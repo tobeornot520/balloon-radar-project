@@ -1,0 +1,50 @@
+{
+  "completed_fold_count": 5,
+  "oof_sample_count": 318,
+  "oof_unique_sample_count": 318,
+  "oof_duplicate_sample_count": 0,
+  "oof_mean_range_error": 1.8867924528301887,
+  "oof_median_range_error": 0.0,
+  "oof_range_error_p90": 1.0,
+  "oof_range_error_p95": 8.449999999999932,
+  "oof_range_error_p99": 42.0,
+  "oof_max_range_error": 47.0,
+  "oof_mean_velocity_error": 2.006289308176101,
+  "oof_median_velocity_error": 0.0,
+  "oof_velocity_error_p90": 1.0,
+  "oof_velocity_error_p95": 18.149999999999977,
+  "oof_velocity_error_p99": 41.979999999999905,
+  "oof_max_velocity_error": 84.0,
+  "oof_strict_hit_count": 290,
+  "oof_strict_hit_rate": 0.9119496855345912,
+  "oof_strict_hit_rate_ci95": [
+    0.875686304024929,
+    0.9383791086786804
+  ],
+  "oof_relaxed_hit_count": 299,
+  "oof_relaxed_hit_rate": 0.940251572327044,
+  "oof_relaxed_hit_rate_ci95": [
+    0.9085742028845158,
+    0.9614193679437688
+  ],
+  "oof_application_hit_count": 299,
+  "oof_application_hit_rate": 0.940251572327044,
+  "oof_application_hit_rate_ci95": [
+    0.9085742028845158,
+    0.9614193679437688
+  ],
+  "oof_relaxed_failure_count": 19,
+  "oof_zero_false_peak_count": 3,
+  "fold_refined_strict_mean": 0.9115440115440115,
+  "fold_refined_strict_std": 0.09454908400322888,
+  "fold_refined_relaxed_mean": 0.94011544011544,
+  "fold_refined_relaxed_std": 0.04958447765166424,
+  "configuration": {
+    "seed": 42,
+    "sigma_epochs": 100,
+    "dual_epochs": 120,
+    "refiner_epochs": 120,
+    "batch_size": 8,
+    "refiner_batch_size": 16
+  }
+}

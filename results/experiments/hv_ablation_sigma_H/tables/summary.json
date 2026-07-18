@@ -1,0 +1,43 @@
+{
+  "experiment_name": "hv_ablation_sigma_H",
+  "channel_mode": "H",
+  "input_channels": 1,
+  "range_sigma": 3.0,
+  "velocity_sigma": 1.0,
+  "train_sample_count": 228,
+  "validation_sample_count": 45,
+  "test_sample_count": 45,
+  "trainable_parameters": 18785,
+  "best_epoch": 67,
+  "training_seconds": 116.22463464736938,
+  "metric_radii": {
+    "strict": {
+      "range": 1,
+      "velocity": 1
+    },
+    "relaxed": {
+      "range": 4,
+      "velocity": 1
+    },
+    "application": {
+      "range": 4,
+      "velocity": 2
+    }
+  },
+  "best_validation_metrics": {
+    "loss": 0.10196402503384484,
+    "mean_range_error": 4.066666666666666,
+    "mean_velocity_error": 4.911111111111111,
+    "strict_hit_rate": 0.5333333333333333,
+    "relaxed_hit_rate": 0.8444444444444444,
+    "application_hit_rate": 0.8444444444444444
+  },
+  "test_metrics": {
+    "loss": 0.09233456353346507,
+    "mean_range_error": 4.0,
+    "mean_velocity_error": 1.6888888888888889,
+    "strict_hit_rate": 0.28888888888888886,
+    "relaxed_hit_rate": 0.9333333333333333,
+    "application_hit_rate": 0.9333333333333333
+  }
+}

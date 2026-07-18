@@ -1,0 +1,73 @@
+{
+  "experiment_name": "hv_ablation_dual_HV",
+  "best_epoch": 48,
+  "training_seconds": 120.74524283409119,
+  "best_validation_metrics": {
+    "loss": 0.13134769532415602,
+    "mean_range_error": 2.0444444444444443,
+    "mean_velocity_error": 0.8444444444444444,
+    "zero_false_peak_rate": 0.0,
+    "zero_false_peak_count": 0.0,
+    "zero_eligible_count": 45.0,
+    "fused_base_loss": 0.09416651593314276,
+    "notch_base_loss": 0.09149840308560266,
+    "ranking_loss": 0.012164435452885099,
+    "band_energy_loss": 7.269284680200272e-07,
+    "strict_hit_rate": 0.35555555555555557,
+    "relaxed_hit_rate": 0.9777777777777777,
+    "application_hit_rate": 0.9777777777777777
+  },
+  "test_metrics": {
+    "loss": 0.11332879927423266,
+    "mean_range_error": 2.1555555555555554,
+    "mean_velocity_error": 0.3333333333333333,
+    "zero_false_peak_rate": 0.0,
+    "zero_false_peak_count": 0.0,
+    "zero_eligible_count": 45.0,
+    "fused_base_loss": 0.08628001593881184,
+    "notch_base_loss": 0.09009954399532742,
+    "ranking_loss": 0.0,
+    "band_energy_loss": 0.00012612974333000201,
+    "strict_hit_rate": 0.2222222222222222,
+    "relaxed_hit_rate": 1.0,
+    "application_hit_rate": 1.0
+  },
+  "target_sample_result": [
+    {
+      "sample_id": "20260202_144849_beam4",
+      "true_range_index": 73,
+      "true_velocity_index": 36,
+      "raw_range_index": 63,
+      "raw_velocity_index": 63,
+      "notch_range_index": 71,
+      "notch_velocity_index": 35,
+      "predicted_range_index": 72,
+      "predicted_velocity_index": 36,
+      "range_error_gates": 1,
+      "velocity_error_bins": 0,
+      "predicted_in_zero_band": false,
+      "strict_hit": true,
+      "relaxed_hit": true,
+      "application_hit": true
+    }
+  ],
+  "configuration": {
+    "pretrained": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/hv_ablation_sigma_HV/checkpoints/best.pt",
+    "name": "hv_ablation_dual_HV",
+    "channel": "HV",
+    "epochs": 120,
+    "batch_size": 8,
+    "learning_rate": 0.0003,
+    "weight_decay": 1e-05,
+    "num_workers": 0,
+    "early_stopping": 30,
+    "notch_sigma": 2.0,
+    "notch_floor": 0.05,
+    "zero_band_half_width": 3,
+    "target_exclusion_margin": 6,
+    "ranking_margin": 0.2,
+    "ranking_weight": 0.8,
+    "band_weight": 0.15,
+    "notch_aux_weight": 0.3
+  }
+}

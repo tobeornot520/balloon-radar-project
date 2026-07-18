@@ -1,0 +1,28 @@
+{
+  "model": "SimpleRadarFCN",
+  "train_sample_count": 228,
+  "validation_sample_count": 45,
+  "test_sample_count": 45,
+  "trainable_parameters": 18929,
+  "best_epoch": 74,
+  "total_training_time_seconds": 269.62113547325134,
+  "best_validation_metrics": {
+    "loss": 0.10509544710318247,
+    "mean_range_error": 2.311111111111111,
+    "mean_velocity_error": 2.0,
+    "strict_hit_rate": 0.5111111111111111,
+    "relaxed_hit_rate": 0.9111111111111111
+  },
+  "test_metrics": {
+    "loss": 0.09912436952193578,
+    "mean_range_error": 1.9111111111111112,
+    "mean_velocity_error": 1.5333333333333334,
+    "strict_hit_rate": 0.4,
+    "relaxed_hit_rate": 0.9111111111111111
+  },
+  "cfar_baseline": {
+    "strict_hit_rate": 0.9371,
+    "relaxed_hit_rate": 0.9528,
+    "average_false_candidates": 6.48
+  }
+}
