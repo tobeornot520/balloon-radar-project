@@ -1,0 +1,4 @@
+# 新雷达原始数据与软链接目录
+data_radar_v2/
+radar_raw/
+*.mat

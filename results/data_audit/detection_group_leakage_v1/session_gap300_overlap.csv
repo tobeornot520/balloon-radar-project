@@ -1,0 +1,3 @@
+﻿class_name,group_column,group_id,splits,split_count,sample_count,count_train,count_val,count_test
+background,session_gap300,background_session_gap300_001,"test,train,val",3,830,581,124,125
+uav,session_gap300,uav_session_gap300_001,"test,train,val",3,318,219,46,53

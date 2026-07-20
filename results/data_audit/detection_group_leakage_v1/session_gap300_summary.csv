@@ -1,0 +1,7 @@
+﻿class_name,session_gap300,current_split,sample_count
+background,background_session_gap300_001,test,125
+background,background_session_gap300_001,train,581
+background,background_session_gap300_001,val,124
+uav,uav_session_gap300_001,test,53
+uav,uav_session_gap300_001,train,219
+uav,uav_session_gap300_001,val,46

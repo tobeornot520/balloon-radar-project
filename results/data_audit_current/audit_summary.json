@@ -1,0 +1,135 @@
+{
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "detection": {
+    "train": {
+      "background_mat": 581,
+      "uav_mat": 219,
+      "uav_labels": 219,
+      "total_samples": 800,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "bad_shapes": [],
+      "schemas": {
+        "(('local_data_H', (128, 100), 'single'), ('local_data_V', (128, 100), 'single'))": 800
+      }
+    },
+    "val": {
+      "background_mat": 124,
+      "uav_mat": 46,
+      "uav_labels": 46,
+      "total_samples": 170,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "bad_shapes": [],
+      "schemas": {
+        "(('local_data_H', (128, 100), 'single'), ('local_data_V', (128, 100), 'single'))": 170
+      }
+    },
+    "test": {
+      "background_mat": 125,
+      "uav_mat": 53,
+      "uav_labels": 53,
+      "total_samples": 178,
+      "missing_labels": [],
+      "orphan_labels": [],
+      "bad_shapes": [],
+      "schemas": {
+        "(('local_data_H', (128, 100), 'single'), ('local_data_V', (128, 100), 'single'))": 178
+      }
+    }
+  },
+  "classification": {
+    "train": {
+      "total_mat_files": 19,
+      "total_samples": 205,
+      "classes": {
+        "uav": {
+          "label": 0,
+          "directory": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/classification_dataset/train/无人机",
+          "mat_files": 19,
+          "samples": 205,
+          "schemas": {
+            "{'UAV_h': (961, 9, 8), 'UAV_v': (961, 9, 8)}": 1,
+            "{'UAV_h': (961, 9, 11), 'UAV_v': (961, 9, 11)}": 3,
+            "{'UAV_h': (961, 9, 13), 'UAV_v': (961, 9, 13)}": 5,
+            "{'UAV_h': (961, 9, 9), 'UAV_v': (961, 9, 9)}": 3,
+            "{'UAV_h': (961, 9, 10), 'UAV_v': (961, 9, 10)}": 6,
+            "{'UAV_h': (961, 9, 12), 'UAV_v': (961, 9, 12)}": 1
+          }
+        },
+        "balloon_line_array": {
+          "label": 1,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_solar_panel": {
+          "label": 2,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_box": {
+          "label": 3,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_circuit_board": {
+          "label": 4,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        }
+      }
+    },
+    "test": {
+      "total_mat_files": 4,
+      "total_samples": 51,
+      "classes": {
+        "uav": {
+          "label": 0,
+          "directory": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/classification_dataset/test/无人机",
+          "mat_files": 4,
+          "samples": 51,
+          "schemas": {
+            "{'UAV_h': (961, 9, 13), 'UAV_v': (961, 9, 13)}": 3,
+            "{'UAV_h': (961, 9, 12), 'UAV_v': (961, 9, 12)}": 1
+          }
+        },
+        "balloon_line_array": {
+          "label": 1,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_solar_panel": {
+          "label": 2,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_box": {
+          "label": 3,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_circuit_board": {
+          "label": 4,
+          "directory": "",
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        }
+      }
+    }
+  }
+}

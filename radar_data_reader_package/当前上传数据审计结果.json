@@ -1,0 +1,61 @@
+{
+  "data_root": "/mnt/data/radar_data_layout_demo",
+  "detection": {
+    "train": {
+      "split": "train",
+      "background_mat_files": 581,
+      "uav_mat_files": 219,
+      "uav_label_files": 219,
+      "missing_labels": [],
+      "schemas": {
+        "(('local_data_H', (128, 100), 'single'), ('local_data_V', (128, 100), 'single'))": 800
+      }
+    },
+    "val": {
+      "split": "val",
+      "background_mat_files": 124,
+      "uav_mat_files": 46,
+      "uav_label_files": 46,
+      "missing_labels": [],
+      "schemas": {
+        "(('local_data_H', (128, 100), 'single'), ('local_data_V', (128, 100), 'single'))": 170
+      }
+    }
+  },
+  "classification": {
+    "test": {
+      "split": "test",
+      "classes": {
+        "uav": {
+          "mat_files": 4,
+          "samples": 51,
+          "schemas": {
+            "{'UAV_h': ((961, 9, 13), 'double'), 'UAV_v': ((961, 9, 13), 'double')}": 3,
+            "{'UAV_h': ((961, 9, 12), 'double'), 'UAV_v': ((961, 9, 12), 'double')}": 1
+          }
+        },
+        "balloon_line_array": {
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_solar_panel": {
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_box": {
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        },
+        "balloon_circuit_board": {
+          "mat_files": 0,
+          "samples": 0,
+          "schemas": {}
+        }
+      },
+      "total_samples": 51
+    }
+  }
+}

@@ -1,0 +1,7 @@
+﻿current_split,class_name,sample_count
+test,background,125
+test,uav,53
+train,background,581
+train,uav,219
+val,background,124
+val,uav,46

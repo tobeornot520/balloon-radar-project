@@ -1,0 +1,7 @@
+split,class_name,sample_count,split_total,class_ratio,group_count
+train,Background,565,767,0.7366362451108214,4
+train,UAV,202,767,0.2633637548891786,45
+val,Background,150,218,0.6880733944954128,1
+val,UAV,68,218,0.3119266055045872,16
+test,Background,115,163,0.7055214723926381,1
+test,UAV,48,163,0.294478527607362,10

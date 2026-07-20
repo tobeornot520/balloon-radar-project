@@ -1,0 +1,7 @@
+class_name,split_a,split_b,overlap_group_count,overlap_groups
+Background,train,val,0,
+Background,train,test,0,
+Background,val,test,0,
+UAV,train,val,0,
+UAV,train,test,0,
+UAV,val,test,0,

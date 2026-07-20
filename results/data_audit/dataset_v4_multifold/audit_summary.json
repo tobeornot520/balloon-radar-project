@@ -1,0 +1,273 @@
+{
+  "dataset_version": "V4",
+  "design": "six_fold_grouped_background_scan_and_contiguous_uav_time_block_rotation",
+  "input_manifest": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v3_grouped/all_samples_manifest_v3.csv",
+  "fold_count": 6,
+  "val_offset": 1,
+  "total_samples": 1148,
+  "background_samples": 830,
+  "uav_samples": 318,
+  "background_group_count": 6,
+  "uav_group_count": 71,
+  "uav_block_count": 6,
+  "max_internal_uav_gap_seconds": 120,
+  "large_gap_boundary_adjustments": [
+    {
+      "original_block": 6,
+      "gap_left_source": "20260202_145216",
+      "gap_right_source": "20260202_145713",
+      "gap_seconds": 297,
+      "left_sample_count": 5,
+      "right_sample_count": 48,
+      "action": "move_prefix_to_previous"
+    }
+  ],
+  "uav_block_internal_gap_violation_count": 0,
+  "duplicate_sample_id_count": 0,
+  "missing_mat_path_count": 0,
+  "missing_label_path_count": 0,
+  "overlap_record_count": 0,
+  "role_frequency_error_count": 0,
+  "expected_role_frequency": {
+    "train": 4,
+    "val": 1,
+    "test": 1
+  },
+  "background_groups": [
+    "20260204_100739",
+    "20260204_100802",
+    "20260204_100826",
+    "20260204_100845",
+    "20260204_100908",
+    "20260204_100932"
+  ],
+  "uav_blocks": [
+    {
+      "uav_block": 1,
+      "first_source_file": "20260202_144238",
+      "last_source_file": "20260202_144417",
+      "group_count": 11,
+      "sample_count": 53,
+      "start_timestamp": "2026-02-02T14:42:38",
+      "end_timestamp": "2026-02-02T14:44:17",
+      "preceding_gap_seconds": null,
+      "max_internal_gap_seconds": 25,
+      "source_files": "20260202_144238|20260202_144246|20260202_144254|20260202_144302|20260202_144311|20260202_144319|20260202_144327|20260202_144335|20260202_144344|20260202_144352|20260202_144417"
+    },
+    {
+      "uav_block": 2,
+      "first_source_file": "20260202_144425",
+      "last_source_file": "20260202_144629",
+      "group_count": 12,
+      "sample_count": 53,
+      "start_timestamp": "2026-02-02T14:44:25",
+      "end_timestamp": "2026-02-02T14:46:29",
+      "preceding_gap_seconds": 8,
+      "max_internal_gap_seconds": 25,
+      "source_files": "20260202_144425|20260202_144433|20260202_144458|20260202_144506|20260202_144515|20260202_144523|20260202_144539|20260202_144548|20260202_144556|20260202_144604|20260202_144613|20260202_144629"
+    },
+    {
+      "uav_block": 3,
+      "first_source_file": "20260202_144637",
+      "last_source_file": "20260202_144833",
+      "group_count": 12,
+      "sample_count": 52,
+      "start_timestamp": "2026-02-02T14:46:37",
+      "end_timestamp": "2026-02-02T14:48:33",
+      "preceding_gap_seconds": 8,
+      "max_internal_gap_seconds": 25,
+      "source_files": "20260202_144637|20260202_144645|20260202_144710|20260202_144718|20260202_144727|20260202_144735|20260202_144751|20260202_144800|20260202_144808|20260202_144816|20260202_144825|20260202_144833"
+    },
+    {
+      "uav_block": 4,
+      "first_source_file": "20260202_144841",
+      "last_source_file": "20260202_145012",
+      "group_count": 12,
+      "sample_count": 52,
+      "start_timestamp": "2026-02-02T14:48:41",
+      "end_timestamp": "2026-02-02T14:50:12",
+      "preceding_gap_seconds": 8,
+      "max_internal_gap_seconds": 9,
+      "source_files": "20260202_144841|20260202_144849|20260202_144857|20260202_144906|20260202_144914|20260202_144922|20260202_144931|20260202_144939|20260202_144947|20260202_144955|20260202_145004|20260202_145012"
+    },
+    {
+      "uav_block": 5,
+      "first_source_file": "20260202_145020",
+      "last_source_file": "20260202_145216",
+      "group_count": 14,
+      "sample_count": 60,
+      "start_timestamp": "2026-02-02T14:50:20",
+      "end_timestamp": "2026-02-02T14:52:16",
+      "preceding_gap_seconds": 8,
+      "max_internal_gap_seconds": 17,
+      "source_files": "20260202_145020|20260202_145028|20260202_145037|20260202_145045|20260202_145053|20260202_145102|20260202_145110|20260202_145118|20260202_145126|20260202_145135|20260202_145143|20260202_145151|20260202_145208|20260202_145216"
+    },
+    {
+      "uav_block": 6,
+      "first_source_file": "20260202_145713",
+      "last_source_file": "20260202_145836",
+      "group_count": 10,
+      "sample_count": 48,
+      "start_timestamp": "2026-02-02T14:57:13",
+      "end_timestamp": "2026-02-02T14:58:36",
+      "preceding_gap_seconds": 297,
+      "max_internal_gap_seconds": 18,
+      "source_files": "20260202_145713|20260202_145722|20260202_145730|20260202_145738|20260202_145746|20260202_145755|20260202_145813|20260202_145819|20260202_145828|20260202_145836"
+    }
+  ],
+  "folds": [
+    {
+      "fold": 1,
+      "test_background_scan": "20260204_100739",
+      "val_background_scan": "20260204_100802",
+      "test_uav_block": 1,
+      "val_uav_block": 2,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 530,
+          "UAV": 212
+        },
+        "val": {
+          "Background": 150,
+          "UAV": 53
+        },
+        "test": {
+          "Background": 150,
+          "UAV": 53
+        }
+      }
+    },
+    {
+      "fold": 2,
+      "test_background_scan": "20260204_100802",
+      "val_background_scan": "20260204_100826",
+      "test_uav_block": 2,
+      "val_uav_block": 3,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 565,
+          "UAV": 213
+        },
+        "val": {
+          "Background": 115,
+          "UAV": 52
+        },
+        "test": {
+          "Background": 150,
+          "UAV": 53
+        }
+      }
+    },
+    {
+      "fold": 3,
+      "test_background_scan": "20260204_100826",
+      "val_background_scan": "20260204_100845",
+      "test_uav_block": 3,
+      "val_uav_block": 4,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 565,
+          "UAV": 214
+        },
+        "val": {
+          "Background": 150,
+          "UAV": 52
+        },
+        "test": {
+          "Background": 115,
+          "UAV": 52
+        }
+      }
+    },
+    {
+      "fold": 4,
+      "test_background_scan": "20260204_100845",
+      "val_background_scan": "20260204_100908",
+      "test_uav_block": 4,
+      "val_uav_block": 5,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 530,
+          "UAV": 206
+        },
+        "val": {
+          "Background": 150,
+          "UAV": 60
+        },
+        "test": {
+          "Background": 150,
+          "UAV": 52
+        }
+      }
+    },
+    {
+      "fold": 5,
+      "test_background_scan": "20260204_100908",
+      "val_background_scan": "20260204_100932",
+      "test_uav_block": 5,
+      "val_uav_block": 6,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 565,
+          "UAV": 210
+        },
+        "val": {
+          "Background": 115,
+          "UAV": 48
+        },
+        "test": {
+          "Background": 150,
+          "UAV": 60
+        }
+      }
+    },
+    {
+      "fold": 6,
+      "test_background_scan": "20260204_100932",
+      "val_background_scan": "20260204_100739",
+      "test_uav_block": 6,
+      "val_uav_block": 1,
+      "sample_count": 1148,
+      "preserved_all_samples": true,
+      "invalid_splits": [],
+      "overlapping_group_count": 0,
+      "counts": {
+        "train": {
+          "Background": 565,
+          "UAV": 217
+        },
+        "val": {
+          "Background": 150,
+          "UAV": 53
+        },
+        "test": {
+          "Background": 115,
+          "UAV": 48
+        }
+      }
+    }
+  ],
+  "role_frequency_errors": [],
+  "audit_passed": true,
+  "interpretation_limit": "All folds remain within one UAV flight session and one continuous Background session. Results must not be described as cross-session, cross-date, or cross-scene generalization."
+}

@@ -1,0 +1,35 @@
+{
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "data_root": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset",
+  "output_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v3_grouped",
+  "total_samples": 1148,
+  "duplicate_sample_id_count": 0,
+  "missing_path_count": 0,
+  "overlap_pair_count": 0,
+  "unassigned_uav_groups": [],
+  "unassigned_background_groups": [],
+  "per_split": {
+    "train": {
+      "total": 767,
+      "background": 565,
+      "uav": 202,
+      "background_groups": 4,
+      "uav_groups": 45
+    },
+    "val": {
+      "total": 218,
+      "background": 150,
+      "uav": 68,
+      "background_groups": 1,
+      "uav_groups": 16
+    },
+    "test": {
+      "total": 163,
+      "background": 115,
+      "uav": 48,
+      "background_groups": 1,
+      "uav_groups": 10
+    }
+  },
+  "audit_passed": true
+}

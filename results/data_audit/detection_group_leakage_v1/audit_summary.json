@@ -1,0 +1,91 @@
+{
+  "data_root": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset",
+  "sample_count": 1148,
+  "split_class_counts": [
+    {
+      "current_split": "test",
+      "class_name": "background",
+      "sample_count": 125
+    },
+    {
+      "current_split": "test",
+      "class_name": "uav",
+      "sample_count": 53
+    },
+    {
+      "current_split": "train",
+      "class_name": "background",
+      "sample_count": 581
+    },
+    {
+      "current_split": "train",
+      "class_name": "uav",
+      "sample_count": 219
+    },
+    {
+      "current_split": "val",
+      "class_name": "background",
+      "sample_count": 124
+    },
+    {
+      "current_split": "val",
+      "class_name": "uav",
+      "sample_count": 46
+    }
+  ],
+  "exact_groups_by_class": {
+    "background": 6,
+    "uav": 71
+  },
+  "exact_overlapping_groups_by_class": {
+    "background": 6,
+    "uav": 0
+  },
+  "session_sensitivity": {
+    "30": {
+      "groups_by_class": {
+        "background": 1,
+        "uav": 2
+      },
+      "overlapping_groups": 3,
+      "overlapping_samples": 1148
+    },
+    "60": {
+      "groups_by_class": {
+        "background": 1,
+        "uav": 2
+      },
+      "overlapping_groups": 3,
+      "overlapping_samples": 1148
+    },
+    "120": {
+      "groups_by_class": {
+        "background": 1,
+        "uav": 2
+      },
+      "overlapping_groups": 3,
+      "overlapping_samples": 1148
+    },
+    "300": {
+      "groups_by_class": {
+        "background": 1,
+        "uav": 1
+      },
+      "overlapping_groups": 2,
+      "overlapping_samples": 1148
+    }
+  },
+  "duplicate_sample_id_groups": 0,
+  "duplicate_hash_groups": 0,
+  "hash_files_enabled": false,
+  "warnings": [
+    "background在gap=120s定义下仅1个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "background在gap=300s定义下仅1个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "background在gap=30s定义下仅1个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "background在gap=60s定义下仅1个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "uav在gap=120s定义下仅2个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "uav在gap=300s定义下仅1个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "uav在gap=30s定义下仅2个session，无法进行严格session级三划分；需要补采独立时段数据",
+    "uav在gap=60s定义下仅2个session，无法进行严格session级三划分；需要补采独立时段数据"
+  ]
+}

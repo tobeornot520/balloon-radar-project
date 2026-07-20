@@ -1,5 +1,0 @@
-Source_File: 20260202_145045
-Beam_Layer: 2
-Azimuth(deg): 310.24
-Distance(m): 2250.0
-Velocity(m/s): -4.02

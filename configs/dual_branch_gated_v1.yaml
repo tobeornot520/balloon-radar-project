@@ -1,0 +1,33 @@
+model:
+  name: DPG-FCN-V1
+  input: HV_power_RD
+  gate_hidden_dim: 16
+  fusion_features:
+    - weighted_H
+    - weighted_V
+    - absolute_difference
+    - elementwise_product
+
+initialization:
+  H: results/experiments/detection_h_baseline_v2/checkpoints/best.pt
+  V: results/experiments/detection_v_baseline_v2/checkpoints/best.pt
+
+training:
+  epochs: 75
+  warmup_epochs: 15
+  partial_unfreeze_epochs: 35
+  batch_size: 8
+  fusion_learning_rate: 3.0e-4
+  branch_learning_rate: 3.0e-5
+  positive_sample_weight: 10.0
+  h_aux_weight: 0.2
+  v_aux_weight: 0.2
+  max_val_false_alarms: 1
+  early_stopping_patience: 15
+  seeds: [42, 3407, 2026]
+
+evaluation:
+  range_tolerance_gates: 2
+  velocity_tolerance_bins: 3
+  threshold_source: validation_only
+  test_used_for_selection: false

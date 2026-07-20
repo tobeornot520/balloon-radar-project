@@ -1,0 +1,7 @@
+﻿class_name,group_column,group_id,splits,split_count,sample_count,count_train,count_val,count_test
+background,exact_group,20260204_100739,"test,train,val",3,150,106,25,19
+background,exact_group,20260204_100802,"test,train,val",3,150,104,22,24
+background,exact_group,20260204_100826,"test,train,val",3,115,86,9,20
+background,exact_group,20260204_100845,"test,train,val",3,150,106,25,19
+background,exact_group,20260204_100908,"test,train,val",3,150,100,26,24
+background,exact_group,20260204_100932,"test,train,val",3,115,79,17,19
