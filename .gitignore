@@ -123,3 +123,6 @@ detection_diagnostics_v3_package/
 detection_group_split_v1_package/
 dpg_fcn_v1_patch/
 hv_late_fusion_diagnostic_v1/
+
+# Project distribution packages
+dist/
