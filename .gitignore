@@ -116,3 +116,10 @@ Thumbs.db
 current_structure_reader_package/
 full_detection_baseline_v2_package/
 detection_visualization_hotfix_v3_1/
+
+# Historical patch and delivery packages
+detection_ablation_analysis_v2_package/
+detection_diagnostics_v3_package/
+detection_group_split_v1_package/
+dpg_fcn_v1_patch/
+hv_late_fusion_diagnostic_v1/
