@@ -228,6 +228,10 @@ python -m compileall -q \
 find "$STAGE_DIR" -type d -name "__pycache__" -prune -exec rm -rf {} +
 find "$STAGE_DIR" -type f \( -name "*.pyc" -o -name "*.pyo" \) -delete
 
+# 删除编译检查生成的 Python 缓存
+find "$STAGE_DIR" -type d -name "__pycache__" -prune -exec rm -rf {} +
+find "$STAGE_DIR" -type f \( -name "*.pyc" -o -name "*.pyo" \) -delete
+
 # 生成压缩包
 tar -C "$DIST_DIR" -czf "$ARCHIVE_TGZ" "$PACKAGE_NAME"
 
