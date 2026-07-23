@@ -1,0 +1,8 @@
+﻿fold,severity,risk_type,unique_scan_groups_in_fold,minimum_scan_groups_in_one_split,message
+1,LOW,environment_effective_sample_size,77.0,12.0,Each split contains at least five scan environments.
+2,LOW,environment_effective_sample_size,77.0,13.0,Each split contains at least five scan environments.
+3,LOW,environment_effective_sample_size,77.0,13.0,Each split contains at least five scan environments.
+4,LOW,environment_effective_sample_size,77.0,13.0,Each split contains at least five scan environments.
+5,LOW,environment_effective_sample_size,77.0,11.0,Each split contains at least five scan environments.
+6,LOW,environment_effective_sample_size,77.0,11.0,Each split contains at least five scan environments.
+all,HIGH,test_feedback_overfitting,,,Test-fold outcomes influenced v1/v2/v3 design. Current six-fold test metrics are development estimates and require a new blind scan set or nested group CV for a final unbiased claim.

@@ -1,0 +1,2942 @@
+[
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 15,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    make_power2,"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 20,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "    make_polar6_gated,"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 21,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "    make_ri8_gated,"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 27,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "VALID_INPUT_MODES = {\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"}"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 69,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"power2\": (\"H_power\", \"V_power\"),"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 71,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "        \"polar6_gated\": ("
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 72,
+    "patterns": [
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "            \"H_power\", \"V_power\", \"gated_relative_ZDR_like\", \"gated_local_rho_HV\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 75,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "        \"ri8_gated\": ("
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 76,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "            \"Re_H\", \"Im_H\", \"Re_V\", \"Im_V\", \"gated_relative_ZDR_like\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 77,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "            \"gated_local_rho_HV\", \"gated_cos_relative_phase\", \"gated_sin_relative_phase\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 107,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "        input_mode: Literal[\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"] = \"power2\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 192,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        if self.input_mode == \"power2\":"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 193,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            array = make_power2(features)"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 196,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "        elif self.input_mode == \"polar6_gated\":"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 197,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "            array = make_polar6_gated("
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "line": 203,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "            array = make_ri8_gated("
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 15,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    make_power2,"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 24,
+    "patterns": [
+      "power2"
+    ],
+    "text": "VALID_INPUT_MODES = {\"power2\", \"ri4\", \"polar6\", \"ri8\"}"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 66,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"power2\": (\"H_power\", \"V_power\"),"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 69,
+    "patterns": [
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "            \"H_power\", \"V_power\", \"relative_ZDR_like\", \"local_rho_HV\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 73,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "            \"Re_H\", \"Im_H\", \"Re_V\", \"Im_V\", \"relative_ZDR_like\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 74,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "            \"local_rho_HV\", \"cos_relative_phase\", \"sin_relative_phase\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 104,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        input_mode: Literal[\"power2\", \"ri4\", \"polar6\", \"ri8\"] = \"power2\","
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 181,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        if self.input_mode == \"power2\":"
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "line": 182,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            array = make_power2(features)"
+  },
+  {
+    "file": "datasets/detection_dataset_v3.py",
+    "line": 70,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "class DetectionRadarDatasetV3(Dataset):"
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 9,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    make_power2,"
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 87,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "def make_polar6_gated("
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 93,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    \"\"\"Power2 plus four power-confidence-gated explicit channels.\"\"\""
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 94,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    power2 = make_power2(features)"
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 102,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            power2,"
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "line": 109,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "def make_ri8_gated("
+  },
+  {
+    "file": "features/polarimetric_rd.py",
+    "line": 232,
+    "patterns": [
+      "power2"
+    ],
+    "text": "def make_power2("
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 23,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 250,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        dataset: Dataset = DetectionRadarDatasetV3("
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 455,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 462,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 470,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"pred_range_index\": int(raw_r[index]),"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 471,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"pred_velocity_index\": int(raw_v[index]),"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 476,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                        \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 632,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best_path = checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 881,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"test_predictions\", test_results),"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 883,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"base_threshold_test_predictions\", base_test_results),"
+  },
+  {
+    "file": "training/train_background_tail_calibrator.py",
+    "line": 885,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            \"raw_base_threshold_test_predictions\","
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 55,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"--input-mode\", choices=[\"power2\", \"ri4\", \"polar6\", \"ri8\"], required=True"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 145,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            (experiment_dir / \"checkpoints/best.pt\").is_file()"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 260,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                checkpoint_dir / \"best.pt\", model, optimizer, epoch, args,"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 285,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        checkpoint_dir / \"best.pt\", map_location=device, weights_only=False"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 305,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_results.to_csv(table_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "line": 342,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "            \"relative_ZDR_like and relative phase are not absolute calibrated polarimetric quantities\""
+  },
+  {
+    "file": "training/run_grouped_5fold.py",
+    "line": 269,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 23,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 321,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "    dataset: Dataset = DetectionRadarDatasetV3("
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 447,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 454,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 469,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"pred_range_index\": int(raw_r[index]),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 470,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"pred_velocity_index\": int(raw_v[index]),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 475,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                        \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 996,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best_path = checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 1231,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"test_predictions\", test_results),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 1233,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"base_threshold_test_predictions\", base_test_results),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator.py",
+    "line": 1235,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            \"raw_base_threshold_test_predictions\","
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 23,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 375,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "    dataset: Dataset = DetectionRadarDatasetV3("
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 501,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 508,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 523,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"pred_range_index\": int(raw_r[index]),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 524,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"pred_velocity_index\": int(raw_v[index]),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 529,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                        \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 1057,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best_path = checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 1292,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"test_predictions\", test_results),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 1294,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        (\"base_threshold_test_predictions\", base_test_results),"
+  },
+  {
+    "file": "training/train_target_protected_scan_calibrator_ablation.py",
+    "line": 1296,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            \"raw_base_threshold_test_predictions\","
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 24,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 231,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        dataset: Dataset = DetectionRadarDatasetV3("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 470,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 477,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 493,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"pred_range_index\": int("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 496,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"pred_velocity_index\": int("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 499,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"raw_pred_range_index\": int(raw_r[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 500,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"raw_pred_velocity_index\": int(raw_v[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 514,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                        \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 522,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"h_pred_range_index\": int(h_r[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 523,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"h_pred_velocity_index\": int(h_v[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 524,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"v_pred_range_index\": int(v_r[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 525,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"v_pred_velocity_index\": int(v_v[index]),"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 572,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    raw[\"pred_range_index\"] = raw[\"raw_pred_range_index\"]"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 573,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    raw[\"pred_velocity_index\"] = ("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 574,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        raw[\"raw_pred_velocity_index\"]"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 579,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        raw.loc[positive, \"pred_range_index\"].to_numpy(int)"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 583,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        raw.loc[positive, \"pred_velocity_index\"].to_numpy(int)"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 586,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    raw[\"localization_ok\"] = ("
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 795,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best_path = checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 983,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        raise RuntimeError(\"best.pt was not created\")"
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 1080,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        table_dir / \"test_predictions.csv\","
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 1090,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        table_dir / \"raw_test_predictions.csv\","
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 1095,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        table_dir / \"fixed_threshold_test_predictions.csv\","
+  },
+  {
+    "file": "training/train_background_calibrator.py",
+    "line": 1100,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        table_dir / \"raw_fixed_threshold_test_predictions.csv\","
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 25,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "    DetectionRadarDatasetV3,"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 80,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        default=\"results/experiments/detection_h_v3_grouped_seed42/checkpoints/best.pt\","
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 84,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        default=\"results/experiments/detection_v_v3_grouped_seed42/checkpoints/best.pt\","
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 254,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 261,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 266,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                    \"pred_range_index\": int(arrays[\"pred_r\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 267,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                    \"pred_velocity_index\": int(arrays[\"pred_v\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 272,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 275,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                    \"h_pred_range_index\": int(arrays[\"h_r\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 276,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                    \"h_pred_velocity_index\": int(arrays[\"h_v\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 277,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                    \"v_pred_range_index\": int(arrays[\"v_r\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 278,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                    \"v_pred_velocity_index\": int(arrays[\"v_v\"][i]),"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 297,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        (result[\"target_present\"] == 1) & result[\"detected\"] & result[\"localization_ok\"]"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 570,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        split: DetectionRadarDatasetV3("
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 636,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        best_path = checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 699,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            save_checkpoint(checkpoint_dir / \"best.pt\", model, optimizer, scheduler, epoch, stage, args, threshold, val_metrics, init_info)"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 719,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best = torch.load(checkpoint_dir / \"best.pt\", map_location=device, weights_only=False)"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 730,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_results.to_csv(table_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 742,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        (test_results[\"h_pred_range_index\"] != test_results[\"v_pred_range_index\"])"
+  },
+  {
+    "file": "training/train_dual_branch_gated.py",
+    "line": 743,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        | (test_results[\"h_pred_velocity_index\"] != test_results[\"v_pred_velocity_index\"])"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 55,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "        \"--input-mode\", choices=[\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"], required=True"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 150,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            (experiment_dir / \"checkpoints/best.pt\").is_file()"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 268,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                checkpoint_dir / \"best.pt\", model, optimizer, epoch, args,"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 293,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        checkpoint_dir / \"best.pt\", map_location=device, weights_only=False"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 313,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_results.to_csv(table_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "line": 355,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "            \"relative_ZDR_like and relative phase are not absolute calibrated polarimetric quantities\""
+  },
+  {
+    "file": "training/train_refiner.py",
+    "line": 73,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "training/train_refiner.py",
+    "line": 87,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "training/train_simple_fcn.py",
+    "line": 104,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    / \"simple_fcn_best.pt\""
+  },
+  {
+    "file": "training/train_simple_fcn.py",
+    "line": 1078,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        / \"test_predictions\""
+  },
+  {
+    "file": "training/train_dual_fcn.py",
+    "line": 51,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "training/train_dual_fcn.py",
+    "line": 1493,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        / \"best.pt\""
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "line": 12,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "MODES = (\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\")"
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "line": 34,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    return (root / \"checkpoints/best.pt\").is_file() and (root / \"tables/summary.json\").is_file()"
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "line": 71,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            \"sample-independent comparison of Power2, RI4 and power-confidence-gated \""
+  },
+  {
+    "file": "scripts/train_local_refiner.py",
+    "line": 47,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    / \"best.pt\""
+  },
+  {
+    "file": "scripts/train_local_refiner.py",
+    "line": 1541,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        figure_dir / \"test_predictions\""
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 35,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    \"pred_range\": (\"pred_range_index\", \"pred_range\", \"range_pred_index\"),"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 36,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    \"pred_velocity\": (\"pred_velocity_index\", \"pred_velocity\", \"velocity_pred_index\"),"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 56,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "    for key in (\"target_present\", \"score\", \"pred_range\", \"pred_velocity\", \"true_range\", \"true_velocity\"):"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 97,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    corrected_range = df[\"pred_range\"] + int(offset)"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 99,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    velocity_error = (df[\"pred_velocity\"] - df[\"true_velocity\"]).abs()"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 100,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    localization_ok = (range_error <= range_tol) & (velocity_error <= velocity_tol)"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 101,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    correct = positive & detected & localization_ok"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 124,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    signed = df.loc[positive, \"pred_range\"] - df.loc[positive, \"true_range\"]"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 125,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    signed_detected = df.loc[detected_positive, \"pred_range\"] - df.loc[detected_positive, \"true_range\"]"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 154,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    signed = (df.loc[mask, \"pred_range\"] - df.loc[mask, \"true_range\"]).dropna().to_numpy()"
+  },
+  {
+    "file": "scripts/analyze_validation_range_bias_v3.py",
+    "line": 200,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        test_path = tables / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 29,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "    DetectionRadarDatasetV3,"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 180,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "def make_debug_subset(dataset: DetectionRadarDatasetV3, per_class: int) -> Dataset:"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 244,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    pred_velocity = flat_indices // range_size"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 245,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    pred_range = flat_indices % range_size"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 246,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "    return scores, pred_range, pred_velocity"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 320,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        pos_correct = pos_detected & positive[\"localization_ok\"].to_numpy(bool)"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 344,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        & result[\"localization_ok\"]"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 420,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "            scores, pred_range, pred_velocity = extract_scores_and_peaks(logits)"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 428,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "            pred_range_np = pred_range.detach().cpu().numpy().astype(int)"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 429,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "            pred_velocity_np = pred_velocity.detach().cpu().numpy().astype(int)"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 435,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                    range_error = abs(int(pred_range_np[index]) - int(true_range[index]))"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 436,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                    velocity_error = abs(int(pred_velocity_np[index]) - int(true_velocity[index]))"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 437,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = ("
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 444,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                    localization_ok = False"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 450,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "                        \"pred_range_index\": int(pred_range_np[index]),"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 451,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "                        \"pred_velocity_index\": int(pred_velocity_np[index]),"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 456,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "                        \"localization_ok\": bool(localization_ok),"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 671,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        split: DetectionRadarDatasetV3("
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 793,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                checkpoint_dir / \"best.pt\","
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 829,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    best_checkpoint = torch.load(checkpoint_dir / \"best.pt\", map_location=device, weights_only=False)"
+  },
+  {
+    "file": "scripts/train_detection_baseline_v2.py",
+    "line": 845,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_results.to_csv(table_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+  },
+  {
+    "file": "scripts/train_v2_pipeline.py",
+    "line": 70,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/run_bc_dpg_v3_ablation.py",
+    "line": 127,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        path / \"tables\" / \"test_predictions.csv\","
+  },
+  {
+    "file": "scripts/run_bc_dpg_v3_ablation.py",
+    "line": 128,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        path / \"checkpoints\" / \"best.pt\","
+  },
+  {
+    "file": "scripts/run_bc_dpg_v3_ablation.py",
+    "line": 339,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                    / \"best.pt\""
+  },
+  {
+    "file": "scripts/audit_polarimetric_score_shift_v1.py",
+    "line": 15,
+    "patterns": [
+      "power2"
+    ],
+    "text": "V1_MODES = (\"power2\", \"ri4\", \"polar6\", \"ri8\")"
+  },
+  {
+    "file": "scripts/audit_polarimetric_score_shift_v1.py",
+    "line": 87,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            test_path = root / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/run_bc_dpg_v2_tail.py",
+    "line": 66,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                / \"checkpoints/best.pt\""
+  },
+  {
+    "file": "scripts/freeze_bc_dpg_v3_evidence.py",
+    "line": 121,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                    / \"best.pt\","
+  },
+  {
+    "file": "scripts/freeze_bc_dpg_v3_evidence.py",
+    "line": 130,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                    / \"best.pt\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 49,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    predictions_path = table_dir / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 63,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        \"pred_range_index\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 64,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        \"pred_velocity_index\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 69,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        \"localization_ok\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 78,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            f\"{display_name} 的 test_predictions.csv 缺少字段：{missing}\""
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 110,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        \"pred_range_index\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 111,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        \"pred_velocity_index\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 116,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        \"localization_ok\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 130,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        \"localization_ok\","
+  },
+  {
+    "file": "scripts/compare_detection_ablation_v2.py",
+    "line": 235,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    if not bool(row[f\"{prefix}_localization_ok\"]):"
+  },
+  {
+    "file": "scripts/plot_v4_paper_figures.py",
+    "line": 39,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/evaluate_detection_baseline_v2.py",
+    "line": 18,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "scripts/evaluate_detection_baseline_v2.py",
+    "line": 82,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        split: DetectionRadarDatasetV3("
+  },
+  {
+    "file": "scripts/evaluate_detection_baseline_v2.py",
+    "line": 124,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_results.to_csv(output_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+  },
+  {
+    "file": "scripts/train_sigma_experiment.py",
+    "line": 977,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        figure_dir / \"test_predictions\""
+  },
+  {
+    "file": "scripts/train_sigma_experiment.py",
+    "line": 992,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        checkpoint_dir / \"best.pt\""
+  },
+  {
+    "file": "scripts/audit_v4_prediction_gate_schema.py",
+    "line": 52,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    \"test_predictions.csv\","
+  },
+  {
+    "file": "scripts/audit_v4_prediction_gate_schema.py",
+    "line": 364,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "            \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 13,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 78,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "            \"name\": DetectionRadarDatasetV3.__name__,"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 79,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "            \"signature\": str(inspect.signature(DetectionRadarDatasetV3)),"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 81,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "                inspect.signature(DetectionRadarDatasetV3.__init__)"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 84,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "                inspect.signature(DetectionRadarDatasetV3.__getitem__)"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 87,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "                DetectionRadarDatasetV3.__init__"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 90,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "                DetectionRadarDatasetV3.__getitem__"
+  },
+  {
+    "file": "scripts/inspect_detection_dataset_interface.py",
+    "line": 97,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "                \"DetectionRadarDatasetV3\","
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_final_evidence.py",
+    "line": 252,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            PROJECT_ROOT / \"results\" / \"experiments\" / f\"dpg_fcn_v4_fold{fold:02d}_seed{seed}\" / \"checkpoints\" / \"best.pt\","
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_final_evidence.py",
+    "line": 257,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            PROJECT_ROOT / \"results\" / \"experiments\" / f\"bc_dpg_v3_ablation_full_v4_fold{fold:02d}_seed{seed}\" / \"checkpoints\" / \"best.pt\","
+  },
+  {
+    "file": "scripts/run_bc_dpg_fold14.py",
+    "line": 59,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"checkpoints/best.pt\""
+  },
+  {
+    "file": "scripts/analyze_v4_multifold.py",
+    "line": 22,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    path = exp / \"tables\" / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 124,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    if \"localization_ok\" in result.columns:"
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 125,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        result[\"localization_ok\"] = normalize_bool("
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 126,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "            result[\"localization_ok\"]"
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 129,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        result[\"localization_ok\"] = True"
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 142,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        & result[\"localization_ok\"]"
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 253,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    v3_path = table_dir / \"base_threshold_test_predictions.csv\""
+  },
+  {
+    "file": "scripts/build_bc_dpg_v3_paper_results.py",
+    "line": 255,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        table_dir / \"raw_base_threshold_test_predictions.csv\""
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 40,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    \"pred_range\": (\"pred_range_index\", \"pred_range\", \"range_pred_index\"),"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 41,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    \"pred_velocity\": (\"pred_velocity_index\", \"pred_velocity\", \"velocity_pred_index\"),"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 63,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "    for key in (\"target_present\", \"score\", \"pred_range\", \"pred_velocity\", \"true_range\", \"true_velocity\"):"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 148,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    hr = df[\"H_pred_range\"].to_numpy(float)"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 149,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    vr = df[\"V_pred_range\"].to_numpy(float)"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 150,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    hv = df[\"H_pred_velocity\"].to_numpy(float)"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 151,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    vv = df[\"V_pred_velocity\"].to_numpy(float)"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 216,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    pred_range: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 217,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    pred_velocity: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 225,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    range_error = np.abs(pred_range - df[\"true_range\"].to_numpy(float))"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 226,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    velocity_error = np.abs(pred_velocity - df[\"true_velocity\"].to_numpy(float))"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 260,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    pred_range: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 261,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    pred_velocity: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 274,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "            df, score, pred_range, pred_velocity,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 282,
+    "patterns": [
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "            df, score, pred_range, pred_velocity,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 312,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        df[f\"{mode}_pred_range\"].to_numpy(float),"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 313,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        df[f\"{mode}_pred_velocity\"].to_numpy(float),"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 376,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    pred_range: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 377,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    pred_velocity: np.ndarray,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 390,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        \"H_pred_range_index\": df[\"H_pred_range\"],"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 391,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        \"V_pred_range_index\": df[\"V_pred_range\"],"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 392,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        \"H_pred_velocity_index\": df[\"H_pred_velocity\"],"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 393,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        \"V_pred_velocity_index\": df[\"V_pred_velocity\"],"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 397,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        \"fusion_pred_range_index\": pred_range,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 398,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        \"fusion_pred_velocity_index\": pred_velocity,"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 402,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "        out[\"fusion_pred_range_index\"] - out[\"true_range_index\"]"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 405,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "        out[\"fusion_pred_velocity_index\"] - out[\"true_velocity_index\"]"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 407,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "    out[\"localization_ok\"] = ("
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 414,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        & out[\"localization_ok\"]"
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 462,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "            \"HV_pred_range\","
+  },
+  {
+    "file": "scripts/analyze_hv_late_fusion_v1.py",
+    "line": 463,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "            \"HV_pred_velocity\","
+  },
+  {
+    "file": "scripts/test_polarimetric_representation_pipeline_v1.py",
+    "line": 19,
+    "patterns": [
+      "power2"
+    ],
+    "text": "from features.polarimetric_rd import PolarimetricConfig, explicit_polarimetric_rd, make_power2, make_ri4, make_polar6, make_ri8"
+  },
+  {
+    "file": "scripts/test_polarimetric_representation_pipeline_v1.py",
+    "line": 39,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"power2\": make_power2(features),"
+  },
+  {
+    "file": "scripts/run_hv_ablation.py",
+    "line": 58,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            \"跳过已经完整生成best.pt和summary.json的阶段；\""
+  },
+  {
+    "file": "scripts/run_hv_ablation.py",
+    "line": 93,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        / \"best.pt\""
+  },
+  {
+    "file": "scripts/run_hv_ablation.py",
+    "line": 117,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/visualize_detection_cases_v3.py",
+    "line": 170,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    checkpoint_path = experiments_root / EXPERIMENTS[mode] / \"checkpoints\" / \"best.pt\""
+  },
+  {
+    "file": "scripts/visualize_detection_cases_v3.py",
+    "line": 223,
+    "patterns": [
+      "pred_range"
+    ],
+    "text": "    r = pd.to_numeric(row.get(f\"{prefix}_pred_range_index\"), errors=\"coerce\")"
+  },
+  {
+    "file": "scripts/visualize_detection_cases_v3.py",
+    "line": 224,
+    "patterns": [
+      "pred_velocity"
+    ],
+    "text": "    v = pd.to_numeric(row.get(f\"{prefix}_pred_velocity_index\"), errors=\"coerce\")"
+  },
+  {
+    "file": "scripts/evaluate_bc_dpg_v2_global_threshold.py",
+    "line": 107,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "    test_path = table_dir / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/evaluate_bc_dpg_v2_global_threshold.py",
+    "line": 123,
+    "patterns": [
+      "localization_ok"
+    ],
+    "text": "        \"localization_ok\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 218,
+    "patterns": [
+      "power2",
+      "best.pt"
+    ],
+    "text": "            f\"results/experiments/*fold{fold:02d}*power2*/**/best.pt\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 219,
+    "patterns": [
+      "power2",
+      "best.pt"
+    ],
+    "text": "            f\"results/experiments/*power2*fold{fold:02d}*/**/best.pt\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 220,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            f\"results/experiments/*fold{fold:02d}*/**/best.pt\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 348,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated",
+      "pred_range",
+      "pred_velocity"
+    ],
+    "text": "        \"power2\", \"polar6_gated\", \"ri8_gated\", \"pred_range\", \"pred_velocity\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 349,
+    "patterns": [
+      "localization_ok",
+      "test_predictions",
+      "validation_predictions",
+      "best.pt"
+    ],
+    "text": "        \"localization_ok\", \"test_predictions\", \"validation_predictions\", \"best.pt\","
+  },
+  {
+    "file": "scripts/collect_roi_polarimetric_stage4_context_v1.py",
+    "line": 350,
+    "patterns": [
+      "DetectionRadarDatasetV3",
+      "polarimetric_confidence",
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "        \"DetectionRadarDatasetV3\", \"polarimetric_confidence\", \"relative_ZDR\", \"local_rho\","
+  },
+  {
+    "file": "scripts/test_dual_branch_gated.py",
+    "line": 23,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    parser.add_argument(\"--h-checkpoint\", default=\"results/experiments/detection_h_baseline_v2/checkpoints/best.pt\")"
+  },
+  {
+    "file": "scripts/test_dual_branch_gated.py",
+    "line": 24,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    parser.add_argument(\"--v-checkpoint\", default=\"results/experiments/detection_v_baseline_v2/checkpoints/best.pt\")"
+  },
+  {
+    "file": "scripts/run_bc_dpg_v3.py",
+    "line": 66,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                / \"checkpoints/best.pt\""
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 13,
+    "patterns": [
+      "power2"
+    ],
+    "text": "MODES = (\"power2\", \"ri4\", \"polar6\", \"ri8\")"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 85,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        if \"power2\" in set(aggregate[\"mode\"]):"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 86,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            base = aggregate.loc[aggregate[\"mode\"] == \"power2\"].iloc[0]"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 87,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_false_alarms_vs_power2\"] = aggregate[\"total_false_alarms\"] - int(base[\"total_false_alarms\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 88,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_mean_pd_vs_power2\"] = aggregate[\"mean_pd\"] - float(base[\"mean_pd\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 89,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_mean_auc_vs_power2\"] = aggregate[\"mean_auc\"] - float(base[\"mean_auc\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v1.py",
+    "line": 106,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"> Power2、RI4、Polar6、RI8仅比较输入表征，不代表已完成物理极化标定。\", \"\","
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 33,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "    modes = (\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\")"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 58,
+    "patterns": [
+      "power2",
+      "polar6_gated"
+    ],
+    "text": "    if not np.allclose(tensors[\"power2\"][:2], tensors[\"polar6_gated\"][:2], atol=1e-6):"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 59,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        raise AssertionError(\"Polar6-gated must preserve the Power2 channels\")"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 60,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "    if not np.allclose(tensors[\"ri4\"][:4], tensors[\"ri8_gated\"][:4], atol=1e-6):"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 62,
+    "patterns": [
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "    for mode in (\"polar6_gated\", \"ri8_gated\"):"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 63,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "        extra = tensors[mode][2:6] if mode == \"polar6_gated\" else tensors[mode][4:8]"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 74,
+    "patterns": [
+      "power2",
+      "polar6_gated"
+    ],
+    "text": "            \"power2_preserved_in_polar6_gated\": True,"
+  },
+  {
+    "file": "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "line": 75,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "            \"ri4_preserved_in_ri8_gated\": True,"
+  },
+  {
+    "file": "scripts/collect_polarimetric_twofold_diagnostics_v1.py",
+    "line": 73,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "        default=[\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"]"
+  },
+  {
+    "file": "scripts/collect_polarimetric_twofold_diagnostics_v1.py",
+    "line": 515,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        for pattern in (\"**/best.pt\", \"**/best.pth\", \"**/*.ckpt\"):"
+  },
+  {
+    "file": "scripts/audit_polarimetric_features_v1.py",
+    "line": 709,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            \"3. 本审计通过后，可依次比较 Power2、RI4、\""
+  },
+  {
+    "file": "scripts/train_notch_dual_refiner.py",
+    "line": 73,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/train_notch_dual_refiner.py",
+    "line": 87,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/train_simple_fcn.py",
+    "line": 104,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    / \"simple_fcn_best.pt\""
+  },
+  {
+    "file": "scripts/train_simple_fcn.py",
+    "line": 1078,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        / \"test_predictions\""
+  },
+  {
+    "file": "scripts/train_notch_dual_fcn.py",
+    "line": 51,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/train_notch_dual_fcn.py",
+    "line": 1478,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        / \"best.pt\""
+  },
+  {
+    "file": "scripts/analyze_v4_localization_rescue.py",
+    "line": 23,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        / \"test_predictions.csv\""
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 13,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "MODES = (\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\")"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 85,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        if \"power2\" in set(aggregate[\"mode\"]):"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 86,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            base = aggregate.loc[aggregate[\"mode\"] == \"power2\"].iloc[0]"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 87,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_false_alarms_vs_power2\"] = aggregate[\"total_false_alarms\"] - int(base[\"total_false_alarms\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 88,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_mean_pd_vs_power2\"] = aggregate[\"mean_pd\"] - float(base[\"mean_pd\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 89,
+    "patterns": [
+      "power2"
+    ],
+    "text": "            aggregate[\"delta_mean_auc_vs_power2\"] = aggregate[\"mean_auc\"] - float(base[\"mean_auc\"])"
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "line": 106,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"> Power2、RI4、Polar6-gated、RI8-gated仅比较输入表征，不代表已完成物理极化标定。\", \"\","
+  },
+  {
+    "file": "scripts/run_grouped_5fold_v2.py",
+    "line": 269,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "            / \"best.pt\""
+  },
+  {
+    "file": "scripts/run_bc_dpg_v31_shift_reg_sweep.py",
+    "line": 89,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        path / \"tables\" / \"test_predictions.csv\","
+  },
+  {
+    "file": "scripts/run_bc_dpg_v31_shift_reg_sweep.py",
+    "line": 90,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "        path / \"checkpoints\" / \"best.pt\","
+  },
+  {
+    "file": "scripts/run_bc_dpg_v31_shift_reg_sweep.py",
+    "line": 285,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "                    / \"best.pt\""
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v1.py",
+    "line": 12,
+    "patterns": [
+      "power2"
+    ],
+    "text": "MODES = (\"power2\", \"ri4\", \"polar6\", \"ri8\")"
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v1.py",
+    "line": 31,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "    return (root / \"checkpoints/best.pt\").is_file() and (root / \"tables/summary.json\").is_file()"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 64,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "MODES = [\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"]"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 66,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    \"power2\": \"Power2\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 68,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "    \"polar6_gated\": \"Polar6-gated\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 69,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "    \"ri8_gated\": \"RI8-gated\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 258,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"- Power2继续作为主检测与定位表征；门控证明了低功率极化噪声抑制方向有效，但密集显式极化输入尚未形成稳定独立增益。\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 259,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"- 不将 Polar6-gated 或 RI8-gated 直接替代 Power2，也不立即扩展为六折主模型。\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 263,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"采用候选区域引导的极化精修：Power2负责候选峰和定位，只在候选峰局部ROI内提取RI4及门控极化特征，用于候选确认或重排序。\","
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 275,
+    "patterns": [
+      "power2"
+    ],
+    "text": "保留 Power2 的高检测率和定位能力，只在 Power2 候选峰周围提取局部极化特征，判断候选是真目标还是背景伪峰。极化分支不重新决定全图峰位置。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 279,
+    "patterns": [
+      "power2"
+    ],
+    "text": "1. `power2_baseline`：原始 Power2。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 280,
+    "patterns": [
+      "power2"
+    ],
+    "text": "2. `power2_roi_power_control`：只使用候选ROI功率统计，作为ROI机制控制组。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 281,
+    "patterns": [
+      "power2"
+    ],
+    "text": "3. `power2_roi_ri4`：ROI内 H/V 实部和虚部。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 282,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "4. `power2_roi_polar6_gated`：ROI内门控 relative_ZDR_like、local_rho_HV 与相对相位。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 283,
+    "patterns": [
+      "power2",
+      "polar6_gated"
+    ],
+    "text": "5. `power2_roi_ri4_polar6_gated`：复数信息与门控极化联合。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 285,
+    "patterns": [
+      "power2"
+    ],
+    "text": "第一轮仅运行 Fold 1 与 Fold 4；保持相同 manifest、seed、Power2 checkpoint、阈值选择规则和测试评价规则。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 294,
+    "patterns": [
+      "power2"
+    ],
+    "text": "raw_power2_score"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 295,
+    "patterns": [
+      "power2",
+      "pred_range"
+    ],
+    "text": "power2_pred_range_index"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 296,
+    "patterns": [
+      "power2",
+      "pred_velocity"
+    ],
+    "text": "power2_pred_velocity_index"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 305,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    \"raw_power2_score\": ...,"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 308,
+    "patterns": [
+      "polarimetric_confidence"
+    ],
+    "text": "    \"polarimetric_confidence\": ...,"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 310,
+    "patterns": [
+      "power2",
+      "pred_range"
+    ],
+    "text": "    \"pred_range_index\": ...,   # 默认沿用Power2"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 311,
+    "patterns": [
+      "power2",
+      "pred_velocity"
+    ],
+    "text": "    \"pred_velocity_index\": ... # 默认沿用Power2"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 324,
+    "patterns": [
+      "power2"
+    ],
+    "text": "Power2虚警救回/新增虚警"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 325,
+    "patterns": [
+      "power2"
+    ],
+    "text": "Power2目标救回/退化"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 332,
+    "patterns": [
+      "power2"
+    ],
+    "text": "- 不覆盖现有 Power2、RI4、Polar6-gated、RI8-gated 正式结果。"
+  },
+  {
+    "file": "scripts/use_polarimetric_final_analysis_v1.py",
+    "line": 405,
+    "patterns": [
+      "power2"
+    ],
+    "text": "        \"not_for\": \"直接训练、替代Power2、证明跨环境独立泛化\","
+  },
+  {
+    "file": "scripts/evaluate_background_calibrator.py",
+    "line": 19,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "from datasets.detection_dataset_v3 import DetectionRadarDatasetV3"
+  },
+  {
+    "file": "scripts/evaluate_background_calibrator.py",
+    "line": 142,
+    "patterns": [
+      "DetectionRadarDatasetV3"
+    ],
+    "text": "        dataset = DetectionRadarDatasetV3("
+  },
+  {
+    "file": "scripts/evaluate_background_calibrator.py",
+    "line": 230,
+    "patterns": [
+      "test_predictions"
+    ],
+    "text": "        output_dir / \"test_predictions.csv\","
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 37,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    power2:"
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 45,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "        - relative_ZDR_like"
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 46,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "        - local_rho_HV"
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 55,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "        - relative_ZDR_like"
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 56,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "        - local_rho_HV"
+  },
+  {
+    "file": "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "line": 62,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "    - report_relative_ZDR_like_not_absolute_ZDR"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 10,
+    "patterns": [
+      "power2"
+    ],
+    "text": "  power2: [H_power, V_power, zero, zero, zero, zero, zero, zero]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 12,
+    "patterns": [
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "  polar6: [H_power, V_power, relative_ZDR_like, local_rho_HV, cos_relative_phase, sin_relative_phase, zero, zero]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 13,
+    "patterns": [
+      "relative_ZDR",
+      "local_rho"
+    ],
+    "text": "  ri8: [Re_H, Im_H, Re_V, Im_V, relative_ZDR_like, local_rho_HV, cos_relative_phase, sin_relative_phase]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 19,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "  relative_zdr_clip_db: 20"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 23,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "    - report relative_ZDR_like, not absolute ZDR"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v1.yaml",
+    "line": 27,
+    "patterns": [
+      "power2"
+    ],
+    "text": "  primary_baseline: power2"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 10,
+    "patterns": [
+      "power2"
+    ],
+    "text": "  power2: [H_power, V_power, zero, zero, zero, zero, zero, zero]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 12,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "  polar6_gated:"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 15,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "    - confidence_times_relative_ZDR_like"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 16,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 17,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV_times_cos_relative_phase"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 18,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV_times_sin_relative_phase"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 21,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "  ri8_gated:"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 26,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "    - confidence_times_relative_ZDR_like"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 27,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 28,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV_times_cos_relative_phase"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 29,
+    "patterns": [
+      "local_rho"
+    ],
+    "text": "    - confidence_times_local_rho_HV_times_sin_relative_phase"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 40,
+    "patterns": [
+      "power2"
+    ],
+    "text": "  primary_baselines: [power2, ri4]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 41,
+    "patterns": [
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "  gated_candidates: [polar6_gated, ri8_gated]"
+  },
+  {
+    "file": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "line": 46,
+    "patterns": [
+      "relative_ZDR"
+    ],
+    "text": "    - relative_ZDR_like is not absolute calibrated ZDR"
+  },
+  {
+    "file": "configs/polarimetric_twofold_diagnostics_v1.json",
+    "line": 8,
+    "patterns": [
+      "power2"
+    ],
+    "text": "    \"power2\","
+  },
+  {
+    "file": "configs/polarimetric_twofold_diagnostics_v1.json",
+    "line": 10,
+    "patterns": [
+      "polar6_gated"
+    ],
+    "text": "    \"polar6_gated\","
+  },
+  {
+    "file": "configs/polarimetric_twofold_diagnostics_v1.json",
+    "line": 11,
+    "patterns": [
+      "ri8_gated"
+    ],
+    "text": "    \"ri8_gated\""
+  },
+  {
+    "file": "configs/roi_polarimetric_stage4_context_v1.json",
+    "line": 4,
+    "patterns": [
+      "power2",
+      "polar6_gated",
+      "ri8_gated"
+    ],
+    "text": "  \"target_modes\": [\"power2\", \"ri4\", \"polar6_gated\", \"ri8_gated\"],"
+  },
+  {
+    "file": "configs/dual_branch_gated_v1.yaml",
+    "line": 12,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "  H: results/experiments/detection_h_baseline_v2/checkpoints/best.pt"
+  },
+  {
+    "file": "configs/dual_branch_gated_v1.yaml",
+    "line": 13,
+    "patterns": [
+      "best.pt"
+    ],
+    "text": "  V: results/experiments/detection_v_baseline_v2/checkpoints/best.pt"
+  }
+]

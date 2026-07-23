@@ -1,0 +1,29 @@
+{
+  "installed_at": "2026-07-22T12:31:14.039114",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "installed_files": [
+    "configs/polarimetric_representation_benchmark_v2.yaml",
+    "datasets/polarimetric_detection_dataset_v2.py",
+    "features/polarimetric_gated_rd.py",
+    "scripts/audit_polarimetric_channels_v1.py",
+    "scripts/audit_polarimetric_score_shift_v1.py",
+    "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "scripts/test_polarimetric_gated_pipeline_v2.py",
+    "training/train_polarimetric_representation_fcn_v2.py"
+  ],
+  "skipped_identical_files": [],
+  "backed_up_files": [],
+  "backup_root": null,
+  "hashes": {
+    "configs/polarimetric_representation_benchmark_v2.yaml": "66c04346f6690aaf7deef7950d1b29ea0f69767b89e1373873d3b57540a5aef8",
+    "datasets/polarimetric_detection_dataset_v2.py": "ef3bc15a370ae74c0f1e80765136ab338eedd17029f900e4ee709edf8df2ca5d",
+    "features/polarimetric_gated_rd.py": "fca8e3f0c76848ca87d999a8a73c669780b4ae3a26ecf53b477c91c3a2d99656",
+    "scripts/audit_polarimetric_channels_v1.py": "76c6a14d8a0be1e6c32cee2b80d0edecbc54b512b11aec9e7bf702ab2891d078",
+    "scripts/audit_polarimetric_score_shift_v1.py": "3fd207823fdeb3bdeadebdf1df1cb658f508915297458399cc37c3857e11cba1",
+    "scripts/run_polarimetric_representation_benchmark_v2.py": "c66b92941432f0288dbddad354d5c86460bfc1de8e44ead4cf57f21fda5380e9",
+    "scripts/summarize_polarimetric_representation_benchmark_v2.py": "a6b6fc495eae0a0a349c750991002681d1b0ee5976825bea64efbad980458f93",
+    "scripts/test_polarimetric_gated_pipeline_v2.py": "1298cc7abcebb2ebbf6f755c39a9301d49be17581a04635d08ac5c11e110d0e1",
+    "training/train_polarimetric_representation_fcn_v2.py": "8fafc9c79af32e126642b1e3410e1fb78e5ecb12651caaf493eac52a984b7ee4"
+  }
+}

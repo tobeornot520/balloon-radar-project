@@ -1,0 +1,90 @@
+{
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "manifest_template": "results/data_audit/dataset_v4_multifold/fold_{fold:02d}_manifest.csv",
+  "hash_files_enabled": true,
+  "test_feedback_known": true,
+  "detected_columns": {
+    "1": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    },
+    "2": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    },
+    "3": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    },
+    "4": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    },
+    "5": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    },
+    "6": {
+      "split": "new_split",
+      "sample_id": "sample_id",
+      "mat_path": "mat_path",
+      "label_path": "label_path",
+      "source_file": "source_file",
+      "target": "target_present"
+    }
+  },
+  "row_count": 6888,
+  "unique_sample_count": 1148,
+  "unique_scan_group_count": 77,
+  "within_fold_overlap_count": 0,
+  "critical_overlap_count": 0,
+  "high_overlap_count": 0,
+  "scan_environment_overlap_count": 0,
+  "within_split_duplicate_count": 0,
+  "sample_rotation_anomaly_count": 0,
+  "scan_group_rotation_anomaly_count": 0,
+  "overall_risk_severity": "HIGH",
+  "deployment_note": "The current v3 group features aggregate all samples from a scan group. This is valid for offline complete-scan processing. For real-time deployment, recompute group features causally using only current and previously observed beams/azimuths.",
+  "interpretation": {
+    "no_critical_overlap": true,
+    "scan_groups_disjoint_within_folds": true,
+    "current_test_is_blind": false,
+    "recommended_final_validation": "Freeze v3 and evaluate once on newly collected scan groups. If new data are unavailable, run nested leave-one-scan-group-out validation with all model choices made only inside the inner folds."
+  },
+  "output_files": {
+    "normalized_rows": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/normalized_manifest_rows.csv",
+    "split_overlaps": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/within_fold_split_overlaps.csv",
+    "within_split_duplicates": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/within_split_duplicates.csv",
+    "environment_summary": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/split_environment_summary.csv",
+    "sample_rotation": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/cross_fold_sample_rotation.csv",
+    "scan_rotation": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/cross_fold_scan_group_rotation.csv",
+    "risk_register": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/overfitting_audit/overfitting_risk_register.csv"
+  }
+}

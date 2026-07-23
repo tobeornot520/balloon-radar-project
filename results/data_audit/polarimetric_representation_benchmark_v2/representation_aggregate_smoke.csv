@@ -1,0 +1,5 @@
+﻿mode,folds,total_positive,total_background,total_false_alarms,mean_pfa,mean_pd,mean_auc,mean_range_mae,mean_velocity_mae,parameter_count,delta_false_alarms_vs_power2,delta_mean_pd_vs_power2,delta_mean_auc_vs_power2
+polar6_gated,2,16,16,1,0.0625,0.0,0.390625,29.9375,55.375,19793,-2,0.0,-0.078125
+power2,2,16,16,3,0.1875,0.0,0.46875,29.9375,55.375,19793,0,0.0,0.0
+ri4,2,16,16,13,0.8125,0.0,0.59375,39.875,20.25,19793,10,0.0,0.125
+ri8_gated,2,16,16,14,0.875,0.0,0.5703125,39.6875,19.5,19793,11,0.0,0.1015625

@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-07-22T19:42:45.379360",
+  "scope": "formal",
+  "folds": [
+    1,
+    4
+  ],
+  "modes": [
+    "power2_baseline",
+    "power2_roi_power_control",
+    "power2_roi_ri4",
+    "power2_roi_polar6_gated",
+    "power2_roi_ri4_polar6_gated"
+  ],
+  "epochs": 100,
+  "debug_per_class": 0,
+  "roi_velocity_radius": 5,
+  "roi_range_radius": 4,
+  "max_val_pd_drop": 0.01,
+  "base_detector": "frozen Power2 formal checkpoint",
+  "primary_threshold": "unchanged fold-specific Power2 deployment threshold",
+  "sample_independent": true,
+  "scan_context": false,
+  "power2_location_frozen": true
+}

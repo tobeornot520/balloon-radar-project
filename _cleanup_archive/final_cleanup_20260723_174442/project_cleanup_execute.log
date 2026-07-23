@@ -1,0 +1,10 @@
+========================================================================================
+BALLOON RADAR PROJECT CLEANUP EXECUTE
+========================================================================================
+archive dir : /home/tobeornot8259748/projects/balloon_radar_project/_cleanup_archive/cleanup_20260722_123754
+processed   : 65
+errors      : 0
+report      : /home/tobeornot8259748/projects/balloon_radar_project/_cleanup_archive/cleanup_20260722_123754/CLEANUP_REPORT.md
+
+清理完成。历史补丁和根目录过程文件已移入可恢复归档。
+恢复命令：python cleanup_balloon_radar_project_v1.py --restore-latest

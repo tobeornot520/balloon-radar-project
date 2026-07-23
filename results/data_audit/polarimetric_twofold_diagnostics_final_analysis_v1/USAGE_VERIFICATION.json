@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "analysis_directory": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/polarimetric_twofold_diagnostics_final_analysis_v1",
+  "required_count": 11,
+  "found_count": 11,
+  "missing": [],
+  "column_errors": {},
+  "mode_errors": {},
+  "sha256": {
+    "README_极化门控两折正式诊断最终分析.md": "20ffc797fbcf853ca0c57397e640600942631390bb4de8efbf6a94ce4fbf07d2",
+    "background_false_alarm_overlap.csv": "ce6c2ea5bc7287edcecf65dfce1e59b827b066e141a9776619dded1460518c77",
+    "threshold_transfer_detail.csv": "da7f9093121c9f66d63d3e46d6897397907f860c5cb65a4ab8d66aafbab8bdfa",
+    "fixed_threshold_detail.csv": "56b7cc94d56574d82bf8509d02b822d294da8c49b228bacf45d5c5b6287a2a6f",
+    "low_fpr_detail.csv": "963956b9e79dfa6636b462ea068cefbbbce5091413d3d0dbb9500a2cbc1b14d5",
+    "fixed_threshold_macro.csv": "0a3a2ee783d31320d188ee98de452773184731f06c1eaacd299246f30d1baff7",
+    "threshold_transfer_macro.csv": "ce9c902d3c90cd1bc270548b8f4c3b4c78308cabcd2ced5a927d2a169f9aa134",
+    "target_scan_group_metrics.csv": "5986052bb556e1ea1e232c87d28f398e54ddd2391d127d86039c3ab2196a3cb1",
+    "score_distribution_quantiles.csv": "6cea0d5c170e8af76c428fc30d3d6f6d0fbb8d05cee2ba72d0d52df47ac37101",
+    "low_fpr_macro.csv": "1873598b8a6f35df090f05a604b89ec599b13ad323881b913fabef1986edddb0",
+    "target_failure_breakdown.csv": "6a5a155c7b6a8303464844fa74dac4dc0166efb548b064dcd189350b99c46c3c"
+  }
+}

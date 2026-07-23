@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "source_shape": [
+    10,
+    128,
+    100
+  ],
+  "confidence_shape": [
+    1,
+    128,
+    100
+  ],
+  "roi_shape": [
+    10,
+    11,
+    9
+  ],
+  "roi_valid_fraction": 0.3030303120613098,
+  "parameter_count": 8162,
+  "same_architecture": true,
+  "sample_independent": true,
+  "scan_context": false,
+  "suppression_only": true,
+  "power2_location_frozen": true,
+  "modes": {
+    "power2_roi_power_control": {
+      "input_shape": [
+        1,
+        8,
+        11,
+        9
+      ],
+      "raw_score": 0.7685248255729675,
+      "refined_score": 0.7649872303009033,
+      "suppression": 0.01978098414838314
+    },
+    "power2_roi_ri4": {
+      "input_shape": [
+        1,
+        8,
+        11,
+        9
+      ],
+      "raw_score": 0.7685248255729675,
+      "refined_score": 0.7649872303009033,
+      "suppression": 0.01978098414838314
+    },
+    "power2_roi_polar6_gated": {
+      "input_shape": [
+        1,
+        8,
+        11,
+        9
+      ],
+      "raw_score": 0.7685248255729675,
+      "refined_score": 0.7649872303009033,
+      "suppression": 0.01978098414838314
+    },
+    "power2_roi_ri4_polar6_gated": {
+      "input_shape": [
+        1,
+        8,
+        11,
+        9
+      ],
+      "raw_score": 0.7685248255729675,
+      "refined_score": 0.7649872303009033,
+      "suppression": 0.01978098414838314
+    }
+  }
+}

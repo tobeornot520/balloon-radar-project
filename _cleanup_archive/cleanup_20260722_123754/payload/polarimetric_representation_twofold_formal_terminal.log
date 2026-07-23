@@ -1,0 +1,892 @@
+预加载 power2-train: 742 个样本...
+  power2-train: 200/742
+  power2-train: 400/742
+  power2-train: 600/742
+  power2-train: 742/742
+预加载 power2-val: 203 个样本...
+  power2-val: 200/203
+  power2-val: 203/203
+预加载 power2-test: 203 个样本...
+  power2-test: 200/203
+  power2-test: 203/203
+==================================================================================
+experiment       : polar_repr_v1_power2_v4_fold01_seed42_formal
+fold / mode      : 1 / power2
+active channels  : ('H_power', 'V_power')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=742, val=203, test=203
+==================================================================================
+Epoch 001/100 | train=0.324230 val=0.140527 | thr=0.36572 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.097562 val=0.058292 | thr=0.17969 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.047644 val=0.034605 | thr=0.13818 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 004/100 | train=0.031136 val=0.024891 | thr=0.10858 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 005/100 | train=0.024377 val=0.020735 | thr=0.09515 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 006/100 | train=0.021269 val=0.018734 | thr=0.08447 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 007/100 | train=0.019668 val=0.017638 | thr=0.07147 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 008/100 | train=0.018758 val=0.017009 | thr=0.07990 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 009/100 | train=0.018188 val=0.016531 | thr=0.05551 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 010/100 | train=0.017804 val=0.016228 | thr=0.08600 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.017452 val=0.015836 | thr=0.12476 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 012/100 | train=0.016996 val=0.015224 | thr=0.20642 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.016063 val=0.014576 | thr=0.36182 Pd=0.0566 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 014/100 | train=0.014661 val=0.013275 | thr=0.31055 Pd=0.0755 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 015/100 | train=0.013738 val=0.012561 | thr=0.33203 Pd=0.3962 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 016/100 | train=0.011904 val=0.010636 | thr=0.22437 Pd=0.3774 Pfa=0.0133 | lr=1.00e-03
+Epoch 017/100 | train=0.010847 val=0.010300 | thr=0.30786 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 018/100 | train=0.011142 val=0.009750 | thr=0.24475 Pd=0.4717 Pfa=0.0133 | lr=1.00e-03
+Epoch 019/100 | train=0.009976 val=0.009307 | thr=0.23315 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 020/100 | train=0.010491 val=0.010859 | thr=0.35107 Pd=0.4717 Pfa=0.0133 | lr=1.00e-03
+Epoch 021/100 | train=0.009384 val=0.009266 | thr=0.38525 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.009010 val=0.008628 | thr=0.25562 Pd=0.6226 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 023/100 | train=0.008240 val=0.010172 | thr=0.32642 Pd=0.7925 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 024/100 | train=0.008129 val=0.008363 | thr=0.26221 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 025/100 | train=0.008049 val=0.008352 | thr=0.17004 Pd=0.3962 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.007521 val=0.007353 | thr=0.19421 Pd=0.7736 Pfa=0.0133 | lr=1.00e-03
+Epoch 027/100 | train=0.007584 val=0.008225 | thr=0.19214 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.007343 val=0.007324 | thr=0.19116 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03
+Epoch 029/100 | train=0.006988 val=0.007315 | thr=0.15027 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.007063 val=0.007214 | thr=0.20813 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.007110 val=0.010849 | thr=0.58350 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 032/100 | train=0.006848 val=0.007238 | thr=0.21973 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03
+Epoch 033/100 | train=0.006693 val=0.006805 | thr=0.41968 Pd=0.6415 Pfa=0.0133 | lr=1.00e-03
+Epoch 034/100 | train=0.006901 val=0.006990 | thr=0.18567 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 035/100 | train=0.006424 val=0.006740 | thr=0.21326 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 036/100 | train=0.006424 val=0.006891 | thr=0.34204 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03
+Epoch 037/100 | train=0.006545 val=0.006960 | thr=0.18835 Pd=0.6415 Pfa=0.0133 | lr=1.00e-03
+Epoch 038/100 | train=0.006219 val=0.006584 | thr=0.17920 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 039/100 | train=0.006261 val=0.007013 | thr=0.35449 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 040/100 | train=0.005969 val=0.006530 | thr=0.34180 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 041/100 | train=0.005890 val=0.006723 | thr=0.46875 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 042/100 | train=0.005996 val=0.006977 | thr=0.50293 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03
+Epoch 043/100 | train=0.005764 val=0.006080 | thr=0.18555 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03
+Epoch 044/100 | train=0.005679 val=0.006391 | thr=0.30786 Pd=0.9245 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 045/100 | train=0.006053 val=0.006424 | thr=0.18518 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03
+Epoch 046/100 | train=0.005773 val=0.006418 | thr=0.27100 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 047/100 | train=0.005871 val=0.006273 | thr=0.34302 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03
+Epoch 048/100 | train=0.005453 val=0.006086 | thr=0.30664 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 049/100 | train=0.005534 val=0.005880 | thr=0.17676 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03
+Epoch 050/100 | train=0.005540 val=0.005949 | thr=0.17944 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 051/100 | train=0.005594 val=0.006081 | thr=0.16992 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 052/100 | train=0.005244 val=0.005841 | thr=0.17480 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 053/100 | train=0.005357 val=0.006545 | thr=0.57471 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 054/100 | train=0.005918 val=0.006382 | thr=0.24597 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03
+Epoch 055/100 | train=0.005253 val=0.006039 | thr=0.35107 Pd=0.9245 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 056/100 | train=0.005247 val=0.005953 | thr=0.17480 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03
+Epoch 057/100 | train=0.005319 val=0.005677 | thr=0.59131 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 058/100 | train=0.005220 val=0.005949 | thr=0.18701 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 059/100 | train=0.005217 val=0.006564 | thr=0.49390 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03
+Epoch 060/100 | train=0.005363 val=0.006381 | thr=0.35522 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 061/100 | train=0.005032 val=0.005692 | thr=0.25244 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 062/100 | train=0.005162 val=0.006121 | thr=0.33325 Pd=0.9057 Pfa=0.0133 | lr=1.00e-03
+Epoch 063/100 | train=0.005267 val=0.005871 | thr=0.27832 Pd=0.8868 Pfa=0.0133 | lr=5.00e-04
+Epoch 064/100 | train=0.004751 val=0.006064 | thr=0.45239 Pd=0.9245 Pfa=0.0133 | lr=5.00e-04
+Epoch 065/100 | train=0.004681 val=0.005494 | thr=0.18994 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 066/100 | train=0.004574 val=0.005785 | thr=0.18384 Pd=0.9245 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 067/100 | train=0.004638 val=0.005584 | thr=0.22656 Pd=0.8868 Pfa=0.0133 | lr=5.00e-04
+Epoch 068/100 | train=0.004599 val=0.005805 | thr=0.46191 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 069/100 | train=0.004567 val=0.005476 | thr=0.18555 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 070/100 | train=0.004524 val=0.005745 | thr=0.27563 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 071/100 | train=0.004527 val=0.005440 | thr=0.21619 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 072/100 | train=0.004483 val=0.006052 | thr=0.32983 Pd=0.8868 Pfa=0.0133 | lr=5.00e-04
+Epoch 073/100 | train=0.004518 val=0.005716 | thr=0.42847 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 074/100 | train=0.004469 val=0.005677 | thr=0.41846 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 075/100 | train=0.004451 val=0.005548 | thr=0.31079 Pd=0.8679 Pfa=0.0133 | lr=5.00e-04
+Epoch 076/100 | train=0.004419 val=0.005432 | thr=0.18506 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 077/100 | train=0.004411 val=0.005661 | thr=0.40039 Pd=0.8679 Pfa=0.0133 | lr=5.00e-04
+Epoch 078/100 | train=0.004402 val=0.005798 | thr=0.35645 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 079/100 | train=0.004479 val=0.005455 | thr=0.24377 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 080/100 | train=0.004363 val=0.005736 | thr=0.24658 Pd=0.8868 Pfa=0.0133 | lr=5.00e-04
+Epoch 081/100 | train=0.004345 val=0.005916 | thr=0.34351 Pd=0.9057 Pfa=0.0133 | lr=5.00e-04
+Epoch 082/100 | train=0.004257 val=0.005530 | thr=0.17871 Pd=0.9057 Pfa=0.0133 | lr=2.50e-04
+Epoch 083/100 | train=0.004109 val=0.005222 | thr=0.21704 Pd=0.8868 Pfa=0.0133 | lr=2.50e-04
+Epoch 084/100 | train=0.004102 val=0.005467 | thr=0.23914 Pd=0.9057 Pfa=0.0133 | lr=2.50e-04
+Epoch 085/100 | train=0.004070 val=0.005379 | thr=0.22119 Pd=0.9057 Pfa=0.0133 | lr=2.50e-04
+Epoch 086/100 | train=0.004050 val=0.005351 | thr=0.29443 Pd=0.8868 Pfa=0.0133 | lr=2.50e-04
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 66
+threshold  : 0.183838
+test       : Pd=0.9811, Pfa=1.0000, FA=150, AUC=0.9444
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_power2_v4_fold01_seed42_formal
+==================================================================================
+预加载 ri4-train: 742 个样本...
+  ri4-train: 200/742
+  ri4-train: 400/742
+  ri4-train: 600/742
+  ri4-train: 742/742
+预加载 ri4-val: 203 个样本...
+  ri4-val: 200/203
+  ri4-val: 203/203
+预加载 ri4-test: 203 个样本...
+  ri4-test: 200/203
+  ri4-test: 203/203
+==================================================================================
+experiment       : polar_repr_v1_ri4_v4_fold01_seed42_formal
+fold / mode      : 1 / ri4
+active channels  : ('Re_H', 'Im_H', 'Re_V', 'Im_V')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=742, val=203, test=203
+==================================================================================
+Epoch 001/100 | train=0.347103 val=0.133820 | thr=0.39746 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.092764 val=0.054525 | thr=0.36914 Pd=0.0566 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.043625 val=0.031682 | thr=0.50537 Pd=0.0566 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.027654 val=0.022980 | thr=0.64990 Pd=0.1132 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.020677 val=0.018318 | thr=0.68164 Pd=0.2453 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.016524 val=0.016150 | thr=0.77051 Pd=0.1698 Pfa=0.0133 | lr=1.00e-03
+Epoch 007/100 | train=0.014160 val=0.014329 | thr=0.84033 Pd=0.2453 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 008/100 | train=0.012338 val=0.012742 | thr=0.83105 Pd=0.3208 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 009/100 | train=0.011318 val=0.012043 | thr=0.86816 Pd=0.3208 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 010/100 | train=0.010408 val=0.012074 | thr=0.89307 Pd=0.3019 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.009724 val=0.010766 | thr=0.88232 Pd=0.4717 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 012/100 | train=0.009329 val=0.009919 | thr=0.83252 Pd=0.3774 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.009035 val=0.009927 | thr=0.77051 Pd=0.4151 Pfa=0.0133 | lr=1.00e-03
+Epoch 014/100 | train=0.008468 val=0.010052 | thr=0.86914 Pd=0.4340 Pfa=0.0133 | lr=1.00e-03
+Epoch 015/100 | train=0.008520 val=0.010746 | thr=0.93213 Pd=0.2453 Pfa=0.0133 | lr=1.00e-03
+Epoch 016/100 | train=0.008015 val=0.009170 | thr=0.85645 Pd=0.3962 Pfa=0.0133 | lr=1.00e-03
+Epoch 017/100 | train=0.007922 val=0.009554 | thr=0.80420 Pd=0.4340 Pfa=0.0133 | lr=1.00e-03
+Epoch 018/100 | train=0.007667 val=0.009132 | thr=0.81641 Pd=0.5094 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.007078 val=0.008945 | thr=0.88867 Pd=0.4151 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.007047 val=0.008747 | thr=0.85791 Pd=0.5849 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 021/100 | train=0.006739 val=0.008884 | thr=0.90967 Pd=0.3585 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.006701 val=0.008843 | thr=0.83838 Pd=0.5849 Pfa=0.0133 | lr=1.00e-03
+Epoch 023/100 | train=0.006370 val=0.008120 | thr=0.87012 Pd=0.5094 Pfa=0.0133 | lr=1.00e-03
+Epoch 024/100 | train=0.006402 val=0.008071 | thr=0.84668 Pd=0.6226 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.006247 val=0.007970 | thr=0.83350 Pd=0.5849 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.005944 val=0.007966 | thr=0.80127 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03
+Epoch 027/100 | train=0.005967 val=0.008382 | thr=0.89404 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.005710 val=0.007652 | thr=0.77441 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 029/100 | train=0.005862 val=0.007934 | thr=0.88867 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.005480 val=0.007755 | thr=0.86719 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.005434 val=0.008752 | thr=0.85693 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 032/100 | train=0.005666 val=0.007689 | thr=0.87500 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03
+Epoch 033/100 | train=0.005167 val=0.007969 | thr=0.87646 Pd=0.6226 Pfa=0.0133 | lr=1.00e-03
+Epoch 034/100 | train=0.005005 val=0.007992 | thr=0.87207 Pd=0.6792 Pfa=0.0133 | lr=5.00e-04
+Epoch 035/100 | train=0.004692 val=0.007135 | thr=0.80322 Pd=0.6792 Pfa=0.0133 | lr=5.00e-04
+Epoch 036/100 | train=0.004521 val=0.006854 | thr=0.78857 Pd=0.7547 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 037/100 | train=0.004465 val=0.007291 | thr=0.85645 Pd=0.6792 Pfa=0.0133 | lr=5.00e-04
+Epoch 038/100 | train=0.004399 val=0.007072 | thr=0.76807 Pd=0.7170 Pfa=0.0133 | lr=5.00e-04
+Epoch 039/100 | train=0.004305 val=0.007057 | thr=0.82520 Pd=0.7925 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 040/100 | train=0.004256 val=0.007058 | thr=0.79834 Pd=0.6981 Pfa=0.0133 | lr=5.00e-04
+Epoch 041/100 | train=0.004272 val=0.007135 | thr=0.83447 Pd=0.6792 Pfa=0.0133 | lr=5.00e-04
+Epoch 042/100 | train=0.004283 val=0.007187 | thr=0.87109 Pd=0.6792 Pfa=0.0133 | lr=2.50e-04
+Epoch 043/100 | train=0.004055 val=0.007002 | thr=0.78906 Pd=0.7170 Pfa=0.0133 | lr=2.50e-04
+Epoch 044/100 | train=0.003987 val=0.006855 | thr=0.80713 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 045/100 | train=0.003959 val=0.006911 | thr=0.76855 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 046/100 | train=0.003932 val=0.007083 | thr=0.81494 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 047/100 | train=0.003952 val=0.006965 | thr=0.80420 Pd=0.7736 Pfa=0.0133 | lr=2.50e-04
+Epoch 048/100 | train=0.003913 val=0.006921 | thr=0.82080 Pd=0.7547 Pfa=0.0133 | lr=1.25e-04
+Epoch 049/100 | train=0.003829 val=0.006893 | thr=0.75195 Pd=0.7736 Pfa=0.0133 | lr=1.25e-04
+Epoch 050/100 | train=0.003808 val=0.006914 | thr=0.79834 Pd=0.7925 Pfa=0.0133 | lr=1.25e-04 | best
+Epoch 051/100 | train=0.003795 val=0.006830 | thr=0.78760 Pd=0.7925 Pfa=0.0133 | lr=1.25e-04 | best
+Epoch 052/100 | train=0.003783 val=0.006791 | thr=0.78711 Pd=0.7736 Pfa=0.0133 | lr=1.25e-04
+Epoch 053/100 | train=0.003775 val=0.006903 | thr=0.76709 Pd=0.7925 Pfa=0.0133 | lr=1.25e-04
+Epoch 054/100 | train=0.003749 val=0.006860 | thr=0.78760 Pd=0.7925 Pfa=0.0133 | lr=1.25e-04
+Epoch 055/100 | train=0.003748 val=0.006927 | thr=0.79688 Pd=0.7547 Pfa=0.0133 | lr=1.25e-04
+Epoch 056/100 | train=0.003746 val=0.006903 | thr=0.79492 Pd=0.7925 Pfa=0.0133 | lr=1.25e-04
+Epoch 057/100 | train=0.003735 val=0.006923 | thr=0.77588 Pd=0.8113 Pfa=0.0133 | lr=1.25e-04 | best
+Epoch 058/100 | train=0.003713 val=0.006890 | thr=0.79297 Pd=0.7736 Pfa=0.0133 | lr=6.25e-05
+Epoch 059/100 | train=0.003672 val=0.006876 | thr=0.79102 Pd=0.7925 Pfa=0.0133 | lr=6.25e-05
+Epoch 060/100 | train=0.003652 val=0.006888 | thr=0.79639 Pd=0.8113 Pfa=0.0133 | lr=6.25e-05 | best
+Epoch 061/100 | train=0.003652 val=0.006906 | thr=0.79688 Pd=0.7925 Pfa=0.0133 | lr=6.25e-05
+Epoch 062/100 | train=0.003648 val=0.006847 | thr=0.79004 Pd=0.8113 Pfa=0.0133 | lr=6.25e-05 | best
+Epoch 063/100 | train=0.003640 val=0.006921 | thr=0.79492 Pd=0.8113 Pfa=0.0133 | lr=6.25e-05
+Epoch 064/100 | train=0.003628 val=0.006914 | thr=0.79785 Pd=0.7925 Pfa=0.0133 | lr=3.13e-05
+Epoch 065/100 | train=0.003617 val=0.006863 | thr=0.78516 Pd=0.8113 Pfa=0.0133 | lr=3.13e-05
+Epoch 066/100 | train=0.003599 val=0.006877 | thr=0.77881 Pd=0.7925 Pfa=0.0133 | lr=3.13e-05
+Epoch 067/100 | train=0.003596 val=0.006884 | thr=0.78467 Pd=0.8113 Pfa=0.0133 | lr=3.13e-05
+Epoch 068/100 | train=0.003592 val=0.006872 | thr=0.78125 Pd=0.8113 Pfa=0.0133 | lr=3.13e-05
+Epoch 069/100 | train=0.003591 val=0.006895 | thr=0.78662 Pd=0.8113 Pfa=0.0133 | lr=3.13e-05
+Epoch 070/100 | train=0.003586 val=0.006870 | thr=0.78320 Pd=0.8113 Pfa=0.0133 | lr=1.56e-05
+Epoch 071/100 | train=0.003574 val=0.006882 | thr=0.77881 Pd=0.7925 Pfa=0.0133 | lr=1.56e-05
+Epoch 072/100 | train=0.003571 val=0.006876 | thr=0.78027 Pd=0.7925 Pfa=0.0133 | lr=1.56e-05
+Epoch 073/100 | train=0.003572 val=0.006880 | thr=0.77979 Pd=0.7925 Pfa=0.0133 | lr=1.56e-05
+Epoch 074/100 | train=0.003566 val=0.006884 | thr=0.78369 Pd=0.8113 Pfa=0.0133 | lr=1.56e-05
+Epoch 075/100 | train=0.003567 val=0.006872 | thr=0.78271 Pd=0.8113 Pfa=0.0133 | lr=1.56e-05
+Epoch 076/100 | train=0.003564 val=0.006887 | thr=0.78467 Pd=0.7925 Pfa=0.0133 | lr=7.81e-06
+Epoch 077/100 | train=0.003557 val=0.006884 | thr=0.78467 Pd=0.7925 Pfa=0.0133 | lr=7.81e-06
+Epoch 078/100 | train=0.003557 val=0.006879 | thr=0.78320 Pd=0.8113 Pfa=0.0133 | lr=7.81e-06
+Epoch 079/100 | train=0.003556 val=0.006880 | thr=0.78223 Pd=0.7925 Pfa=0.0133 | lr=7.81e-06
+Epoch 080/100 | train=0.003555 val=0.006887 | thr=0.78662 Pd=0.7925 Pfa=0.0133 | lr=7.81e-06
+Epoch 081/100 | train=0.003553 val=0.006886 | thr=0.78271 Pd=0.7925 Pfa=0.0133 | lr=7.81e-06
+Epoch 082/100 | train=0.003551 val=0.006877 | thr=0.78076 Pd=0.7925 Pfa=0.0133 | lr=3.91e-06
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 62
+threshold  : 0.790039
+test       : Pd=0.5849, Pfa=0.1467, FA=22, AUC=0.8229
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_ri4_v4_fold01_seed42_formal
+==================================================================================
+预加载 polar6-train: 742 个样本...
+  polar6-train: 200/742
+  polar6-train: 400/742
+  polar6-train: 600/742
+  polar6-train: 742/742
+预加载 polar6-val: 203 个样本...
+  polar6-val: 200/203
+  polar6-val: 203/203
+预加载 polar6-test: 203 个样本...
+  polar6-test: 200/203
+  polar6-test: 203/203
+==================================================================================
+experiment       : polar_repr_v1_polar6_v4_fold01_seed42_formal
+fold / mode      : 1 / polar6
+active channels  : ('H_power', 'V_power', 'relative_ZDR_like', 'local_rho_HV', 'cos_relative_phase', 'sin_relative_phase')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=742, val=203, test=203
+==================================================================================
+Epoch 001/100 | train=0.316958 val=0.135840 | thr=0.32983 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.094731 val=0.057132 | thr=0.17798 Pd=0.0377 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.047078 val=0.034614 | thr=0.15845 Pd=0.2075 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.030976 val=0.024833 | thr=0.26587 Pd=0.3019 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.023626 val=0.020090 | thr=0.27539 Pd=0.3774 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.019266 val=0.017517 | thr=0.12634 Pd=0.3019 Pfa=0.0133 | lr=1.00e-03
+Epoch 007/100 | train=0.016950 val=0.016191 | thr=0.30713 Pd=0.3962 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 008/100 | train=0.014895 val=0.013550 | thr=0.12170 Pd=0.3585 Pfa=0.0133 | lr=1.00e-03
+Epoch 009/100 | train=0.014120 val=0.012926 | thr=0.10413 Pd=0.4340 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 010/100 | train=0.013165 val=0.012969 | thr=0.10266 Pd=0.3019 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.012341 val=0.011000 | thr=0.10822 Pd=0.4151 Pfa=0.0133 | lr=1.00e-03
+Epoch 012/100 | train=0.011406 val=0.010538 | thr=0.14673 Pd=0.5094 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 013/100 | train=0.011095 val=0.012077 | thr=0.11340 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 014/100 | train=0.009953 val=0.009993 | thr=0.10779 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 015/100 | train=0.009799 val=0.010158 | thr=0.16577 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 016/100 | train=0.009688 val=0.011382 | thr=0.21399 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 017/100 | train=0.009688 val=0.009687 | thr=0.05099 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 018/100 | train=0.008604 val=0.008588 | thr=0.07367 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.008659 val=0.009069 | thr=0.06927 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.008485 val=0.010802 | thr=0.20654 Pd=0.6226 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 021/100 | train=0.008138 val=0.008608 | thr=0.21655 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.008522 val=0.010935 | thr=0.25244 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03
+Epoch 023/100 | train=0.007573 val=0.008321 | thr=0.05145 Pd=0.5849 Pfa=0.0133 | lr=1.00e-03
+Epoch 024/100 | train=0.006880 val=0.008088 | thr=0.17798 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.006669 val=0.009704 | thr=0.07043 Pd=0.5094 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.007239 val=0.008746 | thr=0.05603 Pd=0.6415 Pfa=0.0133 | lr=1.00e-03
+Epoch 027/100 | train=0.007270 val=0.008540 | thr=0.21802 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 028/100 | train=0.006453 val=0.008324 | thr=0.07629 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 029/100 | train=0.006331 val=0.008254 | thr=0.07465 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.006554 val=0.007419 | thr=0.06995 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.006197 val=0.007570 | thr=0.09204 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 032/100 | train=0.006027 val=0.007065 | thr=0.10669 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 033/100 | train=0.005419 val=0.007364 | thr=0.09222 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 034/100 | train=0.005747 val=0.006974 | thr=0.10651 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 035/100 | train=0.005410 val=0.007151 | thr=0.06030 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 036/100 | train=0.005370 val=0.007566 | thr=0.08063 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 037/100 | train=0.005425 val=0.006430 | thr=0.10950 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03
+Epoch 038/100 | train=0.005481 val=0.006735 | thr=0.11066 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 039/100 | train=0.005207 val=0.007262 | thr=0.17004 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 040/100 | train=0.005442 val=0.006779 | thr=0.09515 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03
+Epoch 041/100 | train=0.004875 val=0.006698 | thr=0.09808 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 042/100 | train=0.004509 val=0.006605 | thr=0.07172 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 043/100 | train=0.004942 val=0.006515 | thr=0.07794 Pd=0.7736 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 044/100 | train=0.004256 val=0.006211 | thr=0.06512 Pd=0.7358 Pfa=0.0133 | lr=5.00e-04
+Epoch 045/100 | train=0.004299 val=0.005895 | thr=0.05920 Pd=0.7547 Pfa=0.0133 | lr=5.00e-04
+Epoch 046/100 | train=0.004122 val=0.006868 | thr=0.03754 Pd=0.6792 Pfa=0.0133 | lr=5.00e-04
+Epoch 047/100 | train=0.004386 val=0.005913 | thr=0.05420 Pd=0.7547 Pfa=0.0133 | lr=5.00e-04
+Epoch 048/100 | train=0.004035 val=0.007051 | thr=0.05655 Pd=0.7170 Pfa=0.0133 | lr=5.00e-04
+Epoch 049/100 | train=0.004040 val=0.006624 | thr=0.04239 Pd=0.7358 Pfa=0.0133 | lr=5.00e-04
+Epoch 050/100 | train=0.003939 val=0.005975 | thr=0.06940 Pd=0.7736 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 051/100 | train=0.004039 val=0.006449 | thr=0.03876 Pd=0.6792 Pfa=0.0133 | lr=2.50e-04
+Epoch 052/100 | train=0.003657 val=0.005701 | thr=0.05380 Pd=0.7925 Pfa=0.0133 | lr=2.50e-04 | best
+Epoch 053/100 | train=0.003710 val=0.005929 | thr=0.04153 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 054/100 | train=0.003642 val=0.005721 | thr=0.04001 Pd=0.7170 Pfa=0.0133 | lr=2.50e-04
+Epoch 055/100 | train=0.003679 val=0.005667 | thr=0.03769 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 056/100 | train=0.003717 val=0.005616 | thr=0.04434 Pd=0.7925 Pfa=0.0133 | lr=2.50e-04 | best
+Epoch 057/100 | train=0.003653 val=0.007044 | thr=0.04239 Pd=0.7358 Pfa=0.0133 | lr=2.50e-04
+Epoch 058/100 | train=0.003617 val=0.006071 | thr=0.04794 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 059/100 | train=0.003578 val=0.006185 | thr=0.04868 Pd=0.7547 Pfa=0.0133 | lr=2.50e-04
+Epoch 060/100 | train=0.003493 val=0.006053 | thr=0.04327 Pd=0.7736 Pfa=0.0133 | lr=2.50e-04
+Epoch 061/100 | train=0.003438 val=0.006026 | thr=0.04376 Pd=0.7170 Pfa=0.0133 | lr=2.50e-04
+Epoch 062/100 | train=0.003531 val=0.005881 | thr=0.03622 Pd=0.7358 Pfa=0.0133 | lr=1.25e-04
+Epoch 063/100 | train=0.003339 val=0.006232 | thr=0.04208 Pd=0.7547 Pfa=0.0133 | lr=1.25e-04
+Epoch 064/100 | train=0.003275 val=0.006389 | thr=0.03333 Pd=0.7547 Pfa=0.0133 | lr=1.25e-04
+Epoch 065/100 | train=0.003352 val=0.006040 | thr=0.03635 Pd=0.7358 Pfa=0.0133 | lr=1.25e-04
+Epoch 066/100 | train=0.003311 val=0.005823 | thr=0.03629 Pd=0.6981 Pfa=0.0133 | lr=1.25e-04
+Epoch 067/100 | train=0.003242 val=0.005834 | thr=0.03027 Pd=0.6981 Pfa=0.0133 | lr=1.25e-04
+Epoch 068/100 | train=0.003275 val=0.006006 | thr=0.03149 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 069/100 | train=0.003200 val=0.005982 | thr=0.03409 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 070/100 | train=0.003172 val=0.005763 | thr=0.03247 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 071/100 | train=0.003192 val=0.005904 | thr=0.03204 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 072/100 | train=0.003176 val=0.005956 | thr=0.03079 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 073/100 | train=0.003181 val=0.006433 | thr=0.03671 Pd=0.7358 Pfa=0.0133 | lr=6.25e-05
+Epoch 074/100 | train=0.003150 val=0.005898 | thr=0.03004 Pd=0.7547 Pfa=0.0133 | lr=3.13e-05
+Epoch 075/100 | train=0.003113 val=0.005861 | thr=0.03067 Pd=0.7358 Pfa=0.0133 | lr=3.13e-05
+Epoch 076/100 | train=0.003118 val=0.005888 | thr=0.03223 Pd=0.7358 Pfa=0.0133 | lr=3.13e-05
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 56
+threshold  : 0.044342
+test       : Pd=0.4717, Pfa=1.0000, FA=150, AUC=0.8377
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_polar6_v4_fold01_seed42_formal
+==================================================================================
+预加载 ri8-train: 742 个样本...
+  ri8-train: 200/742
+  ri8-train: 400/742
+  ri8-train: 600/742
+  ri8-train: 742/742
+预加载 ri8-val: 203 个样本...
+  ri8-val: 200/203
+  ri8-val: 203/203
+预加载 ri8-test: 203 个样本...
+  ri8-test: 200/203
+  ri8-test: 203/203
+==================================================================================
+experiment       : polar_repr_v1_ri8_v4_fold01_seed42_formal
+fold / mode      : 1 / ri8
+active channels  : ('Re_H', 'Im_H', 'Re_V', 'Im_V', 'relative_ZDR_like', 'local_rho_HV', 'cos_relative_phase', 'sin_relative_phase')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=742, val=203, test=203
+==================================================================================
+Epoch 001/100 | train=0.321091 val=0.134346 | thr=0.32715 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.093223 val=0.055526 | thr=0.19116 Pd=0.0943 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.045387 val=0.033043 | thr=0.16357 Pd=0.2075 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.029600 val=0.023661 | thr=0.18604 Pd=0.3208 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.022491 val=0.019061 | thr=0.20752 Pd=0.3396 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.018266 val=0.017037 | thr=0.33569 Pd=0.4340 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 007/100 | train=0.015954 val=0.016159 | thr=0.40259 Pd=0.2830 Pfa=0.0133 | lr=1.00e-03
+Epoch 008/100 | train=0.013641 val=0.013785 | thr=0.32520 Pd=0.5094 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 009/100 | train=0.012409 val=0.012660 | thr=0.31201 Pd=0.4340 Pfa=0.0133 | lr=1.00e-03
+Epoch 010/100 | train=0.011296 val=0.012507 | thr=0.54932 Pd=0.4528 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.010702 val=0.011235 | thr=0.36719 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 012/100 | train=0.009951 val=0.010529 | thr=0.24414 Pd=0.4906 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.008969 val=0.010780 | thr=0.29785 Pd=0.5283 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 014/100 | train=0.008517 val=0.010098 | thr=0.20593 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 015/100 | train=0.008356 val=0.010472 | thr=0.28125 Pd=0.5660 Pfa=0.0133 | lr=1.00e-03
+Epoch 016/100 | train=0.007854 val=0.010429 | thr=0.23987 Pd=0.6038 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 017/100 | train=0.007649 val=0.009951 | thr=0.40112 Pd=0.5472 Pfa=0.0133 | lr=1.00e-03
+Epoch 018/100 | train=0.007062 val=0.008385 | thr=0.14893 Pd=0.6226 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.007562 val=0.008482 | thr=0.23547 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 020/100 | train=0.006584 val=0.008530 | thr=0.26196 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 021/100 | train=0.006109 val=0.008469 | thr=0.14832 Pd=0.6604 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.006057 val=0.009931 | thr=0.19238 Pd=0.6792 Pfa=0.0133 | lr=1.00e-03
+Epoch 023/100 | train=0.005783 val=0.007955 | thr=0.11780 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 024/100 | train=0.005569 val=0.007810 | thr=0.23840 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.005244 val=0.007236 | thr=0.12274 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 026/100 | train=0.005372 val=0.007961 | thr=0.23975 Pd=0.6415 Pfa=0.0133 | lr=1.00e-03
+Epoch 027/100 | train=0.005145 val=0.007480 | thr=0.30371 Pd=0.8302 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 028/100 | train=0.004756 val=0.007369 | thr=0.15271 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03
+Epoch 029/100 | train=0.004970 val=0.007566 | thr=0.22339 Pd=0.7170 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.005014 val=0.006968 | thr=0.35107 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.004542 val=0.007156 | thr=0.21936 Pd=0.7925 Pfa=0.0133 | lr=1.00e-03
+Epoch 032/100 | train=0.004705 val=0.006603 | thr=0.20337 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 033/100 | train=0.004499 val=0.006581 | thr=0.31470 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03
+Epoch 034/100 | train=0.004284 val=0.006808 | thr=0.30420 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 035/100 | train=0.004228 val=0.006996 | thr=0.19592 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 036/100 | train=0.004056 val=0.006222 | thr=0.27271 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 037/100 | train=0.004686 val=0.007193 | thr=0.34937 Pd=0.6981 Pfa=0.0133 | lr=1.00e-03
+Epoch 038/100 | train=0.004176 val=0.006585 | thr=0.38403 Pd=0.8302 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 039/100 | train=0.003927 val=0.006456 | thr=0.16846 Pd=0.7925 Pfa=0.0133 | lr=1.00e-03
+Epoch 040/100 | train=0.003773 val=0.006468 | thr=0.28564 Pd=0.7358 Pfa=0.0133 | lr=1.00e-03
+Epoch 041/100 | train=0.003821 val=0.005904 | thr=0.26831 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 042/100 | train=0.003633 val=0.005837 | thr=0.29102 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 043/100 | train=0.003789 val=0.005990 | thr=0.26855 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 044/100 | train=0.003623 val=0.005873 | thr=0.26489 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 045/100 | train=0.003582 val=0.005829 | thr=0.17334 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 046/100 | train=0.003357 val=0.006444 | thr=0.21350 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 047/100 | train=0.003752 val=0.006219 | thr=0.23157 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 048/100 | train=0.003601 val=0.006274 | thr=0.25684 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 049/100 | train=0.003523 val=0.006014 | thr=0.17285 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 050/100 | train=0.003287 val=0.005374 | thr=0.21375 Pd=0.8868 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 051/100 | train=0.003518 val=0.006527 | thr=0.12903 Pd=0.7547 Pfa=0.0133 | lr=1.00e-03
+Epoch 052/100 | train=0.003131 val=0.005189 | thr=0.16687 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 053/100 | train=0.003265 val=0.005602 | thr=0.23108 Pd=0.8113 Pfa=0.0133 | lr=1.00e-03
+Epoch 054/100 | train=0.003018 val=0.005335 | thr=0.07861 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 055/100 | train=0.003045 val=0.005330 | thr=0.26074 Pd=0.8679 Pfa=0.0133 | lr=1.00e-03
+Epoch 056/100 | train=0.003008 val=0.005691 | thr=0.18506 Pd=0.8302 Pfa=0.0133 | lr=1.00e-03
+Epoch 057/100 | train=0.002956 val=0.005657 | thr=0.23584 Pd=0.8491 Pfa=0.0133 | lr=1.00e-03
+Epoch 058/100 | train=0.003200 val=0.005424 | thr=0.14978 Pd=0.7925 Pfa=0.0133 | lr=5.00e-04
+Epoch 059/100 | train=0.002680 val=0.005161 | thr=0.14417 Pd=0.8113 Pfa=0.0133 | lr=5.00e-04
+Epoch 060/100 | train=0.002552 val=0.005140 | thr=0.21948 Pd=0.8679 Pfa=0.0133 | lr=5.00e-04
+Epoch 061/100 | train=0.002517 val=0.005169 | thr=0.20105 Pd=0.8302 Pfa=0.0133 | lr=5.00e-04
+Epoch 062/100 | train=0.002499 val=0.005095 | thr=0.15918 Pd=0.8491 Pfa=0.0133 | lr=5.00e-04
+Epoch 063/100 | train=0.002500 val=0.005138 | thr=0.16101 Pd=0.8113 Pfa=0.0133 | lr=5.00e-04
+Epoch 064/100 | train=0.002464 val=0.005576 | thr=0.15625 Pd=0.7925 Pfa=0.0133 | lr=5.00e-04
+Epoch 065/100 | train=0.002485 val=0.005091 | thr=0.14856 Pd=0.8491 Pfa=0.0133 | lr=5.00e-04
+Epoch 066/100 | train=0.002458 val=0.005282 | thr=0.13745 Pd=0.8491 Pfa=0.0133 | lr=5.00e-04
+Epoch 067/100 | train=0.002409 val=0.005916 | thr=0.17432 Pd=0.7170 Pfa=0.0133 | lr=5.00e-04
+Epoch 068/100 | train=0.002489 val=0.005023 | thr=0.22241 Pd=0.8491 Pfa=0.0133 | lr=5.00e-04
+Epoch 069/100 | train=0.002442 val=0.004968 | thr=0.16516 Pd=0.8491 Pfa=0.0133 | lr=5.00e-04
+Epoch 070/100 | train=0.002359 val=0.005213 | thr=0.14233 Pd=0.8679 Pfa=0.0133 | lr=5.00e-04
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 50
+threshold  : 0.213745
+test       : Pd=0.8113, Pfa=0.9600, FA=144, AUC=0.8567
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_ri8_v4_fold01_seed42_formal
+==================================================================================
+预加载 power2-train: 736 个样本...
+  power2-train: 200/736
+  power2-train: 400/736
+  power2-train: 600/736
+  power2-train: 736/736
+预加载 power2-val: 210 个样本...
+  power2-val: 200/210
+  power2-val: 210/210
+预加载 power2-test: 202 个样本...
+  power2-test: 200/202
+  power2-test: 202/202
+==================================================================================
+experiment       : polar_repr_v1_power2_v4_fold04_seed42_formal
+fold / mode      : 4 / power2
+active channels  : ('H_power', 'V_power')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=736, val=210, test=202
+==================================================================================
+Epoch 001/100 | train=0.313560 val=0.148455 | thr=0.35864 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.095384 val=0.063003 | thr=0.18274 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.047195 val=0.037269 | thr=0.13049 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.030969 val=0.027202 | thr=0.10596 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.024236 val=0.022728 | thr=0.08557 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.021073 val=0.020480 | thr=0.07654 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 007/100 | train=0.019413 val=0.019291 | thr=0.07385 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 008/100 | train=0.018468 val=0.018531 | thr=0.05655 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 009/100 | train=0.017857 val=0.018007 | thr=0.06042 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 010/100 | train=0.017368 val=0.017449 | thr=0.10596 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 011/100 | train=0.016864 val=0.016837 | thr=0.19763 Pd=0.0333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 012/100 | train=0.016052 val=0.015549 | thr=0.35693 Pd=0.0167 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.014780 val=0.015133 | thr=0.19519 Pd=0.0167 Pfa=0.0133 | lr=1.00e-03
+Epoch 014/100 | train=0.014532 val=0.013295 | thr=0.39136 Pd=0.0500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 015/100 | train=0.012672 val=0.011440 | thr=0.44531 Pd=0.1500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 016/100 | train=0.011238 val=0.011891 | thr=0.28931 Pd=0.2500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 017/100 | train=0.011480 val=0.011952 | thr=0.22302 Pd=0.2167 Pfa=0.0133 | lr=1.00e-03
+Epoch 018/100 | train=0.009944 val=0.009512 | thr=0.35083 Pd=0.2667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.009771 val=0.009761 | thr=0.31226 Pd=0.2333 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.008913 val=0.012123 | thr=0.13330 Pd=0.1500 Pfa=0.0133 | lr=1.00e-03
+Epoch 021/100 | train=0.008705 val=0.008618 | thr=0.31616 Pd=0.4500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 022/100 | train=0.008578 val=0.009398 | thr=0.21497 Pd=0.3833 Pfa=0.0133 | lr=1.00e-03
+Epoch 023/100 | train=0.008197 val=0.008033 | thr=0.30127 Pd=0.4667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 024/100 | train=0.007543 val=0.007996 | thr=0.19055 Pd=0.4833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.007268 val=0.008089 | thr=0.29736 Pd=0.3500 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.007257 val=0.007186 | thr=0.19067 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 027/100 | train=0.006794 val=0.008381 | thr=0.18066 Pd=0.5667 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.006655 val=0.006555 | thr=0.25366 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 029/100 | train=0.006467 val=0.006637 | thr=0.21863 Pd=0.6500 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.006824 val=0.008784 | thr=0.42358 Pd=0.3000 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.006695 val=0.006706 | thr=0.25098 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 032/100 | train=0.006199 val=0.007205 | thr=0.20203 Pd=0.6667 Pfa=0.0133 | lr=1.00e-03
+Epoch 033/100 | train=0.005981 val=0.005923 | thr=0.26978 Pd=0.7833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 034/100 | train=0.006120 val=0.005983 | thr=0.14539 Pd=0.7667 Pfa=0.0133 | lr=1.00e-03
+Epoch 035/100 | train=0.005764 val=0.007764 | thr=0.15576 Pd=0.4667 Pfa=0.0133 | lr=1.00e-03
+Epoch 036/100 | train=0.006019 val=0.006469 | thr=0.14612 Pd=0.7000 Pfa=0.0133 | lr=1.00e-03
+Epoch 037/100 | train=0.005802 val=0.005808 | thr=0.18933 Pd=0.8333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 038/100 | train=0.005857 val=0.006517 | thr=0.18640 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 039/100 | train=0.005485 val=0.006653 | thr=0.12781 Pd=0.8167 Pfa=0.0133 | lr=1.00e-03
+Epoch 040/100 | train=0.005538 val=0.005900 | thr=0.19348 Pd=0.8167 Pfa=0.0133 | lr=1.00e-03
+Epoch 041/100 | train=0.006089 val=0.005629 | thr=0.22717 Pd=0.8333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 042/100 | train=0.005516 val=0.006844 | thr=0.16211 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03
+Epoch 043/100 | train=0.005447 val=0.005989 | thr=0.15186 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 044/100 | train=0.005252 val=0.005687 | thr=0.12915 Pd=0.9167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 045/100 | train=0.005419 val=0.005957 | thr=0.24548 Pd=0.7833 Pfa=0.0133 | lr=1.00e-03
+Epoch 046/100 | train=0.005303 val=0.005919 | thr=0.20422 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 047/100 | train=0.005150 val=0.005890 | thr=0.15979 Pd=0.8167 Pfa=0.0133 | lr=5.00e-04
+Epoch 048/100 | train=0.004872 val=0.005460 | thr=0.15259 Pd=0.8667 Pfa=0.0133 | lr=5.00e-04
+Epoch 049/100 | train=0.004936 val=0.005314 | thr=0.11475 Pd=0.9000 Pfa=0.0133 | lr=5.00e-04
+Epoch 050/100 | train=0.004822 val=0.005679 | thr=0.26733 Pd=0.8667 Pfa=0.0133 | lr=5.00e-04
+Epoch 051/100 | train=0.004760 val=0.005256 | thr=0.15210 Pd=0.8333 Pfa=0.0133 | lr=5.00e-04
+Epoch 052/100 | train=0.004673 val=0.005230 | thr=0.16052 Pd=0.8667 Pfa=0.0133 | lr=5.00e-04
+Epoch 053/100 | train=0.004691 val=0.005334 | thr=0.19312 Pd=0.8500 Pfa=0.0133 | lr=5.00e-04
+Epoch 054/100 | train=0.004645 val=0.005133 | thr=0.15637 Pd=0.8833 Pfa=0.0133 | lr=5.00e-04
+Epoch 055/100 | train=0.004748 val=0.005469 | thr=0.13745 Pd=0.8333 Pfa=0.0133 | lr=5.00e-04
+Epoch 056/100 | train=0.004586 val=0.005280 | thr=0.17273 Pd=0.8833 Pfa=0.0133 | lr=5.00e-04
+Epoch 057/100 | train=0.004632 val=0.005195 | thr=0.20227 Pd=0.8667 Pfa=0.0133 | lr=5.00e-04
+Epoch 058/100 | train=0.004662 val=0.006287 | thr=0.14197 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 059/100 | train=0.004637 val=0.005353 | thr=0.22424 Pd=0.8833 Pfa=0.0133 | lr=5.00e-04
+Epoch 060/100 | train=0.004644 val=0.005347 | thr=0.20435 Pd=0.8500 Pfa=0.0133 | lr=2.50e-04
+Epoch 061/100 | train=0.004423 val=0.005078 | thr=0.20581 Pd=0.9000 Pfa=0.0133 | lr=2.50e-04
+Epoch 062/100 | train=0.004347 val=0.005158 | thr=0.19910 Pd=0.8667 Pfa=0.0133 | lr=2.50e-04
+Epoch 063/100 | train=0.004313 val=0.005158 | thr=0.15625 Pd=0.8500 Pfa=0.0133 | lr=2.50e-04
+Epoch 064/100 | train=0.004329 val=0.005090 | thr=0.14087 Pd=0.9167 Pfa=0.0133 | lr=2.50e-04 | best
+Epoch 065/100 | train=0.004263 val=0.005284 | thr=0.16016 Pd=0.8333 Pfa=0.0133 | lr=2.50e-04
+Epoch 066/100 | train=0.004290 val=0.005410 | thr=0.16150 Pd=0.8500 Pfa=0.0133 | lr=2.50e-04
+Epoch 067/100 | train=0.004273 val=0.005359 | thr=0.15771 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 068/100 | train=0.004179 val=0.005091 | thr=0.16235 Pd=0.8667 Pfa=0.0133 | lr=1.25e-04
+Epoch 069/100 | train=0.004161 val=0.005156 | thr=0.14917 Pd=0.8333 Pfa=0.0067 | lr=1.25e-04
+Epoch 070/100 | train=0.004158 val=0.005129 | thr=0.14221 Pd=0.8667 Pfa=0.0133 | lr=1.25e-04
+Epoch 071/100 | train=0.004157 val=0.005311 | thr=0.13489 Pd=0.8833 Pfa=0.0133 | lr=1.25e-04
+Epoch 072/100 | train=0.004161 val=0.005152 | thr=0.15869 Pd=0.8833 Pfa=0.0133 | lr=1.25e-04
+Epoch 073/100 | train=0.004148 val=0.005182 | thr=0.14331 Pd=0.9000 Pfa=0.0133 | lr=6.25e-05
+Epoch 074/100 | train=0.004084 val=0.005036 | thr=0.15979 Pd=0.8833 Pfa=0.0133 | lr=6.25e-05
+Epoch 075/100 | train=0.004072 val=0.005262 | thr=0.15247 Pd=0.8500 Pfa=0.0133 | lr=6.25e-05
+Epoch 076/100 | train=0.004066 val=0.005058 | thr=0.15515 Pd=0.8667 Pfa=0.0133 | lr=6.25e-05
+Epoch 077/100 | train=0.004061 val=0.005086 | thr=0.16248 Pd=0.9000 Pfa=0.0133 | lr=6.25e-05
+Epoch 078/100 | train=0.004052 val=0.005170 | thr=0.16711 Pd=0.8667 Pfa=0.0133 | lr=6.25e-05
+Epoch 079/100 | train=0.004060 val=0.005022 | thr=0.16565 Pd=0.9000 Pfa=0.0133 | lr=6.25e-05
+Epoch 080/100 | train=0.004054 val=0.005001 | thr=0.16821 Pd=0.9000 Pfa=0.0133 | lr=6.25e-05
+Epoch 081/100 | train=0.004043 val=0.005080 | thr=0.16992 Pd=0.8667 Pfa=0.0133 | lr=6.25e-05
+Epoch 082/100 | train=0.004045 val=0.004997 | thr=0.16479 Pd=0.9000 Pfa=0.0133 | lr=6.25e-05
+Epoch 083/100 | train=0.004040 val=0.005163 | thr=0.15112 Pd=0.8833 Pfa=0.0133 | lr=6.25e-05
+Epoch 084/100 | train=0.004032 val=0.005077 | thr=0.14685 Pd=0.8833 Pfa=0.0133 | lr=6.25e-05
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 64
+threshold  : 0.140869
+test       : Pd=0.7885, Pfa=0.9867, FA=148, AUC=0.8849
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_power2_v4_fold04_seed42_formal
+==================================================================================
+预加载 ri4-train: 736 个样本...
+  ri4-train: 200/736
+  ri4-train: 400/736
+  ri4-train: 600/736
+  ri4-train: 736/736
+预加载 ri4-val: 210 个样本...
+  ri4-val: 200/210
+  ri4-val: 210/210
+预加载 ri4-test: 202 个样本...
+  ri4-test: 200/202
+  ri4-test: 202/202
+==================================================================================
+experiment       : polar_repr_v1_ri4_v4_fold04_seed42_formal
+fold / mode      : 4 / ri4
+active channels  : ('Re_H', 'Im_H', 'Re_V', 'Im_V')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=736, val=210, test=202
+==================================================================================
+Epoch 001/100 | train=0.331814 val=0.146446 | thr=0.38110 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.094712 val=0.061773 | thr=0.35352 Pd=0.0333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.045164 val=0.034262 | thr=0.43555 Pd=0.1000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.028244 val=0.023800 | thr=0.57031 Pd=0.1167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.020928 val=0.018338 | thr=0.70557 Pd=0.1833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.016881 val=0.015324 | thr=0.69189 Pd=0.3667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 007/100 | train=0.014267 val=0.013690 | thr=0.79150 Pd=0.2667 Pfa=0.0133 | lr=1.00e-03
+Epoch 008/100 | train=0.012809 val=0.012665 | thr=0.75000 Pd=0.2833 Pfa=0.0133 | lr=1.00e-03
+Epoch 009/100 | train=0.011268 val=0.011681 | thr=0.67041 Pd=0.3833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 010/100 | train=0.010509 val=0.010681 | thr=0.82373 Pd=0.3500 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.009770 val=0.010411 | thr=0.80957 Pd=0.3833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 012/100 | train=0.009165 val=0.009620 | thr=0.90088 Pd=0.5167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 013/100 | train=0.008529 val=0.009022 | thr=0.89893 Pd=0.4333 Pfa=0.0133 | lr=1.00e-03
+Epoch 014/100 | train=0.008262 val=0.009761 | thr=0.81836 Pd=0.5167 Pfa=0.0133 | lr=1.00e-03
+Epoch 015/100 | train=0.008397 val=0.009600 | thr=0.74072 Pd=0.4167 Pfa=0.0133 | lr=1.00e-03
+Epoch 016/100 | train=0.007777 val=0.008982 | thr=0.73291 Pd=0.6000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 017/100 | train=0.007255 val=0.008302 | thr=0.84619 Pd=0.5833 Pfa=0.0133 | lr=1.00e-03
+Epoch 018/100 | train=0.007093 val=0.008715 | thr=0.76367 Pd=0.5500 Pfa=0.0133 | lr=1.00e-03
+Epoch 019/100 | train=0.006824 val=0.008828 | thr=0.75391 Pd=0.4833 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.006375 val=0.008135 | thr=0.80371 Pd=0.5500 Pfa=0.0133 | lr=1.00e-03
+Epoch 021/100 | train=0.006230 val=0.008666 | thr=0.76318 Pd=0.5333 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.006260 val=0.007967 | thr=0.84033 Pd=0.6000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 023/100 | train=0.006221 val=0.007703 | thr=0.84766 Pd=0.5000 Pfa=0.0133 | lr=1.00e-03
+Epoch 024/100 | train=0.005690 val=0.007697 | thr=0.84668 Pd=0.5667 Pfa=0.0133 | lr=1.00e-03
+Epoch 025/100 | train=0.005543 val=0.008983 | thr=0.62354 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 026/100 | train=0.005735 val=0.007413 | thr=0.82031 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 027/100 | train=0.005492 val=0.007597 | thr=0.85791 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.005141 val=0.007238 | thr=0.86426 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 029/100 | train=0.005025 val=0.008267 | thr=0.69629 Pd=0.6667 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.005147 val=0.009171 | thr=0.84717 Pd=0.4667 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.005146 val=0.007328 | thr=0.80176 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 032/100 | train=0.004903 val=0.007248 | thr=0.69189 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 033/100 | train=0.004739 val=0.007167 | thr=0.73389 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 034/100 | train=0.004636 val=0.006918 | thr=0.83447 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 035/100 | train=0.004518 val=0.007552 | thr=0.75732 Pd=0.7833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 036/100 | train=0.004612 val=0.007217 | thr=0.84082 Pd=0.6500 Pfa=0.0133 | lr=1.00e-03
+Epoch 037/100 | train=0.004454 val=0.006794 | thr=0.77393 Pd=0.7667 Pfa=0.0133 | lr=1.00e-03
+Epoch 038/100 | train=0.004447 val=0.007345 | thr=0.76025 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03
+Epoch 039/100 | train=0.004452 val=0.007970 | thr=0.73535 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03
+Epoch 040/100 | train=0.004398 val=0.006991 | thr=0.85742 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03
+Epoch 041/100 | train=0.004178 val=0.007209 | thr=0.83789 Pd=0.6667 Pfa=0.0133 | lr=1.00e-03
+Epoch 042/100 | train=0.004149 val=0.006863 | thr=0.83887 Pd=0.6500 Pfa=0.0133 | lr=1.00e-03
+Epoch 043/100 | train=0.004106 val=0.007620 | thr=0.75000 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 044/100 | train=0.003852 val=0.007227 | thr=0.71387 Pd=0.7333 Pfa=0.0133 | lr=5.00e-04
+Epoch 045/100 | train=0.003684 val=0.007334 | thr=0.73682 Pd=0.6833 Pfa=0.0133 | lr=5.00e-04
+Epoch 046/100 | train=0.003707 val=0.007044 | thr=0.83105 Pd=0.6500 Pfa=0.0133 | lr=5.00e-04
+Epoch 047/100 | train=0.003704 val=0.006947 | thr=0.79102 Pd=0.7833 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 048/100 | train=0.003632 val=0.007237 | thr=0.74170 Pd=0.7333 Pfa=0.0133 | lr=5.00e-04
+Epoch 049/100 | train=0.003603 val=0.007676 | thr=0.78174 Pd=0.6833 Pfa=0.0133 | lr=2.50e-04
+Epoch 050/100 | train=0.003468 val=0.007448 | thr=0.71729 Pd=0.7167 Pfa=0.0133 | lr=2.50e-04
+Epoch 051/100 | train=0.003439 val=0.007328 | thr=0.73340 Pd=0.7500 Pfa=0.0133 | lr=2.50e-04
+Epoch 052/100 | train=0.003434 val=0.007416 | thr=0.70508 Pd=0.6833 Pfa=0.0133 | lr=2.50e-04
+Epoch 053/100 | train=0.003410 val=0.007236 | thr=0.67383 Pd=0.7500 Pfa=0.0133 | lr=2.50e-04
+Epoch 054/100 | train=0.003410 val=0.007269 | thr=0.74023 Pd=0.7833 Pfa=0.0133 | lr=2.50e-04
+Epoch 055/100 | train=0.003400 val=0.007308 | thr=0.66357 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 056/100 | train=0.003338 val=0.007333 | thr=0.66650 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04 | best
+Epoch 057/100 | train=0.003330 val=0.007435 | thr=0.65381 Pd=0.7667 Pfa=0.0133 | lr=1.25e-04
+Epoch 058/100 | train=0.003327 val=0.007718 | thr=0.61621 Pd=0.7333 Pfa=0.0133 | lr=1.25e-04
+Epoch 059/100 | train=0.003318 val=0.007407 | thr=0.66602 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 060/100 | train=0.003304 val=0.007362 | thr=0.66113 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 061/100 | train=0.003306 val=0.007688 | thr=0.60693 Pd=0.7833 Pfa=0.0133 | lr=6.25e-05
+Epoch 062/100 | train=0.003277 val=0.007458 | thr=0.64844 Pd=0.7667 Pfa=0.0133 | lr=6.25e-05
+Epoch 063/100 | train=0.003273 val=0.007615 | thr=0.61182 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 064/100 | train=0.003268 val=0.007561 | thr=0.62012 Pd=0.7833 Pfa=0.0133 | lr=6.25e-05
+Epoch 065/100 | train=0.003267 val=0.007622 | thr=0.63477 Pd=0.7333 Pfa=0.0133 | lr=6.25e-05
+Epoch 066/100 | train=0.003260 val=0.007634 | thr=0.61182 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 067/100 | train=0.003263 val=0.007692 | thr=0.59717 Pd=0.7833 Pfa=0.0133 | lr=3.13e-05
+Epoch 068/100 | train=0.003241 val=0.007625 | thr=0.61133 Pd=0.7833 Pfa=0.0133 | lr=3.13e-05
+Epoch 069/100 | train=0.003238 val=0.007609 | thr=0.61670 Pd=0.7833 Pfa=0.0133 | lr=3.13e-05
+Epoch 070/100 | train=0.003233 val=0.007555 | thr=0.64111 Pd=0.7833 Pfa=0.0133 | lr=3.13e-05
+Epoch 071/100 | train=0.003233 val=0.007545 | thr=0.62598 Pd=0.8000 Pfa=0.0133 | lr=3.13e-05
+Epoch 072/100 | train=0.003229 val=0.007589 | thr=0.63037 Pd=0.8000 Pfa=0.0133 | lr=3.13e-05
+Epoch 073/100 | train=0.003227 val=0.007613 | thr=0.62744 Pd=0.8000 Pfa=0.0133 | lr=1.56e-05
+Epoch 074/100 | train=0.003219 val=0.007644 | thr=0.61523 Pd=0.7833 Pfa=0.0133 | lr=1.56e-05
+Epoch 075/100 | train=0.003218 val=0.007551 | thr=0.62988 Pd=0.8000 Pfa=0.0133 | lr=1.56e-05
+Epoch 076/100 | train=0.003217 val=0.007547 | thr=0.63086 Pd=0.8000 Pfa=0.0133 | lr=1.56e-05
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 56
+threshold  : 0.666504
+test       : Pd=0.7115, Pfa=0.1467, FA=22, AUC=0.9340
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_ri4_v4_fold04_seed42_formal
+==================================================================================
+预加载 polar6-train: 736 个样本...
+  polar6-train: 200/736
+  polar6-train: 400/736
+  polar6-train: 600/736
+  polar6-train: 736/736
+预加载 polar6-val: 210 个样本...
+  polar6-val: 200/210
+  polar6-val: 210/210
+预加载 polar6-test: 202 个样本...
+  polar6-test: 200/202
+  polar6-test: 202/202
+==================================================================================
+experiment       : polar_repr_v1_polar6_v4_fold04_seed42_formal
+fold / mode      : 4 / polar6
+active channels  : ('H_power', 'V_power', 'relative_ZDR_like', 'local_rho_HV', 'cos_relative_phase', 'sin_relative_phase')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=736, val=210, test=202
+==================================================================================
+Epoch 001/100 | train=0.306996 val=0.144235 | thr=0.33301 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.092997 val=0.061627 | thr=0.18005 Pd=0.0000 Pfa=0.0067 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.046393 val=0.036581 | thr=0.13184 Pd=0.2333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.030505 val=0.026464 | thr=0.13171 Pd=0.2167 Pfa=0.0133 | lr=1.00e-03
+Epoch 005/100 | train=0.023526 val=0.021325 | thr=0.19189 Pd=0.4000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.019764 val=0.018861 | thr=0.26611 Pd=0.2500 Pfa=0.0133 | lr=1.00e-03
+Epoch 007/100 | train=0.016943 val=0.017515 | thr=0.18701 Pd=0.2000 Pfa=0.0133 | lr=1.00e-03
+Epoch 008/100 | train=0.015429 val=0.016435 | thr=0.18604 Pd=0.1500 Pfa=0.0133 | lr=1.00e-03
+Epoch 009/100 | train=0.013869 val=0.016768 | thr=0.44531 Pd=0.0833 Pfa=0.0133 | lr=1.00e-03
+Epoch 010/100 | train=0.013012 val=0.013621 | thr=0.36011 Pd=0.1833 Pfa=0.0133 | lr=1.00e-03
+Epoch 011/100 | train=0.011991 val=0.013861 | thr=0.11102 Pd=0.2667 Pfa=0.0133 | lr=1.00e-03
+Epoch 012/100 | train=0.011505 val=0.011712 | thr=0.26074 Pd=0.2833 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.010572 val=0.010869 | thr=0.09009 Pd=0.4167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 014/100 | train=0.009828 val=0.010428 | thr=0.31421 Pd=0.3667 Pfa=0.0133 | lr=1.00e-03
+Epoch 015/100 | train=0.011222 val=0.010312 | thr=0.10034 Pd=0.4167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 016/100 | train=0.009594 val=0.009690 | thr=0.09894 Pd=0.4667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 017/100 | train=0.008838 val=0.009054 | thr=0.08679 Pd=0.5667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 018/100 | train=0.009297 val=0.010319 | thr=0.41553 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.008857 val=0.009303 | thr=0.07159 Pd=0.5167 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.008361 val=0.008303 | thr=0.12683 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 021/100 | train=0.007776 val=0.008683 | thr=0.11145 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 022/100 | train=0.007428 val=0.008136 | thr=0.08228 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 023/100 | train=0.007822 val=0.009573 | thr=0.07410 Pd=0.5833 Pfa=0.0133 | lr=1.00e-03
+Epoch 024/100 | train=0.007549 val=0.007334 | thr=0.10413 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.006907 val=0.007804 | thr=0.11200 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.006995 val=0.007845 | thr=0.09485 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03
+Epoch 027/100 | train=0.006631 val=0.007941 | thr=0.13916 Pd=0.6000 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.007193 val=0.008093 | thr=0.09656 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03
+Epoch 029/100 | train=0.006837 val=0.007874 | thr=0.08978 Pd=0.6167 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.006538 val=0.008018 | thr=0.10284 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 031/100 | train=0.005872 val=0.007264 | thr=0.12451 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 032/100 | train=0.005685 val=0.007920 | thr=0.14087 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 033/100 | train=0.005592 val=0.006687 | thr=0.12140 Pd=0.6333 Pfa=0.0133 | lr=5.00e-04
+Epoch 034/100 | train=0.005494 val=0.006871 | thr=0.14062 Pd=0.6500 Pfa=0.0133 | lr=5.00e-04
+Epoch 035/100 | train=0.005460 val=0.006797 | thr=0.10541 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 036/100 | train=0.005402 val=0.006743 | thr=0.06232 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 037/100 | train=0.005262 val=0.006771 | thr=0.11932 Pd=0.6500 Pfa=0.0133 | lr=5.00e-04
+Epoch 038/100 | train=0.005226 val=0.006715 | thr=0.08344 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 039/100 | train=0.004920 val=0.006418 | thr=0.10175 Pd=0.6833 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 040/100 | train=0.005006 val=0.006429 | thr=0.15918 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 041/100 | train=0.004853 val=0.006456 | thr=0.07922 Pd=0.6500 Pfa=0.0133 | lr=5.00e-04
+Epoch 042/100 | train=0.004853 val=0.006531 | thr=0.10394 Pd=0.6667 Pfa=0.0133 | lr=5.00e-04
+Epoch 043/100 | train=0.004841 val=0.006398 | thr=0.10339 Pd=0.6833 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 044/100 | train=0.004926 val=0.006530 | thr=0.08051 Pd=0.7000 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 045/100 | train=0.004831 val=0.006798 | thr=0.06598 Pd=0.7000 Pfa=0.0133 | lr=5.00e-04
+Epoch 046/100 | train=0.004726 val=0.006217 | thr=0.08911 Pd=0.7333 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 047/100 | train=0.004517 val=0.006196 | thr=0.08948 Pd=0.7500 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 048/100 | train=0.004913 val=0.005931 | thr=0.10931 Pd=0.7000 Pfa=0.0133 | lr=5.00e-04
+Epoch 049/100 | train=0.004356 val=0.006298 | thr=0.18408 Pd=0.7667 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 050/100 | train=0.004381 val=0.006678 | thr=0.16968 Pd=0.7333 Pfa=0.0133 | lr=5.00e-04
+Epoch 051/100 | train=0.004439 val=0.006138 | thr=0.16809 Pd=0.7833 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 052/100 | train=0.004330 val=0.005637 | thr=0.14954 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 053/100 | train=0.004230 val=0.006515 | thr=0.07922 Pd=0.7167 Pfa=0.0133 | lr=5.00e-04
+Epoch 054/100 | train=0.004301 val=0.006313 | thr=0.15186 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 055/100 | train=0.004725 val=0.005711 | thr=0.19885 Pd=0.7833 Pfa=0.0133 | lr=5.00e-04
+Epoch 056/100 | train=0.004204 val=0.005971 | thr=0.19519 Pd=0.8333 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 057/100 | train=0.004369 val=0.005922 | thr=0.12244 Pd=0.7167 Pfa=0.0133 | lr=5.00e-04
+Epoch 058/100 | train=0.004210 val=0.007139 | thr=0.05759 Pd=0.7000 Pfa=0.0133 | lr=2.50e-04
+Epoch 059/100 | train=0.003870 val=0.005562 | thr=0.07654 Pd=0.8000 Pfa=0.0133 | lr=2.50e-04
+Epoch 060/100 | train=0.003755 val=0.005638 | thr=0.06952 Pd=0.7833 Pfa=0.0133 | lr=2.50e-04
+Epoch 061/100 | train=0.003617 val=0.005574 | thr=0.06348 Pd=0.8167 Pfa=0.0133 | lr=2.50e-04
+Epoch 062/100 | train=0.003728 val=0.005684 | thr=0.05814 Pd=0.8000 Pfa=0.0133 | lr=2.50e-04
+Epoch 063/100 | train=0.003632 val=0.005961 | thr=0.06549 Pd=0.7500 Pfa=0.0133 | lr=2.50e-04
+Epoch 064/100 | train=0.003657 val=0.005895 | thr=0.05750 Pd=0.7167 Pfa=0.0133 | lr=2.50e-04
+Epoch 065/100 | train=0.003537 val=0.005647 | thr=0.05954 Pd=0.7667 Pfa=0.0133 | lr=1.25e-04
+Epoch 066/100 | train=0.003403 val=0.005770 | thr=0.05023 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 067/100 | train=0.003383 val=0.005527 | thr=0.04715 Pd=0.8167 Pfa=0.0133 | lr=1.25e-04
+Epoch 068/100 | train=0.003392 val=0.005508 | thr=0.08105 Pd=0.7500 Pfa=0.0133 | lr=1.25e-04
+Epoch 069/100 | train=0.003381 val=0.005565 | thr=0.06152 Pd=0.7667 Pfa=0.0133 | lr=1.25e-04
+Epoch 070/100 | train=0.003293 val=0.005499 | thr=0.05411 Pd=0.7333 Pfa=0.0133 | lr=1.25e-04
+Epoch 071/100 | train=0.003281 val=0.005753 | thr=0.04941 Pd=0.7667 Pfa=0.0133 | lr=1.25e-04
+Epoch 072/100 | train=0.003292 val=0.006088 | thr=0.05920 Pd=0.7500 Pfa=0.0133 | lr=1.25e-04
+Epoch 073/100 | train=0.003344 val=0.005767 | thr=0.05511 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 074/100 | train=0.003236 val=0.005768 | thr=0.05823 Pd=0.7500 Pfa=0.0133 | lr=1.25e-04
+Epoch 075/100 | train=0.003231 val=0.005660 | thr=0.04895 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 076/100 | train=0.003253 val=0.005754 | thr=0.03928 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 56
+threshold  : 0.195190
+test       : Pd=0.4038, Pfa=0.9733, FA=146, AUC=0.7675
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_polar6_v4_fold04_seed42_formal
+==================================================================================
+预加载 ri8-train: 736 个样本...
+  ri8-train: 200/736
+  ri8-train: 400/736
+  ri8-train: 600/736
+  ri8-train: 736/736
+预加载 ri8-val: 210 个样本...
+  ri8-val: 200/210
+  ri8-val: 210/210
+预加载 ri8-test: 202 个样本...
+  ri8-test: 200/202
+  ri8-test: 202/202
+==================================================================================
+experiment       : polar_repr_v1_ri8_v4_fold04_seed42_formal
+fold / mode      : 4 / ri8
+active channels  : ('Re_H', 'Im_H', 'Re_V', 'Im_V', 'relative_ZDR_like', 'local_rho_HV', 'cos_relative_phase', 'sin_relative_phase')
+canonical input  : 8 channels
+parameters       : 19,793
+device / AMP     : cuda / True
+dataset sizes    : train=736, val=210, test=202
+==================================================================================
+Epoch 001/100 | train=0.310431 val=0.144163 | thr=0.34106 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 002/100 | train=0.092375 val=0.060143 | thr=0.20264 Pd=0.0000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 003/100 | train=0.044819 val=0.034866 | thr=0.14990 Pd=0.2000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 004/100 | train=0.029047 val=0.025073 | thr=0.14941 Pd=0.2333 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 005/100 | train=0.022275 val=0.019933 | thr=0.20911 Pd=0.4667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 006/100 | train=0.018267 val=0.017372 | thr=0.24146 Pd=0.4833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 007/100 | train=0.015409 val=0.016524 | thr=0.38062 Pd=0.4500 Pfa=0.0133 | lr=1.00e-03
+Epoch 008/100 | train=0.014223 val=0.015245 | thr=0.33350 Pd=0.4500 Pfa=0.0133 | lr=1.00e-03
+Epoch 009/100 | train=0.012685 val=0.013919 | thr=0.50586 Pd=0.4500 Pfa=0.0133 | lr=1.00e-03
+Epoch 010/100 | train=0.011407 val=0.011867 | thr=0.40527 Pd=0.5500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 011/100 | train=0.010836 val=0.011296 | thr=0.54150 Pd=0.5167 Pfa=0.0133 | lr=1.00e-03
+Epoch 012/100 | train=0.010139 val=0.010451 | thr=0.69531 Pd=0.5167 Pfa=0.0133 | lr=1.00e-03
+Epoch 013/100 | train=0.009352 val=0.010661 | thr=0.39160 Pd=0.6667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 014/100 | train=0.009151 val=0.009983 | thr=0.41016 Pd=0.6833 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 015/100 | train=0.008871 val=0.009359 | thr=0.60156 Pd=0.6333 Pfa=0.0133 | lr=1.00e-03
+Epoch 016/100 | train=0.008116 val=0.009034 | thr=0.45215 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 017/100 | train=0.008000 val=0.008827 | thr=0.50684 Pd=0.7500 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 018/100 | train=0.008122 val=0.008623 | thr=0.55664 Pd=0.7667 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 019/100 | train=0.007661 val=0.008977 | thr=0.19910 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 020/100 | train=0.006997 val=0.007724 | thr=0.40308 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 021/100 | train=0.007024 val=0.009822 | thr=0.14758 Pd=0.6500 Pfa=0.0133 | lr=1.00e-03
+Epoch 022/100 | train=0.006604 val=0.007667 | thr=0.22131 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 023/100 | train=0.006960 val=0.008737 | thr=0.18066 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 024/100 | train=0.006248 val=0.006577 | thr=0.45850 Pd=0.8000 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 025/100 | train=0.005800 val=0.008117 | thr=0.15100 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 026/100 | train=0.005951 val=0.006098 | thr=0.40112 Pd=0.8167 Pfa=0.0133 | lr=1.00e-03 | best
+Epoch 027/100 | train=0.005583 val=0.006731 | thr=0.25073 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 028/100 | train=0.005425 val=0.006857 | thr=0.25439 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 029/100 | train=0.005218 val=0.006986 | thr=0.24634 Pd=0.7333 Pfa=0.0133 | lr=1.00e-03
+Epoch 030/100 | train=0.005486 val=0.007699 | thr=0.30786 Pd=0.6667 Pfa=0.0133 | lr=1.00e-03
+Epoch 031/100 | train=0.004982 val=0.007491 | thr=0.24060 Pd=0.7167 Pfa=0.0133 | lr=1.00e-03
+Epoch 032/100 | train=0.005034 val=0.006430 | thr=0.24512 Pd=0.8167 Pfa=0.0133 | lr=5.00e-04
+Epoch 033/100 | train=0.004513 val=0.005930 | thr=0.22656 Pd=0.7500 Pfa=0.0133 | lr=5.00e-04
+Epoch 034/100 | train=0.004264 val=0.005756 | thr=0.22864 Pd=0.8500 Pfa=0.0133 | lr=5.00e-04 | best
+Epoch 035/100 | train=0.004284 val=0.006442 | thr=0.23315 Pd=0.7667 Pfa=0.0133 | lr=5.00e-04
+Epoch 036/100 | train=0.004122 val=0.006068 | thr=0.22559 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 037/100 | train=0.004086 val=0.006209 | thr=0.22339 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 038/100 | train=0.004009 val=0.008138 | thr=0.18896 Pd=0.6833 Pfa=0.0133 | lr=5.00e-04
+Epoch 039/100 | train=0.003920 val=0.006077 | thr=0.21716 Pd=0.7833 Pfa=0.0133 | lr=5.00e-04
+Epoch 040/100 | train=0.003954 val=0.005597 | thr=0.20093 Pd=0.7667 Pfa=0.0133 | lr=5.00e-04
+Epoch 041/100 | train=0.003872 val=0.005940 | thr=0.20288 Pd=0.7833 Pfa=0.0133 | lr=5.00e-04
+Epoch 042/100 | train=0.003935 val=0.005805 | thr=0.20483 Pd=0.8333 Pfa=0.0133 | lr=5.00e-04
+Epoch 043/100 | train=0.003825 val=0.005700 | thr=0.18628 Pd=0.7500 Pfa=0.0133 | lr=5.00e-04
+Epoch 044/100 | train=0.003739 val=0.006330 | thr=0.28369 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 045/100 | train=0.003786 val=0.005724 | thr=0.21753 Pd=0.8000 Pfa=0.0133 | lr=5.00e-04
+Epoch 046/100 | train=0.003733 val=0.005688 | thr=0.29102 Pd=0.8500 Pfa=0.0133 | lr=2.50e-04 | best
+Epoch 047/100 | train=0.003494 val=0.005636 | thr=0.25732 Pd=0.8333 Pfa=0.0133 | lr=2.50e-04
+Epoch 048/100 | train=0.003357 val=0.005900 | thr=0.23462 Pd=0.7833 Pfa=0.0133 | lr=2.50e-04
+Epoch 049/100 | train=0.003415 val=0.005931 | thr=0.24963 Pd=0.8000 Pfa=0.0133 | lr=2.50e-04
+Epoch 050/100 | train=0.003289 val=0.006069 | thr=0.20215 Pd=0.7667 Pfa=0.0133 | lr=2.50e-04
+Epoch 051/100 | train=0.003306 val=0.005803 | thr=0.24524 Pd=0.8000 Pfa=0.0133 | lr=2.50e-04
+Epoch 052/100 | train=0.003243 val=0.005764 | thr=0.33496 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 053/100 | train=0.003155 val=0.005822 | thr=0.22461 Pd=0.7833 Pfa=0.0133 | lr=1.25e-04
+Epoch 054/100 | train=0.003112 val=0.005662 | thr=0.23950 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 055/100 | train=0.003107 val=0.005857 | thr=0.22107 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 056/100 | train=0.003101 val=0.006172 | thr=0.20862 Pd=0.7500 Pfa=0.0133 | lr=1.25e-04
+Epoch 057/100 | train=0.003084 val=0.005656 | thr=0.21252 Pd=0.8000 Pfa=0.0133 | lr=1.25e-04
+Epoch 058/100 | train=0.003077 val=0.005730 | thr=0.21606 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 059/100 | train=0.003009 val=0.005709 | thr=0.22815 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 060/100 | train=0.002994 val=0.005906 | thr=0.22949 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 061/100 | train=0.002998 val=0.005813 | thr=0.21814 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 062/100 | train=0.002980 val=0.005568 | thr=0.22302 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 063/100 | train=0.002973 val=0.005722 | thr=0.22559 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 064/100 | train=0.002996 val=0.005900 | thr=0.20947 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 065/100 | train=0.002960 val=0.005884 | thr=0.22205 Pd=0.8000 Pfa=0.0133 | lr=6.25e-05
+Epoch 066/100 | train=0.002949 val=0.005659 | thr=0.21802 Pd=0.7833 Pfa=0.0133 | lr=6.25e-05
+Early stopping after 20 stale epochs
+
+==================================================================================
+best epoch : 46
+threshold  : 0.291016
+test       : Pd=0.8269, Pfa=0.9533, FA=143, AUC=0.8703
+result dir : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v1_ri8_v4_fold04_seed42_formal
+==================================================================================
+==================================================================================
+representation summary (formal)
+found   : 8
+missing : 0
+detail  : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/polarimetric_representation_benchmark_v1/representation_detail_formal.csv
+aggregate: /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/polarimetric_representation_benchmark_v1/representation_aggregate_formal.csv
+==================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_power2_v4_fold01_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --input-mode power2 --dataset-version V4 --fold-id 1 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_ri4_v4_fold01_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --input-mode ri4 --dataset-version V4 --fold-id 1 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_polar6_v4_fold01_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --input-mode polar6 --dataset-version V4 --fold-id 1 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_ri8_v4_fold01_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --input-mode ri8 --dataset-version V4 --fold-id 1 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_power2_v4_fold04_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --input-mode power2 --dataset-version V4 --fold-id 4 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_ri4_v4_fold04_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --input-mode ri4 --dataset-version V4 --fold-id 4 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_polar6_v4_fold04_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --input-mode polar6 --dataset-version V4 --fold-id 4 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_polarimetric_representation_fcn.py --name polar_repr_v1_ri8_v4_fold04_seed42_formal --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --input-mode ri8 --dataset-version V4 --fold-id 4 --epochs 100 --batch-size 8 --num-workers 0 --seed 42
+====================================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/summarize_polarimetric_representation_benchmark_v1.py --folds 1 4 --modes power2 ri4 polar6 ri8 --scope formal --require-all
+====================================================================================================

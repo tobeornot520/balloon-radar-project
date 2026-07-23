@@ -1,0 +1,12 @@
+{
+  "patch_name": "bc_dpg_v3_final_freeze_paper_evidence",
+  "patch_version": "2026.07.22-v1",
+  "installed_at": "2026-07-22T10:54:45",
+  "backup_root": null,
+  "files": [
+    {
+      "relative_path": "scripts/build_bc_dpg_v3_final_evidence.py",
+      "sha256": "e2181015bbd8888bea650ecf3b8ef7ef757e553852ff1e007075d4895a6d459c"
+    }
+  ]
+}

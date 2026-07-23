@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "same_architecture_across_modes": true,
+  "parameter_count": 19793,
+  "modes": [
+    {
+      "mode": "power2",
+      "active_channel_count": 2,
+      "active_channels": [
+        "H_power",
+        "V_power"
+      ],
+      "canonical_shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "min": 0.0,
+      "max": 1.0
+    },
+    {
+      "mode": "ri4",
+      "active_channel_count": 4,
+      "active_channels": [
+        "Re_H",
+        "Im_H",
+        "Re_V",
+        "Im_V"
+      ],
+      "canonical_shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "min": -1.0,
+      "max": 1.0
+    },
+    {
+      "mode": "polar6",
+      "active_channel_count": 6,
+      "active_channels": [
+        "H_power",
+        "V_power",
+        "relative_ZDR_like",
+        "local_rho_HV",
+        "cos_relative_phase",
+        "sin_relative_phase"
+      ],
+      "canonical_shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "min": -0.9999979138374329,
+      "max": 1.0
+    },
+    {
+      "mode": "ri8",
+      "active_channel_count": 8,
+      "active_channels": [
+        "Re_H",
+        "Im_H",
+        "Re_V",
+        "Im_V",
+        "relative_ZDR_like",
+        "local_rho_HV",
+        "cos_relative_phase",
+        "sin_relative_phase"
+      ],
+      "canonical_shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "min": -1.0,
+      "max": 1.0
+    }
+  ],
+  "warning": "ZDR-like and relative phase are uncalibrated relative features."
+}

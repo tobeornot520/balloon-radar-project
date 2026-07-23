@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "requested": 8,
+  "found": 8,
+  "missing": 0,
+  "missing_paths": [],
+  "note": "Low-FPR test metrics are descriptive diagnostics and are not used for model selection."
+}

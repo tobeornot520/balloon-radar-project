@@ -1,0 +1,9 @@
+fold,mode,n_targets,score_detected,joint_correct,score_misses,detected_but_localization_failed
+1,power2,53,53,52,0,1
+1,ri4,53,33,31,20,2
+1,polar6_gated,53,53,39,0,14
+1,ri8_gated,53,46,37,7,9
+4,power2,52,52,41,0,11
+4,ri4,52,46,37,6,9
+4,polar6_gated,52,39,33,13,6
+4,ri8_gated,52,45,39,7,6

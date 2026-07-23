@@ -1,0 +1,32 @@
+{
+  "found": [
+    "models/target_protected_scan_calibrator.py",
+    "training/train_target_protected_scan_calibrator.py",
+    "training/train_target_protected_scan_calibrator_ablation.py",
+    "scripts/run_bc_dpg_v3.py",
+    "scripts/compare_bc_dpg_v3.py",
+    "configs/bc_dpg_v3_ablation_polar_stage1.yaml",
+    "configs/bc_dpg_fcn_v3_scan_target.yaml",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/detail_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/aggregate_smoke.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/integrity_audit_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/fold_bootstrap_ci_smoke.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/paired_effects_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/fold_consistency_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/fold_bootstrap_ci_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/paired_effects_smoke.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/aggregate_formal.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/fold_consistency_smoke.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/detail_smoke.csv",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/preflight_status.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/run_plan_smoke.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/status_smoke.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/status_formal.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/integrity_audit_status_formal.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/run_plan_formal.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/base_power2_checkpoint_inventory_formal.json",
+    "results/data_audit/roi_stage4_selected_sixfold_v1/install_record.json"
+  ],
+  "raw_data_included": false,
+  "checkpoint_bytes_included": false
+}

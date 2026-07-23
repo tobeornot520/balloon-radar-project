@@ -1,0 +1,77 @@
+========================================================================================
+BALLOON RADAR PROJECT CLEANUP PREVIEW
+========================================================================================
+project root : /home/tobeornot8259748/projects/balloon_radar_project
+candidates   : 66
+total size   : 4.03 MB
+report       : /home/tobeornot8259748/projects/balloon_radar_project/_cleanup_archive/preview_20260722_123740/CLEANUP_REPORT.md
+
+[legacy_patch_dir    ]   10.91 KB  BC_DPG_FCN_v1_argmax_fix
+[legacy_patch_dir    ]   22.12 KB  BC_DPG_FCN_v1_integration_patch
+[legacy_patch_dir    ]   20.99 KB  BC_DPG_FCN_v1_preflight_patch
+[legacy_patch_dir    ]   66.63 KB  BC_DPG_FCN_v1_training_patch
+[legacy_patch_dir    ]   51.16 KB  BC_DPG_FCN_v2_tail_patch
+[legacy_patch_dir    ]   60.59 KB  BC_DPG_FCN_v3_scan_target_patch
+[patch_zip           ]   20.56 KB  BC_DPG_current_model_stage2_patch_v2.zip
+[patch_zip           ]   22.32 KB  BC_DPG_explicit_polarimetric_representation_stage2_patch_v1.zip
+[legacy_audit_dir    ]   32.84 KB  BC_DPG_overfitting_audit_fix
+[legacy_audit_dir    ]   32.64 KB  BC_DPG_overfitting_audit_patch
+[legacy_audit_dir    ]   33.59 KB  BC_DPG_overfitting_audit_rotation_fix
+[patch_zip           ]   26.33 KB  BC_DPG_polarimetric_gated_diagnostic_stage3_patch_v1.zip
+[legacy_patch_dir    ]    6.06 KB  BC_DPG_v2_compare_fix
+[legacy_patch_dir    ]   21.14 KB  BC_DPG_v2_global_threshold_patch
+[patch_zip           ]   17.49 KB  BC_DPG_v3_final_freeze_paper_evidence_patch_v1.zip
+[legacy_paper_dir    ]   36.84 KB  BC_DPG_v3_paper_results_matplotlib_fix
+[legacy_paper_dir    ]   37.77 KB  BC_DPG_v3_paper_results_patch
+[stage_readme        ]    2.89 KB  README_BC_DPG_v3最终冻结与论文证据_V1.md
+[stage_readme        ]    3.52 KB  README_BC_DPG当前模型Stage2_V2.md
+[stage_readme        ]    1.08 KB  README_显式极化表征基准Stage2.md
+[stage_readme        ]   791.00 B  README_显式极化门控与分数迁移诊断_v2.md
+[installer           ]   62.54 KB  apply_bc_dpg_current_model_stage2_v2.py
+[installer           ]  128.01 KB  apply_bc_dpg_v3_ablation_polar_stage1.py
+[installer           ]   17.73 KB  apply_bc_dpg_v3_ablation_runner_fix_v2.py
+[installer           ]   42.81 KB  apply_bc_dpg_v3_final_freeze_paper_evidence_v1.py
+[installer           ]   84.56 KB  apply_polarimetric_gated_representation_v2.py
+[installer           ]   66.23 KB  apply_polarimetric_representation_benchmark_v1.py
+[cache_dir           ]    7.11 KB  baselines/__pycache__
+[acceptance_zip      ]   13.74 KB  bc_dpg_current_model_stage2_smoke_acceptance.zip
+[terminal_log        ]   27.38 KB  bc_dpg_current_model_stage2_smoke_terminal.log
+[acceptance_zip      ]   13.50 KB  bc_dpg_v31_shift_reg_formal_acceptance.zip
+[acceptance_zip      ]   19.51 KB  bc_dpg_v31_shift_reg_formal_acceptance_v2.zip
+[terminal_log        ]  142.32 KB  bc_dpg_v31_shift_reg_formal_terminal.log
+[acceptance_zip      ]   11.67 KB  bc_dpg_v3_ablation_extended_formal_acceptance.zip
+[terminal_log        ]   52.59 KB  bc_dpg_v3_ablation_extended_formal_terminal.log
+[acceptance_zip      ]    3.97 KB  bc_dpg_v3_ablation_formal_acceptance.zip
+[terminal_log        ]    4.81 KB  bc_dpg_v3_ablation_formal_terminal.log
+[acceptance_zip      ]   18.39 KB  bc_dpg_v3_ablation_sixfold_formal_acceptance.zip
+[terminal_log        ]  110.69 KB  bc_dpg_v3_ablation_sixfold_formal_terminal.log
+[evidence_zip        ]  290.93 KB  bc_dpg_v3_final_evidence.zip
+[terminal_log        ]   685.00 B  bc_dpg_v3_final_evidence_terminal.log
+[acceptance_zip      ]  302.24 KB  bc_dpg_v3_final_freeze_acceptance.zip
+[legacy_package_dir  ]   25.56 KB  current_structure_reader_package
+[cache_dir           ]   77.01 KB  datasets/__pycache__
+[legacy_package_dir  ]   19.04 KB  detection_ablation_analysis_v2_package
+[legacy_package_dir  ]   32.16 KB  detection_diagnostics_v3_package
+[legacy_package_dir  ]   64.94 KB  detection_group_split_v1_package
+[cache_dir           ]   36.16 KB  detection_group_split_v1_package/scripts/__pycache__
+[legacy_package_dir  ]   16.36 KB  detection_visualization_hotfix_v3_1
+[legacy_patch_dir    ]   46.63 KB  dpg_fcn_v1_patch
+[cache_dir           ]   142.00 B  evaluation/__pycache__
+[cache_dir           ]   21.73 KB  features/__pycache__
+[legacy_package_dir  ]   42.39 KB  full_detection_baseline_v2_package
+[legacy_diagnostic_dir]   27.31 KB  hv_late_fusion_diagnostic_v1
+[cache_dir           ]   75.42 KB  models/__pycache__
+[acceptance_zip      ]   92.05 KB  polarimetric_gated_stage3_smoke_acceptance.zip
+[terminal_log        ]   19.72 KB  polarimetric_gated_stage3_smoke_terminal.log
+[acceptance_zip      ]    6.77 KB  polarimetric_representation_stage2_smoke_acceptance.zip
+[terminal_log        ]   16.80 KB  polarimetric_representation_stage2_smoke_terminal.log
+[acceptance_zip      ]   15.92 KB  polarimetric_representation_twofold_formal_acceptance.zip
+[terminal_log        ]   72.12 KB  polarimetric_representation_twofold_formal_terminal.log
+[cache_dir           ]   22.18 KB  radar_data_reader_package/datasets/__pycache__
+[cache_dir           ]   15.07 KB  radar_data_reader_package/scripts/__pycache__
+[cache_dir           ]    1.12 MB  scripts/__pycache__
+[cache_dir           ]  281.75 KB  training/__pycache__
+[cache_dir           ]    2.13 KB  utils/__pycache__
+
+预览完成，未移动或删除任何文件。
+执行归档清理：python cleanup_balloon_radar_project_v1.py --execute --clean-caches

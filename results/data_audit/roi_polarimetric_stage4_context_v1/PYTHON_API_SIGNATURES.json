@@ -1,0 +1,1221 @@
+[
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "classes": [
+      {
+        "name": "PolarimetricGateConfig",
+        "methods": [
+          {
+            "name": "__post_init__",
+            "signature": "__post_init__(self) -> None"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "power_confidence",
+        "signature": "power_confidence(features: Mapping[str, np.ndarray], config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      },
+      {
+        "name": "gated_explicit_channels",
+        "signature": "gated_explicit_channels(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]"
+      },
+      {
+        "name": "make_polar6_gated",
+        "signature": "make_polar6_gated(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      },
+      {
+        "name": "make_ri8_gated",
+        "signature": "make_ri8_gated(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from typing import Mapping",
+      "import numpy as np",
+      "from features.polarimetric_rd import make_power2, make_ri4"
+    ]
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "classes": [
+      {
+        "name": "PolarimetricDetectionDatasetV2",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, manifest_path: str | Path=DEFAULT_MANIFEST, split: Literal['train', 'val', 'test']='train', input_mode: Literal['power2', 'ri4', 'polar6_gated', 'ri8_gated']='power2', range_sigma: float=5.0, velocity_sigma: float=5.0, max_samples: Optional[int]=None, geometry: Optional[DetectionGeometry]=None, velocity_window: int=5, range_window: int=3, zdr_clip_db: float=20.0, gate_low_percentile: float=50.0, gate_high_percentile: float=99.0, gate_gamma: float=1.5) -> None"
+          },
+          {
+            "name": "__len__",
+            "signature": "__len__(self) -> int"
+          },
+          {
+            "name": "_make_input",
+            "signature": "_make_input(self, h: np.ndarray, v: np.ndarray) -> np.ndarray"
+          },
+          {
+            "name": "__getitem__",
+            "signature": "__getitem__(self, index: int) -> dict[str, Any]"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_resolve_path",
+        "signature": "_resolve_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_recover_data_path",
+        "signature": "_recover_data_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_to_float",
+        "signature": "_to_float(value: str, default: float=float('nan')) -> float"
+      },
+      {
+        "name": "_to_int",
+        "signature": "_to_int(value: str, default: int=-1) -> int"
+      },
+      {
+        "name": "representation_channels",
+        "signature": "representation_channels(mode: str) -> tuple[str, ...]"
+      },
+      {
+        "name": "to_canonical8",
+        "signature": "to_canonical8(array: np.ndarray) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from pathlib import Path",
+      "from typing import Any, Literal, Optional",
+      "import numpy as np",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.detection_dataset_v2 import DetectionGeometry, _generate_heatmap, _load_iq_pair",
+      "from features.polarimetric_rd import PolarimetricConfig, explicit_polarimetric_rd, make_power2, make_ri4",
+      "from features.polarimetric_gated_rd import PolarimetricGateConfig, make_polar6_gated, make_ri8_gated"
+    ]
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_args",
+        "signature": "parse_args() -> argparse.Namespace"
+      },
+      {
+        "name": "validate_args",
+        "signature": "validate_args(args: argparse.Namespace) -> None"
+      },
+      {
+        "name": "save_checkpoint",
+        "signature": "save_checkpoint(path: Path, model: PolarimetricRepresentationFCN, optimizer: torch.optim.Optimizer, epoch: int, args: argparse.Namespace, threshold: float, val_metrics: dict[str, float | int]) -> None"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "import math",
+      "import sys",
+      "import time",
+      "from dataclasses import asdict",
+      "from pathlib import Path",
+      "from typing import Any",
+      "import numpy as np",
+      "import pandas as pd",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.polarimetric_detection_dataset_v2 import PolarimetricDetectionDatasetV2, representation_channels",
+      "from models.polarimetric_representation_fcn import PolarimetricRepresentationFCN, count_parameters",
+      "from scripts.train_detection_baseline_v2 import DetectionTolerance, MemoryCachedDataset, SampleWeightedHeatmapMSE, apply_threshold_and_metrics, collect_predictions, json_safe, make_debug_subset, make_loader, plot_history, plot_score_histogram, resolve_project_path, select_threshold_at_false_alarm_budget, set_seed, train_one_epoch"
+    ]
+  },
+  {
+    "file": "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_args",
+        "signature": "parse_args() -> argparse.Namespace"
+      },
+      {
+        "name": "complete",
+        "signature": "complete(name: str) -> bool"
+      },
+      {
+        "name": "run",
+        "signature": "run(command: list[str]) -> None"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "import subprocess",
+      "import sys",
+      "from datetime import datetime",
+      "from pathlib import Path"
+    ]
+  },
+  {
+    "file": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_args",
+        "signature": "parse_args() -> argparse.Namespace"
+      },
+      {
+        "name": "safe",
+        "signature": "safe(value: Any) -> float"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "import math",
+      "from pathlib import Path",
+      "from typing import Any",
+      "import pandas as pd"
+    ]
+  },
+  {
+    "file": "datasets/detection_dataset_v2.py",
+    "classes": [
+      {
+        "name": "DetectionGeometry",
+        "methods": [
+          {
+            "name": "range_to_index",
+            "signature": "range_to_index(self, distance_m: float) -> int"
+          },
+          {
+            "name": "velocity_to_index",
+            "signature": "velocity_to_index(self, velocity_mps: float) -> int"
+          }
+        ]
+      },
+      {
+        "name": "DetectionRadarDatasetV2",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, data_root: str | Path=DEFAULT_DATA_ROOT, split: Literal['train', 'val', 'test']='train', channel_mode: Literal['H', 'V', 'HV']='HV', range_sigma: float=2.0, velocity_sigma: float=1.0, include_background: bool=True, include_uav: bool=True, max_samples: Optional[int]=None, geometry: Optional[DetectionGeometry]=None) -> None"
+          },
+          {
+            "name": "__len__",
+            "signature": "__len__(self) -> int"
+          },
+          {
+            "name": "__getitem__",
+            "signature": "__getitem__(self, index: int) -> dict[str, Any]"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_resolve_path",
+        "signature": "_resolve_path(path: str | Path) -> Path"
+      },
+      {
+        "name": "_parse_label",
+        "signature": "_parse_label(path: Path) -> dict[str, Any]"
+      },
+      {
+        "name": "_extract_int",
+        "signature": "_extract_int(text: str, pattern: str) -> Optional[int]"
+      },
+      {
+        "name": "_load_iq_pair",
+        "signature": "_load_iq_pair(path: Path) -> tuple[np.ndarray, np.ndarray]"
+      },
+      {
+        "name": "_calculate_rd_power",
+        "signature": "_calculate_rd_power(iq: np.ndarray) -> np.ndarray"
+      },
+      {
+        "name": "_normalize_power_db",
+        "signature": "_normalize_power_db(power: np.ndarray) -> np.ndarray"
+      },
+      {
+        "name": "_generate_heatmap",
+        "signature": "_generate_heatmap(range_index: int, velocity_index: int, range_sigma: float, velocity_sigma: float) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import re",
+      "from dataclasses import dataclass",
+      "from pathlib import Path",
+      "from typing import Any, Literal, Optional",
+      "import numpy as np",
+      "import torch",
+      "from scipy.io import loadmat",
+      "from torch.utils.data import Dataset"
+    ]
+  },
+  {
+    "file": "datasets/detection_dataset_v3.py",
+    "classes": [
+      {
+        "name": "DetectionRadarDatasetV3",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, manifest_path: str | Path=DEFAULT_MANIFEST, split: Literal['train', 'val', 'test']='train', channel_mode: Literal['H', 'V', 'HV']='HV', range_sigma: float=2.0, velocity_sigma: float=1.0, include_background: bool=True, include_uav: bool=True, max_samples: Optional[int]=None, geometry: Optional[DetectionGeometry]=None) -> None"
+          },
+          {
+            "name": "__len__",
+            "signature": "__len__(self) -> int"
+          },
+          {
+            "name": "__getitem__",
+            "signature": "__getitem__(self, index: int) -> dict[str, Any]"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_resolve_path",
+        "signature": "_resolve_path(path: str | Path) -> Path"
+      },
+      {
+        "name": "_to_float",
+        "signature": "_to_float(value: str, default: float=float('nan')) -> float"
+      },
+      {
+        "name": "_to_int",
+        "signature": "_to_int(value: str, default: int=-1) -> int"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from pathlib import Path",
+      "from typing import Any, Literal, Optional",
+      "import numpy as np",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.detection_dataset_v2 import DetectionGeometry, _calculate_rd_power, _generate_heatmap, _load_iq_pair, _normalize_power_db"
+    ]
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v1.py",
+    "classes": [
+      {
+        "name": "PolarimetricDetectionDatasetV1",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, manifest_path: str | Path=DEFAULT_MANIFEST, split: Literal['train', 'val', 'test']='train', input_mode: Literal['power2', 'ri4', 'polar6', 'ri8']='power2', range_sigma: float=5.0, velocity_sigma: float=5.0, max_samples: Optional[int]=None, geometry: Optional[DetectionGeometry]=None, velocity_window: int=5, range_window: int=3, zdr_clip_db: float=20.0) -> None"
+          },
+          {
+            "name": "__len__",
+            "signature": "__len__(self) -> int"
+          },
+          {
+            "name": "_make_input",
+            "signature": "_make_input(self, h: np.ndarray, v: np.ndarray) -> np.ndarray"
+          },
+          {
+            "name": "__getitem__",
+            "signature": "__getitem__(self, index: int) -> dict[str, Any]"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_resolve_path",
+        "signature": "_resolve_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_recover_data_path",
+        "signature": "_recover_data_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_to_float",
+        "signature": "_to_float(value: str, default: float=float('nan')) -> float"
+      },
+      {
+        "name": "_to_int",
+        "signature": "_to_int(value: str, default: int=-1) -> int"
+      },
+      {
+        "name": "representation_channels",
+        "signature": "representation_channels(mode: str) -> tuple[str, ...]"
+      },
+      {
+        "name": "to_canonical8",
+        "signature": "to_canonical8(array: np.ndarray) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from pathlib import Path",
+      "from typing import Any, Literal, Optional",
+      "import numpy as np",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.detection_dataset_v2 import DetectionGeometry, _generate_heatmap, _load_iq_pair",
+      "from features.polarimetric_rd import PolarimetricConfig, explicit_polarimetric_rd, make_power2, make_ri4, make_polar6, make_ri8"
+    ]
+  },
+  {
+    "file": "datasets/polarimetric_detection_dataset_v2.py",
+    "classes": [
+      {
+        "name": "PolarimetricDetectionDatasetV2",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, manifest_path: str | Path=DEFAULT_MANIFEST, split: Literal['train', 'val', 'test']='train', input_mode: Literal['power2', 'ri4', 'polar6_gated', 'ri8_gated']='power2', range_sigma: float=5.0, velocity_sigma: float=5.0, max_samples: Optional[int]=None, geometry: Optional[DetectionGeometry]=None, velocity_window: int=5, range_window: int=3, zdr_clip_db: float=20.0, gate_low_percentile: float=50.0, gate_high_percentile: float=99.0, gate_gamma: float=1.5) -> None"
+          },
+          {
+            "name": "__len__",
+            "signature": "__len__(self) -> int"
+          },
+          {
+            "name": "_make_input",
+            "signature": "_make_input(self, h: np.ndarray, v: np.ndarray) -> np.ndarray"
+          },
+          {
+            "name": "__getitem__",
+            "signature": "__getitem__(self, index: int) -> dict[str, Any]"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_resolve_path",
+        "signature": "_resolve_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_recover_data_path",
+        "signature": "_recover_data_path(value: str | Path) -> Path"
+      },
+      {
+        "name": "_to_float",
+        "signature": "_to_float(value: str, default: float=float('nan')) -> float"
+      },
+      {
+        "name": "_to_int",
+        "signature": "_to_int(value: str, default: int=-1) -> int"
+      },
+      {
+        "name": "representation_channels",
+        "signature": "representation_channels(mode: str) -> tuple[str, ...]"
+      },
+      {
+        "name": "to_canonical8",
+        "signature": "to_canonical8(array: np.ndarray) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import csv",
+      "from pathlib import Path",
+      "from typing import Any, Literal, Optional",
+      "import numpy as np",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.detection_dataset_v2 import DetectionGeometry, _generate_heatmap, _load_iq_pair",
+      "from features.polarimetric_rd import PolarimetricConfig, explicit_polarimetric_rd, make_power2, make_ri4",
+      "from features.polarimetric_gated_rd import PolarimetricGateConfig, make_polar6_gated, make_ri8_gated"
+    ]
+  },
+  {
+    "file": "evaluation/analyze_fold_stability.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "main",
+        "signature": "main()"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import pandas as pd",
+      "import matplotlib.pyplot as plt"
+    ]
+  },
+  {
+    "file": "evaluation/analyze_hv_ablation.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_arguments",
+        "signature": "parse_arguments() -> argparse.Namespace"
+      },
+      {
+        "name": "load_summary",
+        "signature": "load_summary(path: Path) -> dict[str, Any]"
+      },
+      {
+        "name": "extract_record",
+        "signature": "extract_record(channel: str, summary: dict[str, Any]) -> dict[str, Any]"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "from pathlib import Path",
+      "from typing import Any",
+      "import pandas as pd"
+    ]
+  },
+  {
+    "file": "evaluation/analyze_refiner_gain.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "main",
+        "signature": "main()"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import pandas as pd"
+    ]
+  },
+  {
+    "file": "evaluation/build_final_metrics.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "load_json",
+        "signature": "load_json(path)"
+      },
+      {
+        "name": "main",
+        "signature": "main()"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import pandas as pd",
+      "import json"
+    ]
+  },
+  {
+    "file": "evaluation/evaluate_cfar.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "calculate_rd_power",
+        "signature": "calculate_rd_power(iq_data: np.ndarray) -> np.ndarray"
+      },
+      {
+        "name": "candidate_is_hit",
+        "signature": "candidate_is_hit(candidate: dict, label_velocity_index: int, label_range_index: int, range_tolerance: int, velocity_tolerance: int) -> bool"
+      },
+      {
+        "name": "select_nearest_candidate",
+        "signature": "select_nearest_candidate(candidates: list[dict], label_velocity_index: int, label_range_index: int) -> dict | None"
+      },
+      {
+        "name": "evaluate_one_sample",
+        "signature": "evaluate_one_sample(row: pd.Series) -> tuple[dict, list[dict]]"
+      },
+      {
+        "name": "build_summary",
+        "signature": "build_summary(result_df: pd.DataFrame) -> pd.DataFrame"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import sys",
+      "import numpy as np",
+      "import pandas as pd",
+      "from scipy.io import loadmat",
+      "from baselines.ca_cfar import ca_cfar_2d, extract_peak_candidates"
+    ]
+  },
+  {
+    "file": "evaluation/final_report.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "save_csv",
+        "signature": "save_csv(df, name)"
+      },
+      {
+        "name": "load_json",
+        "signature": "load_json(path)"
+      },
+      {
+        "name": "generate_model_comparison",
+        "signature": "generate_model_comparison()"
+      },
+      {
+        "name": "generate_refiner_ablation",
+        "signature": "generate_refiner_ablation()"
+      },
+      {
+        "name": "generate_fold_analysis",
+        "signature": "generate_fold_analysis()"
+      },
+      {
+        "name": "generate_error_distribution",
+        "signature": "generate_error_distribution()"
+      },
+      {
+        "name": "main",
+        "signature": "main()"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import json",
+      "import pandas as pd",
+      "import matplotlib.pyplot as plt"
+    ]
+  },
+  {
+    "file": "evaluation/plot_rd_with_label.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "load_config",
+        "signature": "load_config()"
+      },
+      {
+        "name": "parse_label",
+        "signature": "parse_label(label_path)"
+      },
+      {
+        "name": "load_iq",
+        "signature": "load_iq(mat_path, channel, n_pulses, n_range)"
+      },
+      {
+        "name": "generate_rd",
+        "signature": "generate_rd(iq_data, clutter_suppression='demean')"
+      },
+      {
+        "name": "build_physical_rd",
+        "signature": "build_physical_rd(rd_db, fc, prf)"
+      },
+      {
+        "name": "plot_rd",
+        "signature": "plot_rd(rd_physical, velocity_axis, label_info, range_res, output_path, channel)"
+      },
+      {
+        "name": "find_sample",
+        "signature": "find_sample(sample_name)"
+      },
+      {
+        "name": "main",
+        "signature": "main()"
+      }
+    ],
+    "imports": [
+      "import argparse",
+      "from pathlib import Path",
+      "import matplotlib",
+      "import matplotlib.pyplot as plt",
+      "import numpy as np",
+      "import yaml",
+      "from scipy.io import loadmat"
+    ]
+  },
+  {
+    "file": "evaluation/visualize_cfar.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "resolve_project_path",
+        "signature": "resolve_project_path(path_value: str) -> Path"
+      },
+      {
+        "name": "calculate_rd_power",
+        "signature": "calculate_rd_power(iq_data: np.ndarray) -> np.ndarray"
+      },
+      {
+        "name": "detection_exists_in_window",
+        "signature": "detection_exists_in_window(detection_map: np.ndarray, label_velocity_index: int, label_range_index: int, velocity_radius: int, range_radius: int) -> bool"
+      },
+      {
+        "name": "candidate_is_target",
+        "signature": "candidate_is_target(candidate: dict, label_velocity_index: int, label_range_index: int) -> bool"
+      },
+      {
+        "name": "find_nearest_candidate",
+        "signature": "find_nearest_candidate(candidates: list[dict], label_velocity_index: int, label_range_index: int) -> dict | None"
+      },
+      {
+        "name": "analyze_sample",
+        "signature": "analyze_sample(row: pd.Series) -> dict"
+      },
+      {
+        "name": "select_three_cases",
+        "signature": "select_three_cases(analysis_results: list[dict]) -> list[dict]"
+      },
+      {
+        "name": "get_physical_extent",
+        "signature": "get_physical_extent()"
+      },
+      {
+        "name": "add_target_region",
+        "signature": "add_target_region(axis, label_range_index: int, label_velocity_index: int) -> None"
+      },
+      {
+        "name": "draw_candidate_points",
+        "signature": "draw_candidate_points(axis, candidates: list[dict], label_velocity_index: int, label_range_index: int) -> None"
+      },
+      {
+        "name": "draw_one_case",
+        "signature": "draw_one_case(case: dict) -> Path"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from pathlib import Path",
+      "import sys",
+      "import matplotlib.pyplot as plt",
+      "from matplotlib.patches import Rectangle",
+      "import numpy as np",
+      "import pandas as pd",
+      "from scipy.io import loadmat",
+      "from baselines.ca_cfar import ca_cfar_2d, extract_peak_candidates",
+      "from utils.plot_config import configure_chinese_font"
+    ]
+  },
+  {
+    "file": "features/polarimetric_gated_rd.py",
+    "classes": [
+      {
+        "name": "PolarimetricGateConfig",
+        "methods": [
+          {
+            "name": "__post_init__",
+            "signature": "__post_init__(self) -> None"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "power_confidence",
+        "signature": "power_confidence(features: Mapping[str, np.ndarray], config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      },
+      {
+        "name": "gated_explicit_channels",
+        "signature": "gated_explicit_channels(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]"
+      },
+      {
+        "name": "make_polar6_gated",
+        "signature": "make_polar6_gated(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      },
+      {
+        "name": "make_ri8_gated",
+        "signature": "make_ri8_gated(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0, gate_config: PolarimetricGateConfig | None=None) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from typing import Mapping",
+      "import numpy as np",
+      "from features.polarimetric_rd import make_power2, make_ri4"
+    ]
+  },
+  {
+    "file": "features/polarimetric_rd.py",
+    "classes": [
+      {
+        "name": "PolarimetricConfig",
+        "methods": [
+          {
+            "name": "__post_init__",
+            "signature": "__post_init__(self) -> None"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_ensure_iq_pair",
+        "signature": "_ensure_iq_pair(h: np.ndarray, v: np.ndarray) -> tuple[np.ndarray, np.ndarray]"
+      },
+      {
+        "name": "complex_rd",
+        "signature": "complex_rd(iq: np.ndarray) -> np.ndarray"
+      },
+      {
+        "name": "_local_mean",
+        "signature": "_local_mean(values: np.ndarray, velocity_window: int, range_window: int) -> np.ndarray"
+      },
+      {
+        "name": "robust_power_channel",
+        "signature": "robust_power_channel(power: np.ndarray, *, low_percentile: float=1.0, high_percentile: float=99.0, eps: float=1e-12) -> np.ndarray"
+      },
+      {
+        "name": "robust_signed_channel",
+        "signature": "robust_signed_channel(values: np.ndarray, *, percentile: float=99.0, eps: float=1e-08) -> np.ndarray"
+      },
+      {
+        "name": "explicit_polarimetric_rd",
+        "signature": "explicit_polarimetric_rd(h: np.ndarray, v: np.ndarray, config: PolarimetricConfig | None=None) -> Mapping[str, np.ndarray]"
+      },
+      {
+        "name": "make_power2",
+        "signature": "make_power2(features: Mapping[str, np.ndarray]) -> np.ndarray"
+      },
+      {
+        "name": "make_polar6",
+        "signature": "make_polar6(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0) -> np.ndarray"
+      },
+      {
+        "name": "make_ri4",
+        "signature": "make_ri4(features: Mapping[str, np.ndarray]) -> np.ndarray"
+      },
+      {
+        "name": "make_ri8",
+        "signature": "make_ri8(features: Mapping[str, np.ndarray], *, zdr_clip_db: float=20.0) -> np.ndarray"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from dataclasses import dataclass",
+      "from typing import Mapping",
+      "import numpy as np",
+      "from scipy.ndimage import uniform_filter"
+    ]
+  },
+  {
+    "file": "models/background_calibrated_dpg_fcn.py",
+    "classes": [
+      {
+        "name": "BackgroundCalibrator",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, feature_dim: int=12, hidden_dims: Sequence[int]=(32, 16), min_temperature: float=0.05) -> None"
+          },
+          {
+            "name": "_initialize_as_identity",
+            "signature": "_initialize_as_identity(self) -> None"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, features: Tensor) -> Tuple[Tensor, Tensor]"
+          }
+        ]
+      },
+      {
+        "name": "BackgroundCalibratedDPGFCN",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, base_model: nn.Module, *, topk: int=16, hidden_dims: Sequence[int]=(32, 16), min_temperature: float=0.05, freeze_base: bool=True) -> None"
+          },
+          {
+            "name": "freeze_base",
+            "signature": "freeze_base(self) -> None"
+          },
+          {
+            "name": "train",
+            "signature": "train(self, mode: bool=True)"
+          },
+          {
+            "name": "_as_batched_map",
+            "signature": "_as_batched_map(tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_find_tensor",
+            "signature": "_find_tensor(cls, mapping: Mapping[str, Any], keys: Iterable[str]) -> Optional[Tensor]"
+          },
+          {
+            "name": "extract_heatmap",
+            "signature": "extract_heatmap(cls, output: Any) -> Tensor"
+          },
+          {
+            "name": "extract_gate",
+            "signature": "extract_gate(cls, output: Any) -> Optional[Tensor]"
+          },
+          {
+            "name": "_topk_mean",
+            "signature": "_topk_mean(self, tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_four_input_statistics",
+            "signature": "_four_input_statistics(self, tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_two_gate_statistics",
+            "signature": "_two_gate_statistics(gate: Optional[Tensor], *, batch_size: int, device: torch.device, dtype: torch.dtype) -> Tensor"
+          },
+          {
+            "name": "build_features",
+            "signature": "build_features(self, input_tensor: Tensor, raw_logits: Tensor, gate_weights: Optional[Tensor]) -> Tensor"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: Tensor) -> Dict[str, Any]"
+          },
+          {
+            "name": "sample_logits",
+            "signature": "sample_logits(logits: Tensor) -> Tensor"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "calibration_loss",
+        "signature": "calibration_loss(sample_logits: Tensor, labels: Tensor, temperature: Tensor, bias: Tensor, *, temperature_regularization: float=0.01, bias_regularization: float=0.01) -> Tuple[Tensor, Dict[str, Tensor]]"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from typing import Any, Dict, Iterable, Mapping, Optional, Sequence, Tuple",
+      "import torch",
+      "from torch import Tensor, nn",
+      "import torch.nn.functional as F"
+    ]
+  },
+  {
+    "file": "models/background_tail_calibrated_dpg_fcn.py",
+    "classes": [
+      {
+        "name": "DownwardShiftHead",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, feature_dim: int=24, hidden_dims: Sequence[int]=(48, 24), initial_shift: float=0.001) -> None"
+          },
+          {
+            "name": "_initialize_near_zero",
+            "signature": "_initialize_near_zero(self, initial_shift: float) -> None"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, features: Tensor) -> Tensor"
+          }
+        ]
+      },
+      {
+        "name": "BackgroundTailCalibratedDPGFCN",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, base_model: nn.Module, *, topk: int=16, hidden_dims: Sequence[int]=(48, 24), initial_shift: float=0.001, freeze_base: bool=True) -> None"
+          },
+          {
+            "name": "freeze_base",
+            "signature": "freeze_base(self) -> None"
+          },
+          {
+            "name": "train",
+            "signature": "train(self, mode: bool=True)"
+          },
+          {
+            "name": "_flatten",
+            "signature": "_flatten(tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_topk_values",
+            "signature": "_topk_values(self, tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_four_stats",
+            "signature": "_four_stats(self, tensor: Tensor) -> Tensor"
+          },
+          {
+            "name": "_peak_coordinates",
+            "signature": "_peak_coordinates(logits: Tensor) -> Tuple[Tensor, Tensor]"
+          },
+          {
+            "name": "_normalized_peak_distance",
+            "signature": "_normalized_peak_distance(first: Tensor, second: Tensor) -> Tensor"
+          },
+          {
+            "name": "_local_peak_contrast",
+            "signature": "_local_peak_contrast(probability: Tensor) -> Tensor"
+          },
+          {
+            "name": "build_features",
+            "signature": "build_features(self, input_tensor: Tensor, base_output: Dict[str, Tensor]) -> Tensor"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: Tensor) -> Dict[str, Any]"
+          },
+          {
+            "name": "sample_logits",
+            "signature": "sample_logits(logits: Tensor) -> Tensor"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "probability_to_logit",
+        "signature": "probability_to_logit(value: float) -> float"
+      },
+      {
+        "name": "background_tail_loss",
+        "signature": "background_tail_loss(sample_logits: Tensor, labels: Tensor, shift: Tensor, *, background_margin_probability: float, positive_floor_probability: float=0.8, pairwise_margin: float=1.0, background_weight: float=1.0, positive_weight: float=1.0, pairwise_weight: float=0.2, shift_regularization: float=0.01) -> Tuple[Tensor, Dict[str, Tensor]]"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from typing import Any, Dict, Optional, Sequence, Tuple",
+      "import torch",
+      "from torch import Tensor, nn",
+      "import torch.nn.functional as F"
+    ]
+  },
+  {
+    "file": "models/dual_branch_gated_fcn.py",
+    "classes": [
+      {
+        "name": "DualBranchGatedFCN",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, gate_hidden_dim: int=16) -> None"
+          },
+          {
+            "name": "_branch_forward",
+            "signature": "_branch_forward(branch: SimpleRadarFCN, input_tensor: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: torch.Tensor) -> dict[str, torch.Tensor]"
+          },
+          {
+            "name": "set_branch_trainability",
+            "signature": "set_branch_trainability(self, stage: str) -> None"
+          },
+          {
+            "name": "branch_parameters",
+            "signature": "branch_parameters(self)"
+          },
+          {
+            "name": "fusion_parameters",
+            "signature": "fusion_parameters(self)"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "_extract_state_dict",
+        "signature": "_extract_state_dict(checkpoint: Any) -> Mapping[str, torch.Tensor]"
+      },
+      {
+        "name": "_state_variants",
+        "signature": "_state_variants(state: Mapping[str, torch.Tensor]) -> list[tuple[str, dict[str, torch.Tensor]]]"
+      },
+      {
+        "name": "load_single_branch_checkpoint",
+        "signature": "load_single_branch_checkpoint(branch: SimpleRadarFCN, checkpoint_path: str | Path, map_location: str | torch.device='cpu') -> dict[str, Any]"
+      },
+      {
+        "name": "count_trainable_parameters",
+        "signature": "count_trainable_parameters(model: nn.Module) -> int"
+      },
+      {
+        "name": "count_total_parameters",
+        "signature": "count_total_parameters(model: nn.Module) -> int"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "from pathlib import Path",
+      "from typing import Any, Mapping",
+      "import torch",
+      "from torch import nn",
+      "from models.simple_fcn import ConvBlock, SimpleRadarFCN"
+    ]
+  },
+  {
+    "file": "models/polarimetric_representation_fcn.py",
+    "classes": [
+      {
+        "name": "PolarimetricRepresentationFCN",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, in_channels: int=8) -> None"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: torch.Tensor) -> torch.Tensor"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "count_parameters",
+        "signature": "count_parameters(model: nn.Module) -> int"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import torch",
+      "from torch import nn",
+      "from models.simple_fcn import ConvBlock"
+    ]
+  },
+  {
+    "file": "models/simple_fcn.py",
+    "classes": [
+      {
+        "name": "ConvBlock",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, input_channels: int, output_channels: int) -> None"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: torch.Tensor) -> torch.Tensor"
+          }
+        ]
+      },
+      {
+        "name": "SimpleRadarFCN",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "__init__(self, in_channels: int=2) -> None"
+          },
+          {
+            "name": "forward",
+            "signature": "forward(self, input_tensor: torch.Tensor) -> torch.Tensor"
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "count_trainable_parameters",
+        "signature": "count_trainable_parameters(model: nn.Module) -> int"
+      }
+    ],
+    "imports": [
+      "import torch",
+      "from torch import nn"
+    ]
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_args",
+        "signature": "parse_args() -> argparse.Namespace"
+      },
+      {
+        "name": "validate_args",
+        "signature": "validate_args(args: argparse.Namespace) -> None"
+      },
+      {
+        "name": "save_checkpoint",
+        "signature": "save_checkpoint(path: Path, model: PolarimetricRepresentationFCN, optimizer: torch.optim.Optimizer, epoch: int, args: argparse.Namespace, threshold: float, val_metrics: dict[str, float | int]) -> None"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "import math",
+      "import sys",
+      "import time",
+      "from dataclasses import asdict",
+      "from pathlib import Path",
+      "from typing import Any",
+      "import numpy as np",
+      "import pandas as pd",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.polarimetric_detection_dataset_v1 import PolarimetricDetectionDatasetV1, representation_channels",
+      "from models.polarimetric_representation_fcn import PolarimetricRepresentationFCN, count_parameters",
+      "from scripts.train_detection_baseline_v2 import DetectionTolerance, MemoryCachedDataset, SampleWeightedHeatmapMSE, apply_threshold_and_metrics, collect_predictions, json_safe, make_debug_subset, make_loader, plot_history, plot_score_histogram, resolve_project_path, select_threshold_at_false_alarm_budget, set_seed, train_one_epoch"
+    ]
+  },
+  {
+    "file": "training/train_polarimetric_representation_fcn_v2.py",
+    "classes": [],
+    "functions": [
+      {
+        "name": "parse_args",
+        "signature": "parse_args() -> argparse.Namespace"
+      },
+      {
+        "name": "validate_args",
+        "signature": "validate_args(args: argparse.Namespace) -> None"
+      },
+      {
+        "name": "save_checkpoint",
+        "signature": "save_checkpoint(path: Path, model: PolarimetricRepresentationFCN, optimizer: torch.optim.Optimizer, epoch: int, args: argparse.Namespace, threshold: float, val_metrics: dict[str, float | int]) -> None"
+      },
+      {
+        "name": "main",
+        "signature": "main() -> None"
+      }
+    ],
+    "imports": [
+      "from __future__ import annotations",
+      "import argparse",
+      "import json",
+      "import math",
+      "import sys",
+      "import time",
+      "from dataclasses import asdict",
+      "from pathlib import Path",
+      "from typing import Any",
+      "import numpy as np",
+      "import pandas as pd",
+      "import torch",
+      "from torch.utils.data import Dataset",
+      "from datasets.polarimetric_detection_dataset_v2 import PolarimetricDetectionDatasetV2, representation_channels",
+      "from models.polarimetric_representation_fcn import PolarimetricRepresentationFCN, count_parameters",
+      "from scripts.train_detection_baseline_v2 import DetectionTolerance, MemoryCachedDataset, SampleWeightedHeatmapMSE, apply_threshold_and_metrics, collect_predictions, json_safe, make_debug_subset, make_loader, plot_history, plot_score_histogram, resolve_project_path, select_threshold_at_false_alarm_budget, set_seed, train_one_epoch"
+    ]
+  }
+]

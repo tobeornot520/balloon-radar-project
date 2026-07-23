@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-07-21T23:09:12",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "modes": [
+    "full",
+    "no_scan_context",
+    "no_background_classification",
+    "no_background_tail",
+    "no_target_protection",
+    "no_target_keep",
+    "no_pairwise",
+    "no_shift_selectivity",
+    "no_shift_regularization"
+  ],
+  "smoke": false,
+  "epochs": 30,
+  "debug_per_class": 0,
+  "batch_size": 64,
+  "seed": 42,
+  "existing_policy": "smart",
+  "dry_run": false
+}

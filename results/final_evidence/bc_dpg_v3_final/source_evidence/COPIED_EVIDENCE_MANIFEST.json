@@ -1,0 +1,80 @@
+[
+  {
+    "key": "deployment_detail",
+    "source": "results/data_audit/bc_dpg_v3_deployment_comparison/deployment_comparison_detail.csv",
+    "copied_to": "source_evidence/deployment_detail.csv",
+    "sha256": "4c46b494ae6e8a38bf2ef5933078349361701006eb7f2c2d66eb15f5661e9e41"
+  },
+  {
+    "key": "deployment_aggregate",
+    "source": "results/data_audit/bc_dpg_v3_deployment_comparison/deployment_comparison_aggregate.csv",
+    "copied_to": "source_evidence/deployment_aggregate.csv",
+    "sha256": "0cbf4993cc006ad46d28f48d23fd2891c9ceb2f2f86465170595af6b26392dad"
+  },
+  {
+    "key": "deployment_audit",
+    "source": "results/data_audit/bc_dpg_v3_deployment_comparison/deployment_comparison_audit.json",
+    "copied_to": "source_evidence/deployment_audit.json",
+    "sha256": "040c24a915b671c0d32c7bb97b9dd3503b58d2c29feee8dde847ab967c2b3f60"
+  },
+  {
+    "key": "ablation_detail",
+    "source": "results/data_audit/bc_dpg_v3_ablation/ablation_detail_formal.csv",
+    "copied_to": "source_evidence/ablation_detail.csv",
+    "sha256": "c871dee04591a77b0c5d30b574bc3082ea72bed9f86ccaec0bc9b59f0a7eb7bb"
+  },
+  {
+    "key": "ablation_aggregate",
+    "source": "results/data_audit/bc_dpg_v3_ablation/ablation_aggregate_formal.csv",
+    "copied_to": "source_evidence/ablation_aggregate.csv",
+    "sha256": "f5046cdee2c4ca371f77145622636d2717d9942fc29629b64a564b1689adf807"
+  },
+  {
+    "key": "regularization_candidates",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/candidate_validation_metrics_formal.csv",
+    "copied_to": "source_evidence/regularization_candidates.csv",
+    "sha256": "a8979456c8ca2da705450dd1583f9f87a26e52246fcff34cb78e8e69d1198228"
+  },
+  {
+    "key": "regularization_selected",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/selected_by_fold_formal.csv",
+    "copied_to": "source_evidence/regularization_selected.csv",
+    "sha256": "4d89e89bdbc6f56c83ff20233dab7c6f7dc02a184068857b6881f4af6df31649"
+  },
+  {
+    "key": "regularization_test",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/selected_test_metrics_formal.csv",
+    "copied_to": "source_evidence/regularization_test.csv",
+    "sha256": "8a53ac5233729b6ab13b45a143d3fd25ed910e89e00fbb901d92d72c8d7e0138"
+  },
+  {
+    "key": "regularization_aggregate",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/aggregate_selected_test_metrics_formal.csv",
+    "copied_to": "source_evidence/regularization_aggregate.csv",
+    "sha256": "5627cea58b27e0a5b48f05d4016f35a7979aa78991a2bbe7b90881a6e94dfa21"
+  },
+  {
+    "key": "regularization_audit",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/selection_audit_formal.json",
+    "copied_to": "source_evidence/regularization_audit.json",
+    "sha256": "d30e34dde8e7ce34c1f9f6dad28d69d20a3ba009e72b2911e43cff7537e4578a"
+  },
+  {
+    "key": "optional_report",
+    "source": "results/data_audit/bc_dpg_v3_deployment_comparison/README_deployment_comparison.md",
+    "copied_to": "source_evidence/README_deployment_comparison.md",
+    "sha256": "4f21ab13e97ae388b7d161291b05953080aa8d1035b7ead019d7914b5aa4810c"
+  },
+  {
+    "key": "optional_report",
+    "source": "results/data_audit/bc_dpg_v3_ablation/README_消融结果_formal.md",
+    "copied_to": "source_evidence/README_消融结果_formal.md",
+    "sha256": "3c1cf020ad1058c229cddcfa71c1c3d04523af28ee58726dd8d315af666758ed"
+  },
+  {
+    "key": "optional_report",
+    "source": "results/data_audit/bc_dpg_v31_shift_reg/README_shift_regularization_selection_formal.md",
+    "copied_to": "source_evidence/README_shift_regularization_selection_formal.md",
+    "sha256": "cda7baaa123e3c38daa6b946fd96eebf831473139993e776c9399b49cd989bdc"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "scope": "smoke",
+  "requested_experiments": 10,
+  "checkpoint_metadata_found": 10,
+  "missing_experiments": [],
+  "checkpoint_bytes_included": false,
+  "cache_tensor_bytes_included": false,
+  "raw_mat_bytes_included": false,
+  "files_included": 67
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "folds": [
+    1,
+    4
+  ],
+  "expected_found": 7,
+  "expected_missing": [],
+  "copied_files": 930,
+  "manifest_count": 2,
+  "prediction_csv_count": 368,
+  "checkpoint_metadata_count": 91,
+  "code_search_hits": 361,
+  "raw_data_copied": false,
+  "checkpoint_bytes_copied": false,
+  "next_action": "Upload roi_polarimetric_stage4_context_acceptance_v1.zip for exact Stage 4 implementation."
+}

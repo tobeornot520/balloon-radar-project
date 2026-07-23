@@ -1,0 +1,8 @@
+{
+  "scope": "smoke",
+  "requested": 12,
+  "found": 12,
+  "missing": [],
+  "selection_frozen_before_sixfold": true,
+  "test_set_model_selection_forbidden": true
+}

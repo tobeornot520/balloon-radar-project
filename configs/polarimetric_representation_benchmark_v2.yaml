@@ -1,0 +1,48 @@
+project_stage:
+  name: explicit-polarimetric-representation-gated-v2
+  purpose:
+    - diagnose validation-to-test score shift in the existing v1 experiments
+    - suppress unreliable explicit polarimetric channels in low-power RD regions
+    - compare gated representations under sample-independent inference
+
+representations:
+  canonical_channels: 8
+  power2: [H_power, V_power, zero, zero, zero, zero, zero, zero]
+  ri4: [Re_H, Im_H, Re_V, Im_V, zero, zero, zero, zero]
+  polar6_gated:
+    - H_power
+    - V_power
+    - confidence_times_relative_ZDR_like
+    - confidence_times_local_rho_HV
+    - confidence_times_local_rho_HV_times_cos_relative_phase
+    - confidence_times_local_rho_HV_times_sin_relative_phase
+    - zero
+    - zero
+  ri8_gated:
+    - Re_H
+    - Im_H
+    - Re_V
+    - Im_V
+    - confidence_times_relative_ZDR_like
+    - confidence_times_local_rho_HV
+    - confidence_times_local_rho_HV_times_cos_relative_phase
+    - confidence_times_local_rho_HV_times_sin_relative_phase
+
+gate:
+  source: local_H_plus_V_power_in_RD_plane
+  low_percentile: 50.0
+  high_percentile: 99.0
+  gamma: 1.5
+  range: [0.0, 1.0]
+
+benchmark:
+  folds_first_stage: [1, 4]
+  primary_baselines: [power2, ri4]
+  gated_candidates: [polar6_gated, ri8_gated]
+  scan_context: disabled
+  seed: 42
+  model_selection_from_test_set: forbidden
+  warnings:
+    - relative_ZDR_like is not absolute calibrated ZDR
+    - relative phase is not absolute calibrated PhiDP
+    - RI channels require future verification of H/V phase stability

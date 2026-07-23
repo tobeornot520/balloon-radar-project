@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "fold": 1,
+  "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+  "base_checkpoint": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold01_seed42_formal/checkpoints/best.pt",
+  "base_checkpoint_sha256": "b4cd1bea678e30f7e0cdbc820ecec6979d42cbe0b1c7296dd8d9351ecb07f13d",
+  "base_threshold": 0.183837890625,
+  "base_checkpoint_epoch": 66,
+  "roi": {
+    "velocity_radius": 5,
+    "range_radius": 4,
+    "height": 11,
+    "width": 9
+  },
+  "splits": [
+    {
+      "split": "train",
+      "samples": 742,
+      "targets": 212,
+      "background": 530,
+      "localized_targets": 197
+    },
+    {
+      "split": "val",
+      "samples": 203,
+      "targets": 53,
+      "background": 150,
+      "localized_targets": 49
+    },
+    {
+      "split": "test",
+      "samples": 203,
+      "targets": 53,
+      "background": 150,
+      "localized_targets": 52
+    }
+  ],
+  "sample_independent": true,
+  "scan_context": false,
+  "raw_data_copied_to_acceptance": false
+}

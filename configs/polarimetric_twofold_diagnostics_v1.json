@@ -1,0 +1,71 @@
+{
+  "version": "1.0",
+  "folds": [
+    1,
+    4
+  ],
+  "modes": [
+    "power2",
+    "ri4",
+    "polar6_gated",
+    "ri8_gated"
+  ],
+  "scope": "formal",
+  "seed": 42,
+  "experiment_name_template": "polar_repr_v2_{mode}_v4_fold{fold:02d}_seed42_formal",
+  "result_root": "results/experiments",
+  "audit_output": "results/data_audit/polarimetric_twofold_diagnostics_v1",
+  "acceptance_zip": "polarimetric_twofold_diagnostics_acceptance_v1.zip",
+  "max_copy_size_mb": 25,
+  "protected_extensions": [
+    ".pt",
+    ".pth",
+    ".ckpt",
+    ".bin",
+    ".npy",
+    ".npz",
+    ".mat"
+  ],
+  "prediction_filename_keywords": [
+    "prediction",
+    "predictions",
+    "score",
+    "scores",
+    "validation",
+    "val_",
+    "test_",
+    "inference"
+  ],
+  "target_column_candidates": [
+    "target_present",
+    "label",
+    "y_true",
+    "is_target",
+    "target",
+    "class_label",
+    "ground_truth"
+  ],
+  "score_column_candidates": [
+    "score",
+    "raw_score",
+    "pred_score",
+    "prediction_score",
+    "probability",
+    "prob",
+    "max_score",
+    "confidence"
+  ],
+  "split_column_candidates": [
+    "split",
+    "subset",
+    "partition"
+  ],
+  "group_column_candidates": [
+    "source_file",
+    "scan_group",
+    "scan_id",
+    "session",
+    "source",
+    "group_id"
+  ]
+}

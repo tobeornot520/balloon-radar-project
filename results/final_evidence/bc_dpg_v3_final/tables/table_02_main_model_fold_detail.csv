@@ -1,0 +1,19 @@
+﻿fold,model,experiment_name,context_requirement,causality,false_alarms,pfa,pd,auc,background_shift,target_shift
+1,raw_dpg,bc_dpg_v3_ablation_full_v4_fold01_seed42,current sample only,causal/sample-independent,86,0.5733333333333334,1.0,0.9822641509433964,0.0,0.0
+1,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold01_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,54,0.36,1.0,0.9842767295597484,0.5151753136298308,0.0271956464385543
+1,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold01_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,42,0.28,1.0,0.999496855345912,0.6985316597918669,2.1446490345109817e-05
+2,raw_dpg,bc_dpg_v3_ablation_full_v4_fold02_seed42,current sample only,causal/sample-independent,0,0.0,0.9245283018867924,1.0,0.0,0.0
+2,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold02_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,0,0.0,0.9245283018867924,1.0,0.7970602691173554,0.0179608665333395
+2,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold02_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,0,0.0,0.9245283018867924,1.0,0.155348604619503,0.0001970741497369
+3,raw_dpg,bc_dpg_v3_ablation_full_v4_fold03_seed42,current sample only,causal/sample-independent,0,0.0,0.8653846153846154,1.0,0.0,0.0
+3,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold03_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,0,0.0,0.8653846153846154,1.0,0.2262147061202837,0.0173306307817536
+3,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold03_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,0,0.0,0.8653846153846154,1.0,0.2385348786478457,0.0026277269585429
+4,raw_dpg,bc_dpg_v3_ablation_full_v4_fold04_seed42,current sample only,causal/sample-independent,100,0.6666666666666666,0.903846153846154,0.966153846153846,0.0,0.0
+4,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold04_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,68,0.4533333333333333,0.903846153846154,0.9683333333333334,0.5021986734618743,0.0881313052713477
+4,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold04_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,14,0.0933333333333333,0.903846153846154,0.9965384615384616,0.8055681550006072,6.078816918139077e-05
+5,raw_dpg,bc_dpg_v3_ablation_full_v4_fold05_seed42,current sample only,causal/sample-independent,0,0.0,0.95,0.9997777777777778,0.0,0.0
+5,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold05_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,0,0.0,0.95,0.9997777777777778,0.3731006890535354,0.0462283104444698
+5,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold05_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,0,0.0,0.95,1.0,0.1247394233445326,0.001022944394693
+6,raw_dpg,bc_dpg_v3_ablation_full_v4_fold06_seed42,current sample only,causal/sample-independent,0,0.0,0.7916666666666666,0.998731884057971,0.0,0.0
+6,sample_independent_bc,bc_dpg_v3_ablation_no_scan_context_v4_fold06_seed42,current sample features; 12 scan statistics forced to zero,causal/sample-independent,0,0.0,0.7916666666666666,0.998731884057971,0.1534192871788273,0.0164486790454247
+6,scan_aware_bc,bc_dpg_v3_ablation_full_v4_fold06_seed42,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan,0,0.0,0.7916666666666666,0.9998188405797102,0.2372865754625071,0.013150161533152

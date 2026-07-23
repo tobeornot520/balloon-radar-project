@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "target_folds": [1, 4],
+  "target_modes": ["power2", "ri4", "polar6_gated", "ri8_gated"],
+  "max_text_file_bytes": 2097152,
+  "max_csv_copy_bytes": 8388608,
+  "excluded_suffixes": [".mat", ".pt", ".pth", ".ckpt", ".npy", ".npz", ".zip", ".tar", ".gz"],
+  "expected_files": [
+    "features/polarimetric_gated_rd.py",
+    "datasets/polarimetric_detection_dataset_v2.py",
+    "training/train_polarimetric_representation_fcn_v2.py",
+    "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "configs/polarimetric_representation_benchmark_v2.yaml",
+    "docs/polarimetric_stage3/NEXT_STAGE_ROI_POLARIMETRIC_INTERFACE.md"
+  ]
+}

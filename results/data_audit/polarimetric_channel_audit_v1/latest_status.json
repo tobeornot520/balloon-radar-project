@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "folds": [
+    1,
+    4
+  ],
+  "sample_count": 192,
+  "per_split_class": 16,
+  "gate": {
+    "low_percentile": 50.0,
+    "high_percentile": 99.0,
+    "gamma": 1.5
+  },
+  "interpretation": "The audit quantifies low-power suppression and channel saturation. It does not establish absolute polarimetric calibration."
+}

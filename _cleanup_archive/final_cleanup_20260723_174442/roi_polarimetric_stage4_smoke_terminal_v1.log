@@ -1,0 +1,225 @@
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 1 / 0.183838
+ROI shape        : 11 x 9
+train: n=16 target=8 background=8 localized=5
+  val: n=16 target=8 background=8 localized=8
+ test: n=16 target=8 background=8 localized=8
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke
+========================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold01_seed42_smoke / 1 / power2_baseline
+base threshold           : 0.183838
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold01_seed42_smoke
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold01_seed42_smoke / 1 / power2_roi_power_control
+base threshold           : 0.183838
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.60184 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.60010 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.59836 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=1.0000 Pfa=1.0000 FA=8 AUC=0.9219
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold01_seed42_smoke
+==============================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold01_seed42_smoke / 1 / power2_roi_ri4
+base threshold           : 0.183838
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.60129 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.60002 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.59875 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=1.0000 Pfa=1.0000 FA=8 AUC=0.9219
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold01_seed42_smoke
+==============================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold01_seed42_smoke / 1 / power2_roi_polar6_gated
+base threshold           : 0.183838
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.60199 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.60043 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.59886 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=1.0000 Pfa=1.0000 FA=8 AUC=0.9219
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold01_seed42_smoke
+==============================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold01_seed42_smoke / 1 / power2_roi_ri4_polar6_gated
+base threshold           : 0.183838
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.60126 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.59995 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.59864 Pd=1.0000 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=1.0000 Pfa=1.0000 FA=8 AUC=0.9219
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold01_seed42_smoke
+==============================================================================================
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 4 / 0.140869
+ROI shape        : 11 x 9
+train: n=16 target=8 background=8 localized=8
+  val: n=16 target=8 background=8 localized=7
+ test: n=16 target=8 background=8 localized=5
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke
+========================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold04_seed42_smoke / 4 / power2_baseline
+base threshold           : 0.140869
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold04_seed42_smoke
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold04_seed42_smoke / 4 / power2_roi_power_control
+base threshold           : 0.140869
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.55504 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.55359 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.55218 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.6250 Pfa=1.0000 FA=8 AUC=0.7812
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold04_seed42_smoke
+==============================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold04_seed42_smoke / 4 / power2_roi_ri4
+base threshold           : 0.140869
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.55468 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.55360 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.55250 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.6250 Pfa=1.0000 FA=8 AUC=0.7812
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold04_seed42_smoke
+==============================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold04_seed42_smoke / 4 / power2_roi_polar6_gated
+base threshold           : 0.140869
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.55526 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.55410 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.55298 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.6250 Pfa=1.0000 FA=8 AUC=0.7812
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold04_seed42_smoke
+==============================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 1 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold01_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --batch-size 8 --num-workers 0 --debug-per-class 8 --roi-velocity-radius 5 --roi-range-radius 4
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold01_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --mode power2_baseline --fold-id 1 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold01_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --mode power2_roi_power_control --fold-id 1 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold01_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --mode power2_roi_ri4 --fold-id 1 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold01_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --mode power2_roi_polar6_gated --fold-id 1 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold01_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_smoke --mode power2_roi_ri4_polar6_gated --fold-id 1 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 4 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold04_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --batch-size 8 --num-workers 0 --debug-per-class 8 --roi-velocity-radius 5 --roi-range-radius 4
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold04_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --mode power2_baseline --fold-id 4 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold04_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --mode power2_roi_power_control --fold-id 4 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold04_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --mode power2_roi_ri4 --fold-id 4 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_polar6_gated_v4_fold04_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --mode power2_roi_polar6_gated --fold-id 4 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold04_seed42_smoke --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_smoke --mode power2_roi_ri4_polar6_gated --fold-id 4 --epochs 3 --batch-size 32 --num-workers 0 --debug-per-class 8 --max-val-pd-drop 0.01 --seed 42==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold04_seed42_smoke / 4 / power2_roi_ri4_polar6_gated
+base threshold           : 0.140869
+dataset sizes            : train=16, val=16, test=16
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/3 | loss=0.55485 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 002/3 | loss=0.55375 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 003/3 | loss=0.55266 Pd=0.8750 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.6250 Pfa=1.0000 FA=8 AUC=0.7812
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_polar6_gated_v4_fold04_seed42_smoke
+==============================================================================================
+==========================================================================================
+Stage 4 summary (smoke)
+found   : 10
+missing : 0
+output  : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1
+==========================================================================================
+
+============================================================================================================
+
+============================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/summarize_roi_polarimetric_stage4_v1.py --folds 1 4 --modes power2_baseline power2_roi_power_control power2_roi_ri4 power2_roi_polar6_gated power2_roi_ri4_polar6_gated --scope smoke --require-all
+============================================================================================================

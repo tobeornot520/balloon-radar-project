@@ -1,0 +1,33 @@
+project_stage:
+  name: explicit-polarimetric-representation-benchmark-v1
+  purpose:
+    - compare H/V input representations under one fixed-capacity FCN
+    - keep inference sample-independent
+    - avoid mixing polarimetric gain with scan-context gain
+
+representations:
+  canonical_channels: 8
+  power2: [H_power, V_power, zero, zero, zero, zero, zero, zero]
+  ri4: [Re_H, Im_H, Re_V, Im_V, zero, zero, zero, zero]
+  polar6: [H_power, V_power, relative_ZDR_like, local_rho_HV, cos_relative_phase, sin_relative_phase, zero, zero]
+  ri8: [Re_H, Im_H, Re_V, Im_V, relative_ZDR_like, local_rho_HV, cos_relative_phase, sin_relative_phase]
+
+polarimetric_estimation:
+  slow_time_window: Hann
+  velocity_window_bins: 5
+  range_window_gates: 3
+  relative_zdr_clip_db: 20
+  warnings:
+    - absolute H/V amplitude calibration is unknown
+    - absolute inter-channel phase calibration is unknown
+    - report relative_ZDR_like, not absolute ZDR
+    - report relative phase, not absolute PhiDP
+
+benchmark:
+  primary_baseline: power2
+  primary_metrics: [joint_pd, pfa, false_alarm_count, roc_auc]
+  secondary_metrics: [range_mae_gates, velocity_mae_bins]
+  threshold_rule: validation_false_alarm_budget
+  test_set_model_selection: forbidden
+  scan_context: disabled
+  seed: 42

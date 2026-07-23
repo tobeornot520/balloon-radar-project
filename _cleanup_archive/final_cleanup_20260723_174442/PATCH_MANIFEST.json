@@ -1,0 +1,61 @@
+{
+  "patch": "BC_DPG_roi_polarimetric_stage4_implementation_v1",
+  "files": [
+    {
+      "path": "files/configs/roi_polarimetric_stage4_v1.yaml",
+      "size_bytes": 2914,
+      "sha256": "d621d87b09c6845c39939682de4f8610b0213cae46cc2686631dafda9c603a5f"
+    },
+    {
+      "path": "files/datasets/roi_polarimetric_refinement_dataset.py",
+      "size_bytes": 7422,
+      "sha256": "f437b3db2f60ed71ffeb42c107916e85fd3652e40b0d9c7e0d5ca513b2320021"
+    },
+    {
+      "path": "files/docs/README_候选区域极化精修Stage4_V1.md",
+      "size_bytes": 2310,
+      "sha256": "bcfb0da9af02c1f3d6297c8f5266a1e7128ca655c9628377de31f945b862f8ba"
+    },
+    {
+      "path": "files/features/roi_polarimetric_refinement.py",
+      "size_bytes": 4810,
+      "sha256": "d4cf43446818e987c374c594938829da88a214796f593d23e12e47a9eb5a3a0e"
+    },
+    {
+      "path": "files/models/roi_polarimetric_refiner.py",
+      "size_bytes": 4449,
+      "sha256": "171e27429faa4c7e9bc4c0e28b9938678551ae73349e00e49dd778ba3bf21292"
+    },
+    {
+      "path": "files/scripts/build_roi_polarimetric_cache_v1.py",
+      "size_bytes": 12297,
+      "sha256": "fb0bdbfa46e186d8e69404c982b07bb0009b089a8da5594dae02c9b036548d89"
+    },
+    {
+      "path": "files/scripts/package_roi_polarimetric_stage4_acceptance_v1.py",
+      "size_bytes": 7074,
+      "sha256": "535220be9f8e247863faf6fe9784a9dfc40a86f8e6c86d12280e904d26f96f21"
+    },
+    {
+      "path": "files/scripts/run_roi_polarimetric_stage4_v1.py",
+      "size_bytes": 5939,
+      "sha256": "c3d5a328a205fe1453a9cd6333a4e1e22dc0cbe3f5171c060371809890b1823a"
+    },
+    {
+      "path": "files/scripts/summarize_roi_polarimetric_stage4_v1.py",
+      "size_bytes": 10164,
+      "sha256": "0788482fd4d36e3784c97092056ff5a4a7d65567bbb574c7e2f0d63e8cbf8fa9"
+    },
+    {
+      "path": "files/scripts/test_roi_polarimetric_stage4_v1.py",
+      "size_bytes": 4922,
+      "sha256": "49acb5f7a6ea09469c47861b5ba55e80d73647e9e7f688ee4fe578d979b01cb5"
+    },
+    {
+      "path": "files/training/train_roi_polarimetric_refiner_v1.py",
+      "size_bytes": 27090,
+      "sha256": "526b5961519745c1ac16c46e13735ba0fbb205e55d1235bd3e2b6546a5a7bcc9"
+    }
+  ],
+  "file_count": 11
+}

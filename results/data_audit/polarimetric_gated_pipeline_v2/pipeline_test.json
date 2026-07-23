@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "manifest_path": "results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+  "modes": [
+    {
+      "mode": "power2",
+      "shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "active_channels": [
+        "H_power",
+        "V_power"
+      ]
+    },
+    {
+      "mode": "ri4",
+      "shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "minimum": -1.0,
+      "maximum": 1.0,
+      "active_channels": [
+        "Re_H",
+        "Im_H",
+        "Re_V",
+        "Im_V"
+      ]
+    },
+    {
+      "mode": "polar6_gated",
+      "shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "minimum": -0.8325252532958984,
+      "maximum": 1.0,
+      "active_channels": [
+        "H_power",
+        "V_power",
+        "gated_relative_ZDR_like",
+        "gated_local_rho_HV",
+        "gated_cos_relative_phase",
+        "gated_sin_relative_phase"
+      ]
+    },
+    {
+      "mode": "ri8_gated",
+      "shape": [
+        8,
+        128,
+        100
+      ],
+      "finite": true,
+      "minimum": -1.0,
+      "maximum": 1.0,
+      "active_channels": [
+        "Re_H",
+        "Im_H",
+        "Re_V",
+        "Im_V",
+        "gated_relative_ZDR_like",
+        "gated_local_rho_HV",
+        "gated_cos_relative_phase",
+        "gated_sin_relative_phase"
+      ]
+    }
+  ],
+  "same_architecture": true,
+  "parameter_count": 19793,
+  "invariants": {
+    "power2_preserved_in_polar6_gated": true,
+    "ri4_preserved_in_ri8_gated": true,
+    "gated_channels_bounded": true,
+    "sample_independent": true,
+    "scan_context": false
+  }
+}

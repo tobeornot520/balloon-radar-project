@@ -1,0 +1,597 @@
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 1 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold01_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+[cache complete] /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_01_formal
+[skip complete] roi_polar_stage4_v1_power2_baseline_v4_fold01_seed42_formal
+[skip complete] roi_polar_stage4_v1_power2_roi_power_control_v4_fold01_seed42_formal
+[skip complete] roi_polar_stage4_v1_power2_roi_ri4_v4_fold01_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 2 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold02_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_02_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 2 / 0.523438
+ROI shape        : 11 x 9
+train: n=778 target=213 background=565 localized=192
+  val: n=167 target=52 background=115 localized=46
+ test: n=203 target=53 background=150 localized=47
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_02_formal
+========================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold02_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_02_formal --mode power2_baseline --fold-id 2 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold02_seed42_formal / 2 / power2_baseline
+base threshold           : 0.523438
+dataset sizes            : train=778, val=167, test=203
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold02_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold02_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_02_formal --mode power2_roi_power_control --fold-id 2 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold02_seed42_formal / 2 / power2_roi_power_control
+base threshold           : 0.523438
+dataset sizes            : train=778, val=167, test=203
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.49623 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 002/100 | loss=0.45526 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 003/100 | loss=0.40790 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 004/100 | loss=0.38918 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 005/100 | loss=0.24802 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 006/100 | loss=0.22916 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 007/100 | loss=0.21100 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 008/100 | loss=0.19129 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 009/100 | loss=0.21128 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 010/100 | loss=0.17679 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 011/100 | loss=0.18502 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 012/100 | loss=0.16718 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 013/100 | loss=0.16323 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 014/100 | loss=0.17603 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 015/100 | loss=0.19647 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 016/100 | loss=0.15442 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 017/100 | loss=0.16379 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 018/100 | loss=0.17607 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 019/100 | loss=0.15538 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 020/100 | loss=0.16951 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 021/100 | loss=0.18553 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 022/100 | loss=0.15019 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 023/100 | loss=0.18067 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 024/100 | loss=0.20316 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 025/100 | loss=0.15673 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 026/100 | loss=0.18872 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 027/100 | loss=0.18565 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 028/100 | loss=0.15534 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 029/100 | loss=0.18162 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 030/100 | loss=0.18044 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 031/100 | loss=0.16844 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 032/100 | loss=0.17850 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 033/100 | loss=0.18324 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 034/100 | loss=0.17726 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 035/100 | loss=0.16415 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 036/100 | loss=0.17827 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 037/100 | loss=0.17026 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 038/100 | loss=0.17522 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 039/100 | loss=0.16915 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 040/100 | loss=0.17451 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 041/100 | loss=0.17741 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 042/100 | loss=0.17112 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 22
+test fixed: Pd=0.8868 Pfa=0.0000 FA=0 AUC=1.0000
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold02_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold02_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_02_formal --mode power2_roi_ri4 --fold-id 2 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold02_seed42_formal / 2 / power2_roi_ri4
+base threshold           : 0.523438
+dataset sizes            : train=778, val=167, test=203
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.49938 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 002/100 | loss=0.45895 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 003/100 | loss=0.40775 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 004/100 | loss=0.35025 Pd=0.8846 Pfa=0.0174 pAUC5=1.0000 eligible=True | best
+Epoch 005/100 | loss=0.24495 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 006/100 | loss=0.23727 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 007/100 | loss=0.20818 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 008/100 | loss=0.19375 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 009/100 | loss=0.18613 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 010/100 | loss=0.19313 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 011/100 | loss=0.18010 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 012/100 | loss=0.19554 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True
+Epoch 013/100 | loss=0.17703 Pd=0.8846 Pfa=0.0000 pAUC5=1.0000 eligible=True | best
+Epoch 014/100 | loss=0.23363 Pd=0.8654 Pfa=0.0000 pAUC5=1.0000 eligible=False
+Epoch 015/100 | loss=0.33743 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 016/100 | loss=0.25643 Pd=0.8654 Pfa=0.0000 pAUC5=0.9949 eligible=False
+Epoch 017/100 | loss=0.27148 Pd=0.8654 Pfa=0.0000 pAUC5=0.9983 eligible=False
+Epoch 018/100 | loss=0.20438 Pd=0.8654 Pfa=0.0000 pAUC5=1.0000 eligible=False
+Epoch 019/100 | loss=0.25246 Pd=0.8654 Pfa=0.0000 pAUC5=0.9949 eligible=False
+Epoch 020/100 | loss=0.22987 Pd=0.8654 Pfa=0.0000 pAUC5=0.9983 eligible=False
+Epoch 021/100 | loss=0.29946 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 022/100 | loss=0.28465 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 023/100 | loss=0.25368 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 024/100 | loss=0.26669 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 025/100 | loss=0.27191 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 026/100 | loss=0.30389 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 027/100 | loss=0.29844 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 028/100 | loss=0.29078 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 029/100 | loss=0.32461 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 030/100 | loss=0.30604 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 031/100 | loss=0.32066 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 032/100 | loss=0.31233 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Epoch 033/100 | loss=0.31758 Pd=0.8654 Pfa=0.0000 pAUC5=0.9901 eligible=False
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 13
+test fixed: Pd=0.8868 Pfa=0.0000 FA=0 AUC=1.0000
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold02_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 3 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold03_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_03_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 3 / 0.900391
+ROI shape        : 11 x 9
+train: n=779 target=214 background=565 localized=195
+  val: n=202 target=52 background=150 localized=46
+ test: n=167 target=52 background=115 localized=45
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_03_formal
+========================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold03_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_03_formal --mode power2_baseline --fold-id 3 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold03_seed42_formal / 3 / power2_baseline
+base threshold           : 0.900391
+dataset sizes            : train=779, val=202, test=167
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold03_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold03_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_03_formal --mode power2_roi_power_control --fold-id 3 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold03_seed42_formal / 3 / power2_roi_power_control
+base threshold           : 0.900391
+dataset sizes            : train=779, val=202, test=167
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=1.12709 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 002/100 | loss=1.10157 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 003/100 | loss=1.07475 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 004/100 | loss=1.06225 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 005/100 | loss=1.06216 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 006/100 | loss=1.06463 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 007/100 | loss=1.06491 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 008/100 | loss=1.06135 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 009/100 | loss=1.05056 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 010/100 | loss=1.03813 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 011/100 | loss=1.04524 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 012/100 | loss=1.03764 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 013/100 | loss=1.03753 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 014/100 | loss=1.06039 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 015/100 | loss=1.04949 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 016/100 | loss=1.02406 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 017/100 | loss=1.02596 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 018/100 | loss=1.01855 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 019/100 | loss=1.06345 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 020/100 | loss=1.02434 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 021/100 | loss=1.02302 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 022/100 | loss=1.04498 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 023/100 | loss=1.03599 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 024/100 | loss=1.02148 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 025/100 | loss=1.01007 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 026/100 | loss=1.00360 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 027/100 | loss=0.99915 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 028/100 | loss=1.00344 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 029/100 | loss=0.99141 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 030/100 | loss=0.99462 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 031/100 | loss=0.98239 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 032/100 | loss=0.99251 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 033/100 | loss=0.95802 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 034/100 | loss=0.99671 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 035/100 | loss=0.95323 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 036/100 | loss=0.96092 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 037/100 | loss=0.96086 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 038/100 | loss=1.00200 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 039/100 | loss=0.94793 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 040/100 | loss=0.96961 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 041/100 | loss=0.96311 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 042/100 | loss=0.98105 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 043/100 | loss=0.96311 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 044/100 | loss=0.96276 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 045/100 | loss=0.92941 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 046/100 | loss=0.95050 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 047/100 | loss=0.94716 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 048/100 | loss=0.93605 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 049/100 | loss=0.98674 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 050/100 | loss=0.91921 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 051/100 | loss=0.93071 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 052/100 | loss=0.92346 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 053/100 | loss=0.92995 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 054/100 | loss=0.91266 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True | best
+Epoch 055/100 | loss=0.93464 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 056/100 | loss=0.90882 Pd=0.7885 Pfa=0.0133 pAUC5=0.8941 eligible=True | best
+Epoch 057/100 | loss=0.93894 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 058/100 | loss=0.96347 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 059/100 | loss=0.91384 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 060/100 | loss=0.91955 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 061/100 | loss=0.93737 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 062/100 | loss=0.91679 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 063/100 | loss=0.93084 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 064/100 | loss=0.92786 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 065/100 | loss=0.92109 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 066/100 | loss=0.91200 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 067/100 | loss=0.92100 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 068/100 | loss=0.91239 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True | best
+Epoch 069/100 | loss=0.91782 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 070/100 | loss=0.91590 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 071/100 | loss=0.91396 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 072/100 | loss=0.92084 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 073/100 | loss=0.91995 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 074/100 | loss=0.92003 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 075/100 | loss=0.91984 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 076/100 | loss=0.91752 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 077/100 | loss=0.91778 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 078/100 | loss=0.91905 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 079/100 | loss=0.91867 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True
+Epoch 080/100 | loss=0.91576 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 081/100 | loss=0.91676 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 082/100 | loss=0.91570 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 083/100 | loss=0.91712 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 084/100 | loss=0.91622 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 085/100 | loss=0.91730 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 086/100 | loss=0.91672 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 087/100 | loss=0.91638 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 088/100 | loss=0.91668 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 68
+test fixed: Pd=0.8269 Pfa=0.0000 FA=0 AUC=1.0000
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold03_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold03_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_03_formal --mode power2_roi_ri4 --fold-id 3 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold03_seed42_formal / 3 / power2_roi_ri4
+base threshold           : 0.900391
+dataset sizes            : train=779, val=202, test=167
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=1.13193 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 002/100 | loss=1.09926 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 003/100 | loss=1.07431 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 004/100 | loss=1.06111 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 005/100 | loss=1.05964 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 006/100 | loss=1.07587 Pd=0.7885 Pfa=0.0200 pAUC5=0.8915 eligible=True
+Epoch 007/100 | loss=1.04438 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 008/100 | loss=1.03585 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 009/100 | loss=1.04690 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 010/100 | loss=1.03114 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 011/100 | loss=1.03094 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 012/100 | loss=1.00463 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True | best
+Epoch 013/100 | loss=0.99946 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True | best
+Epoch 014/100 | loss=1.01578 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 015/100 | loss=0.99388 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 016/100 | loss=0.90913 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True | best
+Epoch 017/100 | loss=0.97816 Pd=0.7885 Pfa=0.0133 pAUC5=0.8915 eligible=True
+Epoch 018/100 | loss=0.86649 Pd=0.7885 Pfa=0.0133 pAUC5=0.8928 eligible=True | best
+Epoch 019/100 | loss=0.77176 Pd=0.7885 Pfa=0.0067 pAUC5=0.9047 eligible=True | best
+Epoch 020/100 | loss=0.85511 Pd=0.7885 Pfa=0.0067 pAUC5=0.8968 eligible=True
+Epoch 021/100 | loss=0.79072 Pd=0.7885 Pfa=0.0067 pAUC5=0.9047 eligible=True
+Epoch 022/100 | loss=0.83777 Pd=0.7885 Pfa=0.0067 pAUC5=0.9007 eligible=True
+Epoch 023/100 | loss=0.86718 Pd=0.7885 Pfa=0.0067 pAUC5=0.8928 eligible=True
+Epoch 024/100 | loss=0.79990 Pd=0.7885 Pfa=0.0067 pAUC5=0.8994 eligible=True
+Epoch 025/100 | loss=0.83738 Pd=0.7885 Pfa=0.0067 pAUC5=0.9007 eligible=True
+Epoch 026/100 | loss=0.83226 Pd=0.7885 Pfa=0.0067 pAUC5=0.9047 eligible=True
+Epoch 027/100 | loss=0.82693 Pd=0.7885 Pfa=0.0067 pAUC5=0.9034 eligible=True
+Epoch 028/100 | loss=0.84182 Pd=0.7885 Pfa=0.0067 pAUC5=0.9047 eligible=True
+Epoch 029/100 | loss=0.84408 Pd=0.7885 Pfa=0.0067 pAUC5=0.9047 eligible=True
+Epoch 030/100 | loss=0.82564 Pd=0.7885 Pfa=0.0067 pAUC5=0.8981 eligible=True
+Epoch 031/100 | loss=0.81677 Pd=0.7885 Pfa=0.0067 pAUC5=0.9007 eligible=True
+Epoch 032/100 | loss=0.82714 Pd=0.7885 Pfa=0.0067 pAUC5=0.9040 eligible=True
+Epoch 033/100 | loss=0.83751 Pd=0.7692 Pfa=0.0067 pAUC5=0.9040 eligible=False
+Epoch 034/100 | loss=0.82527 Pd=0.7885 Pfa=0.0067 pAUC5=0.9027 eligible=True
+Epoch 035/100 | loss=0.84320 Pd=0.7692 Pfa=0.0067 pAUC5=0.9040 eligible=False
+Epoch 036/100 | loss=0.82538 Pd=0.7885 Pfa=0.0067 pAUC5=0.9027 eligible=True
+Epoch 037/100 | loss=0.81893 Pd=0.7885 Pfa=0.0067 pAUC5=0.8994 eligible=True
+Epoch 038/100 | loss=0.84002 Pd=0.7885 Pfa=0.0067 pAUC5=0.9001 eligible=True
+Epoch 039/100 | loss=0.81397 Pd=0.7885 Pfa=0.0067 pAUC5=0.9001 eligible=True
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 19
+test fixed: Pd=0.8269 Pfa=0.0000 FA=0 AUC=0.9967
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold03_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 4 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold04_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+[cache complete] /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_04_formal
+[skip complete] roi_polar_stage4_v1_power2_baseline_v4_fold04_seed42_formal
+[skip complete] roi_polar_stage4_v1_power2_roi_power_control_v4_fold04_seed42_formal
+[skip complete] roi_polar_stage4_v1_power2_roi_ri4_v4_fold04_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 5 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold05_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_05_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 5 / 0.557617
+ROI shape        : 11 x 9
+train: n=775 target=210 background=565 localized=199
+  val: n=163 target=48 background=115 localized=43
+ test: n=210 target=60 background=150 localized=53
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_05_formal
+========================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold05_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_05_formal --mode power2_baseline --fold-id 5 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold05_seed42_formal / 5 / power2_baseline
+base threshold           : 0.557617
+dataset sizes            : train=775, val=163, test=210
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold05_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold05_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_05_formal --mode power2_roi_power_control --fold-id 5 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold05_seed42_formal / 5 / power2_roi_power_control
+base threshold           : 0.557617
+dataset sizes            : train=775, val=163, test=210
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.49398 Pd=0.8958 Pfa=0.0174 pAUC5=0.9679 eligible=True | best
+Epoch 002/100 | loss=0.44710 Pd=0.8958 Pfa=0.0174 pAUC5=0.9679 eligible=True | best
+Epoch 003/100 | loss=0.41002 Pd=0.8958 Pfa=0.0174 pAUC5=0.9679 eligible=True | best
+Epoch 004/100 | loss=1.10682 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 005/100 | loss=1.05976 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 006/100 | loss=0.93562 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 007/100 | loss=1.15577 Pd=0.8542 Pfa=0.0000 pAUC5=0.9693 eligible=False
+Epoch 008/100 | loss=0.78299 Pd=0.8750 Pfa=0.0000 pAUC5=0.9693 eligible=False
+Epoch 009/100 | loss=1.33609 Pd=0.8333 Pfa=0.0000 pAUC5=0.9693 eligible=False
+Epoch 010/100 | loss=0.94567 Pd=0.8750 Pfa=0.0000 pAUC5=0.9712 eligible=False
+Epoch 011/100 | loss=0.86654 Pd=0.8750 Pfa=0.0000 pAUC5=0.9731 eligible=False
+Epoch 012/100 | loss=0.90533 Pd=0.8750 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 013/100 | loss=0.97736 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 014/100 | loss=0.81431 Pd=0.8750 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 015/100 | loss=0.90782 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 016/100 | loss=0.94126 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 017/100 | loss=0.88134 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 018/100 | loss=0.93242 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 019/100 | loss=0.91648 Pd=0.8333 Pfa=0.0000 pAUC5=0.9768 eligible=False
+Epoch 020/100 | loss=0.90922 Pd=0.8333 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 021/100 | loss=0.84692 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 022/100 | loss=0.87195 Pd=0.8542 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Epoch 023/100 | loss=0.93076 Pd=0.8333 Pfa=0.0000 pAUC5=0.9749 eligible=False
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.8833 Pfa=0.0000 FA=0 AUC=0.9999
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold05_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold05_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_05_formal --mode power2_roi_ri4 --fold-id 5 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold05_seed42_formal / 5 / power2_roi_ri4
+base threshold           : 0.557617
+dataset sizes            : train=775, val=163, test=210
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.49572 Pd=0.8958 Pfa=0.0174 pAUC5=0.9679 eligible=True | best
+Epoch 002/100 | loss=0.44963 Pd=0.8958 Pfa=0.0174 pAUC5=0.9679 eligible=True | best
+Epoch 003/100 | loss=0.40720 Pd=0.8958 Pfa=0.0000 pAUC5=0.9679 eligible=True | best
+Epoch 004/100 | loss=0.95555 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 005/100 | loss=1.18416 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 006/100 | loss=0.89165 Pd=0.8750 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 007/100 | loss=1.07402 Pd=0.8542 Pfa=0.0000 pAUC5=0.9679 eligible=False
+Epoch 008/100 | loss=0.73353 Pd=0.8750 Pfa=0.0000 pAUC5=0.9661 eligible=False
+Epoch 009/100 | loss=0.95073 Pd=0.8542 Pfa=0.0000 pAUC5=0.9661 eligible=False
+Epoch 010/100 | loss=0.81032 Pd=0.8750 Pfa=0.0000 pAUC5=0.9661 eligible=False
+Epoch 011/100 | loss=0.85478 Pd=0.8750 Pfa=0.0000 pAUC5=0.9624 eligible=False
+Epoch 012/100 | loss=0.81378 Pd=0.8750 Pfa=0.0000 pAUC5=0.9605 eligible=False
+Epoch 013/100 | loss=1.08398 Pd=0.8542 Pfa=0.0000 pAUC5=0.9554 eligible=False
+Epoch 014/100 | loss=0.75969 Pd=0.8750 Pfa=0.0000 pAUC5=0.9587 eligible=False
+Epoch 015/100 | loss=0.93874 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 016/100 | loss=0.99897 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 017/100 | loss=0.93064 Pd=0.8542 Pfa=0.0000 pAUC5=0.9535 eligible=False
+Epoch 018/100 | loss=0.96005 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 019/100 | loss=0.96548 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 020/100 | loss=0.82989 Pd=0.8750 Pfa=0.0000 pAUC5=0.9568 eligible=False
+Epoch 021/100 | loss=0.99598 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 022/100 | loss=0.95187 Pd=0.8542 Pfa=0.0000 pAUC5=0.9517 eligible=False
+Epoch 023/100 | loss=0.95152 Pd=0.8542 Pfa=0.0000 pAUC5=0.9535 eligible=False
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.8833 Pfa=0.0000 FA=0 AUC=0.9999
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold05_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/build_roi_polarimetric_cache_v1.py --fold 6 --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/polar_repr_v2_power2_v4_fold06_seed42_formal/checkpoints/best.pt --output-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_06_formal --batch-size 8 --num-workers 0 --debug-per-class 0 --roi-velocity-radius 5 --roi-range-radius 4
+====================================================================================================
+========================================================================================
+Stage 4 frozen Power2 candidate cache complete
+fold / threshold : 6 / 0.841797
+ROI shape        : 11 x 9
+train: n=782 target=217 background=565 localized=166
+  val: n=203 target=53 background=150 localized=44
+ test: n=163 target=48 background=115 localized=40
+output           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_06_formal
+========================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_baseline_v4_fold06_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_06_formal --mode power2_baseline --fold-id 6 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_baseline_v4_fold06_seed42_formal / 6 / power2_baseline
+base threshold           : 0.841797
+dataset sizes            : train=782, val=203, test=163
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+baseline result: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_baseline_v4_fold06_seed42_formal
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_power_control_v4_fold06_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_06_formal --mode power2_roi_power_control --fold-id 6 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_power_control_v4_fold06_seed42_formal / 6 / power2_roi_power_control
+base threshold           : 0.841797
+dataset sizes            : train=782, val=203, test=163
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.80800 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 002/100 | loss=0.78219 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 003/100 | loss=0.74489 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 004/100 | loss=0.73106 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 005/100 | loss=0.72514 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 006/100 | loss=0.72300 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 007/100 | loss=0.75178 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 008/100 | loss=0.72640 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 009/100 | loss=0.72190 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 010/100 | loss=0.75117 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 011/100 | loss=0.73889 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 012/100 | loss=0.73546 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 013/100 | loss=0.72544 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 014/100 | loss=0.71520 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 015/100 | loss=0.66736 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 016/100 | loss=0.64190 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 017/100 | loss=0.65577 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 018/100 | loss=0.56711 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 019/100 | loss=0.65497 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 020/100 | loss=0.65973 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 021/100 | loss=0.53489 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 022/100 | loss=0.52744 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 023/100 | loss=0.45792 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 3
+test fixed: Pd=0.6667 Pfa=0.0000 FA=0 AUC=0.9980
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_power_control_v4_fold06_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python training/train_roi_polarimetric_refiner_v1.py --name roi_polar_stage4_v1_power2_roi_ri4_v4_fold06_seed42_formal --cache-dir /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_polarimetric_stage4_v1/cache/fold_06_formal --mode power2_roi_ri4 --fold-id 6 --epochs 100 --batch-size 32 --num-workers 0 --debug-per-class 0 --max-val-pd-drop 0.01 --seed 42
+====================================================================================================
+==============================================================================================
+experiment / fold / mode : roi_polar_stage4_v1_power2_roi_ri4_v4_fold06_seed42_formal / 6 / power2_roi_ri4
+base threshold           : 0.841797
+dataset sizes            : train=782, val=203, test=163
+sample independent       : true
+Power2 location frozen   : true
+==============================================================================================
+Epoch 001/100 | loss=0.81340 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 002/100 | loss=0.78215 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 003/100 | loss=0.74831 Pd=0.7925 Pfa=0.0133 pAUC5=0.9278 eligible=True | best
+Epoch 004/100 | loss=0.73255 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 005/100 | loss=0.72766 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 006/100 | loss=0.72049 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 007/100 | loss=0.76964 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 008/100 | loss=0.67566 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 009/100 | loss=0.65302 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 010/100 | loss=0.71047 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 011/100 | loss=0.67265 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 012/100 | loss=0.58384 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 013/100 | loss=0.63966 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 014/100 | loss=0.71540 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 015/100 | loss=0.45940 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 016/100 | loss=0.44507 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True | best
+Epoch 017/100 | loss=0.40640 Pd=0.7925 Pfa=0.0133 pAUC5=0.9310 eligible=True | best
+Epoch 018/100 | loss=0.39624 Pd=0.7925 Pfa=0.0133 pAUC5=0.9310 eligible=True | best
+Epoch 019/100 | loss=0.50931 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 020/100 | loss=0.49667 Pd=0.7925 Pfa=0.0200 pAUC5=0.9278 eligible=True
+Epoch 021/100 | loss=0.45333 Pd=0.7925 Pfa=0.0200 pAUC5=0.9290 eligible=True
+Epoch 022/100 | loss=0.43291 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 023/100 | loss=0.44477 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 024/100 | loss=0.40061 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 025/100 | loss=0.37518 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 026/100 | loss=0.38817 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 027/100 | loss=0.37638 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 028/100 | loss=0.39054 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 029/100 | loss=0.37067 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 030/100 | loss=0.35720 Pd=0.7925 Pfa=0.0133 pAUC5=0.9323 eligible=True | best
+Epoch 031/100 | loss=0.35785 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 032/100 | loss=0.37488 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 033/100 | loss=0.37588 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 034/100 | loss=0.35117 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 035/100 | loss=0.36879 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 036/100 | loss=0.35871 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 037/100 | loss=0.37107 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 038/100 | loss=0.35800 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 039/100 | loss=0.35570 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 040/100 | loss=0.35760 Pd=0.7925 Pfa=0.0133 pAUC5=0.9297 eligible=True
+Epoch 041/100 | loss=0.37433 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 042/100 | loss=0.36609 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 043/100 | loss=0.35768 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 044/100 | loss=0.36552 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 045/100 | loss=0.38709 Pd=0.7925 Pfa=0.0200 pAUC5=0.9297 eligible=True
+Epoch 046/100 | loss=0.37249 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 047/100 | loss=0.35873 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 048/100 | loss=0.36942 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 049/100 | loss=0.36386 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Epoch 050/100 | loss=0.36703 Pd=0.7925 Pfa=0.0133 pAUC5=0.9284 eligible=True
+Early stopping after 20 stale epochs
+==============================================================================================
+best epoch : 30
+test fixed: Pd=0.6667 Pfa=0.0000 FA=0 AUC=0.9790
+result     : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/roi_polar_stage4_v1_power2_roi_ri4_v4_fold06_seed42_formal
+==============================================================================================
+
+====================================================================================================
+COMMAND:
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python scripts/summarize_roi_stage4_selected_sixfold_v1.py --folds 1 2 3 4 5 6 --modes power2_baseline power2_roi_power_control power2_roi_ri4 --scope formal --require-all
+====================================================================================================
+found=18 missing=0 output=/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/roi_stage4_selected_sixfold_v1

@@ -1,0 +1,17 @@
+{
+  "created_at": "2026-07-22T11:05:36.339909",
+  "scope": "formal",
+  "folds": [
+    1,
+    4
+  ],
+  "modes": [
+    "power2",
+    "ri4",
+    "polar6",
+    "ri8"
+  ],
+  "epochs": 100,
+  "debug_per_class": 0,
+  "scientific_role": "sample-independent representation comparison; no scan context"
+}

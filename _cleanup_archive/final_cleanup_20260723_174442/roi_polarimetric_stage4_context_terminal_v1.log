@@ -1,0 +1,12 @@
+========================================================================
+Stage 4 ROI极化精修上下文采集完成
+expected found   : 7
+expected missing : 0
+manifests        : 2
+prediction CSVs  : 368
+checkpoint meta  : 91
+copied files     : 930
+acceptance ZIP   : /home/tobeornot8259748/projects/balloon_radar_project/roi_polarimetric_stage4_context_acceptance_v1.zip
+raw data copied  : false
+checkpoint copied: false
+========================================================================

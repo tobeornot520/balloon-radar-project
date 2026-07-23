@@ -1,0 +1,1026 @@
+{
+  "tool_version": "1.0",
+  "timestamp": "2026-07-22T12:37:54",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "mode": "execute",
+  "candidate_count": 66,
+  "candidate_bytes": 4224731,
+  "candidate_human": "4.03 MB",
+  "moved": [
+    {
+      "relative_path": "BC_DPG_FCN_v1_argmax_fix",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v1_argmax_fix"
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_integration_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v1_integration_patch"
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_preflight_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v1_preflight_patch"
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_training_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v1_training_patch"
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v2_tail_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v2_tail_patch"
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v3_scan_target_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_FCN_v3_scan_target_patch"
+    },
+    {
+      "relative_path": "BC_DPG_current_model_stage2_patch_v2.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_current_model_stage2_patch_v2.zip"
+    },
+    {
+      "relative_path": "BC_DPG_explicit_polarimetric_representation_stage2_patch_v1.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_explicit_polarimetric_representation_stage2_patch_v1.zip"
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_fix",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_overfitting_audit_fix"
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_overfitting_audit_patch"
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_rotation_fix",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_overfitting_audit_rotation_fix"
+    },
+    {
+      "relative_path": "BC_DPG_polarimetric_gated_diagnostic_stage3_patch_v1.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_polarimetric_gated_diagnostic_stage3_patch_v1.zip"
+    },
+    {
+      "relative_path": "BC_DPG_v2_compare_fix",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_v2_compare_fix"
+    },
+    {
+      "relative_path": "BC_DPG_v2_global_threshold_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_v2_global_threshold_patch"
+    },
+    {
+      "relative_path": "BC_DPG_v3_final_freeze_paper_evidence_patch_v1.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_v3_final_freeze_paper_evidence_patch_v1.zip"
+    },
+    {
+      "relative_path": "BC_DPG_v3_paper_results_matplotlib_fix",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_v3_paper_results_matplotlib_fix"
+    },
+    {
+      "relative_path": "BC_DPG_v3_paper_results_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/BC_DPG_v3_paper_results_patch"
+    },
+    {
+      "relative_path": "README_BC_DPG_v3最终冻结与论文证据_V1.md",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/README_BC_DPG_v3最终冻结与论文证据_V1.md"
+    },
+    {
+      "relative_path": "README_BC_DPG当前模型Stage2_V2.md",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/README_BC_DPG当前模型Stage2_V2.md"
+    },
+    {
+      "relative_path": "README_显式极化表征基准Stage2.md",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/README_显式极化表征基准Stage2.md"
+    },
+    {
+      "relative_path": "README_显式极化门控与分数迁移诊断_v2.md",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/README_显式极化门控与分数迁移诊断_v2.md"
+    },
+    {
+      "relative_path": "apply_bc_dpg_current_model_stage2_v2.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_bc_dpg_current_model_stage2_v2.py"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_ablation_polar_stage1.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_bc_dpg_v3_ablation_polar_stage1.py"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_ablation_runner_fix_v2.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_bc_dpg_v3_ablation_runner_fix_v2.py"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_final_freeze_paper_evidence_v1.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_bc_dpg_v3_final_freeze_paper_evidence_v1.py"
+    },
+    {
+      "relative_path": "apply_polarimetric_gated_representation_v2.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_polarimetric_gated_representation_v2.py"
+    },
+    {
+      "relative_path": "apply_polarimetric_representation_benchmark_v1.py",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/apply_polarimetric_representation_benchmark_v1.py"
+    },
+    {
+      "relative_path": "bc_dpg_current_model_stage2_smoke_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_current_model_stage2_smoke_acceptance.zip"
+    },
+    {
+      "relative_path": "bc_dpg_current_model_stage2_smoke_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_current_model_stage2_smoke_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v31_shift_reg_formal_acceptance.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_acceptance_v2.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v31_shift_reg_formal_acceptance_v2.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v31_shift_reg_formal_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_extended_formal_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_extended_formal_acceptance.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_extended_formal_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_extended_formal_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_formal_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_formal_acceptance.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_formal_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_formal_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_sixfold_formal_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_sixfold_formal_acceptance.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_sixfold_formal_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_ablation_sixfold_formal_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_evidence.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_final_evidence.zip"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_evidence_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_final_evidence_terminal.log"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_freeze_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/bc_dpg_v3_final_freeze_acceptance.zip"
+    },
+    {
+      "relative_path": "current_structure_reader_package",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/current_structure_reader_package"
+    },
+    {
+      "relative_path": "detection_ablation_analysis_v2_package",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/detection_ablation_analysis_v2_package"
+    },
+    {
+      "relative_path": "detection_diagnostics_v3_package",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/detection_diagnostics_v3_package"
+    },
+    {
+      "relative_path": "detection_group_split_v1_package",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/detection_group_split_v1_package"
+    },
+    {
+      "relative_path": "detection_visualization_hotfix_v3_1",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/detection_visualization_hotfix_v3_1"
+    },
+    {
+      "relative_path": "dpg_fcn_v1_patch",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/dpg_fcn_v1_patch"
+    },
+    {
+      "relative_path": "full_detection_baseline_v2_package",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/full_detection_baseline_v2_package"
+    },
+    {
+      "relative_path": "hv_late_fusion_diagnostic_v1",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/hv_late_fusion_diagnostic_v1"
+    },
+    {
+      "relative_path": "polarimetric_gated_stage3_smoke_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_gated_stage3_smoke_acceptance.zip"
+    },
+    {
+      "relative_path": "polarimetric_gated_stage3_smoke_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_gated_stage3_smoke_terminal.log"
+    },
+    {
+      "relative_path": "polarimetric_representation_stage2_smoke_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_representation_stage2_smoke_acceptance.zip"
+    },
+    {
+      "relative_path": "polarimetric_representation_stage2_smoke_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_representation_stage2_smoke_terminal.log"
+    },
+    {
+      "relative_path": "polarimetric_representation_twofold_formal_acceptance.zip",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_representation_twofold_formal_acceptance.zip"
+    },
+    {
+      "relative_path": "polarimetric_representation_twofold_formal_terminal.log",
+      "action": "moved_to_archive",
+      "archive_relative_path": "payload/polarimetric_representation_twofold_formal_terminal.log"
+    },
+    {
+      "relative_path": "baselines/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "datasets/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "evaluation/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "features/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "models/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "radar_data_reader_package/datasets/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "radar_data_reader_package/scripts/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "scripts/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "training/__pycache__",
+      "action": "cache_deleted"
+    },
+    {
+      "relative_path": "utils/__pycache__",
+      "action": "cache_deleted"
+    }
+  ],
+  "errors": [],
+  "protected_top_level": [
+    ".git",
+    ".github",
+    ".vscode",
+    "_cleanup_archive",
+    "backups",
+    "baselines",
+    "checkpoints",
+    "configs",
+    "data",
+    "datasets",
+    "dist",
+    "docs",
+    "evaluation",
+    "features",
+    "logs",
+    "losses",
+    "metrics",
+    "models",
+    "notebooks",
+    "results",
+    "scripts",
+    "training"
+  ],
+  "protected_files": [
+    "README.md",
+    "cleanup_balloon_radar_project_v1.py",
+    "collect_bc_dpg_v3_context.sh",
+    "environment.yml",
+    "package_balloon_radar_project.sh",
+    "pyproject.toml",
+    "requirements-lock.txt",
+    "requirements.txt",
+    "setup.cfg",
+    "setup.py",
+    "test_read_mat.py"
+  ],
+  "rows": [
+    {
+      "relative_path": "BC_DPG_FCN_v1_argmax_fix",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 BC-DPG-FCN v1 补丁目录，功能已集成",
+      "size_bytes": 11167,
+      "size_human": "10.91 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_integration_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 BC-DPG-FCN v1 补丁目录，功能已集成",
+      "size_bytes": 22656,
+      "size_human": "22.12 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_preflight_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 BC-DPG-FCN v1 补丁目录，功能已集成",
+      "size_bytes": 21492,
+      "size_human": "20.99 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v1_training_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 BC-DPG-FCN v1 补丁目录，功能已集成",
+      "size_bytes": 68229,
+      "size_human": "66.63 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v2_tail_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 BC-DPG-FCN v2 补丁目录，功能已集成",
+      "size_bytes": 52388,
+      "size_human": "51.16 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_FCN_v3_scan_target_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "v3 扫描目标补丁目录，功能已集成",
+      "size_bytes": 62044,
+      "size_human": "60.59 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_current_model_stage2_patch_v2.zip",
+      "kind": "file",
+      "category": "patch_zip",
+      "recommended_action": "archive",
+      "reason": "已安装的 Stage 2 补丁压缩包",
+      "size_bytes": 21055,
+      "size_human": "20.56 KB",
+      "sha256": "a7e1a1d2fba2153420be34e4caf54d881d33071a855f7d8ab18989e2b37cec83"
+    },
+    {
+      "relative_path": "BC_DPG_explicit_polarimetric_representation_stage2_patch_v1.zip",
+      "kind": "file",
+      "category": "patch_zip",
+      "recommended_action": "archive",
+      "reason": "已安装的极化 Stage 2 补丁压缩包",
+      "size_bytes": 22854,
+      "size_human": "22.32 KB",
+      "sha256": "90c0a0d9ffbff16d3d37fe1ba0a17075d8fc64e104c24b3502574bc6dbdfb792"
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_fix",
+      "kind": "directory",
+      "category": "legacy_audit_dir",
+      "recommended_action": "archive",
+      "reason": "旧过拟合审计补丁目录",
+      "size_bytes": 33628,
+      "size_human": "32.84 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_patch",
+      "kind": "directory",
+      "category": "legacy_audit_dir",
+      "recommended_action": "archive",
+      "reason": "旧过拟合审计补丁目录",
+      "size_bytes": 33424,
+      "size_human": "32.64 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_overfitting_audit_rotation_fix",
+      "kind": "directory",
+      "category": "legacy_audit_dir",
+      "recommended_action": "archive",
+      "reason": "旧过拟合审计补丁目录",
+      "size_bytes": 34394,
+      "size_human": "33.59 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_polarimetric_gated_diagnostic_stage3_patch_v1.zip",
+      "kind": "file",
+      "category": "patch_zip",
+      "recommended_action": "archive",
+      "reason": "已安装的极化 Stage 3 补丁压缩包",
+      "size_bytes": 26957,
+      "size_human": "26.33 KB",
+      "sha256": "363ab3020c825176c8eca66a1b6ae8e5a1bdf8bff32d6c05962a813de4e5eb27"
+    },
+    {
+      "relative_path": "BC_DPG_v2_compare_fix",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "旧 v2 比较/阈值补丁目录",
+      "size_bytes": 6206,
+      "size_human": "6.06 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_v2_global_threshold_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "旧 v2 比较/阈值补丁目录",
+      "size_bytes": 21643,
+      "size_human": "21.14 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_v3_final_freeze_paper_evidence_patch_v1.zip",
+      "kind": "file",
+      "category": "patch_zip",
+      "recommended_action": "archive",
+      "reason": "已安装的 v3 最终冻结补丁压缩包",
+      "size_bytes": 17910,
+      "size_human": "17.49 KB",
+      "sha256": "4809f602a93f9ee0ecb5e7974b0251f521a3c58cff2f45d7131ebce7bba67cc3"
+    },
+    {
+      "relative_path": "BC_DPG_v3_paper_results_matplotlib_fix",
+      "kind": "directory",
+      "category": "legacy_paper_dir",
+      "recommended_action": "archive",
+      "reason": "旧论文结果生成补丁目录",
+      "size_bytes": 37725,
+      "size_human": "36.84 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "BC_DPG_v3_paper_results_patch",
+      "kind": "directory",
+      "category": "legacy_paper_dir",
+      "recommended_action": "archive",
+      "reason": "旧论文结果生成补丁目录",
+      "size_bytes": 38679,
+      "size_human": "37.77 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "README_BC_DPG_v3最终冻结与论文证据_V1.md",
+      "kind": "file",
+      "category": "stage_readme",
+      "recommended_action": "archive",
+      "reason": "阶段安装说明，正式报告已在 results/final_evidence",
+      "size_bytes": 2959,
+      "size_human": "2.89 KB",
+      "sha256": "81a76ff56db670b83980d794a119c02fe73cbaed5809dae00fa60b7a5fa83181"
+    },
+    {
+      "relative_path": "README_BC_DPG当前模型Stage2_V2.md",
+      "kind": "file",
+      "category": "stage_readme",
+      "recommended_action": "archive",
+      "reason": "阶段安装说明",
+      "size_bytes": 3605,
+      "size_human": "3.52 KB",
+      "sha256": "25bae10972a4b7910b0c7b8c06a65571aae43922915d53dabf2bff3642caf5b5"
+    },
+    {
+      "relative_path": "README_显式极化表征基准Stage2.md",
+      "kind": "file",
+      "category": "stage_readme",
+      "recommended_action": "archive",
+      "reason": "阶段安装说明，正式文档已在项目目录内",
+      "size_bytes": 1107,
+      "size_human": "1.08 KB",
+      "sha256": "472b5eef69ff0cc68822190f031239e05654949fa194d1ca39043f0b4d57329d"
+    },
+    {
+      "relative_path": "README_显式极化门控与分数迁移诊断_v2.md",
+      "kind": "file",
+      "category": "stage_readme",
+      "recommended_action": "archive",
+      "reason": "阶段安装说明，正式文档已在项目目录内",
+      "size_bytes": 791,
+      "size_human": "791.00 B",
+      "sha256": "9e2e9e1309135159f554f28241fe2038502d7e9a9b5eba1532f8d6b9817ffac6"
+    },
+    {
+      "relative_path": "apply_bc_dpg_current_model_stage2_v2.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的当前模型 Stage 2 安装器",
+      "size_bytes": 64037,
+      "size_human": "62.54 KB",
+      "sha256": "29fc69b37e94415b0697cc0f59d922b00b2013709b6c7f1ee0713f77391d6037"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_ablation_polar_stage1.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的 v3 消融安装器",
+      "size_bytes": 131082,
+      "size_human": "128.01 KB",
+      "sha256": "aa5cecfa5d8e25be4c080b924f298afeb8426af1529fdd5bc7c539027fc486cc"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_ablation_runner_fix_v2.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的 v3 消融安装器",
+      "size_bytes": 18155,
+      "size_human": "17.73 KB",
+      "sha256": "fc5e57d30caa727e02b075f00a1bcc49727ee287c4ae0fc74e17def75eb43588"
+    },
+    {
+      "relative_path": "apply_bc_dpg_v3_final_freeze_paper_evidence_v1.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的最终冻结安装器",
+      "size_bytes": 43837,
+      "size_human": "42.81 KB",
+      "sha256": "ec3bba98ef54ef71ca782b738e5777a06e2c4a454f68f8508576a451bd4fe85a"
+    },
+    {
+      "relative_path": "apply_polarimetric_gated_representation_v2.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的极化门控安装器",
+      "size_bytes": 86588,
+      "size_human": "84.56 KB",
+      "sha256": "b9dc58a91fd0456dcae046a49502028696d99f71eee0142ec092f5237654c17f"
+    },
+    {
+      "relative_path": "apply_polarimetric_representation_benchmark_v1.py",
+      "kind": "file",
+      "category": "installer",
+      "recommended_action": "archive",
+      "reason": "已执行的极化表征安装器",
+      "size_bytes": 67823,
+      "size_human": "66.23 KB",
+      "sha256": "7d83fbfcfbc22e4414cd951daa51d077f4ce4555e81d837f24632e376e24d8e3"
+    },
+    {
+      "relative_path": "baselines/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 7282,
+      "size_human": "7.11 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "bc_dpg_current_model_stage2_smoke_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "Stage 2 验收包，结果已进入 results",
+      "size_bytes": 14074,
+      "size_human": "13.74 KB",
+      "sha256": "9648e9fbbef71e4f90ae1383b6950addeff6e964da484984692858fae5e87d79"
+    },
+    {
+      "relative_path": "bc_dpg_current_model_stage2_smoke_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "Stage 2 根目录过程日志",
+      "size_bytes": 28036,
+      "size_human": "27.38 KB",
+      "sha256": "47b132bc56a989ad0b341dd9028f9bfa4c29b96029b7ecc1d3f5455a27d269da"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "正则扫描验收包，结果已进入 results",
+      "size_bytes": 13820,
+      "size_human": "13.50 KB",
+      "sha256": "b9a602c6ea6b69fe6b5401b04fa2cf281c3ff2994da65ba50f21b40cb7b61876"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_acceptance_v2.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "正则扫描验收包，结果已进入 results",
+      "size_bytes": 19978,
+      "size_human": "19.51 KB",
+      "sha256": "569c9632e3e1a648f117f39e0a33f46f1fcdfaebc9f6025cdd6420bddf06f677"
+    },
+    {
+      "relative_path": "bc_dpg_v31_shift_reg_formal_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "正则扫描根目录过程日志",
+      "size_bytes": 145733,
+      "size_human": "142.32 KB",
+      "sha256": "82d523b8bbeee385f1467d7e43cf96a5c98b30a7ba2959b5db4a553847e7b68b"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_extended_formal_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "v3 消融验收包，结果已进入 results",
+      "size_bytes": 11952,
+      "size_human": "11.67 KB",
+      "sha256": "93a1b421bc32499463edb8de8a76d0b719361b46698dae639bb2d86f2a3697e5"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_extended_formal_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "v3 消融根目录过程日志",
+      "size_bytes": 53856,
+      "size_human": "52.59 KB",
+      "sha256": "746e60157ef9fa358aa1aa9aaf40445832bf2d67723761cc1bbfd7f64ab70711"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_formal_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "v3 消融验收包，结果已进入 results",
+      "size_bytes": 4068,
+      "size_human": "3.97 KB",
+      "sha256": "b3f60ed82a2ffad746ee03d9157215394d838302f9770f71ba1be93d7c60c477"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_formal_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "v3 消融根目录过程日志",
+      "size_bytes": 4924,
+      "size_human": "4.81 KB",
+      "sha256": "8358c075737423658b38fff7b5898ad04e2834d064742de77a7b50fce201e6a0"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_sixfold_formal_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "v3 消融验收包，结果已进入 results",
+      "size_bytes": 18827,
+      "size_human": "18.39 KB",
+      "sha256": "aa9b66d26a8efe62ab9a0dbf52c03ff5971429a35142708bfda21d3eb10b8bfe"
+    },
+    {
+      "relative_path": "bc_dpg_v3_ablation_sixfold_formal_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "v3 消融根目录过程日志",
+      "size_bytes": 113342,
+      "size_human": "110.69 KB",
+      "sha256": "f8f507750941b8af55edd4849c27325eb7943d668227a7ed0ba610b716c25d94"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_evidence.zip",
+      "kind": "file",
+      "category": "evidence_zip",
+      "recommended_action": "archive",
+      "reason": "根目录证据副本，正式文件保存在 results/final_evidence",
+      "size_bytes": 297914,
+      "size_human": "290.93 KB",
+      "sha256": "0191df3e9a777bdaa8ab7e0cc4a626a7001796fb907c5a7f7bcb27a7887827f5"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_evidence_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "最终证据根目录过程日志",
+      "size_bytes": 685,
+      "size_human": "685.00 B",
+      "sha256": "768399862cc8f2e1d75c2a2cbd6f156b5ed6f925ab6534c27d75ec6a2bb39f7e"
+    },
+    {
+      "relative_path": "bc_dpg_v3_final_freeze_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "最终冻结验收包",
+      "size_bytes": 309494,
+      "size_human": "302.24 KB",
+      "sha256": "8179e445805ffe44159b21a303a572960c0c2b3c969b24471ece0ed31b19cb74"
+    },
+    {
+      "relative_path": "current_structure_reader_package",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "一次性项目结构读取包",
+      "size_bytes": 26173,
+      "size_human": "25.56 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "datasets/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 78860,
+      "size_human": "77.01 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "detection_ablation_analysis_v2_package",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "旧检测消融分析包",
+      "size_bytes": 19498,
+      "size_human": "19.04 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "detection_diagnostics_v3_package",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "旧检测诊断包",
+      "size_bytes": 32930,
+      "size_human": "32.16 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "detection_group_split_v1_package",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "旧分组划分包",
+      "size_bytes": 66498,
+      "size_human": "64.94 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "detection_group_split_v1_package/scripts/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 37029,
+      "size_human": "36.16 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "detection_visualization_hotfix_v3_1",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "旧可视化热修复目录",
+      "size_bytes": 16753,
+      "size_human": "16.36 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "dpg_fcn_v1_patch",
+      "kind": "directory",
+      "category": "legacy_patch_dir",
+      "recommended_action": "archive",
+      "reason": "早期 DPG-FCN v1 补丁目录",
+      "size_bytes": 47749,
+      "size_human": "46.63 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "evaluation/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 142,
+      "size_human": "142.00 B",
+      "sha256": ""
+    },
+    {
+      "relative_path": "features/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 22250,
+      "size_human": "21.73 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "full_detection_baseline_v2_package",
+      "kind": "directory",
+      "category": "legacy_package_dir",
+      "recommended_action": "archive",
+      "reason": "旧完整检测基线包",
+      "size_bytes": 43405,
+      "size_human": "42.39 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "hv_late_fusion_diagnostic_v1",
+      "kind": "directory",
+      "category": "legacy_diagnostic_dir",
+      "recommended_action": "archive",
+      "reason": "旧 H/V 后融合诊断目录",
+      "size_bytes": 27967,
+      "size_human": "27.31 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "models/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 77231,
+      "size_human": "75.42 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "polarimetric_gated_stage3_smoke_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "极化 Stage 3 smoke 验收包",
+      "size_bytes": 94260,
+      "size_human": "92.05 KB",
+      "sha256": "653d4170875f67a1367fd15577866016313f9eb59f7a03c6114d1b7a6fb6d95d"
+    },
+    {
+      "relative_path": "polarimetric_gated_stage3_smoke_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "极化 Stage 3 根目录过程日志",
+      "size_bytes": 20191,
+      "size_human": "19.72 KB",
+      "sha256": "99c67c4dd1a13b3ff086750c66024a761933d6c6fe965548b88a4fa56a3c9b13"
+    },
+    {
+      "relative_path": "polarimetric_representation_stage2_smoke_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "极化 Stage 2 smoke 验收包",
+      "size_bytes": 6929,
+      "size_human": "6.77 KB",
+      "sha256": "942c4401a77773d84e66619999a5b58be493ce9f19aa69433699c0f9b86c0ac6"
+    },
+    {
+      "relative_path": "polarimetric_representation_stage2_smoke_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "极化 Stage 2 根目录过程日志",
+      "size_bytes": 17203,
+      "size_human": "16.80 KB",
+      "sha256": "f43f8e5c135846a39bc19217a1ca79b64374c7353bb2c1dc3617fe59e1018ea0"
+    },
+    {
+      "relative_path": "polarimetric_representation_twofold_formal_acceptance.zip",
+      "kind": "file",
+      "category": "acceptance_zip",
+      "recommended_action": "archive",
+      "reason": "极化两折正式验收包",
+      "size_bytes": 16298,
+      "size_human": "15.92 KB",
+      "sha256": "e1e4c66b66d472e513e310fb7673c82031dcaafb957d0e2233cf7d56ae9cf441"
+    },
+    {
+      "relative_path": "polarimetric_representation_twofold_formal_terminal.log",
+      "kind": "file",
+      "category": "terminal_log",
+      "recommended_action": "archive",
+      "reason": "极化两折正式根目录过程日志",
+      "size_bytes": 73848,
+      "size_human": "72.12 KB",
+      "sha256": "9780a0eb05157d38307f77a37489c355071b1c6086ce16466123f764b8fdb6a1"
+    },
+    {
+      "relative_path": "radar_data_reader_package/datasets/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 22711,
+      "size_human": "22.18 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "radar_data_reader_package/scripts/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 15434,
+      "size_human": "15.07 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "scripts/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 1174256,
+      "size_human": "1.12 MB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "training/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 288514,
+      "size_human": "281.75 KB",
+      "sha256": ""
+    },
+    {
+      "relative_path": "utils/__pycache__",
+      "kind": "directory",
+      "category": "cache_dir",
+      "recommended_action": "delete_cache",
+      "reason": "Python/测试/Notebook 可再生缓存",
+      "size_bytes": 2182,
+      "size_human": "2.13 KB",
+      "sha256": ""
+    }
+  ]
+}

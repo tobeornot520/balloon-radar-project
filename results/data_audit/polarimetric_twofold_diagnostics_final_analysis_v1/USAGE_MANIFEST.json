@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-07-22T18:39:22",
+  "status": "PASS",
+  "analysis_dir": "results/data_audit/polarimetric_twofold_diagnostics_final_analysis_v1",
+  "frozen_conclusion": "docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md",
+  "next_stage_interface": "docs/polarimetric_stage3/NEXT_STAGE_ROI_POLARIMETRIC_INTERFACE.md",
+  "scientific_use": "Stage 3结果冻结、论文表格引用、下一阶段ROI极化精修设计",
+  "not_for": "直接训练、替代Power2、证明跨环境独立泛化"
+}

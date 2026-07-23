@@ -1,0 +1,2 @@
+﻿fold,base_threshold,raw_pd,raw_pfa,v1_selected_pd,v1_selected_pfa,v2_base_pd,v2_base_pfa,v2_pfa_reduction_vs_raw,v2_score_never_increased,v2_shift_background_mean,v2_shift_positive_mean
+1,0.337646484375,1.0,0.5733333333333334,1.0,0.58,1.0,0.24,0.5813953488372093,True,0.9293267679214477,1.3424396087538522

@@ -1,0 +1,2 @@
+﻿scope,sample_count,target_count,background_count,raw_detected_target_count,v3_detected_target_count,raw_false_alarm_count,v3_false_alarm_count,raw_pd,v3_pd,pd_change,raw_pfa,v3_pfa,pfa_absolute_change,pfa_reduction_fraction
+six_fold_pooled_samples,1148,318,830,289,289,186,56,0.9088050314465409,0.9088050314465409,0.0,0.22409638554216868,0.06746987951807229,-0.1566265060240964,0.6989247311827957

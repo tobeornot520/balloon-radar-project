@@ -1,0 +1,28 @@
+{
+  "stage": "roi_stage4_selected_sixfold_v1",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "selected_modes": [
+    "power2_baseline",
+    "power2_roi_power_control",
+    "power2_roi_ri4"
+  ],
+  "seed": 42,
+  "base_power2_missing_folds": [
+    2,
+    3,
+    5,
+    6
+  ],
+  "primary_threshold": "unchanged fold-specific Power2 deployment threshold",
+  "sample_independent": true,
+  "scan_context": false,
+  "power2_location_frozen": true,
+  "selection_frozen_before_sixfold": true
+}

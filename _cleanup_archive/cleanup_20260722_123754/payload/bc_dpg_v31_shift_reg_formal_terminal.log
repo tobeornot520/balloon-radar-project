@@ -1,0 +1,1778 @@
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt
+Base threshold         : 0.337646
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 742 个样本...
+  dataset: 200/742
+  dataset: 400/742
+  dataset: 600/742
+  dataset: 742/742
+Precomputing frozen DPG features: train (742 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9434, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76770 val=2.30537 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.71371 val=2.21688 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.65492 val=2.12407 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.009 targetShift=0.003 *
+epoch=004 train=1.58809 val=2.02622 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.52473 val=1.92274 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.016 targetShift=0.003 *
+epoch=006 train=1.44794 val=1.82109 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.022 targetShift=0.002 *
+epoch=007 train=1.38858 val=1.71941 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.030 targetShift=0.002 *
+epoch=008 train=1.31098 val=1.61550 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.041 targetShift=0.002 *
+epoch=009 train=1.24257 val=1.51194 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.058 targetShift=0.002 *
+epoch=010 train=1.17052 val=1.40824 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.082 targetShift=0.002 *
+epoch=011 train=1.09660 val=1.30487 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.118 targetShift=0.003 *
+epoch=012 train=1.01119 val=1.20240 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.165 targetShift=0.003 *
+epoch=013 train=0.92986 val=1.10410 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.226 targetShift=0.003 *
+epoch=014 train=0.85326 val=1.00843 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.303 targetShift=0.002 *
+epoch=015 train=0.77426 val=0.91678 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.397 targetShift=0.001 *
+epoch=016 train=0.70061 val=0.82979 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.511 targetShift=0.000 *
+epoch=017 train=0.62574 val=0.74729 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.646 targetShift=0.000 *
+epoch=018 train=0.55995 val=0.67279 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.772 targetShift=0.000 *
+epoch=019 train=0.50248 val=0.60464 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.912 targetShift=0.000 *
+epoch=020 train=0.44660 val=0.54310 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.043 targetShift=0.000 *
+epoch=021 train=0.39495 val=0.48846 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.168 targetShift=0.000 *
+epoch=022 train=0.34984 val=0.44060 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.259 targetShift=0.000 *
+epoch=023 train=0.31396 val=0.39651 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.281 targetShift=0.000 *
+epoch=024 train=0.28157 val=0.35630 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.908 targetShift=0.000 *
+epoch=025 train=0.25056 val=0.32069 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.333 targetShift=0.000 *
+epoch=026 train=0.22741 val=0.29076 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.234 targetShift=0.000 *
+epoch=027 train=0.20399 val=0.26505 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.243 targetShift=0.000 *
+epoch=028 train=0.18712 val=0.24266 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.206 targetShift=0.000 *
+epoch=029 train=0.17096 val=0.22287 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.187 targetShift=0.000 *
+epoch=030 train=0.16097 val=0.20469 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.203 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=1.0000, Pfa=0.9267, AUC=0.9995
+Selected-threshold raw test: Pd=1.0000, Pfa=0.5733, AUC=0.9823
+Base threshold 0.337646 v3 test : Pd=1.0000, Pfa=0.1467
+Base threshold 0.337646 raw test: Pd=1.0000, Pfa=0.5733
+Test mean shift: background=0.8144, target=0.0000
+Test p(background): background=0.7696, target=0.0034
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt
+Base threshold         : 0.337646
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 742 个样本...
+  dataset: 200/742
+  dataset: 400/742
+  dataset: 600/742
+  dataset: 742/742
+Precomputing frozen DPG features: train (742 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9434, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76770 val=2.30537 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.71371 val=2.21688 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.65492 val=2.12407 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.009 targetShift=0.003 *
+epoch=004 train=1.58809 val=2.02622 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.52473 val=1.92274 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.016 targetShift=0.003 *
+epoch=006 train=1.44794 val=1.82109 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.022 targetShift=0.002 *
+epoch=007 train=1.38858 val=1.71941 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.030 targetShift=0.002 *
+epoch=008 train=1.31097 val=1.61549 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.041 targetShift=0.002 *
+epoch=009 train=1.24256 val=1.51194 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.058 targetShift=0.002 *
+epoch=010 train=1.17051 val=1.40822 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.082 targetShift=0.002 *
+epoch=011 train=1.09658 val=1.30484 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.118 targetShift=0.003 *
+epoch=012 train=1.01114 val=1.20234 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.165 targetShift=0.003 *
+epoch=013 train=0.92977 val=1.10398 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.226 targetShift=0.003 *
+epoch=014 train=0.85309 val=1.00821 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.303 targetShift=0.002 *
+epoch=015 train=0.77395 val=0.91640 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.397 targetShift=0.001 *
+epoch=016 train=0.70008 val=0.82916 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.513 targetShift=0.000 *
+epoch=017 train=0.62489 val=0.74629 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.647 targetShift=0.000 *
+epoch=018 train=0.55867 val=0.67135 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.776 targetShift=0.000 *
+epoch=019 train=0.50066 val=0.60264 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.917 targetShift=0.000 *
+epoch=020 train=0.44417 val=0.54047 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.054 targetShift=0.000 *
+epoch=021 train=0.39187 val=0.48518 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.189 targetShift=0.000 *
+epoch=022 train=0.34615 val=0.43686 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.307 targetShift=0.000 *
+epoch=023 train=0.30995 val=0.39299 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.424 targetShift=0.000 *
+epoch=024 train=0.27842 val=0.35610 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.513 targetShift=0.000 *
+epoch=025 train=0.25015 val=0.32349 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.576 targetShift=0.000 *
+epoch=026 train=0.22826 val=0.29414 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.579 targetShift=0.000 *
+epoch=027 train=0.20536 val=0.26738 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.313 targetShift=0.000 *
+epoch=028 train=0.18726 val=0.24267 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.600 targetShift=0.000 *
+epoch=029 train=0.17050 val=0.22242 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.372 targetShift=0.000 *
+epoch=030 train=0.16045 val=0.20450 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.395 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=1.0000, Pfa=0.9533, AUC=0.9995
+Selected-threshold raw test: Pd=1.0000, Pfa=0.5733, AUC=0.9823
+Base threshold 0.337646 v3 test : Pd=1.0000, Pfa=0.1467
+Base threshold 0.337646 raw test: Pd=1.0000, Pfa=0.5733
+Test mean shift: background=1.0450, target=0.0000
+Test p(background): background=0.7696, target=0.0034
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt
+Base threshold         : 0.337646
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 742 个样本...
+  dataset: 200/742
+  dataset: 400/742
+  dataset: 600/742
+  dataset: 742/742
+Precomputing frozen DPG features: train (742 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9434, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76770 val=2.30537 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.71371 val=2.21688 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.65492 val=2.12407 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.009 targetShift=0.003 *
+epoch=004 train=1.58809 val=2.02622 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.52473 val=1.92274 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.016 targetShift=0.003 *
+epoch=006 train=1.44794 val=1.82109 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.022 targetShift=0.002 *
+epoch=007 train=1.38858 val=1.71941 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.030 targetShift=0.002 *
+epoch=008 train=1.31097 val=1.61549 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.041 targetShift=0.002 *
+epoch=009 train=1.24256 val=1.51193 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.058 targetShift=0.002 *
+epoch=010 train=1.17051 val=1.40822 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.082 targetShift=0.002 *
+epoch=011 train=1.09656 val=1.30482 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.118 targetShift=0.003 *
+epoch=012 train=1.01112 val=1.20230 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.165 targetShift=0.003 *
+epoch=013 train=0.92971 val=1.10391 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.226 targetShift=0.003 *
+epoch=014 train=0.85298 val=1.00808 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.303 targetShift=0.002 *
+epoch=015 train=0.77377 val=0.91618 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.398 targetShift=0.001 *
+epoch=016 train=0.69977 val=0.82879 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.513 targetShift=0.000 *
+epoch=017 train=0.62439 val=0.74569 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.649 targetShift=0.000 *
+epoch=018 train=0.55789 val=0.67048 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.778 targetShift=0.000 *
+epoch=019 train=0.49955 val=0.60141 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.920 targetShift=0.000 *
+epoch=020 train=0.44268 val=0.53885 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.059 targetShift=0.000 *
+epoch=021 train=0.38997 val=0.48311 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.196 targetShift=0.000 *
+epoch=022 train=0.34382 val=0.43435 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.319 targetShift=0.000 *
+epoch=023 train=0.30720 val=0.39004 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.443 targetShift=0.000 *
+epoch=024 train=0.27526 val=0.35278 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.546 targetShift=0.000 *
+epoch=025 train=0.24667 val=0.31994 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.640 targetShift=0.000 *
+epoch=026 train=0.22460 val=0.29072 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.729 targetShift=0.000 *
+epoch=027 train=0.20208 val=0.26550 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.805 targetShift=0.000 *
+epoch=028 train=0.18549 val=0.24333 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.871 targetShift=0.000 *
+epoch=029 train=0.16994 val=0.22377 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.929 targetShift=0.000 *
+epoch=030 train=0.16024 val=0.20617 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.980 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=1.0000, Pfa=0.6000, AUC=0.9995
+Selected-threshold raw test: Pd=1.0000, Pfa=0.5733, AUC=0.9823
+Base threshold 0.337646 v3 test : Pd=1.0000, Pfa=0.1400
+Base threshold 0.337646 raw test: Pd=1.0000, Pfa=0.5733
+Test mean shift: background=1.9700, target=0.0000
+Test p(background): background=0.7700, target=0.0034
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold01_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt
+Base threshold         : 0.337646
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 742 个样本...
+  dataset: 200/742
+  dataset: 400/742
+  dataset: 600/742
+  dataset: 742/742
+Precomputing frozen DPG features: train (742 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9434, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76770 val=2.30537 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.71371 val=2.21688 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.65492 val=2.12407 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.009 targetShift=0.003 *
+epoch=004 train=1.58809 val=2.02622 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.52473 val=1.92274 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.016 targetShift=0.003 *
+epoch=006 train=1.44794 val=1.82109 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.022 targetShift=0.002 *
+epoch=007 train=1.38858 val=1.71941 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.030 targetShift=0.002 *
+epoch=008 train=1.31097 val=1.61549 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.041 targetShift=0.002 *
+epoch=009 train=1.24255 val=1.51193 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.058 targetShift=0.002 *
+epoch=010 train=1.17050 val=1.40821 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.082 targetShift=0.002 *
+epoch=011 train=1.09655 val=1.30480 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.118 targetShift=0.003 *
+epoch=012 train=1.01110 val=1.20227 basePd=0.9434 basePfa=0.0133 rawPd=0.9434 bgShift=0.165 targetShift=0.003 *
+epoch=013 train=0.92968 val=1.10386 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.226 targetShift=0.003 *
+epoch=014 train=0.85291 val=1.00800 basePd=0.9434 basePfa=0.0067 rawPd=0.9434 bgShift=0.304 targetShift=0.002 *
+epoch=015 train=0.77364 val=0.91603 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.398 targetShift=0.001 *
+epoch=016 train=0.69956 val=0.82854 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.514 targetShift=0.000 *
+epoch=017 train=0.62405 val=0.74529 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.649 targetShift=0.000 *
+epoch=018 train=0.55737 val=0.66989 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.779 targetShift=0.000 *
+epoch=019 train=0.49881 val=0.60059 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=0.922 targetShift=0.000 *
+epoch=020 train=0.44168 val=0.53775 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.062 targetShift=0.000 *
+epoch=021 train=0.38868 val=0.48171 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.200 targetShift=0.000 *
+epoch=022 train=0.34223 val=0.43263 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.325 targetShift=0.000 *
+epoch=023 train=0.30532 val=0.38799 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.451 targetShift=0.000 *
+epoch=024 train=0.27308 val=0.35043 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.556 targetShift=0.000 *
+epoch=025 train=0.24421 val=0.31730 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.652 targetShift=0.000 *
+epoch=026 train=0.22187 val=0.28780 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.745 targetShift=0.000 *
+epoch=027 train=0.19912 val=0.26233 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.825 targetShift=0.000 *
+epoch=028 train=0.18229 val=0.23994 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.897 targetShift=0.000 *
+epoch=029 train=0.16653 val=0.22018 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=1.963 targetShift=0.000 *
+epoch=030 train=0.15659 val=0.20241 basePd=0.9434 basePfa=0.0000 rawPd=0.9434 bgShift=2.026 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=1.0000, Pfa=0.5867, AUC=0.9995
+Selected-threshold raw test: Pd=1.0000, Pfa=0.5733, AUC=0.9823
+Base threshold 0.337646 v3 test : Pd=1.0000, Pfa=0.1400
+Base threshold 0.337646 raw test: Pd=1.0000, Pfa=0.5733
+Test mean shift: background=2.0098, target=0.0000
+Test p(background): background=0.7708, target=0.0033
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold01_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt
+Base threshold         : 0.393799
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 778 个样本...
+  dataset: 200/778
+  dataset: 400/778
+  dataset: 600/778
+  dataset: 778/778
+Precomputing frozen DPG features: train (778 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: val (167 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.72940 val=1.69392 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.65719 val=1.62251 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.58306 val=1.54826 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.51859 val=1.47220 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.44538 val=1.39088 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.018 targetShift=0.002 *
+epoch=006 train=1.37612 val=1.30926 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.30128 val=1.22811 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.036 targetShift=0.001 *
+epoch=008 train=1.22500 val=1.14656 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.052 targetShift=0.001 *
+epoch=009 train=1.14688 val=1.06513 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.075 targetShift=0.001 *
+epoch=010 train=1.07042 val=0.98508 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.108 targetShift=0.001 *
+epoch=011 train=0.98582 val=0.90549 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.156 targetShift=0.001 *
+epoch=012 train=0.90442 val=0.82837 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.219 targetShift=0.001 *
+epoch=013 train=0.83047 val=0.75500 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.293 targetShift=0.001 *
+epoch=014 train=0.75408 val=0.68457 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.389 targetShift=0.001 *
+epoch=015 train=0.67765 val=0.61770 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.504 targetShift=0.002 *
+epoch=016 train=0.60331 val=0.55494 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.632 targetShift=0.002 *
+epoch=017 train=0.53625 val=0.49650 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.776 targetShift=0.001 *
+epoch=018 train=0.47287 val=0.44533 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.924 targetShift=0.004 *
+epoch=019 train=0.41807 val=0.39749 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.060 targetShift=0.004 *
+epoch=020 train=0.37316 val=0.35605 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.172 targetShift=0.003 *
+epoch=021 train=0.33372 val=0.32032 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.271 targetShift=0.003 *
+epoch=022 train=0.29984 val=0.28813 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.313 targetShift=0.002 *
+epoch=023 train=0.26781 val=0.25737 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.983 targetShift=0.001 *
+epoch=024 train=0.23852 val=0.22964 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.299 targetShift=0.000 *
+epoch=025 train=0.21539 val=0.20786 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.184 targetShift=0.002 *
+epoch=026 train=0.19480 val=0.18834 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.260 targetShift=0.008 *
+epoch=027 train=0.17568 val=0.17140 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.196 targetShift=0.007 *
+epoch=028 train=0.15987 val=0.15696 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.154 targetShift=0.006 *
+epoch=029 train=0.14641 val=0.14357 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.169 targetShift=0.006 *
+epoch=030 train=0.13355 val=0.13110 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.185 targetShift=0.005 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Base threshold 0.393799 v3 test : Pd=0.9245, Pfa=0.0000
+Base threshold 0.393799 raw test: Pd=0.9245, Pfa=0.0000
+Test mean shift: background=0.1712, target=0.0055
+Test p(background): background=0.7995, target=0.0035
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt
+Base threshold         : 0.393799
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 778 个样本...
+  dataset: 200/778
+  dataset: 400/778
+  dataset: 600/778
+  dataset: 778/778
+Precomputing frozen DPG features: train (778 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: val (167 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.72940 val=1.69392 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.65719 val=1.62251 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.58306 val=1.54826 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.51859 val=1.47220 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.44538 val=1.39088 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.018 targetShift=0.002 *
+epoch=006 train=1.37612 val=1.30926 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.30128 val=1.22811 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.036 targetShift=0.001 *
+epoch=008 train=1.22500 val=1.14656 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.052 targetShift=0.001 *
+epoch=009 train=1.14687 val=1.06512 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.075 targetShift=0.001 *
+epoch=010 train=1.07041 val=0.98506 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.108 targetShift=0.001 *
+epoch=011 train=0.98578 val=0.90544 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.156 targetShift=0.001 *
+epoch=012 train=0.90433 val=0.82827 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.220 targetShift=0.001 *
+epoch=013 train=0.83030 val=0.75482 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.294 targetShift=0.001 *
+epoch=014 train=0.75377 val=0.68424 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.389 targetShift=0.001 *
+epoch=015 train=0.67713 val=0.61716 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.505 targetShift=0.002 *
+epoch=016 train=0.60245 val=0.55407 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.634 targetShift=0.002 *
+epoch=017 train=0.53496 val=0.49519 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.780 targetShift=0.001 *
+epoch=018 train=0.47102 val=0.44348 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.929 targetShift=0.004 *
+epoch=019 train=0.41558 val=0.39505 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.068 targetShift=0.004 *
+epoch=020 train=0.36999 val=0.35306 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.187 targetShift=0.003 *
+epoch=021 train=0.32990 val=0.31683 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.301 targetShift=0.003 *
+epoch=022 train=0.29551 val=0.28464 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.412 targetShift=0.002 *
+epoch=023 train=0.26392 val=0.25678 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.508 targetShift=0.002 *
+epoch=024 train=0.23765 val=0.23230 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.587 targetShift=0.002 *
+epoch=025 train=0.21425 val=0.21104 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.604 targetShift=0.001 *
+epoch=026 train=0.19568 val=0.19067 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.368 targetShift=0.001 *
+epoch=027 train=0.17577 val=0.17155 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.522 targetShift=0.000 *
+epoch=028 train=0.15970 val=0.15668 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.323 targetShift=0.000 *
+epoch=029 train=0.14584 val=0.14355 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.459 targetShift=0.004 *
+epoch=030 train=0.13284 val=0.13108 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.344 targetShift=0.004 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Base threshold 0.393799 v3 test : Pd=0.9245, Pfa=0.0000
+Base threshold 0.393799 raw test: Pd=0.9245, Pfa=0.0000
+Test mean shift: background=0.3250, target=0.0052
+Test p(background): background=0.7994, target=0.0035
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt
+Base threshold         : 0.393799
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 778 个样本...
+  dataset: 200/778
+  dataset: 400/778
+  dataset: 600/778
+  dataset: 778/778
+Precomputing frozen DPG features: train (778 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: val (167 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.72940 val=1.69392 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.65719 val=1.62251 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.58306 val=1.54826 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.51859 val=1.47220 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.44538 val=1.39088 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.018 targetShift=0.002 *
+epoch=006 train=1.37611 val=1.30926 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.30128 val=1.22810 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.036 targetShift=0.001 *
+epoch=008 train=1.22499 val=1.14655 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.052 targetShift=0.001 *
+epoch=009 train=1.14687 val=1.06511 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.075 targetShift=0.001 *
+epoch=010 train=1.07039 val=0.98504 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.108 targetShift=0.001 *
+epoch=011 train=0.98576 val=0.90541 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.156 targetShift=0.001 *
+epoch=012 train=0.90428 val=0.82821 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.220 targetShift=0.001 *
+epoch=013 train=0.83020 val=0.75471 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.294 targetShift=0.001 *
+epoch=014 train=0.75359 val=0.68405 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.390 targetShift=0.001 *
+epoch=015 train=0.67681 val=0.61683 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.505 targetShift=0.002 *
+epoch=016 train=0.60192 val=0.55355 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.635 targetShift=0.002 *
+epoch=017 train=0.53417 val=0.49440 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.782 targetShift=0.001 *
+epoch=018 train=0.46990 val=0.44236 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.932 targetShift=0.004 *
+epoch=019 train=0.41407 val=0.39356 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.072 targetShift=0.005 *
+epoch=020 train=0.36805 val=0.35119 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.194 targetShift=0.003 *
+epoch=021 train=0.32753 val=0.31458 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.310 targetShift=0.003 *
+epoch=022 train=0.29272 val=0.28201 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.425 targetShift=0.002 *
+epoch=023 train=0.26071 val=0.25378 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.528 targetShift=0.002 *
+epoch=024 train=0.23407 val=0.22901 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.624 targetShift=0.002 *
+epoch=025 train=0.21039 val=0.20778 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.705 targetShift=0.002 *
+epoch=026 train=0.19199 val=0.18872 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.785 targetShift=0.002 *
+epoch=027 train=0.17367 val=0.17225 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.853 targetShift=0.001 *
+epoch=028 train=0.15839 val=0.15785 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.911 targetShift=0.001 *
+epoch=029 train=0.14529 val=0.14494 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.962 targetShift=0.001 *
+epoch=030 train=0.13275 val=0.13285 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=2.016 targetShift=0.001 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Base threshold 0.393799 v3 test : Pd=0.9245, Pfa=0.0000
+Base threshold 0.393799 raw test: Pd=0.9245, Pfa=0.0000
+Test mean shift: background=2.0156, target=0.0026
+Test p(background): background=0.7997, target=0.0035
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold02_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt
+Base threshold         : 0.393799
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 778 个样本...
+  dataset: 200/778
+  dataset: 400/778
+  dataset: 600/778
+  dataset: 778/778
+Precomputing frozen DPG features: train (778 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: val (167 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: test (203 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.72940 val=1.69392 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.65719 val=1.62251 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.58306 val=1.54826 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.51859 val=1.47220 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.44538 val=1.39088 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.018 targetShift=0.002 *
+epoch=006 train=1.37611 val=1.30926 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.30128 val=1.22810 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.036 targetShift=0.001 *
+epoch=008 train=1.22499 val=1.14655 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.052 targetShift=0.001 *
+epoch=009 train=1.14687 val=1.06511 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.075 targetShift=0.001 *
+epoch=010 train=1.07039 val=0.98503 basePd=0.9231 basePfa=0.0087 rawPd=0.9231 bgShift=0.108 targetShift=0.001 *
+epoch=011 train=0.98574 val=0.90538 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.156 targetShift=0.001 *
+epoch=012 train=0.90425 val=0.82817 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.220 targetShift=0.001 *
+epoch=013 train=0.83014 val=0.75463 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.294 targetShift=0.001 *
+epoch=014 train=0.75347 val=0.68392 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.390 targetShift=0.001 *
+epoch=015 train=0.67660 val=0.61661 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.506 targetShift=0.002 *
+epoch=016 train=0.60157 val=0.55320 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.636 targetShift=0.002 *
+epoch=017 train=0.53365 val=0.49387 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.783 targetShift=0.001 *
+epoch=018 train=0.46914 val=0.44160 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.934 targetShift=0.004 *
+epoch=019 train=0.41306 val=0.39255 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.075 targetShift=0.005 *
+epoch=020 train=0.36675 val=0.34993 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.198 targetShift=0.003 *
+epoch=021 train=0.32593 val=0.31305 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.315 targetShift=0.003 *
+epoch=022 train=0.29083 val=0.28021 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.431 targetShift=0.002 *
+epoch=023 train=0.25853 val=0.25171 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.536 targetShift=0.002 *
+epoch=024 train=0.23160 val=0.22667 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.634 targetShift=0.002 *
+epoch=025 train=0.20764 val=0.20521 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.718 targetShift=0.002 *
+epoch=026 train=0.18898 val=0.18593 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.801 targetShift=0.002 *
+epoch=027 train=0.17043 val=0.16925 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.873 targetShift=0.001 *
+epoch=028 train=0.15493 val=0.15467 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.937 targetShift=0.001 *
+epoch=029 train=0.14165 val=0.14161 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=2.000 targetShift=0.001 *
+epoch=030 train=0.12896 val=0.12937 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=2.074 targetShift=0.001 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.9245, Pfa=0.0000, AUC=1.0000
+Base threshold 0.393799 v3 test : Pd=0.9245, Pfa=0.0000
+Base threshold 0.393799 raw test: Pd=0.9245, Pfa=0.0000
+Test mean shift: background=2.0742, target=0.0029
+Test p(background): background=0.8006, target=0.0035
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold02_seed42/tables/summary.json
+==================================================================================
+
+============================================================================================
+Fold=01 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold01_seed42
+============================================================================================
+
+============================================================================================
+Fold=01 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005
+============================================================================================
+
+============================================================================================
+Fold=01 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025
+============================================================================================
+
+============================================================================================
+Fold=01 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=01 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold01_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================
+
+============================================================================================
+Fold=02 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold02_seed42
+============================================================================================
+
+============================================================================================
+Fold=02 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005
+============================================================================================
+
+============================================================================================
+Fold=02 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025
+============================================================================================
+
+============================================================================================
+Fold=02 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=02 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold02_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================
+
+============================================================================================
+Fold=03 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold03_seed42
+============================================================================================
+
+============================================================================================
+Fold=03 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt
+Base threshold         : 0.846680
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 779 个样本...
+  dataset: 200/779
+  dataset: 400/779
+  dataset: 600/779
+  dataset: 779/779
+Precomputing frozen DPG features: train (779 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: val (202 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: test (167 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.53612 val=2.32632 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.48161 val=2.23487 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.41881 val=2.13391 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.34921 val=2.02091 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.014 targetShift=0.003 *
+epoch=005 train=1.27395 val=1.90260 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.19753 val=1.78350 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.027 targetShift=0.002 *
+epoch=007 train=1.12023 val=1.66523 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.038 targetShift=0.002 *
+epoch=008 train=1.04299 val=1.54656 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.055 targetShift=0.001 *
+epoch=009 train=0.96495 val=1.43033 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.079 targetShift=0.001 *
+epoch=010 train=0.88782 val=1.31593 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.114 targetShift=0.001 *
+epoch=011 train=0.81266 val=1.20496 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.160 targetShift=0.001 *
+epoch=012 train=0.74170 val=1.09972 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.210 targetShift=0.001 *
+epoch=013 train=0.67630 val=1.00075 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.256 targetShift=0.001 *
+epoch=014 train=0.61364 val=0.90699 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.305 targetShift=0.001 *
+epoch=015 train=0.55560 val=0.81939 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.353 targetShift=0.000 *
+epoch=016 train=0.50145 val=0.73850 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.405 targetShift=0.000 *
+epoch=017 train=0.45121 val=0.66378 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.458 targetShift=0.000 *
+epoch=018 train=0.40569 val=0.59602 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.470 targetShift=0.000 *
+epoch=019 train=0.36401 val=0.53485 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.478 targetShift=0.000 *
+epoch=020 train=0.33040 val=0.47953 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.558 targetShift=0.001 *
+epoch=021 train=0.29214 val=0.42893 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.662 targetShift=0.001 *
+epoch=022 train=0.26172 val=0.38568 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.700 targetShift=0.001 *
+epoch=023 train=0.23534 val=0.34832 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.812 targetShift=0.001 *
+epoch=024 train=0.21267 val=0.31526 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.812 targetShift=0.001 *
+epoch=025 train=0.19303 val=0.28607 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.801 targetShift=0.000 *
+epoch=026 train=0.17538 val=0.26105 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.945 targetShift=0.001 *
+epoch=027 train=0.16017 val=0.23816 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.873 targetShift=0.000 *
+epoch=028 train=0.14635 val=0.21784 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.779 targetShift=0.000 *
+epoch=029 train=0.13422 val=0.20023 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.794 targetShift=0.000 *
+epoch=030 train=0.12371 val=0.18512 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.954 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9231, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.8654, Pfa=0.0000, AUC=1.0000
+Base threshold 0.846680 v3 test : Pd=0.8654, Pfa=0.0000
+Base threshold 0.846680 raw test: Pd=0.8654, Pfa=0.0000
+Test mean shift: background=0.3279, target=0.0052
+Test p(background): background=0.7986, target=0.0081
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt
+Base threshold         : 0.846680
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 779 个样本...
+  dataset: 200/779
+  dataset: 400/779
+  dataset: 600/779
+  dataset: 779/779
+Precomputing frozen DPG features: train (779 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: val (202 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: test (167 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.53612 val=2.32632 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.48161 val=2.23487 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.41881 val=2.13391 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.34921 val=2.02091 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.014 targetShift=0.003 *
+epoch=005 train=1.27395 val=1.90260 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.19753 val=1.78350 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.027 targetShift=0.002 *
+epoch=007 train=1.12023 val=1.66523 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.038 targetShift=0.002 *
+epoch=008 train=1.04299 val=1.54655 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.055 targetShift=0.001 *
+epoch=009 train=0.96494 val=1.43031 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.079 targetShift=0.001 *
+epoch=010 train=0.88780 val=1.31590 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.114 targetShift=0.001 *
+epoch=011 train=0.81262 val=1.20489 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.160 targetShift=0.001 *
+epoch=012 train=0.74162 val=1.09961 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.210 targetShift=0.001 *
+epoch=013 train=0.67618 val=1.00057 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.257 targetShift=0.001 *
+epoch=014 train=0.61346 val=0.90673 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.307 targetShift=0.001 *
+epoch=015 train=0.55533 val=0.81902 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.358 targetShift=0.000 *
+epoch=016 train=0.50107 val=0.73800 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.415 targetShift=0.000 *
+epoch=017 train=0.45072 val=0.66312 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.480 targetShift=0.000 *
+epoch=018 train=0.40512 val=0.59524 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.545 targetShift=0.000 *
+epoch=019 train=0.36356 val=0.53403 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.613 targetShift=0.000 *
+epoch=020 train=0.33013 val=0.47871 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.684 targetShift=0.000 *
+epoch=021 train=0.29195 val=0.42802 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.689 targetShift=0.000 *
+epoch=022 train=0.26146 val=0.38470 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.707 targetShift=0.000 *
+epoch=023 train=0.23496 val=0.34703 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.831 targetShift=0.000 *
+epoch=024 train=0.21220 val=0.31401 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.903 targetShift=0.000 *
+epoch=025 train=0.19250 val=0.28489 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.955 targetShift=0.000 *
+epoch=026 train=0.17478 val=0.25938 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.003 targetShift=0.000 *
+epoch=027 train=0.15952 val=0.23682 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.042 targetShift=0.000 *
+epoch=028 train=0.14575 val=0.21685 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.080 targetShift=0.000 *
+epoch=029 train=0.13359 val=0.19922 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.100 targetShift=0.000 *
+epoch=030 train=0.12314 val=0.18374 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.183 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9231, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.8654, Pfa=0.0000, AUC=1.0000
+Base threshold 0.846680 v3 test : Pd=0.8654, Pfa=0.0000
+Base threshold 0.846680 raw test: Pd=0.8654, Pfa=0.0000
+Test mean shift: background=0.5575, target=0.0050
+Test p(background): background=0.7987, target=0.0081
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt
+Base threshold         : 0.846680
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 779 个样本...
+  dataset: 200/779
+  dataset: 400/779
+  dataset: 600/779
+  dataset: 779/779
+Precomputing frozen DPG features: train (779 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: val (202 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: test (167 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.53612 val=2.32632 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.48161 val=2.23487 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.41881 val=2.13391 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.34921 val=2.02091 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.014 targetShift=0.003 *
+epoch=005 train=1.27395 val=1.90260 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.19753 val=1.78350 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.027 targetShift=0.002 *
+epoch=007 train=1.12023 val=1.66523 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.038 targetShift=0.002 *
+epoch=008 train=1.04299 val=1.54654 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.055 targetShift=0.001 *
+epoch=009 train=0.96494 val=1.43030 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.079 targetShift=0.001 *
+epoch=010 train=0.88779 val=1.31588 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.114 targetShift=0.001 *
+epoch=011 train=0.81259 val=1.20486 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.160 targetShift=0.001 *
+epoch=012 train=0.74158 val=1.09955 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.211 targetShift=0.001 *
+epoch=013 train=0.67610 val=1.00047 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.257 targetShift=0.001 *
+epoch=014 train=0.61334 val=0.90657 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.308 targetShift=0.001 *
+epoch=015 train=0.55516 val=0.81879 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.361 targetShift=0.000 *
+epoch=016 train=0.50083 val=0.73768 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.419 targetShift=0.000 *
+epoch=017 train=0.45039 val=0.66269 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.488 targetShift=0.000 *
+epoch=018 train=0.40468 val=0.59468 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.558 targetShift=0.000 *
+epoch=019 train=0.36301 val=0.53334 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.633 targetShift=0.000 *
+epoch=020 train=0.32946 val=0.47787 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.723 targetShift=0.000 *
+epoch=021 train=0.29127 val=0.42707 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.802 targetShift=0.000 *
+epoch=022 train=0.26092 val=0.38373 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.871 targetShift=0.000 *
+epoch=023 train=0.23457 val=0.34603 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.928 targetShift=0.000 *
+epoch=024 train=0.21187 val=0.31295 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.964 targetShift=0.000 *
+epoch=025 train=0.19214 val=0.28376 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.982 targetShift=0.000 *
+epoch=026 train=0.17433 val=0.25814 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.031 targetShift=0.000 *
+epoch=027 train=0.15901 val=0.23548 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.118 targetShift=0.000 *
+epoch=028 train=0.14518 val=0.21543 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.183 targetShift=0.000 *
+epoch=029 train=0.13298 val=0.19775 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.223 targetShift=0.000 *
+epoch=030 train=0.12239 val=0.18208 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.279 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9231, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.8654, Pfa=0.0000, AUC=1.0000
+Base threshold 0.846680 v3 test : Pd=0.8654, Pfa=0.0000
+Base threshold 0.846680 raw test: Pd=0.8654, Pfa=0.0000
+Test mean shift: background=0.4970, target=0.0023
+Test p(background): background=0.7988, target=0.0081
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold03_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt
+Base threshold         : 0.846680
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 779 个样本...
+  dataset: 200/779
+  dataset: 400/779
+  dataset: 600/779
+  dataset: 779/779
+Precomputing frozen DPG features: train (779 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: val (202 samples)
+预加载 dataset: 167 个样本...
+  dataset: 167/167
+Precomputing frozen DPG features: test (167 samples)
+Raw validation at base threshold: Pd=0.9231, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.53612 val=2.32632 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.48161 val=2.23487 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.41881 val=2.13391 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.34921 val=2.02091 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.014 targetShift=0.003 *
+epoch=005 train=1.27395 val=1.90260 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.19753 val=1.78349 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.027 targetShift=0.002 *
+epoch=007 train=1.12023 val=1.66523 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.038 targetShift=0.002 *
+epoch=008 train=1.04298 val=1.54654 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.055 targetShift=0.001 *
+epoch=009 train=0.96493 val=1.43030 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.079 targetShift=0.001 *
+epoch=010 train=0.88778 val=1.31587 basePd=0.9231 basePfa=0.0133 rawPd=0.9231 bgShift=0.114 targetShift=0.001 *
+epoch=011 train=0.81257 val=1.20483 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.160 targetShift=0.001 *
+epoch=012 train=0.74155 val=1.09950 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.211 targetShift=0.001 *
+epoch=013 train=0.67605 val=1.00040 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.258 targetShift=0.001 *
+epoch=014 train=0.61326 val=0.90646 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.309 targetShift=0.001 *
+epoch=015 train=0.55505 val=0.81863 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.363 targetShift=0.000 *
+epoch=016 train=0.50067 val=0.73746 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.422 targetShift=0.000 *
+epoch=017 train=0.45017 val=0.66239 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.493 targetShift=0.000 *
+epoch=018 train=0.40438 val=0.59429 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.566 targetShift=0.000 *
+epoch=019 train=0.36262 val=0.53284 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.645 targetShift=0.000 *
+epoch=020 train=0.32896 val=0.47724 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.740 targetShift=0.000 *
+epoch=021 train=0.29065 val=0.42632 basePd=0.9231 basePfa=0.0067 rawPd=0.9231 bgShift=0.826 targetShift=0.000 *
+epoch=022 train=0.26019 val=0.38286 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.905 targetShift=0.000 *
+epoch=023 train=0.23374 val=0.34502 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=0.979 targetShift=0.000 *
+epoch=024 train=0.21096 val=0.31181 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.046 targetShift=0.000 *
+epoch=025 train=0.19119 val=0.28250 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.114 targetShift=0.000 *
+epoch=026 train=0.17341 val=0.25680 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.178 targetShift=0.000 *
+epoch=027 train=0.15805 val=0.23406 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.245 targetShift=0.000 *
+epoch=028 train=0.14421 val=0.21392 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.308 targetShift=0.000 *
+epoch=029 train=0.13199 val=0.19616 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.367 targetShift=0.000 *
+epoch=030 train=0.12137 val=0.18040 basePd=0.9231 basePfa=0.0000 rawPd=0.9231 bgShift=1.425 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9231, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.8654, Pfa=0.0000, AUC=1.0000
+Base threshold 0.846680 v3 test : Pd=0.8654, Pfa=0.0000
+Base threshold 0.846680 raw test: Pd=0.8654, Pfa=0.0000
+Test mean shift: background=1.4260, target=0.0043
+Test p(background): background=0.7990, target=0.0081
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold03_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt
+Base threshold         : 0.254150
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 736 个样本...
+  dataset: 200/736
+  dataset: 400/736
+  dataset: 600/736
+  dataset: 736/736
+Precomputing frozen DPG features: train (736 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: val (210 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: test (202 samples)
+Raw validation at base threshold: Pd=0.9333, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.86772 val=2.23238 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.81738 val=2.14426 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.74967 val=2.05354 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.67669 val=1.95970 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.62593 val=1.86136 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.017 targetShift=0.003 *
+epoch=006 train=1.54490 val=1.76177 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.022 targetShift=0.003 *
+epoch=007 train=1.47871 val=1.66279 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.030 targetShift=0.003 *
+epoch=008 train=1.40545 val=1.56356 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.042 targetShift=0.002 *
+epoch=009 train=1.33116 val=1.46482 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.058 targetShift=0.003 *
+epoch=010 train=1.25987 val=1.36631 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.082 targetShift=0.003 *
+epoch=011 train=1.17522 val=1.26807 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.117 targetShift=0.004 *
+epoch=012 train=1.10624 val=1.17113 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.165 targetShift=0.005 *
+epoch=013 train=1.01860 val=1.07671 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.228 targetShift=0.005 *
+epoch=014 train=0.94108 val=0.98587 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.304 targetShift=0.005 *
+epoch=015 train=0.86559 val=0.89707 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.399 targetShift=0.004 *
+epoch=016 train=0.78009 val=0.81071 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.511 targetShift=0.003 *
+epoch=017 train=0.69774 val=0.73154 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.629 targetShift=0.001 *
+epoch=018 train=0.61555 val=0.65712 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.769 targetShift=0.001 *
+epoch=019 train=0.54529 val=0.58758 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.922 targetShift=0.001 *
+epoch=020 train=0.48299 val=0.52784 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.053 targetShift=0.000 *
+epoch=021 train=0.42736 val=0.47304 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.177 targetShift=0.000 *
+epoch=022 train=0.38014 val=0.42473 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.254 targetShift=0.000 *
+epoch=023 train=0.33599 val=0.38245 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.132 targetShift=0.000 *
+epoch=024 train=0.30098 val=0.34125 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.477 targetShift=0.000 *
+epoch=025 train=0.26870 val=0.30696 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.228 targetShift=0.000 *
+epoch=026 train=0.23901 val=0.27814 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.196 targetShift=0.000 *
+epoch=027 train=0.21651 val=0.25321 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.174 targetShift=0.000 *
+epoch=028 train=0.19580 val=0.23075 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.154 targetShift=0.000 *
+epoch=029 train=0.17810 val=0.21106 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.197 targetShift=0.000 *
+epoch=030 train=0.16540 val=0.19360 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.206 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9038, Pfa=0.8800, AUC=0.9965
+Selected-threshold raw test: Pd=0.9038, Pfa=0.6667, AUC=0.9662
+Base threshold 0.254150 v3 test : Pd=0.9038, Pfa=0.0933
+Base threshold 0.254150 raw test: Pd=0.9038, Pfa=0.6667
+Test mean shift: background=0.8886, target=0.0001
+Test p(background): background=0.7760, target=0.0037
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt
+Base threshold         : 0.254150
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 736 个样本...
+  dataset: 200/736
+  dataset: 400/736
+  dataset: 600/736
+  dataset: 736/736
+Precomputing frozen DPG features: train (736 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: val (210 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: test (202 samples)
+Raw validation at base threshold: Pd=0.9333, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.86772 val=2.23238 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.81738 val=2.14426 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.74967 val=2.05354 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.67669 val=1.95970 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.62593 val=1.86136 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.017 targetShift=0.003 *
+epoch=006 train=1.54490 val=1.76177 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.022 targetShift=0.003 *
+epoch=007 train=1.47871 val=1.66279 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.030 targetShift=0.003 *
+epoch=008 train=1.40545 val=1.56355 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.042 targetShift=0.002 *
+epoch=009 train=1.33116 val=1.46481 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.058 targetShift=0.003 *
+epoch=010 train=1.25986 val=1.36630 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.082 targetShift=0.003 *
+epoch=011 train=1.17520 val=1.26804 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.117 targetShift=0.004 *
+epoch=012 train=1.10619 val=1.17107 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.165 targetShift=0.005 *
+epoch=013 train=1.01851 val=1.07660 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.228 targetShift=0.005 *
+epoch=014 train=0.94091 val=0.98567 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.304 targetShift=0.005 *
+epoch=015 train=0.86528 val=0.89672 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.399 targetShift=0.004 *
+epoch=016 train=0.77957 val=0.81012 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.512 targetShift=0.003 *
+epoch=017 train=0.69694 val=0.73063 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.631 targetShift=0.001 *
+epoch=018 train=0.61432 val=0.65577 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.772 targetShift=0.001 *
+epoch=019 train=0.54351 val=0.58565 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.928 targetShift=0.001 *
+epoch=020 train=0.48054 val=0.52529 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.065 targetShift=0.000 *
+epoch=021 train=0.42427 val=0.46989 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.203 targetShift=0.000 *
+epoch=022 train=0.37650 val=0.42129 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.328 targetShift=0.000 *
+epoch=023 train=0.33237 val=0.38034 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.429 targetShift=0.000 *
+epoch=024 train=0.29953 val=0.34305 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.519 targetShift=0.000 *
+epoch=025 train=0.26917 val=0.30979 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.558 targetShift=0.000 *
+epoch=026 train=0.24015 val=0.28052 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.417 targetShift=0.000 *
+epoch=027 train=0.21699 val=0.25322 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.718 targetShift=0.000 *
+epoch=028 train=0.19538 val=0.23001 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.330 targetShift=0.000 *
+epoch=029 train=0.17765 val=0.21091 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.333 targetShift=0.000 *
+epoch=030 train=0.16480 val=0.19353 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=0.363 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9038, Pfa=0.9400, AUC=0.9965
+Selected-threshold raw test: Pd=0.9038, Pfa=0.6667, AUC=0.9662
+Base threshold 0.254150 v3 test : Pd=0.9038, Pfa=0.0933
+Base threshold 0.254150 raw test: Pd=0.9038, Pfa=0.6667
+Test mean shift: background=1.1662, target=0.0001
+Test p(background): background=0.7759, target=0.0037
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt
+Base threshold         : 0.254150
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 736 个样本...
+  dataset: 200/736
+  dataset: 400/736
+  dataset: 600/736
+  dataset: 736/736
+Precomputing frozen DPG features: train (736 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: val (210 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: test (202 samples)
+Raw validation at base threshold: Pd=0.9333, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.86772 val=2.23238 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.81738 val=2.14426 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.74967 val=2.05354 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.67669 val=1.95969 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.62593 val=1.86136 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.017 targetShift=0.003 *
+epoch=006 train=1.54490 val=1.76177 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.022 targetShift=0.003 *
+epoch=007 train=1.47871 val=1.66279 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.030 targetShift=0.003 *
+epoch=008 train=1.40545 val=1.56355 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.042 targetShift=0.002 *
+epoch=009 train=1.33116 val=1.46481 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.058 targetShift=0.003 *
+epoch=010 train=1.25985 val=1.36629 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.082 targetShift=0.003 *
+epoch=011 train=1.17518 val=1.26802 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.117 targetShift=0.004 *
+epoch=012 train=1.10616 val=1.17103 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.165 targetShift=0.005 *
+epoch=013 train=1.01845 val=1.07653 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.228 targetShift=0.005 *
+epoch=014 train=0.94081 val=0.98554 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.304 targetShift=0.005 *
+epoch=015 train=0.86509 val=0.89650 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.399 targetShift=0.004 *
+epoch=016 train=0.77925 val=0.80975 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.513 targetShift=0.003 *
+epoch=017 train=0.69646 val=0.73008 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.632 targetShift=0.001 *
+epoch=018 train=0.61357 val=0.65494 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.774 targetShift=0.001 *
+epoch=019 train=0.54243 val=0.58446 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.931 targetShift=0.001 *
+epoch=020 train=0.47904 val=0.52372 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.070 targetShift=0.000 *
+epoch=021 train=0.42234 val=0.46787 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.212 targetShift=0.000 *
+epoch=022 train=0.37412 val=0.41884 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.342 targetShift=0.000 *
+epoch=023 train=0.32955 val=0.37748 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.454 targetShift=0.000 *
+epoch=024 train=0.29631 val=0.33987 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.565 targetShift=0.000 *
+epoch=025 train=0.26569 val=0.30653 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.667 targetShift=0.000 *
+epoch=026 train=0.23682 val=0.27812 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.755 targetShift=0.000 *
+epoch=027 train=0.21496 val=0.25339 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.832 targetShift=0.000 *
+epoch=028 train=0.19467 val=0.23103 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.903 targetShift=0.000 *
+epoch=029 train=0.17737 val=0.21226 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.953 targetShift=0.000 *
+epoch=030 train=0.16487 val=0.19513 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.987 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9038, Pfa=0.6800, AUC=0.9967
+Selected-threshold raw test: Pd=0.9038, Pfa=0.6667, AUC=0.9662
+Base threshold 0.254150 v3 test : Pd=0.9038, Pfa=0.0933
+Base threshold 0.254150 raw test: Pd=0.9038, Pfa=0.6667
+Test mean shift: background=1.9879, target=0.0001
+Test p(background): background=0.7762, target=0.0037
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold04_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt
+Base threshold         : 0.254150
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 736 个样本...
+  dataset: 200/736
+  dataset: 400/736
+  dataset: 600/736
+  dataset: 736/736
+Precomputing frozen DPG features: train (736 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: val (210 samples)
+预加载 dataset: 202 个样本...
+  dataset: 200/202
+  dataset: 202/202
+Precomputing frozen DPG features: test (202 samples)
+Raw validation at base threshold: Pd=0.9333, Pfa=0.0200
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.86772 val=2.23238 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.81738 val=2.14426 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.74967 val=2.05354 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.67669 val=1.95969 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.012 targetShift=0.003 *
+epoch=005 train=1.62593 val=1.86136 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.017 targetShift=0.003 *
+epoch=006 train=1.54490 val=1.76177 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.022 targetShift=0.003 *
+epoch=007 train=1.47871 val=1.66279 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.030 targetShift=0.003 *
+epoch=008 train=1.40545 val=1.56355 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.042 targetShift=0.002 *
+epoch=009 train=1.33115 val=1.46480 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.058 targetShift=0.003 *
+epoch=010 train=1.25985 val=1.36628 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.082 targetShift=0.003 *
+epoch=011 train=1.17517 val=1.26801 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.117 targetShift=0.004 *
+epoch=012 train=1.10615 val=1.17101 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.165 targetShift=0.005 *
+epoch=013 train=1.01841 val=1.07648 basePd=0.9333 basePfa=0.0133 rawPd=0.9333 bgShift=0.228 targetShift=0.005 *
+epoch=014 train=0.94074 val=0.98546 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.304 targetShift=0.005 *
+epoch=015 train=0.86497 val=0.89636 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.399 targetShift=0.004 *
+epoch=016 train=0.77904 val=0.80951 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.513 targetShift=0.003 *
+epoch=017 train=0.69614 val=0.72971 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.633 targetShift=0.001 *
+epoch=018 train=0.61307 val=0.65439 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.775 targetShift=0.001 *
+epoch=019 train=0.54170 val=0.58366 basePd=0.9333 basePfa=0.0067 rawPd=0.9333 bgShift=0.933 targetShift=0.001 *
+epoch=020 train=0.47803 val=0.52265 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.073 targetShift=0.000 *
+epoch=021 train=0.42104 val=0.46650 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.216 targetShift=0.000 *
+epoch=022 train=0.37250 val=0.41715 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.348 targetShift=0.000 *
+epoch=023 train=0.32761 val=0.37549 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.463 targetShift=0.000 *
+epoch=024 train=0.29405 val=0.33757 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.576 targetShift=0.000 *
+epoch=025 train=0.26313 val=0.30393 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.681 targetShift=0.000 *
+epoch=026 train=0.23399 val=0.27524 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.774 targetShift=0.000 *
+epoch=027 train=0.21186 val=0.25027 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.857 targetShift=0.000 *
+epoch=028 train=0.19135 val=0.22767 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=1.938 targetShift=0.000 *
+epoch=029 train=0.17385 val=0.20874 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=2.004 targetShift=0.000 *
+epoch=030 train=0.16119 val=0.19149 basePd=0.9333 basePfa=0.0000 rawPd=0.9333 bgShift=2.068 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.9038, Pfa=0.6667, AUC=0.9967
+Selected-threshold raw test: Pd=0.9038, Pfa=0.6667, AUC=0.9662
+Base threshold 0.254150 v3 test : Pd=0.9038, Pfa=0.0933
+Base threshold 0.254150 raw test: Pd=0.9038, Pfa=0.6667
+Test mean shift: background=2.0516, target=0.0001
+Test p(background): background=0.7770, target=0.0037
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold04_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt
+Base threshold         : 0.361328
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 775 个样本...
+  dataset: 200/775
+  dataset: 400/775
+  dataset: 600/775
+  dataset: 775/775
+Precomputing frozen DPG features: train (775 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: val (163 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: test (210 samples)
+Raw validation at base threshold: Pd=0.9375, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76180 val=1.75128 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.70223 val=1.67594 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.63212 val=1.59893 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.010 targetShift=0.004 *
+epoch=004 train=1.56600 val=1.52043 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.50583 val=1.43982 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.018 targetShift=0.003 *
+epoch=006 train=1.41792 val=1.35535 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.024 targetShift=0.003 *
+epoch=007 train=1.33814 val=1.27427 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.034 targetShift=0.004 *
+epoch=008 train=1.26855 val=1.19347 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.048 targetShift=0.005 *
+epoch=009 train=1.18940 val=1.11189 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.070 targetShift=0.006 *
+epoch=010 train=1.11519 val=1.03071 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.102 targetShift=0.008 *
+epoch=011 train=1.02791 val=0.95144 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.147 targetShift=0.011 *
+epoch=012 train=0.95370 val=0.87854 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.208 targetShift=0.015 *
+epoch=013 train=0.86636 val=0.81540 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.287 targetShift=0.020 *
+epoch=014 train=0.78814 val=0.77244 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.388 targetShift=0.027 *
+epoch=015 train=0.69625 val=0.75758 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.514 targetShift=0.035 *
+epoch=016 train=0.61515 val=0.79125 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.655 targetShift=0.046 
+epoch=017 train=0.54229 val=0.85681 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.803 targetShift=0.056 
+epoch=018 train=0.47637 val=0.95718 basePd=0.9167 basePfa=0.0087 rawPd=0.9375 bgShift=0.959 targetShift=0.065 
+epoch=019 train=0.41685 val=1.11008 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.100 targetShift=0.076 
+epoch=020 train=0.37886 val=1.16830 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.159 targetShift=0.080 
+epoch=021 train=0.35618 val=1.15793 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.197 targetShift=0.080 
+epoch=022 train=0.33556 val=1.12296 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.180 targetShift=0.079 
+epoch=023 train=0.31683 val=0.88445 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=0.984 targetShift=0.068 
+Early stopping after 8 stale epochs
+
+==================================================================================
+Best epoch: 15
+Selected-threshold v3 test : Pd=0.9500, Pfa=0.0000, AUC=0.9999
+Selected-threshold raw test: Pd=0.9500, Pfa=0.0000, AUC=0.9998
+Base threshold 0.361328 v3 test : Pd=0.9500, Pfa=0.0000
+Base threshold 0.361328 raw test: Pd=0.9500, Pfa=0.0000
+Test mean shift: background=0.5138, target=0.0127
+Test p(background): background=0.3523, target=0.0198
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42/tables/summary.json
+==================================================================================
+
+============================================================================================
+
+============================================================================================
+Fold=03 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025
+============================================================================================
+
+============================================================================================
+Fold=03 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=03 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold03_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================
+
+============================================================================================
+Fold=04 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold04_seed42
+============================================================================================
+
+============================================================================================
+Fold=04 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005
+============================================================================================
+
+============================================================================================
+Fold=04 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025
+============================================================================================
+
+============================================================================================
+Fold=04 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=04 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold04_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================
+
+============================================================================================
+Fold=05 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold05_seed42
+============================================================================================
+
+============================================================================================
+Fold=05 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005
+============================================================================================
+
+============================================================================================
+Fold=05 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt
+Base threshold         : 0.361328
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 775 个样本...
+  dataset: 200/775
+  dataset: 400/775
+  dataset: 600/775
+  dataset: 775/775
+Precomputing frozen DPG features: train (775 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: val (163 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: test (210 samples)
+Raw validation at base threshold: Pd=0.9375, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76180 val=1.75128 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.70223 val=1.67594 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.63211 val=1.59893 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.010 targetShift=0.004 *
+epoch=004 train=1.56600 val=1.52043 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.50583 val=1.43982 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.018 targetShift=0.003 *
+epoch=006 train=1.41792 val=1.35535 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.024 targetShift=0.003 *
+epoch=007 train=1.33814 val=1.27427 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.034 targetShift=0.004 *
+epoch=008 train=1.26855 val=1.19347 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.048 targetShift=0.005 *
+epoch=009 train=1.18939 val=1.11188 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.070 targetShift=0.006 *
+epoch=010 train=1.11517 val=1.03069 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.102 targetShift=0.008 *
+epoch=011 train=1.02787 val=0.95140 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.147 targetShift=0.011 *
+epoch=012 train=0.95362 val=0.87845 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.208 targetShift=0.015 *
+epoch=013 train=0.86620 val=0.81527 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.288 targetShift=0.020 *
+epoch=014 train=0.78784 val=0.77229 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.389 targetShift=0.027 *
+epoch=015 train=0.69571 val=0.75758 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.515 targetShift=0.035 *
+epoch=016 train=0.61424 val=0.79182 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.657 targetShift=0.046 
+epoch=017 train=0.54089 val=0.85870 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.806 targetShift=0.056 
+epoch=018 train=0.47436 val=0.96225 basePd=0.9167 basePfa=0.0087 rawPd=0.9375 bgShift=0.964 targetShift=0.066 
+epoch=019 train=0.41416 val=1.12475 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.112 targetShift=0.077 
+epoch=020 train=0.37561 val=1.19821 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.180 targetShift=0.082 
+epoch=021 train=0.35267 val=1.22475 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.243 targetShift=0.083 
+epoch=022 train=0.33197 val=1.29995 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.301 targetShift=0.087 
+epoch=023 train=0.31375 val=1.38751 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.355 targetShift=0.091 
+Early stopping after 8 stale epochs
+
+==================================================================================
+Best epoch: 15
+Selected-threshold v3 test : Pd=0.9500, Pfa=0.0000, AUC=0.9999
+Selected-threshold raw test: Pd=0.9500, Pfa=0.0000, AUC=0.9998
+Base threshold 0.361328 v3 test : Pd=0.9500, Pfa=0.0000
+Base threshold 0.361328 raw test: Pd=0.9500, Pfa=0.0000
+Test mean shift: background=0.5148, target=0.0127
+Test p(background): background=0.3524, target=0.0198
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt
+Base threshold         : 0.361328
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 775 个样本...
+  dataset: 200/775
+  dataset: 400/775
+  dataset: 600/775
+  dataset: 775/775
+Precomputing frozen DPG features: train (775 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: val (163 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: test (210 samples)
+Raw validation at base threshold: Pd=0.9375, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76180 val=1.75128 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.70223 val=1.67594 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.63211 val=1.59893 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.010 targetShift=0.004 *
+epoch=004 train=1.56600 val=1.52043 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.50583 val=1.43982 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.018 targetShift=0.003 *
+epoch=006 train=1.41792 val=1.35535 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.024 targetShift=0.003 *
+epoch=007 train=1.33814 val=1.27426 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.034 targetShift=0.004 *
+epoch=008 train=1.26854 val=1.19346 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.048 targetShift=0.005 *
+epoch=009 train=1.18939 val=1.11188 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.070 targetShift=0.006 *
+epoch=010 train=1.11516 val=1.03068 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.102 targetShift=0.008 *
+epoch=011 train=1.02785 val=0.95137 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.147 targetShift=0.011 *
+epoch=012 train=0.95357 val=0.87840 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.208 targetShift=0.015 *
+epoch=013 train=0.86611 val=0.81520 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.288 targetShift=0.020 *
+epoch=014 train=0.78767 val=0.77220 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.389 targetShift=0.027 *
+epoch=015 train=0.69539 val=0.75758 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.515 targetShift=0.035 *
+epoch=016 train=0.61370 val=0.79214 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.658 targetShift=0.046 
+epoch=017 train=0.54004 val=0.85973 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.808 targetShift=0.056 
+epoch=018 train=0.47314 val=0.96466 basePd=0.9167 basePfa=0.0087 rawPd=0.9375 bgShift=0.967 targetShift=0.066 
+epoch=019 train=0.41251 val=1.12998 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.116 targetShift=0.078 
+epoch=020 train=0.37360 val=1.20603 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.186 targetShift=0.082 
+epoch=021 train=0.35044 val=1.23528 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.250 targetShift=0.083 
+epoch=022 train=0.32952 val=1.31643 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.311 targetShift=0.088 
+epoch=023 train=0.31107 val=1.41440 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.370 targetShift=0.093 
+Early stopping after 8 stale epochs
+
+==================================================================================
+Best epoch: 15
+Selected-threshold v3 test : Pd=0.9500, Pfa=0.0000, AUC=0.9999
+Selected-threshold raw test: Pd=0.9500, Pfa=0.0000, AUC=0.9998
+Base threshold 0.361328 v3 test : Pd=0.9500, Pfa=0.0000
+Base threshold 0.361328 raw test: Pd=0.9500, Pfa=0.0000
+Test mean shift: background=0.5154, target=0.0127
+Test p(background): background=0.3524, target=0.0198
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold05_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt
+Base threshold         : 0.361328
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 775 个样本...
+  dataset: 200/775
+  dataset: 400/775
+  dataset: 600/775
+  dataset: 775/775
+Precomputing frozen DPG features: train (775 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: val (163 samples)
+预加载 dataset: 210 个样本...
+  dataset: 200/210
+  dataset: 210/210
+Precomputing frozen DPG features: test (210 samples)
+Raw validation at base threshold: Pd=0.9375, Pfa=0.0174
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.76180 val=1.75128 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.006 targetShift=0.005 *
+epoch=002 train=1.70223 val=1.67594 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.008 targetShift=0.004 *
+epoch=003 train=1.63211 val=1.59893 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.010 targetShift=0.004 *
+epoch=004 train=1.56600 val=1.52043 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.013 targetShift=0.003 *
+epoch=005 train=1.50583 val=1.43982 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.018 targetShift=0.003 *
+epoch=006 train=1.41792 val=1.35535 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.024 targetShift=0.003 *
+epoch=007 train=1.33814 val=1.27426 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.034 targetShift=0.004 *
+epoch=008 train=1.26854 val=1.19346 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.048 targetShift=0.005 *
+epoch=009 train=1.18938 val=1.11187 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.070 targetShift=0.006 *
+epoch=010 train=1.11515 val=1.03067 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.102 targetShift=0.008 *
+epoch=011 train=1.02783 val=0.95135 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.147 targetShift=0.011 *
+epoch=012 train=0.95354 val=0.87837 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.208 targetShift=0.015 *
+epoch=013 train=0.86605 val=0.81515 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.288 targetShift=0.020 *
+epoch=014 train=0.78755 val=0.77215 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.389 targetShift=0.027 *
+epoch=015 train=0.69517 val=0.75758 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.516 targetShift=0.035 *
+epoch=016 train=0.61333 val=0.79235 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.659 targetShift=0.046 
+epoch=017 train=0.53947 val=0.86038 basePd=0.9375 basePfa=0.0087 rawPd=0.9375 bgShift=0.809 targetShift=0.056 
+epoch=018 train=0.47232 val=0.96612 basePd=0.9167 basePfa=0.0087 rawPd=0.9375 bgShift=0.969 targetShift=0.066 
+epoch=019 train=0.41141 val=1.13296 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.118 targetShift=0.078 
+epoch=020 train=0.37225 val=1.21020 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.189 targetShift=0.082 
+epoch=021 train=0.34894 val=1.24024 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.254 targetShift=0.084 
+epoch=022 train=0.32787 val=1.32307 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.315 targetShift=0.088 
+epoch=023 train=0.30926 val=1.42294 basePd=0.9167 basePfa=0.0000 rawPd=0.9375 bgShift=1.375 targetShift=0.093 
+Early stopping after 8 stale epochs
+
+==================================================================================
+Best epoch: 15
+Selected-threshold v3 test : Pd=0.9500, Pfa=0.0000, AUC=0.9999
+Selected-threshold raw test: Pd=0.9500, Pfa=0.0000, AUC=0.9998
+Base threshold 0.361328 v3 test : Pd=0.9500, Pfa=0.0000
+Base threshold 0.361328 raw test: Pd=0.9500, Pfa=0.0000
+Test mean shift: background=0.5158, target=0.0127
+Test p(background): background=0.3525, target=0.0198
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold05_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt
+Base threshold         : 0.896973
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 782 个样本...
+  dataset: 200/782
+  dataset: 400/782
+  dataset: 600/782
+  dataset: 782/782
+Precomputing frozen DPG features: train (782 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: test (163 samples)
+Raw validation at base threshold: Pd=0.9623, Pfa=0.0133
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.52889 val=2.31157 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.006 targetShift=0.004 *
+epoch=002 train=1.47049 val=2.21726 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.40459 val=2.11202 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.33591 val=2.00179 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.014 targetShift=0.002 *
+epoch=005 train=1.26303 val=1.88984 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.18929 val=1.77232 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.11430 val=1.66197 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.037 targetShift=0.001 *
+epoch=008 train=1.03972 val=1.54826 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.053 targetShift=0.001 *
+epoch=009 train=0.96439 val=1.44025 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.077 targetShift=0.001 *
+epoch=010 train=0.88965 val=1.32792 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.110 targetShift=0.001 *
+epoch=011 train=0.81703 val=1.22539 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.154 targetShift=0.000 *
+epoch=012 train=0.74748 val=1.12209 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.201 targetShift=0.000 *
+epoch=013 train=0.68333 val=1.02531 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.240 targetShift=0.000 *
+epoch=014 train=0.62257 val=0.93186 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.277 targetShift=0.000 *
+epoch=015 train=0.56552 val=0.84640 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.312 targetShift=0.000 *
+epoch=016 train=0.51137 val=0.76403 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.350 targetShift=0.000 *
+epoch=017 train=0.46203 val=0.69049 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.388 targetShift=0.000 *
+epoch=018 train=0.41606 val=0.61912 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.424 targetShift=0.000 *
+epoch=019 train=0.37493 val=0.55750 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.453 targetShift=0.000 *
+epoch=020 train=0.33655 val=0.50085 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.451 targetShift=0.000 *
+epoch=021 train=0.30264 val=0.45055 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.500 targetShift=0.000 *
+epoch=022 train=0.27267 val=0.40497 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.558 targetShift=0.000 *
+epoch=023 train=0.24551 val=0.36537 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.547 targetShift=0.000 *
+epoch=024 train=0.22198 val=0.32994 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.601 targetShift=0.000 *
+epoch=025 train=0.20107 val=0.29899 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.646 targetShift=0.000 *
+epoch=026 train=0.18243 val=0.27157 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.625 targetShift=0.000 *
+epoch=027 train=0.16648 val=0.24767 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.671 targetShift=0.000 *
+epoch=028 train=0.15196 val=0.22668 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.708 targetShift=0.000 *
+epoch=029 train=0.13925 val=0.20760 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.659 targetShift=0.000 *
+epoch=030 train=0.12829 val=0.19114 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.729 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.8542, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.7917, Pfa=0.0000, AUC=0.9987
+Base threshold 0.896973 v3 test : Pd=0.7917, Pfa=0.0000
+Base threshold 0.896973 raw test: Pd=0.7917, Pfa=0.0000
+Test mean shift: background=0.3211, target=0.0136
+Test p(background): background=0.7922, target=0.0300
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt
+Base threshold         : 0.896973
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 782 个样本...
+  dataset: 200/782
+  dataset: 400/782
+  dataset: 600/782
+  dataset: 782/782
+Precomputing frozen DPG features: train (782 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: test (163 samples)
+Raw validation at base threshold: Pd=0.9623, Pfa=0.0133
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.52889 val=2.31157 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.006 targetShift=0.004 *
+epoch=002 train=1.47049 val=2.21726 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.40459 val=2.11202 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.33591 val=2.00179 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.014 targetShift=0.002 *
+epoch=005 train=1.26303 val=1.88984 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.18929 val=1.77232 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.11430 val=1.66197 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.037 targetShift=0.001 *
+epoch=008 train=1.03972 val=1.54826 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.053 targetShift=0.001 *
+epoch=009 train=0.96438 val=1.44023 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.077 targetShift=0.001 *
+epoch=010 train=0.88963 val=1.32789 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.110 targetShift=0.001 *
+epoch=011 train=0.81699 val=1.22533 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.154 targetShift=0.000 *
+epoch=012 train=0.74741 val=1.12199 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.202 targetShift=0.000 *
+epoch=013 train=0.68322 val=1.02516 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.241 targetShift=0.000 *
+epoch=014 train=0.62241 val=0.93165 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.279 targetShift=0.000 *
+epoch=015 train=0.56530 val=0.84612 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.316 targetShift=0.000 *
+epoch=016 train=0.51109 val=0.76367 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.357 targetShift=0.000 *
+epoch=017 train=0.46166 val=0.69003 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.400 targetShift=0.000 *
+epoch=018 train=0.41561 val=0.61856 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.445 targetShift=0.000 *
+epoch=019 train=0.37440 val=0.55685 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.490 targetShift=0.000 *
+epoch=020 train=0.33602 val=0.50020 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.536 targetShift=0.000 *
+epoch=021 train=0.30210 val=0.44978 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.578 targetShift=0.000 *
+epoch=022 train=0.27220 val=0.40417 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.620 targetShift=0.000 *
+epoch=023 train=0.24511 val=0.36469 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.649 targetShift=0.000 *
+epoch=024 train=0.22155 val=0.32920 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.655 targetShift=0.000 *
+epoch=025 train=0.20064 val=0.29815 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.684 targetShift=0.000 *
+epoch=026 train=0.18199 val=0.27080 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.734 targetShift=0.000 *
+epoch=027 train=0.16599 val=0.24685 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.793 targetShift=0.000 *
+epoch=028 train=0.15147 val=0.22578 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.825 targetShift=0.000 *
+epoch=029 train=0.13874 val=0.20691 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.850 targetShift=0.000 *
+epoch=030 train=0.12775 val=0.19030 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.897 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.8542, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.7917, Pfa=0.0000, AUC=0.9987
+Base threshold 0.896973 v3 test : Pd=0.7917, Pfa=0.0000
+Base threshold 0.896973 raw test: Pd=0.7917, Pfa=0.0000
+Test mean shift: background=0.5517, target=0.0176
+Test p(background): background=0.7923, target=0.0300
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt
+Base threshold         : 0.896973
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 782 个样本...
+  dataset: 200/782
+  dataset: 400/782
+  dataset: 600/782
+  dataset: 782/782
+Precomputing frozen DPG features: train (782 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: test (163 samples)
+Raw validation at base threshold: Pd=0.9623, Pfa=0.0133
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.52889 val=2.31157 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.006 targetShift=0.004 *
+epoch=002 train=1.47049 val=2.21726 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.40459 val=2.11202 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.33591 val=2.00179 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.014 targetShift=0.002 *
+epoch=005 train=1.26302 val=1.88984 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.18929 val=1.77232 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.11430 val=1.66197 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.037 targetShift=0.001 *
+epoch=008 train=1.03971 val=1.54825 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.053 targetShift=0.001 *
+epoch=009 train=0.96438 val=1.44022 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.077 targetShift=0.001 *
+epoch=010 train=0.88961 val=1.32788 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.111 targetShift=0.001 *
+epoch=011 train=0.81696 val=1.22530 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.154 targetShift=0.000 *
+epoch=012 train=0.74736 val=1.12193 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.202 targetShift=0.000 *
+epoch=013 train=0.68315 val=1.02507 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.242 targetShift=0.000 *
+epoch=014 train=0.62232 val=0.93152 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.280 targetShift=0.000 *
+epoch=015 train=0.56517 val=0.84595 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.319 targetShift=0.000 *
+epoch=016 train=0.51091 val=0.76344 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.362 targetShift=0.000 *
+epoch=017 train=0.46143 val=0.68973 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.407 targetShift=0.000 *
+epoch=018 train=0.41532 val=0.61818 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.456 targetShift=0.000 *
+epoch=019 train=0.37403 val=0.55638 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.507 targetShift=0.000 *
+epoch=020 train=0.33557 val=0.49963 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.559 targetShift=0.000 *
+epoch=021 train=0.30158 val=0.44912 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.611 targetShift=0.000 *
+epoch=022 train=0.27158 val=0.40339 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.667 targetShift=0.000 *
+epoch=023 train=0.24442 val=0.36384 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.720 targetShift=0.000 *
+epoch=024 train=0.22080 val=0.32826 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.772 targetShift=0.000 *
+epoch=025 train=0.19989 val=0.29718 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.823 targetShift=0.000 *
+epoch=026 train=0.18127 val=0.26987 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.870 targetShift=0.000 *
+epoch=027 train=0.16525 val=0.24586 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.914 targetShift=0.000 *
+epoch=028 train=0.15077 val=0.22477 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.959 targetShift=0.000 *
+epoch=029 train=0.13803 val=0.20592 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.995 targetShift=0.000 *
+epoch=030 train=0.12703 val=0.18927 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=1.028 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.8542, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.7917, Pfa=0.0000, AUC=0.9987
+Base threshold 0.896973 v3 test : Pd=0.7917, Pfa=0.0000
+Base threshold 0.896973 raw test: Pd=0.7917, Pfa=0.0000
+Test mean shift: background=1.0150, target=0.0201
+Test p(background): background=0.7924, target=0.0300
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+Experiment             : bc_dpg_v31_shiftreg_0_v4_fold06_seed42
+Ablation mode          : full
+Zero scan context      : False
+Device / AMP           : cuda / True
+Base checkpoint        : /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt
+Base threshold         : 0.896973
+Pd tolerance           : 0.0100
+==================================================================================
+预加载 dataset: 782 个样本...
+  dataset: 200/782
+  dataset: 400/782
+  dataset: 600/782
+  dataset: 782/782
+Precomputing frozen DPG features: train (782 samples)
+预加载 dataset: 203 个样本...
+  dataset: 200/203
+  dataset: 203/203
+Precomputing frozen DPG features: val (203 samples)
+预加载 dataset: 163 个样本...
+  dataset: 163/163
+Precomputing frozen DPG features: test (163 samples)
+Raw validation at base threshold: Pd=0.9623, Pfa=0.0133
+Trainable parameters  : 9474
+==================================================================================
+epoch=001 train=1.52889 val=2.31157 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.006 targetShift=0.004 *
+epoch=002 train=1.47049 val=2.21726 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.007 targetShift=0.004 *
+epoch=003 train=1.40459 val=2.11202 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.010 targetShift=0.003 *
+epoch=004 train=1.33591 val=2.00179 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.014 targetShift=0.002 *
+epoch=005 train=1.26302 val=1.88984 basePd=0.9623 basePfa=0.0133 rawPd=0.9623 bgShift=0.019 targetShift=0.002 *
+epoch=006 train=1.18928 val=1.77232 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.026 targetShift=0.002 *
+epoch=007 train=1.11430 val=1.66197 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.037 targetShift=0.001 *
+epoch=008 train=1.03971 val=1.54825 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.053 targetShift=0.001 *
+epoch=009 train=0.96437 val=1.44022 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.077 targetShift=0.001 *
+epoch=010 train=0.88960 val=1.32786 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.111 targetShift=0.001 *
+epoch=011 train=0.81694 val=1.22527 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.154 targetShift=0.000 *
+epoch=012 train=0.74733 val=1.12189 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.202 targetShift=0.000 *
+epoch=013 train=0.68311 val=1.02501 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.242 targetShift=0.000 *
+epoch=014 train=0.62225 val=0.93144 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.281 targetShift=0.000 *
+epoch=015 train=0.56508 val=0.84583 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.320 targetShift=0.000 *
+epoch=016 train=0.51079 val=0.76328 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.364 targetShift=0.000 *
+epoch=017 train=0.46127 val=0.68952 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.412 targetShift=0.000 *
+epoch=018 train=0.41511 val=0.61790 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.463 targetShift=0.000 *
+epoch=019 train=0.37376 val=0.55604 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.518 targetShift=0.000 *
+epoch=020 train=0.33525 val=0.49921 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.576 targetShift=0.000 *
+epoch=021 train=0.30118 val=0.44861 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.635 targetShift=0.000 *
+epoch=022 train=0.27110 val=0.40278 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.700 targetShift=0.000 *
+epoch=023 train=0.24385 val=0.36311 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.766 targetShift=0.000 *
+epoch=024 train=0.22013 val=0.32744 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.832 targetShift=0.000 *
+epoch=025 train=0.19912 val=0.29625 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.901 targetShift=0.000 *
+epoch=026 train=0.18040 val=0.26884 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=0.968 targetShift=0.000 *
+epoch=027 train=0.16425 val=0.24474 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=1.035 targetShift=0.000 *
+epoch=028 train=0.14967 val=0.22358 basePd=0.9623 basePfa=0.0067 rawPd=0.9623 bgShift=1.107 targetShift=0.000 *
+epoch=029 train=0.13683 val=0.20469 basePd=0.9623 basePfa=0.0000 rawPd=0.9623 bgShift=1.174 targetShift=0.000 *
+epoch=030 train=0.12571 val=0.18800 basePd=0.9623 basePfa=0.0000 rawPd=0.9623 bgShift=1.242 targetShift=0.000 *
+
+==================================================================================
+Best epoch: 30
+Selected-threshold v3 test : Pd=0.8750, Pfa=0.0000, AUC=1.0000
+Selected-threshold raw test: Pd=0.7917, Pfa=0.0000, AUC=0.9987
+Base threshold 0.896973 v3 test : Pd=0.7917, Pfa=0.0000
+Base threshold 0.896973 raw test: Pd=0.7917, Pfa=0.0000
+Test mean shift: background=1.2502, target=0.0269
+Test p(background): background=0.7927, target=0.0300
+Validation Pd floor satisfied: True
+Score never increased: val=True, test=True
+Summary: /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold06_seed42/tables/summary.json
+==================================================================================
+==================================================================================
+BC-DPG-FCN v3.1 validation-only regularization selection complete
+candidate table : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/candidate_validation_metrics_formal.csv
+selected table  : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/selected_by_fold_formal.csv
+test report     : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/selected_test_metrics_formal.csv
+aggregate       : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/aggregate_selected_test_metrics_formal.csv
+audit           : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/selection_audit_formal.json
+report          : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_v31_shift_reg/README_shift_regularization_selection_formal.md
+candidate rows  : 30
+selected folds  : 6
+missing         : 0
+==================================================================================
+
+============================================================================================
+
+============================================================================================
+Fold=05 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=05 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold05_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================
+
+============================================================================================
+Fold=06 Reg=0.01 Smoke=False Action=reuse_full_v3
+[复用] /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold06_seed42
+============================================================================================
+
+============================================================================================
+Fold=06 Reg=0.005 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.005
+============================================================================================
+
+============================================================================================
+Fold=06 Reg=0.0025 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.0025
+============================================================================================
+
+============================================================================================
+Fold=06 Reg=0.001 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0.001
+============================================================================================
+
+============================================================================================
+Fold=06 Reg=0 Smoke=False ExistingAction=run
+/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python /home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py --name bc_dpg_v31_shiftreg_0_v4_fold06_seed42 --ablation-mode full --manifest-path /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv --base-checkpoint /home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt --epochs 30 --batch-size 64 --debug-per-class 0 --seed 42 --shift-regularization 0
+============================================================================================

@@ -1,0 +1,4 @@
+﻿model,folds,false_alarms_sum,pfa_mean,pd_mean,auc_mean,background_shift_mean,target_shift_mean,context_requirement,causality
+raw_dpg,6,186,0.20666666666666667,0.9059042896307048,0.9911546098221652,0.0,0.0,current sample only,causal/sample-independent
+sample_independent_bc,6,122,0.13555555555555554,0.9059042896307048,0.9918532874548052,0.42786148976028454,0.03554923975248164,current sample features; 12 scan statistics forced to zero,causal/sample-independent
+scan_aware_bc,6,56,0.06222222222222223,0.9059042896307048,0.999309026244014,0.37666821614447715,0.002846690282608586,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan

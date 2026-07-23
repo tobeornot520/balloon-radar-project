@@ -1,0 +1,28 @@
+{
+  "package": "BC_DPG_stage4_next_all_in_one_v1",
+  "files": [
+    "configs/roi_stage4_selected_sixfold_v1.json",
+    "docs/COMMANDS_STAGE4_NEXT_V1.md",
+    "docs/README_STAGE4_NEXT_ALL_IN_ONE_V1.md",
+    "docs/ROI_BC_DPG_JOINT_NEXT_DESIGN.md",
+    "docs/STAGE4_SIXFOLD_PREREGISTRATION.md",
+    "precomputed_twofold_assets/STAGE4_TWOFOLD_FROZEN_ANALYSIS.md",
+    "precomputed_twofold_assets/figure_stage4_auc_pauc.png",
+    "precomputed_twofold_assets/figure_stage4_false_alarms.png",
+    "precomputed_twofold_assets/figure_stage4_threshold_transfer.png",
+    "precomputed_twofold_assets/paper_table_stage4_twofold_main.csv",
+    "precomputed_twofold_assets/paper_table_stage4_twofold_main.md",
+    "precomputed_twofold_assets/stage4_aggregate_formal.csv",
+    "precomputed_twofold_assets/stage4_detail_formal.csv",
+    "precomputed_twofold_assets/stage4_rescue_regression_formal.csv",
+    "precomputed_twofold_assets/stage4_threshold_transfer_formal.csv",
+    "scripts/audit_roi_stage4_selected_sixfold_v1.py",
+    "scripts/collect_roi_bc_dpg_joint_context_v1.py",
+    "scripts/generate_roi_stage4_paper_assets_v1.py",
+    "scripts/package_roi_stage4_selected_sixfold_acceptance_v1.py",
+    "scripts/preflight_roi_stage4_selected_sixfold_v1.py",
+    "scripts/run_roi_stage4_selected_sixfold_v1.py",
+    "scripts/run_stage4_next_all_v1.sh",
+    "scripts/summarize_roi_stage4_selected_sixfold_v1.py"
+  ]
+}

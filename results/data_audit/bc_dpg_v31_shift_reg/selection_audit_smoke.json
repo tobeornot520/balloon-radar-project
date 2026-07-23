@@ -1,0 +1,27 @@
+{
+  "folds": [
+    1,
+    4
+  ],
+  "regularizations": [
+    0.01,
+    0.005,
+    0.0025,
+    0.001,
+    0.0
+  ],
+  "smoke": true,
+  "selection_uses_test_metrics": false,
+  "selection_fields": [
+    "pd_floor_satisfied",
+    "score_never_increased_validation",
+    "val_false_alarms",
+    "val_pd",
+    "val_auc",
+    "val_target_shift",
+    "regularization"
+  ],
+  "candidate_rows_found": 10,
+  "selected_folds": 2,
+  "missing_summary_files": []
+}

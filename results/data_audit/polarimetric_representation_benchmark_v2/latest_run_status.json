@@ -1,0 +1,8 @@
+{
+  "scope": "formal",
+  "requested": 3,
+  "found": 3,
+  "missing": 0,
+  "missing_paths": [],
+  "selection_rule": "No test-set model selection. This table is descriptive representation comparison."
+}

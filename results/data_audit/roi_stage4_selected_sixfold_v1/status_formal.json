@@ -1,0 +1,8 @@
+{
+  "scope": "formal",
+  "requested": 18,
+  "found": 18,
+  "missing": [],
+  "selection_frozen_before_sixfold": true,
+  "test_set_model_selection_forbidden": true
+}

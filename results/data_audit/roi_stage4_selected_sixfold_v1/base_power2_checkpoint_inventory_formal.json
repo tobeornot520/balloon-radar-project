@@ -1,0 +1,38 @@
+[
+  {
+    "fold": 1,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold01_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "b4cd1bea678e30f7e0cdbc820ecec6979d42cbe0b1c7296dd8d9351ecb07f13d"
+  },
+  {
+    "fold": 2,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold02_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "6eb1cbab41693d58143b8fd849e930db502f76575d339aa0efe81bf5f5ad64b8"
+  },
+  {
+    "fold": 3,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold03_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "963693c12ec6abd5c4ac51496cd1464db6ddca7dd5d0008a6dff8c6e9453969d"
+  },
+  {
+    "fold": 4,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold04_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "a43d486fb47e6beb5a8d24fda1ba74f0002c1b1fd0d312f4ce7979269a34210f"
+  },
+  {
+    "fold": 5,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold05_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "4fb1e705ba78dfa58727e79fa5ab5e587bff5ab6acf053973d84bd83b8a24805"
+  },
+  {
+    "fold": 6,
+    "path": "results/experiments/polar_repr_v2_power2_v4_fold06_seed42_formal/checkpoints/best.pt",
+    "size_bytes": 254785,
+    "sha256": "80fa2243559ba8cd25438c026ce71857845bdff6803230ecb10325d090c241d8"
+  }
+]

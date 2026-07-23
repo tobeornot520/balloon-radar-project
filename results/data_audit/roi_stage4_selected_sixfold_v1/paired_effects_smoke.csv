@@ -1,0 +1,9 @@
+﻿fold,mode,false_alarms_removed,false_alarms_added,target_correct_preserved,target_correct_regressed,target_correct_rescued
+2,power2_roi_power_control,0,0,7,0,0
+2,power2_roi_ri4,0,0,7,0,0
+3,power2_roi_power_control,0,0,4,0,0
+3,power2_roi_ri4,0,0,4,0,0
+5,power2_roi_power_control,0,0,8,0,0
+5,power2_roi_ri4,0,0,8,0,0
+6,power2_roi_power_control,0,0,0,0,0
+6,power2_roi_ri4,0,0,0,0,0

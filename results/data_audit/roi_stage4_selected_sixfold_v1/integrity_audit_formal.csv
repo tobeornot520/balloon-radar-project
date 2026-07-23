@@ -1,0 +1,13 @@
+﻿fold,mode,samples,power2_location_frozen,raw_score_identical,suppression_only,new_false_alarms
+1,power2_roi_power_control,203,True,True,True,0
+1,power2_roi_ri4,203,True,True,True,0
+2,power2_roi_power_control,203,True,True,True,0
+2,power2_roi_ri4,203,True,True,True,0
+3,power2_roi_power_control,167,True,True,True,0
+3,power2_roi_ri4,167,True,True,True,0
+4,power2_roi_power_control,202,True,True,True,0
+4,power2_roi_ri4,202,True,True,True,0
+5,power2_roi_power_control,210,True,True,True,0
+5,power2_roi_ri4,210,True,True,True,0
+6,power2_roi_power_control,163,True,True,True,0
+6,power2_roi_ri4,163,True,True,True,0

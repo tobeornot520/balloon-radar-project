@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-07-22T10:54:55",
+  "final_model": "BC-DPG-FCN v3",
+  "final_shift_regularization": 0.01,
+  "final_model_status": "frozen_current_model",
+  "deployment_scope": "offline scan-aware background calibrator",
+  "main_evidence": {
+    "raw_false_alarms": 186,
+    "sample_independent_false_alarms": 122,
+    "final_false_alarms": 56,
+    "raw_pd_mean": 0.9059042896307048,
+    "final_pd_mean": 0.9059042896307048,
+    "raw_pfa_mean": 0.2066666666666666,
+    "final_pfa_mean": 0.0622222222222222
+  },
+  "v31_decision": {
+    "validation_selected_weights": [
+      0.0,
+      0.01,
+      0.0,
+      0.0025,
+      0.01,
+      0.0
+    ],
+    "unique_weight_count": 3,
+    "selected_test_false_alarms": 35,
+    "selected_test_target_shift_mean": 0.0054266479601536,
+    "adopted": false,
+    "reason": "fold-specific validation selections are inconsistent and cannot define one deployable fixed hyperparameter; lower regularization also raises target suppression risk"
+  },
+  "evidence_scope": "internal six-fold scan-group evaluation; not an independent new-date/new-environment blind test",
+  "context_limitation": "complete scan-group statistics may contain future samples; the full model is not a strict causal online detector"
+}

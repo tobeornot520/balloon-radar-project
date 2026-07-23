@@ -1,0 +1,15 @@
+==============================================================================
+Polarimetric Twofold Diagnostics Collection V1
+project root : /home/tobeornot8259748/projects/balloon_radar_project
+folds        : [1, 4]
+modes        : ['power2', 'ri4', 'polar6_gated', 'ri8_gated']
+==============================================================================
+------------------------------------------------------------------------------
+experiments requested : 8
+experiments found     : 8
+prediction candidates : 24
+usable predictions    : 16
+low-FPR status        : COMPLETE
+audit output          : /home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/polarimetric_twofold_diagnostics_v1
+acceptance zip        : /home/tobeornot8259748/projects/balloon_radar_project/polarimetric_twofold_diagnostics_acceptance_v1.zip
+------------------------------------------------------------------------------

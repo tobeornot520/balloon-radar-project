@@ -1,0 +1,24 @@
+{
+  "patch_name": "bc_dpg_current_model_stage2",
+  "patch_version": "2026.07.21-v2",
+  "installed_at": "2026-07-21T23:49:35",
+  "backup_root": null,
+  "files": [
+    {
+      "relative_path": "scripts/run_bc_dpg_v31_shift_reg_sweep.py",
+      "sha256": "ae3534a68c6c1dcd39f9d652adb037d6ef7ea8474bf10cac3dff94110fed089c"
+    },
+    {
+      "relative_path": "scripts/select_bc_dpg_v31_shift_reg.py",
+      "sha256": "006b735c3694c208ec4372c47fafeb25a4e05d14a05e5b163ade60977ab63e92"
+    },
+    {
+      "relative_path": "scripts/build_bc_dpg_v3_deployment_comparison.py",
+      "sha256": "167e8260fc5e7ee295352216cd6c58ef7af7b37218893bd2fefed94cd149eb81"
+    },
+    {
+      "relative_path": "scripts/freeze_bc_dpg_v3_evidence.py",
+      "sha256": "eec247fbc10e8769229de5371a74673744b1a5b3a30d64bbcc9f32a96fb2e882"
+    }
+  ]
+}

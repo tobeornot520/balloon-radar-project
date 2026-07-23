@@ -1,0 +1,27 @@
+{
+  "required_files": {
+    "scripts/run_polarimetric_representation_benchmark_v2.py": true,
+    "training/train_polarimetric_representation_fcn_v2.py": true,
+    "scripts/build_roi_polarimetric_cache_v1.py": true,
+    "training/train_roi_polarimetric_refiner_v1.py": true
+  },
+  "manifests": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true
+  },
+  "power2_checkpoints": {
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true
+  },
+  "missing_required": [],
+  "missing_manifests": [],
+  "missing_power2_folds": []
+}

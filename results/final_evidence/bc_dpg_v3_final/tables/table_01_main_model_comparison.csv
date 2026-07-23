@@ -1,0 +1,4 @@
+﻿model,模型名称,folds,false_alarms_sum,相对原始虚警减少数,相对原始虚警降幅,pfa_mean,平均Pfa改善,pd_mean,auc_mean,background_shift_mean,target_shift_mean,context_requirement,causality
+raw_dpg,原始DPG-FCN,6,186,0.0,0.0,0.2066666666666666,0.0,0.9059042896307048,0.9911546098221652,0.0,0.0,current sample only,causal/sample-independent
+sample_independent_bc,样本独立BC校准,6,122,64.0,0.34408602150537637,0.1355555555555555,0.0711111111111111,0.9059042896307048,0.9918532874548052,0.4278614897602845,0.0355492397524816,current sample features; 12 scan statistics forced to zero,causal/sample-independent
+scan_aware_bc,扫描上下文BC-DPG-FCN v3,6,56,130.0,0.6989247311827957,0.0622222222222222,0.1444444444444444,0.9059042896307048,0.999309026244014,0.3766682161444771,0.0028466902826085,current sample plus complete scan-group statistics,offline scan-aware; may use future samples within the scan

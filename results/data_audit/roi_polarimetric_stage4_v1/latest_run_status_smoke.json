@@ -1,0 +1,12 @@
+{
+  "scope": "smoke",
+  "requested": 10,
+  "found": 10,
+  "missing": 0,
+  "missing_paths": [],
+  "primary_evaluation": "unchanged Power2 deployment threshold",
+  "sample_independent": true,
+  "scan_context": false,
+  "power2_location_frozen": true,
+  "test_set_model_selection_forbidden": true
+}

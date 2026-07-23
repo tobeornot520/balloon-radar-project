@@ -1,0 +1,4 @@
+﻿mode,folds,mean_false_alarms,mean_fixed_pfa,mean_fixed_score_pd,mean_fixed_joint_pd,mean_auc,mean_pauc_5pct,mean_tpr_1pct,mean_tpr_5pct,mean_range_mae,mean_velocity_mae,mean_test_background_exceed_q99_fraction,mean_background_median_shift,mean_background_q95_shift,total_false_alarms,parameter_count,delta_total_false_alarms_vs_power2,delta_mean_joint_pd_vs_power2,delta_mean_pauc_vs_power2
+power2_baseline,4,0.0,0.0,0.71875,0.59375,0.98828125,0.9519230769230769,0.90625,0.90625,6.28125,3.3125,0.0,-0.19711929575,-0.2562546589,0,0,0,0.0,0.0
+power2_roi_power_control,4,0.0,0.0,0.71875,0.59375,0.98828125,0.9519230769230769,0.90625,0.90625,6.28125,3.3125,0.0,-0.195476121125,-0.25522380395,0,8162,0,0.0,0.0
+power2_roi_ri4,4,0.0,0.0,0.71875,0.59375,0.98828125,0.9519230769230769,0.90625,0.90625,6.28125,3.3125,0.0,-0.195475732125,-0.25522380595,0,8162,0,0.0,0.0

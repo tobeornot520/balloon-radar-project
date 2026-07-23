@@ -1,0 +1,25 @@
+{
+  "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+  "selected_sample_count": 120,
+  "processed_sample_count": 120,
+  "error_count": 0,
+  "splits": [
+    "train",
+    "val",
+    "test"
+  ],
+  "max_per_class": 20,
+  "neighborhood": {
+    "velocity_window": 5,
+    "range_window": 3
+  },
+  "observed_iq_shapes": {
+    "(128, 100)": 120
+  },
+  "all_complex_iq": true,
+  "minimum_finite_fraction": 1.0,
+  "explicit_polarimetric_status": "ready_for_exploratory_ablation",
+  "absolute_calibration_status": "unknown; use relative ZDR-like and relative phase naming",
+  "micro_doppler_status": "not established by this 2-D 128-pulse snapshot audit; requires ordered continuous slow-time windows, PRF, and target-aligned sequence construction",
+  "plot_warnings": []
+}

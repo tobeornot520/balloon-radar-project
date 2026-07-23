@@ -1,0 +1,5 @@
+﻿candidate,fold_count,folds,adopt_as_final,reason
+validation-selected weight 0,3,"1,3,6",False,各折选择不一致，不能形成统一部署超参数
+validation-selected weight 0.0025,1,4,False,各折选择不一致，不能形成统一部署超参数
+validation-selected weight 0.01,2,"2,5",False,各折选择不一致，不能形成统一部署超参数
+fixed weight 0.01,6,"1,2,3,4,5,6",True,更保守、目标抑制风险较低，保持当前v3冻结结论

@@ -1,0 +1,30 @@
+[
+  {
+    "path": "features/polarimetric_gated_rd.py",
+    "status": "FOUND"
+  },
+  {
+    "path": "datasets/polarimetric_detection_dataset_v2.py",
+    "status": "FOUND"
+  },
+  {
+    "path": "training/train_polarimetric_representation_fcn_v2.py",
+    "status": "FOUND"
+  },
+  {
+    "path": "scripts/run_polarimetric_representation_benchmark_v2.py",
+    "status": "FOUND"
+  },
+  {
+    "path": "scripts/summarize_polarimetric_representation_benchmark_v2.py",
+    "status": "FOUND"
+  },
+  {
+    "path": "configs/polarimetric_representation_benchmark_v2.yaml",
+    "status": "FOUND"
+  },
+  {
+    "path": "docs/polarimetric_stage3/NEXT_STAGE_ROI_POLARIMETRIC_INTERFACE.md",
+    "status": "FOUND"
+  }
+]

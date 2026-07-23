@@ -1,0 +1,1393 @@
+{
+  "dataset_class": {
+    "name": "DetectionRadarDatasetV3",
+    "signature": "(manifest_path: 'str | Path' = PosixPath('/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v3_grouped/all_samples_manifest_v3.csv'), split: \"Literal['train', 'val', 'test']\" = 'train', channel_mode: \"Literal['H', 'V', 'HV']\" = 'HV', range_sigma: 'float' = 2.0, velocity_sigma: 'float' = 1.0, include_background: 'bool' = True, include_uav: 'bool' = True, max_samples: 'Optional[int]' = None, geometry: 'Optional[DetectionGeometry]' = None) -> 'None'",
+    "init_signature": "(self, manifest_path: 'str | Path' = PosixPath('/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v3_grouped/all_samples_manifest_v3.csv'), split: \"Literal['train', 'val', 'test']\" = 'train', channel_mode: \"Literal['H', 'V', 'HV']\" = 'HV', range_sigma: 'float' = 2.0, velocity_sigma: 'float' = 1.0, include_background: 'bool' = True, include_uav: 'bool' = True, max_samples: 'Optional[int]' = None, geometry: 'Optional[DetectionGeometry]' = None) -> 'None'",
+    "getitem_signature": "(self, index: 'int') -> 'dict[str, Any]'",
+    "init_source": "    def __init__(\n        self,\n        manifest_path: str | Path = DEFAULT_MANIFEST,\n        split: Literal[\"train\", \"val\", \"test\"] = \"train\",\n        channel_mode: Literal[\"H\", \"V\", \"HV\"] = \"HV\",\n        range_sigma: float = 2.0,\n        velocity_sigma: float = 1.0,\n        include_background: bool = True,\n        include_uav: bool = True,\n        max_samples: Optional[int] = None,\n        geometry: Optional[DetectionGeometry] = None,\n    ) -> None:\n        super().__init__()\n\n        if split not in VALID_SPLITS:\n            raise ValueError(\n                f\"Invalid split: {split}. \"\n                f\"Expected one of {sorted(VALID_SPLITS)}\"\n            )\n\n        if channel_mode not in VALID_CHANNEL_MODES:\n            raise ValueError(\n                f\"Invalid channel_mode: {channel_mode}. \"\n                f\"Expected one of {sorted(VALID_CHANNEL_MODES)}\"\n            )\n\n        if range_sigma <= 0 or velocity_sigma <= 0:\n            raise ValueError(\n                \"range_sigma and velocity_sigma must be positive\"\n            )\n\n        if not include_background and not include_uav:\n            raise ValueError(\n                \"include_background and include_uav \"\n                \"cannot both be False\"\n            )\n\n        self.manifest_path = _resolve_path(manifest_path)\n        self.split = split\n        self.channel_mode = channel_mode\n        self.range_sigma = float(range_sigma)\n        self.velocity_sigma = float(velocity_sigma)\n        self.geometry = geometry or DetectionGeometry()\n\n        if not self.manifest_path.is_file():\n            raise FileNotFoundError(\n                f\"V3 manifest not found: {self.manifest_path}\"\n            )\n\n        records: list[dict[str, Any]] = []\n\n        with self.manifest_path.open(\n            \"r\",\n            encoding=\"utf-8-sig\",\n            newline=\"\",\n        ) as handle:\n            reader = csv.DictReader(handle)\n\n            required_columns = {\n                \"new_split\",\n                \"class_name\",\n                \"target_present\",\n                \"sample_id\",\n                \"source_file\",\n                \"beam_layer\",\n                \"azimuth_deg\",\n                \"distance_m\",\n                \"velocity_mps\",\n                \"mat_path\",\n                \"label_path\",\n            }\n\n            actual_columns = set(reader.fieldnames or [])\n            missing_columns = required_columns - actual_columns\n\n            if missing_columns:\n                raise ValueError(\n                    \"Manifest is missing columns: \"\n                    f\"{sorted(missing_columns)}\"\n                )\n\n            for row in reader:\n                if row[\"new_split\"] != split:\n                    continue\n\n                target_present = int(row[\"target_present\"])\n\n                if target_present not in (0, 1):\n                    raise ValueError(\n                        \"Invalid target_present value for \"\n                        f\"{row['sample_id']}: {target_present}\"\n                    )\n\n                if target_present == 0 and not include_background:\n                    continue\n\n                if target_present == 1 and not include_uav:\n                    continue\n\n                mat_path = Path(\n                    row[\"mat_path\"]\n                ).expanduser().resolve()\n\n                label_text = row[\"label_path\"].strip()\n\n                label_path = (\n                    Path(label_text).expanduser().resolve()\n                    if label_text\n                    else None\n                )\n\n                if not mat_path.is_file():\n                    raise FileNotFoundError(\n                        f\"Missing MAT file: {mat_path}\"\n                    )\n\n                if target_present:\n                    if label_path is None:\n                        raise FileNotFoundError(\n                            \"Empty label path for \"\n                            f\"{row['sample_id']}\"\n                        )\n\n                    if not label_path.is_file():\n                        raise FileNotFoundError(\n                            f\"Missing label file: {label_path}\"\n                        )\n\n                records.append(\n                    {\n                        \"class_name\": row[\"class_name\"],\n                        \"target_present\": target_present,\n                        \"sample_id\": row[\"sample_id\"],\n                        \"source_file\": row[\"source_file\"],\n                        \"beam_layer\": _to_int(\n                            row[\"beam_layer\"]\n                        ),\n                        \"azimuth_deg\": _to_float(\n                            row[\"azimuth_deg\"]\n                        ),\n                        \"distance_m\": _to_float(\n                            row[\"distance_m\"]\n                        ),\n                        \"velocity_mps\": _to_float(\n                            row[\"velocity_mps\"]\n                        ),\n                        \"mat_path\": mat_path,\n                        \"label_path\": label_path,\n                    }\n                )\n\n        if max_samples is not None:\n            if max_samples <= 0:\n                raise ValueError(\n                    \"max_samples must be positive\"\n                )\n\n            records = records[:max_samples]\n\n        if not records:\n            raise ValueError(\n                f\"No records found for split={split} \"\n                f\"in {self.manifest_path}\"\n            )\n\n        self.records = records\n",
+    "getitem_source": "    def __getitem__(\n        self,\n        index: int,\n    ) -> dict[str, Any]:\n        record = self.records[index]\n\n        h, v = _load_iq_pair(record[\"mat_path\"])\n\n        rd_h = _normalize_power_db(\n            _calculate_rd_power(h)\n        )\n        rd_v = _normalize_power_db(\n            _calculate_rd_power(v)\n        )\n\n        if self.channel_mode == \"H\":\n            input_array = rd_h[None]\n\n        elif self.channel_mode == \"V\":\n            input_array = rd_v[None]\n\n        else:\n            input_array = np.stack(\n                (rd_h, rd_v),\n                axis=0,\n            )\n\n        target_present = int(\n            record[\"target_present\"]\n        )\n\n        if target_present:\n            distance_m = float(\n                record[\"distance_m\"]\n            )\n            velocity_mps = float(\n                record[\"velocity_mps\"]\n            )\n\n            range_index = self.geometry.range_to_index(\n                distance_m\n            )\n            velocity_index = (\n                self.geometry.velocity_to_index(\n                    velocity_mps\n                )\n            )\n\n            target = _generate_heatmap(\n                range_index,\n                velocity_index,\n                self.range_sigma,\n                self.velocity_sigma,\n            )\n\n        else:\n            distance_m = float(\"nan\")\n            velocity_mps = float(\"nan\")\n            range_index = -1\n            velocity_index = -1\n\n            target = np.zeros(\n                (1, NUM_PULSES, NUM_GATES),\n                dtype=np.float32,\n            )\n\n        return {\n            \"input\": torch.from_numpy(\n                np.ascontiguousarray(input_array)\n            ).float(),\n            \"target\": torch.from_numpy(\n                np.ascontiguousarray(target)\n            ).float(),\n            \"target_present\": torch.tensor(\n                target_present,\n                dtype=torch.long,\n            ),\n            \"sample_id\": record[\"sample_id\"],\n            \"beam_layer\": int(\n                record[\"beam_layer\"]\n            ),\n            \"azimuth_deg\": float(\n                record[\"azimuth_deg\"]\n            ),\n            \"distance_m\": distance_m,\n            \"velocity_mps\": velocity_mps,\n            \"range_index\": int(range_index),\n            \"velocity_index\": int(velocity_index),\n            \"source_file\": record[\"source_file\"],\n            \"mat_path\": str(\n                record[\"mat_path\"]\n            ),\n            \"label_path\": (\n                \"\"\n                if record[\"label_path\"] is None\n                else str(record[\"label_path\"])\n            ),\n        }\n"
+  },
+  "training_file": "/home/tobeornot8259748/projects/balloon_radar_project/training/train_dual_branch_gated.py",
+  "training_context": [
+    [
+      {
+        "line_number": 7,
+        "text": "import sys"
+      },
+      {
+        "line_number": 8,
+        "text": "import time"
+      },
+      {
+        "line_number": 9,
+        "text": "from dataclasses import asdict"
+      },
+      {
+        "line_number": 10,
+        "text": "from pathlib import Path"
+      },
+      {
+        "line_number": 11,
+        "text": "from typing import Any"
+      },
+      {
+        "line_number": 12,
+        "text": ""
+      },
+      {
+        "line_number": 13,
+        "text": "import numpy as np"
+      },
+      {
+        "line_number": 14,
+        "text": "import pandas as pd"
+      },
+      {
+        "line_number": 15,
+        "text": "import torch"
+      },
+      {
+        "line_number": 16,
+        "text": "from torch import nn"
+      },
+      {
+        "line_number": 17,
+        "text": "from torch.utils.data import DataLoader, Dataset"
+      },
+      {
+        "line_number": 18,
+        "text": ""
+      },
+      {
+        "line_number": 19,
+        "text": "PROJECT_ROOT = Path(__file__).resolve().parents[1]"
+      },
+      {
+        "line_number": 20,
+        "text": "if str(PROJECT_ROOT) not in sys.path:"
+      },
+      {
+        "line_number": 21,
+        "text": "    sys.path.insert(0, str(PROJECT_ROOT))"
+      },
+      {
+        "line_number": 22,
+        "text": ""
+      },
+      {
+        "line_number": 23,
+        "text": "from datasets.detection_dataset_v3 import ("
+      },
+      {
+        "line_number": 24,
+        "text": "    DEFAULT_MANIFEST,"
+      },
+      {
+        "line_number": 25,
+        "text": "    DetectionRadarDatasetV3,"
+      },
+      {
+        "line_number": 26,
+        "text": ")"
+      },
+      {
+        "line_number": 27,
+        "text": "from models.dual_branch_gated_fcn import ("
+      },
+      {
+        "line_number": 28,
+        "text": "    DualBranchGatedFCN,"
+      },
+      {
+        "line_number": 29,
+        "text": "    count_total_parameters,"
+      },
+      {
+        "line_number": 30,
+        "text": "    count_trainable_parameters,"
+      },
+      {
+        "line_number": 31,
+        "text": "    load_single_branch_checkpoint,"
+      },
+      {
+        "line_number": 32,
+        "text": ")"
+      },
+      {
+        "line_number": 33,
+        "text": "from scripts.train_detection_baseline_v2 import ("
+      },
+      {
+        "line_number": 34,
+        "text": "    DetectionTolerance,"
+      },
+      {
+        "line_number": 35,
+        "text": "    MemoryCachedDataset,"
+      },
+      {
+        "line_number": 36,
+        "text": "    SampleWeightedHeatmapMSE,"
+      },
+      {
+        "line_number": 37,
+        "text": "    apply_threshold_and_metrics,"
+      },
+      {
+        "line_number": 38,
+        "text": "    json_safe,"
+      },
+      {
+        "line_number": 39,
+        "text": "    make_debug_subset,"
+      },
+      {
+        "line_number": 40,
+        "text": "    make_loader,"
+      },
+      {
+        "line_number": 41,
+        "text": "    plot_history,"
+      },
+      {
+        "line_number": 42,
+        "text": "    plot_score_histogram,"
+      },
+      {
+        "line_number": 43,
+        "text": "    resolve_project_path,"
+      },
+      {
+        "line_number": 44,
+        "text": "    select_threshold_at_false_alarm_budget,"
+      },
+      {
+        "line_number": 45,
+        "text": "    set_seed,"
+      },
+      {
+        "line_number": 46,
+        "text": ")"
+      },
+      {
+        "line_number": 47,
+        "text": ""
+      },
+      {
+        "line_number": 48,
+        "text": ""
+      },
+      {
+        "line_number": 49,
+        "text": "def parse_args() -> argparse.Namespace:"
+      },
+      {
+        "line_number": 50,
+        "text": "    parser = argparse.ArgumentParser(description=\"训练H/V独立编码的门控融合FCN\")"
+      },
+      {
+        "line_number": 51,
+        "text": "    parser.add_argument(\"--name\", default=\"dpg_fcn_v1_seed42\")"
+      },
+      {
+        "line_number": 52,
+        "text": "    parser.add_argument("
+      },
+      {
+        "line_number": 53,
+        "text": "        \"--data-root\","
+      },
+      {
+        "line_number": 54,
+        "text": "        default=\"data/raw/detection_dataset\","
+      }
+    ],
+    [
+      {
+        "line_number": 150,
+        "text": ""
+      },
+      {
+        "line_number": 151,
+        "text": ""
+      },
+      {
+        "line_number": 152,
+        "text": "def compute_losses("
+      },
+      {
+        "line_number": 153,
+        "text": "    outputs: dict[str, torch.Tensor],"
+      },
+      {
+        "line_number": 154,
+        "text": "    target: torch.Tensor,"
+      },
+      {
+        "line_number": 155,
+        "text": "    present: torch.Tensor,"
+      },
+      {
+        "line_number": 156,
+        "text": "    criterion: SampleWeightedHeatmapMSE,"
+      },
+      {
+        "line_number": 157,
+        "text": "    h_aux_weight: float,"
+      },
+      {
+        "line_number": 158,
+        "text": "    v_aux_weight: float,"
+      },
+      {
+        "line_number": 159,
+        "text": ") -> tuple[torch.Tensor, dict[str, torch.Tensor]]:"
+      },
+      {
+        "line_number": 160,
+        "text": "    fusion_loss = criterion(outputs[\"fusion_logits\"], target, present)"
+      },
+      {
+        "line_number": 161,
+        "text": "    h_loss = criterion(outputs[\"h_logits\"], target, present)"
+      },
+      {
+        "line_number": 162,
+        "text": "    v_loss = criterion(outputs[\"v_logits\"], target, present)"
+      },
+      {
+        "line_number": 163,
+        "text": "    total = fusion_loss + h_aux_weight * h_loss + v_aux_weight * v_loss"
+      },
+      {
+        "line_number": 164,
+        "text": "    return total, {\"fusion\": fusion_loss, \"h_aux\": h_loss, \"v_aux\": v_loss}"
+      },
+      {
+        "line_number": 165,
+        "text": ""
+      },
+      {
+        "line_number": 166,
+        "text": ""
+      },
+      {
+        "line_number": 167,
+        "text": "def train_one_epoch("
+      },
+      {
+        "line_number": 168,
+        "text": "    model: DualBranchGatedFCN,"
+      },
+      {
+        "line_number": 169,
+        "text": "    loader: DataLoader,"
+      },
+      {
+        "line_number": 170,
+        "text": "    criterion: SampleWeightedHeatmapMSE,"
+      },
+      {
+        "line_number": 171,
+        "text": "    optimizer: torch.optim.Optimizer,"
+      },
+      {
+        "line_number": 172,
+        "text": "    scaler: torch.amp.GradScaler,"
+      },
+      {
+        "line_number": 173,
+        "text": "    device: torch.device,"
+      },
+      {
+        "line_number": 174,
+        "text": "    args: argparse.Namespace,"
+      },
+      {
+        "line_number": 175,
+        "text": "    amp_enabled: bool,"
+      },
+      {
+        "line_number": 176,
+        "text": ") -> dict[str, float]:"
+      },
+      {
+        "line_number": 177,
+        "text": "    model.train()"
+      },
+      {
+        "line_number": 178,
+        "text": "    sums = {\"total\": 0.0, \"fusion\": 0.0, \"h_aux\": 0.0, \"v_aux\": 0.0}"
+      },
+      {
+        "line_number": 179,
+        "text": "    sample_count = 0"
+      },
+      {
+        "line_number": 180,
+        "text": "    for batch in loader:"
+      },
+      {
+        "line_number": 181,
+        "text": "        inputs = batch[\"input\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 182,
+        "text": "        target = batch[\"target\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 183,
+        "text": "        present = batch[\"target_present\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 184,
+        "text": "        optimizer.zero_grad(set_to_none=True)"
+      },
+      {
+        "line_number": 185,
+        "text": "        with torch.autocast(device_type=device.type, dtype=torch.float16, enabled=amp_enabled):"
+      },
+      {
+        "line_number": 186,
+        "text": "            outputs = model(inputs)"
+      },
+      {
+        "line_number": 187,
+        "text": "            total, parts = compute_losses("
+      },
+      {
+        "line_number": 188,
+        "text": "                outputs, target, present, criterion, args.h_aux_weight, args.v_aux_weight"
+      },
+      {
+        "line_number": 189,
+        "text": "            )"
+      },
+      {
+        "line_number": 190,
+        "text": "        scaler.scale(total).backward()"
+      },
+      {
+        "line_number": 191,
+        "text": "        scaler.unscale_(optimizer)"
+      },
+      {
+        "line_number": 192,
+        "text": "        torch.nn.utils.clip_grad_norm_(model.parameters(), args.gradient_clip_norm)"
+      },
+      {
+        "line_number": 193,
+        "text": "        scaler.step(optimizer)"
+      },
+      {
+        "line_number": 194,
+        "text": "        scaler.update()"
+      },
+      {
+        "line_number": 195,
+        "text": "        n = inputs.shape[0]"
+      },
+      {
+        "line_number": 196,
+        "text": "        sums[\"total\"] += float(total.item()) * n"
+      },
+      {
+        "line_number": 197,
+        "text": "        for key in (\"fusion\", \"h_aux\", \"v_aux\"):"
+      },
+      {
+        "line_number": 198,
+        "text": "            sums[key] += float(parts[key].item()) * n"
+      },
+      {
+        "line_number": 199,
+        "text": "        sample_count += n"
+      },
+      {
+        "line_number": 200,
+        "text": "    if sample_count == 0:"
+      },
+      {
+        "line_number": 201,
+        "text": "        raise RuntimeError(\"训练DataLoader为空\")"
+      },
+      {
+        "line_number": 202,
+        "text": "    return {key: value / sample_count for key, value in sums.items()}"
+      },
+      {
+        "line_number": 203,
+        "text": ""
+      },
+      {
+        "line_number": 204,
+        "text": ""
+      },
+      {
+        "line_number": 205,
+        "text": "def collect_predictions("
+      },
+      {
+        "line_number": 206,
+        "text": "    model: DualBranchGatedFCN,"
+      },
+      {
+        "line_number": 207,
+        "text": "    loader: DataLoader,"
+      },
+      {
+        "line_number": 208,
+        "text": "    criterion: SampleWeightedHeatmapMSE,"
+      },
+      {
+        "line_number": 209,
+        "text": "    device: torch.device,"
+      },
+      {
+        "line_number": 210,
+        "text": "    tolerance: DetectionTolerance,"
+      },
+      {
+        "line_number": 211,
+        "text": "    args: argparse.Namespace,"
+      },
+      {
+        "line_number": 212,
+        "text": "    amp_enabled: bool,"
+      },
+      {
+        "line_number": 213,
+        "text": ") -> tuple[pd.DataFrame, dict[str, float]]:"
+      },
+      {
+        "line_number": 214,
+        "text": "    model.eval()"
+      },
+      {
+        "line_number": 215,
+        "text": "    rows: list[dict[str, Any]] = []"
+      },
+      {
+        "line_number": 216,
+        "text": "    sums = {\"total\": 0.0, \"fusion\": 0.0, \"h_aux\": 0.0, \"v_aux\": 0.0}"
+      },
+      {
+        "line_number": 217,
+        "text": "    sample_count = 0"
+      },
+      {
+        "line_number": 218,
+        "text": "    with torch.no_grad():"
+      },
+      {
+        "line_number": 219,
+        "text": "        for batch in loader:"
+      },
+      {
+        "line_number": 220,
+        "text": "            inputs = batch[\"input\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 221,
+        "text": "            target = batch[\"target\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 222,
+        "text": "            present = batch[\"target_present\"].to(device, non_blocking=True)"
+      },
+      {
+        "line_number": 223,
+        "text": "            with torch.autocast(device_type=device.type, dtype=torch.float16, enabled=amp_enabled):"
+      },
+      {
+        "line_number": 224,
+        "text": "                outputs = model(inputs)"
+      },
+      {
+        "line_number": 225,
+        "text": "                total, parts = compute_losses("
+      },
+      {
+        "line_number": 226,
+        "text": "                    outputs, target, present, criterion, args.h_aux_weight, args.v_aux_weight"
+      },
+      {
+        "line_number": 227,
+        "text": "                )"
+      },
+      {
+        "line_number": 228,
+        "text": "            fusion_score, fusion_r, fusion_v = extract_scores_and_peaks(outputs[\"fusion_logits\"])"
+      },
+      {
+        "line_number": 229,
+        "text": "            h_score, h_r, h_v = extract_scores_and_peaks(outputs[\"h_logits\"])"
+      },
+      {
+        "line_number": 230,
+        "text": "            v_score, v_r, v_v = extract_scores_and_peaks(outputs[\"v_logits\"])"
+      },
+      {
+        "line_number": 231,
+        "text": "            gates = outputs[\"gate_weights\"]"
+      },
+      {
+        "line_number": 232,
+        "text": "            n = inputs.shape[0]"
+      },
+      {
+        "line_number": 233,
+        "text": "            sums[\"total\"] += float(total.item()) * n"
+      },
+      {
+        "line_number": 234,
+        "text": "            for key in (\"fusion\", \"h_aux\", \"v_aux\"):"
+      },
+      {
+        "line_number": 235,
+        "text": "                sums[key] += float(parts[key].item()) * n"
+      },
+      {
+        "line_number": 236,
+        "text": "            sample_count += n"
+      },
+      {
+        "line_number": 237,
+        "text": ""
+      },
+      {
+        "line_number": 238,
+        "text": "            present_np = present.cpu().numpy().astype(int)"
+      }
+    ],
+    [
+      {
+        "line_number": 254,
+        "text": "                    localization_ok = ("
+      },
+      {
+        "line_number": 255,
+        "text": "                        range_error <= tolerance.range_gates"
+      },
+      {
+        "line_number": 256,
+        "text": "                        and velocity_error <= tolerance.velocity_bins"
+      },
+      {
+        "line_number": 257,
+        "text": "                    )"
+      },
+      {
+        "line_number": 258,
+        "text": "                else:"
+      },
+      {
+        "line_number": 259,
+        "text": "                    range_error = math.nan"
+      },
+      {
+        "line_number": 260,
+        "text": "                    velocity_error = math.nan"
+      },
+      {
+        "line_number": 261,
+        "text": "                    localization_ok = False"
+      },
+      {
+        "line_number": 262,
+        "text": "                rows.append({"
+      },
+      {
+        "line_number": 263,
+        "text": "                    \"sample_id\": batch[\"sample_id\"][i],"
+      },
+      {
+        "line_number": 264,
+        "text": "                    \"target_present\": int(present_np[i]),"
+      },
+      {
+        "line_number": 265,
+        "text": "                    \"score\": float(arrays[\"score\"][i]),"
+      },
+      {
+        "line_number": 266,
+        "text": "                    \"pred_range_index\": int(arrays[\"pred_r\"][i]),"
+      },
+      {
+        "line_number": 267,
+        "text": "                    \"pred_velocity_index\": int(arrays[\"pred_v\"][i]),"
+      },
+      {
+        "line_number": 268,
+        "text": "                    \"true_range_index\": int(true_r[i]),"
+      },
+      {
+        "line_number": 269,
+        "text": "                    \"true_velocity_index\": int(true_v[i]),"
+      },
+      {
+        "line_number": 270,
+        "text": "                    \"range_error_gates\": range_error,"
+      },
+      {
+        "line_number": 271,
+        "text": "                    \"velocity_error_bins\": velocity_error,"
+      },
+      {
+        "line_number": 272,
+        "text": "                    \"localization_ok\": bool(localization_ok),"
+      },
+      {
+        "line_number": 273,
+        "text": "                    \"h_aux_score\": float(arrays[\"h_score\"][i]),"
+      },
+      {
+        "line_number": 274,
+        "text": "                    \"v_aux_score\": float(arrays[\"v_score\"][i]),"
+      }
+    ],
+    [
+      {
+        "line_number": 278,
+        "text": "                    \"v_pred_velocity_index\": int(arrays[\"v_v\"][i]),"
+      },
+      {
+        "line_number": 279,
+        "text": "                    \"gate_h\": float(arrays[\"gates\"][i, 0]),"
+      },
+      {
+        "line_number": 280,
+        "text": "                    \"gate_v\": float(arrays[\"gates\"][i, 1]),"
+      },
+      {
+        "line_number": 281,
+        "text": "                    \"beam_layer\": int(np.asarray(batch[\"beam_layer\"])[i]),"
+      },
+      {
+        "line_number": 282,
+        "text": "                    \"azimuth_deg\": float(np.asarray(batch[\"azimuth_deg\"])[i]),"
+      },
+      {
+        "line_number": 283,
+        "text": "                    \"distance_m\": float(np.asarray(batch[\"distance_m\"])[i]),"
+      },
+      {
+        "line_number": 284,
+        "text": "                    \"velocity_mps\": float(np.asarray(batch[\"velocity_mps\"])[i]),"
+      },
+      {
+        "line_number": 285,
+        "text": "                    \"mat_path\": batch[\"mat_path\"][i],"
+      },
+      {
+        "line_number": 286,
+        "text": "                })"
+      },
+      {
+        "line_number": 287,
+        "text": "    if sample_count == 0:"
+      },
+      {
+        "line_number": 288,
+        "text": "        raise RuntimeError(\"评价DataLoader为空\")"
+      },
+      {
+        "line_number": 289,
+        "text": "    return pd.DataFrame(rows), {key: value / sample_count for key, value in sums.items()}"
+      },
+      {
+        "line_number": 290,
+        "text": ""
+      },
+      {
+        "line_number": 291,
+        "text": ""
+      },
+      {
+        "line_number": 292,
+        "text": "def add_gate_diagnostics(frame: pd.DataFrame, threshold: float) -> pd.DataFrame:"
+      },
+      {
+        "line_number": 293,
+        "text": "    result = frame.copy()"
+      },
+      {
+        "line_number": 294,
+        "text": "    result[\"detected\"] = result[\"score\"] > float(threshold)"
+      },
+      {
+        "line_number": 295,
+        "text": "    result[\"false_alarm\"] = (result[\"target_present\"] == 0) & result[\"detected\"]"
+      },
+      {
+        "line_number": 296,
+        "text": "    result[\"correct_detection\"] = ("
+      },
+      {
+        "line_number": 297,
+        "text": "        (result[\"target_present\"] == 1) & result[\"detected\"] & result[\"localization_ok\"]"
+      },
+      {
+        "line_number": 298,
+        "text": "    )"
+      },
+      {
+        "line_number": 299,
+        "text": "    result[\"dominant_branch\"] = np.where(result[\"gate_h\"] >= result[\"gate_v\"], \"H\", \"V\")"
+      },
+      {
+        "line_number": 300,
+        "text": "    result[\"gate_margin\"] = np.abs(result[\"gate_h\"] - result[\"gate_v\"])"
+      },
+      {
+        "line_number": 301,
+        "text": "    return result"
+      },
+      {
+        "line_number": 302,
+        "text": ""
+      },
+      {
+        "line_number": 303,
+        "text": ""
+      },
+      {
+        "line_number": 304,
+        "text": "def gate_statistics(frame: pd.DataFrame, split: str) -> pd.DataFrame:"
+      },
+      {
+        "line_number": 305,
+        "text": "    masks = {"
+      },
+      {
+        "line_number": 306,
+        "text": "        \"all\": np.ones(len(frame), dtype=bool),"
+      },
+      {
+        "line_number": 307,
+        "text": "        \"positive\": frame[\"target_present\"].to_numpy(int) == 1,"
+      },
+      {
+        "line_number": 308,
+        "text": "        \"background\": frame[\"target_present\"].to_numpy(int) == 0,"
+      },
+      {
+        "line_number": 309,
+        "text": "        \"correct_positive\": frame[\"correct_detection\"].to_numpy(bool),"
+      },
+      {
+        "line_number": 310,
+        "text": "        \"failed_positive\": (frame[\"target_present\"].to_numpy(int) == 1) & ~frame[\"correct_detection\"].to_numpy(bool),"
+      },
+      {
+        "line_number": 311,
+        "text": "        \"false_alarm\": frame[\"false_alarm\"].to_numpy(bool),"
+      },
+      {
+        "line_number": 312,
+        "text": "    }"
+      },
+      {
+        "line_number": 313,
+        "text": "    rows = []"
+      },
+      {
+        "line_number": 314,
+        "text": "    for group, mask in masks.items():"
+      },
+      {
+        "line_number": 315,
+        "text": "        part = frame.loc[mask]"
+      },
+      {
+        "line_number": 316,
+        "text": "        rows.append({"
+      },
+      {
+        "line_number": 317,
+        "text": "            \"split\": split,"
+      },
+      {
+        "line_number": 318,
+        "text": "            \"group\": group,"
+      },
+      {
+        "line_number": 319,
+        "text": "            \"count\": int(len(part)),"
+      },
+      {
+        "line_number": 320,
+        "text": "            \"mean_gate_h\": float(part[\"gate_h\"].mean()) if len(part) else math.nan,"
+      }
+    ],
+    [
+      {
+        "line_number": 339,
+        "text": "    metrics: dict[str, float | int],"
+      },
+      {
+        "line_number": 340,
+        "text": "    init_info: dict[str, Any],"
+      },
+      {
+        "line_number": 341,
+        "text": ") -> None:"
+      },
+      {
+        "line_number": 342,
+        "text": "    torch.save({"
+      },
+      {
+        "line_number": 343,
+        "text": "        \"epoch\": int(epoch),"
+      },
+      {
+        "line_number": 344,
+        "text": "        \"stage\": stage,"
+      },
+      {
+        "line_number": 345,
+        "text": "        \"model_state_dict\": model.state_dict(),"
+      },
+      {
+        "line_number": 346,
+        "text": "        \"optimizer_state_dict\": optimizer.state_dict(),"
+      },
+      {
+        "line_number": 347,
+        "text": "        \"scheduler_state_dict\": scheduler.state_dict(),"
+      },
+      {
+        "line_number": 348,
+        "text": "        \"threshold\": float(threshold),"
+      },
+      {
+        "line_number": 349,
+        "text": "        \"validation_metrics\": metrics,"
+      },
+      {
+        "line_number": 350,
+        "text": "        \"initialization\": init_info,"
+      },
+      {
+        "line_number": 351,
+        "text": "        \"dataset_version\": getattr("
+      },
+      {
+        "line_number": 352,
+        "text": "            args,"
+      },
+      {
+        "line_number": 353,
+        "text": "            \"dataset_version\","
+      },
+      {
+        "line_number": 354,
+        "text": "            \"unknown\","
+      },
+      {
+        "line_number": 355,
+        "text": "        ),"
+      },
+      {
+        "line_number": 356,
+        "text": "        \"manifest_path\": getattr("
+      },
+      {
+        "line_number": 357,
+        "text": "            args,"
+      },
+      {
+        "line_number": 358,
+        "text": "            \"manifest_path\","
+      },
+      {
+        "line_number": 359,
+        "text": "            \"\","
+      }
+    ],
+    [
+      {
+        "line_number": 560,
+        "text": "    table_dir = experiment_dir / \"tables\""
+      },
+      {
+        "line_number": 561,
+        "text": "    figure_dir = experiment_dir / \"figures\""
+      },
+      {
+        "line_number": 562,
+        "text": "    for directory in (checkpoint_dir, table_dir, figure_dir):"
+      },
+      {
+        "line_number": 563,
+        "text": "        directory.mkdir(parents=True, exist_ok=True)"
+      },
+      {
+        "line_number": 564,
+        "text": ""
+      },
+      {
+        "line_number": 565,
+        "text": "    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")"
+      },
+      {
+        "line_number": 566,
+        "text": "    amp_enabled = device.type == \"cuda\" and not args.no_amp"
+      },
+      {
+        "line_number": 567,
+        "text": "    tolerance = DetectionTolerance(args.range_tolerance_gates, args.velocity_tolerance_bins)"
+      },
+      {
+        "line_number": 568,
+        "text": ""
+      },
+      {
+        "line_number": 569,
+        "text": "    base = {"
+      },
+      {
+        "line_number": 570,
+        "text": "        split: DetectionRadarDatasetV3("
+      },
+      {
+        "line_number": 571,
+        "text": "            manifest_path=manifest_path,"
+      },
+      {
+        "line_number": 572,
+        "text": "            split=split,"
+      },
+      {
+        "line_number": 573,
+        "text": "            channel_mode=\"HV\","
+      },
+      {
+        "line_number": 574,
+        "text": "            range_sigma=args.range_sigma,"
+      },
+      {
+        "line_number": 575,
+        "text": "            velocity_sigma=args.velocity_sigma,"
+      },
+      {
+        "line_number": 576,
+        "text": "        ) for split in (\"train\", \"val\", \"test\")"
+      },
+      {
+        "line_number": 577,
+        "text": "    }"
+      },
+      {
+        "line_number": 578,
+        "text": "    datasets: dict[str, Dataset] = {"
+      },
+      {
+        "line_number": 579,
+        "text": "        split: make_debug_subset(dataset, args.debug_per_class)"
+      },
+      {
+        "line_number": 580,
+        "text": "        for split, dataset in base.items()"
+      }
+    ],
+    [
+      {
+        "line_number": 629,
+        "text": "        optimizer.load_state_dict(resume[\"optimizer_state_dict\"])"
+      },
+      {
+        "line_number": 630,
+        "text": "        if \"scheduler_state_dict\" in resume:"
+      },
+      {
+        "line_number": 631,
+        "text": "            scheduler.load_state_dict(resume[\"scheduler_state_dict\"])"
+      },
+      {
+        "line_number": 632,
+        "text": "        start_epoch = int(resume[\"epoch\"]) + 1"
+      },
+      {
+        "line_number": 633,
+        "text": "        history_path = table_dir / \"training_history.csv\""
+      },
+      {
+        "line_number": 634,
+        "text": "        if history_path.exists():"
+      },
+      {
+        "line_number": 635,
+        "text": "            history_rows = pd.read_csv(history_path, encoding=\"utf-8-sig\").to_dict(\"records\")"
+      },
+      {
+        "line_number": 636,
+        "text": "        best_path = checkpoint_dir / \"best.pt\""
+      },
+      {
+        "line_number": 637,
+        "text": "        if best_path.exists():"
+      },
+      {
+        "line_number": 638,
+        "text": "            previous_best = torch.load(best_path, map_location=\"cpu\", weights_only=False)"
+      },
+      {
+        "line_number": 639,
+        "text": "            previous_metrics = previous_best.get(\"validation_metrics\", {})"
+      },
+      {
+        "line_number": 640,
+        "text": "            if previous_metrics:"
+      },
+      {
+        "line_number": 641,
+        "text": "                best_key = ("
+      },
+      {
+        "line_number": 642,
+        "text": "                    float(previous_metrics.get(\"joint_pd\", -math.inf)),"
+      },
+      {
+        "line_number": 643,
+        "text": "                    -float(previous_metrics.get(\"pfa\", math.inf)),"
+      },
+      {
+        "line_number": 644,
+        "text": "                    float(previous_metrics.get(\"roc_auc\", -math.inf)),"
+      },
+      {
+        "line_number": 645,
+        "text": "                    -math.inf,"
+      },
+      {
+        "line_number": 646,
+        "text": "                )"
+      },
+      {
+        "line_number": 647,
+        "text": "                best_epoch = int(previous_best.get(\"epoch\", 0))"
+      },
+      {
+        "line_number": 648,
+        "text": "        print(f\"从epoch {start_epoch}继续训练：{last_path}\")"
+      },
+      {
+        "line_number": 649,
+        "text": ""
+      }
+    ],
+    [
+      {
+        "line_number": 665,
+        "text": "            current_stage = stage"
+      },
+      {
+        "line_number": 666,
+        "text": "            stale_epochs = 0"
+      },
+      {
+        "line_number": 667,
+        "text": "            print(f\"进入训练阶段：{stage}; 可训练参数：{count_trainable_parameters(model):,}\")"
+      },
+      {
+        "line_number": 668,
+        "text": ""
+      },
+      {
+        "line_number": 669,
+        "text": "        train_losses = train_one_epoch("
+      },
+      {
+        "line_number": 670,
+        "text": "            model, loaders[\"train\"], criterion, optimizer, scaler, device, args, amp_enabled"
+      },
+      {
+        "line_number": 671,
+        "text": "        )"
+      },
+      {
+        "line_number": 672,
+        "text": "        val_frame, val_losses = collect_predictions("
+      },
+      {
+        "line_number": 673,
+        "text": "            model, loaders[\"val\"], criterion, device, tolerance, args, amp_enabled"
+      },
+      {
+        "line_number": 674,
+        "text": "        )"
+      },
+      {
+        "line_number": 675,
+        "text": "        threshold, _ = select_threshold_at_false_alarm_budget(val_frame, args.max_val_false_alarms)"
+      },
+      {
+        "line_number": 676,
+        "text": "        _, val_metrics = apply_threshold_and_metrics(val_frame, threshold, tolerance)"
+      },
+      {
+        "line_number": 677,
+        "text": "        scheduler.step(val_losses[\"total\"])"
+      },
+      {
+        "line_number": 678,
+        "text": "        row = {"
+      },
+      {
+        "line_number": 679,
+        "text": "            \"epoch\": epoch, \"stage\": stage,"
+      },
+      {
+        "line_number": 680,
+        "text": "            \"train_loss\": train_losses[\"total\"], \"train_fusion_loss\": train_losses[\"fusion\"],"
+      },
+      {
+        "line_number": 681,
+        "text": "            \"train_h_aux_loss\": train_losses[\"h_aux\"], \"train_v_aux_loss\": train_losses[\"v_aux\"],"
+      },
+      {
+        "line_number": 682,
+        "text": "            \"val_loss\": val_losses[\"total\"], \"val_fusion_loss\": val_losses[\"fusion\"],"
+      },
+      {
+        "line_number": 683,
+        "text": "            \"val_h_aux_loss\": val_losses[\"h_aux\"], \"val_v_aux_loss\": val_losses[\"v_aux\"],"
+      },
+      {
+        "line_number": 684,
+        "text": "            \"fusion_lr\": float(optimizer.param_groups[0][\"lr\"]),"
+      },
+      {
+        "line_number": 685,
+        "text": "            \"branch_lr\": float(optimizer.param_groups[1][\"lr\"]),"
+      }
+    ],
+    [
+      {
+        "line_number": 712,
+        "text": "            break"
+      },
+      {
+        "line_number": 713,
+        "text": ""
+      },
+      {
+        "line_number": 714,
+        "text": "    history = pd.DataFrame(history_rows)"
+      },
+      {
+        "line_number": 715,
+        "text": "    history.to_csv(table_dir / \"training_history.csv\", index=False, encoding=\"utf-8-sig\")"
+      },
+      {
+        "line_number": 716,
+        "text": "    if len(history):"
+      },
+      {
+        "line_number": 717,
+        "text": "        plot_history(history, figure_dir / \"training_loss.png\")"
+      },
+      {
+        "line_number": 718,
+        "text": ""
+      },
+      {
+        "line_number": 719,
+        "text": "    best = torch.load(checkpoint_dir / \"best.pt\", map_location=device, weights_only=False)"
+      },
+      {
+        "line_number": 720,
+        "text": "    model.load_state_dict(best[\"model_state_dict\"])"
+      },
+      {
+        "line_number": 721,
+        "text": "    val_frame, val_losses = collect_predictions(model, loaders[\"val\"], criterion, device, tolerance, args, amp_enabled)"
+      },
+      {
+        "line_number": 722,
+        "text": "    threshold, threshold_curve = select_threshold_at_false_alarm_budget(val_frame, args.max_val_false_alarms)"
+      },
+      {
+        "line_number": 723,
+        "text": "    val_results, val_metrics = apply_threshold_and_metrics(val_frame, threshold, tolerance)"
+      },
+      {
+        "line_number": 724,
+        "text": "    val_results = add_gate_diagnostics(val_results, threshold)"
+      },
+      {
+        "line_number": 725,
+        "text": "    test_frame, test_losses = collect_predictions(model, loaders[\"test\"], criterion, device, tolerance, args, amp_enabled)"
+      },
+      {
+        "line_number": 726,
+        "text": "    test_results, test_metrics = apply_threshold_and_metrics(test_frame, threshold, tolerance)"
+      },
+      {
+        "line_number": 727,
+        "text": "    test_results = add_gate_diagnostics(test_results, threshold)"
+      },
+      {
+        "line_number": 728,
+        "text": ""
+      },
+      {
+        "line_number": 729,
+        "text": "    val_results.to_csv(table_dir / \"val_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+      },
+      {
+        "line_number": 730,
+        "text": "    test_results.to_csv(table_dir / \"test_predictions.csv\", index=False, encoding=\"utf-8-sig\")"
+      },
+      {
+        "line_number": 731,
+        "text": "    threshold_curve.to_csv(table_dir / \"val_threshold_curve.csv\", index=False, encoding=\"utf-8-sig\")"
+      },
+      {
+        "line_number": 732,
+        "text": "    pd.concat([gate_statistics(val_results, \"val\"), gate_statistics(test_results, \"test\")], ignore_index=True).to_csv("
+      },
+      {
+        "line_number": 733,
+        "text": "        table_dir / \"gate_statistics.csv\", index=False, encoding=\"utf-8-sig\""
+      },
+      {
+        "line_number": 734,
+        "text": "    )"
+      },
+      {
+        "line_number": 735,
+        "text": "    test_results[(test_results[\"target_present\"] == 1) & ~test_results[\"correct_detection\"]].to_csv("
+      },
+      {
+        "line_number": 736,
+        "text": "        table_dir / \"test_failure_samples.csv\", index=False, encoding=\"utf-8-sig\""
+      },
+      {
+        "line_number": 737,
+        "text": "    )"
+      },
+      {
+        "line_number": 738,
+        "text": "    test_results[test_results[\"false_alarm\"]].to_csv("
+      },
+      {
+        "line_number": 739,
+        "text": "        table_dir / \"test_false_alarm_samples.csv\", index=False, encoding=\"utf-8-sig\""
+      },
+      {
+        "line_number": 740,
+        "text": "    )"
+      },
+      {
+        "line_number": 741,
+        "text": "    test_results["
+      },
+      {
+        "line_number": 742,
+        "text": "        (test_results[\"h_pred_range_index\"] != test_results[\"v_pred_range_index\"])"
+      },
+      {
+        "line_number": 743,
+        "text": "        | (test_results[\"h_pred_velocity_index\"] != test_results[\"v_pred_velocity_index\"])"
+      },
+      {
+        "line_number": 744,
+        "text": "    ].to_csv("
+      },
+      {
+        "line_number": 745,
+        "text": "        table_dir / \"test_branch_disagreement.csv\", index=False, encoding=\"utf-8-sig\""
+      }
+    ],
+    [
+      {
+        "line_number": 759,
+        "text": "        \"v_checkpoint\": args.v_checkpoint,"
+      },
+      {
+        "line_number": 760,
+        "text": "        \"device\": str(device), \"amp_enabled\": amp_enabled,"
+      },
+      {
+        "line_number": 761,
+        "text": "        \"parameter_count\": count_total_parameters(model),"
+      },
+      {
+        "line_number": 762,
+        "text": "        \"dataset_sizes\": {split: len(dataset) for split, dataset in datasets.items()},"
+      },
+      {
+        "line_number": 763,
+        "text": "        \"best_epoch\": int(best[\"epoch\"]), \"best_stage\": best.get(\"stage\"),"
+      },
+      {
+        "line_number": 764,
+        "text": "        \"validation_threshold\": float(threshold),"
+      },
+      {
+        "line_number": 765,
+        "text": "        \"max_val_false_alarms\": args.max_val_false_alarms,"
+      },
+      {
+        "line_number": 766,
+        "text": "        \"tolerance\": asdict(tolerance),"
+      },
+      {
+        "line_number": 767,
+        "text": "        \"initialization\": init_info,"
+      },
+      {
+        "line_number": 768,
+        "text": "        \"validation_losses\": val_losses, \"test_losses\": test_losses,"
+      },
+      {
+        "line_number": 769,
+        "text": "        \"validation_metrics\": val_metrics, \"test_metrics\": test_metrics,"
+      },
+      {
+        "line_number": 770,
+        "text": "        \"elapsed_seconds\": time.time() - start_time,"
+      },
+      {
+        "line_number": 771,
+        "text": "        \"config\": vars(args),"
+      },
+      {
+        "line_number": 772,
+        "text": "    }"
+      },
+      {
+        "line_number": 773,
+        "text": "    (table_dir / \"summary.json\").write_text("
+      },
+      {
+        "line_number": 774,
+        "text": "        json.dumps(json_safe(summary), ensure_ascii=False, indent=2), encoding=\"utf-8\""
+      },
+      {
+        "line_number": 775,
+        "text": "    )"
+      },
+      {
+        "line_number": 776,
+        "text": "    print(\"\\n\" + \"=\" * 78)"
+      },
+      {
+        "line_number": 777,
+        "text": "    print(f\"最佳epoch：{best['epoch']}；阶段：{best.get('stage')}；验证集阈值：{threshold:.6f}\")"
+      },
+      {
+        "line_number": 778,
+        "text": "    print(f\"验证集：Pd={float(val_metrics['joint_pd']):.4f}, Pfa={float(val_metrics['pfa']):.4f}, AUC={float(val_metrics['roc_auc']):.4f}\")"
+      },
+      {
+        "line_number": 779,
+        "text": "    print(f\"测试集：Pd={float(test_metrics['joint_pd']):.4f}, Pfa={float(test_metrics['pfa']):.4f}, AUC={float(test_metrics['roc_auc']):.4f}\")"
+      }
+    ]
+  ]
+}

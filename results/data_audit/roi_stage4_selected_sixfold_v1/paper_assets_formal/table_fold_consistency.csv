@@ -1,0 +1,4 @@
+﻿mode,folds,folds_false_alarms_not_worse,folds_joint_pd_not_worse,folds_pauc_improved,max_joint_pd_drop
+power2_baseline,6,6,6,0,0.0
+power2_roi_power_control,6,6,6,2,0.0
+power2_roi_ri4,6,6,6,2,0.0

@@ -1,0 +1,25 @@
+{
+  "installed_at": "2026-07-21T22:25:23.281195",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "installed_files": [
+    "training/train_target_protected_scan_calibrator_ablation.py",
+    "scripts/run_bc_dpg_v3_ablation.py",
+    "scripts/summarize_bc_dpg_v3_ablation.py",
+    "features/__init__.py",
+    "features/polarimetric_rd.py",
+    "scripts/test_polarimetric_features_v1.py",
+    "scripts/audit_polarimetric_features_v1.py",
+    "configs/bc_dpg_v3_ablation_polar_stage1.yaml"
+  ],
+  "backed_up_files": [],
+  "file_hashes": {
+    "training/train_target_protected_scan_calibrator_ablation.py": "e1ef0455c47aba7aa528bbd367eb0f559767f9b3f1b329ca32e032b1046c5ebb",
+    "scripts/run_bc_dpg_v3_ablation.py": "fba41958aebbbf51d0ec80c53c6ed573cb0ff28ca6f790e02cf8545c7c12f733",
+    "scripts/summarize_bc_dpg_v3_ablation.py": "0c85f700c748c74e1cb06a8b285e0ff6f7f7adb6503c5eace5c433593cf361e2",
+    "features/__init__.py": "cbc48b055fef209f194309d86830d0d5d21fbdf24084b8d292352ddbd25bdcc2",
+    "features/polarimetric_rd.py": "2b1dbc92aa10882295df9186d92309d50ce7971d424c9f2d9732b73702b3f416",
+    "scripts/test_polarimetric_features_v1.py": "6f6227c6b87deb2d393564a9f8e12a53c58d371a1c9ec47ef844ca6b1617e25c",
+    "scripts/audit_polarimetric_features_v1.py": "f9d813d4c1f04618e06bded49c513234ebab92bd35b34a29e65feb5f390bcd41",
+    "configs/bc_dpg_v3_ablation_polar_stage1.yaml": "35f39c16be1d8bbc89cf7320ddaa88b32245d98e4ec57f2d9f4a6c05be8b9b5c"
+  }
+}

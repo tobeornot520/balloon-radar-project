@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-07-22T10:54:55",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "output_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/final_evidence/bc_dpg_v3_final",
+  "backup_dir": null,
+  "final_model": "BC-DPG-FCN v3",
+  "final_shift_regularization": 0.01,
+  "include_checkpoints": true,
+  "required_evidence_count": 10,
+  "required_evidence_missing": [],
+  "hash_record_count": 34,
+  "hash_missing": [],
+  "figures": [
+    "figures/fig1_deployment_false_alarms.png",
+    "figures/fig2_ablation_false_alarms.png",
+    "figures/fig3_false_alarm_target_shift_tradeoff.png",
+    "figures/fig4_selected_regularization_by_fold.png"
+  ],
+  "validation_selection_uses_test_metrics": false,
+  "v31_adopted": false
+}

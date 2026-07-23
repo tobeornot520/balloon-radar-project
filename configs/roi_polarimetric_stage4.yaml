@@ -1,0 +1,10 @@
+
+stage: roi_polarimetric_stage4
+folds: [1,4]
+modes:
+  - power2
+  - roi_ri4
+  - roi_polar6_gated
+  - roi_ri8_gated
+  - roi_fusion
+use_scan_context: false

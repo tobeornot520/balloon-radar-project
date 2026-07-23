@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-07-22T08:09:11.682233+00:00",
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "folds": [
+    1,
+    4
+  ],
+  "modes": [
+    "power2",
+    "ri4",
+    "polar6_gated",
+    "ri8_gated"
+  ],
+  "experiments_requested": 8,
+  "experiments_found": 8,
+  "files_inventoried": 88,
+  "csv_files_inspected": 32,
+  "prediction_candidate_tables": 24,
+  "usable_prediction_tables": 16,
+  "low_fpr_rows": 16,
+  "threshold_transfer_rows": 8,
+  "group_rows": 0,
+  "low_fpr_status": "COMPLETE",
+  "errors": []
+}

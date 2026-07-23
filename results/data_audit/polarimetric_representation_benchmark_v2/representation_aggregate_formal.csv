@@ -1,0 +1,2 @@
+﻿mode,folds,total_positive,total_background,total_false_alarms,mean_pfa,mean_pd,mean_auc,mean_range_mae,mean_velocity_mae,parameter_count,delta_false_alarms_vs_power2,delta_mean_pd_vs_power2,delta_mean_auc_vs_power2
+power2,3,160,380,0,0.0,0.7923076923076923,0.9992987117552335,3.1069444444444443,2.345726495726496,19793,0,0.0,0.0

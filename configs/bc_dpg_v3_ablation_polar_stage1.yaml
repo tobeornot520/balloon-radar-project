@@ -1,0 +1,75 @@
+project_stage:
+  name: BC-DPG-FCN-v3-ablation-and-polar-stage1
+  purpose:
+    - freeze and ablate the current scan-aware score calibrator
+    - audit explicit H/V polarimetric RD features before model fusion
+  hard_folds: [1, 4]
+  seed: 42
+
+ablation:
+  primary_metric_scope: base_threshold_test_metrics
+  threshold_rule: reuse_each_fold_original_DPG_threshold
+  core_modes:
+    - full
+    - no_scan_context
+    - no_background_classification
+    - no_background_tail
+    - no_target_protection
+  extended_modes:
+    - no_target_keep
+    - no_pairwise
+    - no_shift_selectivity
+    - no_shift_regularization
+  no_scan_context_rule: zero_12D_group_features_keep_architecture_fixed
+  no_target_protection_rule:
+    target_keep_weight: 0.0
+    pairwise_weight: 0.0
+    shift_selectivity_weight: 0.0
+
+polarimetric_stage1:
+  status: exploratory_feature_audit
+  input_source: complex_HV_IQ
+  rd_transform: slow_time_Hann_FFT
+  local_estimation_window:
+    velocity_bins: 5
+    range_gates: 3
+  candidate_inputs:
+    power2:
+      channels: [H_power, V_power]
+    ri4:
+      channels: [Re_H, Im_H, Re_V, Im_V]
+    polar6:
+      channels:
+        - H_power
+        - V_power
+        - relative_ZDR_like
+        - local_rho_HV
+        - cos_relative_phase
+        - sin_relative_phase
+    ri8:
+      channels:
+        - Re_H
+        - Im_H
+        - Re_V
+        - Im_V
+        - relative_ZDR_like
+        - local_rho_HV
+        - cos_relative_phase
+        - sin_relative_phase
+  calibration_warning:
+    - absolute_channel_amplitude_calibration_unknown
+    - absolute_interchannel_phase_calibration_unknown
+    - report_relative_ZDR_like_not_absolute_ZDR
+    - report_relative_phase_not_absolute_PhiDP
+
+multidomain_boundary:
+  current_RD_detection: ready
+  explicit_polarimetric_branch: audit_first
+  short_time_frequency_from_128_pulses: possible_but_resolution_limited
+  stable_micro_doppler_branch:
+    status: not_ready
+    missing:
+      - ordered_continuous_long_slow_time_sequence
+      - PRF_and_time_spacing
+      - target_range_gate_alignment_or_tracking
+      - sequence_level_labels

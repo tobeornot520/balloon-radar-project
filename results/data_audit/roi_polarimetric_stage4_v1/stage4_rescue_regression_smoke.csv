@@ -1,0 +1,9 @@
+﻿scope,fold,mode,samples,background_false_alarms_removed,background_false_alarms_added,target_correct_detections_preserved,target_correct_detections_regressed,target_correct_detections_rescued
+smoke,1,power2_roi_power_control,16,0,0,8,0,0
+smoke,1,power2_roi_ri4,16,0,0,8,0,0
+smoke,1,power2_roi_polar6_gated,16,0,0,8,0,0
+smoke,1,power2_roi_ri4_polar6_gated,16,0,0,8,0,0
+smoke,4,power2_roi_power_control,16,0,0,5,0,0
+smoke,4,power2_roi_ri4,16,0,0,5,0,0
+smoke,4,power2_roi_polar6_gated,16,0,0,5,0,0
+smoke,4,power2_roi_ri4_polar6_gated,16,0,0,5,0,0

@@ -1,0 +1,506 @@
+{
+  "project_root": "/home/tobeornot8259748/projects/balloon_radar_project",
+  "checkpoint": {
+    "checkpoint_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt",
+    "checkpoint_type": "dict",
+    "top_level_keys": [
+      "epoch",
+      "stage",
+      "model_state_dict",
+      "optimizer_state_dict",
+      "scheduler_state_dict",
+      "threshold",
+      "validation_metrics",
+      "initialization",
+      "dataset_version",
+      "manifest_path",
+      "split_strategy",
+      "fold_id",
+      "raw_data_root",
+      "h_checkpoint",
+      "v_checkpoint",
+      "config"
+    ],
+    "state_dict_source": "model_state_dict",
+    "state_dict_key_count": 40,
+    "state_dict_preview": [
+      {
+        "key": "h_branch.network.0.block.0.weight",
+        "shape": [
+          16,
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "h_branch.network.0.block.1.weight",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "h_branch.network.0.block.1.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "h_branch.network.1.block.0.weight",
+        "shape": [
+          32,
+          16,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "h_branch.network.1.block.1.weight",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "h_branch.network.1.block.1.bias",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "h_branch.network.2.block.0.weight",
+        "shape": [
+          32,
+          32,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "h_branch.network.2.block.1.weight",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "h_branch.network.2.block.1.bias",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "h_branch.network.3.block.0.weight",
+        "shape": [
+          16,
+          32,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "h_branch.network.3.block.1.weight",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "h_branch.network.3.block.1.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "h_branch.network.4.weight",
+        "shape": [
+          1,
+          16,
+          1,
+          1
+        ]
+      },
+      {
+        "key": "h_branch.network.4.bias",
+        "shape": [
+          1
+        ]
+      },
+      {
+        "key": "v_branch.network.0.block.0.weight",
+        "shape": [
+          16,
+          1,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "v_branch.network.0.block.1.weight",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "v_branch.network.0.block.1.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "v_branch.network.1.block.0.weight",
+        "shape": [
+          32,
+          16,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "v_branch.network.1.block.1.weight",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "v_branch.network.1.block.1.bias",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "v_branch.network.2.block.0.weight",
+        "shape": [
+          32,
+          32,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "v_branch.network.2.block.1.weight",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "v_branch.network.2.block.1.bias",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "v_branch.network.3.block.0.weight",
+        "shape": [
+          16,
+          32,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "v_branch.network.3.block.1.weight",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "v_branch.network.3.block.1.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "v_branch.network.4.weight",
+        "shape": [
+          1,
+          16,
+          1,
+          1
+        ]
+      },
+      {
+        "key": "v_branch.network.4.bias",
+        "shape": [
+          1
+        ]
+      },
+      {
+        "key": "gate.0.weight",
+        "shape": [
+          16,
+          34
+        ]
+      },
+      {
+        "key": "gate.0.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "gate.2.weight",
+        "shape": [
+          2,
+          16
+        ]
+      },
+      {
+        "key": "gate.2.bias",
+        "shape": [
+          2
+        ]
+      },
+      {
+        "key": "fusion_head.0.block.0.weight",
+        "shape": [
+          32,
+          64,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "fusion_head.0.block.1.weight",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "fusion_head.0.block.1.bias",
+        "shape": [
+          32
+        ]
+      },
+      {
+        "key": "fusion_head.1.block.0.weight",
+        "shape": [
+          16,
+          32,
+          3,
+          3
+        ]
+      },
+      {
+        "key": "fusion_head.1.block.1.weight",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "fusion_head.1.block.1.bias",
+        "shape": [
+          16
+        ]
+      },
+      {
+        "key": "fusion_head.2.weight",
+        "shape": [
+          1,
+          16,
+          1,
+          1
+        ]
+      },
+      {
+        "key": "fusion_head.2.bias",
+        "shape": [
+          1
+        ]
+      }
+    ],
+    "scalar_metadata": {
+      "epoch": 74,
+      "stage": "full",
+      "threshold": 0.254150390625,
+      "dataset_version": "V4",
+      "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "split_strategy": "six_fold_grouped_background_scan_and_contiguous_uav_time_block_rotation",
+      "fold_id": 4,
+      "raw_data_root": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset",
+      "h_checkpoint": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/detection_h_v4_fold04_seed42/checkpoints/best.pt",
+      "v_checkpoint": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/detection_v_v4_fold04_seed42/checkpoints/best.pt"
+    },
+    "config": {
+      "name": "dpg_fcn_v4_fold04_seed42",
+      "data_root": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset",
+      "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "dataset_version": "V4",
+      "split_strategy": "six_fold_grouped_background_scan_and_contiguous_uav_time_block_rotation",
+      "fold_id": 4,
+      "h_checkpoint": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/detection_h_v4_fold04_seed42/checkpoints/best.pt",
+      "v_checkpoint": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/detection_v_v4_fold04_seed42/checkpoints/best.pt",
+      "epochs": 75,
+      "warmup_epochs": 15,
+      "partial_unfreeze_epochs": 35,
+      "batch_size": 8,
+      "num_workers": 0,
+      "fusion_learning_rate": 0.0003,
+      "branch_learning_rate": 3e-05,
+      "min_fusion_learning_rate": 3e-06,
+      "min_branch_learning_rate": 3e-07,
+      "weight_decay": 1e-05,
+      "positive_sample_weight": 10.0,
+      "h_aux_weight": 0.2,
+      "v_aux_weight": 0.2,
+      "range_sigma": 5.0,
+      "velocity_sigma": 5.0,
+      "gate_hidden_dim": 16,
+      "early_stopping_patience": 15,
+      "scheduler_patience": 5,
+      "gradient_clip_norm": 5.0,
+      "max_val_false_alarms": 2,
+      "range_tolerance_gates": 2,
+      "velocity_tolerance_bins": 3,
+      "seed": 42,
+      "debug_per_class": 0,
+      "no_memory_cache": false,
+      "no_amp": false,
+      "resume": false
+    }
+  },
+  "manifest": {
+    "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+    "rows": 1148,
+    "columns": [
+      "new_split",
+      "original_split",
+      "class_name",
+      "target_present",
+      "sample_id",
+      "source_file",
+      "beam_layer",
+      "azimuth_deg",
+      "distance_m",
+      "velocity_mps",
+      "mat_path",
+      "label_path"
+    ],
+    "dtypes": {
+      "new_split": "str",
+      "original_split": "str",
+      "class_name": "str",
+      "target_present": "int64",
+      "sample_id": "str",
+      "source_file": "str",
+      "beam_layer": "int64",
+      "azimuth_deg": "float64",
+      "distance_m": "float64",
+      "velocity_mps": "float64",
+      "mat_path": "str",
+      "label_path": "str"
+    },
+    "head": [
+      {
+        "new_split": "train",
+        "original_split": "test",
+        "class_name": "Background",
+        "target_present": 0,
+        "sample_id": "20260204_100739_beam1_az001",
+        "source_file": "20260204_100739",
+        "beam_layer": 1,
+        "azimuth_deg": 1.0,
+        "distance_m": "",
+        "velocity_mps": "",
+        "mat_path": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/test/Background_IQ/IQ_Data/20260204_100739_beam1_az001.mat",
+        "label_path": ""
+      },
+      {
+        "new_split": "train",
+        "original_split": "train",
+        "class_name": "Background",
+        "target_present": 0,
+        "sample_id": "20260204_100739_beam1_az010",
+        "source_file": "20260204_100739",
+        "beam_layer": 1,
+        "azimuth_deg": 10.0,
+        "distance_m": "",
+        "velocity_mps": "",
+        "mat_path": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/train/Background_IQ/IQ_Data/20260204_100739_beam1_az010.mat",
+        "label_path": ""
+      },
+      {
+        "new_split": "train",
+        "original_split": "val",
+        "class_name": "Background",
+        "target_present": 0,
+        "sample_id": "20260204_100739_beam1_az019",
+        "source_file": "20260204_100739",
+        "beam_layer": 1,
+        "azimuth_deg": 19.0,
+        "distance_m": "",
+        "velocity_mps": "",
+        "mat_path": "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/val/Background_IQ/IQ_Data/20260204_100739_beam1_az019.mat",
+        "label_path": ""
+      }
+    ],
+    "absolute_path_hits": [
+      {
+        "column": "mat_path",
+        "count": 1148,
+        "examples": [
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/test/Background_IQ/IQ_Data/20260204_100739_beam1_az001.mat",
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/train/Background_IQ/IQ_Data/20260204_100739_beam1_az010.mat",
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/val/Background_IQ/IQ_Data/20260204_100739_beam1_az019.mat"
+        ]
+      },
+      {
+        "column": "label_path",
+        "count": 318,
+        "examples": [
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/train/UAV_IQ/Labels/20260202_144238_beam1.txt",
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/train/UAV_IQ/Labels/20260202_144238_beam2.txt",
+          "/home/tobeornot8259748/projects/balloon_radar_project/data/raw/detection_dataset/train/UAV_IQ/Labels/20260202_144238_beam3.txt"
+        ]
+      }
+    ]
+  },
+  "model_module": {
+    "module": "models.dual_branch_gated_fcn",
+    "classes": [
+      {
+        "name": "DualBranchGatedFCN",
+        "signature": "(gate_hidden_dim: 'int' = 16) -> 'None'"
+      }
+    ],
+    "functions": [
+      {
+        "name": "_extract_state_dict",
+        "signature": "(checkpoint: 'Any') -> 'Mapping[str, torch.Tensor]'"
+      },
+      {
+        "name": "_state_variants",
+        "signature": "(state: 'Mapping[str, torch.Tensor]') -> 'list[tuple[str, dict[str, torch.Tensor]]]'"
+      },
+      {
+        "name": "count_total_parameters",
+        "signature": "(model: 'nn.Module') -> 'int'"
+      },
+      {
+        "name": "count_trainable_parameters",
+        "signature": "(model: 'nn.Module') -> 'int'"
+      },
+      {
+        "name": "load_single_branch_checkpoint",
+        "signature": "(branch: 'SimpleRadarFCN', checkpoint_path: 'str | Path', map_location: 'str | torch.device' = 'cpu') -> 'dict[str, Any]'"
+      }
+    ]
+  },
+  "training_file": {
+    "path": "/home/tobeornot8259748/projects/balloon_radar_project/training/train_dual_branch_gated.py",
+    "classes": [],
+    "functions": [
+      "parse_args",
+      "validate_args",
+      "stage_for_epoch",
+      "extract_scores_and_peaks",
+      "compute_losses",
+      "train_one_epoch",
+      "collect_predictions",
+      "add_gate_diagnostics",
+      "gate_statistics",
+      "save_checkpoint",
+      "validate_branch_checkpoint",
+      "main"
+    ]
+  },
+  "torch_version": "2.11.0+cu128",
+  "cuda_available": true
+}

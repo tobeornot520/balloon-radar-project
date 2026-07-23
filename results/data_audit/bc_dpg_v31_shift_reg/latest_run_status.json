@@ -1,0 +1,1016 @@
+[
+  {
+    "fold": 1,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold01_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold01_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 1,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold01_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 1,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold01_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 1,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold01_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 1,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold01_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold01_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold01_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold01_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold01_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold01_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold01_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  },
+  {
+    "fold": 2,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold02_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold02_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 2,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold02_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 2,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold02_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 2,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold02_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 2,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold02_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold02_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold02_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold02_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold02_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold02_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_02_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold02_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  },
+  {
+    "fold": 3,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold03_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold03_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 3,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold03_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 3,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold03_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 3,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold03_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 3,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold03_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold03_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold03_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold03_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold03_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold03_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_03_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold03_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  },
+  {
+    "fold": 4,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold04_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold04_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 4,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold04_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 4,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold04_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 4,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold04_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 4,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold04_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold04_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold04_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold04_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold04_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold04_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_04_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold04_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  },
+  {
+    "fold": 5,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold05_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold05_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 5,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold05_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 5,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold05_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 5,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold05_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 5,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold05_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold05_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold05_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold05_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold05_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold05_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_05_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold05_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  },
+  {
+    "fold": 6,
+    "regularization": 0.01,
+    "experiment_name": "bc_dpg_v3_ablation_full_v4_fold06_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v3_ablation_full_v4_fold06_seed42",
+    "action": "reuse_full_v3",
+    "run_status": "reused",
+    "existing_state": {
+      "exists": true,
+      "complete": true,
+      "missing": []
+    }
+  },
+  {
+    "fold": 6,
+    "regularization": 0.005,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p005_v4_fold06_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.005"
+    ]
+  },
+  {
+    "fold": 6,
+    "regularization": 0.0025,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p0025_v4_fold06_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.0025"
+    ]
+  },
+  {
+    "fold": 6,
+    "regularization": 0.001,
+    "experiment_name": "bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0p001_v4_fold06_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0.001"
+    ]
+  },
+  {
+    "fold": 6,
+    "regularization": 0.0,
+    "experiment_name": "bc_dpg_v31_shiftreg_0_v4_fold06_seed42",
+    "experiment_dir": "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold06_seed42",
+    "action": "run",
+    "existing_state": {
+      "exists": false,
+      "complete": false,
+      "missing": [
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold06_seed42/tables/summary.json",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold06_seed42/tables/test_predictions.csv",
+        "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/bc_dpg_v31_shiftreg_0_v4_fold06_seed42/checkpoints/best.pt"
+      ]
+    },
+    "run_status": "completed",
+    "command": [
+      "/home/tobeornot8259748/miniforge3/envs/radar-torch/bin/python",
+      "/home/tobeornot8259748/projects/balloon_radar_project/training/train_target_protected_scan_calibrator_ablation.py",
+      "--name",
+      "bc_dpg_v31_shiftreg_0_v4_fold06_seed42",
+      "--ablation-mode",
+      "full",
+      "--manifest-path",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_06_manifest.csv",
+      "--base-checkpoint",
+      "/home/tobeornot8259748/projects/balloon_radar_project/results/experiments/dpg_fcn_v4_fold06_seed42/checkpoints/best.pt",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--debug-per-class",
+      "0",
+      "--seed",
+      "42",
+      "--shift-regularization",
+      "0"
+    ]
+  }
+]

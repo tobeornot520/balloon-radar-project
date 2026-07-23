@@ -1,0 +1,87 @@
+{
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "experiment_template": "bc_dpg_v2_tail_v4_fold{fold:02d}_seed42",
+  "primary_policy": "two_per_fold",
+  "policy_budgets": {
+    "two_per_fold": 12,
+    "pfa05": 41
+  },
+  "localization_tolerance": {
+    "range_gates": 2,
+    "velocity_bins": 3
+  },
+  "validation_duplicate_report": {
+    "row_count": 1148,
+    "unique_sample_id_count": 1148,
+    "duplicate_row_count": 0
+  },
+  "test_duplicate_report": {
+    "row_count": 1148,
+    "unique_sample_id_count": 1148,
+    "duplicate_row_count": 0
+  },
+  "primary_combined_test": {
+    "policy": "two_per_fold",
+    "scope": "combined_test",
+    "fold": "all",
+    "raw_threshold": 0.8037906289100647,
+    "bc_threshold": 0.8036319017410278,
+    "raw_joint_pd": 0.9119496855345912,
+    "bc_joint_pd": 0.8553459119496856,
+    "joint_pd_change": -0.05660377358490565,
+    "raw_pfa": 0.03132530120481928,
+    "bc_pfa": 0.006024096385542169,
+    "pfa_absolute_change": -0.025301204819277112,
+    "pfa_reduction_fraction": 0.8076923076923077,
+    "raw_roc_auc": 0.9888402667272865,
+    "bc_roc_auc": 0.9943623550807001,
+    "roc_auc_change": 0.005522088353413612
+  },
+  "thresholds": [
+    {
+      "method": "raw",
+      "policy": "two_per_fold",
+      "threshold": 0.8037906289100647,
+      "validation_background_count": 830,
+      "max_false_alarms": 12,
+      "target_pfa": 0.014457831325301205
+    },
+    {
+      "method": "bc_v2",
+      "policy": "two_per_fold",
+      "threshold": 0.8036319017410278,
+      "validation_background_count": 830,
+      "max_false_alarms": 12,
+      "target_pfa": 0.014457831325301205
+    },
+    {
+      "method": "raw",
+      "policy": "pfa05",
+      "threshold": 0.6035230159759521,
+      "validation_background_count": 830,
+      "max_false_alarms": 41,
+      "target_pfa": 0.04939759036144578
+    },
+    {
+      "method": "bc_v2",
+      "policy": "pfa05",
+      "threshold": 0.6032900810241699,
+      "validation_background_count": 830,
+      "max_false_alarms": 41,
+      "target_pfa": 0.04939759036144578
+    }
+  ],
+  "output_files": {
+    "thresholds": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_global_threshold/global_thresholds.csv",
+    "metrics": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_global_threshold/global_threshold_metrics.csv",
+    "comparison": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_global_threshold/global_threshold_comparison.csv",
+    "scan_analysis": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/bc_dpg_global_threshold/scan_group_false_alarm_analysis.csv"
+  }
+}
