@@ -66,6 +66,7 @@ models/checkpoints/
 
 runs/
 logs/
+*.log
 wandb/
 
 tensorboard/
@@ -126,3 +127,8 @@ hv_late_fusion_diagnostic_v1/
 
 # Project distribution packages
 dist/
+
+# Local recovery material and raw development transcripts
+_cleanup_archive/
+notes/development_history/
+*.docx

@@ -1,0 +1,15 @@
+fold,comparison,bc_false_alarms,roi_false_alarms,shared_false_alarms,bc_only_false_alarms,roi_only_false_alarms,fa_union,target_samples,shared_correct,bc_only_correct,roi_only_correct,correct_union,neither_correct
+01,roi_power_control,42,98,35,7,63,105,53,52,1,0,53,0
+01,roi_ri4,42,100,24,18,76,118,53,52,1,0,53,0
+02,roi_power_control,0,0,0,0,0,0,53,46,3,1,50,3
+02,roi_ri4,0,0,0,0,0,0,53,46,3,1,50,3
+03,roi_power_control,0,0,0,0,0,0,52,43,2,0,45,7
+03,roi_ri4,0,0,0,0,0,0,52,43,2,0,45,7
+04,roi_power_control,14,139,14,0,125,139,52,40,7,1,48,4
+04,roi_ri4,14,96,12,2,84,98,52,40,7,1,48,4
+05,roi_power_control,0,0,0,0,0,0,60,52,5,1,58,2
+05,roi_ri4,0,0,0,0,0,0,60,52,5,1,58,2
+06,roi_power_control,0,0,0,0,0,0,48,30,8,2,40,8
+06,roi_ri4,0,0,0,0,0,0,48,30,8,2,40,8
+ALL,roi_power_control,56,237,49,7,188,244,318,263,26,5,294,24
+ALL,roi_ri4,56,196,36,20,160,216,318,263,26,5,294,24

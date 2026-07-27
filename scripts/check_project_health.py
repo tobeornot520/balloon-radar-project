@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import ast
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+EXCLUDED_PARTS = {
+    ".git",
+    "_cleanup_archive",
+    "data",
+    "dist",
+    "payload",
+    "results",
+    "notes",
+}
+
+REQUIRED_FILES = (
+    "environment.yml",
+    "datasets/detection_dataset_v3.py",
+    "datasets/polarimetric_detection_dataset_v2.py",
+    "features/polarimetric_rd.py",
+    "features/roi_polarimetric_refinement.py",
+    "models/target_protected_scan_calibrator.py",
+    "models/roi_polarimetric_refiner.py",
+    "training/train_target_protected_scan_calibrator.py",
+    "training/train_roi_polarimetric_refiner_v1.py",
+    "scripts/build_roi_bc_dpg_joint_tables_v1.py",
+    "scripts/build_final_roi_bc_dpg_joint_audit.py",
+)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Check active Python syntax and required project files."
+    )
+    parser.add_argument(
+        "--require-joint-inputs",
+        action="store_true",
+        help="Also require all frozen six-fold BC-DPG and ROI prediction tables.",
+    )
+    return parser.parse_args()
+
+
+def active_python_files() -> list[Path]:
+    return sorted(
+        path
+        for path in ROOT.rglob("*.py")
+        if not EXCLUDED_PARTS.intersection(path.relative_to(ROOT).parts)
+        and not path.name.endswith(".syntax_error_backup")
+    )
+
+
+def syntax_errors(paths: list[Path]) -> list[str]:
+    errors: list[str] = []
+    for path in paths:
+        try:
+            source = path.read_text(encoding="utf-8-sig")
+            ast.parse(source, filename=str(path))
+        except (SyntaxError, UnicodeError) as exc:
+            relative = path.relative_to(ROOT)
+            line = getattr(exc, "lineno", None)
+            errors.append(f"{relative}:{line}: {exc}")
+    return errors
+
+
+def missing_required_files() -> list[str]:
+    return [name for name in REQUIRED_FILES if not (ROOT / name).is_file()]
+
+
+def joint_input_paths() -> list[Path]:
+    paths: list[Path] = []
+    modes = (
+        "power2_baseline",
+        "power2_roi_power_control",
+        "power2_roi_ri4",
+    )
+    for fold in range(1, 7):
+        fold_tag = f"fold{fold:02d}"
+        paths.append(
+            ROOT
+            / "results"
+            / "experiments"
+            / f"bc_dpg_v3_scan_target_v4_{fold_tag}_seed42"
+            / "tables"
+            / "base_threshold_test_predictions.csv"
+        )
+        for mode in modes:
+            paths.append(
+                ROOT
+                / "results"
+                / "experiments"
+                / f"roi_polar_stage4_v1_{mode}_v4_{fold_tag}_seed42_formal"
+                / "tables"
+                / "test_predictions.csv"
+            )
+    return paths
+
+
+def print_result(label: str, ok: bool, detail: str) -> None:
+    status = "PASS" if ok else "FAIL"
+    print(f"[{status}] {label}: {detail}")
+
+
+def main() -> int:
+    args = parse_args()
+    python_files = active_python_files()
+    errors = syntax_errors(python_files)
+    missing = missing_required_files()
+
+    print_result(
+        "active Python syntax",
+        not errors,
+        f"{len(python_files)} files checked, {len(errors)} errors",
+    )
+    for error in errors:
+        print(f"  {error}")
+
+    print_result(
+        "required project files",
+        not missing,
+        f"{len(REQUIRED_FILES) - len(missing)}/{len(REQUIRED_FILES)} present",
+    )
+    for name in missing:
+        print(f"  missing: {name}")
+
+    joint_missing: list[Path] = []
+    if args.require_joint_inputs:
+        joint_paths = joint_input_paths()
+        joint_missing = [path for path in joint_paths if not path.is_file()]
+        print_result(
+            "six-fold joint inputs",
+            not joint_missing,
+            f"{len(joint_paths) - len(joint_missing)}/{len(joint_paths)} present",
+        )
+        for path in joint_missing:
+            print(f"  missing: {path.relative_to(ROOT)}")
+
+    return 1 if errors or missing or joint_missing else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

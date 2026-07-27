@@ -1,0 +1,7 @@
+fold,rows,unique_sample_id,exact_sample_alignment,exact_label_alignment,exact_mat_path_alignment,bc_source
+1,203,203,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold01_seed42/tables/base_threshold_test_predictions.csv
+2,203,203,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold02_seed42/tables/base_threshold_test_predictions.csv
+3,167,167,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold03_seed42/tables/base_threshold_test_predictions.csv
+4,202,202,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold04_seed42/tables/base_threshold_test_predictions.csv
+5,210,210,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold05_seed42/tables/base_threshold_test_predictions.csv
+6,163,163,True,True,True,results/experiments/bc_dpg_v3_scan_target_v4_fold06_seed42/tables/base_threshold_test_predictions.csv

@@ -1,0 +1,17 @@
+{
+  "status": "ok",
+  "bc_decision_source": "base_threshold_test_predictions.csv",
+  "roi_decision_source": "refined_fixed_* columns from test_predictions.csv",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "rows": 1148,
+  "exact_alignment": true,
+  "test_threshold_retuning": false,
+  "output_dir": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold"
+}
