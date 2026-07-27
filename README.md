@@ -12,6 +12,7 @@
 4. ROI Stage 4：冻结 Power2 候选位置，仅使用局部 ROI 极化特征进行 suppression-only 精修。
 5. 联合审计：对齐 BC-DPG 与 ROI 六折逐样本预测，分析虚警与正确检测的互补性，不在测试集重新选择阈值。
 6. 因果上下文敏感性审计：冻结完整模型和阈值，对比 complete-scan、leave-one-out 与假定顺序 past-only 上下文，不把后验窗口结果用于选型。
+7. 因果训练就绪审计：检查文件名、MAT 元数据和文件时间，确认当前没有可验证的组内采集顺序；仅开放 validation-only 小样本 smoke。
 
 冻结结论和研究边界见：
 
@@ -26,6 +27,8 @@
 - [ROI 与 BC-DPG 联合设计](docs/ROI_BC_DPG_JOINT_NEXT_DESIGN.md)
 - [ROI/BC-DPG 固定阈值联合证据](results/final_evidence/roi_bc_dpg_joint_fixed_threshold/JOINT_AUDIT_REPORT.md)
 - [BC-DPG 因果上下文敏感性审计](results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md)
+- [采集顺序审计](results/data_audit/detection_acquisition_order/ACQUISITION_ORDER_AUDIT.md)
+- [BC-DPG 因果训练协议](docs/BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
 - [项目对外分享材料](docs/share/README_SHARE_ZH.md)
 
 ## 目录结构
@@ -126,6 +129,20 @@ python scripts/audit_bc_dpg_v3_causal_context.py --overwrite
 
 正式审计位于 `results/data_audit/bc_dpg_v3_causal_context_audit/`。其中 past-only
 结果属于完整模型的上下文替换敏感性，不是经过因果上下文训练和验证集选型的新模型。
+
+检查真实采集顺序是否足以支持因果训练：
+
+```bash
+python scripts/audit_detection_acquisition_order.py --overwrite
+```
+
+当前正式因果训练门禁关闭。开发接口可运行一个受限、validation-only 的小样本 smoke：
+
+```bash
+python scripts/run_bc_dpg_causal_smoke.py
+```
+
+该 smoke 使用未经时间戳验证的 beam/azimuth 推断顺序，不加载测试 split，结果不用于模型或窗口选择。
 
 生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
 

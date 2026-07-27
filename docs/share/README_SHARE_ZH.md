@@ -30,6 +30,8 @@
 
 leave-one-out 与 past-only 数字来自冻结完整 checkpoint 的推理上下文替换，没有因果重训练。past-only 顺序由 `(beam_layer, azimuth_deg, sample_id)` 推断，未由逐样本采集时间戳验证；`54/830` 和 `93/830` 只能作为测试后敏感性诊断。下一版需按真实时间顺序重新训练，并只在训练/验证集选择历史窗口。
 
+后续就绪审计检查了全部 1,148 个 MAT 文件：没有时间戳变量，MAT 头时间至少晚于文件名时间 49.1 天并贴近文件 mtime，因此正式因果训练门禁仍关闭。当前只完成了一个不加载测试 split 的单折小样本接口 smoke，不构成性能证据。
+
 BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升至 216；AND/intersection 可把虚警降至 36，但正确检测降至 263。两者只用于测试后的互补性诊断，没有作为部署规则。
 
 ![固定阈值检测权衡](assets/figures/joint_pooled_detection_tradeoff.png)
@@ -46,8 +48,8 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 
 - `docs/`：项目介绍、开发历史、结果、分享提纲、后续计划及三份治理文档。
 - `assets/figures/`：用于介绍的精选 PNG 和 PDF 图件。
-- `assets/tables/`：冻结主结果、折间分布、区间估计、配对诊断和上下文敏感性 CSV。
-- `evidence/`：四个阶段的冻结结论或正式报告，以及一份冻结 checkpoint 的上下文敏感性审计。
+- `assets/tables/`：冻结主结果、折间分布、区间估计、配对诊断、上下文敏感性和采集顺序来源 CSV。
+- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性和因果训练就绪审计。
 - `MANIFEST.json`：版本、范围、源文件及 SHA256 哈希。
 - `SHA256SUMS.txt`：包内文件完整性校验值。
 

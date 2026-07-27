@@ -1,0 +1,43 @@
+{
+  "audit_role": "causal-training input readiness",
+  "formal_causal_training_gate_open": false,
+  "generated_files": [
+    {
+      "path": "ACQUISITION_ORDER_AUDIT.md",
+      "sha256": "4bb8d79b2e3d0c1adfccf12dfb26c00b28a7c8432180a6bad422c74979370507",
+      "size_bytes": 1418
+    },
+    {
+      "path": "group_order_coverage.csv",
+      "sha256": "82333a66745fd278704c1d429ab4693548c614ba655c0e88e5c55ada2cae1210",
+      "size_bytes": 6903
+    },
+    {
+      "path": "order_source_summary.csv",
+      "sha256": "8e0dc4bee04b8fd1bb10455b50d2b735e3ae5c2eae5bda4fd74e7d426837ab77",
+      "size_bytes": 530
+    }
+  ],
+  "implementation": {
+    "path": "scripts/audit_detection_acquisition_order.py",
+    "sha256": "957477363a3fc03025c30e79cdbc667409866a67cbc434fc5e1628944938b5c4",
+    "size_bytes": 16412
+  },
+  "inferred_order_allowed_for": [
+    "development-only interface smoke tests"
+  ],
+  "inferred_order_columns": [
+    "beam_layer",
+    "azimuth_deg",
+    "sample_id"
+  ],
+  "input": {
+    "path": "results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+    "sha256": "b22abcfdece83a17ab474e690a280400b97c60623a9780d799fe2e1c19476221",
+    "size_bytes": 287084
+  },
+  "sample_count": 1148,
+  "scan_group_count": 77,
+  "schema_version": 1,
+  "verified_within_scan_order_available": false
+}

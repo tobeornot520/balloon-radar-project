@@ -135,6 +135,11 @@ PACKAGE_FILES = (
         "post_test_sensitivity_report",
     ),
     PackageFile(
+        "results/data_audit/detection_acquisition_order/ACQUISITION_ORDER_AUDIT.md",
+        "evidence/06_DETECTION_ACQUISITION_ORDER_AUDIT.md",
+        "causal_training_readiness_report",
+    ),
+    PackageFile(
         "results/final_evidence/bc_dpg_v3_final/figures/fig1_deployment_false_alarms.png",
         "assets/figures/bc_dpg_deployment_false_alarms.png",
         "figure",
@@ -258,6 +263,11 @@ PACKAGE_FILES = (
         "results/data_audit/bc_dpg_v3_causal_context_audit/history_coverage_by_fold.csv",
         "assets/tables/bc_dpg_causal_context_history_coverage.csv",
         "post_test_sensitivity_table",
+    ),
+    PackageFile(
+        "results/data_audit/detection_acquisition_order/order_source_summary.csv",
+        "assets/tables/detection_acquisition_order_sources.csv",
+        "causal_training_readiness_table",
     ),
 )
 
@@ -397,6 +407,10 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "leave_one_out_is_causal": False,
             "past_only_order_verified_by_timestamp": False,
             "past_only_order_columns": ["beam_layer", "azimuth_deg", "sample_id"],
+            "formal_causal_training_gate_open": False,
+            "verified_within_scan_order_available": False,
+            "causal_development_smoke_test_split_loaded": False,
+            "causal_development_smoke_test_split_evaluated": False,
             "evaluation_role": "internal development estimate",
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,

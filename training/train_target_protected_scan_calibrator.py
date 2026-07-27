@@ -22,6 +22,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from datasets.detection_dataset_v3 import DetectionRadarDatasetV3
 from features.scan_context import (
+    DEFAULT_ORDER_COLUMNS,
     GROUP_FEATURE_DIM,
     build_scan_context_features,
 )
@@ -99,6 +100,26 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument("--topk", type=int, default=16)
+    parser.add_argument(
+        "--scan-context-mode",
+        choices=("complete_scan", "past_only"),
+        default="complete_scan",
+        help="Context used consistently for train, validation, and test splits.",
+    )
+    parser.add_argument(
+        "--history-window",
+        type=int,
+        default=None,
+        help="Maximum past samples for past_only; omit to use all prior samples.",
+    )
+    parser.add_argument(
+        "--allow-inferred-order",
+        action="store_true",
+        help=(
+            "Acknowledge that past_only currently orders samples by beam layer, "
+            "azimuth, and sample ID rather than verified acquisition timestamps."
+        ),
+    )
     parser.add_argument(
         "--hidden-dims",
         type=parse_hidden_dims,
@@ -186,10 +207,48 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--debug-per-class", type=int, default=0)
+    parser.add_argument(
+        "--validation-only",
+        action="store_true",
+        help="Train and evaluate train/validation splits without loading test data.",
+    )
     parser.add_argument("--no-memory-cache", action="store_true")
     parser.add_argument("--no-amp", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
     return parser.parse_args()
+
+
+def validate_scan_context_args(args: argparse.Namespace) -> None:
+    if args.history_window is not None and args.history_window <= 0:
+        raise ValueError("history-window must be positive")
+    if args.scan_context_mode == "complete_scan":
+        if args.history_window is not None:
+            raise ValueError("history-window is only valid for past_only context")
+        if args.allow_inferred_order:
+            raise ValueError("allow-inferred-order is only valid for past_only context")
+        return
+    if not args.allow_inferred_order:
+        columns = ", ".join(DEFAULT_ORDER_COLUMNS)
+        raise ValueError(
+            "past_only requires verified acquisition order, which is unavailable. "
+            f"For development-only smoke runs using ({columns}), explicitly pass "
+            "--allow-inferred-order."
+        )
+
+
+def scan_context_metadata(args: argparse.Namespace) -> dict[str, Any]:
+    inferred = args.scan_context_mode == "past_only"
+    return {
+        "mode": args.scan_context_mode,
+        "history_window": args.history_window,
+        "order_columns": list(DEFAULT_ORDER_COLUMNS) if inferred else [],
+        "order_verified_by_timestamp": False,
+        "evidence_role": (
+            "development_only_inferred_order"
+            if inferred
+            else "offline_complete_scan"
+        ),
+    }
 
 
 def resolve_path(value: str | Path) -> Path:
@@ -509,14 +568,18 @@ def precompute_split(
             f"got {sample_features.shape[1]}"
         )
 
-    group_features = build_group_features(
+    context = build_scan_context_features(
         frame,
         sample_features,
         float(args.base_threshold),
+        mode=args.scan_context_mode,
+        window_size=args.history_window,
     )
+    frame["context_used_samples"] = context.used_history_counts
+    frame["context_available_samples"] = context.available_history_counts
     return (
         sample_features,
-        group_features,
+        context.values,
         raw_logit,
         labels,
         frame,
@@ -527,13 +590,165 @@ def build_group_features(
     frame: pd.DataFrame,
     sample_features: np.ndarray,
     base_threshold: float,
+    *,
+    mode: str = "complete_scan",
+    window_size: int | None = None,
 ) -> np.ndarray:
     return build_scan_context_features(
         frame,
         sample_features,
         base_threshold,
-        mode="complete_scan",
+        mode=mode,
+        window_size=window_size,
     ).values
+
+
+def context_coverage(
+    precomputed: dict[
+        str,
+        tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, pd.DataFrame],
+    ],
+) -> dict[str, dict[str, float | int]]:
+    result: dict[str, dict[str, float | int]] = {}
+    for split, values in precomputed.items():
+        frame = values[4]
+        used = frame["context_used_samples"].to_numpy(dtype=np.int64)
+        available = frame["context_available_samples"].to_numpy(dtype=np.int64)
+        result[split] = {
+            "samples": int(len(frame)),
+            "zero_context_samples": int((used == 0).sum()),
+            "used_min": int(used.min()),
+            "used_median": float(np.median(used)),
+            "used_mean": float(used.mean()),
+            "used_max": int(used.max()),
+            "available_max": int(available.max()),
+        }
+    return result
+
+
+def write_validation_only_outputs(
+    *,
+    args: argparse.Namespace,
+    model: TargetProtectedScanCalibrator,
+    best: dict[str, Any],
+    precomputed: dict[
+        str,
+        tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, pd.DataFrame],
+    ],
+    val_frame: pd.DataFrame,
+    val_losses: dict[str, float],
+    tolerance: DetectionTolerance,
+    table_dir: Path,
+    start_time: float,
+) -> None:
+    selected_threshold, selected_curve = select_threshold_at_false_alarm_budget(
+        val_frame,
+        int(args.max_val_false_alarms),
+    )
+    val_results, val_metrics = apply_metrics(
+        val_frame,
+        selected_threshold,
+        tolerance,
+    )
+    raw_val = val_frame.copy()
+    raw_val["score"] = raw_val["raw_score"]
+    raw_threshold, raw_curve = select_threshold_at_false_alarm_budget(
+        raw_val,
+        int(args.max_val_false_alarms),
+    )
+    _, raw_val_metrics = apply_metrics(raw_val, raw_threshold, tolerance)
+    base_val_results, base_val_metrics = apply_metrics(
+        val_frame,
+        args.base_threshold,
+        tolerance,
+    )
+    _, raw_base_val_metrics = apply_metrics(
+        raw_val,
+        args.base_threshold,
+        tolerance,
+    )
+
+    val_results.to_csv(
+        table_dir / "val_predictions.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    base_val_results.to_csv(
+        table_dir / "base_threshold_val_predictions.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    selected_curve.to_csv(
+        table_dir / "val_threshold_curve.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    raw_curve.to_csv(
+        table_dir / "raw_val_threshold_curve.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    summary = {
+        "experiment_name": args.name,
+        "evaluation_scope": "validation_only",
+        "test_evaluation_performed": False,
+        "performance_evidence_role": (
+            "interface_smoke_only"
+            if args.allow_inferred_order
+            else "validation_selection"
+        ),
+        "best_epoch": int(best["epoch"]),
+        "base_threshold": args.base_threshold,
+        "selected_threshold": float(selected_threshold),
+        "raw_selected_threshold": float(raw_threshold),
+        "dataset_sizes": {
+            split: int(precomputed[split][3].shape[0])
+            for split in ("train", "val")
+        },
+        "trainable_parameter_count": sum(
+            parameter.numel() for parameter in model.parameters()
+        ),
+        "scan_context": scan_context_metadata(args),
+        "context_coverage": context_coverage(precomputed),
+        "validation_metrics": val_metrics,
+        "raw_validation_metrics": raw_val_metrics,
+        "base_threshold_validation_metrics": base_val_metrics,
+        "raw_base_threshold_validation_metrics": raw_base_val_metrics,
+        "validation_losses": val_losses,
+        "pd_floor_validation": {
+            "raw_pd": float(raw_base_val_metrics["joint_pd"]),
+            "required_minimum": float(
+                raw_base_val_metrics["joint_pd"] - args.pd_tolerance
+            ),
+            "bc_pd": float(base_val_metrics["joint_pd"]),
+            "satisfied": bool(
+                base_val_metrics["joint_pd"]
+                >= raw_base_val_metrics["joint_pd"] - args.pd_tolerance
+            ),
+        },
+        "score_never_increased_validation": bool(
+            val_frame["score_never_increased"].all()
+        ),
+        "elapsed_seconds": time.time() - start_time,
+        "config": vars(args),
+    }
+    (table_dir / "summary.json").write_text(
+        json.dumps(json_safe(summary), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+    print("\n" + "=" * 82)
+    print(f"Best epoch: {best['epoch']}")
+    print(
+        "Selected-threshold validation: "
+        f"Pd={val_metrics['joint_pd']:.4f}, "
+        f"Pfa={val_metrics['pfa']:.4f}, "
+        f"AUC={val_metrics['roc_auc']:.4f}"
+    )
+    print("Test split loaded/evaluated: False")
+    print(f"Summary: {table_dir / 'summary.json'}")
+    print("=" * 82)
 
 
 def save_precomputed(
@@ -814,6 +1029,7 @@ def apply_metrics(
 
 def main() -> None:
     args = parse_args()
+    validate_scan_context_args(args)
     set_seed(args.seed)
 
     manifest_path = resolve_path(args.manifest_path)
@@ -863,10 +1079,16 @@ def main() -> None:
     print(f"Base checkpoint        : {base_checkpoint_path}")
     print(f"Base threshold         : {args.base_threshold:.6f}")
     print(f"Pd tolerance           : {args.pd_tolerance:.4f}")
+    print(f"Scan context           : {args.scan_context_mode}")
+    if args.scan_context_mode == "past_only":
+        window = "all" if args.history_window is None else args.history_window
+        print(f"History window         : {window}")
+        print("Order timestamp-verified: False (development-only)")
     print("=" * 82)
 
     precomputed = {}
-    for split in ("train", "val", "test"):
+    splits = ("train", "val") if args.validation_only else ("train", "val", "test")
+    for split in splits:
         source_dataset = build_source_dataset(
             manifest_path,
             split,
@@ -904,10 +1126,14 @@ def main() -> None:
         batch_size=args.batch_size,
         shuffle=False,
     )
-    test_loader = create_feature_loader(
-        precomputed["test"],
-        batch_size=args.batch_size,
-        shuffle=False,
+    test_loader = (
+        None
+        if args.validation_only
+        else create_feature_loader(
+            precomputed["test"],
+            batch_size=args.batch_size,
+            shuffle=False,
+        )
     )
 
     model = TargetProtectedScanCalibrator(
@@ -1121,6 +1347,22 @@ def main() -> None:
         args,
         background_margin_logit,
     )
+    if args.validation_only:
+        write_validation_only_outputs(
+            args=args,
+            model=model,
+            best=best,
+            precomputed=precomputed,
+            val_frame=val_frame,
+            val_losses=val_losses,
+            tolerance=tolerance,
+            table_dir=table_dir,
+            start_time=start_time,
+        )
+        return
+
+    if test_loader is None:
+        raise RuntimeError("test loader is required outside validation-only mode")
     test_frame, test_losses = collect_predictions(
         model,
         test_loader,
@@ -1219,6 +1461,8 @@ def main() -> None:
 
     summary = {
         "experiment_name": args.name,
+        "evaluation_scope": "validation_and_test",
+        "test_evaluation_performed": True,
         "best_epoch": int(best["epoch"]),
         "base_threshold": args.base_threshold,
         "selected_threshold": float(selected_threshold),
@@ -1231,6 +1475,8 @@ def main() -> None:
             parameter.numel()
             for parameter in model.parameters()
         ),
+        "scan_context": scan_context_metadata(args),
+        "context_coverage": context_coverage(precomputed),
         "validation_metrics": val_metrics,
         "test_metrics": test_metrics,
         "raw_validation_metrics": raw_val_metrics,

@@ -1,0 +1,6 @@
+candidate_source,sample_coverage,within_group_distinct_max,timestamp_verified,within_group_order_verified,assessment
+sample_id_timestamp,1148,1,False,False,filename-encoded group second; not externally verified
+MAT embedded variables,0,0,False,False,no timestamp-like MAT variable
+MAT v5 header Created on,1148,9,False,False,post-acquisition conversion/save time
+filesystem mtime,1148,5,False,False,"copy/save metadata, not acquisition time"
+beam_layer/azimuth_deg/sample_id,1148,150,False,False,deterministic inferred order only

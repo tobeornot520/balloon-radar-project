@@ -92,6 +92,7 @@ BC-DPG 与 ROI 使用不同的抑制信息。最终审计按 fold、sample ID、
 - 显式极化 Stage 3 与局部 ROI Stage 4；
 - BC-DPG/ROI 冻结阈值逐样本联合审计；
 - 冻结 BC-DPG 的 leave-one-out 与假定顺序 past-only 上下文敏感性审计；
+- 全量采集顺序就绪审计，以及不加载测试集的单折小样本因果训练 smoke；
 - 折间分布、样本级区间、扫描组 bootstrap 和 McNemar 配对诊断；
 - 数据卡、指标定义、模型选择台账和哈希清单。
 

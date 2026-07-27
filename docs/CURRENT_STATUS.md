@@ -9,6 +9,7 @@
 5. Stage 4 freezes Power2 candidate locations and applies suppression-only ROI refinement.
 6. The final audit aligns frozen BC-DPG and ROI predictions without retuning test thresholds or selecting a joint rule.
 7. A causal-context sensitivity audit replays the frozen full checkpoint with leave-one-out and assumed-order past-only contexts. It does not retrain or select a causal model.
+8. An acquisition-order readiness audit finds no verified within-scan sample order. Formal causal training remains gated; a bounded validation-only interface smoke has passed.
 
 ## Authoritative evidence
 
@@ -18,6 +19,8 @@
 - Joint audit: `results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`
 - Joint paper evidence: `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
 - Causal-context sensitivity audit: `results/data_audit/bc_dpg_v3_causal_context_audit/`
+- Acquisition-order readiness audit: `results/data_audit/detection_acquisition_order/`
+- Causal-training protocol: [BC_DPG_CAUSAL_TRAINING_PROTOCOL.md](BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
 - Data card: [DATA_CARD.md](DATA_CARD.md)
 - Metric definitions: [METRIC_DEFINITIONS.md](METRIC_DEFINITIONS.md)
 - Model-selection ledger: [MODEL_SELECTION_LEDGER.md](MODEL_SELECTION_LEDGER.md)
@@ -51,6 +54,10 @@ The absence of test-threshold retuning does not make the evaluation blind. Stage
 All target scan groups in the frozen audit are dated `20260202`; all background scan groups are dated `20260204`. Class and acquisition date are fully confounded. The current results therefore cannot establish cross-date, cross-site, or external blind generalization.
 
 The source tables do not contain verified per-sample acquisition timestamps. Past-only order is inferred from beam, azimuth, and sample ID, so causal status holds only under that ordering assumption. Each scan also has a cold start: 71 target samples and 6 background samples have zero prior context.
+
+The readiness audit checked all 1,148 MAT files. They contain H/V IQ arrays but no timestamp-like variable. MAT header creation times are at least 49.1 days after the filename timestamp and follow filesystem mtime within 3 seconds, so neither source is acquisition order. The formal causal-training gate is therefore closed.
+
+A Fold 1 development smoke using inferred order, a four-sample history, two epochs, and 12 samples per class per split completed on CPU. It loaded only train and validation data; no test split or test metric was produced. This establishes interface readiness only and contributes no performance evidence or window choice.
 
 ## Claim boundaries
 

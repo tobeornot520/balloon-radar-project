@@ -61,6 +61,15 @@ python scripts/audit_bc_dpg_v3_causal_context.py --overwrite
 
 该命令不训练模型或重选阈值；正式结果中的 leave-one-out 与 past-only 行都是冻结测试后的上下文替换诊断。
 
+检查采集顺序并运行受限接口 smoke：
+
+```bash
+python scripts/audit_detection_acquisition_order.py --overwrite
+python scripts/run_bc_dpg_causal_smoke.py
+```
+
+当前审计结论是正式训练门禁关闭。smoke 只加载 train/val 小样本，不读取测试 split，也不提供性能或窗口选择证据。
+
 ## 4. 当前证据与治理文档
 
 - BC-DPG v3：`results/final_evidence/bc_dpg_v3_final/`
@@ -69,6 +78,7 @@ python scripts/audit_bc_dpg_v3_causal_context.py --overwrite
 - 最终联合审计：`results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`
 - 联合证据资产：`results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
 - BC-DPG 因果上下文敏感性审计：`results/data_audit/bc_dpg_v3_causal_context_audit/`
+- 采集顺序就绪审计：`results/data_audit/detection_acquisition_order/`
 - 数据卡：`docs/DATA_CARD.md`
 - 指标定义：`docs/METRIC_DEFINITIONS.md`
 - 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`

@@ -27,10 +27,12 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/figures/joint_fold_heterogeneity.png" in destinations
     assert "assets/tables/joint_scan_group_bootstrap.csv" in destinations
     assert "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md" in destinations
+    assert "evidence/06_DETECTION_ACQUISITION_ORDER_AUDIT.md" in destinations
     assert "assets/tables/bc_dpg_causal_context_aggregate.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_paired_deltas.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_replay_validation.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_history_coverage.csv" in destinations
+    assert "assets/tables/detection_acquisition_order_sources.csv" in destinations
     assert not any("joint_fold_false_alarms" in path for path in destinations)
 
 
@@ -48,6 +50,10 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["causal_context_retraining_performed"] is False
     assert rules["causal_history_window_selected"] is False
     assert rules["past_only_order_verified_by_timestamp"] is False
+    assert rules["formal_causal_training_gate_open"] is False
+    assert rules["verified_within_scan_order_available"] is False
+    assert rules["causal_development_smoke_test_split_loaded"] is False
+    assert rules["causal_development_smoke_test_split_evaluated"] is False
     assert rules["past_only_order_columns"] == [
         "beam_layer",
         "azimuth_deg",
