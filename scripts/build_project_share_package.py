@@ -130,6 +130,11 @@ PACKAGE_FILES = (
         "frozen_report",
     ),
     PackageFile(
+        "results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md",
+        "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md",
+        "post_test_sensitivity_report",
+    ),
+    PackageFile(
         "results/final_evidence/bc_dpg_v3_final/figures/fig1_deployment_false_alarms.png",
         "assets/figures/bc_dpg_deployment_false_alarms.png",
         "figure",
@@ -233,6 +238,26 @@ PACKAGE_FILES = (
         "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_09_paired_mcnemar_diagnostics.csv",
         "assets/tables/joint_paired_mcnemar_diagnostics.csv",
         "table",
+    ),
+    PackageFile(
+        "results/data_audit/bc_dpg_v3_causal_context_audit/context_metrics_aggregate.csv",
+        "assets/tables/bc_dpg_causal_context_aggregate.csv",
+        "post_test_sensitivity_table",
+    ),
+    PackageFile(
+        "results/data_audit/bc_dpg_v3_causal_context_audit/paired_deltas_vs_complete_scan.csv",
+        "assets/tables/bc_dpg_causal_context_paired_deltas.csv",
+        "post_test_sensitivity_table",
+    ),
+    PackageFile(
+        "results/data_audit/bc_dpg_v3_causal_context_audit/complete_replay_validation.csv",
+        "assets/tables/bc_dpg_causal_context_replay_validation.csv",
+        "replay_validation_table",
+    ),
+    PackageFile(
+        "results/data_audit/bc_dpg_v3_causal_context_audit/history_coverage_by_fold.csv",
+        "assets/tables/bc_dpg_causal_context_history_coverage.csv",
+        "post_test_sensitivity_table",
     ),
 )
 
@@ -366,6 +391,12 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "joint_model_trained": False,
             "and_or_rules_selected": False,
             "complete_scan_bc_is_causal": False,
+            "causal_context_audit_role": "post-hoc frozen-checkpoint sensitivity",
+            "causal_context_retraining_performed": False,
+            "causal_history_window_selected": False,
+            "leave_one_out_is_causal": False,
+            "past_only_order_verified_by_timestamp": False,
+            "past_only_order_columns": ["beam_layer", "azimuth_deg", "sample_id"],
             "evaluation_role": "internal development estimate",
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,

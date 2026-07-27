@@ -30,6 +30,9 @@ H/V complex IQ
               |         |
               |         +--> sample-independent BC (online-oriented baseline)
               |         +--> complete-scan BC-DPG v3 (offline upper bound)
+              |                    |
+              |                    +--> frozen-checkpoint context sensitivity
+              |                         (leave-one-out / assumed-order past-only)
               |
               +--> frozen candidate locations
                         |
@@ -47,6 +50,12 @@ Frozen BC-DPG decisions + frozen ROI decisions
 ### BC-DPG-FCN v3
 
 在冻结 DPG 输出上加入目标保护的背景条件校准。样本独立 BC 不使用扫描上下文，更接近在线条件；完整版本使用同一扫描的整体统计上下文，可能包含未来样本，只能定位为离线扫描感知性能上限。
+
+### 因果上下文敏感性审计
+
+项目已冻结完整扫描 checkpoint 和原阈值，重放 complete-scan、leave-one-out 及 past-only 上下文。完整扫描重放与六折权威判决完全一致；leave-one-out 得到 54/830 个背景误警和 289/318 个正确检测，past-only all-history 得到 93/830 和 288/318。后两组数字是已经查看测试结果后的上下文替换敏感性诊断：完整模型并未按这些上下文重新训练，不能据此选择历史窗口或声称得到可部署因果模型。
+
+past-only 顺序由 `(beam_layer, azimuth_deg, sample_id)` 推断，源数据没有逐样本已验证采集时间戳。下一版模型需要使用真实时间顺序的因果上下文训练，并且只在训练/验证集选择窗口，再在锁定测试集评价一次。
 
 ### 显式极化与 ROI Stage 4
 
@@ -82,6 +91,7 @@ BC-DPG 与 ROI 使用不同的抑制信息。最终审计按 fold、sample ID、
 - BC-DPG-FCN v3 背景虚警校准及消融；
 - 显式极化 Stage 3 与局部 ROI Stage 4；
 - BC-DPG/ROI 冻结阈值逐样本联合审计；
+- 冻结 BC-DPG 的 leave-one-out 与假定顺序 past-only 上下文敏感性审计；
 - 折间分布、样本级区间、扫描组 bootstrap 和 McNemar 配对诊断；
 - 数据卡、指标定义、模型选择台账和哈希清单。
 
@@ -92,5 +102,5 @@ BC-DPG 与 ROI 使用不同的抑制信息。最终审计按 fold、sample ID、
 - 长慢时间时频、微多普勒和轨迹建模；
 - 同日目标/背景对照及跨日期、跨场地、跨天气的锁定盲测；
 - 按观测时长和事件定义统计的部署级虚警指标；
-- past-only 和 leave-one-sample-out 扫描上下文控制实验；
+- 按真实时间顺序训练、在验证集选择窗口并独立测试的因果 BC-DPG；
 - 在训练/验证集上选定并一次性测试的学习型联合模型。

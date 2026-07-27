@@ -1,0 +1,297 @@
+{
+  "audit_role": "post-hoc frozen-checkpoint context sensitivity",
+  "checkpoint_selection_performed": false,
+  "complete_scan_replay_required": true,
+  "deterministic_build": true,
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "generated_files": [
+    {
+      "path": "CAUSAL_CONTEXT_AUDIT.md",
+      "sha256": "3a80ef421cfb5ce31c121f873f61c42e9bb2e983395f514afa020ece35af92d1",
+      "size_bytes": 3767
+    },
+    {
+      "path": "complete_replay_validation.csv",
+      "sha256": "057509a9bf69a91df9dbaf87898c5f13b0b5e06ce84ec0b4935273af2e038bce",
+      "size_bytes": 438
+    },
+    {
+      "path": "context_metrics_aggregate.csv",
+      "sha256": "893d74fcb7b724c6b741310cda666b39425da2eb94f46cd6836bcd95f61d7f88",
+      "size_bytes": 3363
+    },
+    {
+      "path": "context_metrics_by_fold.csv",
+      "sha256": "b3b9e62a66c1a1581969a5793a6842432185e80d3451efbf5f8e8febbaf96fc4",
+      "size_bytes": 13133
+    },
+    {
+      "path": "history_coverage_by_fold.csv",
+      "sha256": "585c41f4a904b333a270abb45fe792691950b687480c9d824ed4cf26cf032f18",
+      "size_bytes": 4723
+    },
+    {
+      "path": "paired_deltas_vs_complete_scan.csv",
+      "sha256": "0cccd982307519c72fdc382a0571905de9860d1164ab5faa34e6703fa026a0bd",
+      "size_bytes": 4349
+    }
+  ],
+  "past_only_order_columns": [
+    "beam_layer",
+    "azimuth_deg",
+    "sample_id"
+  ],
+  "past_only_order_verified_by_timestamp": false,
+  "past_only_windows": [
+    4,
+    16,
+    64
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold01_seed42/checkpoints/best.pt",
+      "sha256": "ece7c169c8cafffc3f360722c159ecd4cfbf618fa907e0805c75acdf66671397",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold01_seed42/tables/precomputed_test.csv",
+      "sha256": "0e56a430db0dbafbc67a0e610f784adfb0a8ef0f27c43c928b7a2583b45c2b21",
+      "size_bytes": 130666
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold01_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "239fa467cd40d84a5528af75969da1b981270fd8453f81a3a96afdce38f77b81",
+      "size_bytes": 82775
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold01_seed42/tables/summary.json",
+      "sha256": "56e83447ffcb7c48c29db88bd67e04e349956459693427191e3f80b4b5d5c6e0",
+      "size_bytes": 10364
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold01_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "b87348dae55e26e7f0f6de25bced0d04f18221fdeab0010da03f651730782dd0",
+      "size_bytes": 82527
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold01_seed42/tables/summary.json",
+      "sha256": "1cbc6f6e085772d8aada89e3fccd16d6757f2576951d2e47e569a0a1a3315941",
+      "size_bytes": 10455
+    },
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold02_seed42/checkpoints/best.pt",
+      "sha256": "047096a7b2aaf4c55ff3ffc959b8d82e554388a48013a5ee4671115940ebdc17",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold02_seed42/tables/precomputed_test.csv",
+      "sha256": "965744515c728dfc22b50083ed84ca572e9e29cace021a62deb275db51f277cb",
+      "size_bytes": 129264
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold02_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "db73a46d645af2f86709cc3ba1818ae51bf8cacdfeface8c011e514d0dc0b225",
+      "size_bytes": 82883
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold02_seed42/tables/summary.json",
+      "sha256": "4c1e783852d299571a677c9282d621263a38f0abeff8fc0eb13a01fb26ce7bae",
+      "size_bytes": 10215
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold02_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "6522867ddc450cb2bcdf40b651aa0aa5a94d0f2e993f99807b28fb5910ce3d8b",
+      "size_bytes": 82609
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold02_seed42/tables/summary.json",
+      "sha256": "e2e635bfbd0ad8e20f0c077d9e8b0f05f40b7e2156b602932dce4a10e5f20dd9",
+      "size_bytes": 10308
+    },
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold03_seed42/checkpoints/best.pt",
+      "sha256": "c9dc5aa36306ac871d3dcd61d92985e9eef14650749824c89ecafd7cb79e7c13",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold03_seed42/tables/precomputed_test.csv",
+      "sha256": "42487f9365fc26a8a4f410314adf9344122d2496e0e58507fc680ba26eff4606",
+      "size_bytes": 107604
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold03_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "0011e27e2fff2697af3e30909217b40d7153f12fef74b6651bddd532ef91de2e",
+      "size_bytes": 68263
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold03_seed42/tables/summary.json",
+      "sha256": "3db9bb0e33c5f61037b54a0ec96137a9c496ab33e4a997dd63e59035c32d4d9f",
+      "size_bytes": 10491
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold03_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "e830767e10fc2ef5b7854bd9c3e0176519384e637b0f82f49344361718c8ebdb",
+      "size_bytes": 68196
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold03_seed42/tables/summary.json",
+      "sha256": "5eb955155680f336745c2df64c3ce2ae5b054ab53b28daae0b87c1314b869623",
+      "size_bytes": 10654
+    },
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold04_seed42/checkpoints/best.pt",
+      "sha256": "ee613452fee939a40690c8f948910460ca9f1257d50b62608a6e7f49e9ea0416",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold04_seed42/tables/precomputed_test.csv",
+      "sha256": "98121fd30bb003db0fa37b622fc2dd8278b4643a466312b63474e69d0b15f5ae",
+      "size_bytes": 129705
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold04_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "ca35d6d5af16bc0e000400bbe6994171e3a88ef3c586ea6d58d7d29b94934bd4",
+      "size_bytes": 82410
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold04_seed42/tables/summary.json",
+      "sha256": "f4bce8abcb74c5e0ff8f9cd5879b5530d44ccbb11700531e5fbdd20053456d00",
+      "size_bytes": 10634
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold04_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "bb30c23ac483db6cb7aa519af2d4a67cb20d50bdf00a00e3aa27657cac1fa18b",
+      "size_bytes": 82107
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold04_seed42/tables/summary.json",
+      "sha256": "99578a7850127a511b043ddcfc2428a9d6ad931199479959775b0fe99992074b",
+      "size_bytes": 10832
+    },
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold05_seed42/checkpoints/best.pt",
+      "sha256": "e2df44fce0fee2b52750be8bb358ba7e4b153d0cf5550cc230e48a9987a2661a",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold05_seed42/tables/precomputed_test.csv",
+      "sha256": "62c2669016fb26bba9ec763b9e363ac210a1ca9b4f17a651f2a2486d9e883e33",
+      "size_bytes": 131938
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold05_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "3658af609e714d4276bc621082211475747514e74bd10d06914782e20d803bf9",
+      "size_bytes": 85297
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold05_seed42/tables/summary.json",
+      "sha256": "6695ccf11edb1d34939040eb9ff3300eec10a5f3428d23a12f44be8db0e7c985",
+      "size_bytes": 10537
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold05_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "277d5da41328116699b264c8c19279b002f11f370b0332783bcc397947291124",
+      "size_bytes": 85166
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold05_seed42/tables/summary.json",
+      "sha256": "5092ea9bfee65d5abd63e12347c5f22b49b98669ec0d72db5577f9697e62cb79",
+      "size_bytes": 10668
+    },
+    {
+      "category": "full_checkpoint",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold06_seed42/checkpoints/best.pt",
+      "sha256": "fbd9140e241d15f4174b7119a58beab974d0eb9009fd36eb5ebe5140f8a19260",
+      "size_bytes": 138673
+    },
+    {
+      "category": "precomputed_test",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold06_seed42/tables/precomputed_test.csv",
+      "sha256": "a2e886aa00f0b7148d34a6c223096eece3dfa6da843600a29b421d2c4205ebdb",
+      "size_bytes": 103477
+    },
+    {
+      "category": "full_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold06_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "389326070945a776dba4bd669fab16f868f7a7d58843949efce8c895400783de",
+      "size_bytes": 66640
+    },
+    {
+      "category": "full_summary",
+      "path": "results/experiments/bc_dpg_v3_scan_target_v4_fold06_seed42/tables/summary.json",
+      "sha256": "69485a01bd283a156ca5d19991bb48873e7e7781bbdbef465ea77eb7c6f44df0",
+      "size_bytes": 10640
+    },
+    {
+      "category": "independent_frozen_predictions",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold06_seed42/tables/base_threshold_test_predictions.csv",
+      "sha256": "6ffea7c2871066aa521a2efd9e7156331178c9183468156a11aaf588329b31e9",
+      "size_bytes": 66550
+    },
+    {
+      "category": "independent_summary",
+      "path": "results/experiments/bc_dpg_v3_ablation_no_scan_context_v4_fold06_seed42/tables/summary.json",
+      "sha256": "99cc6ae6e7cc4062c99cfa23a62c80531a9e922afeda960ca5d3e8fc70671aed",
+      "size_bytes": 10760
+    },
+    {
+      "category": "build_script",
+      "path": "scripts/audit_bc_dpg_v3_causal_context.py",
+      "sha256": "d44e648eb2f6a06e1b8adf721e0290bc013eedbef858c07954f9130cca892e8e",
+      "size_bytes": 37931
+    },
+    {
+      "category": "context_implementation",
+      "path": "features/scan_context.py",
+      "sha256": "15a6b1d717472819b2fb9e7bb34734c04555d4e05cddc0a9b9f4fbff7e72e736",
+      "size_bytes": 6189
+    },
+    {
+      "category": "model_implementation",
+      "path": "models/target_protected_scan_calibrator.py",
+      "sha256": "876ce55315d38f9d11ca0db308dd98981fee2f58a6df854ed5d7c081d3cc4eae",
+      "size_bytes": 9253
+    }
+  ],
+  "test_threshold_retuning": false,
+  "threshold_selection_performed": false,
+  "training_performed": false
+}

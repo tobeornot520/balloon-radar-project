@@ -120,3 +120,13 @@ BC-DPG 和 ROI 均冻结原始候选位置，只调整候选分数，因此校�
 - 单位面积虚警率。
 
 可以报告每个已评价背景扫描组的虚警数，但必须同时给出扫描组数量、样本数和最大值，不能把它等同于每小时虚警率。
+
+## 8. 扫描上下文敏感性口径
+
+- complete-scan：统计同一扫描的全部样本，包含当前样本并可能包含未来样本；
+- leave-one-out：排除当前样本，但仍可使用扫描内未来样本，只用于检查 self-inclusion；
+- past-only：只统计确定性顺序中位于当前样本之前的样本；
+- history window：past-only 模式最多保留的最近历史样本数；
+- zero-context / cold start：当前样本之前没有历史，12 维上下文全部置零。
+
+当前 past-only 顺序按 `(beam_layer, azimuth_deg, sample_id)` 推断，未由逐样本时间戳验证。冻结完整模型原本使用 complete-scan 上下文训练，因此将其输入替换为 leave-one-out 或 past-only 属于 out-of-distribution 敏感性审计。该结果不能用于从测试集选择窗口，也不能命名为已训练的因果模型。

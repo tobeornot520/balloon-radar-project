@@ -21,6 +21,10 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from datasets.detection_dataset_v3 import DetectionRadarDatasetV3
+from features.scan_context import (
+    GROUP_FEATURE_DIM,
+    build_scan_context_features,
+)
 from models.background_tail_calibrated_dpg_fcn import (
     BackgroundTailCalibratedDPGFCN,
 )
@@ -42,7 +46,6 @@ from scripts.train_detection_baseline_v2 import (
 
 SCAN_PATTERN = re.compile(r"^(\d{8}_\d{6})")
 SAMPLE_FEATURE_DIM = 24
-GROUP_FEATURE_DIM = 12
 
 
 def parse_hidden_dims(text: str) -> tuple[int, ...]:
@@ -525,51 +528,12 @@ def build_group_features(
     sample_features: np.ndarray,
     base_threshold: float,
 ) -> np.ndarray:
-    if len(frame) != sample_features.shape[0]:
-        raise ValueError("frame/features length mismatch")
-
-    raw_score = frame["raw_score"].to_numpy(dtype=np.float64)
-    feature_branch_diff = sample_features[:, 21]
-    feature_peak_distance = sample_features[:, 22]
-
-    output = np.zeros(
-        (len(frame), GROUP_FEATURE_DIM),
-        dtype=np.float32,
-    )
-
-    group_indices = frame.groupby(
-        "scan_group",
-        sort=False,
-    ).indices
-
-    for _, indices_value in group_indices.items():
-        indices = np.asarray(indices_value, dtype=np.int64)
-        scores = raw_score[indices]
-        count = len(indices)
-
-        values = np.asarray(
-            [
-                min(
-                    math.log1p(count) / math.log1p(256.0),
-                    1.0,
-                ),
-                float(np.mean(scores)),
-                float(np.std(scores)),
-                float(np.median(scores)),
-                float(np.quantile(scores, 0.75)),
-                float(np.quantile(scores, 0.90)),
-                float(np.max(scores)),
-                float(np.mean(scores > 0.30)),
-                float(np.mean(scores > 0.50)),
-                float(np.mean(scores > base_threshold)),
-                float(np.mean(feature_branch_diff[indices])),
-                float(np.mean(feature_peak_distance[indices])),
-            ],
-            dtype=np.float32,
-        )
-        output[indices] = values
-
-    return output
+    return build_scan_context_features(
+        frame,
+        sample_features,
+        base_threshold,
+        mode="complete_scan",
+    ).values
 
 
 def save_precomputed(

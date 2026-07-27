@@ -8,6 +8,7 @@
 4. Stage 3 evaluates dense explicit polarimetric representations and retains Power2 as the most reliable detection representation.
 5. Stage 4 freezes Power2 candidate locations and applies suppression-only ROI refinement.
 6. The final audit aligns frozen BC-DPG and ROI predictions without retuning test thresholds or selecting a joint rule.
+7. A causal-context sensitivity audit replays the frozen full checkpoint with leave-one-out and assumed-order past-only contexts. It does not retrain or select a causal model.
 
 ## Authoritative evidence
 
@@ -16,6 +17,7 @@
 - Stage 4: `results/data_audit/roi_stage4_selected_sixfold_v1/`
 - Joint audit: `results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`
 - Joint paper evidence: `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
+- Causal-context sensitivity audit: `results/data_audit/bc_dpg_v3_causal_context_audit/`
 - Data card: [DATA_CARD.md](DATA_CARD.md)
 - Metric definitions: [METRIC_DEFINITIONS.md](METRIC_DEFINITIONS.md)
 - Model-selection ledger: [MODEL_SELECTION_LEDGER.md](MODEL_SELECTION_LEDGER.md)
@@ -36,12 +38,20 @@ The 56 complete-scan BC false alarms are concentrated entirely in Folds 1 and 4.
 
 ROI refinement remains an independent suppression study. The reported AND/intersection, OR/union, and McNemar results are post-test diagnostics only. No combination was trained or selected from these outcomes.
 
+## Causal-context sensitivity
+
+The frozen complete-scan checkpoint was replayed with the original fold thresholds under several context substitutions. Complete-scan replay reproduced all six frozen decision tables with zero decision mismatches. Leave-one-out produced 54/830 background alarms and 289/318 joint successes, indicating that direct self-inclusion is not the main source of the complete-scan gain; it remains non-causal because later samples are still available.
+
+Using all prior samples under the inferred `(beam_layer, azimuth_deg, sample_id)` order produced 93/830 alarms and 288/318 joint successes. Windows of 4, 16, and 64 produced 148, 138, and 105 alarms respectively. These are post-hoc out-of-distribution sensitivity results from a model trained with complete-scan context. They must not be used to select a deployment window. The separately trained sample-independent BC remains the valid online-oriented reference at 122 alarms.
+
 ## Selection and data limitations
 
 The absence of test-threshold retuning does not make the evaluation blind. Stage 4 modes were screened on development Folds 1 and 4, and those folds were reused in the six-fold ROI summary. BC-DPG structure and loss design were also informed by development feedback.
 
 All target scan groups in the frozen audit are dated `20260202`; all background scan groups are dated `20260204`. Class and acquisition date are fully confounded. The current results therefore cannot establish cross-date, cross-site, or external blind generalization.
 
+The source tables do not contain verified per-sample acquisition timestamps. Past-only order is inferred from beam, azimuth, and sample ID, so causal status holds only under that ordering assumption. Each scan also has a cold start: 71 target samples and 6 background samples have zero prior context.
+
 ## Claim boundaries
 
-The current data support an internal development-stage H/V UAV detection and distance-velocity localization front end. They do not establish balloon payload classification, event-level or hourly false-alarm performance, cross-environment blind generalization, or strict real-time causal scan adaptation.
+The current data support an internal development-stage H/V UAV detection and distance-velocity localization front end. They do not establish balloon payload classification, event-level or hourly false-alarm performance, cross-environment blind generalization, or a trained and independently evaluated real-time causal scan adapter.

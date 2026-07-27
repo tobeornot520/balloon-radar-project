@@ -25,6 +25,7 @@ REQUIRED_FILES = (
     "datasets/polarimetric_detection_dataset_v2.py",
     "features/polarimetric_rd.py",
     "features/roi_polarimetric_refinement.py",
+    "features/scan_context.py",
     "models/target_protected_scan_calibrator.py",
     "models/roi_polarimetric_refiner.py",
     "training/train_target_protected_scan_calibrator.py",
@@ -33,6 +34,7 @@ REQUIRED_FILES = (
     "scripts/build_final_roi_bc_dpg_joint_audit.py",
     "scripts/build_roi_bc_dpg_joint_paper_assets.py",
     "scripts/build_project_share_package.py",
+    "scripts/audit_bc_dpg_v3_causal_context.py",
 )
 
 

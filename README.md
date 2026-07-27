@@ -11,6 +11,7 @@
 3. 显式极化 Stage 3：比较 Power2、RI4、Polar6-gated 和 RI8-gated；结论是 Power2 仍为主检测表征。
 4. ROI Stage 4：冻结 Power2 候选位置，仅使用局部 ROI 极化特征进行 suppression-only 精修。
 5. 联合审计：对齐 BC-DPG 与 ROI 六折逐样本预测，分析虚警与正确检测的互补性，不在测试集重新选择阈值。
+6. 因果上下文敏感性审计：冻结完整模型和阈值，对比 complete-scan、leave-one-out 与假定顺序 past-only 上下文，不把后验窗口结果用于选型。
 
 冻结结论和研究边界见：
 
@@ -24,6 +25,7 @@
 - [Stage 4 预注册](docs/STAGE4_SIXFOLD_PREREGISTRATION.md)
 - [ROI 与 BC-DPG 联合设计](docs/ROI_BC_DPG_JOINT_NEXT_DESIGN.md)
 - [ROI/BC-DPG 固定阈值联合证据](results/final_evidence/roi_bc_dpg_joint_fixed_threshold/JOINT_AUDIT_REPORT.md)
+- [BC-DPG 因果上下文敏感性审计](results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md)
 - [项目对外分享材料](docs/share/README_SHARE_ZH.md)
 
 ## 目录结构
@@ -115,6 +117,16 @@ python scripts/build_roi_bc_dpg_joint_paper_assets.py
 bootstrap 和 McNemar 配对诊断。AND/OR 结果只作为测试后诊断统计，不代表已训练或
 已选定的联合模型。
 
+冻结完整 BC-DPG checkpoint，在不训练、不改阈值的条件下重放 complete-scan、
+leave-one-out 和假定 beam/azimuth 顺序的 past-only 上下文：
+
+```bash
+python scripts/audit_bc_dpg_v3_causal_context.py --overwrite
+```
+
+正式审计位于 `results/data_audit/bc_dpg_v3_causal_context_audit/`。其中 past-only
+结果属于完整模型的上下文替换敏感性，不是经过因果上下文训练和验证集选型的新模型。
+
 生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
 
 ```bash
@@ -135,6 +147,7 @@ checkpoint。
 - 同时报告 pooled、折间分布和最差折；当前 56 个 BC-DPG 虚警全部集中于 Fold 1/4。
 - Stage 4 的 Fold 1/4 参与过模式筛选，最终六折 ROI 汇总不是独立盲测估计。
 - 当前目标和背景来自不同采集日期，不能声称跨日期泛化。
+- past-only 顺序目前由 beam、azimuth 和 sample ID 推断，不能替代采集时间戳。
 - `results/experiments/`、原始数据、大权重、原始聊天记录和生成分发包不应提交到 Git。
 - 当前分类数据只覆盖 UAV，长期空飘球、载荷和状态分类仍需要补充真实数据。
 

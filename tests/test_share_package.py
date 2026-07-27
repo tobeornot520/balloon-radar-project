@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
+import scripts.build_project_share_package as share_package
 
 from scripts.build_project_share_package import (
     PACKAGE_FILES,
@@ -24,7 +26,33 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/08_MODEL_SELECTION_LEDGER_ZH.md" in destinations
     assert "assets/figures/joint_fold_heterogeneity.png" in destinations
     assert "assets/tables/joint_scan_group_bootstrap.csv" in destinations
+    assert "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md" in destinations
+    assert "assets/tables/bc_dpg_causal_context_aggregate.csv" in destinations
+    assert "assets/tables/bc_dpg_causal_context_paired_deltas.csv" in destinations
+    assert "assets/tables/bc_dpg_causal_context_replay_validation.csv" in destinations
+    assert "assets/tables/bc_dpg_causal_context_history_coverage.csv" in destinations
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+
+
+def test_share_manifest_marks_causal_context_as_post_test(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(share_package, "current_commit", lambda: "test-commit")
+    share_package.write_manifest(tmp_path, [])
+    manifest = json.loads((tmp_path / "MANIFEST.json").read_text(encoding="utf-8"))
+    rules = manifest["evidence_rules"]
+    assert rules["causal_context_audit_role"] == (
+        "post-hoc frozen-checkpoint sensitivity"
+    )
+    assert rules["causal_context_retraining_performed"] is False
+    assert rules["causal_history_window_selected"] is False
+    assert rules["past_only_order_verified_by_timestamp"] is False
+    assert rules["past_only_order_columns"] == [
+        "beam_layer",
+        "azimuth_deg",
+        "sample_id",
+    ]
 
 
 def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:
