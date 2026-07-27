@@ -1,0 +1,117 @@
+{
+  "aligned_rows": 1148,
+  "combination_selected": false,
+  "deterministic_build": true,
+  "evidence_scope": "fixed-threshold six-fold ROI/BC-DPG joint audit",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "generated_files": [
+    {
+      "path": "JOINT_AUDIT_REPORT.md",
+      "sha256": "ed96c7b3765240d66f1f1ec6e5ebe8fe4ee89193b6731ff629b2ce883c4faee2",
+      "size_bytes": 2709
+    },
+    {
+      "path": "figures/fig1_pooled_detection_tradeoff.pdf",
+      "sha256": "51428c1a26d79843333fdd8e11aa5846fe2058bff25e1dbecb75aa732ce6e74a",
+      "size_bytes": 20386
+    },
+    {
+      "path": "figures/fig1_pooled_detection_tradeoff.png",
+      "sha256": "2c1bebb8e2bde8b2b198fc82f4949e3bb3beee1269e077c92ca3809850bdb895",
+      "size_bytes": 135285
+    },
+    {
+      "path": "figures/fig2_fold_false_alarms.pdf",
+      "sha256": "8a6921dca7fe204c51ddebc1e6934a485a2b2da8aef8176195881beff70f6169",
+      "size_bytes": 16230
+    },
+    {
+      "path": "figures/fig2_fold_false_alarms.png",
+      "sha256": "e1046b47f47ec4969231ad661420cc0919b71eac2a7a4fb1c2f9b38966588070",
+      "size_bytes": 95942
+    },
+    {
+      "path": "figures/fig3_complementarity.pdf",
+      "sha256": "47a2b3508052e4455bdbc119634ca8882814c6f5e962b74a4abd38d1a7e6379a",
+      "size_bytes": 20482
+    },
+    {
+      "path": "figures/fig3_complementarity.png",
+      "sha256": "cd215420c6c69e3f613a754040860413a00d9101705e42c457bb1bba5b1a3aa5",
+      "size_bytes": 132242
+    },
+    {
+      "path": "tables/table_01_pooled_detection.csv",
+      "sha256": "f1fbcf6cc30ffdbb9a6906bedb9f5fd35b4179a81048778c30ecb355bc23ad28",
+      "size_bytes": 539
+    },
+    {
+      "path": "tables/table_02_fold_detection.csv",
+      "sha256": "0f83330e1ff518a6fe7eb5b8cadcecc28fe50ab17ce1921f89be7db57cc124d4",
+      "size_bytes": 1716
+    },
+    {
+      "path": "tables/table_03_complementarity.csv",
+      "sha256": "2953d77056b22909460a79f5ce55022be2f69b69f5380febaa4393a95a7c1cc7",
+      "size_bytes": 405
+    },
+    {
+      "path": "tables/table_04_simple_combination_diagnostics.csv",
+      "sha256": "88150413441867f5934b4c237d1c186028c273da9e475f58e4a3ca7648ccd7ed",
+      "size_bytes": 709
+    },
+    {
+      "path": "tables/table_05_claim_boundaries.csv",
+      "sha256": "a8ba7b2a81b3eb686479b88ba5cd7c2fa8f565aa8d163004cd2c2ffbd581a3c7",
+      "size_bytes": 1367
+    }
+  ],
+  "joint_model_trained": false,
+  "schema_version": 1,
+  "sources": [
+    {
+      "category": "frozen_audit_input",
+      "path": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/detection_comparison.csv",
+      "sha256": "6d41dcac0df4a43dd14e4e423ec28b86ddd9948b51e4f8a75b0039caa0930918",
+      "size_bytes": 1654
+    },
+    {
+      "category": "frozen_audit_input",
+      "path": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/complementarity_summary.csv",
+      "sha256": "cc5b7d914d18572198f9f58c035a0f0337608ab2c2fa124e5468474add7e7e7d",
+      "size_bytes": 872
+    },
+    {
+      "category": "frozen_audit_input",
+      "path": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/fold_alignment.csv",
+      "sha256": "c496b53ca9b57e34c3ad53d4aa0ee9eab3e471ee345cedfad654d1ea34f32622",
+      "size_bytes": 869
+    },
+    {
+      "category": "frozen_audit_input",
+      "path": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/status.json",
+      "sha256": "7d58d7cb47822421ba189fa5b0059385092f06453a61257fe5554b4fe4f9f29a",
+      "size_bytes": 379
+    },
+    {
+      "category": "frozen_audit_input",
+      "path": "results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/all_fold_joint_predictions.csv",
+      "sha256": "04b80a750064e8300435f809c646baeedb0c2dc1a77bafbb253aa3ba1fc2a8b7",
+      "size_bytes": 607708
+    },
+    {
+      "category": "build_script",
+      "path": "scripts/build_roi_bc_dpg_joint_paper_assets.py",
+      "sha256": "9e02da598e51d0f27182fc62b15444a9e9a7efc548622bb73e56932373871955",
+      "size_bytes": 36610
+    }
+  ],
+  "test_threshold_retuning": false
+}

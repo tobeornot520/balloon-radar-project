@@ -1,0 +1,3 @@
+fold,comparison,comparison_name,bc_false_alarms,roi_false_alarms,shared_false_alarms,bc_only_false_alarms,roi_only_false_alarms,fa_union,target_samples,shared_correct,bc_only_correct,roi_only_correct,correct_union,neither_correct
+ALL,roi_power_control,BC-DPG-FCN v3 vs ROI power control,56,237,49,7,188,244,318,263,26,5,294,24
+ALL,roi_ri4,BC-DPG-FCN v3 vs ROI RI4,56,196,36,20,160,216,318,263,26,5,294,24

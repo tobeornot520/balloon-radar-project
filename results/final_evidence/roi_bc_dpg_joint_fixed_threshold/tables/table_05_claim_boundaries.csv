@@ -1,0 +1,9 @@
+boundary,statement,basis
+supported,"At the frozen thresholds, BC-DPG-FCN v3 has 56 false alarms and 289/318 correct detections.",Six-fold sample-aligned fixed-threshold audit.
+supported,BC-DPG-FCN v3 and ROI RI4 have complementary target outcomes and partially overlapping false alarms.,"The pooled overlap is reported as counts, without selecting a new rule."
+supported,ROI refinement is an independent suppression study under frozen Power2 candidate locations.,ROI results are not presented as a trained joint detector.
+diagnostic_only,AND and OR counts describe logical intersections and unions only.,Neither rule was selected on training or validation data for this audit.
+not_supported,"A naive AND, OR, or serial combination improves the deployed detector.",Choosing such a rule from these test outcomes would be test-set selection.
+not_supported,The evidence represents a trained or learned ROI/BC-DPG joint model.,No joint model was trained in this evidence build.
+not_supported,The results establish cross-site blind generalization or balloon-payload classification.,The current scope is an internal six-fold H/V UAV detection and localization front end.
+method_constraint,Any future learned combination must be selected using training or validation data and tested once with frozen rules.,Test thresholds and combination rules remain untuned in this audit.

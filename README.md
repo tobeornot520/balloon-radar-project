@@ -20,6 +20,7 @@
 - [Stage 3 冻结结论](docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md)
 - [Stage 4 预注册](docs/STAGE4_SIXFOLD_PREREGISTRATION.md)
 - [ROI 与 BC-DPG 联合设计](docs/ROI_BC_DPG_JOINT_NEXT_DESIGN.md)
+- [ROI/BC-DPG 固定阈值联合证据](results/final_evidence/roi_bc_dpg_joint_fixed_threshold/JOINT_AUDIT_REPORT.md)
 
 ## 目录结构
 
@@ -97,6 +98,16 @@ python scripts/build_final_roi_bc_dpg_joint_audit.py \
 当前有效的联合审计是
 `results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`。早期同名输出使用了
 错误的 BC 判决来源，已移入本地恢复归档，不应用于论文或后续选型。
+
+从冻结联合审计生成正式论文表格、PNG/PDF 图件、报告和 SHA256 清单：
+
+```bash
+python scripts/build_roi_bc_dpg_joint_paper_assets.py
+```
+
+正式输出位于 `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`。脚本会在
+写入前复核 1,148 行逐样本对齐、六折来源和固定阈值状态，并默认拒绝覆盖非空目录。
+AND/OR 结果只作为诊断统计，不代表已训练或已选定的联合模型。
 
 ## 实验纪律
 

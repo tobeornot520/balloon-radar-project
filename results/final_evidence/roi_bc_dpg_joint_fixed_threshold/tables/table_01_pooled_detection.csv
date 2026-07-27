@@ -1,0 +1,5 @@
+model,display_name,evidence_role,background_samples,target_samples,false_alarms,pfa,correct_detections,joint_pd
+bc_dpg_v3,BC-DPG-FCN v3,frozen current detector,830,318,56,0.0674698795180722,289,0.9088050314465408
+roi_baseline,Power2 baseline,frozen candidate baseline,830,318,300,0.3614457831325301,268,0.8427672955974843
+roi_power_control,ROI power control,ROI suppression control,830,318,237,0.2855421686746988,268,0.8427672955974843
+roi_ri4,ROI RI4,independent ROI suppression study,830,318,196,0.236144578313253,268,0.8427672955974843

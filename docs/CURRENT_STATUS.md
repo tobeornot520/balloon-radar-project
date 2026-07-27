@@ -17,6 +17,16 @@
 - Stage 3: `docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md`
 - Stage 4: `results/data_audit/roi_stage4_selected_sixfold_v1/`
 - Joint audit: `results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`
+- Joint paper evidence: `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
+
+The joint paper-evidence package is generated deterministically from the frozen
+audit. It contains the formal report, pooled and fold-level tables, logical
+combination diagnostics, PNG/PDF figures, and a SHA256 evidence manifest. Build
+it with:
+
+```bash
+python scripts/build_roi_bc_dpg_joint_paper_assets.py
+```
 
 The earlier `final_roi_bc_dpg_joint` output used the wrong BC decision source and
 has been moved to the local recovery archive. It must not be cited.
@@ -28,6 +38,10 @@ useful independent suppression study, but the fixed-threshold audit does not
 support a naive AND, OR, or serial combination. Any learned combination must be
 selected only on training or validation data and evaluated once with frozen
 rules.
+
+The reported AND/intersection and OR/union counts are diagnostic only. They are
+not trained models or deployment rules, and no combination was selected from
+the test outcomes.
 
 ## Claim boundaries
 

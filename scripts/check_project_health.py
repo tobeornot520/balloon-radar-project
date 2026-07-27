@@ -31,6 +31,7 @@ REQUIRED_FILES = (
     "training/train_roi_polarimetric_refiner_v1.py",
     "scripts/build_roi_bc_dpg_joint_tables_v1.py",
     "scripts/build_final_roi_bc_dpg_joint_audit.py",
+    "scripts/build_roi_bc_dpg_joint_paper_assets.py",
 )
 
 
