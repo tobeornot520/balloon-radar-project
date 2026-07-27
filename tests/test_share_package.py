@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+import pytest
+
+from scripts.build_project_share_package import (
+    PACKAGE_FILES,
+    audit_markdown_links,
+    audit_package_directory,
+    sha256_file,
+    validate_source_map,
+    write_deterministic_zip,
+)
+
+
+def test_share_source_map_is_complete_and_unique() -> None:
+    validate_source_map()
+    destinations = [item.destination for item in PACKAGE_FILES]
+    assert len(destinations) == len(set(destinations))
+    assert not any("development_history" in item.source for item in PACKAGE_FILES)
+
+
+def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:
+    package = tmp_path / "share"
+    package.mkdir()
+    (package / "README.md").write_text(
+        "private source: /home/example/project\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="sensitive marker"):
+        audit_package_directory(package)
+
+
+def test_share_audit_rejects_model_weights(tmp_path: Path) -> None:
+    package = tmp_path / "share"
+    package.mkdir()
+    (package / "model.pt").write_bytes(b"not-a-real-checkpoint")
+    with pytest.raises(ValueError, match="file type"):
+        audit_package_directory(package)
+
+
+def test_share_link_audit_rejects_missing_local_target(tmp_path: Path) -> None:
+    package = tmp_path / "share"
+    package.mkdir()
+    (package / "README.md").write_text(
+        "[missing](docs/missing.md)\n", encoding="utf-8"
+    )
+    with pytest.raises(ValueError, match="missing link target"):
+        audit_markdown_links(package)
+
+
+def test_share_zip_is_deterministic(tmp_path: Path) -> None:
+    package = tmp_path / "share"
+    package.mkdir()
+    (package / "README.md").write_text("share\n", encoding="utf-8")
+    first = tmp_path / "first.zip"
+    second = tmp_path / "second.zip"
+    write_deterministic_zip(package, first)
+    write_deterministic_zip(package, second)
+    assert sha256_file(first) == sha256_file(second)

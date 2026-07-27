@@ -21,6 +21,7 @@
 - [Stage 4 预注册](docs/STAGE4_SIXFOLD_PREREGISTRATION.md)
 - [ROI 与 BC-DPG 联合设计](docs/ROI_BC_DPG_JOINT_NEXT_DESIGN.md)
 - [ROI/BC-DPG 固定阈值联合证据](results/final_evidence/roi_bc_dpg_joint_fixed_threshold/JOINT_AUDIT_REPORT.md)
+- [项目对外分享材料](docs/share/README_SHARE_ZH.md)
 
 ## 目录结构
 
@@ -108,6 +109,14 @@ python scripts/build_roi_bc_dpg_joint_paper_assets.py
 正式输出位于 `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`。脚本会在
 写入前复核 1,148 行逐样本对齐、六折来源和固定阈值状态，并默认拒绝覆盖非空目录。
 AND/OR 结果只作为诊断统计，不代表已训练或已选定的联合模型。
+
+生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
+
+```bash
+python scripts/build_project_share_package.py
+```
+
+目录版和 ZIP 默认生成在 `dist/`，该目录属于本地分发产物，不进入 Git。
 
 ## 实验纪律
 

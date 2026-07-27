@@ -32,6 +32,7 @@ REQUIRED_FILES = (
     "scripts/build_roi_bc_dpg_joint_tables_v1.py",
     "scripts/build_final_roi_bc_dpg_joint_audit.py",
     "scripts/build_roi_bc_dpg_joint_paper_assets.py",
+    "scripts/build_project_share_package.py",
 )
 
 
