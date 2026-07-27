@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import shutil
 import tempfile
@@ -22,6 +23,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+from matplotlib.ticker import PercentFormatter  # noqa: E402
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +45,8 @@ EXPECTED_ROWS = 1148
 EXPECTED_BC_SOURCE = "base_threshold_test_predictions.csv"
 EXPECTED_ROI_SOURCE = "refined_fixed_* columns from test_predictions.csv"
 EXPECTED_AUDIT_NAME = "final_roi_bc_dpg_joint_v2_base_threshold"
+BOOTSTRAP_ITERATIONS = 10_000
+BOOTSTRAP_SEED = 20260727
 
 SOURCE_FILES = (
     "detection_comparison.csv",
@@ -63,13 +67,13 @@ COMPARISON_COLUMNS = {
     "roi_ri4": ("roi_ri4_false_alarm", "roi_ri4_correct"),
 }
 MODEL_LABELS = {
-    "bc_dpg_v3": "BC-DPG-FCN v3",
+    "bc_dpg_v3": "BC-DPG-FCN v3 (offline)",
     "roi_baseline": "Power2 baseline",
     "roi_power_control": "ROI power control",
     "roi_ri4": "ROI RI4",
 }
 MODEL_ROLES = {
-    "bc_dpg_v3": "frozen current detector",
+    "bc_dpg_v3": "offline complete-scan upper bound",
     "roi_baseline": "frozen candidate baseline",
     "roi_power_control": "ROI suppression control",
     "roi_ri4": "independent ROI suppression study",
@@ -425,6 +429,252 @@ def fold_detection_table(detection: pd.DataFrame) -> pd.DataFrame:
     ]
 
 
+def build_fold_distribution_summary(detection: pd.DataFrame) -> pd.DataFrame:
+    detail = detection.loc[~detection["fold"].eq("ALL")].copy()
+    rows: list[dict[str, Any]] = []
+    for model in MODEL_COLUMNS:
+        current = detail.loc[detail["model"].eq(model)].sort_values("fold")
+        if len(current) != len(EXPECTED_FOLDS):
+            raise ValueError(f"Expected six fold rows for {model}")
+        pfa = pd.to_numeric(current["pfa"], errors="raise").to_numpy(float)
+        joint_pd = pd.to_numeric(
+            current["joint_pd"], errors="raise"
+        ).to_numpy(float)
+        false_alarms = pd.to_numeric(
+            current["false_alarms"], errors="raise"
+        ).to_numpy(int)
+        top_two = np.sort(false_alarms)[-2:].sum()
+        total_false_alarms = int(false_alarms.sum())
+        worst_pfa_index = int(np.argmax(pfa))
+        worst_pd_index = int(np.argmin(joint_pd))
+        rows.append(
+            {
+                "model": model,
+                "display_name": MODEL_LABELS[model],
+                "folds": len(current),
+                "macro_pfa": float(pfa.mean()),
+                "median_pfa": float(np.median(pfa)),
+                "pfa_q25": float(np.quantile(pfa, 0.25)),
+                "pfa_q75": float(np.quantile(pfa, 0.75)),
+                "worst_fold_pfa": float(pfa[worst_pfa_index]),
+                "worst_pfa_fold": str(current.iloc[worst_pfa_index]["fold"]),
+                "macro_joint_pd": float(joint_pd.mean()),
+                "median_joint_pd": float(np.median(joint_pd)),
+                "joint_pd_q25": float(np.quantile(joint_pd, 0.25)),
+                "joint_pd_q75": float(np.quantile(joint_pd, 0.75)),
+                "worst_fold_joint_pd": float(joint_pd[worst_pd_index]),
+                "worst_joint_pd_fold": str(current.iloc[worst_pd_index]["fold"]),
+                "folds_with_false_alarms": int((false_alarms > 0).sum()),
+                "top_two_fold_fa_fraction": (
+                    float(top_two / total_false_alarms)
+                    if total_false_alarms
+                    else 0.0
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def wilson_interval(
+    successes: int,
+    total: int,
+    z: float = 1.959963984540054,
+) -> tuple[float, float]:
+    if total <= 0:
+        return float("nan"), float("nan")
+    proportion = successes / total
+    denominator = 1.0 + z * z / total
+    center = (proportion + z * z / (2.0 * total)) / denominator
+    margin = (
+        z
+        * math.sqrt(
+            proportion * (1.0 - proportion) / total
+            + z * z / (4.0 * total * total)
+        )
+        / denominator
+    )
+    return center - margin, center + margin
+
+
+def build_derived_metric_table(pooled: pd.DataFrame) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+    for _, row in pooled.iterrows():
+        true_positive = int(row["correct_detections"])
+        false_positive = int(row["false_alarms"])
+        target_count = int(row["target_samples"])
+        background_count = int(row["background_samples"])
+        false_negative = target_count - true_positive
+        true_negative = background_count - false_positive
+        precision = true_positive / (true_positive + false_positive)
+        recall = true_positive / target_count
+        f1 = 2.0 * precision * recall / (precision + recall)
+        pd_low, pd_high = wilson_interval(true_positive, target_count)
+        pfa_low, pfa_high = wilson_interval(false_positive, background_count)
+        rows.append(
+            {
+                "model": row["model"],
+                "display_name": row["display_name"],
+                "tp_joint_success": true_positive,
+                "fp_background_alarm": false_positive,
+                "fn_target_not_joint_success": false_negative,
+                "tn_background_rejected": true_negative,
+                "joint_precision": precision,
+                "joint_f1": f1,
+                "specificity": true_negative / background_count,
+                "joint_pd": recall,
+                "joint_pd_wilson95_low": pd_low,
+                "joint_pd_wilson95_high": pd_high,
+                "pfa": false_positive / background_count,
+                "pfa_wilson95_low": pfa_low,
+                "pfa_wilson95_high": pfa_high,
+                "definition_caveat": (
+                    "TP requires threshold detection and localization within 2 range "
+                    "gates and 3 velocity bins; Wilson intervals ignore scan correlation"
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def build_scan_group_uncertainty(
+    predictions: pd.DataFrame,
+    iterations: int = BOOTSTRAP_ITERATIONS,
+    seed: int = BOOTSTRAP_SEED,
+) -> pd.DataFrame:
+    group_keys = ["fold", "scan_group"]
+    label_counts = predictions.groupby(group_keys)["target_present"].nunique()
+    if (label_counts > 1).any():
+        raise ValueError("A scan group contains both target and background labels")
+
+    rows: list[dict[str, Any]] = []
+    for model, (false_alarm_column, correct_column) in MODEL_COLUMNS.items():
+        grouped = (
+            predictions.groupby([*group_keys, "target_present"], sort=True)
+            .agg(
+                sample_count=("sample_id", "size"),
+                false_alarms=(false_alarm_column, "sum"),
+                correct_detections=(correct_column, "sum"),
+            )
+            .reset_index()
+        )
+        background = grouped.loc[grouped["target_present"].eq(0)].reset_index(drop=True)
+        targets = grouped.loc[grouped["target_present"].eq(1)].reset_index(drop=True)
+        if background.empty or targets.empty:
+            raise ValueError("Cluster bootstrap requires target and background scan groups")
+
+        rng = np.random.default_rng(seed)
+        background_indices = rng.integers(
+            0,
+            len(background),
+            size=(iterations, len(background)),
+        )
+        target_indices = rng.integers(
+            0,
+            len(targets),
+            size=(iterations, len(targets)),
+        )
+        background_samples = background["sample_count"].to_numpy(float)
+        background_false_alarms = background["false_alarms"].to_numpy(float)
+        target_samples = targets["sample_count"].to_numpy(float)
+        target_correct = targets["correct_detections"].to_numpy(float)
+        bootstrap_pfa = (
+            background_false_alarms[background_indices].sum(axis=1)
+            / background_samples[background_indices].sum(axis=1)
+        )
+        bootstrap_pd = (
+            target_correct[target_indices].sum(axis=1)
+            / target_samples[target_indices].sum(axis=1)
+        )
+        pfa_low, pfa_high = np.quantile(bootstrap_pfa, [0.025, 0.975])
+        pd_low, pd_high = np.quantile(bootstrap_pd, [0.025, 0.975])
+        worst_background_index = int(background["false_alarms"].idxmax())
+        worst_background = background.loc[worst_background_index]
+        rows.append(
+            {
+                "model": model,
+                "display_name": MODEL_LABELS[model],
+                "background_scan_groups": len(background),
+                "target_scan_groups": len(targets),
+                "mean_false_alarms_per_background_scan": float(
+                    background["false_alarms"].mean()
+                ),
+                "median_false_alarms_per_background_scan": float(
+                    background["false_alarms"].median()
+                ),
+                "max_false_alarms_in_background_scan": int(
+                    worst_background["false_alarms"]
+                ),
+                "worst_background_fold": f"{int(worst_background['fold']):02d}",
+                "worst_background_scan_group": str(worst_background["scan_group"]),
+                "background_scans_with_false_alarms": int(
+                    background["false_alarms"].gt(0).sum()
+                ),
+                "pfa_cluster_bootstrap95_low": float(pfa_low),
+                "pfa_cluster_bootstrap95_high": float(pfa_high),
+                "joint_pd_cluster_bootstrap95_low": float(pd_low),
+                "joint_pd_cluster_bootstrap95_high": float(pd_high),
+                "bootstrap_iterations": iterations,
+                "bootstrap_seed": seed,
+                "bootstrap_unit": (
+                    f"stratified resampling of {len(background)} background and "
+                    f"{len(targets)} target scan groups"
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def exact_mcnemar_pvalue(first_only: int, second_only: int) -> float:
+    discordant = first_only + second_only
+    if discordant == 0:
+        return 1.0
+    lower_tail = sum(
+        math.comb(discordant, value)
+        for value in range(min(first_only, second_only) + 1)
+    ) / (2.0**discordant)
+    return min(1.0, 2.0 * lower_tail)
+
+
+def build_paired_mcnemar_table(complementarity: pd.DataFrame) -> pd.DataFrame:
+    selected = complementarity.loc[
+        complementarity["fold"].eq("ALL")
+        & complementarity["comparison"].eq("roi_ri4")
+    ]
+    if len(selected) != 1:
+        raise ValueError("Expected one pooled BC-DPG vs ROI RI4 comparison")
+    row = selected.iloc[0]
+    outcomes = [
+        (
+            "background false-alarm decision",
+            int(row["bc_only_false_alarms"]),
+            int(row["roi_only_false_alarms"]),
+            "BC-DPG has fewer background-only positive decisions",
+        ),
+        (
+            "target joint-success decision",
+            int(row["bc_only_correct"]),
+            int(row["roi_only_correct"]),
+            "BC-DPG has more target-only joint successes",
+        ),
+    ]
+    return pd.DataFrame(
+        [
+            {
+                "paired_outcome": outcome,
+                "bc_only": bc_only,
+                "roi_ri4_only": roi_only,
+                "discordant_pairs": bc_only + roi_only,
+                "two_sided_exact_mcnemar_p": exact_mcnemar_pvalue(
+                    bc_only, roi_only
+                ),
+                "direction": direction,
+                "status": "post-test paired diagnostic only; not a selection rule",
+            }
+            for outcome, bc_only, roi_only, direction in outcomes
+        ]
+    )
+
+
 def pooled_complementarity_table(complementarity: pd.DataFrame) -> pd.DataFrame:
     pooled = complementarity.loc[complementarity["fold"].eq("ALL")].copy()
     pooled.insert(
@@ -460,8 +710,10 @@ def build_simple_combination_diagnostics(
             "correct_detections": int(bc["correct_detections"]),
             "target_samples": target_samples,
             "missed_targets": target_samples - int(bc["correct_detections"]),
-            "selection_status": "frozen current detector",
-            "interpretation": "Primary detector retained by the current evidence.",
+            "selection_status": "offline complete-scan upper bound",
+            "interpretation": (
+                "Best observed internal result; complete-scan context is non-causal."
+            ),
         },
         {
             "rule": "ROI RI4 alone",
@@ -505,8 +757,8 @@ def build_claim_boundaries() -> pd.DataFrame:
     rows = [
         (
             "supported",
-            "At the frozen thresholds, BC-DPG-FCN v3 has 56 false alarms and 289/318 correct detections.",
-            "Six-fold sample-aligned fixed-threshold audit.",
+            "The offline complete-scan BC-DPG-FCN v3 has 56/830 background alarms and 289/318 joint successes at frozen thresholds.",
+            "Six-fold sample-aligned internal development audit.",
         ),
         (
             "supported",
@@ -539,6 +791,16 @@ def build_claim_boundaries() -> pd.DataFrame:
             "The current scope is an internal six-fold H/V UAV detection and localization front end.",
         ),
         (
+            "not_supported",
+            "The complete-scan BC-DPG-FCN v3 result represents strict causal real-time deployment performance.",
+            "Its scan statistics may include samples occurring after the current sample.",
+        ),
+        (
+            "method_constraint",
+            "Stage 4 modes were screened on development Folds 1 and 4 before six-fold extension.",
+            "Those folds are included in the six-fold ROI summary, so it is not an unbiased blind estimate.",
+        ),
+        (
             "method_constraint",
             "Any future learned combination must be selected using training or validation data and tested once with frozen rules.",
             "Test thresholds and combination rules remain untuned in this audit.",
@@ -551,7 +813,10 @@ def markdown_table(frame: pd.DataFrame, columns: list[str]) -> str:
     view = frame[columns].copy()
     for column in view.columns:
         if pd.api.types.is_float_dtype(view[column]):
-            view[column] = view[column].map(lambda value: f"{value:.4f}")
+            if column == "two_sided_exact_mcnemar_p":
+                view[column] = view[column].map(lambda value: f"{value:.3e}")
+            else:
+                view[column] = view[column].map(lambda value: f"{value:.4f}")
     headers = [str(column) for column in view.columns]
     lines = [
         "| " + " | ".join(headers) + " |",
@@ -618,6 +883,12 @@ def build_figures(
     created: list[str] = []
 
     fig, ax = plt.subplots(figsize=(7.4, 5.2))
+    plot_labels = {
+        "bc_dpg_v3": "Offline scan-aware BC-DPG v3",
+        "roi_baseline": "Power2 baseline",
+        "roi_power_control": "ROI power control",
+        "roi_ri4": "ROI RI4",
+    }
     for _, row in pooled.iterrows():
         model = str(row["model"])
         ax.scatter(
@@ -630,13 +901,13 @@ def build_figures(
             zorder=3,
         )
         offsets = {
-            "bc_dpg_v3": (7, -14),
-            "roi_baseline": (-98, 7),
-            "roi_power_control": (-102, -17),
-            "roi_ri4": (7, 7),
+            "bc_dpg_v3": (7, -16),
+            "roi_baseline": (-112, -21),
+            "roi_power_control": (-36, 23),
+            "roi_ri4": (-10, -21),
         }
         ax.annotate(
-            str(row["display_name"]),
+            plot_labels[model],
             (row["false_alarms"], row["correct_detections"]),
             xytext=offsets[model],
             textcoords="offset points",
@@ -644,7 +915,7 @@ def build_figures(
         )
     ax.set_xlabel("False alarms across six folds (lower is better)")
     ax.set_ylabel("Correct detections out of 318 (higher is better)")
-    ax.set_title("Frozen fixed-threshold detection trade-off")
+    ax.set_title("Six-fold internal validation at frozen thresholds")
     ax.set_xlim(0, 330)
     ax.set_ylim(255, 300)
     ax.grid(axis="both", color="#D9DDE2", linewidth=0.7, alpha=0.65)
@@ -652,32 +923,44 @@ def build_figures(
     fig.tight_layout()
     created.extend(save_figure(fig, figures_dir, "fig1_pooled_detection_tradeoff"))
 
-    fig, ax = plt.subplots(figsize=(8.8, 5.2))
+    fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.8), sharex=True)
     models = list(MODEL_COLUMNS)
     x = np.arange(len(EXPECTED_FOLDS), dtype=float)
     width = 0.19
-    for index, model in enumerate(models):
-        values = (
-            fold_detail.loc[fold_detail["model"].eq(model)]
-            .sort_values("fold")["false_alarms"]
-            .to_numpy()
-        )
-        offset = (index - (len(models) - 1) / 2) * width
-        ax.bar(
-            x + offset,
-            values,
-            width=width,
-            label=MODEL_LABELS[model],
-            color=MODEL_COLORS[model],
-        )
-    ax.set_xticks(x, [f"Fold {fold}" for fold in EXPECTED_FOLDS])
-    ax.set_ylabel("False alarms")
-    ax.set_title("Fold-level false alarms at frozen thresholds")
-    ax.grid(axis="y", color="#D9DDE2", linewidth=0.7, alpha=0.7)
-    ax.set_axisbelow(True)
-    ax.legend(ncols=2, loc="upper right")
-    fig.tight_layout()
-    created.extend(save_figure(fig, figures_dir, "fig2_fold_false_alarms"))
+    for axis, metric, title in (
+        (axes[0], "pfa", "Background Pfa by fold"),
+        (axes[1], "joint_pd", "Joint Pd by fold"),
+    ):
+        for index, model in enumerate(models):
+            values = (
+                fold_detail.loc[fold_detail["model"].eq(model)]
+                .sort_values("fold")[metric]
+                .to_numpy()
+            )
+            offset = (index - (len(models) - 1) / 2) * width
+            axis.bar(
+                x + offset,
+                values,
+                width=width,
+                label=MODEL_LABELS[model],
+                color=MODEL_COLORS[model],
+            )
+        axis.set_xticks(x, [f"F{fold}" for fold in EXPECTED_FOLDS])
+        axis.set_ylim(0.0, 1.05)
+        axis.yaxis.set_major_formatter(PercentFormatter(1.0))
+        axis.set_title(title)
+        axis.grid(axis="y", color="#D9DDE2", linewidth=0.7, alpha=0.7)
+        axis.set_axisbelow(True)
+    axes[0].set_ylabel("Rate")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, ncols=2, loc="upper center", bbox_to_anchor=(0.5, 0.93))
+    fig.suptitle(
+        "Fold heterogeneity at frozen thresholds (internal development estimate)",
+        y=1.02,
+        fontsize=12,
+    )
+    fig.tight_layout(rect=(0, 0, 1, 0.82))
+    created.extend(save_figure(fig, figures_dir, "fig2_fold_heterogeneity"))
 
     selected = complementarity.loc[
         complementarity["fold"].eq("ALL")
@@ -719,7 +1002,14 @@ def build_figures(
     for axis, values, labels, colors, xlabel, title in panels:
         left = 0
         for value, label, color in zip(values, labels, colors):
-            axis.barh([0], [value], left=left, color=color, height=0.48, label=label)
+            axis.barh(
+                [0],
+                [value],
+                left=left,
+                color=color,
+                height=0.48,
+                label=f"{label} ({value})",
+            )
             if value >= 12:
                 axis.text(
                     left + value / 2,
@@ -731,21 +1021,16 @@ def build_figures(
                     fontsize=9,
                     fontweight="bold",
                 )
-            else:
-                axis.annotate(
-                    str(value),
-                    (left + value / 2, 0.24),
-                    xytext=(0, 5),
-                    textcoords="offset points",
-                    ha="center",
-                    fontsize=9,
-                )
             left += value
         axis.set_yticks([])
         axis.set_xlabel(xlabel)
         axis.set_title(title)
         axis.legend(loc="upper center", bbox_to_anchor=(0.5, -0.24), ncols=2)
-    fig.suptitle("BC-DPG-FCN v3 and ROI RI4 complementarity", y=1.02, fontsize=12)
+    fig.suptitle(
+        "Post-test diagnostic: offline BC-DPG v3 and ROI RI4 complementarity",
+        y=1.02,
+        fontsize=12,
+    )
     fig.tight_layout()
     created.extend(save_figure(fig, figures_dir, "fig3_complementarity"))
     return created
@@ -756,11 +1041,31 @@ def build_report(
     pooled: pd.DataFrame,
     complementarity: pd.DataFrame,
     diagnostics: pd.DataFrame,
+    fold_distribution: pd.DataFrame,
+    derived_metrics: pd.DataFrame,
+    scan_uncertainty: pd.DataFrame,
+    paired_diagnostics: pd.DataFrame,
 ) -> str:
     bc = pooled.loc[pooled["model"].eq("bc_dpg_v3")].iloc[0]
     ri4 = complementarity.loc[complementarity["comparison"].eq("roi_ri4")].iloc[0]
+    bc_distribution = fold_distribution.loc[
+        fold_distribution["model"].eq("bc_dpg_v3")
+    ].iloc[0]
+    bc_uncertainty = scan_uncertainty.loc[
+        scan_uncertainty["model"].eq("bc_dpg_v3")
+    ].iloc[0]
+    target_dates = sorted(
+        data.predictions.loc[
+            data.predictions["target_present"].eq(1), "scan_group"
+        ].astype(str).str[:8].unique()
+    )
+    background_dates = sorted(
+        data.predictions.loc[
+            data.predictions["target_present"].eq(0), "scan_group"
+        ].astype(str).str[:8].unique()
+    )
     lines = [
-        "# Fixed-threshold ROI and BC-DPG joint audit: paper evidence",
+        "# Fixed-threshold ROI and BC-DPG audit: transparent internal evidence",
         "",
         "## Evidence status",
         "",
@@ -768,6 +1073,11 @@ def build_report(
         "All 1,148 test rows are aligned exactly by fold, label, sample ID, and MAT path. "
         "BC decisions come from `base_threshold_test_predictions.csv`; ROI decisions come "
         "from the frozen `refined_fixed_*` columns. Test thresholds were not retuned.",
+        "",
+        "The absence of test-threshold retuning does not make this a blind evaluation. "
+        "BC-DPG design "
+        "was informed by development-fold feedback, and Stage 4 modes were screened on "
+        "Folds 1 and 4 before those folds were included in the six-fold extension.",
         "",
         f"Source: `{display_path(data.input_dir)}/`",
         "",
@@ -784,9 +1094,66 @@ def build_report(
             ],
         ),
         "",
-        f"BC-DPG-FCN v3 remains the strongest current detector with "
-        f"{int(bc['false_alarms'])} false alarms and "
-        f"{int(bc['correct_detections'])}/318 correct detections.",
+        f"The complete-scan BC-DPG-FCN v3 has the best observed pooled result among "
+        f"the audited branches, with {int(bc['false_alarms'])}/830 background alarms "
+        f"and {int(bc['correct_detections'])}/318 joint successes. Because its context "
+        "can include later samples from the same scan, this is an offline scan-aware "
+        "upper bound, not strict causal deployment performance.",
+        "",
+        "A correct detection requires a target score above the frozen threshold and "
+        "localization within 2 range gates and 3 velocity bins. It is therefore a joint "
+        "detection-localization success, not score detection alone.",
+        "",
+        "## Fold heterogeneity",
+        "",
+        markdown_table(
+            fold_distribution,
+            [
+                "display_name",
+                "macro_pfa",
+                "median_pfa",
+                "worst_fold_pfa",
+                "worst_pfa_fold",
+                "macro_joint_pd",
+                "worst_fold_joint_pd",
+                "worst_joint_pd_fold",
+            ],
+        ),
+        "",
+        f"All {int(bc['false_alarms'])} BC-DPG false alarms occur in Folds 1 and 4. "
+        f"The worst-fold Pfa is {float(bc_distribution['worst_fold_pfa']):.4f} "
+        f"(Fold {bc_distribution['worst_pfa_fold']}), while the worst-fold joint Pd is "
+        f"{float(bc_distribution['worst_fold_joint_pd']):.4f} "
+        f"(Fold {bc_distribution['worst_joint_pd_fold']}). Pooled Pfa alone therefore "
+        "understates the concentration of errors in difficult backgrounds.",
+        "",
+        "## Derived metrics and uncertainty",
+        "",
+        markdown_table(
+            derived_metrics,
+            [
+                "display_name",
+                "joint_precision",
+                "joint_f1",
+                "specificity",
+                "joint_pd_wilson95_low",
+                "joint_pd_wilson95_high",
+                "pfa_wilson95_low",
+                "pfa_wilson95_high",
+            ],
+        ),
+        "",
+        f"A scan-group bootstrap gives BC-DPG Pfa 95% interval "
+        f"[{float(bc_uncertainty['pfa_cluster_bootstrap95_low']):.4f}, "
+        f"{float(bc_uncertainty['pfa_cluster_bootstrap95_high']):.4f}] and joint Pd "
+        f"95% interval [{float(bc_uncertainty['joint_pd_cluster_bootstrap95_low']):.4f}, "
+        f"{float(bc_uncertainty['joint_pd_cluster_bootstrap95_high']):.4f}]. The resampling "
+        f"unit is the scan group, but only {int(bc_uncertainty['background_scan_groups'])} "
+        "independent background scan groups are available, so uncertainty remains weakly "
+        "identified.",
+        "",
+        "Wilson intervals are included only as sample-level references; they ignore "
+        "within-scan correlation and should not be the primary uncertainty claim.",
         "",
         "## BC-DPG and ROI RI4 complementarity",
         "",
@@ -815,6 +1182,28 @@ def build_report(
         "36 but loses 26 BC-only correct detections. These counts are descriptive test-set "
         "diagnostics, not candidate rules selected for deployment.",
         "",
+        markdown_table(
+            paired_diagnostics,
+            [
+                "paired_outcome",
+                "bc_only",
+                "roi_ri4_only",
+                "discordant_pairs",
+                "two_sided_exact_mcnemar_p",
+                "status",
+            ],
+        ),
+        "",
+        "The paired tests quantify differences on the already inspected test outcomes. "
+        "They are post-test diagnostics and do not authorize model or rule selection.",
+        "",
+        "## Data and selection limitations",
+        "",
+        f"Target scan dates in the frozen audit: {', '.join(target_dates)}. Background "
+        f"scan dates: {', '.join(background_dates)}. Class and acquisition date are fully "
+        "confounded in this dataset, so the current results cannot establish cross-date "
+        "generalization or exclude date-specific acquisition effects.",
+        "",
         "## Interpretation and claim boundary",
         "",
         "ROI remains an independent suppression study rather than a trained joint model. "
@@ -822,19 +1211,22 @@ def build_report(
         "combination. Any future learned combination must be selected using training or "
         "validation data and evaluated once with frozen rules.",
         "",
-        "The evidence supports an internal six-fold H/V UAV detection and localization "
-        "front end. It does not establish balloon-payload classification, cross-site blind "
-        "generalization, or strict real-time causal scan adaptation.",
+        "The evidence supports an internal development-stage H/V UAV detection and "
+        "localization front end. It does not establish balloon-payload classification, "
+        "cross-date or cross-site blind generalization, or strict real-time causal scan "
+        "adaptation.",
         "",
-        "## Reproduction",
+        "## Internal regeneration",
         "",
         "```bash",
         "python scripts/build_roi_bc_dpg_joint_paper_assets.py",
         "```",
         "",
         "The build validates source status, row alignment, and prediction-derived metrics "
-        "before writing tables or figures. `evidence_manifest.json` records SHA256 hashes "
-        "for all source and generated artifacts.",
+        "before writing tables or figures. Full regeneration requires the internal frozen "
+        "prediction CSVs. A sanitized share package containing only result excerpts is "
+        "traceable and hash-verifiable, but is not independently reproducible without "
+        "source data, code, and checkpoints.",
     ]
     return "\n".join(lines) + "\n"
 
@@ -885,6 +1277,10 @@ def write_assets(data: AuditData, output_dir: Path) -> None:
         data.detection, data.complementarity
     )
     claims = build_claim_boundaries()
+    fold_distribution = build_fold_distribution_summary(data.detection)
+    derived_metrics = build_derived_metric_table(pooled)
+    scan_uncertainty = build_scan_group_uncertainty(data.predictions)
+    paired_diagnostics = build_paired_mcnemar_table(data.complementarity)
 
     tables = {
         "table_01_pooled_detection.csv": pooled,
@@ -892,12 +1288,25 @@ def write_assets(data: AuditData, output_dir: Path) -> None:
         "table_03_complementarity.csv": complementarity,
         "table_04_simple_combination_diagnostics.csv": diagnostics,
         "table_05_claim_boundaries.csv": claims,
+        "table_06_fold_distribution_summary.csv": fold_distribution,
+        "table_07_derived_metrics_and_wilson_ci.csv": derived_metrics,
+        "table_08_scan_group_bootstrap.csv": scan_uncertainty,
+        "table_09_paired_mcnemar_diagnostics.csv": paired_diagnostics,
     }
     for name, frame in tables.items():
         frame.to_csv(tables_dir / name, index=False, lineterminator="\n")
 
     build_figures(pooled, fold_detail, complementarity, figures_dir)
-    report = build_report(data, pooled, complementarity, diagnostics)
+    report = build_report(
+        data,
+        pooled,
+        complementarity,
+        diagnostics,
+        fold_distribution,
+        derived_metrics,
+        scan_uncertainty,
+        paired_diagnostics,
+    )
     (output_dir / "JOINT_AUDIT_REPORT.md").write_text(report, encoding="utf-8")
 
     manifest = {
@@ -907,6 +1316,11 @@ def write_assets(data: AuditData, output_dir: Path) -> None:
         "test_threshold_retuning": False,
         "joint_model_trained": False,
         "combination_selected": False,
+        "complete_scan_bc_is_causal": False,
+        "evaluation_role": "internal development estimate",
+        "stage4_development_folds_reused_in_sixfold": [1, 4],
+        "bootstrap_iterations": BOOTSTRAP_ITERATIONS,
+        "bootstrap_seed": BOOTSTRAP_SEED,
         "folds": list(EXPECTED_FOLDS),
         "aligned_rows": EXPECTED_ROWS,
         "sources": source_records(data.input_dir),

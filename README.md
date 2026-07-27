@@ -1,13 +1,13 @@
-# Balloon Radar Project
+# 面向未来空飘球辨识的 H/V 双极化 UAV 检测定位前端研究
 
-本仓库是基于 H/V 双极化雷达 IQ 数据的 UAV 检测、距离-速度定位与背景虚警抑制研究工程。当前成果属于检测定位前端，不代表空飘球载荷分类或跨场景泛化结论。
+本仓库是基于 H/V 双极化雷达 IQ 数据的 UAV 检测、距离-速度定位与背景虚警抑制研究工程。当前成果属于内部开发阶段的检测定位前端，不代表空飘球载荷分类、跨日期/跨场景泛化或严格实时部署结论。
 
 ## 当前主线
 
 项目按以下顺序演进：
 
 1. Power2 FCN：使用 H/V 功率距离-多普勒图进行整图候选检测与定位。
-2. BC-DPG-FCN v3：在冻结 DPG 输出上使用扫描背景上下文进行目标保护的分数校准。
+2. BC-DPG-FCN v3：样本独立版本是部署导向基准；完整扫描上下文版本是非因果离线性能上限。
 3. 显式极化 Stage 3：比较 Power2、RI4、Polar6-gated 和 RI8-gated；结论是 Power2 仍为主检测表征。
 4. ROI Stage 4：冻结 Power2 候选位置，仅使用局部 ROI 极化特征进行 suppression-only 精修。
 5. 联合审计：对齐 BC-DPG 与 ROI 六折逐样本预测，分析虚警与正确检测的互补性，不在测试集重新选择阈值。
@@ -15,6 +15,9 @@
 冻结结论和研究边界见：
 
 - [当前研究状态](docs/CURRENT_STATUS.md)
+- [当前检测数据卡](docs/DATA_CARD.md)
+- [评价指标定义](docs/METRIC_DEFINITIONS.md)
+- [模型选择台账](docs/MODEL_SELECTION_LEDGER.md)
 - [项目结构说明](docs/PROJECT_STRUCTURE.md)
 - [项目阶段说明](docs/PROJECT_STAGE_20260719.md)
 - [Stage 3 冻结结论](docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md)
@@ -108,7 +111,9 @@ python scripts/build_roi_bc_dpg_joint_paper_assets.py
 
 正式输出位于 `results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`。脚本会在
 写入前复核 1,148 行逐样本对齐、六折来源和固定阈值状态，并默认拒绝覆盖非空目录。
-AND/OR 结果只作为诊断统计，不代表已训练或已选定的联合模型。
+生成资产同时报告 pooled、macro、median/IQR、worst-fold、Wilson 区间、扫描组
+bootstrap 和 McNemar 配对诊断。AND/OR 结果只作为测试后诊断统计，不代表已训练或
+已选定的联合模型。
 
 生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
 
@@ -116,7 +121,9 @@ AND/OR 结果只作为诊断统计，不代表已训练或已选定的联合模�
 python scripts/build_project_share_package.py
 ```
 
-目录版和 ZIP 默认生成在 `dist/`，该目录属于本地分发产物，不进入 Git。
+目录版和 ZIP 默认生成在 `dist/`，该目录属于本地分发产物，不进入 Git。分享包是
+可追溯、可校验的冻结结果摘录；完整复现仍需要内部代码、数据、逐样本预测和
+checkpoint。
 
 ## 实验纪律
 
@@ -124,6 +131,10 @@ python scripts/build_project_share_package.py
 - smoke 结果只验证接口，不作为性能结论。
 - 不修改已冻结 checkpoint，不用测试集重新调阈值。
 - 样本独立实验与扫描上下文实验必须分别报告。
+- 完整扫描上下文可能使用未来样本，只能表述为离线扫描感知上限。
+- 同时报告 pooled、折间分布和最差折；当前 56 个 BC-DPG 虚警全部集中于 Fold 1/4。
+- Stage 4 的 Fold 1/4 参与过模式筛选，最终六折 ROI 汇总不是独立盲测估计。
+- 当前目标和背景来自不同采集日期，不能声称跨日期泛化。
 - `results/experiments/`、原始数据、大权重、原始聊天记录和生成分发包不应提交到 Git。
 - 当前分类数据只覆盖 UAV，长期空飘球、载荷和状态分类仍需要补充真实数据。
 

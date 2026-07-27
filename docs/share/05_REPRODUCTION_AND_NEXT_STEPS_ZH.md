@@ -1,25 +1,25 @@
-# 复现入口与后续计划
+# 复核入口与后续计划
 
-## 1. 分享包的使用方式
+## 1. 分享包能做什么
 
-本分享包是说明和证据摘录，不包含完整源码、原始数据或模型权重。阅读 Markdown、CSV 和图片不需要安装 Python 环境。
+本分享包是可追溯、可校验的冻结结果摘录，不包含完整源码、原始数据、逐样本预测或模型权重。阅读 Markdown、CSV 和图片不需要安装 Python 环境。
 
-`MANIFEST.json` 记录分享版本、来源提交和文件哈希；`SHA256SUMS.txt` 可用于检查文件是否在传输中损坏。
+`MANIFEST.json` 记录分享版本、来源提交、证据角色和文件哈希；`SHA256SUMS.txt` 用于检查文件是否在传输中损坏。哈希校验不等同于重新运行指标计算。完整复现需要内部代码、数据、冻结预测和 checkpoint。
 
 ## 2. 完整仓库环境
 
-完整工程使用 Conda 环境 `radar-torch`，Python 3.11。仓库根目录提供 `environment.yml` 和锁定依赖文件。
+内部工程使用 Conda 环境 `radar-torch`，Python 3.11。仓库根目录提供 `environment.yml` 和锁定依赖文件。
 
 ```bash
 conda env create -f environment.yml
 conda activate radar-torch
-python scripts/check_project_health.py
+python scripts/check_project_health.py --require-joint-inputs
 python -m pytest
 ```
 
 原始数据、checkpoint 和大规模训练输出不在 Git 中，需要由数据持有方按项目目录约定单独准备。
 
-## 3. 主要入口
+## 3. 主要内部入口
 
 六折 BC-DPG v3：
 
@@ -46,43 +46,46 @@ python scripts/build_final_roi_bc_dpg_joint_audit.py \
   --output-dir results/data_audit/final_roi_bc_dpg_joint_rebuild
 ```
 
-生成联合审计论文资产：
+从冻结预测重建证据资产与脱敏分享包：
 
 ```bash
-python scripts/build_roi_bc_dpg_joint_paper_assets.py
+python scripts/build_roi_bc_dpg_joint_paper_assets.py --overwrite
+python scripts/build_project_share_package.py --overwrite
 ```
 
-## 4. 当前证据位置
+## 4. 当前证据与治理文档
 
 - BC-DPG v3：`results/final_evidence/bc_dpg_v3_final/`
 - Stage 3：`docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md`
 - Stage 4：`results/data_audit/roi_stage4_selected_sixfold_v1/`
 - 最终联合审计：`results/data_audit/final_roi_bc_dpg_joint_v2_base_threshold/`
-- 联合论文资产：`results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
+- 联合证据资产：`results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
+- 数据卡：`docs/DATA_CARD.md`
+- 指标定义：`docs/METRIC_DEFINITIONS.md`
+- 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`
 
 早期 `final_roi_bc_dpg_joint` 使用了错误的 BC 判决来源，已经移出活动证据，不得引用。
 
 ## 5. 下一阶段优先级
 
-### 优先级 1：补充真实目标和干扰数据
+### 优先级 1：同日多类数据与锁定外部评价
 
-- 空飘球、带载空飘球和不同载荷构型；
-- 静稳、摆动、旋转及耦合运动状态；
-- 鸟类、地物、气象和不同硬件状态背景；
-- 不同日期、距离、方位、天气和场地；
-- 保留连续 H/V 复数 IQ、时间顺序和扫描元数据。
+- 每个日期和场地同时采集目标与无目标背景；
+- 增加空飘球、带载空飘球、鸟类和不同背景类型；
+- 以日期、场地或飞行架次为外层隔离单位；
+- 在盲测前冻结结构、阈值、后处理、主指标和失败判据。
 
-### 优先级 2：建立锁定外部评价
+### 优先级 2：BC-DPG 因果在线化
 
-按日期、场地或采集批次预先隔离训练、验证和最终盲测。所有阈值、模型和后处理规则在盲测前冻结。
+分别评估样本独立、leave-one-sample-out、past-only 不同历史窗口和完整扫描离线上限，禁止把完整扫描结果混写成在线性能。
 
-### 优先级 3：BC-DPG 因果在线化
+### 优先级 3：部署级虚警与定位指标
 
-将完整扫描统计替换为只使用过去样本的历史状态，并分别报告样本独立、因果上下文和完整扫描离线增强三种条件。
+补齐时间戳、扫描时长和事件边界，报告每扫描、每小时和事件级虚警；同时补充距离/速度 MAE、中位数、90% 分位数和分层结果。
 
-### 优先级 4：学习型联合模型
+### 优先级 4：嵌套选择与学习型联合模型
 
-仅在训练/验证集使用 BC 分数、ROI 分数、背景状态和质量指标选择门控或融合规则；规则冻结后只评估一次测试集。
+使用嵌套扫描组交叉验证，或独立开发集选择 BC 分数、ROI 分数、背景状态和质量指标的门控/融合规则；外层测试只评价一次。
 
 ### 优先级 5：多域细粒度分类
 
@@ -90,9 +93,10 @@ python scripts/build_roi_bc_dpg_joint_paper_assets.py
 
 ## 6. 继续开发时必须保持的纪律
 
-- 不依据测试集重新选择阈值、容差、模型或组合逻辑；
+- 不依据外层测试结果重新选择阈值、容差、模型或组合逻辑；
 - 不覆盖冻结 checkpoint 和正式证据目录；
 - smoke 结果只验证接口，不作为性能结论；
-- 两折诊断、六折内部验证和外部盲测必须分开报告；
-- 样本独立、完整扫描上下文和因果在线模型必须分开命名；
-- 新结论必须附带数据范围、划分方式、决策来源和可复现清单。
+- 两折筛选、六折内部开发评价和外部盲测必须分开报告；
+- 样本独立、因果上下文和完整扫描离线模型必须分开命名；
+- 同时报告 pooled、macro、median/IQR 和 worst-fold 指标；
+- 新结论必须附带数据范围、划分方式、选择来源、指标定义和完整复现清单。

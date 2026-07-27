@@ -19,6 +19,12 @@ def test_share_source_map_is_complete_and_unique() -> None:
     destinations = [item.destination for item in PACKAGE_FILES]
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
+    assert "docs/06_DATA_CARD_ZH.md" in destinations
+    assert "docs/07_METRIC_DEFINITIONS_ZH.md" in destinations
+    assert "docs/08_MODEL_SELECTION_LEDGER_ZH.md" in destinations
+    assert "assets/figures/joint_fold_heterogeneity.png" in destinations
+    assert "assets/tables/joint_scan_group_bootstrap.csv" in destinations
+    assert not any("joint_fold_false_alarms" in path for path in destinations)
 
 
 def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:

@@ -1,7 +1,11 @@
 {
   "aligned_rows": 1148,
+  "bootstrap_iterations": 10000,
+  "bootstrap_seed": 20260727,
   "combination_selected": false,
+  "complete_scan_bc_is_causal": false,
   "deterministic_build": true,
+  "evaluation_role": "internal development estimate",
   "evidence_scope": "fixed-threshold six-fold ROI/BC-DPG joint audit",
   "folds": [
     1,
@@ -14,48 +18,48 @@
   "generated_files": [
     {
       "path": "JOINT_AUDIT_REPORT.md",
-      "sha256": "ed96c7b3765240d66f1f1ec6e5ebe8fe4ee89193b6731ff629b2ce883c4faee2",
-      "size_bytes": 2709
+      "sha256": "d1558add5a1dea432ce7164841a9b16a29985f96d5cf3286f0dc767d88ca8498",
+      "size_bytes": 6089
     },
     {
       "path": "figures/fig1_pooled_detection_tradeoff.pdf",
-      "sha256": "51428c1a26d79843333fdd8e11aa5846fe2058bff25e1dbecb75aa732ce6e74a",
-      "size_bytes": 20386
+      "sha256": "be46432d79cd61e2d75cce8f2c2a625cb192479c5fc0251d00ddd20742feefde",
+      "size_bytes": 20379
     },
     {
       "path": "figures/fig1_pooled_detection_tradeoff.png",
-      "sha256": "2c1bebb8e2bde8b2b198fc82f4949e3bb3beee1269e077c92ca3809850bdb895",
-      "size_bytes": 135285
+      "sha256": "e3ca46563fa98625fef2f47660090a30e65715331a7e39eaa35276b97ab82a3d",
+      "size_bytes": 143974
     },
     {
-      "path": "figures/fig2_fold_false_alarms.pdf",
-      "sha256": "8a6921dca7fe204c51ddebc1e6934a485a2b2da8aef8176195881beff70f6169",
-      "size_bytes": 16230
+      "path": "figures/fig2_fold_heterogeneity.pdf",
+      "sha256": "b77d32eb9865578c786adbf729b139ab942b602c42c81b2622c8dc2111fb1ee0",
+      "size_bytes": 20919
     },
     {
-      "path": "figures/fig2_fold_false_alarms.png",
-      "sha256": "e1046b47f47ec4969231ad661420cc0919b71eac2a7a4fb1c2f9b38966588070",
-      "size_bytes": 95942
+      "path": "figures/fig2_fold_heterogeneity.png",
+      "sha256": "19e173b64bbf1b21657c2ea8881a73241c2df319c67461f18dbe76bd0693cb7d",
+      "size_bytes": 151421
     },
     {
       "path": "figures/fig3_complementarity.pdf",
-      "sha256": "47a2b3508052e4455bdbc119634ca8882814c6f5e962b74a4abd38d1a7e6379a",
-      "size_bytes": 20482
+      "sha256": "68787ca3d62d28ae1180131bcc91e9d7016d4c35576008222f6edd389f6081da",
+      "size_bytes": 22135
     },
     {
       "path": "figures/fig3_complementarity.png",
-      "sha256": "cd215420c6c69e3f613a754040860413a00d9101705e42c457bb1bba5b1a3aa5",
-      "size_bytes": 132242
+      "sha256": "367aed3c0d78d1d3cfe9662cbc951389b24aa5d91f05f81c272462ae67043065",
+      "size_bytes": 156397
     },
     {
       "path": "tables/table_01_pooled_detection.csv",
-      "sha256": "f1fbcf6cc30ffdbb9a6906bedb9f5fd35b4179a81048778c30ecb355bc23ad28",
-      "size_bytes": 539
+      "sha256": "5cbab1764415bcd603406d09c44c6b85eb3d0c08efbbdfbef3da2c5b1afe8960",
+      "size_bytes": 559
     },
     {
       "path": "tables/table_02_fold_detection.csv",
-      "sha256": "0f83330e1ff518a6fe7eb5b8cadcecc28fe50ab17ce1921f89be7db57cc124d4",
-      "size_bytes": 1716
+      "sha256": "ded8d69595d33e851b5f01cfb8358abc88d14edaea05a7eb7c141a11c93dff8e",
+      "size_bytes": 1776
     },
     {
       "path": "tables/table_03_complementarity.csv",
@@ -64,13 +68,33 @@
     },
     {
       "path": "tables/table_04_simple_combination_diagnostics.csv",
-      "sha256": "88150413441867f5934b4c237d1c186028c273da9e475f58e4a3ca7648ccd7ed",
-      "size_bytes": 709
+      "sha256": "1505ea5b14f2a24e0b2973586fad3f9d92e33b06202a203b965266c79a37ae04",
+      "size_bytes": 736
     },
     {
       "path": "tables/table_05_claim_boundaries.csv",
-      "sha256": "a8ba7b2a81b3eb686479b88ba5cd7c2fa8f565aa8d163004cd2c2ffbd581a3c7",
-      "size_bytes": 1367
+      "sha256": "d06ff6e2082b43c1006734c35901698b767fc09b9960bc302db6e6f58b945a93",
+      "size_bytes": 1784
+    },
+    {
+      "path": "tables/table_06_fold_distribution_summary.csv",
+      "sha256": "5991e32fd6b2b9c35ca17857a471e3b5416b39d96e1493e4a8041ead55048bc9",
+      "size_bytes": 1011
+    },
+    {
+      "path": "tables/table_07_derived_metrics_and_wilson_ci.csv",
+      "sha256": "b5c2dccfe4aa2a2f52f45b1cd7ff3b9e4015f6ea7713b87f5c1e2474158c8ca5",
+      "size_bytes": 1645
+    },
+    {
+      "path": "tables/table_08_scan_group_bootstrap.csv",
+      "sha256": "5261575f20e91002f1df88afa3e57b4013796faf53354c44eafc010c9c48c8de",
+      "size_bytes": 1309
+    },
+    {
+      "path": "tables/table_09_paired_mcnemar_diagnostics.csv",
+      "sha256": "2fb0dde82df56d434405d6d6a112f4fedae2abd4fac3b56cf981e50f7be2cd5d",
+      "size_bytes": 429
     }
   ],
   "joint_model_trained": false,
@@ -109,9 +133,13 @@
     {
       "category": "build_script",
       "path": "scripts/build_roi_bc_dpg_joint_paper_assets.py",
-      "sha256": "9e02da598e51d0f27182fc62b15444a9e9a7efc548622bb73e56932373871955",
-      "size_bytes": 36610
+      "sha256": "44983f71f4e628bf3c36069499d4410703c65e5357fe6d55b4967550e904e89f",
+      "size_bytes": 54113
     }
+  ],
+  "stage4_development_folds_reused_in_sixfold": [
+    1,
+    4
   ],
   "test_threshold_retuning": false
 }

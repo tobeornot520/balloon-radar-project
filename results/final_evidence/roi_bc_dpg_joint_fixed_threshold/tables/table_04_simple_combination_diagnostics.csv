@@ -1,5 +1,5 @@
 rule,logical_definition,false_alarms,correct_detections,target_samples,missed_targets,selection_status,interpretation
-BC-DPG-FCN v3 alone,frozen BC decision,56,289,318,29,frozen current detector,Primary detector retained by the current evidence.
+BC-DPG-FCN v3 alone,frozen BC decision,56,289,318,29,offline complete-scan upper bound,Best observed internal result; complete-scan context is non-causal.
 ROI RI4 alone,frozen ROI RI4 decision,196,268,318,50,independent suppression study,"Reported as an independent ROI study, not a replacement."
 AND / intersection,BC detected AND ROI RI4 detected,36,263,318,55,"diagnostic only, not selected",Reduces false alarms but discards BC-only correct detections.
 OR / union,BC detected OR ROI RI4 detected,216,294,318,24,"diagnostic only, not selected",Recovers ROI-only correct detections but admits the false-alarm union.

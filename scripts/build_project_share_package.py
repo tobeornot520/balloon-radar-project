@@ -95,6 +95,21 @@ PACKAGE_FILES = (
         "share_document",
     ),
     PackageFile(
+        "docs/DATA_CARD.md",
+        "docs/06_DATA_CARD_ZH.md",
+        "governance_document",
+    ),
+    PackageFile(
+        "docs/METRIC_DEFINITIONS.md",
+        "docs/07_METRIC_DEFINITIONS_ZH.md",
+        "governance_document",
+    ),
+    PackageFile(
+        "docs/MODEL_SELECTION_LEDGER.md",
+        "docs/08_MODEL_SELECTION_LEDGER_ZH.md",
+        "governance_document",
+    ),
+    PackageFile(
         "results/final_evidence/bc_dpg_v3_final/FINAL_EVIDENCE_REPORT.md",
         "evidence/01_BC_DPG_V3_FINAL_REPORT.md",
         "frozen_report",
@@ -140,13 +155,13 @@ PACKAGE_FILES = (
         "figure",
     ),
     PackageFile(
-        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/figures/fig2_fold_false_alarms.png",
-        "assets/figures/joint_fold_false_alarms.png",
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/figures/fig2_fold_heterogeneity.png",
+        "assets/figures/joint_fold_heterogeneity.png",
         "figure",
     ),
     PackageFile(
-        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/figures/fig2_fold_false_alarms.pdf",
-        "assets/figures/joint_fold_false_alarms.pdf",
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/figures/fig2_fold_heterogeneity.pdf",
+        "assets/figures/joint_fold_heterogeneity.pdf",
         "figure",
     ),
     PackageFile(
@@ -197,6 +212,26 @@ PACKAGE_FILES = (
     PackageFile(
         "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_05_claim_boundaries.csv",
         "assets/tables/joint_claim_boundaries.csv",
+        "table",
+    ),
+    PackageFile(
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_06_fold_distribution_summary.csv",
+        "assets/tables/joint_fold_distribution_summary.csv",
+        "table",
+    ),
+    PackageFile(
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_07_derived_metrics_and_wilson_ci.csv",
+        "assets/tables/joint_derived_metrics_and_wilson_ci.csv",
+        "table",
+    ),
+    PackageFile(
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_08_scan_group_bootstrap.csv",
+        "assets/tables/joint_scan_group_bootstrap.csv",
+        "table",
+    ),
+    PackageFile(
+        "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/tables/table_09_paired_mcnemar_diagnostics.csv",
+        "assets/tables/joint_paired_mcnemar_diagnostics.csv",
         "table",
     ),
 )
@@ -319,7 +354,10 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
         "package_name": PACKAGE_NAME,
         "package_date": PACKAGE_DATE,
         "language": "zh-CN",
-        "purpose": "sanitized technical overview and development-history share package",
+        "purpose": (
+            "sanitized, traceable, and hash-verifiable frozen-result excerpts; "
+            "not a self-contained reproduction package"
+        ),
         "source_commit": current_commit(),
         "current_scope": "H/V UAV detection, localization, and false-alarm suppression front end",
         "long_term_scope": "balloon payload and motion-state recognition after new data collection",
@@ -327,7 +365,17 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "test_threshold_retuning": False,
             "joint_model_trained": False,
             "and_or_rules_selected": False,
+            "complete_scan_bc_is_causal": False,
+            "evaluation_role": "internal development estimate",
+            "stage4_development_folds_reused_in_sixfold": [1, 4],
+            "class_and_acquisition_date_confounded": True,
         },
+        "full_reproduction_requires": [
+            "internal source code",
+            "raw data and manifests",
+            "sample-level frozen predictions",
+            "model checkpoints",
+        ],
         "excluded_content": [
             "raw MAT or IQ data",
             "sample labels and sample-level predictions",
