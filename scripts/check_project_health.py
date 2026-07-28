@@ -38,6 +38,10 @@ REQUIRED_FILES = (
     "scripts/audit_detection_acquisition_order.py",
     "scripts/run_bc_dpg_causal_smoke.py",
     "scripts/build_bc_dpg_localization_evidence.py",
+    "scripts/validate_data_collection_manifest.py",
+    "configs/data_collection_contract_v1.json",
+    "configs/data_collection_manifest_template_v1.csv",
+    "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
 )
 
 

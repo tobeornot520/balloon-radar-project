@@ -11,7 +11,7 @@
 3. [当前成果与证据](docs/03_RESULTS_AND_EVIDENCE_ZH.md)：主要数字、折间差异、不确定性和结论边界。
 4. [对外分享提纲](docs/04_SHARING_TALK_TRACK_ZH.md)：口头介绍、答辩和常见问题回答。
 5. [复核入口与后续计划](docs/05_REPRODUCTION_AND_NEXT_STEPS_ZH.md)：分享包校验方式、完整仓库入口及下一阶段工作。
-6. [数据卡](docs/06_DATA_CARD_ZH.md)、[指标定义](docs/07_METRIC_DEFINITIONS_ZH.md)和[模型选择台账](docs/08_MODEL_SELECTION_LEDGER_ZH.md)：评价单位、计算口径和选择信息使用情况。
+6. [数据卡](docs/06_DATA_CARD_ZH.md)、[指标定义](docs/07_METRIC_DEFINITIONS_ZH.md)、[模型选择台账](docs/08_MODEL_SELECTION_LEDGER_ZH.md)和[新数据采集协议](docs/NEW_DATA_COLLECTION_PROTOCOL.md)：评价口径、选择信息与新数据门禁。
 
 只需快速了解时，阅读本文件和第 3 份文档即可。
 
@@ -36,6 +36,8 @@ leave-one-out 与 past-only 数字来自冻结完整 checkpoint 的推理上下�
 
 ![冻结定位误差 CDF](assets/figures/bc_dpg_localization_error_cdf.png)
 
+下一批数据已经有统一进入标准：40 列采集合同覆盖真实 UTC 时间、硬件序号、时钟重置、事件时长、SNR、雷达/标定版本、同条件目标/背景和外层隔离。当前 V4 清单缺少其中 33 列，在 `locked_evaluation` 档明确为 FAIL；旧测试集和推断顺序不会被重新命名为锁定证据。
+
 BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升至 216；AND/intersection 可把虚警降至 36，但正确检测降至 263。两者只用于测试后的互补性诊断，没有作为部署规则。
 
 ![固定阈值检测权衡](assets/figures/joint_pooled_detection_tradeoff.png)
@@ -53,7 +55,8 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 - `docs/`：项目介绍、开发历史、结果、分享提纲、后续计划及三份治理文档。
 - `assets/figures/`：用于介绍的精选 PNG 和 PDF 图件。
 - `assets/tables/`：冻结主结果、折间分布、定位误差、区间估计、配对诊断、上下文敏感性和采集顺序来源 CSV。
-- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪和定位证据审计。
+- `assets/contracts/`、`assets/templates/`：新数据采集合同和空白清单模板。
+- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据和当前数据合同缺口审计。
 - `MANIFEST.json`：版本、范围、源文件及 SHA256 哈希。
 - `SHA256SUMS.txt`：包内文件完整性校验值。
 

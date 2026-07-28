@@ -71,6 +71,17 @@ python scripts/run_bc_dpg_causal_smoke.py
 
 当前审计结论是正式训练门禁关闭。smoke 只加载 train/val 小样本，不读取测试 split，也不提供性能或窗口选择证据。
 
+新数据采集完成后先运行分级合同预检：
+
+```bash
+python scripts/validate_data_collection_manifest.py \
+  path/to/collection_manifest.csv \
+  --profile capture \
+  --output-dir results/data_audit/new_collection_capture
+```
+
+只有 `causal` 报告打开因果训练门禁后才能正式训练；只有 `locked_evaluation` 报告通过后才能进入外部锁定评价。
+
 ## 4. 当前证据与治理文档
 
 - BC-DPG v3：`results/final_evidence/bc_dpg_v3_final/`
@@ -81,6 +92,8 @@ python scripts/run_bc_dpg_causal_smoke.py
 - BC-DPG 因果上下文敏感性审计：`results/data_audit/bc_dpg_v3_causal_context_audit/`
 - 采集顺序就绪审计：`results/data_audit/detection_acquisition_order/`
 - BC-DPG 冻结定位证据：`results/final_evidence/bc_dpg_localization/`
+- 新数据采集协议：`docs/NEW_DATA_COLLECTION_PROTOCOL.md`
+- 当前数据合同缺口：`results/data_audit/data_collection_readiness_v1/`
 - 数据卡：`docs/DATA_CARD.md`
 - 指标定义：`docs/METRIC_DEFINITIONS.md`
 - 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`
@@ -95,6 +108,7 @@ python scripts/run_bc_dpg_causal_smoke.py
 - 增加空飘球、带载空飘球、鸟类和不同背景类型；
 - 以日期、场地或飞行架次为外层隔离单位；
 - 在盲测前冻结结构、阈值、后处理、主指标和失败判据。
+- 使用 v1 空白模板采集全部 40 个字段，并在数据进入训练前通过三档合同预检。
 
 ### 优先级 2：BC-DPG 因果在线化
 

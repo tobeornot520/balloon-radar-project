@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "contract_name": "balloon_radar_data_collection_manifest",
+  "time_standard": "UTC",
+  "profiles": [
+    "capture",
+    "causal",
+    "locked_evaluation"
+  ],
+  "columns": [
+    {"name": "sample_id", "type": "string", "nullable": false},
+    {"name": "iq_path", "type": "relative_path", "nullable": false},
+    {"name": "label_path", "type": "relative_path", "nullable": true},
+    {"name": "target_present", "type": "integer", "nullable": false, "allowed": [0, 1]},
+    {"name": "target_class", "type": "enum", "nullable": false, "allowed": ["background", "uav", "balloon_unloaded", "balloon_loaded", "bird", "other_target"]},
+    {"name": "background_type", "type": "string", "nullable": true},
+    {"name": "payload_class", "type": "string", "nullable": true},
+    {"name": "motion_state", "type": "string", "nullable": true},
+    {"name": "acquisition_timestamp_utc", "type": "datetime_utc", "nullable": false},
+    {"name": "hardware_sequence", "type": "integer", "nullable": false, "minimum": 0},
+    {"name": "scan_id", "type": "string", "nullable": false},
+    {"name": "scan_sequence", "type": "integer", "nullable": false, "minimum": 0},
+    {"name": "order_source", "type": "enum", "nullable": false, "allowed": ["hardware_sequence", "timestamp_only", "inferred", "unknown"]},
+    {"name": "order_verified", "type": "boolean", "nullable": false},
+    {"name": "clock_id", "type": "string", "nullable": false},
+    {"name": "clock_reset_counter", "type": "integer", "nullable": false, "minimum": 0},
+    {"name": "timestamp_resolution_ns", "type": "integer", "nullable": false, "minimum": 1},
+    {"name": "dropped_frames_before", "type": "integer", "nullable": false, "minimum": 0},
+    {"name": "session_id", "type": "string", "nullable": false},
+    {"name": "observation_id", "type": "string", "nullable": false},
+    {"name": "event_id", "type": "string", "nullable": false},
+    {"name": "event_start_utc", "type": "datetime_utc", "nullable": false},
+    {"name": "event_end_utc", "type": "datetime_utc", "nullable": false},
+    {"name": "sample_duration_s", "type": "number", "nullable": false, "minimum": 1e-09},
+    {"name": "collection_date", "type": "date", "nullable": false},
+    {"name": "site_id", "type": "string", "nullable": false},
+    {"name": "flight_id", "type": "string", "nullable": true},
+    {"name": "platform_id", "type": "string", "nullable": true},
+    {"name": "beam_layer", "type": "integer", "nullable": false, "minimum": 0},
+    {"name": "azimuth_deg", "type": "number", "nullable": false, "minimum": 0, "maximum_exclusive": 360},
+    {"name": "distance_m", "type": "number", "nullable": true, "minimum": 0},
+    {"name": "velocity_mps", "type": "number", "nullable": true},
+    {"name": "snr_db", "type": "number", "nullable": true},
+    {"name": "radar_config_id", "type": "string", "nullable": false},
+    {"name": "calibration_id", "type": "string", "nullable": false},
+    {"name": "h_channel_valid", "type": "boolean", "nullable": false},
+    {"name": "v_channel_valid", "type": "boolean", "nullable": false},
+    {"name": "weather_id", "type": "string", "nullable": false},
+    {"name": "evaluation_partition", "type": "enum", "nullable": false, "allowed": ["development", "validation", "locked_test"]},
+    {"name": "outer_group_id", "type": "string", "nullable": false}
+  ],
+  "cross_row_rules": {
+    "capture": [
+      "sample_id is globally unique",
+      "paths are storage-root relative and do not contain parent traversal",
+      "target labels agree with target_present",
+      "target rows contain label, flight, platform, distance, and velocity metadata",
+      "background rows contain background_type",
+      "loaded balloons contain payload_class and all balloons contain motion_state",
+      "collection_date equals the UTC acquisition date",
+      "sample timestamps lie inside event bounds"
+    ],
+    "causal": [
+      "capture rules pass",
+      "scan_sequence starts at zero and is contiguous within scan_id",
+      "hardware_sequence is unique and strictly increasing within scan_id",
+      "UTC timestamps are nondecreasing within scan_id",
+      "order_source is hardware_sequence and order_verified is true",
+      "both H and V channels are marked valid"
+    ],
+    "locked_evaluation": [
+      "causal rules pass",
+      "locked_test rows exist",
+      "session_id and outer_group_id each map to exactly one evaluation partition",
+      "each date-site-radar-calibration condition contains target and background rows",
+      "locked_test contains target and background rows",
+      "target SNR coverage is complete"
+    ]
+  }
+}

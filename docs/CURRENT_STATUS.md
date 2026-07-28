@@ -11,6 +11,7 @@
 7. A causal-context sensitivity audit replays the frozen full checkpoint with leave-one-out and assumed-order past-only contexts. It does not retrain or select a causal model.
 8. An acquisition-order readiness audit finds no verified within-scan sample order. Formal causal training remains gated; a bounded validation-only interface smoke has passed.
 9. A frozen localization build aggregates range-velocity errors from the six base-threshold BC-DPG test tables without training, inference, or retuning.
+10. A versioned new-data contract now enforces capture, causal-order, and locked-evaluation readiness before new data can enter formal experiments.
 
 ## Authoritative evidence
 
@@ -23,6 +24,8 @@
 - Acquisition-order readiness audit: `results/data_audit/detection_acquisition_order/`
 - Causal-training protocol: [BC_DPG_CAUSAL_TRAINING_PROTOCOL.md](BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
 - Frozen localization evidence: `results/final_evidence/bc_dpg_localization/`
+- New-data collection protocol: [NEW_DATA_COLLECTION_PROTOCOL.md](NEW_DATA_COLLECTION_PROTOCOL.md)
+- Current contract gap baseline: `results/data_audit/data_collection_readiness_v1/`
 - Data card: [DATA_CARD.md](DATA_CARD.md)
 - Metric definitions: [METRIC_DEFINITIONS.md](METRIC_DEFINITIONS.md)
 - Model-selection ledger: [MODEL_SELECTION_LEDGER.md](MODEL_SELECTION_LEDGER.md)
@@ -66,6 +69,12 @@ A Fold 1 development smoke using inferred order, a four-sample history, two epoc
 The six frozen base-threshold folds contain 318 target samples. Of these, 302 pass the score threshold, 297 meet the 2-gate/3-bin localization tolerance regardless of score, and 289 meet both conditions. This gives pooled score Pd 0.9497, localization-ok rate 0.9340, and joint Pd 0.9088; 289/302 score-detected targets meet the localization tolerance.
 
 Across all targets, range error has MAE 1.418 gates, median 1, P90 2, and maximum 39. Velocity error has MAE 1.154 bins, median 0, P90 1, and maximum 40. The long tail means MAE, median/P90, maximum, conditional-on-detection errors, and joint success must be reported together. All six calibrated coordinate tables match their raw DPG tables exactly; BC-DPG changes scores, not candidate locations.
+
+## New-data readiness contract
+
+The version-1 collection contract defines 40 required manifest columns and three validation profiles: capture, causal, and locked evaluation. It requires storage-root-relative paths, UTC timestamps, hardware sequence provenance, clock-reset tracking, event and observation timing, SNR, radar/configuration identifiers, H/V validity, same-condition target/background controls, and outer-group partition isolation.
+
+The current 1,148-row V4 manifest fails the locked-evaluation profile because 33 contract columns are absent. Schema failure blocks all downstream gates; neither formal causal training nor locked external evaluation is open. Existing filename time, beam/azimuth order, MAT header time, filesystem mtime, and historical test labels cannot be promoted into the missing verified metadata.
 
 ## Claim boundaries
 

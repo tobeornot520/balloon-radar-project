@@ -20,6 +20,22 @@ DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
 PACKAGE_DATE = "2026-07-28"
 ZIP_TIMESTAMP = (2026, 7, 28, 0, 0, 0)
+CURRENT_DATA_READINESS = (
+    PROJECT_ROOT
+    / "results"
+    / "data_audit"
+    / "data_collection_readiness_v1"
+    / "preflight.json"
+)
+CURRENT_DATA_MANIFEST = (
+    PROJECT_ROOT
+    / "results"
+    / "data_audit"
+    / "dataset_v4_multifold"
+    / "fold_01_manifest.csv"
+)
+DATA_CONTRACT = PROJECT_ROOT / "configs" / "data_collection_contract_v1.json"
+DATA_CONTRACT_VALIDATOR = PROJECT_ROOT / "scripts" / "validate_data_collection_manifest.py"
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt"}
 FORBIDDEN_SUFFIXES = {
@@ -110,6 +126,11 @@ PACKAGE_FILES = (
         "governance_document",
     ),
     PackageFile(
+        "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
+        "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
+        "governance_document",
+    ),
+    PackageFile(
         "results/final_evidence/bc_dpg_v3_final/FINAL_EVIDENCE_REPORT.md",
         "evidence/01_BC_DPG_V3_FINAL_REPORT.md",
         "frozen_report",
@@ -143,6 +164,16 @@ PACKAGE_FILES = (
         "results/final_evidence/bc_dpg_localization/LOCALIZATION_EVIDENCE_REPORT.md",
         "evidence/07_BC_DPG_LOCALIZATION_EVIDENCE.md",
         "frozen_localization_report",
+    ),
+    PackageFile(
+        "results/data_audit/data_collection_readiness_v1/PRECHECK_REPORT.md",
+        "evidence/08_CURRENT_DATA_COLLECTION_READINESS.md",
+        "data_contract_readiness_report",
+    ),
+    PackageFile(
+        "results/data_audit/data_collection_readiness_v1/preflight.json",
+        "evidence/08_CURRENT_DATA_COLLECTION_READINESS.json",
+        "data_contract_readiness_manifest",
     ),
     PackageFile(
         "results/final_evidence/bc_dpg_v3_final/figures/fig1_deployment_false_alarms.png",
@@ -314,6 +345,21 @@ PACKAGE_FILES = (
         "assets/tables/bc_dpg_localization_velocity_strata.csv",
         "frozen_localization_table",
     ),
+    PackageFile(
+        "results/data_audit/data_collection_readiness_v1/column_coverage.csv",
+        "assets/tables/current_data_collection_contract_coverage.csv",
+        "data_contract_readiness_table",
+    ),
+    PackageFile(
+        "configs/data_collection_contract_v1.json",
+        "assets/contracts/data_collection_contract_v1.json",
+        "data_collection_contract",
+    ),
+    PackageFile(
+        "configs/data_collection_manifest_template_v1.csv",
+        "assets/templates/data_collection_manifest_template_v1.csv",
+        "data_collection_template",
+    ),
 )
 
 
@@ -358,6 +404,43 @@ def current_commit() -> str:
         text=True,
     )
     return result.stdout.strip()
+
+
+def load_current_data_readiness() -> dict[str, object]:
+    payload = json.loads(CURRENT_DATA_READINESS.read_text(encoding="utf-8"))
+    expected = {
+        "profile": "locked_evaluation",
+        "status": "FAIL",
+        "formal_causal_training_gate_open": False,
+        "locked_evaluation_gate_open": False,
+        "row_count": 1148,
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(
+                f"Unexpected current data readiness {field}: {payload.get(field)!r}"
+            )
+    hashes = (
+        (payload.get("input", {}).get("sha256"), CURRENT_DATA_MANIFEST, "input"),
+        (payload.get("contract", {}).get("sha256"), DATA_CONTRACT, "contract"),
+        (
+            payload.get("implementation", {}).get("sha256"),
+            DATA_CONTRACT_VALIDATOR,
+            "implementation",
+        ),
+    )
+    for recorded, path, label in hashes:
+        actual = sha256_file(path)
+        if recorded != actual:
+            raise ValueError(
+                f"Current data readiness {label} hash is stale; rebuild precheck"
+            )
+    gates = payload.get("gates", {})
+    if gates.get("schema") != "FAIL" or any(
+        status != "BLOCKED" for gate, status in gates.items() if gate != "schema"
+    ):
+        raise ValueError("Unexpected current data readiness gate states")
+    return payload
 
 
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
@@ -429,6 +512,7 @@ def copy_package_files(staging_dir: Path) -> list[dict[str, object]]:
 
 
 def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
+    readiness = load_current_data_readiness()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -462,6 +546,18 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "localization_test_threshold_retuning": False,
             "localization_coordinates_match_raw_dpg": True,
             "localization_sample_predictions_included": False,
+            "new_data_collection_contract_version": 1,
+            "current_manifest_contract_profile": readiness["profile"],
+            "current_manifest_contract_status": readiness["status"],
+            "current_manifest_missing_contract_columns": len(
+                readiness["missing_columns"]
+            ),
+            "current_formal_causal_training_gate_open": readiness[
+                "formal_causal_training_gate_open"
+            ],
+            "current_locked_evaluation_gate_open": readiness[
+                "locked_evaluation_gate_open"
+            ],
             "evaluation_role": "internal development estimate",
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,

@@ -14,6 +14,7 @@
 6. 因果上下文敏感性审计：冻结完整模型和阈值，对比 complete-scan、leave-one-out 与假定顺序 past-only 上下文，不把后验窗口结果用于选型。
 7. 因果训练就绪审计：检查文件名、MAT 元数据和文件时间，确认当前没有可验证的组内采集顺序；仅开放 validation-only 小样本 smoke。
 8. 冻结定位证据：从六折 base-threshold 预测聚合距离/速度误差、条件口径和物理量分层，不重新训练、推理或调阈值。
+9. 新数据合同：以 capture、causal、locked-evaluation 三档预检固化真实顺序、同日类别对照、事件时长和外层隔离要求。
 
 冻结结论和研究边界见：
 
@@ -31,6 +32,8 @@
 - [采集顺序审计](results/data_audit/detection_acquisition_order/ACQUISITION_ORDER_AUDIT.md)
 - [BC-DPG 因果训练协议](docs/BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
 - [BC-DPG 冻结定位证据](results/final_evidence/bc_dpg_localization/LOCALIZATION_EVIDENCE_REPORT.md)
+- [新数据采集与锁定评价协议](docs/NEW_DATA_COLLECTION_PROTOCOL.md)
+- [当前数据合同缺口报告](results/data_audit/data_collection_readiness_v1/PRECHECK_REPORT.md)
 - [项目对外分享材料](docs/share/README_SHARE_ZH.md)
 
 ## 目录结构
@@ -153,6 +156,17 @@ python scripts/build_bc_dpg_localization_evidence.py --overwrite
 ```
 
 该构建器会逐折验证 raw DPG 与 BC-DPG 的定位坐标一致，只输出聚合证据，不复制逐样本预测。
+
+新数据落盘后的第一入口是清单合同预检：
+
+```bash
+python scripts/validate_data_collection_manifest.py \
+  path/to/collection_manifest.csv \
+  --profile capture \
+  --output-dir results/data_audit/new_collection_capture
+```
+
+采集完整性通过后再依次使用 `causal` 和 `locked_evaluation`。空白模板位于 `configs/data_collection_manifest_template_v1.csv`；旧 `new_split=test` 不得直接改名为锁定测试。
 
 生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
 

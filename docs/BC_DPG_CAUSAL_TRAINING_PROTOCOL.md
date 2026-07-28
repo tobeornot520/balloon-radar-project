@@ -1,6 +1,6 @@
 # BC-DPG 因果训练协议
 
-版本：2026-07-27
+版本：2026-07-28
 
 ## 1. 当前门禁状态
 
@@ -36,6 +36,17 @@ python scripts/run_bc_dpg_causal_smoke.py
 5. 训练集拟合模型，验证集选择窗口、冷启动策略、checkpoint 和阈值；
 6. 外层锁定测试集只在全部选择冻结后评价一次；
 7. 完整扫描离线上限、样本独立 BC 和正式因果模型分开命名与报告。
+
+新数据还必须先通过版本化数据合同的 causal 档：
+
+```bash
+python scripts/validate_data_collection_manifest.py \
+  path/to/collection_manifest.csv \
+  --profile causal \
+  --output-dir results/data_audit/new_collection_causal
+```
+
+合同定义见 `docs/NEW_DATA_COLLECTION_PROTOCOL.md`。只有该报告的 `formal_causal_training_gate_open=true` 才能解除本协议的训练停止条件；beam/azimuth 推断顺序和人工补写字段不能打开门禁。
 
 ## 4. 正式评价单位
 

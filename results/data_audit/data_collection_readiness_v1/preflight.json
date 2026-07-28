@@ -1,0 +1,96 @@
+{
+  "background_rows": 830,
+  "check_files": false,
+  "contract": {
+    "path": "configs/data_collection_contract_v1.json",
+    "sha256": "557ace0d301dc123cee1edd71250178ed3e60390b13882c5ff3c8bc2c82af4f3",
+    "size_bytes": 4632
+  },
+  "contract_name": "balloon_radar_data_collection_manifest",
+  "contract_schema_version": 1,
+  "formal_causal_training_gate_open": false,
+  "gates": {
+    "causal_order": "BLOCKED",
+    "channel_integrity": "BLOCKED",
+    "event_timing": "BLOCKED",
+    "partition_isolation": "BLOCKED",
+    "row_integrity": "BLOCKED",
+    "same_condition_class_control": "BLOCKED",
+    "schema": "FAIL"
+  },
+  "implementation": {
+    "path": "scripts/validate_data_collection_manifest.py",
+    "sha256": "107316bb57c727f5da7f6ced4eec7153d92096c62b958b606c6becd9a051b3d0",
+    "size_bytes": 32131
+  },
+  "input": {
+    "name": "fold_01_manifest.csv",
+    "sha256": "b22abcfdece83a17ab474e690a280400b97c60623a9780d799fe2e1c19476221",
+    "size_bytes": 287084
+  },
+  "issue_count": 2,
+  "issues": [
+    {
+      "code": "MISSING_COLUMNS",
+      "gate": "schema",
+      "message": "Manifest is missing columns: ['iq_path', 'target_class', 'background_type', 'payload_class', 'motion_state', 'acquisition_timestamp_utc', 'hardware_sequence', 'scan_id', 'scan_sequence', 'order_source', 'order_verified', 'clock_id', 'clock_reset_counter', 'timestamp_resolution_ns', 'dropped_frames_before', 'session_id', 'observation_id', 'event_id', 'event_start_utc', 'event_end_utc', 'sample_duration_s', 'collection_date', 'site_id', 'flight_id', 'platform_id', 'snr_db', 'radar_config_id', 'calibration_id', 'h_channel_valid', 'v_channel_valid', 'weather_id', 'evaluation_partition', 'outer_group_id']",
+      "row_examples": [],
+      "severity": "ERROR"
+    },
+    {
+      "code": "UNEXPECTED_COLUMNS",
+      "gate": "schema",
+      "message": "Manifest contains unexpected columns: ['class_name', 'mat_path', 'new_split', 'original_split', 'source_file']",
+      "row_examples": [],
+      "severity": "ERROR"
+    }
+  ],
+  "locked_evaluation_gate_open": false,
+  "missing_columns": [
+    "iq_path",
+    "target_class",
+    "background_type",
+    "payload_class",
+    "motion_state",
+    "acquisition_timestamp_utc",
+    "hardware_sequence",
+    "scan_id",
+    "scan_sequence",
+    "order_source",
+    "order_verified",
+    "clock_id",
+    "clock_reset_counter",
+    "timestamp_resolution_ns",
+    "dropped_frames_before",
+    "session_id",
+    "observation_id",
+    "event_id",
+    "event_start_utc",
+    "event_end_utc",
+    "sample_duration_s",
+    "collection_date",
+    "site_id",
+    "flight_id",
+    "platform_id",
+    "snr_db",
+    "radar_config_id",
+    "calibration_id",
+    "h_channel_valid",
+    "v_channel_valid",
+    "weather_id",
+    "evaluation_partition",
+    "outer_group_id"
+  ],
+  "profile": "locked_evaluation",
+  "row_count": 1148,
+  "schema_version": 1,
+  "status": "FAIL",
+  "target_rows": 318,
+  "unexpected_columns": [
+    "class_name",
+    "mat_path",
+    "new_split",
+    "original_split",
+    "source_file"
+  ]
+}

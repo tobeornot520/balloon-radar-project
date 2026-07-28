@@ -1,6 +1,6 @@
 # 当前检测数据卡
 
-版本：2026-07-27
+版本：2026-07-28
 
 ## 1. 适用范围
 
@@ -69,3 +69,9 @@
 ## 7. 可接受的当前表述
 
 > 当前数据支持基于扫描组隔离的 H/V UAV 检测定位内部开发评价。由于目标与背景采集日期耦合、背景独立扫描组数量有限，最终泛化能力仍需通过同日类别对照和跨日期、跨场地锁定盲测验证。
+
+## 8. 下一批数据的强制合同
+
+下一批数据必须使用 `configs/data_collection_manifest_template_v1.csv`，并通过 `scripts/validate_data_collection_manifest.py` 的分级预检。字段和跨行规则见 [NEW_DATA_COLLECTION_PROTOCOL.md](NEW_DATA_COLLECTION_PROTOCOL.md)。
+
+当前 V4 清单在 `locked_evaluation` 档为 FAIL：40 个合同字段中缺少 33 个，后续完整性、因果顺序和锁定评价检查均被 schema 门禁阻断。该结果位于 `results/data_audit/data_collection_readiness_v1/`。

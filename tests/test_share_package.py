@@ -29,6 +29,8 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md" in destinations
     assert "evidence/06_DETECTION_ACQUISITION_ORDER_AUDIT.md" in destinations
     assert "evidence/07_BC_DPG_LOCALIZATION_EVIDENCE.md" in destinations
+    assert "evidence/08_CURRENT_DATA_COLLECTION_READINESS.md" in destinations
+    assert "evidence/08_CURRENT_DATA_COLLECTION_READINESS.json" in destinations
     assert "assets/tables/bc_dpg_causal_context_aggregate.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_paired_deltas.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_replay_validation.csv" in destinations
@@ -38,7 +40,30 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "evidence/figures/fig1_localization_error_cdf.png" in destinations
     assert "assets/tables/bc_dpg_localization_pooled.csv" in destinations
     assert "assets/tables/bc_dpg_localization_error_distribution.csv" in destinations
+    assert "assets/tables/current_data_collection_contract_coverage.csv" in destinations
+    assert "assets/contracts/data_collection_contract_v1.json" in destinations
+    assert "assets/templates/data_collection_manifest_template_v1.csv" in destinations
+    assert "docs/NEW_DATA_COLLECTION_PROTOCOL.md" in destinations
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+
+
+def test_current_data_readiness_sources_are_fresh() -> None:
+    readiness = share_package.load_current_data_readiness()
+    assert readiness["status"] == "FAIL"
+    assert len(readiness["missing_columns"]) == 33
+    assert readiness["gates"]["schema"] == "FAIL"
+    assert set(readiness["gates"].values()) == {"FAIL", "BLOCKED"}
+
+
+def test_current_data_readiness_rejects_stale_contract(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    changed_contract = tmp_path / "changed_contract.json"
+    changed_contract.write_text('{"schema_version": 999}\n', encoding="utf-8")
+    monkeypatch.setattr(share_package, "DATA_CONTRACT", changed_contract)
+    with pytest.raises(ValueError, match="contract hash is stale"):
+        share_package.load_current_data_readiness()
 
 
 def test_share_manifest_marks_causal_context_as_post_test(
@@ -64,6 +89,12 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["localization_test_threshold_retuning"] is False
     assert rules["localization_coordinates_match_raw_dpg"] is True
     assert rules["localization_sample_predictions_included"] is False
+    assert rules["new_data_collection_contract_version"] == 1
+    assert rules["current_manifest_contract_profile"] == "locked_evaluation"
+    assert rules["current_manifest_contract_status"] == "FAIL"
+    assert rules["current_manifest_missing_contract_columns"] == 33
+    assert rules["current_formal_causal_training_gate_open"] is False
+    assert rules["current_locked_evaluation_gate_open"] is False
     assert rules["past_only_order_columns"] == [
         "beam_layer",
         "azimuth_deg",
