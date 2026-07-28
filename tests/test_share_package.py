@@ -28,11 +28,16 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/tables/joint_scan_group_bootstrap.csv" in destinations
     assert "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md" in destinations
     assert "evidence/06_DETECTION_ACQUISITION_ORDER_AUDIT.md" in destinations
+    assert "evidence/07_BC_DPG_LOCALIZATION_EVIDENCE.md" in destinations
     assert "assets/tables/bc_dpg_causal_context_aggregate.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_paired_deltas.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_replay_validation.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_history_coverage.csv" in destinations
     assert "assets/tables/detection_acquisition_order_sources.csv" in destinations
+    assert "assets/figures/bc_dpg_localization_error_cdf.png" in destinations
+    assert "evidence/figures/fig1_localization_error_cdf.png" in destinations
+    assert "assets/tables/bc_dpg_localization_pooled.csv" in destinations
+    assert "assets/tables/bc_dpg_localization_error_distribution.csv" in destinations
     assert not any("joint_fold_false_alarms" in path for path in destinations)
 
 
@@ -54,6 +59,11 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["verified_within_scan_order_available"] is False
     assert rules["causal_development_smoke_test_split_loaded"] is False
     assert rules["causal_development_smoke_test_split_evaluated"] is False
+    assert rules["localization_training_performed"] is False
+    assert rules["localization_inference_performed"] is False
+    assert rules["localization_test_threshold_retuning"] is False
+    assert rules["localization_coordinates_match_raw_dpg"] is True
+    assert rules["localization_sample_predictions_included"] is False
     assert rules["past_only_order_columns"] == [
         "beam_layer",
         "azimuth_deg",

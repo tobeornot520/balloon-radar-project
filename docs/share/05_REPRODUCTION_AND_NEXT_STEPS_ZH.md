@@ -50,6 +50,7 @@ python scripts/build_final_roi_bc_dpg_joint_audit.py \
 
 ```bash
 python scripts/build_roi_bc_dpg_joint_paper_assets.py --overwrite
+python scripts/build_bc_dpg_localization_evidence.py --overwrite
 python scripts/build_project_share_package.py --overwrite
 ```
 
@@ -79,6 +80,7 @@ python scripts/run_bc_dpg_causal_smoke.py
 - 联合证据资产：`results/final_evidence/roi_bc_dpg_joint_fixed_threshold/`
 - BC-DPG 因果上下文敏感性审计：`results/data_audit/bc_dpg_v3_causal_context_audit/`
 - 采集顺序就绪审计：`results/data_audit/detection_acquisition_order/`
+- BC-DPG 冻结定位证据：`results/final_evidence/bc_dpg_localization/`
 - 数据卡：`docs/DATA_CARD.md`
 - 指标定义：`docs/METRIC_DEFINITIONS.md`
 - 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`
@@ -100,9 +102,9 @@ python scripts/run_bc_dpg_causal_smoke.py
 
 下一步应补齐逐样本真实时间戳，按因果上下文重新训练 BC-DPG，只在训练/验证集比较冷启动处理和历史窗口，然后用锁定外部测试集评价一次。完整扫描结果继续只作为离线上限，样本独立 BC 继续作为在线导向参照。
 
-### 优先级 3：部署级虚警与定位指标
+### 优先级 3：部署级虚警与连续物理定位指标
 
-补齐时间戳、扫描时长和事件边界，报告每扫描、每小时和事件级虚警；同时补充距离/速度 MAE、中位数、90% 分位数和分层结果。
+冻结网格定位证据已经补齐全部目标、过阈值目标、联合成功目标的距离/速度 MAE、中位数、P90 和分层结果。下一步需补齐时间戳、扫描时长和事件边界，报告每扫描、每小时和事件级虚警；同时增加 SNR、环境分层、雷达标定信息和未量化连续物理真值，才能评价真实测距测速精度。
 
 ### 优先级 4：嵌套选择与学习型联合模型
 

@@ -1,0 +1,175 @@
+{
+  "coordinates_match_raw_dpg": true,
+  "correct_detections": 289,
+  "evidence_role": "frozen six-fold aggregate localization analysis",
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "generated_files": [
+    {
+      "path": "LOCALIZATION_EVIDENCE_REPORT.md",
+      "sha256": "fa27a49c92ad6e1f2b4c39965bfa858c219527ab74fecbba49284c93b9a5c713",
+      "size_bytes": 3365
+    },
+    {
+      "path": "figures/fig1_localization_error_cdf.pdf",
+      "sha256": "e7271245bb52b6a0edccca162234a5398c750d58b0af0ef11361a0b681176006",
+      "size_bytes": 17840
+    },
+    {
+      "path": "figures/fig1_localization_error_cdf.png",
+      "sha256": "b12fd443eeb4b627131bd14d243f94773c8a0cfd1073d973d3a789e60f98b59d",
+      "size_bytes": 81776
+    },
+    {
+      "path": "tables/table_01_pooled_localization.csv",
+      "sha256": "9ca7ddd33e71e66839460422432bf10153cc9ec455b7797f87d6a5a89d968747",
+      "size_bytes": 535
+    },
+    {
+      "path": "tables/table_02_fold_localization.csv",
+      "sha256": "6935a08a8f75de516ce44579d8864065adfda55f9b79ff4d02e9167144c11af2",
+      "size_bytes": 1842
+    },
+    {
+      "path": "tables/table_03_error_distribution.csv",
+      "sha256": "00885842d2cdad90b54e87ce2c5e8aa528807d57ffc7475730dc5501e75734d5",
+      "size_bytes": 782
+    },
+    {
+      "path": "tables/table_04_distance_strata.csv",
+      "sha256": "74e80b032713a9bc2aa7e98fc37de6fac1412e5cc5f8023ebe279504ad5ab882",
+      "size_bytes": 642
+    },
+    {
+      "path": "tables/table_05_velocity_strata.csv",
+      "sha256": "c479038be739a8b9543e563193c503438c1bd71f7697dd4ffc25151d51755f05",
+      "size_bytes": 823
+    },
+    {
+      "path": "tables/table_06_source_files.csv",
+      "sha256": "223dd18e2cab9f9304e57f2355d208d79bc5f0b970a763b2a2b24c31fb67952f",
+      "size_bytes": 2717
+    }
+  ],
+  "implementation": {
+    "path": "scripts/build_bc_dpg_localization_evidence.py",
+    "sha256": "6dbcba7dfcb7eb8ec827c4fdb30d4c317014f58e17b63e21e151a49e4563855f",
+    "size_bytes": 35671
+  },
+  "inference_performed": false,
+  "localization_ok_regardless_score": 297,
+  "model": "BC-DPG-FCN v3 complete-scan offline upper bound",
+  "range_resolution_m_per_gate": 30.0,
+  "range_tolerance_gates": 2,
+  "sample_level_predictions_included": false,
+  "schema_version": 1,
+  "score_detected": 302,
+  "selection_table": {
+    "path": "results/final_evidence/bc_dpg_v3_final/source_evidence/ablation_detail.csv",
+    "sha256": "c871dee04591a77b0c5d30b574bc3082ea72bed9f86ccaec0bc9b59f0a7eb7bb",
+    "size_bytes": 12706
+  },
+  "sources": [
+    {
+      "background_rows": 150,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold01_seed42",
+      "fold": 1,
+      "frozen_threshold": 0.337646484375,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold01_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold01_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "835d91b4ca9f78649c9d900d790224c5fbcdebb13ae1ce3925cdbb514d2d37f5",
+      "raw_size_bytes": 82655,
+      "rows": 203,
+      "sha256": "239fa467cd40d84a5528af75969da1b981270fd8453f81a3a96afdce38f77b81",
+      "size_bytes": 82775,
+      "target_rows": 53
+    },
+    {
+      "background_rows": 150,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold02_seed42",
+      "fold": 2,
+      "frozen_threshold": 0.393798828125,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold02_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold02_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "021a29729542c056a4d9c5e33af960bffbc4f51391ffa1d4093ec6b519e0bf20",
+      "raw_size_bytes": 82858,
+      "rows": 203,
+      "sha256": "db73a46d645af2f86709cc3ba1818ae51bf8cacdfeface8c011e514d0dc0b225",
+      "size_bytes": 82883,
+      "target_rows": 53
+    },
+    {
+      "background_rows": 115,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold03_seed42",
+      "fold": 3,
+      "frozen_threshold": 0.8466796875,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold03_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold03_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "5b5af8d146cb70e4fcce0b5048a7ef62469c6fb4d8c2b161b2b56ce39a47ce70",
+      "raw_size_bytes": 68249,
+      "rows": 167,
+      "sha256": "0011e27e2fff2697af3e30909217b40d7153f12fef74b6651bddd532ef91de2e",
+      "size_bytes": 68263,
+      "target_rows": 52
+    },
+    {
+      "background_rows": 150,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold04_seed42",
+      "fold": 4,
+      "frozen_threshold": 0.254150390625,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold04_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold04_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "4dd17ed4c65d6828ef474afd9c75e653792d53e6986c1e9c8f73b74d2f510aa1",
+      "raw_size_bytes": 82198,
+      "rows": 202,
+      "sha256": "ca35d6d5af16bc0e000400bbe6994171e3a88ef3c586ea6d58d7d29b94934bd4",
+      "size_bytes": 82410,
+      "target_rows": 52
+    },
+    {
+      "background_rows": 150,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold05_seed42",
+      "fold": 5,
+      "frozen_threshold": 0.361328125,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold05_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold05_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "01513bf8e8dcb4fb754495f00c12301a20796e2c493f98b85c17baa70a7222ab",
+      "raw_size_bytes": 85283,
+      "rows": 210,
+      "sha256": "3658af609e714d4276bc621082211475747514e74bd10d06914782e20d803bf9",
+      "size_bytes": 85297,
+      "target_rows": 60
+    },
+    {
+      "background_rows": 115,
+      "coordinate_match_with_raw": true,
+      "experiment_name": "bc_dpg_v3_ablation_full_v4_fold06_seed42",
+      "fold": 6,
+      "frozen_threshold": 0.89697265625,
+      "path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold06_seed42/tables/base_threshold_test_predictions.csv",
+      "raw_path": "results/experiments/bc_dpg_v3_ablation_full_v4_fold06_seed42/tables/raw_base_threshold_test_predictions.csv",
+      "raw_sha256": "18bdfb0b838abc0a1bbe3b29c53f6f1cdb027d58fa4c58528e66f2d33712092d",
+      "raw_size_bytes": 66597,
+      "rows": 163,
+      "sha256": "389326070945a776dba4bd669fab16f868f7a7d58843949efce8c895400783de",
+      "size_bytes": 66640,
+      "target_rows": 48
+    }
+  ],
+  "target_samples": 318,
+  "test_threshold_retuning": false,
+  "training_performed": false,
+  "velocity_resolution_mps_per_bin": 0.183,
+  "velocity_tolerance_bins": 3
+}

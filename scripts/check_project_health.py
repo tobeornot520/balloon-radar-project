@@ -37,6 +37,7 @@ REQUIRED_FILES = (
     "scripts/audit_bc_dpg_v3_causal_context.py",
     "scripts/audit_detection_acquisition_order.py",
     "scripts/run_bc_dpg_causal_smoke.py",
+    "scripts/build_bc_dpg_localization_evidence.py",
 )
 
 

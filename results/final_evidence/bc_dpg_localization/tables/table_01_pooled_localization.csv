@@ -1,0 +1,2 @@
+model,evaluation_scope,target_samples,score_detected,score_pd,localization_ok_regardless_score,localization_ok_rate,correct_detection,joint_pd,localization_ok_among_detected,detected_but_not_localized,localized_but_not_detected,neither_detected_nor_localized,range_tolerance_gates,velocity_tolerance_bins,range_resolution_m_per_gate,velocity_resolution_mps_per_bin
+BC-DPG-FCN v3 complete-scan,six-fold internal frozen test,318,302,0.949685534591195,297,0.9339622641509434,289,0.9088050314465409,0.956953642384106,13,8,8,2,3,30.0,0.183

@@ -13,6 +13,7 @@
 5. 联合审计：对齐 BC-DPG 与 ROI 六折逐样本预测，分析虚警与正确检测的互补性，不在测试集重新选择阈值。
 6. 因果上下文敏感性审计：冻结完整模型和阈值，对比 complete-scan、leave-one-out 与假定顺序 past-only 上下文，不把后验窗口结果用于选型。
 7. 因果训练就绪审计：检查文件名、MAT 元数据和文件时间，确认当前没有可验证的组内采集顺序；仅开放 validation-only 小样本 smoke。
+8. 冻结定位证据：从六折 base-threshold 预测聚合距离/速度误差、条件口径和物理量分层，不重新训练、推理或调阈值。
 
 冻结结论和研究边界见：
 
@@ -29,6 +30,7 @@
 - [BC-DPG 因果上下文敏感性审计](results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md)
 - [采集顺序审计](results/data_audit/detection_acquisition_order/ACQUISITION_ORDER_AUDIT.md)
 - [BC-DPG 因果训练协议](docs/BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
+- [BC-DPG 冻结定位证据](results/final_evidence/bc_dpg_localization/LOCALIZATION_EVIDENCE_REPORT.md)
 - [项目对外分享材料](docs/share/README_SHARE_ZH.md)
 
 ## 目录结构
@@ -143,6 +145,14 @@ python scripts/run_bc_dpg_causal_smoke.py
 ```
 
 该 smoke 使用未经时间戳验证的 beam/azimuth 推断顺序，不加载测试 split，结果不用于模型或窗口选择。
+
+从六折冻结 base-threshold 预测构建距离-速度定位汇总、图件和 SHA256 清单：
+
+```bash
+python scripts/build_bc_dpg_localization_evidence.py --overwrite
+```
+
+该构建器会逐折验证 raw DPG 与 BC-DPG 的定位坐标一致，只输出聚合证据，不复制逐样本预测。
 
 生成不含原始数据、权重、逐样本预测和开发聊天记录的对外分享包：
 

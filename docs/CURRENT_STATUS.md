@@ -10,6 +10,7 @@
 6. The final audit aligns frozen BC-DPG and ROI predictions without retuning test thresholds or selecting a joint rule.
 7. A causal-context sensitivity audit replays the frozen full checkpoint with leave-one-out and assumed-order past-only contexts. It does not retrain or select a causal model.
 8. An acquisition-order readiness audit finds no verified within-scan sample order. Formal causal training remains gated; a bounded validation-only interface smoke has passed.
+9. A frozen localization build aggregates range-velocity errors from the six base-threshold BC-DPG test tables without training, inference, or retuning.
 
 ## Authoritative evidence
 
@@ -21,6 +22,7 @@
 - Causal-context sensitivity audit: `results/data_audit/bc_dpg_v3_causal_context_audit/`
 - Acquisition-order readiness audit: `results/data_audit/detection_acquisition_order/`
 - Causal-training protocol: [BC_DPG_CAUSAL_TRAINING_PROTOCOL.md](BC_DPG_CAUSAL_TRAINING_PROTOCOL.md)
+- Frozen localization evidence: `results/final_evidence/bc_dpg_localization/`
 - Data card: [DATA_CARD.md](DATA_CARD.md)
 - Metric definitions: [METRIC_DEFINITIONS.md](METRIC_DEFINITIONS.md)
 - Model-selection ledger: [MODEL_SELECTION_LEDGER.md](MODEL_SELECTION_LEDGER.md)
@@ -58,6 +60,12 @@ The source tables do not contain verified per-sample acquisition timestamps. Pas
 The readiness audit checked all 1,148 MAT files. They contain H/V IQ arrays but no timestamp-like variable. MAT header creation times are at least 49.1 days after the filename timestamp and follow filesystem mtime within 3 seconds, so neither source is acquisition order. The formal causal-training gate is therefore closed.
 
 A Fold 1 development smoke using inferred order, a four-sample history, two epochs, and 12 samples per class per split completed on CPU. It loaded only train and validation data; no test split or test metric was produced. This establishes interface readiness only and contributes no performance evidence or window choice.
+
+## Frozen localization evidence
+
+The six frozen base-threshold folds contain 318 target samples. Of these, 302 pass the score threshold, 297 meet the 2-gate/3-bin localization tolerance regardless of score, and 289 meet both conditions. This gives pooled score Pd 0.9497, localization-ok rate 0.9340, and joint Pd 0.9088; 289/302 score-detected targets meet the localization tolerance.
+
+Across all targets, range error has MAE 1.418 gates, median 1, P90 2, and maximum 39. Velocity error has MAE 1.154 bins, median 0, P90 1, and maximum 40. The long tail means MAE, median/P90, maximum, conditional-on-detection errors, and joint success must be reported together. All six calibrated coordinate tables match their raw DPG tables exactly; BC-DPG changes scores, not candidate locations.
 
 ## Claim boundaries
 

@@ -15,11 +15,11 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_project_share_20260727"
+PACKAGE_NAME = "balloon_radar_project_share_20260728"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
-PACKAGE_DATE = "2026-07-27"
-ZIP_TIMESTAMP = (2026, 7, 27, 0, 0, 0)
+PACKAGE_DATE = "2026-07-28"
+ZIP_TIMESTAMP = (2026, 7, 28, 0, 0, 0)
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt"}
 FORBIDDEN_SUFFIXES = {
@@ -140,6 +140,11 @@ PACKAGE_FILES = (
         "causal_training_readiness_report",
     ),
     PackageFile(
+        "results/final_evidence/bc_dpg_localization/LOCALIZATION_EVIDENCE_REPORT.md",
+        "evidence/07_BC_DPG_LOCALIZATION_EVIDENCE.md",
+        "frozen_localization_report",
+    ),
+    PackageFile(
         "results/final_evidence/bc_dpg_v3_final/figures/fig1_deployment_false_alarms.png",
         "assets/figures/bc_dpg_deployment_false_alarms.png",
         "figure",
@@ -182,6 +187,21 @@ PACKAGE_FILES = (
     PackageFile(
         "results/final_evidence/roi_bc_dpg_joint_fixed_threshold/figures/fig3_complementarity.pdf",
         "assets/figures/joint_complementarity.pdf",
+        "figure",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/figures/fig1_localization_error_cdf.png",
+        "assets/figures/bc_dpg_localization_error_cdf.png",
+        "figure",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/figures/fig1_localization_error_cdf.png",
+        "evidence/figures/fig1_localization_error_cdf.png",
+        "report_figure",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/figures/fig1_localization_error_cdf.pdf",
+        "assets/figures/bc_dpg_localization_error_cdf.pdf",
         "figure",
     ),
     PackageFile(
@@ -268,6 +288,31 @@ PACKAGE_FILES = (
         "results/data_audit/detection_acquisition_order/order_source_summary.csv",
         "assets/tables/detection_acquisition_order_sources.csv",
         "causal_training_readiness_table",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/tables/table_01_pooled_localization.csv",
+        "assets/tables/bc_dpg_localization_pooled.csv",
+        "frozen_localization_table",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/tables/table_02_fold_localization.csv",
+        "assets/tables/bc_dpg_localization_by_fold.csv",
+        "frozen_localization_table",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/tables/table_03_error_distribution.csv",
+        "assets/tables/bc_dpg_localization_error_distribution.csv",
+        "frozen_localization_table",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/tables/table_04_distance_strata.csv",
+        "assets/tables/bc_dpg_localization_distance_strata.csv",
+        "frozen_localization_table",
+    ),
+    PackageFile(
+        "results/final_evidence/bc_dpg_localization/tables/table_05_velocity_strata.csv",
+        "assets/tables/bc_dpg_localization_velocity_strata.csv",
+        "frozen_localization_table",
     ),
 )
 
@@ -411,6 +456,12 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "verified_within_scan_order_available": False,
             "causal_development_smoke_test_split_loaded": False,
             "causal_development_smoke_test_split_evaluated": False,
+            "localization_evidence_role": "frozen aggregate analysis",
+            "localization_training_performed": False,
+            "localization_inference_performed": False,
+            "localization_test_threshold_retuning": False,
+            "localization_coordinates_match_raw_dpg": True,
+            "localization_sample_predictions_included": False,
             "evaluation_role": "internal development estimate",
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,
