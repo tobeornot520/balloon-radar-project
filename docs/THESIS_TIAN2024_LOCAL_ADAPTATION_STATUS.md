@@ -2,6 +2,48 @@
 
 Date: 2026-07-30
 
+## Full Fold 1 Result
+
+The full validation experiment used the deterministic 80-UAV/208-background
+training subset and all 53 UAV plus 150 background validation samples. The
+reported batch-dependent normalization and the deployment-stable per-sample
+normalization were compared before any held-out evaluation.
+
+| Normalization | Best epoch | Validation joint Pd | Validation Pfa | Responsible grid | Range / velocity MAE | Template correlation |
+|---|---:|---:|---:|---:|---:|---:|
+| `batch_channel` | 29 | 49/53 = 0.9245 | 1/150 = 0.0067 | 0.7925 | 1.34 / 1.51 | 0.2497 |
+| `sample_channel` | 34 | 50/53 = 0.9434 | 1/150 = 0.0067 | 0.7736 | 1.53 / 1.45 | 0.3557 |
+
+Both outputs passed the preregistered non-degeneration gate. `sample_channel`
+was frozen because it had the higher joint Pd and does not depend on inference
+batch composition. Its checkpoint SHA256, manifest SHA256, threshold
+`0.7036690711975098`, tolerances, and selection evidence are recorded in
+`configs/thesis_tian2024_adapter_fold01_selected_v1.yaml`.
+
+A single local held-out evaluation was then run with the frozen checkpoint and
+threshold. No threshold tuning was performed on held-out data.
+
+| Held-out metric | Result |
+|---|---:|
+| Joint Pd | 30/53 = 0.5660 |
+| Pfa | 134/150 = 0.8933 |
+| Responsible-grid selection | 0.4528 |
+| Range MAE | 6.02 gates |
+| Velocity MAE | 5.68 bins |
+
+This candidate is rejected as a generalizing detector. The failure is a
+background scan-group shift, not a marginal threshold miss: all validation
+backgrounds come from `20260204_100802`, while all held-out backgrounds come
+from `20260204_100739`. Of 150 validation backgrounds, 145 peak on the Doppler
+output edges and only 1 exceeds the frozen threshold. Of 150 held-out
+backgrounds, 125 peak at the zero-Doppler row (`grid_y=16`) and 134 exceed the
+threshold. Retuning on held-out scores would hide this failure and is forbidden.
+
+The next model experiment must use multiple background scan groups for model
+selection, explicitly supervise or suppress the zero-Doppler clutter mechanism,
+and reserve an untouched outer group. The current held-out partition has now
+been consumed and must not be presented as a future blind test.
+
 ## Outcome
 
 The existing local H/V IQ data now drive an independent implementation of the
@@ -45,13 +87,11 @@ localization gates.
 
 ## Next Decision
 
-The next bounded experiment should use the thesis-reported scale as closely as
-the leakage-controlled manifest permits: 80 UAV and 208 background training
-samples, all Fold 1 validation samples, 50 Adam epochs, and no test access. Run
-the reported `batch_channel` normalization first, followed by the preregistered
-`sample_channel` sensitivity check. Only a model with non-degenerate output and
-non-zero responsible-grid localization should be considered for a frozen test
-proposal.
+The thesis-scale Fold 1 experiment and normalization sensitivity check are now
+complete. The next bounded experiment should address the demonstrated
+zero-Doppler background-group failure using development folds only. It must not
+reuse the consumed Fold 1 held-out results for threshold or architecture
+selection.
 
 Because the thesis subset identifiers and original code are unavailable, any
 result remains a method-level local adaptation rather than exact numerical
@@ -61,6 +101,6 @@ cannot validate balloon payload recognition.
 ## Verification
 
 - Focused adapter tests: 7 passed.
-- Full test suite: 91 passed.
+- Full test suite: 92 passed.
 - Project health: 166 Python files, 0 syntax errors, 0 duplicate groups, 43/43
   required files present.

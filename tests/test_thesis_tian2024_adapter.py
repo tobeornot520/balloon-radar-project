@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import numpy as np
+import pandas as pd
 import pytest
 import torch
 
+from evaluation.evaluate_thesis_tian2024_adapter import compute_frozen_metrics
 from evaluation.thesis_tian2024_postprocess import direct_max_detections
 from features.polarimetric_rd import (
     PolarimetricConfig,
@@ -124,3 +126,35 @@ def test_thesis_training_subset_selection_is_seeded_and_class_limited() -> None:
     labels = [dataset.records[index]["target_present"] for index in first.indices]
     assert labels.count(0) == 6
     assert labels.count(1) == 4
+
+
+def test_frozen_metrics_never_select_or_change_threshold() -> None:
+    table = pd.DataFrame(
+        [
+            {
+                "target_present": 1,
+                "peak_score": 0.8,
+                "peak_grid_x": 2,
+                "peak_grid_y": 3,
+                "pred_range_index": 9,
+                "pred_velocity_index": 13,
+                "true_range_index": 8,
+                "true_velocity_index": 12,
+            },
+            {
+                "target_present": 0,
+                "peak_score": 0.7,
+                "peak_grid_x": 1,
+                "peak_grid_y": 1,
+                "pred_range_index": 4,
+                "pred_velocity_index": 4,
+                "true_range_index": -1,
+                "true_velocity_index": -1,
+            },
+        ]
+    )
+    metrics, predictions = compute_frozen_metrics(table, 0.75, 2, 3)
+    assert metrics["frozen_threshold"] == 0.75
+    assert metrics["joint_pd"] == 1.0
+    assert metrics["pfa"] == 0.0
+    assert predictions["detected"].tolist() == [True, False]

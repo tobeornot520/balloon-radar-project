@@ -1,0 +1,55 @@
+selection:
+  status: completed_single_local_heldout_evaluation_do_not_repeat
+  selected_from: validation_only
+  selected_experiment: thesis_tian2024_adapter_fold01_sample_channel_v1
+  normalization_scope: sample_channel
+  best_epoch: 34
+  selection_reason:
+    - validation_joint_pd_50_of_53
+    - validation_pfa_1_of_150
+    - deployment_stable_sample_independent_normalization
+
+artifacts:
+  checkpoint_path: results/experiments/thesis_tian2024_adapter_fold01_sample_channel_v1/checkpoints/best.pt
+  checkpoint_sha256: 7a50827634a8e921a89619e3ab26907ed4e7ca09e2158b8bc0bb4a072b291cda
+  manifest_path: results/data_audit/dataset_v4_multifold/fold_01_manifest.csv
+  manifest_sha256: b22abcfdece83a17ab474e690a280400b97c60623a9780d799fe2e1c19476221
+
+frozen_evaluation:
+  threshold: 0.7036690711975098
+  threshold_comparison: probability_strictly_greater_than_threshold
+  range_tolerance_gates: 2
+  velocity_tolerance_bins: 3
+  allowed_test_evaluations: 1
+  completed_test_evaluations: 1
+  test_retuning_allowed: false
+
+validation_evidence:
+  target_count: 53
+  background_count: 150
+  joint_pd: 0.9433962264150944
+  pfa: 0.006666666666666667
+  responsible_grid_selection_rate: 0.7735849056603774
+  range_mae_gates: 1.528301886792453
+  velocity_mae_bins: 1.4528301886792452
+  unique_target_peak_grids: 16
+  mean_target_template_correlation: 0.3556859635446017
+
+claim_boundary:
+  evaluation_role: historical_local_heldout_not_external_blind_test
+  exact_thesis_reproduction: false
+  balloon_payload_recognition_evidence: false
+
+heldout_result:
+  joint_success_count: 30
+  target_count: 53
+  joint_pd: 0.5660377358490566
+  false_alarm_count: 134
+  background_count: 150
+  pfa: 0.8933333333333333
+  responsible_grid_selection_rate: 0.4528301886792453
+  range_mae_gates: 6.018867924528302
+  velocity_mae_bins: 5.679245283018868
+  decision: reject_as_generalizing_detector
+  threshold_retuned: false
+  repeat_test_evaluation: false
