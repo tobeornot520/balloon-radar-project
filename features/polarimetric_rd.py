@@ -316,3 +316,44 @@ def make_ri8(
     return np.concatenate((ri4, extra), axis=0).astype(
         np.float32
     )
+
+
+def make_thesis_tian6(
+    features: Mapping[str, np.ndarray],
+    *,
+    eps: float = 1e-8,
+) -> np.ndarray:
+    """Six-channel input used by the thesis Tian2024 local adaptation.
+
+    Channel order is ``Re(H), Im(H), Re(V), Im(V), sZdr, sRhoCo``.  The
+    complex channels intentionally retain their linear RD amplitudes; the
+    training model applies the separately configured Z-score normalization.
+    ``sZdr`` is relative because the available H/V channels are not backed by
+    an absolute polarimetric calibration.
+    """
+    if eps <= 0:
+        raise ValueError("eps must be positive")
+    rd_h = np.asarray(features["rd_h"])
+    rd_v = np.asarray(features["rd_v"])
+    if rd_h.shape != rd_v.shape or rd_h.ndim != 2:
+        raise ValueError("rd_h and rd_v must be aligned two-dimensional maps")
+
+    power_h = np.abs(rd_h).astype(np.float64) ** 2
+    power_v = np.abs(rd_v).astype(np.float64) ** 2
+    relative_zdr = 10.0 * np.log10(
+        (power_h + float(eps)) / (power_v + float(eps))
+    )
+    result = np.stack(
+        (
+            rd_h.real,
+            rd_h.imag,
+            rd_v.real,
+            rd_v.imag,
+            relative_zdr,
+            np.asarray(features["rho_hv_local"], dtype=np.float32),
+        ),
+        axis=0,
+    ).astype(np.float32)
+    if not np.isfinite(result).all():
+        raise ValueError("thesis Tian2024 six-channel input contains NaN or Inf")
+    return result

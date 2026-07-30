@@ -1,0 +1,62 @@
+experiment:
+  name: thesis_tian2024_local_adaptation_v1
+  evidence_role: train_validation_only_method_level_local_adaptation
+  source: 参考资料/thesis.pdf
+
+data:
+  manifest: results/data_audit/dataset_v4_multifold/fold_01_manifest.csv
+  loaded_splits: [train, val]
+  test_split_loaded: false
+  train_subset:
+    background: 208
+    uav: 80
+    selection: seeded_without_replacement_within_train_partition
+    exact_thesis_sample_ids_available: false
+  validation_subset: complete_fold01_validation_partition
+  input_shape: [6, 128, 100]
+  channels: [Re_H, Im_H, Re_V, Im_V, sZdr, sRhoCo]
+  rho_window: [3, 3]
+  absolute_polarimetric_calibration_claimed: false
+
+model:
+  shared_first_convolution: [6, 16, 3, 5]
+  branch_channels: [16, 32, 64]
+  pooling_kernels: [[2, 2], [2, 2]]
+  output_stride: [4, 4]
+  output_shape: [32, 25]
+  decoding: direct_global_max_with_responsible_cell_offset
+  pir_mdp: false
+
+targets:
+  doppler_extent: 7
+  range_extent: 5
+  classification_downsampling: max_pool_4x4
+  regression: responsible_cell_only
+  negative_sampling: random_equal_to_positive_grid_count
+  regression_weight: 10.0
+
+training:
+  optimizer: Adam
+  learning_rate: 0.0001
+  epochs: 50
+  batch_size: 4
+  seed: 42
+  primary_normalization_scope: batch_channel
+  required_sensitivity_normalization_scope: sample_channel
+
+validation_gate:
+  threshold_source: validation_background_only
+  maximum_false_alarms: 1
+  range_tolerance_gates: 2
+  velocity_tolerance_bins: 3
+  non_degenerate_requirements:
+    minimum_unique_target_peak_grids: 2
+    minimum_unique_target_peak_ratio: 0.25
+    maximum_mean_target_template_correlation: 0.98
+  open_test_only_after_gate_passes: true
+
+claim_boundaries:
+  - method-level adaptation because exact thesis subset IDs and source code are unavailable
+  - not the original Tian 2024 architecture reproduction
+  - not evidence for balloon payload recognition
+  - sZdr is relative until H/V amplitude calibration is verified
