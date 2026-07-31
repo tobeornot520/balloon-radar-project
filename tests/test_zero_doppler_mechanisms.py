@@ -9,6 +9,7 @@ import torch
 from models.dual_branch_gated_fcn import DualBranchGatedFCN
 from models.zero_doppler_mechanisms import (
     ClutterAwareSuppressionHead,
+    FixedNotchResidualSuppressionHead,
     FixedZeroDopplerNotch,
 )
 from scripts.audit_zero_doppler_candidate_veto_v1 import evaluate_radius
@@ -19,8 +20,12 @@ from scripts.summarize_zero_doppler_mechanism_v1 import (
 from training.zero_doppler_objectives import (
     DenseZeroDopplerMSE,
     clutter_aware_detection_loss,
+    fixed_residual_detection_loss,
 )
-from training.train_zero_doppler_mechanism import ZeroDopplerMechanismDetector
+from training.train_zero_doppler_mechanism import (
+    ZeroDopplerMechanismDetector,
+    worst_background_group_pfa,
+)
 
 
 def test_fixed_notch_is_symmetric_and_never_increases_logits() -> None:
@@ -75,6 +80,47 @@ def test_clutter_head_and_loss_preserve_non_increasing_contract() -> None:
     assert raw.grad is not None
 
 
+def test_fixed_residual_is_bounded_and_concentrated_near_zero() -> None:
+    logits = torch.ones(2, 1, 128, 5)
+    context = torch.randn(2, 2, 128, 5)
+    head = FixedNotchResidualSuppressionHead(
+        hidden_channels=4,
+        maximum_suppression=1.5,
+        initial_suppression=0.1,
+        zero_sigma_bins=8.0,
+    )
+
+    output = head(logits, context)
+
+    assert torch.all(output.calibrated_logits <= logits)
+    assert torch.all(output.suppression >= 0)
+    assert float(output.suppression.detach().max()) <= 1.5 + 1e-6
+    assert output.suppression[0, 0, 64, 0] > output.suppression[0, 0, 32, 0]
+
+
+def test_fixed_residual_loss_penalizes_background_peaks_and_backpropagates() -> None:
+    notched = torch.zeros(2, 1, 8, 3)
+    calibrated = notched.clone().requires_grad_(True)
+    suppression = torch.zeros_like(calibrated)
+    target = torch.zeros_like(calibrated)
+    target[1, 0, 4, 1] = 1.0
+    present = torch.tensor([0, 1])
+
+    total, parts = fixed_residual_detection_loss(
+        notched_logits=notched,
+        calibrated_logits=calibrated,
+        residual_suppression=suppression,
+        target=target,
+        target_present=present,
+        detection_criterion=DenseZeroDopplerMSE(zero_band_radius=2),
+        background_topk=4,
+    )
+    total.backward()
+
+    assert parts["background_peak"] > 0
+    assert calibrated.grad is not None
+
+
 def test_candidate_veto_audit_counts_tradeoff() -> None:
     frame = pd.DataFrame(
         {
@@ -100,6 +146,10 @@ def mechanism_args() -> Namespace:
         notch_floor=0.05,
         maximum_suppression=4.0,
         initial_suppression=0.05,
+        residual_hidden_channels=4,
+        residual_maximum_suppression=1.5,
+        residual_initial_suppression=1e-4,
+        residual_zero_sigma_bins=8.0,
     )
 
 
@@ -110,6 +160,7 @@ def mechanism_args() -> Namespace:
         ("fixed_notch", False),
         ("dense_negative", True),
         ("clutter_aware", True),
+        ("fixed_residual", True),
     ],
 )
 def test_unified_detector_exposes_expected_trainable_scope(
@@ -127,6 +178,20 @@ def test_unified_detector_exposes_expected_trainable_scope(
         assert not any(
             parameter.requires_grad for parameter in model.base.h_branch.parameters()
         )
+    if mode == "fixed_residual":
+        assert not any(parameter.requires_grad for parameter in model.base.parameters())
+
+
+def test_worst_background_group_pfa_uses_group_maximum() -> None:
+    predictions = pd.DataFrame(
+        {
+            "source_file": ["a", "a", "b", "b", "target"],
+            "target_present": [0, 0, 0, 0, 1],
+            "false_alarm": [False, True, True, True, False],
+        }
+    )
+
+    assert worst_background_group_pfa(predictions) == pytest.approx(1.0)
 
 
 def test_mechanism_summary_uses_pooled_counts_and_worst_fold() -> None:

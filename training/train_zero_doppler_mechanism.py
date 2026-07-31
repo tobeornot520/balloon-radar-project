@@ -24,6 +24,7 @@ from datasets.detection_dataset_v3 import DetectionRadarDatasetV3  # noqa: E402
 from models.dual_branch_gated_fcn import DualBranchGatedFCN  # noqa: E402
 from models.zero_doppler_mechanisms import (  # noqa: E402
     ClutterAwareSuppressionHead,
+    FixedNotchResidualSuppressionHead,
     FixedZeroDopplerNotch,
     SuppressionOutput,
 )
@@ -40,10 +41,17 @@ from scripts.train_detection_baseline_v2 import (  # noqa: E402
 from training.zero_doppler_objectives import (  # noqa: E402
     DenseZeroDopplerMSE,
     clutter_aware_detection_loss,
+    fixed_residual_detection_loss,
 )
 
 
-MODES = ("baseline", "fixed_notch", "dense_negative", "clutter_aware")
+MODES = (
+    "baseline",
+    "fixed_notch",
+    "dense_negative",
+    "clutter_aware",
+    "fixed_residual",
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -69,6 +77,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--notch-floor", type=float, default=0.05)
     parser.add_argument("--maximum-suppression", type=float, default=4.0)
     parser.add_argument("--initial-suppression", type=float, default=0.05)
+    parser.add_argument("--residual-hidden-channels", type=int, default=16)
+    parser.add_argument("--residual-maximum-suppression", type=float, default=1.5)
+    parser.add_argument("--residual-initial-suppression", type=float, default=1e-4)
+    parser.add_argument("--residual-zero-sigma-bins", type=float, default=8.0)
+    parser.add_argument("--background-peak-weight", type=float, default=2.0)
+    parser.add_argument("--background-topk", type=int, default=16)
+    parser.add_argument(
+        "--residual-allowed-target-probability-drop", type=float, default=0.01
+    )
+    parser.add_argument("--residual-target-keep-weight", type=float, default=12.0)
     parser.add_argument("--allowed-target-probability-drop", type=float, default=0.02)
     parser.add_argument("--target-keep-weight", type=float, default=8.0)
     parser.add_argument("--suppression-regularization", type=float, default=0.01)
@@ -95,6 +113,13 @@ def validate_args(args: argparse.Namespace) -> None:
         "maximum_suppression",
         "initial_suppression",
         "target_keep_weight",
+        "residual_hidden_channels",
+        "residual_maximum_suppression",
+        "residual_initial_suppression",
+        "residual_zero_sigma_bins",
+        "background_peak_weight",
+        "background_topk",
+        "residual_target_keep_weight",
     )
     if any(getattr(args, name) <= 0 for name in positive):
         raise ValueError("positive training arguments must be greater than zero")
@@ -106,6 +131,10 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("notch-floor must be in (0, 1]")
     if not 0.0 <= args.target_guard_level <= 1.0:
         raise ValueError("target-guard-level must be in [0, 1]")
+    if not 0.0 <= args.residual_allowed_target_probability_drop <= 1.0:
+        raise ValueError(
+            "residual-allowed-target-probability-drop must be in [0, 1]"
+        )
 
 
 class ZeroDopplerMechanismDetector(nn.Module):
@@ -124,6 +153,7 @@ class ZeroDopplerMechanismDetector(nn.Module):
             parameter.requires_grad_(False)
         self.fixed_notch: FixedZeroDopplerNotch | None = None
         self.clutter_head: ClutterAwareSuppressionHead | None = None
+        self.residual_head: FixedNotchResidualSuppressionHead | None = None
         if mode == "dense_negative":
             for parameter in self.base.fusion_head.parameters():
                 parameter.requires_grad_(True)
@@ -139,6 +169,19 @@ class ZeroDopplerMechanismDetector(nn.Module):
                 maximum_suppression=args.maximum_suppression,
                 initial_suppression=args.initial_suppression,
             )
+        elif mode == "fixed_residual":
+            self.fixed_notch = FixedZeroDopplerNotch(
+                velocity_bins=128,
+                sigma_bins=args.notch_sigma_bins,
+                floor=args.notch_floor,
+            )
+            self.residual_head = FixedNotchResidualSuppressionHead(
+                velocity_bins=128,
+                hidden_channels=args.residual_hidden_channels,
+                maximum_suppression=args.residual_maximum_suppression,
+                initial_suppression=args.residual_initial_suppression,
+                zero_sigma_bins=args.residual_zero_sigma_bins,
+            )
 
     def trainable_parameters(self) -> list[nn.Parameter]:
         return [parameter for parameter in self.parameters() if parameter.requires_grad]
@@ -151,6 +194,10 @@ class ZeroDopplerMechanismDetector(nn.Module):
             if self.clutter_head is None:
                 raise RuntimeError("clutter head is unavailable")
             self.clutter_head.train()
+        elif self.mode == "fixed_residual":
+            if self.residual_head is None:
+                raise RuntimeError("fixed residual head is unavailable")
+            self.residual_head.train()
 
     def forward(self, inputs: Tensor) -> tuple[Tensor, SuppressionOutput]:
         base_output = self.base(inputs)
@@ -164,11 +211,25 @@ class ZeroDopplerMechanismDetector(nn.Module):
             if self.fixed_notch is None:
                 raise RuntimeError("fixed notch is unavailable")
             output = self.fixed_notch(raw_logits)
-        else:
+        elif self.mode == "clutter_aware":
             if self.clutter_head is None:
                 raise RuntimeError("clutter head is unavailable")
             output = self.clutter_head(raw_logits, inputs)
+        else:
+            if self.fixed_notch is None or self.residual_head is None:
+                raise RuntimeError("fixed residual mechanism is unavailable")
+            fixed = self.fixed_notch(raw_logits)
+            residual = self.residual_head(fixed.calibrated_logits, inputs)
+            output = SuppressionOutput(
+                calibrated_logits=residual.calibrated_logits,
+                suppression=fixed.suppression + residual.suppression,
+            )
         return raw_logits, output
+
+    def fixed_reference(self, raw_logits: Tensor) -> SuppressionOutput:
+        if self.fixed_notch is None:
+            raise RuntimeError("fixed notch reference is unavailable")
+        return self.fixed_notch(raw_logits)
 
 
 def load_model(
@@ -223,9 +284,28 @@ def compute_loss(
             target=target,
             target_present=present,
             detection_criterion=criterion,
+            allowed_target_probability_drop=(
+                args.residual_allowed_target_probability_drop
+            ),
+            target_keep_weight=args.residual_target_keep_weight,
+            suppression_regularization=args.suppression_regularization,
+        )
+        return total, dict(parts)
+    if model.mode == "fixed_residual":
+        fixed = model.fixed_reference(raw_logits)
+        residual_suppression = output.suppression - fixed.suppression
+        total, parts = fixed_residual_detection_loss(
+            notched_logits=fixed.calibrated_logits,
+            calibrated_logits=output.calibrated_logits,
+            residual_suppression=residual_suppression,
+            target=target,
+            target_present=present,
+            detection_criterion=criterion,
             allowed_target_probability_drop=args.allowed_target_probability_drop,
             target_keep_weight=args.target_keep_weight,
             suppression_regularization=args.suppression_regularization,
+            background_peak_weight=args.background_peak_weight,
+            background_topk=args.background_topk,
         )
         return total, dict(parts)
     detection = criterion(output.calibrated_logits, target, present)
@@ -233,6 +313,7 @@ def compute_loss(
     return detection, {
         "detection": detection,
         "target_keep": zero,
+        "background_peak": zero,
         "suppression_regularization": output.suppression.mean(),
     }
 
@@ -246,7 +327,12 @@ def train_epoch(
     args: argparse.Namespace,
 ) -> dict[str, float]:
     model.prepare_training_mode()
-    sums = {"total": 0.0, "detection": 0.0, "target_keep": 0.0}
+    sums = {
+        "total": 0.0,
+        "detection": 0.0,
+        "target_keep": 0.0,
+        "background_peak": 0.0,
+    }
     sample_count = 0
     for batch in loader:
         inputs = batch["input"].to(device)
@@ -266,6 +352,9 @@ def train_epoch(
         sums["total"] += float(total.item()) * count
         sums["detection"] += float(parts["detection"].item()) * count
         sums["target_keep"] += float(parts["target_keep"].item()) * count
+        background_peak = parts.get("background_peak")
+        if background_peak is not None:
+            sums["background_peak"] += float(background_peak.detach().item()) * count
         sample_count += count
     if sample_count == 0:
         raise RuntimeError("training loader is empty")
@@ -369,6 +458,15 @@ def save_checkpoint(
     )
 
 
+def worst_background_group_pfa(predictions: pd.DataFrame) -> float:
+    background = predictions.loc[predictions["target_present"].eq(0)]
+    if background.empty:
+        return 0.0
+    return float(
+        background.groupby("source_file", observed=True)["false_alarm"].mean().max()
+    )
+
+
 def main() -> int:
     args = parse_args()
     validate_args(args)
@@ -426,7 +524,7 @@ def main() -> int:
     )
 
     history: list[dict[str, Any]] = []
-    best_key: tuple[float, float, float, float] | None = None
+    best_key: tuple[float, float, float, float, float] | None = None
     best_path = checkpoint_dir / "best.pt"
     selected_epoch: int | None = None
     if trainable:
@@ -438,11 +536,13 @@ def main() -> int:
         initial_frame, initial_loss = collect_predictions(
             model, loaders["val"], criterion, device, tolerance, args
         )
-        _, initial_metrics = apply_threshold_and_metrics(
+        initial_predictions, initial_metrics = apply_threshold_and_metrics(
             initial_frame, frozen_threshold, tolerance
         )
+        initial_worst_group_pfa = worst_background_group_pfa(initial_predictions)
         best_key = (
             float(initial_metrics["joint_pd"]),
+            -initial_worst_group_pfa,
             -float(initial_metrics["pfa"]),
             float(initial_metrics["roc_auc"]),
             -float(initial_loss),
@@ -456,6 +556,7 @@ def main() -> int:
                 "val_loss": initial_loss,
                 "val_joint_pd": initial_metrics["joint_pd"],
                 "val_pfa": initial_metrics["pfa"],
+                "val_worst_background_group_pfa": initial_worst_group_pfa,
                 "val_auc": initial_metrics["roc_auc"],
             }
         )
@@ -467,11 +568,15 @@ def main() -> int:
             val_frame, val_loss = collect_predictions(
                 model, loaders["val"], criterion, device, tolerance, args
             )
-            _, val_metrics = apply_threshold_and_metrics(
+            val_predictions_epoch, val_metrics = apply_threshold_and_metrics(
                 val_frame, frozen_threshold, tolerance
+            )
+            val_worst_group_pfa = worst_background_group_pfa(
+                val_predictions_epoch
             )
             key = (
                 float(val_metrics["joint_pd"]),
+                -val_worst_group_pfa,
                 -float(val_metrics["pfa"]),
                 float(val_metrics["roc_auc"]),
                 -float(val_loss),
@@ -483,6 +588,7 @@ def main() -> int:
                     "val_loss": val_loss,
                     "val_joint_pd": val_metrics["joint_pd"],
                     "val_pfa": val_metrics["pfa"],
+                    "val_worst_background_group_pfa": val_worst_group_pfa,
                     "val_auc": val_metrics["roc_auc"],
                 }
             )
@@ -520,7 +626,11 @@ def main() -> int:
         .reset_index()
     )
     scan_metrics.to_csv(table_dir / "test_background_scan_metrics.csv", index=False)
-    contract_applies = args.mode in {"fixed_notch", "clutter_aware"}
+    contract_applies = args.mode in {
+        "fixed_notch",
+        "clutter_aware",
+        "fixed_residual",
+    }
     summary = {
         "status": "COMPLETE_MECHANICAL_SMOKE" if args.debug_per_class else "COMPLETE_DEVELOPMENT_RUN",
         "experiment_name": args.name,
@@ -537,6 +647,9 @@ def main() -> int:
         "validation_loss": val_loss,
         "test_loss": test_loss,
         "validation_metrics": val_metrics,
+        "validation_worst_background_group_pfa": worst_background_group_pfa(
+            val_predictions
+        ),
         "test_metrics": test_metrics,
         "nonincrease_contract_applies": contract_applies,
         "nonincrease_contract_satisfied": (

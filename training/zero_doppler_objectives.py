@@ -113,3 +113,68 @@ def clutter_aware_detection_loss(
         "target_keep": target_keep,
         "suppression_regularization": shift_regularization,
     }
+
+
+def fixed_residual_detection_loss(
+    *,
+    notched_logits: Tensor,
+    calibrated_logits: Tensor,
+    residual_suppression: Tensor,
+    target: Tensor,
+    target_present: Tensor,
+    detection_criterion: DenseZeroDopplerMSE,
+    allowed_target_probability_drop: float = 0.01,
+    target_keep_weight: float = 12.0,
+    suppression_regularization: float = 0.01,
+    background_peak_weight: float = 2.0,
+    background_topk: int = 16,
+) -> tuple[Tensor, Mapping[str, Tensor]]:
+    """Train a residual relative to the fixed notch with direct peak pressure."""
+    if not 0.0 <= allowed_target_probability_drop <= 1.0:
+        raise ValueError("allowed_target_probability_drop must be in [0, 1]")
+    if min(target_keep_weight, suppression_regularization, background_peak_weight) < 0:
+        raise ValueError("loss weights must be nonnegative")
+    if background_topk <= 0:
+        raise ValueError("background_topk must be positive")
+    if not (
+        notched_logits.shape
+        == calibrated_logits.shape
+        == residual_suppression.shape
+        == target.shape
+    ):
+        raise ValueError("all heatmap tensors must have identical shapes")
+    detection = detection_criterion(calibrated_logits, target, target_present)
+    present = target_present.reshape(-1).to(target.device) > 0.5
+    target_region = (
+        (target >= detection_criterion.target_guard_level)
+        & present.view(-1, 1, 1, 1)
+    )
+    if bool(target_region.any()):
+        probability_drop = torch.sigmoid(notched_logits) - torch.sigmoid(
+            calibrated_logits
+        )
+        target_keep = torch.relu(
+            probability_drop[target_region] - allowed_target_probability_drop
+        ).square().mean()
+    else:
+        target_keep = calibrated_logits.new_zeros(())
+    background = ~present
+    if bool(background.any()):
+        probabilities = torch.sigmoid(calibrated_logits[background]).flatten(1)
+        topk = min(int(background_topk), probabilities.shape[1])
+        background_peak = probabilities.topk(topk, dim=1).values.square().mean()
+    else:
+        background_peak = calibrated_logits.new_zeros(())
+    residual_regularization = residual_suppression.mean()
+    total = (
+        detection
+        + float(target_keep_weight) * target_keep
+        + float(background_peak_weight) * background_peak
+        + float(suppression_regularization) * residual_regularization
+    )
+    return total, {
+        "detection": detection,
+        "target_keep": target_keep,
+        "background_peak": background_peak,
+        "suppression_regularization": residual_regularization,
+    }
