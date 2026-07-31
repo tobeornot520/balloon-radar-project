@@ -132,3 +132,17 @@ dist/
 _cleanup_archive/
 notes/development_history/
 *.docx
+
+# Local user-owned research inputs and development transcripts
+参考资料/
+当前开发过程/
+
+# Reproducible outputs from active development workflows
+results/data_audit/field_readiness_v1/
+results/data_audit/multidomain_feature_catalog_v1/
+results/data_audit/tian_fcn_reproduction_v1/
+results/data_audit/tian_fcn_v1/
+results/data_audit/zero_doppler_candidate_veto_v1/
+results/data_audit/zero_doppler_mechanism_v1/
+results/experiment_ledger/
+results/reproduction/

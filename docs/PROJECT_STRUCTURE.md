@@ -7,12 +7,13 @@
 | `datasets/` | Manifest-driven detection, polarimetric, and ROI datasets |
 | `features/` | RD, gated polarimetric, and ROI feature construction |
 | `models/` | FCN, DPG, background calibrator, and ROI refiner models |
-| `training/` | Formal model training implementations |
-| `scripts/` | Experiment orchestration, audits, summaries, and packaging |
-| `evaluation/` | CFAR evaluation, metric analysis, and reports |
+| `training/` | Reusable formal training implementations; no duplicate CLI copies |
+| `scripts/` | User-invoked orchestration, audits, summaries, plots, and packaging |
+| `evaluation/` | Importable metrics, postprocessing, analysis, and report logic |
 | `baselines/` | Classical detection baselines |
 | `configs/` | Versioned experiment configuration |
-| `tests/` | Automated tests collected by pytest |
+| `tests/` | Automated pytest tests only; standalone audits belong in `scripts/` |
+| `utils/` | Shared provenance and small infrastructure helpers |
 
 ## Evidence and documentation
 
@@ -21,6 +22,9 @@
 | `results/data_audit/` | Manifests, alignment audits, and compact result tables |
 | `results/final_evidence/` | Frozen paper evidence and precomputed assets |
 | `docs/` | Stable conclusions, preregistration, and operating instructions |
+
+Directory-level indexes are maintained in `scripts/README.md`, `configs/README.md`,
+`results/README.md`, and `docs/INDEX.md`.
 
 Large checkpoints, raw radar data, experiment runs, and generated distributions
 are excluded from Git.
@@ -36,3 +40,23 @@ are excluded from Git.
 
 The repository has no package-level `main.py`. Use the versioned entry points
 listed in the root README.
+
+## Root boundary
+
+The project PPT, application PDF, paper PDF, `方向.md`, and `先改.md` are user-owned
+research inputs. They remain at the root until the user explicitly approves a
+reference-material migration. They are never treated as source entry points.
+
+Generated checkpoints and raw data stay local. Empty `losses/`, `metrics/`,
+`postprocess/`, `radar_processing/`, `checkpoints/`, `logs/`, and `notebooks/`
+directories are reserved local placeholders, not active modules.
+
+## Enforcement
+
+`scripts/check_project_health.py` checks:
+
+1. syntax of active Python files;
+2. required workflow files;
+3. absence of exact duplicate Python implementations in active directories;
+4. absence of root-level Python entry points;
+5. optional availability of frozen six-fold joint inputs.

@@ -1,0 +1,31 @@
+# Script entry points
+
+`scripts/` contains command-line entry points, orchestration, audits, evidence builders and plots.
+Reusable model, feature, loss and metric logic belongs in the corresponding source package rather
+than being copied into a script.
+
+## Active workflows
+
+| Workflow | Primary entry points |
+|---|---|
+| Project checks | `check_project_health.py` |
+| Experiment provenance | `run_recorded_experiment.py`, `manage_experiment_ledger.py` |
+| Dataset contracts | `validate_data_collection_manifest.py`, `audit_detection_acquisition_order.py` |
+| Field readiness | `initialize_field_readiness_evidence.py`, `audit_field_readiness_v1.py` |
+| BC-DPG | `run_bc_dpg_v3.py`, `audit_bc_dpg_v3_causal_context.py` |
+| Polarimetric Stage 3 | `run_polarimetric_representation_benchmark_v2.py` |
+| ROI Stage 4 | `run_roi_stage4_selected_sixfold_v1.py` |
+| Tian reproduction | `run_tian_fcn_reproduction_smoke.py`, `run_tian_fcn_sixfold.py` |
+| Frozen evidence | `build_bc_dpg_localization_evidence.py`, `build_roi_bc_dpg_joint_paper_assets.py` |
+| Sharing | `build_project_share_package.py` |
+
+Files named `test_*.py` in this directory are explicit historical smoke tools. Automated tests live
+only in `tests/` and are collected by pytest.
+
+## Placement rule
+
+- Put a reusable implementation in `datasets/`, `features/`, `models/`, `training/`, `evaluation/`
+  or `utils/`.
+- Put a user-invoked command in `scripts/`.
+- Do not keep identical copies in two active directories.
+- New formal experiment commands must use the experiment ledger wrapper.
