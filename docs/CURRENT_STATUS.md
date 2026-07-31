@@ -13,6 +13,66 @@
 9. A frozen localization build aggregates range-velocity errors from the six base-threshold BC-DPG test tables without training, inference, or retuning.
 10. A versioned new-data contract now enforces capture, causal-order, and locked-evaluation readiness before new data can enter formal experiments.
 
+## Active method reproduction
+
+The Tian et al. 2024 FCN method-level reproduction has an independent model,
+target objective, PIR/MDP postprocessing, validation-only threshold selection,
+one-fold trainer, and six-fold orchestrator. A first H-only six-fold run was
+completed, but it produced zero joint detections and was subsequently found to
+contain non-paper L1 distance metrics and incorrect d_min/d_5/d_avg definitions.
+It is retained only as failed-transfer diagnostic evidence and must not be cited
+as a successful or metric-valid reproduction.
+
+The corrected Fold 1 diagnosis found that all 53 validation target responsible
+cells passed PIR but none was selected by MDP. A preregistered train/validation-
+only point-GT rescue changed one target-construction setting and reached 22/53
+joint successes with 2/150 background alarms. It did not load test. Because it
+changes the paper's expanded GT and still has only 15.1% responsible-cell MDP
+selection with a severe Doppler-error tail, it is a local transfer ablation, not
+a Tian reproduction result. Component and probability-template audits show two
+nearly fixed Doppler bands: the mean target-map correlation to the shared
+template is 0.99818. A preregistered 16-negative floor reduced background Pfa
+but degraded joint Pd from 0.4151 to 0.2453 and did not shrink the bands, so it
+is rejected. No further six-fold, V/HV, random-negative scan, or PIR-threshold
+scan is authorized. A second preregistered same-range-column dense-negative
+diagnostic also failed (joint Pd 0.1132; template correlation 0.99817). The
+point-GT classification-supervision branch is closed pending reproduction-
+condition and local-data identifiability evidence.
+
+The August-September field preparation is now represented by five auditable
+gates: capability, synchronization, polarimetric calibration, dry run, and
+pilot. The checklist, evidence initializer, auditor, four-scenario matrix, and
+field SOP are implemented. All gates remain blocked until the team supplies
+real device, timing, calibration, dry-run, and pilot evidence; no readiness is
+inferred from the legacy data.
+
+## Active polarimetric transfer preparation
+
+A reusable candidate-ROI polarimetric encoder scaffold is now implemented. It
+separates H/V power, complex RD, and gated explicit polarimetric channels, then
+fuses them into a task-independent embedding with a replaceable classifier
+head. A per-channel validity mask allows unverified coherent phase channels to
+be disabled instead of treating them as calibrated physical measurements.
+
+This is architecture and interface preparation only. No pretrained checkpoint
+exists and no formal pretraining run has been authorized. Existing UAV and
+background labels may support a preregistered auxiliary representation study,
+but they cannot establish balloon-payload recognition. Formal work must keep
+train/validation acquisition groups isolated, avoid test-driven selection, and
+audit whether the embedding mainly encodes date, source, range, or velocity.
+The intended later transfer path is to replace the task head and fuse the
+polarimetric embedding with time-domain and micro-Doppler representations from
+new synchronized, calibrated balloon data.
+
+## Zero-Doppler development gate
+
+The six-fold frozen fixed-notch diagnostic improves the current false-alarm
+count while retaining joint detections, but it remains a development reference.
+The first learned dense-negative and clutter-aware variants failed to beat that
+reference on the Fold 1/4 gate and will not be expanded to six folds in their
+current form. See
+[ZERO_DOPPLER_MECHANISM_V1_CONCLUSION.md](ZERO_DOPPLER_MECHANISM_V1_CONCLUSION.md).
+
 ## Authoritative evidence
 
 - BC-DPG v3: `results/final_evidence/bc_dpg_v3_final/`
@@ -29,6 +89,13 @@
 - Data card: [DATA_CARD.md](DATA_CARD.md)
 - Metric definitions: [METRIC_DEFINITIONS.md](METRIC_DEFINITIONS.md)
 - Model-selection ledger: [MODEL_SELECTION_LEDGER.md](MODEL_SELECTION_LEDGER.md)
+- Tian FCN reproduction protocol: [TIAN_FCN_REPRODUCTION_PROTOCOL.md](TIAN_FCN_REPRODUCTION_PROTOCOL.md)
+- Tian Fold 1 diagnostic conclusion: [TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md](TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md)
+- Tian Fold 1 component mechanism: [TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md](TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md)
+- Tian reproduction-condition request: [TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md](TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md)
+- Field collection SOP: [FIELD_COLLECTION_SOP_V1.md](FIELD_COLLECTION_SOP_V1.md)
+- Field readiness pending baseline: `results/data_audit/field_readiness_v1/pending_audit/`
+- Polarimetric transfer encoder V1: [POLARIMETRIC_TRANSFER_ENCODER_V1.md](POLARIMETRIC_TRANSFER_ENCODER_V1.md)
 
 The deterministic joint evidence build contains the formal report, pooled and fold-level tables, fold-distribution summaries, Wilson and scan-group bootstrap intervals, paired McNemar diagnostics, PNG/PDF figures, and a SHA256 manifest. Build it with:
 

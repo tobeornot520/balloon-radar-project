@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -19,10 +20,32 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument(
+        "--label",
+        help=(
+            "Output-scope label. Defaults to a deterministic label derived from "
+            "the requested folds, modes, and smoke status."
+        ),
+    )
+    parser.add_argument(
         "--output-dir",
         default="results/data_audit/zero_doppler_mechanism_v1",
     )
     return parser.parse_args()
+
+
+def output_label(
+    folds: list[int], modes: list[str], smoke: bool, label: str | None
+) -> str:
+    if label is not None:
+        if not re.fullmatch(r"[a-z0-9][a-z0-9_-]*", label):
+            raise ValueError(
+                "--label must contain only lowercase letters, digits, '-' or '_'"
+            )
+        return label
+    fold_scope = "_".join(f"{fold:02d}" for fold in folds)
+    mode_scope = "_".join(modes)
+    prefix = "smoke" if smoke else "development"
+    return f"{prefix}_fold{fold_scope}_{mode_scope}"
 
 
 def experiment_name(fold: int, mode: str, seed: int, smoke: bool) -> str:
@@ -100,13 +123,17 @@ def aggregate_detail(detail: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values(["split", "mode"])
 
 
-def make_report(detail: pd.DataFrame, aggregate: pd.DataFrame, smoke: bool) -> str:
+def make_report(
+    detail: pd.DataFrame, aggregate: pd.DataFrame, smoke: bool, label: str
+) -> str:
     test_rows = aggregate.loc[aggregate["split"].eq("test")]
     return "\n".join(
         [
             "# Zero-Doppler Mechanism V1 Run Summary",
             "",
             "## Scope",
+            "",
+            f"Output label: `{label}`.",
             "",
             (
                 "Mechanical smoke only. Debug subsets verify the real checkpoint, "
@@ -139,17 +166,18 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     detail = load_detail(args.folds, args.modes, args.seed, args.smoke)
     aggregate = aggregate_detail(detail)
-    suffix = "smoke" if args.smoke else "development"
+    suffix = output_label(args.folds, args.modes, args.smoke, args.label)
     detail.to_csv(output_dir / f"detail_{suffix}.csv", index=False)
     aggregate.to_csv(output_dir / f"aggregate_{suffix}.csv", index=False)
     (output_dir / f"REPORT_{suffix}.md").write_text(
-        make_report(detail, aggregate, args.smoke), encoding="utf-8"
+        make_report(detail, aggregate, args.smoke, suffix), encoding="utf-8"
     )
     status = {
         "status": "COMPLETE_MECHANICAL_SMOKE" if args.smoke else "COMPLETE_DEVELOPMENT_RUN",
         "folds": args.folds,
         "modes": args.modes,
         "seed": args.seed,
+        "output_label": suffix,
         "row_count": int(len(detail)),
         "claim_warning": (
             "debug subsets cannot support mechanism selection"

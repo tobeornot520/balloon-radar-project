@@ -12,7 +12,10 @@ from models.zero_doppler_mechanisms import (
     FixedZeroDopplerNotch,
 )
 from scripts.audit_zero_doppler_candidate_veto_v1 import evaluate_radius
-from scripts.summarize_zero_doppler_mechanism_v1 import aggregate_detail
+from scripts.summarize_zero_doppler_mechanism_v1 import (
+    aggregate_detail,
+    output_label,
+)
 from training.zero_doppler_objectives import (
     DenseZeroDopplerMSE,
     clutter_aware_detection_loss,
@@ -147,3 +150,24 @@ def test_mechanism_summary_uses_pooled_counts_and_worst_fold() -> None:
     assert result["pooled_pfa"] == pytest.approx(20 / 150)
     assert result["worst_fold_pfa"] == pytest.approx(0.2)
     assert result["pooled_joint_pd"] == pytest.approx(27 / 30)
+
+
+def test_mechanism_summary_output_label_is_scope_specific() -> None:
+    sixfold = output_label(
+        [1, 2, 3, 4, 5, 6], ["baseline", "fixed_notch"], False, None
+    )
+    learned = output_label(
+        [1, 4], ["dense_negative", "clutter_aware"], False, None
+    )
+
+    assert sixfold != learned
+    assert sixfold.startswith("development_fold01_02_03_04_05_06_")
+    assert output_label([1, 4], ["baseline"], True, "smoke_fold01_04_all") == (
+        "smoke_fold01_04_all"
+    )
+
+
+@pytest.mark.parametrize("label", ["Development", "bad label", "../escape", ""])
+def test_mechanism_summary_rejects_unsafe_output_label(label: str) -> None:
+    with pytest.raises(ValueError):
+        output_label([1], ["baseline"], False, label)
