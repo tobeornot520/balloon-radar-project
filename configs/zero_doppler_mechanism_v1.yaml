@@ -1,0 +1,42 @@
+experiment:
+  name: zero_doppler_mechanism_v1
+  status: development_only
+  evidence_boundary: all_six_outer_folds_are_consumed_diagnostic_evidence
+  seed: 42
+
+geometry:
+  velocity_bins: 128
+  zero_doppler_index: 64
+  diagnostic_candidate_veto_half_widths: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+mechanisms:
+  fixed_soft_notch:
+    sigma_bins: 4.0
+    odds_floor: 0.05
+    requirement: score_never_increases
+  dense_zero_doppler_negative:
+    zero_band_radius: 7
+    zero_negative_weight: 4.0
+    target_guard_level: 0.10
+    positive_sample_weight: 10.0
+  clutter_aware_auxiliary:
+    hidden_channels: 16
+    maximum_suppression_logit: 4.0
+    initial_suppression_logit: 0.05
+    allowed_target_probability_drop: 0.02
+    target_keep_weight: 8.0
+    suppression_regularization: 0.01
+    requirement: calibrated_logit_never_exceeds_raw_logit
+
+selection:
+  primary_false_alarm_metric: worst_background_scan_pfa
+  secondary_false_alarm_metric: pooled_background_pfa
+  target_constraint: joint_pd_drop_no_more_than_0.01
+  report_candidate_veto_radius_without_current_joint_loss: true
+  threshold_policy: reuse_each_fold_frozen_raw_DPG_validation_threshold
+
+claim_limits:
+  - candidate_veto_is_not_equivalent_to_full_heatmap_notching
+  - no_new_blind_test_claim
+  - target_and_background_dates_are_confounded
+  - final_mechanism_requires_new_grouped_data
