@@ -15,11 +15,11 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_project_share_20260728"
+PACKAGE_NAME = "balloon_radar_results_consultation_20260731"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
-PACKAGE_DATE = "2026-07-28"
-ZIP_TIMESTAMP = (2026, 7, 28, 0, 0, 0)
+PACKAGE_DATE = "2026-07-31"
+ZIP_TIMESTAMP = (2026, 7, 31, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"
@@ -111,6 +111,26 @@ PACKAGE_FILES = (
         "share_document",
     ),
     PackageFile(
+        "docs/share/00_ONE_PAGE_SUMMARY_ZH.md",
+        "docs/00_ONE_PAGE_SUMMARY_ZH.md",
+        "share_document",
+    ),
+    PackageFile(
+        "docs/share/06_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md",
+        "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md",
+        "share_document",
+    ),
+    PackageFile(
+        "docs/share/07_QUESTIONS_FOR_SENIOR_ZH.md",
+        "docs/10_QUESTIONS_FOR_SENIOR_ZH.md",
+        "share_document",
+    ),
+    PackageFile(
+        "docs/share/08_DATA_REQUEST_CHECKLIST_ZH.md",
+        "docs/11_DATA_REQUEST_CHECKLIST_ZH.md",
+        "share_document",
+    ),
+    PackageFile(
         "docs/DATA_CARD.md",
         "docs/06_DATA_CARD_ZH.md",
         "governance_document",
@@ -129,6 +149,16 @@ PACKAGE_FILES = (
         "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
         "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
         "governance_document",
+    ),
+    PackageFile(
+        "docs/EXPERIMENT_RECORDING_PROTOCOL.md",
+        "docs/EXPERIMENT_RECORDING_PROTOCOL.md",
+        "governance_document",
+    ),
+    PackageFile(
+        "docs/FIELD_COLLECTION_SOP_V1.md",
+        "docs/FIELD_COLLECTION_SOP_V1.md",
+        "field_protocol",
     ),
     PackageFile(
         "results/final_evidence/bc_dpg_v3_final/FINAL_EVIDENCE_REPORT.md",
@@ -174,6 +204,66 @@ PACKAGE_FILES = (
         "results/data_audit/data_collection_readiness_v1/preflight.json",
         "evidence/08_CURRENT_DATA_COLLECTION_READINESS.json",
         "data_contract_readiness_manifest",
+    ),
+    PackageFile(
+        "results/data_audit/multidomain_feature_catalog_v1/REPORT.md",
+        "evidence/09_MULTIDOMAIN_FEATURE_CATALOG.md",
+        "development_feature_audit",
+    ),
+    PackageFile(
+        "docs/TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md",
+        "evidence/10_TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md",
+        "failed_reproduction_diagnostic",
+    ),
+    PackageFile(
+        "docs/TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md",
+        "evidence/11_TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md",
+        "failed_reproduction_mechanism",
+    ),
+    PackageFile(
+        "docs/TIAN_FCN_REPRODUCTION_PROTOCOL.md",
+        "evidence/12_TIAN_FCN_REPRODUCTION_PROTOCOL.md",
+        "reproduction_protocol",
+    ),
+    PackageFile(
+        "docs/TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md",
+        "evidence/13_TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md",
+        "consultation_request",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_candidate_veto_v1/REPORT.md",
+        "evidence/14_ZERO_DOPPLER_CANDIDATE_VETO.md",
+        "post_test_mechanism_diagnostic",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_mechanism_v1/REPORT_frozen_sixfold_baseline_fixed.md",
+        "evidence/15_ZERO_DOPPLER_FROZEN_SIXFOLD.md",
+        "development_mechanism_comparison",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_mechanism_v1/REPORT_comparison_fold01_04_all.md",
+        "evidence/16_ZERO_DOPPLER_FOLD01_04_COMPARISON.md",
+        "development_mechanism_gate",
+    ),
+    PackageFile(
+        "docs/ZERO_DOPPLER_MECHANISM_V1_CONCLUSION.md",
+        "evidence/17_ZERO_DOPPLER_MECHANISM_CONCLUSION.md",
+        "development_decision",
+    ),
+    PackageFile(
+        "docs/POLARIMETRIC_TRANSFER_ENCODER_V1.md",
+        "evidence/18_POLARIMETRIC_TRANSFER_ENCODER.md",
+        "architecture_preparation",
+    ),
+    PackageFile(
+        "docs/FIELD_COLLECTION_SOP_V1.md",
+        "evidence/19_FIELD_COLLECTION_SOP.md",
+        "field_protocol",
+    ),
+    PackageFile(
+        "docs/FIELD_CAPABILITY_REQUEST_V1.md",
+        "evidence/20_FIELD_CAPABILITY_REQUEST.md",
+        "field_consultation_request",
     ),
     PackageFile(
         "results/final_evidence/bc_dpg_v3_final/figures/fig1_deployment_false_alarms.png",
@@ -360,6 +450,56 @@ PACKAGE_FILES = (
         "assets/templates/data_collection_manifest_template_v1.csv",
         "data_collection_template",
     ),
+    PackageFile(
+        "results/data_audit/multidomain_feature_catalog_v1/feature_schema.csv",
+        "assets/tables/multidomain_feature_schema.csv",
+        "development_feature_table",
+    ),
+    PackageFile(
+        "results/data_audit/multidomain_feature_catalog_v1/detection_univariate_separability.csv",
+        "assets/tables/multidomain_detection_separability.csv",
+        "development_feature_table",
+    ),
+    PackageFile(
+        "results/data_audit/multidomain_feature_catalog_v1/detection_background_group_stress.csv",
+        "assets/tables/multidomain_background_group_stress.csv",
+        "development_feature_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_candidate_veto_v1/radius_tradeoff.csv",
+        "assets/tables/zero_doppler_candidate_veto_tradeoff.csv",
+        "post_test_mechanism_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_mechanism_v1/aggregate_frozen_sixfold_baseline_fixed.csv",
+        "assets/tables/zero_doppler_frozen_sixfold.csv",
+        "development_mechanism_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_mechanism_v1/aggregate_comparison_fold01_04_all.csv",
+        "assets/tables/zero_doppler_fold01_04_comparison.csv",
+        "development_mechanism_table",
+    ),
+    PackageFile(
+        "configs/field_capability_response_template_v1.csv",
+        "assets/templates/field_capability_response_template_v1.csv",
+        "field_template",
+    ),
+    PackageFile(
+        "configs/field_readiness_evidence_template_v1.csv",
+        "assets/templates/field_readiness_evidence_template_v1.csv",
+        "field_template",
+    ),
+    PackageFile(
+        "configs/pilot_scenario_matrix_v1.csv",
+        "assets/templates/pilot_scenario_matrix_v1.csv",
+        "field_template",
+    ),
+    PackageFile(
+        "configs/pilot_session_log_template_v1.csv",
+        "assets/templates/pilot_session_log_template_v1.csv",
+        "field_template",
+    ),
 )
 
 
@@ -519,7 +659,8 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
         "package_date": PACKAGE_DATE,
         "language": "zh-CN",
         "purpose": (
-            "sanitized, traceable, and hash-verifiable frozen-result excerpts; "
+            "sanitized results analysis and technical consultation package with "
+            "traceable frozen evidence and clearly labeled development diagnostics; "
             "not a self-contained reproduction package"
         ),
         "source_commit": current_commit(),
@@ -561,6 +702,15 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "evaluation_role": "internal development estimate",
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,
+            "tian_reproduction_successful": False,
+            "tian_point_gt_role": "validation-only local-transfer ablation",
+            "zero_doppler_candidate_veto_role": "post-test mechanism diagnostic",
+            "zero_doppler_fixed_notch_role": "development safety reference",
+            "zero_doppler_learned_sixfold_authorized": False,
+            "polarimetric_transfer_checkpoint_available": False,
+            "absolute_polarimetric_calibration_verified": False,
+            "physical_micro_doppler_timing_verified": False,
+            "field_readiness_gate_open": False,
         },
         "full_reproduction_requires": [
             "internal source code",

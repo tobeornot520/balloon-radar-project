@@ -24,6 +24,10 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/06_DATA_CARD_ZH.md" in destinations
     assert "docs/07_METRIC_DEFINITIONS_ZH.md" in destinations
     assert "docs/08_MODEL_SELECTION_LEDGER_ZH.md" in destinations
+    assert "docs/00_ONE_PAGE_SUMMARY_ZH.md" in destinations
+    assert "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md" in destinations
+    assert "docs/10_QUESTIONS_FOR_SENIOR_ZH.md" in destinations
+    assert "docs/11_DATA_REQUEST_CHECKLIST_ZH.md" in destinations
     assert "assets/figures/joint_fold_heterogeneity.png" in destinations
     assert "assets/tables/joint_scan_group_bootstrap.csv" in destinations
     assert "evidence/05_BC_DPG_V3_CAUSAL_CONTEXT_AUDIT.md" in destinations
@@ -31,6 +35,13 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "evidence/07_BC_DPG_LOCALIZATION_EVIDENCE.md" in destinations
     assert "evidence/08_CURRENT_DATA_COLLECTION_READINESS.md" in destinations
     assert "evidence/08_CURRENT_DATA_COLLECTION_READINESS.json" in destinations
+    assert "evidence/09_MULTIDOMAIN_FEATURE_CATALOG.md" in destinations
+    assert "evidence/10_TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md" in destinations
+    assert "evidence/14_ZERO_DOPPLER_CANDIDATE_VETO.md" in destinations
+    assert "evidence/15_ZERO_DOPPLER_FROZEN_SIXFOLD.md" in destinations
+    assert "evidence/17_ZERO_DOPPLER_MECHANISM_CONCLUSION.md" in destinations
+    assert "evidence/18_POLARIMETRIC_TRANSFER_ENCODER.md" in destinations
+    assert "evidence/19_FIELD_COLLECTION_SOP.md" in destinations
     assert "assets/tables/bc_dpg_causal_context_aggregate.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_paired_deltas.csv" in destinations
     assert "assets/tables/bc_dpg_causal_context_replay_validation.csv" in destinations
@@ -43,6 +54,9 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/tables/current_data_collection_contract_coverage.csv" in destinations
     assert "assets/contracts/data_collection_contract_v1.json" in destinations
     assert "assets/templates/data_collection_manifest_template_v1.csv" in destinations
+    assert "assets/templates/field_capability_response_template_v1.csv" in destinations
+    assert "assets/tables/zero_doppler_candidate_veto_tradeoff.csv" in destinations
+    assert "assets/tables/zero_doppler_frozen_sixfold.csv" in destinations
     assert "docs/NEW_DATA_COLLECTION_PROTOCOL.md" in destinations
     assert not any("joint_fold_false_alarms" in path for path in destinations)
 
@@ -100,6 +114,19 @@ def test_share_manifest_marks_causal_context_as_post_test(
         "azimuth_deg",
         "sample_id",
     ]
+    assert rules["tian_reproduction_successful"] is False
+    assert rules["tian_point_gt_role"] == "validation-only local-transfer ablation"
+    assert rules["zero_doppler_candidate_veto_role"] == (
+        "post-test mechanism diagnostic"
+    )
+    assert rules["zero_doppler_fixed_notch_role"] == (
+        "development safety reference"
+    )
+    assert rules["zero_doppler_learned_sixfold_authorized"] is False
+    assert rules["polarimetric_transfer_checkpoint_available"] is False
+    assert rules["absolute_polarimetric_calibration_verified"] is False
+    assert rules["physical_micro_doppler_timing_verified"] is False
+    assert rules["field_readiness_gate_open"] is False
 
 
 def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:
