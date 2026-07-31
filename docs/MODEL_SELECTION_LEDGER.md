@@ -29,6 +29,7 @@
 | 新数据合同基线 | 当前 V4 1,148 行与 v1 采集合同 | 全量旧清单 | 数据就绪审计 | locked_evaluation 为 FAIL，缺少 33 个字段；所有下游门禁被 schema 阻断 |
 | Tian FCN 扩展 GT v1 | H-only 六折原方法迁移 | 当前 V4 六折 | 首轮正式执行后发现迁移失败及旧版论文指标定义错误 | 失败诊断；不得作为成功复现或有效论文指标引用 |
 | Tian FCN point-GT | Fold 1 H train/validation | 预登记单一救援诊断 | 只改变分类目标；未加载 test | joint Pd 0.4151、Pfa 0.0133；本地迁移消融，六折仍关闭 |
+| Zero-Doppler fixed residual V2 | 固定 soft notch 后的 1,137 参数非增残差 | 先预登记 Fold 1/4 门，过门后参数不变扩展六折 | 每折验证按 joint Pd、最差背景组 Pfa、pooled Pfa、AUC、loss 选 epoch，含 epoch 0 | 六折 CPU 开发比较 109 FA、290 joint hits；当前学习型开发参考，不是部署或盲测证据 |
 
 ## 1. 必须使用的证据标签
 

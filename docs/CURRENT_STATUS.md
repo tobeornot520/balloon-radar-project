@@ -73,6 +73,15 @@ reference on the Fold 1/4 gate and will not be expanded to six folds in their
 current form. See
 [ZERO_DOPPLER_MECHANISM_V1_CONCLUSION.md](ZERO_DOPPLER_MECHANISM_V1_CONCLUSION.md).
 
+A preregistered V2 subsequently froze that fixed notch and learned only a
+bounded, zero-localized residual with direct background peak pressure. It passed
+the Fold 1/4 gate and, without parameter changes, reduced the six-fold CPU
+comparison from 120 to 109 false alarms while retaining 290 joint hits. All 11
+removed alarms are in Fold 4; no alarm was added and no paired joint hit changed.
+This is the current learned development reference, not blind or deployment
+evidence. See
+[ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md](ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md).
+
 ## Authoritative evidence
 
 - BC-DPG v3: `results/final_evidence/bc_dpg_v3_final/`

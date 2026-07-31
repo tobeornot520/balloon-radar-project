@@ -13,6 +13,10 @@ from models.zero_doppler_mechanisms import (
     FixedZeroDopplerNotch,
 )
 from scripts.audit_zero_doppler_candidate_veto_v1 import evaluate_radius
+from scripts.audit_zero_doppler_fixed_residual_v2 import (
+    aggregate_gate,
+    paired_fold_audit,
+)
 from scripts.summarize_zero_doppler_mechanism_v1 import (
     aggregate_detail,
     output_label,
@@ -192,6 +196,31 @@ def test_worst_background_group_pfa_uses_group_maximum() -> None:
     )
 
     assert worst_background_group_pfa(predictions) == pytest.approx(1.0)
+
+
+def test_fixed_residual_paired_gate_counts_only_safe_improvements() -> None:
+    fixed = pd.DataFrame(
+        {
+            "sample_id": ["b1", "b2", "t1"],
+            "target_present": [0, 0, 1],
+            "false_alarm": [True, False, False],
+            "correct_detection": [False, False, True],
+            "pred_range_index": [1, 2, 3],
+            "pred_velocity_index": [64, 20, 30],
+            "score": [0.8, 0.1, 0.9],
+        }
+    )
+    residual = fixed.copy()
+    residual.loc[0, ["false_alarm", "score"]] = [False, 0.4]
+    residual.loc[2, ["pred_velocity_index", "score"]] = [31, 0.85]
+
+    row = paired_fold_audit(fixed, residual, fold=1, selected_epoch=2)
+    result = aggregate_gate(pd.DataFrame([row]))
+
+    assert row["background_removed"] == 1
+    assert row["target_peak_changed"] == 1
+    assert row["target_joint_lost"] == 0
+    assert result["gate_pass"] is True
 
 
 def test_mechanism_summary_uses_pooled_counts_and_worst_fold() -> None:
