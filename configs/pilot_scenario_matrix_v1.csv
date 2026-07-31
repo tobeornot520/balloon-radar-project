@@ -1,0 +1,5 @@
+scenario_id,target_present,target_class,payload_class,motion_state,independent_repeats,min_duration_s,max_duration_s,video_required,same_condition_background_required,evaluation_partition,purpose
+PILOT_BG,0,background,,,3,120,300,true,false,development,Measure target-free background and end-to-end false-alarm inputs
+PILOT_BALLOON_UNLOADED,1,balloon_unloaded,,stable,3,120,300,true,true,development,Establish the unloaded balloon reference under the same platform and geometry
+PILOT_BALLOON_LOADED_STABLE,1,balloon_loaded,pilot_payload_v1,stable,3,120,300,true,true,development,Isolate payload effect while keeping the balloon and motion state controlled
+PILOT_BALLOON_LOADED_MOTION,1,balloon_loaded,pilot_payload_v1,swing_or_natural_motion,3,120,300,true,true,development,Verify continuous timing and state-segment labels for micro-Doppler preparation

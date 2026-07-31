@@ -3,6 +3,9 @@
 版本：2026-07-28
 
 本台账记录当前主要模型、表征和规则的选择来源。它用于区分验证集选择、开发折反馈、测试后诊断和真正的锁定盲测。
+逐次运行的命令、代码状态、测试集访问和结果路径另见
+[实验记录协议](EXPERIMENT_RECORDING_PROTOCOL.md)及
+`results/experiment_ledger/experiments.csv`。
 
 | 对象 | 选择或冻结内容 | 使用的数据 | 决策来源 | 当前证据角色 |
 |---|---|---|---|---|
@@ -24,6 +27,8 @@
 | 推断顺序因果 smoke | Fold 1 小样本 train/val，窗口 4，2 epochs | 每类每 split 12 个样本 | 仅验证接口；未加载 test | development-only，不提供性能证据，不参与窗口选择 |
 | 冻结定位证据 | 六折 full BC-DPG 的 base-threshold 预测 | 318 个测试目标 | 测试后固定结果聚合；不训练、不推理、不调阈值 | 同时报告无条件、过阈值条件和联合成功口径；不用于选模型 |
 | 新数据合同基线 | 当前 V4 1,148 行与 v1 采集合同 | 全量旧清单 | 数据就绪审计 | locked_evaluation 为 FAIL，缺少 33 个字段；所有下游门禁被 schema 阻断 |
+| Tian FCN 扩展 GT v1 | H-only 六折原方法迁移 | 当前 V4 六折 | 首轮正式执行后发现迁移失败及旧版论文指标定义错误 | 失败诊断；不得作为成功复现或有效论文指标引用 |
+| Tian FCN point-GT | Fold 1 H train/validation | 预登记单一救援诊断 | 只改变分类目标；未加载 test | joint Pd 0.4151、Pfa 0.0133；本地迁移消融，六折仍关闭 |
 
 ## 1. 必须使用的证据标签
 

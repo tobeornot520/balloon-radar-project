@@ -11,6 +11,11 @@
 - `configs/data_collection_contract_v1.json`
 - `configs/data_collection_manifest_template_v1.csv`
 
+本合同检查已经落盘的逐样本数据。采集前的设备能力、时间同步、H/V 幅相标定、
+dry run 和 Pilot 门禁由 [FIELD_COLLECTION_SOP_V1.md](FIELD_COLLECTION_SOP_V1.md)
+及 `scripts/audit_field_readiness_v1.py` 管理。两层都必须通过，不能用完整 manifest
+替代设备和同步证据。
+
 模板只有表头，不包含虚构样本。原始 IQ、标签、标定文件和包含敏感位置的信息仍由数据持有方在受控存储中管理，不进入 Git。
 
 ## 2. 三档门禁
