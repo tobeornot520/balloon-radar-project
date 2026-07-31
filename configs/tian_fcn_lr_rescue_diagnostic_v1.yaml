@@ -1,0 +1,51 @@
+experiment:
+  name: tian_fcn_lr_rescue_diagnostic_v1
+  parent: tian_fcn_reproduction_v1
+  evidence_role: train_validation_only_model_rescue_diagnostic
+  created_at: 2026-07-28
+
+trigger:
+  formal_v1_completed_folds: [1, 2, 3, 4, 5, 6]
+  formal_v1_pooled_joint_pd: 0.0
+  validation_diagnosis:
+    class_peak_scores_collapsed: true
+    peak_spatial_location_constant: true
+    classification_feature_nonzero_fraction_initial: 0.68795
+    classification_feature_nonzero_fraction_trained: 0.03963
+    regression_offsets_saturated: true
+
+frozen_diagnostic_scope:
+  fold: 1
+  splits_loaded: [train, val]
+  test_split_loaded: false
+  channel: H
+  seed: 42
+  architecture_changed: false
+  targets_changed: false
+  objective_changed: false
+  initialization_changed: false
+  postprocess_changed: false
+
+single_change:
+  rationale: adapt paper SGD rates to local percentile-normalized RD input
+  learning_rate_scale: 0.01
+  classification_learning_rate: 0.001
+  regression_learning_rate: 0.001
+  joint_learning_rate: 0.0005
+
+acceptance:
+  required_before_new_sixfold_run:
+    - target_and_background_peak_distributions_are_not_identical
+    - target_responsible_grid_scores_are_not_constant
+    - regression_offsets_are_not_saturated_for_all_targets
+    - validation_joint_pd_is_greater_than_zero
+  prohibited:
+    - loading_test_for_diagnostic_selection
+    - trying_multiple_learning_rate_scales_and_choosing_by_seen_test_results
+
+implementation_audit_2026_07_28:
+  issue: padded candidates were ranked before decoded-coordinate validity filtering
+  fix: filter decoded out-of-map candidates before PIR maximum and components
+  hyperparameters_changed_after_first_diagnostic: false
+  rerun_scope: fold_1_train_validation_only
+  test_split_loaded: false

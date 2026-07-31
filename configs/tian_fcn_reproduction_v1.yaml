@@ -1,0 +1,58 @@
+experiment:
+  name: tian_fcn_reproduction_v1
+  evidence_role: method_reproduction_and_local_data_transfer
+  paper_doi: 10.1109/TGRS.2024.3358956
+
+data:
+  primary_channel: H
+  migration_channels: [V, HV]
+  input_axes: [channel, doppler, range]
+  local_input_shape: [128, 100]
+  pad_to_stride: true
+  padding_value: 0.0
+  split_strategy: grouped_source_file_and_scan_holdout
+
+model:
+  shared_layers: 1
+  convolution_kernels: [[3, 5], [3, 5], [3, 5], [3, 3], [1, 1]]
+  pooling_kernels: [[2, 4], [2, 4]]
+  output_stride: [4, 16]
+  theoretical_receptive_field: [20, 72]
+  channels: [16, 16, 32, 64]
+
+targets:
+  range_extent: 5
+  doppler_extent: 7
+  negative_to_positive_ratio: 1.0
+  background_negative_units: 16
+
+training:
+  stages: [classification, regression, joint]
+  # Local preregistration: the paper does not freeze stage epoch counts.
+  stage_epochs: [20, 20, 20]
+  optimizer: SGD
+  momentum: 0.9
+  classification_learning_rate: 0.1
+  regression_learning_rate: 0.1
+  joint_learning_rate: 0.05
+  learning_rate_decay_every_epochs: 10
+  learning_rate_decay_factor: 0.1
+  primary_regression_weight: 10.0
+  sensitivity_regression_weight: 20.0
+  seed: 42
+
+postprocess:
+  probability_margin: 0.1
+  paper_dynamic_threshold: max_probability_minus_margin
+  local_background_adaptation: validation_selected_absolute_threshold
+  connected_component_policy: highest_average_probability
+  positioning: minimum_euclidean_normalized_offset
+
+evaluation:
+  paper_metrics: [pd, paper_pf, d_min, d_5, d_avg, seconds_per_map, flops]
+  project_metrics: [joint_pd, pfa, range_mae_gates, velocity_mae_bins]
+  max_validation_false_alarms: 2
+  absolute_threshold_comparison: probability_greater_than_threshold
+  localization_tolerance_range_gates: 2
+  localization_tolerance_velocity_bins: 3
+  paper_distance_threshold_cells: 0
