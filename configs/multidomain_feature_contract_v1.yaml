@@ -1,0 +1,67 @@
+contract:
+  name: multidomain_radar_feature_catalog_v1
+  detection_local_anchor_policy: frozen_out_of_fold_DPG_candidate
+  classification_local_anchor_policy: strongest_combined_HV_power_RD_cell
+  scene_anchor_policy: strongest_combined_HV_power_RD_cell
+  label_used_for_anchor: false
+  physical_frequency_units_available_for_all_current_data: false
+
+domains:
+  time:
+    current_status: available
+    inputs: [complex_H_slow_time, complex_V_slow_time]
+    outputs:
+      - magnitude_statistics
+      - lag1_coherence
+      - HV_complex_coherence
+      - relative_phase_resultant
+      - relative_power_ratio
+  polarimetric:
+    current_status: relative_only
+    outputs:
+      - relative_ZDR_like
+      - local_rho_HV
+      - relative_phase_resultant
+      - normalized_Stokes_like
+    blocked_absolute_claims: [absolute_ZDR, absolute_PhiDP]
+    unlock_requires: [simultaneous_HV_capture, amplitude_calibration, phase_calibration]
+  range_doppler:
+    current_status: available
+    outputs:
+      - peak_and_anchor_coordinates
+      - spectral_width
+      - spectral_entropy
+      - main_band_and_sideband_energy
+      - zero_and_edge_Doppler_energy
+  time_frequency:
+    current_status: normalized_frequency_descriptors_available
+    current_detection_windows: 128
+    current_uav_classification_windows: 961
+    long_window_gate_pulses: 512
+    blocked_physical_claims: [micro_Doppler_Hz, rotor_rate_Hz]
+    unlock_requires: [PRF, continuous_order, sample_duration, target_aligned_events]
+  trajectory:
+    current_status: blocked
+    unlock_requires: [verified_timestamps, hardware_sequence, continuous_track_id]
+  wind_dynamics:
+    current_status: blocked
+    unlock_requires: [wind_vector, target_dimensions, payload_mass, continuous_trajectory]
+
+analysis_rules:
+  - do_not_train_detection_claims_from_date_confounded_target_background_labels
+  - use_source_file_as_independent_group
+  - report_pooled_and_worst_background_group_behavior
+  - current_classification_data_are_UAV_only
+  - current_heldout_detection_partition_is_consumed_historical_evidence
+  - fit_scalar_normalization_on_training_acquisition_groups_only
+
+fusion_interface:
+  domains: [quality, time, rd, polar, tf]
+  current_dimensions: [3, 11, 22, 8, 12]
+  missing_domain_policy: explicit_validity_mask_and_zero_fusion_weight
+  replaceable_heads:
+    - target_class
+    - balloon_loaded_state
+    - payload_class
+    - motion_state
+  training_status: scaffold_only
