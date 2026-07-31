@@ -1,0 +1,52 @@
+model:
+  name: polarimetric_transfer_encoder_v1
+  input_contract: roi_source_10
+  input_channels:
+    - H_power
+    - V_power
+    - Re_H
+    - Im_H
+    - Re_V
+    - Im_V
+    - gated_relative_ZDR_like
+    - gated_local_rho_HV
+    - gated_cos_relative_phase
+    - gated_sin_relative_phase
+  branches:
+    power: [0, 1]
+    complex_rd: [2, 3, 4, 5]
+    gated_explicit_polarimetric: [6, 7, 8, 9]
+  embedding_dim: 128
+  spatial_input: arbitrary_roi_height_and_width
+  channel_validity_mask: supported
+
+current_stage:
+  role: reusable_encoder_scaffold_only
+  allowed_data: existing_train_and_validation_candidate_rois
+  allowed_tasks:
+    - representation_sanity_checks
+    - validation_only_pretraining_design
+    - target_background_auxiliary_pretraining
+  prohibited_claims:
+    - balloon_payload_recognition
+    - absolute_ZDR_or_PhiDP_without_calibration
+    - cross_date_or_cross_site_generalization
+    - test_based_pretraining_selection
+
+future_transfer:
+  reuse:
+    - load_encoder_weights
+    - replace_task_classifier
+    - optionally_freeze_then_gradually_unfreeze_encoder
+    - fuse_embedding_with_time_domain_and_micro_doppler_embeddings
+  required_before_payload_training:
+    - coherent_or_documented_HV_timing
+    - calibration_id_and_channel_validity
+    - balloon_payload_labels
+    - same_condition_background_and_unloaded_balloon_controls
+    - group_isolated_train_validation_locked_test_splits
+
+status:
+  implementation: READY
+  pretrained_checkpoint: NONE
+  formal_experiment_authorized: false
