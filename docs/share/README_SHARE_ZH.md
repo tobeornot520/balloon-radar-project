@@ -9,15 +9,16 @@
 1. [一页式成果摘要](docs/00_ONE_PAGE_SUMMARY_ZH.md)：可直接转发的项目结论和五个核心问题。
 2. [项目整体介绍](docs/01_PROJECT_OVERVIEW_ZH.md)：任务定位、技术路线和工程构成。
 3. [开发历史简述](docs/02_DEVELOPMENT_HISTORY_ZH.md)：从基础定位到背景校准和联合审计的主要转折。
-4. [当前成果与证据](docs/03_RESULTS_AND_EVIDENCE_ZH.md)：冻结主结果、折间差异、不确定性和结论边界。
-5. [近期成果与失败分析](docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md)：多域特征、零频抑制、Tian 复现和极化准备。
-6. [向学长请教清单](docs/10_QUESTIONS_FOR_SENIOR_ZH.md)和[数据需求清单](docs/11_DATA_REQUEST_CHECKLIST_ZH.md)：可直接用于交流。
-7. [对外分享提纲](docs/04_SHARING_TALK_TRACK_ZH.md)与[复核入口和后续计划](docs/05_REPRODUCTION_AND_NEXT_STEPS_ZH.md)。
-8. [数据卡](docs/06_DATA_CARD_ZH.md)、[指标定义](docs/07_METRIC_DEFINITIONS_ZH.md)、[模型选择台账](docs/08_MODEL_SELECTION_LEDGER_ZH.md)和[新数据采集协议](docs/NEW_DATA_COLLECTION_PROTOCOL.md)：评价口径与门禁。
+4. [项目历史重建与认知修订](docs/02A_HISTORICAL_PROJECT_RECONSTRUCTION_ZH.md)：对 14 份历史导出的逐阶段审计，以及早期结论与当前证据的差异。
+5. [当前成果与证据](docs/03_RESULTS_AND_EVIDENCE_ZH.md)：冻结主结果、折间差异、不确定性和结论边界。
+6. [近期成果与失败分析](docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md)：多域特征、零频抑制、Tian 复现和极化准备。
+7. [向学长请教清单](docs/10_QUESTIONS_FOR_SENIOR_ZH.md)和[数据需求清单](docs/11_DATA_REQUEST_CHECKLIST_ZH.md)：可直接用于交流。
+8. [对外分享提纲](docs/04_SHARING_TALK_TRACK_ZH.md)与[复核入口和后续计划](docs/05_REPRODUCTION_AND_NEXT_STEPS_ZH.md)。
+9. [数据卡](docs/06_DATA_CARD_ZH.md)、[指标定义](docs/07_METRIC_DEFINITIONS_ZH.md)、[模型选择台账](docs/08_MODEL_SELECTION_LEDGER_ZH.md)和[新数据采集协议](docs/NEW_DATA_COLLECTION_PROTOCOL.md)：评价口径与门禁。
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 
-## 2026-07-31 新增进展
+## 2026-07-31 至 2026-08-01 新增进展
 
 - 完成 56 个时域、极化、时频和 RD 特征的候选锚定目录及组依赖审计；
 - 定位零多普勒附近的集中虚警机制，并完成 candidate veto、固定 soft notch、
@@ -77,4 +78,4 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 
 本包不包含原始 MAT/IQ 数据、标签明细、逐样本预测、checkpoint、训练日志、开发聊天记录、个人路径或访问凭据。哈希只能校验包内文件是否变化，不能替代从源码和数据重新计算结果。包内数字属于当前数据上的内部开发评价或明确标注的两折诊断证据，不代表跨日期、跨场地盲测、严格实时部署或空飘球载荷分类性能。
 
-分享包版本：`2026-07-31`
+分享包版本：`2026-08-01`

@@ -15,11 +15,11 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_consultation_20260731"
+PACKAGE_NAME = "balloon_radar_results_consultation_20260801"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
-PACKAGE_DATE = "2026-07-31"
-ZIP_TIMESTAMP = (2026, 7, 31, 0, 0, 0)
+PACKAGE_DATE = "2026-08-01"
+ZIP_TIMESTAMP = (2026, 8, 1, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"
@@ -94,6 +94,11 @@ PACKAGE_FILES = (
         "docs/share/02_DEVELOPMENT_HISTORY_ZH.md",
         "docs/02_DEVELOPMENT_HISTORY_ZH.md",
         "share_document",
+    ),
+    PackageFile(
+        "docs/HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md",
+        "docs/02A_HISTORICAL_PROJECT_RECONSTRUCTION_ZH.md",
+        "historical_reconstruction",
     ),
     PackageFile(
         "docs/share/03_RESULTS_AND_EVIDENCE_ZH.md",
