@@ -219,10 +219,11 @@ def make_readme(queue: pd.DataFrame, summary: pd.DataFrame) -> str:
 | `review_status` | `reviewed`、`needs_more_context`、`unavailable` |
 | `visible_pattern` | `near_zero_doppler_peak`、`multiple_peaks`、`broad_structure`、`edge_peak`、`no_clear_pattern` |
 | `physical_class` | 默认 `unknown`；只有独立场景记录支持时才填具体类别 |
+| `evidence_source` | 默认 `prediction_and_relative_features_only`；填写具体物理类别时改为 `independent_scene_record` |
 | `review_note` | 描述你实际看到了什么，不写推测性因果结论 |
 
 不要根据文件名、日期、分数或 H/V 数值单独推断地物类别。完成后保存为新的版本文件，
-不要覆盖 `review_queue.csv`。
+不要覆盖 `review_queue.csv`。之后运行 `audit_zero_doppler_human_review_v1.py` 检查复核结果。
 
 ## 文件
 
