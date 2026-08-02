@@ -121,6 +121,11 @@ PACKAGE_FILES = (
         "paper_scope_document",
     ),
     PackageFile(
+        "docs/EXTERNAL_FACT_REQUEST_MESSAGE_V1.md",
+        "docs/16_EXTERNAL_FACT_REQUEST_MESSAGE_V1_ZH.md",
+        "external_fact_request",
+    ),
+    PackageFile(
         "configs/current_direction_completion_v1.json",
         "assets/contracts/current_direction_completion_v1.json",
         "direction_completion_contract",
