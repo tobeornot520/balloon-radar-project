@@ -101,6 +101,11 @@ PACKAGE_FILES = (
         "historical_reconstruction",
     ),
     PackageFile(
+        "docs/PROJECT_TASK_LEDGER.md",
+        "docs/12_PROJECT_TASK_LEDGER_ZH.md",
+        "project_governance_document",
+    ),
+    PackageFile(
         "docs/share/03_RESULTS_AND_EVIDENCE_ZH.md",
         "docs/03_RESULTS_AND_EVIDENCE_ZH.md",
         "share_document",
