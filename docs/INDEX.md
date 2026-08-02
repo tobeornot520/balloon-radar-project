@@ -8,6 +8,7 @@
 - `MODEL_SELECTION_LEDGER.md`: model-selection history and claim boundaries
 - `HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md`: audited reconstruction of the 14 local history exports and their corrections
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
+- `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 
 ## Detection and localization
 

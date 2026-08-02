@@ -106,6 +106,11 @@ PACKAGE_FILES = (
         "project_governance_document",
     ),
     PackageFile(
+        "docs/TEAM_REPRODUCTION_GUIDE_ZH.md",
+        "docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md",
+        "reproduction_guide",
+    ),
+    PackageFile(
         "docs/share/03_RESULTS_AND_EVIDENCE_ZH.md",
         "docs/03_RESULTS_AND_EVIDENCE_ZH.md",
         "share_document",
