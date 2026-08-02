@@ -111,6 +111,11 @@ PACKAGE_FILES = (
         "reproduction_guide",
     ),
     PackageFile(
+        "docs/MULTIDOMAIN_FEATURE_GATE_V1.md",
+        "docs/14_MULTIDOMAIN_FEATURE_GATE_V1_ZH.md",
+        "feature_governance_document",
+    ),
+    PackageFile(
         "docs/share/03_RESULTS_AND_EVIDENCE_ZH.md",
         "docs/03_RESULTS_AND_EVIDENCE_ZH.md",
         "share_document",
