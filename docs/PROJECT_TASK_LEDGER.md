@@ -63,6 +63,20 @@
 4. 失败判据和停止条件已经确定；
 5. 测试集只评价一次，结果不反向选择方案。
 
+### 当前方向完成判定
+
+“当前方向完成”不等于项目结束，也不等于可以跳过新数据。它指当前 UAV 检测定位、虚警
+机制和后续研究边界已形成可交付闭环。判定由
+`configs/current_direction_completion_v1.json` 定义，并用以下命令每次复查：
+
+```bash
+python scripts/check_current_direction_completion_v1.py --overwrite
+```
+
+只有该检查输出 `COMPLETE` 才提醒负责人“当前方向任务已全部完成”；输出
+`BLOCKED_EXTERNAL` 或 `IN_PROGRESS` 时，必须先完成 `remaining_actions.csv` 的对应动作，
+不得因为等待外部事实而直接启动新模型训练。
+
 ## 3. 待解决问题台账
 
 状态含义：`已完成` 表示当前证据已具备；`进行中` 表示有代码或结果但仍需验收；

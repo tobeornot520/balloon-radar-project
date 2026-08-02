@@ -116,6 +116,11 @@ PACKAGE_FILES = (
         "feature_governance_document",
     ),
     PackageFile(
+        "configs/current_direction_completion_v1.json",
+        "assets/contracts/current_direction_completion_v1.json",
+        "direction_completion_contract",
+    ),
+    PackageFile(
         "docs/share/03_RESULTS_AND_EVIDENCE_ZH.md",
         "docs/03_RESULTS_AND_EVIDENCE_ZH.md",
         "share_document",

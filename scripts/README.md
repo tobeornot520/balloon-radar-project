@@ -8,7 +8,7 @@ than being copied into a script.
 
 | Workflow | Primary entry points |
 |---|---|
-| Project checks | `check_project_health.py` |
+| Project checks | `check_project_health.py`, `check_current_direction_completion_v1.py` |
 | Experiment provenance | `run_recorded_experiment.py`, `manage_experiment_ledger.py` |
 | Dataset contracts | `validate_data_collection_manifest.py`, `audit_detection_acquisition_order.py` |
 | Field readiness | `initialize_field_readiness_evidence.py`, `audit_field_readiness_v1.py` |

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "milestone_id": "current_direction_evidence_closure_v1",
+  "title": "当前研究方向证据闭环",
+  "completion_rule": "All required items must be complete. External prerequisites remain visible as blockers and must never be inferred from legacy files.",
+  "items": [
+    {
+      "id": "CD01",
+      "ledger_ids": ["D03", "D08", "D09", "D14"],
+      "title": "现有检测、定位和零多普勒证据边界冻结",
+      "owner": "assistant",
+      "status": "complete",
+      "evidence": "docs/CURRENT_STATUS.md; docs/ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md",
+      "next_action": "Keep frozen evidence separate from new-data evaluation."
+    },
+    {
+      "id": "CD02",
+      "ledger_ids": ["D05", "D06", "D07"],
+      "title": "多域特征当前数据放行门冻结",
+      "owner": "assistant",
+      "status": "complete",
+      "evidence": "docs/MULTIDOMAIN_FEATURE_GATE_V1.md",
+      "next_action": "Do not start a new feature-fusion training run on consumed, date-confounded data."
+    },
+    {
+      "id": "CD03",
+      "ledger_ids": ["D04"],
+      "title": "Fold 4 的 11 个 P0 零多普勒误警人工复核",
+      "owner": "user",
+      "status": "pending_user",
+      "evidence": "results/data_audit/zero_doppler_review_atlas_v1/; results/data_audit/zero_doppler_human_review_v1/",
+      "next_action": "Review the 11 P0 atlas cases, save a separate CSV, and run the review audit."
+    },
+    {
+      "id": "CD04",
+      "ledger_ids": ["D01", "D02"],
+      "title": "H/V 通道、IQ 处理链、PRF 和距离-速度轴事实确认",
+      "owner": "user",
+      "status": "blocked_external",
+      "evidence": "docs/FIELD_CAPABILITY_REQUEST_V1.md; docs/DATA_CARD.md",
+      "next_action": "Obtain an attributable answer, configuration export, or minimal raw sample from the data/device owner."
+    },
+    {
+      "id": "CD05",
+      "ledger_ids": ["D10"],
+      "title": "Tian 2024 复现条件最小核对",
+      "owner": "user",
+      "status": "blocked_external",
+      "evidence": "docs/TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md",
+      "next_action": "Obtain a preprocessing/label/configuration answer, one alignment example, or a same-domain dataset statement."
+    },
+    {
+      "id": "CD06",
+      "ledger_ids": ["D15", "D16"],
+      "title": "可追溯交付、队员复现说明与分享包",
+      "owner": "assistant",
+      "status": "complete",
+      "evidence": "docs/TEAM_REPRODUCTION_GUIDE_ZH.md; dist/balloon_radar_results_consultation_20260802/",
+      "next_action": "Keep only the latest share package and its immediate predecessor."
+    }
+  ]
+}

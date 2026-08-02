@@ -29,6 +29,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/12_PROJECT_TASK_LEDGER_ZH.md" in destinations
     assert "docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md" in destinations
     assert "docs/14_MULTIDOMAIN_FEATURE_GATE_V1_ZH.md" in destinations
+    assert "assets/contracts/current_direction_completion_v1.json" in destinations
     assert "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md" in destinations
     assert "docs/10_QUESTIONS_FOR_SENIOR_ZH.md" in destinations
     assert "docs/11_DATA_REQUEST_CHECKLIST_ZH.md" in destinations
