@@ -34,7 +34,8 @@
 以下命令在项目根目录执行。不要把个人绝对路径写入 manifest、日志或提交。
 
 ```bash
-git checkout 41cb31f
+# 从分享包 MANIFEST.json 的 source_commit 取得精确提交，不使用文档里的旧哈希。
+git checkout <source_commit>
 conda env create -f environment.yml
 conda activate radar-torch
 python scripts/check_project_health.py --require-joint-inputs
@@ -135,6 +136,30 @@ python scripts/build_project_share_package.py --overwrite
 
 V2 是开发参考，不是盲测或部署结果。不能把 CPU 重推理的 `187` 与冻结 GPU 表中的 `186`
 混为同一个基线。
+
+### 零多普勒人工复核
+
+这是对既有预测的人工审计，不训练模型、不选择阈值，也不生成新的性能结论。前提是仓库中
+已有对应六折的 fixed-notch/residual 预测、特征目录和原始 MAT/IQ。先构建原始队列和 P0 图册：
+
+```bash
+python scripts/build_zero_doppler_human_review_queue_v1.py --overwrite
+python scripts/build_zero_doppler_review_atlas_v1.py --overwrite
+```
+
+将 `review_queue.csv` 另存为带日期的新文件，只先复核图册中的 11 个
+`P0_removed_by_residual` 条目。`reviewed` 必须填写可见结构和备注；没有独立场景记录时
+`physical_class` 必须保持 `unknown`。如果填写具体类别，必须把 `evidence_source` 写为
+`independent_scene_record` 并在备注中说明依据。完成后审计另存版本：
+
+```bash
+python scripts/audit_zero_doppler_human_review_v1.py \
+  --reviewed-queue results/data_audit/zero_doppler_human_review_v1/review_queue_reviewer_YYYYMMDD.csv \
+  --output-dir results/data_audit/zero_doppler_human_review_summary_reviewer_YYYYMMDD
+```
+
+图册、逐样本队列和复核汇总都只在受控本地目录保存，不进入分享包。审计输出为
+`INCOMPLETE` 仅表示还有待复核项，并不是失败或物理结论。
 
 ### Tian FCN
 
