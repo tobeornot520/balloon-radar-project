@@ -19,6 +19,8 @@ def test_review_queue_contains_fixed_notch_false_alarms_and_relative_features() 
             "score_residual": [0.2, 0.6, 0.1],
             "pred_range_index_fixed": [30, 40, 50],
             "pred_velocity_index_fixed": [64, 70, 40],
+            "pred_range_index_residual": [30, 39, 50],
+            "pred_velocity_index_residual": [63, 69, 40],
         }
     )
     features = pd.DataFrame(
@@ -35,6 +37,8 @@ def test_review_queue_contains_fixed_notch_false_alarms_and_relative_features() 
     assert queue["sample_id"].tolist() == ["removed", "retained"]
     assert queue["residual_removed"].tolist() == [True, False]
     assert queue["zero_velocity_distance_bins"].tolist() == [0, 6]
+    assert queue["pred_range_index_residual"].tolist() == [30, 39]
+    assert queue["pred_velocity_index_residual"].tolist() == [63, 69]
     assert queue.loc[0, "review_priority"] == "P0_removed_by_residual"
     assert queue.loc[1, "review_priority"] == "P1_near_zero_doppler"
     assert queue.loc[0, "physical_class"] == "unknown"

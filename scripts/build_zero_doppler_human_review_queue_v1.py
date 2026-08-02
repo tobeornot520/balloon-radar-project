@@ -171,6 +171,8 @@ def prepare_review_queue(
         "score_delta_residual_minus_fixed",
         "pred_range_index_fixed",
         "pred_velocity_index_fixed",
+        "pred_range_index_residual",
+        "pred_velocity_index_residual",
         "zero_velocity_distance_bins",
         "fixed_notch_false_alarm",
         "residual_false_alarm",
