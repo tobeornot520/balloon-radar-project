@@ -126,6 +126,11 @@ PACKAGE_FILES = (
         "external_fact_request",
     ),
     PackageFile(
+        "docs/ZERO_DOPPLER_P0_REVIEW_PRESCREEN_V1.md",
+        "evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md",
+        "human_review_prescreen",
+    ),
+    PackageFile(
         "configs/current_direction_completion_v1.json",
         "assets/contracts/current_direction_completion_v1.json",
         "direction_completion_contract",

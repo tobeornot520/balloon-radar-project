@@ -18,8 +18,9 @@
 10. [多域特征候选放行门](docs/14_MULTIDOMAIN_FEATURE_GATE_V1_ZH.md)：当前特征的允许用途、禁止用途和下一次训练的条件。
 11. [当前论文主线与写作边界](docs/15_PAPER_MAINLINE_V1_ZH.md)：当前可写贡献、主表和不能跨越的结论边界。
 12. [外部事实确认可转发消息](docs/16_EXTERNAL_FACT_REQUEST_MESSAGE_V1_ZH.md)：向学长和设备方索取最小关键条件的短消息。
-13. [项目任务台账](docs/12_PROJECT_TASK_LEDGER_ZH.md)：持续更新的问题、分工、验收标准和下一动作。
-14. [队员复现指南](docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md)：按材料完整程度区分分享包复核、冻结重放和重新训练。
+13. [零多普勒 P0 人工复核预筛](evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md)：聚合结构事实、复核顺序和结论边界。
+14. [项目任务台账](docs/12_PROJECT_TASK_LEDGER_ZH.md)：持续更新的问题、分工、验收标准和下一动作。
+15. [队员复现指南](docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md)：按材料完整程度区分分享包复核、冻结重放和重新训练。
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 
