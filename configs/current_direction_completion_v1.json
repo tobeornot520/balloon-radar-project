@@ -10,7 +10,7 @@
       "title": "现有检测、定位和零多普勒证据边界冻结",
       "owner": "assistant",
       "status": "complete",
-      "evidence": "docs/CURRENT_STATUS.md; docs/ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md",
+      "evidence": "docs/CURRENT_STATUS.md; docs/ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md; docs/PAPER_MAINLINE_V1.md",
       "next_action": "Keep frozen evidence separate from new-data evaluation."
     },
     {
