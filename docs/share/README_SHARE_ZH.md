@@ -22,7 +22,7 @@
 14. [下一阶段研究与数据计划](docs/17_NEXT_STAGE_PLAN_20260803_ZH.md)：任务分工、数据规格、算法放行门和停止规则。
 15. [项目任务台账](docs/12_PROJECT_TASK_LEDGER_ZH.md)：持续更新的问题、分工、验收标准和下一动作。
 16. [队员复现指南](docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md)：按材料完整程度区分分享包复核、冻结重放和重新训练。
-17. [外部公开数据核验](evidence/22_EXTERNAL_PUBLIC_DATA_AUDIT.md)：LAT-MRICD/LSS 的来源、规模、划分风险与可用边界。
+17. [外部公开数据核验](docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)：LAT-MRICD/LSS 的来源、规模、划分风险与可用边界。
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 

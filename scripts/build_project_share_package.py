@@ -137,7 +137,7 @@ PACKAGE_FILES = (
     ),
     PackageFile(
         "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
-        "evidence/22_EXTERNAL_PUBLIC_DATA_AUDIT.md",
+        "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
         "external_public_data_audit",
     ),
     PackageFile(
