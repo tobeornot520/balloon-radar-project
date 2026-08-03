@@ -1,6 +1,6 @@
 # 当前检测数据卡
 
-版本：2026-07-28
+版本：2026-08-03
 
 ## 1. 适用范围
 
@@ -75,3 +75,17 @@
 下一批数据必须使用 `configs/data_collection_manifest_template_v1.csv`，并通过 `scripts/validate_data_collection_manifest.py` 的分级预检。字段和跨行规则见 [NEW_DATA_COLLECTION_PROTOCOL.md](NEW_DATA_COLLECTION_PROTOCOL.md)。
 
 当前 V4 清单在 `locked_evaluation` 档为 FAIL：40 个合同字段中缺少 33 个，后续完整性、因果顺序和锁定评价检查均被 schema 门禁阻断。该结果位于 `results/data_audit/data_collection_readiness_v1/`。
+
+## 9. 外部公开数据补充：LAT-MRICD-1.0
+
+2026-08-03 从期刊官方补充材料入口取得 LAT-MRICD-1.0。其 33 个 MAT 文件包含 7,119 条
+X/Ku HRRP 和 16,072 条 S/X/Ku 窄带 I/Q 记录，可用于 UAV/鸟/气象的大类分组基线、
+归一化频率微动特征和跨频段迁移预研。
+
+该数据集与当前冻结 H/V 检测数据是两个独立证据对象：它没有 H/V 极化通道、空飘球标签，
+也没有在当前材料中确认 PRF、时间戳、连续 session 或同事件跨频配对。不得用它补写当前
+H/V 数据的设备事实，或报告物理 Hz 微多普勒、极化和空飘球识别结论。
+
+批次审计发现 batch 编号存在跨类别/型号碰撞，因此禁止随机拆行。第一轮算法必须按
+`(representation, band_code, batch_code)` 保守分组。完整来源、哈希、规模与使用边界见
+[外部公开数据核验](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)。

@@ -16,6 +16,9 @@
 
 当前脱敏分享包属于 **A 级**。它是可追溯、可校验的成果摘录，不是自包含的训练包。
 
+LAT-MRICD-1.0 是另一个公开数据证据对象。队员可自行从期刊官方补充材料取得原始 ZIP，
+但项目分享包不会代为分发；下载后必须先核对 ZIP SHA256 和批次审计，再运行算法。
+
 ## 2. 队员需要向项目负责人申请的材料
 
 不要把原始数据和权重直接放进公共分享包。队员在受控的项目目录中申请：
@@ -52,6 +55,17 @@ git status --short
 ```
 
 预期：Python 3.11、项目健康检查通过、测试全部通过、工作区没有未说明的代码改动。
+
+公开 LAT-MRICD 数据放到 `data/raw/external/LAT-MRICD-1.0/` 后运行：
+
+```bash
+sha256sum data/raw/external/LAT-MRICD-1.0.zip
+python scripts/audit_lat_mricd_dataset_v1.py --overwrite
+```
+
+预期 ZIP SHA256 为
+`2fe0d5e89016382c7c980172d67ba640179d6e2724edc735bcdf65c66b533bc0`，审计状态为
+`READY_FOR_PREREGISTERED_GROUPED_BASELINE`。任何训练划分都必须按 batch 分组，不能随机拆行。
 
 ## 4. 分享包的独立复核
 
@@ -201,6 +215,7 @@ Tian 线是方法级迁移诊断，不是成功复现。point-GT 分支只在 Fo
 - 把单帧 RD 的速度纹理称作物理微多普勒；
 - 把两折筛选结果当作六折独立盲测；
 - 把 UAV/背景结果写成空飘球载荷分类结果；
+- 把 LAT-MRICD 的归一化频谱写成有 Hz 单位的物理微多普勒，或随机拆行报告高精度；
 - 直接覆盖 `results/final_evidence/` 或历史 checkpoint；
 - 没有实验台账就把新训练数字追加到旧表格。
 

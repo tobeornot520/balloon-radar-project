@@ -11,6 +11,7 @@ than being copied into a script.
 | Project checks | `check_project_health.py`, `check_current_direction_completion_v1.py` |
 | Experiment provenance | `run_recorded_experiment.py`, `manage_experiment_ledger.py` |
 | Dataset contracts | `validate_data_collection_manifest.py`, `audit_detection_acquisition_order.py` |
+| Public external data | `audit_lat_mricd_dataset_v1.py` |
 | Field readiness | `initialize_field_readiness_evidence.py`, `audit_field_readiness_v1.py` |
 | BC-DPG | `run_bc_dpg_v3.py`, `audit_bc_dpg_v3_causal_context.py` |
 | Polarimetric Stage 3 | `run_polarimetric_representation_benchmark_v2.py` |

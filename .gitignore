@@ -150,5 +150,6 @@ results/data_audit/zero_doppler_human_review_v1/
 results/data_audit/zero_doppler_review_atlas_v1/
 results/data_audit/zero_doppler_human_review_summary_v1/
 results/data_audit/current_direction_completion_v1/
+results/data_audit/lat_mricd_v1/
 results/experiment_ledger/
 results/reproduction/

@@ -9,6 +9,7 @@
 - `HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md`: audited reconstruction of the 14 local history exports and their corrections
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
+- `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
 
 ## Detection and localization
 
@@ -33,6 +34,7 @@
 - `NEW_DATA_COLLECTION_PROTOCOL.md`
 - `FIELD_COLLECTION_SOP_V1.md`
 - `FIELD_CAPABILITY_REQUEST_V1.md`
+- `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`
 
 ## Reproducibility and sharing
 

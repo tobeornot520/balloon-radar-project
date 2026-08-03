@@ -64,6 +64,22 @@ The intended later transfer path is to replace the task head and fuse the
 polarimetric embedding with time-domain and micro-Doppler representations from
 new synchronized, calibrated balloon data.
 
+## External public-data preparation
+
+LAT-MRICD-1.0 was obtained from the journal's official ScienceDB supplement and
+audited locally. Its 33 MAT files contain 7,119 X/Ku HRRP records and 16,072
+S/X/Ku narrowband I/Q records. All matrices pass schema, finite-value and label
+code checks; alternating narrowband columns reconstruct to 512 complex samples.
+
+The audit forbids random row splitting. Across 911 `(representation, band,
+batch)` groups, 46 batch codes collide across models/categories and 94.95% of
+groups are category-pure. Category-level grouped baselines are ready for
+preregistration, while 12 fine-model strata have fewer than three batches.
+This public dataset partially unlocks normalized-frequency micro-motion and
+HRRP algorithm development only. It provides no H/V polarization, balloon
+labels, verified PRF/timestamps, causal session order, or Tian alignment facts.
+See [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md).
+
 ## Zero-Doppler development gate
 
 The six-fold frozen fixed-notch diagnostic improves the current false-alarm
@@ -105,6 +121,7 @@ evidence. See
 - Field collection SOP: [FIELD_COLLECTION_SOP_V1.md](FIELD_COLLECTION_SOP_V1.md)
 - Field readiness pending baseline: `results/data_audit/field_readiness_v1/pending_audit/`
 - Polarimetric transfer encoder V1: [POLARIMETRIC_TRANSFER_ENCODER_V1.md](POLARIMETRIC_TRANSFER_ENCODER_V1.md)
+- External public-data audit: [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)
 
 The deterministic joint evidence build contains the formal report, pooled and fold-level tables, fold-distribution summaries, Wilson and scan-group bootstrap intervals, paired McNemar diagnostics, PNG/PDF figures, and a SHA256 manifest. Build it with:
 

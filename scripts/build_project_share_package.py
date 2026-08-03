@@ -136,6 +136,11 @@ PACKAGE_FILES = (
         "human_review_prescreen",
     ),
     PackageFile(
+        "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
+        "evidence/22_EXTERNAL_PUBLIC_DATA_AUDIT.md",
+        "external_public_data_audit",
+    ),
+    PackageFile(
         "configs/current_direction_completion_v1.json",
         "assets/contracts/current_direction_completion_v1.json",
         "direction_completion_contract",
@@ -756,6 +761,9 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "absolute_polarimetric_calibration_verified": False,
             "physical_micro_doppler_timing_verified": False,
             "field_readiness_gate_open": False,
+            "lat_mricd_raw_data_included": False,
+            "lat_mricd_random_row_split_allowed": False,
+            "lat_mricd_physical_micro_doppler_hz_allowed": False,
         },
         "full_reproduction_requires": [
             "internal source code",

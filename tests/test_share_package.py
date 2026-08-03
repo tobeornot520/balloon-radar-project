@@ -33,6 +33,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/16_EXTERNAL_FACT_REQUEST_MESSAGE_V1_ZH.md" in destinations
     assert "docs/17_NEXT_STAGE_PLAN_20260803_ZH.md" in destinations
     assert "evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md" in destinations
+    assert "evidence/22_EXTERNAL_PUBLIC_DATA_AUDIT.md" in destinations
     assert "assets/contracts/current_direction_completion_v1.json" in destinations
     assert "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md" in destinations
     assert "docs/10_QUESTIONS_FOR_SENIOR_ZH.md" in destinations
@@ -136,6 +137,9 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["absolute_polarimetric_calibration_verified"] is False
     assert rules["physical_micro_doppler_timing_verified"] is False
     assert rules["field_readiness_gate_open"] is False
+    assert rules["lat_mricd_raw_data_included"] is False
+    assert rules["lat_mricd_random_row_split_allowed"] is False
+    assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False
 
 
 def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:

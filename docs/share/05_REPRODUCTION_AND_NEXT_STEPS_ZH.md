@@ -19,6 +19,14 @@ python -m pytest
 
 原始数据、checkpoint 和大规模训练输出不在 Git 中，需要由数据持有方按项目目录约定单独准备。
 
+公开 LAT-MRICD 原始数据同样不包含在分享包中。按官方来源下载并放到项目约定目录后，先运行：
+
+```bash
+python scripts/audit_lat_mricd_dataset_v1.py --overwrite
+```
+
+该数据禁止随机拆行；第一轮只放行 batch-grouped 的 HRRP/归一化微动大类基线。
+
 ## 3. 主要内部入口
 
 六折 BC-DPG v3：
@@ -97,6 +105,7 @@ python scripts/validate_data_collection_manifest.py \
 - 数据卡：`docs/DATA_CARD.md`
 - 指标定义：`docs/METRIC_DEFINITIONS.md`
 - 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`
+- 外部公开数据审计：`docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`
 
 早期 `final_roi_bc_dpg_joint` 使用了错误的 BC 判决来源，已经移出活动证据，不得引用。
 
@@ -127,6 +136,10 @@ python scripts/validate_data_collection_manifest.py \
 ### 优先级 5：多域细粒度分类
 
 在真实空飘球数据齐备后，引入长慢时间时频/微多普勒、极化、轨迹和行为特征，逐级开展目标类别、有载/无载、载荷类型和运动状态识别。
+
+在等待新数据期间，LAT-MRICD 可作为独立支线先完成 Narrow-X、HRRP-X 的 batch-grouped
+UAV/鸟/气象特征基线和 band-held-out 迁移。它不与当前 H/V 六折结果合并计分，也不解除
+极化、PRF、连续时序和空飘球标签门禁。
 
 ## 6. 继续开发时必须保持的纪律
 
