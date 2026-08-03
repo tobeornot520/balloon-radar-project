@@ -1,0 +1,157 @@
+{
+  "status": "FROZEN_METADATA_ONLY_BATCH_SPLIT",
+  "splitter": "metadata_only_balanced_milp_v1",
+  "group_key": [
+    "representation",
+    "band_code",
+    "batch_code"
+  ],
+  "n_splits": 5,
+  "config_sha256": "eb900681f5050668893eab642cb80aee89d8b289e839cfac5ff964f31c11f7dc",
+  "split_manifest_sha256": "ba41761226eb367197251f80f314eb5e44df429be54c6e9518cd0f7e2f15a354",
+  "signal_columns_used_for_assignment": false,
+  "aggregate_files_loaded_only": true,
+  "detail_files_loaded": false,
+  "batch_group_count": 402,
+  "source_files": [
+    {
+      "task_id": "narrow_x_category",
+      "relative_path": "Narrow/X波段/data_narrow_X.mat",
+      "sha256": "da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4",
+      "record_count": 8715,
+      "signal_column_count": 1024,
+      "signal_columns_used_for_assignment": false
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "relative_path": "HRRP/X波段/data_hrrp_X.mat",
+      "sha256": "276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267",
+      "record_count": 3648,
+      "signal_column_count": 500,
+      "signal_columns_used_for_assignment": false
+    }
+  ],
+  "fold_coverage": [
+    {
+      "task_id": "narrow_x_category",
+      "heldout_fold": 1,
+      "batch_count": 73,
+      "record_count": 1715,
+      "uav_batch_count": 5,
+      "uav_record_count": 434,
+      "bird_batch_count": 2,
+      "bird_record_count": 164,
+      "weather_batch_count": 71,
+      "weather_record_count": 1117
+    },
+    {
+      "task_id": "narrow_x_category",
+      "heldout_fold": 2,
+      "batch_count": 73,
+      "record_count": 1722,
+      "uav_batch_count": 5,
+      "uav_record_count": 434,
+      "bird_batch_count": 2,
+      "bird_record_count": 171,
+      "weather_batch_count": 72,
+      "weather_record_count": 1117
+    },
+    {
+      "task_id": "narrow_x_category",
+      "heldout_fold": 3,
+      "batch_count": 73,
+      "record_count": 1683,
+      "uav_batch_count": 5,
+      "uav_record_count": 434,
+      "bird_batch_count": 2,
+      "bird_record_count": 132,
+      "weather_batch_count": 71,
+      "weather_record_count": 1117
+    },
+    {
+      "task_id": "narrow_x_category",
+      "heldout_fold": 4,
+      "batch_count": 72,
+      "record_count": 1797,
+      "uav_batch_count": 5,
+      "uav_record_count": 433,
+      "bird_batch_count": 1,
+      "bird_record_count": 248,
+      "weather_batch_count": 72,
+      "weather_record_count": 1116
+    },
+    {
+      "task_id": "narrow_x_category",
+      "heldout_fold": 5,
+      "batch_count": 73,
+      "record_count": 1798,
+      "uav_batch_count": 5,
+      "uav_record_count": 434,
+      "bird_batch_count": 2,
+      "bird_record_count": 248,
+      "weather_batch_count": 71,
+      "weather_record_count": 1116
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "heldout_fold": 1,
+      "batch_count": 7,
+      "record_count": 795,
+      "uav_batch_count": 2,
+      "uav_record_count": 227,
+      "bird_batch_count": 3,
+      "bird_record_count": 543,
+      "weather_batch_count": 4,
+      "weather_record_count": 25
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "heldout_fold": 2,
+      "batch_count": 8,
+      "record_count": 722,
+      "uav_batch_count": 3,
+      "uav_record_count": 280,
+      "bird_batch_count": 4,
+      "bird_record_count": 122,
+      "weather_batch_count": 4,
+      "weather_record_count": 320
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "heldout_fold": 3,
+      "batch_count": 8,
+      "record_count": 716,
+      "uav_batch_count": 3,
+      "uav_record_count": 265,
+      "bird_batch_count": 3,
+      "bird_record_count": 65,
+      "weather_batch_count": 4,
+      "weather_record_count": 386
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "heldout_fold": 4,
+      "batch_count": 8,
+      "record_count": 687,
+      "uav_batch_count": 2,
+      "uav_record_count": 317,
+      "bird_batch_count": 3,
+      "bird_record_count": 202,
+      "weather_batch_count": 5,
+      "weather_record_count": 168
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "heldout_fold": 5,
+      "batch_count": 7,
+      "record_count": 728,
+      "uav_batch_count": 2,
+      "uav_record_count": 322,
+      "bird_batch_count": 3,
+      "bird_record_count": 220,
+      "weather_batch_count": 5,
+      "weather_record_count": 186
+    }
+  ],
+  "claim_scope": "metadata-only conservative batch-code grouping"
+}

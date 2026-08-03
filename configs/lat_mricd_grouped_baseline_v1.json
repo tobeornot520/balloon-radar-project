@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "experiment_id": "lat_mricd_grouped_baseline_v1",
+  "dataset": "LAT-MRICD-1.0",
+  "dataset_root": "data/raw/external/LAT-MRICD-1.0",
+  "output_dir": "results/experiments/lat_mricd_grouped_baseline_v1",
+  "random_state": 20260803,
+  "n_splits": 5,
+  "splitter": "metadata_only_balanced_milp_v1",
+  "split_manifest": "data/splits/lat_mricd_x_batch_grouped_v1.csv",
+  "split_summary": "data/splits/lat_mricd_x_batch_grouped_v1.json",
+  "group_key": [
+    "representation",
+    "band_code",
+    "batch_code"
+  ],
+  "tasks": [
+    {
+      "task_id": "narrow_x_category",
+      "relative_path": "Narrow/X波段/data_narrow_X.mat",
+      "representation": "Narrow",
+      "band_code": 2,
+      "band": "X",
+      "class_codes": [1, 2, 3]
+    },
+    {
+      "task_id": "hrrp_x_category",
+      "relative_path": "HRRP/X波段/data_hrrp_X.mat",
+      "representation": "HRRP",
+      "band_code": 2,
+      "band": "X",
+      "class_codes": [1, 2, 3]
+    }
+  ],
+  "models": [
+    {
+      "model_id": "dummy_prior",
+      "type": "dummy",
+      "strategy": "prior"
+    },
+    {
+      "model_id": "logistic_batch_balanced",
+      "type": "logistic_regression",
+      "C": 1.0,
+      "class_weight": null,
+      "max_iter": 5000,
+      "solver": "lbfgs"
+    },
+    {
+      "model_id": "random_forest_batch_balanced",
+      "type": "random_forest",
+      "n_estimators": 500,
+      "max_depth": 8,
+      "min_samples_leaf": 5,
+      "max_features": "sqrt",
+      "class_weight": null,
+      "n_jobs": 1
+    }
+  ],
+  "primary_metrics": [
+    "fold_macro_balanced_accuracy",
+    "worst_fold_balanced_accuracy",
+    "batch_macro_accuracy",
+    "batch_accuracy_p10",
+    "worst_batch_accuracy",
+    "batch_class_macro_accuracy"
+  ],
+  "acceptance_contract": {
+    "random_row_split_allowed": false,
+    "all_rows_receive_exactly_one_heldout_fold": true,
+    "split_must_be_frozen_before_signal_feature_extraction": true,
+    "batch_overlap_between_train_and_heldout_allowed": false,
+    "every_heldout_fold_must_cover_all_classes": true,
+    "feature_values_must_be_finite": true,
+    "hyperparameter_search_allowed": false,
+    "test_driven_model_selection_allowed": false,
+    "physical_frequency_hz_reporting_allowed": false,
+    "same_event_cross_band_fusion_allowed": false,
+    "h_v_polarimetric_claims_allowed": false,
+    "unseen_model_generalization_claim_allowed": false
+  },
+  "bootstrap_replicates": 2000
+}
