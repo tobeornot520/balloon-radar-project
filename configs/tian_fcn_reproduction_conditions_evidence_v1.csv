@@ -1,16 +1,16 @@
 item_id,category,evidence_needed,status,owner,evidence_path,notes
-RC-01,data_provenance,dataset identity version sample counts and split definition,PENDING_EXTERNAL,student,,ask senior
-RC-02,input_representation,raw IQ or RD power dB normalization and channel definition,PENDING_EXTERNAL,student,,ask senior
-RC-03,axis_order,range and Doppler axis order through input kernels pools and labels,PENDING_EXTERNAL,student,,ask senior
-RC-04,rd_processing,demean window FFT shift Doppler sign and zero-bin definition,PENDING_EXTERNAL,student,,ask senior
-RC-05,normalization,per-map or train-set normalization dB clipping and padding value,PENDING_EXTERNAL,student,,ask senior
-RC-06,label_geometry,index base coordinate formulas and 5x7 GT axis order,PENDING_EXTERNAL,student,,ask senior
-RC-07,negative_sampling,exact classification negative sampling rule by training stage,PENDING_EXTERNAL,student,,ask senior
-RC-08,optimization,epochs batch optimizer learning rates decay loss weights initialization and freezing,PENDING_EXTERNAL,student,,ask senior
-RC-09,pir_mdp,threshold connectivity component selection and within-component positioning,PENDING_EXTERNAL,student,,ask senior
-RC-10,reference_artifacts,code config checkpoint log or one aligned input-output example,PENDING_EXTERNAL,student,,ask senior
-RC-11,acceptance_target,expected metric definitions tolerances and target values,PENDING_EXTERNAL,student,,ask senior
-RC-12,data_coverage,target range velocity grid coverage and same-condition background controls,PENDING_EXTERNAL,student,,ask senior
+RC-01,data_provenance,dataset identity version sample counts and split definition,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-02,input_representation,raw IQ or RD power dB normalization and channel definition,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-03,axis_order,range and Doppler axis order through input kernels pools and labels,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-04,rd_processing,demean window FFT shift Doppler sign and zero-bin definition,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-05,normalization,per-map or train-set normalization dB clipping and padding value,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-06,label_geometry,index base coordinate formulas and 5x7 GT axis order,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-07,negative_sampling,exact classification negative sampling rule by training stage,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-08,optimization,epochs batch optimizer learning rates decay loss weights initialization and freezing,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-09,pir_mdp,threshold connectivity component selection and within-component positioning,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-10,reference_artifacts,code config checkpoint log or one aligned input-output example,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-11,acceptance_target,expected metric definitions tolerances and target values,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
+RC-12,data_coverage,target range velocity grid coverage and same-condition background controls,UNAVAILABLE_AT_PRESENT,external_owner,docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md,user reported unavailable 2026-08-03; underlying fact remains unknown
 LC-01,local_identifiability,all Fold 1 targets occupy Tian output grid_x 4,VERIFIED_LOCAL,codex,results/data_audit/tian_fcn_v1/fold01_data_identifiability_v1/summary.json,318 of 318 targets
 LC-02,local_identifiability,target probability maps are nearly fixed templates,VERIFIED_LOCAL,codex,results/data_audit/tian_fcn_v1/fold01_point_gt_template_audit_v1/diagnostic_summary.json,mean correlation 0.99818
 LC-03,local_identifiability,raw H local Doppler peaks align with labels,VERIFIED_LOCAL,codex,results/analysis/hv_raw_peak_offsets/tables/hv_raw_peak_offsets.csv,51 of 53 exact and 53 of 53 within one bin on Fold 1 validation

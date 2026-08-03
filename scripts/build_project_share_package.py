@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v2"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v3"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
 PACKAGE_DATE = "2026-08-03"
@@ -149,6 +149,11 @@ PACKAGE_FILES = (
         "docs/NEXT_STAGE_PLAN_20260803.md",
         "docs/17_NEXT_STAGE_PLAN_20260803_ZH.md",
         "next_stage_plan",
+    ),
+    PackageFile(
+        "docs/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md",
+        "docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md",
+        "reproduction_failure_and_fallback_decision",
     ),
     PackageFile(
         "docs/ZERO_DOPPLER_P0_REVIEW_PRESCREEN_V1.md",
@@ -774,7 +779,10 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "stage4_development_folds_reused_in_sixfold": [1, 4],
             "class_and_acquisition_date_confounded": True,
             "tian_reproduction_successful": False,
+            "tian_exact_reproduction_status": "blocked_unverifiable",
+            "tian_reproduction_conditions_available": False,
             "tian_point_gt_role": "validation-only local-transfer ablation",
+            "tian_fallback_mainline": "DPG-FCN zero-Doppler development plus grouped LAT-MRICD baselines",
             "zero_doppler_candidate_veto_role": "post-test mechanism diagnostic",
             "zero_doppler_fixed_notch_role": "development safety reference",
             "zero_doppler_learned_sixfold_authorized": False,

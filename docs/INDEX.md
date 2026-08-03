@@ -10,6 +10,7 @@
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
+- `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
 
 ## Detection and localization
@@ -29,6 +30,7 @@
 - `TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md`
 - `TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md`
 - `TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md`
+- `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`
 
 ## New data and field work
 

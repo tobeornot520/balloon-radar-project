@@ -39,6 +39,15 @@ diagnostic also failed (joint Pd 0.1132; template correlation 0.99817). The
 point-GT classification-supervision branch is closed pending reproduction-
 condition and local-data identifiability evidence.
 
+As of 2026-08-03, the project owner reports that the attributable H/V/IQ/PRF/
+coordinate facts and the Tian preprocessing/label/configuration or aligned
+example cannot currently be obtained. This records availability only; the
+underlying technical values remain unknown. Exact Tian reproduction is frozen,
+the existing implementation is retained as method-level failure evidence, and
+work proceeds through the DPG-FCN zero-Doppler mainline, grouped LAT-MRICD
+baselines, and synthetic contract tests. See
+[TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md](TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md).
+
 The August-September field preparation is now represented by five auditable
 gates: capability, synchronization, polarimetric calibration, dry run, and
 pilot. The checklist, evidence initializer, auditor, four-scenario matrix, and
@@ -98,6 +107,13 @@ This is the current learned development reference, not blind or deployment
 evidence. See
 [ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md](ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md).
 
+The 11 removed Fold 4 alarms have now passed human visible-pattern review: 9
+were recorded as `near_zero_doppler_peak`, 2 as `broad_structure`, and all 11
+physical classes remain `unknown` because no independent scene record exists.
+This closes the P0 review workflow but does not identify a physical clutter
+mechanism. See
+[ZERO_DOPPLER_P0_REVIEW_PRESCREEN_V1.md](ZERO_DOPPLER_P0_REVIEW_PRESCREEN_V1.md).
+
 ## Authoritative evidence
 
 - BC-DPG v3: `results/final_evidence/bc_dpg_v3_final/`
@@ -118,6 +134,7 @@ evidence. See
 - Tian Fold 1 diagnostic conclusion: [TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md](TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md)
 - Tian Fold 1 component mechanism: [TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md](TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md)
 - Tian reproduction-condition request: [TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md](TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md)
+- Tian failure analysis and fallback decision: [TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md](TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md)
 - Field collection SOP: [FIELD_COLLECTION_SOP_V1.md](FIELD_COLLECTION_SOP_V1.md)
 - Field readiness pending baseline: `results/data_audit/field_readiness_v1/pending_audit/`
 - Polarimetric transfer encoder V1: [POLARIMETRIC_TRANSFER_ENCODER_V1.md](POLARIMETRIC_TRANSFER_ENCODER_V1.md)

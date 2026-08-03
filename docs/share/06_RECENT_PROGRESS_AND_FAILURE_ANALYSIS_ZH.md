@@ -1,6 +1,6 @@
 # 近期成果、失败机制与算法判断
 
-版本：2026-08-02
+版本：2026-08-03
 
 本文补充 7 月 28 日以后完成的多域特征挖掘、零多普勒机制、Tian FCN 复现、极化
 迁移架构和外场准备。旧冻结 BC-DPG、ROI 与定位结果仍然有效，但以下新结果的证据
@@ -122,6 +122,11 @@ point-GT 单一救援只改变分类目标，不加载 test，得到：
 本地 Fold 1 的 318 个目标映射后全部位于同一个距离输出列，71 个采集源中 47 个只
 对应一个速度值。当前无法区分论文实现差异、训练条件差异和本地数据可辨识性不足。
 因此不继续扫学习率、PIR 阈值、V/HV 或六折，而是先向学长核对输入、采样和原始配置。
+
+截至 2026-08-03，上述原始条件和 H/V/IQ/PRF/坐标事实被报告为目前无法取得。精确复现
+因此冻结，底层技术事实仍保持 unknown；替代路线转为 DPG-FCN 零多普勒主线、公开
+LAT-MRICD 分组基线和 Tian 合成合同测试。详细说明见分享包
+`docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md`。
 
 详见[诊断结论](../evidence/10_TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md)、
 [PIR/MDP 机制分析](../evidence/11_TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md)和

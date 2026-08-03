@@ -32,6 +32,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/15_PAPER_MAINLINE_V1_ZH.md" in destinations
     assert "docs/16_EXTERNAL_FACT_REQUEST_MESSAGE_V1_ZH.md" in destinations
     assert "docs/17_NEXT_STAGE_PLAN_20260803_ZH.md" in destinations
+    assert "docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md" in destinations
     assert "evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md" in destinations
     assert "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md" in destinations
     assert "TEAM_START_HERE.md" in destinations
@@ -129,7 +130,12 @@ def test_share_manifest_marks_causal_context_as_post_test(
         "sample_id",
     ]
     assert rules["tian_reproduction_successful"] is False
+    assert rules["tian_exact_reproduction_status"] == "blocked_unverifiable"
+    assert rules["tian_reproduction_conditions_available"] is False
     assert rules["tian_point_gt_role"] == "validation-only local-transfer ablation"
+    assert rules["tian_fallback_mainline"] == (
+        "DPG-FCN zero-Doppler development plus grouped LAT-MRICD baselines"
+    )
     assert rules["zero_doppler_candidate_veto_role"] == (
         "post-test mechanism diagnostic"
     )
