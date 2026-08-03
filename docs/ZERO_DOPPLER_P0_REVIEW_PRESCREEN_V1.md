@@ -1,6 +1,6 @@
 # 零多普勒 P0 人工复核预筛 V1
 
-版本：2026-08-02  
+版本：2026-08-03
 范围：fixed-notch 与 target-protected residual V2 配对比较中，Fold 4 被 residual 移除的
 11 个背景误警。  
 证据角色：人工复核前的结构化排序，不是物理背景标签，也不是新的模型性能评价。
@@ -37,12 +37,14 @@
 
 ## 复核闭环
 
-1. 运行 `build_zero_doppler_human_review_queue_v1.py` 和
-   `build_zero_doppler_review_atlas_v1.py` 得到本地队列与图册；
-2. 将 `review_queue.csv` 另存为新的复核 CSV，完成 P0 条目；
-3. 运行 `audit_zero_doppler_human_review_v1.py --reviewed-queue <另存CSV>`；
-4. 将审计摘要、证据来源与不确定项回填 D04；
-5. 新同条件数据到位后，才可将此处的结构假设用于一次锁定外层验证。
+1. 运行 `build_zero_doppler_human_review_queue_v1.py`、
+   `build_zero_doppler_review_atlas_v1.py` 和
+   `build_zero_doppler_review_workbench_v1.py` 得到本地队列、图册与离线工作台；
+2. 直接打开图册目录内的 `review_workbench.html`，先按上表顺序审 11 个 P0；
+3. 工作台通过 `localStorage` 保存进度；校验通过后导出带日期的新 CSV；
+4. 运行 `audit_zero_doppler_human_review_v1.py --reviewed-queue <导出CSV>`；
+5. 将审计摘要、证据来源与不确定项回填 D04；
+6. 新同条件数据到位后，才可将此处的结构假设用于一次锁定外层验证。
 
-相关的逐样本图册、队列和复核输出只保留在受控本地目录，不进入分享包。本文件仅保留
+相关的逐样本图册、工作台、队列和复核输出只保留在受控本地目录，不进入分享包。本文件仅保留
 不含样本 ID 的聚合结论。

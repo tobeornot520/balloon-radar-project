@@ -1,6 +1,6 @@
 # 队员复现指南
 
-版本：2026-08-02  
+版本：2026-08-03
 适用提交：以分享包 `MANIFEST.json` 中的 `source_commit` 为准。
 
 ## 1. 先说清楚：什么叫“复现”
@@ -145,12 +145,18 @@ V2 是开发参考，不是盲测或部署结果。不能把 CPU 重推理的 `1
 ```bash
 python scripts/build_zero_doppler_human_review_queue_v1.py --overwrite
 python scripts/build_zero_doppler_review_atlas_v1.py --overwrite
+python scripts/build_zero_doppler_review_workbench_v1.py --overwrite
 ```
 
-将 `review_queue.csv` 另存为带日期的新文件，只先复核图册中的 11 个
-`P0_removed_by_residual` 条目。`reviewed` 必须填写可见结构和备注；没有独立场景记录时
-`physical_class` 必须保持 `unknown`。如果填写具体类别，必须把 `evidence_source` 写为
-`independent_scene_record` 并在备注中说明依据。完成后审计另存版本：
+直接在浏览器打开
+`results/data_audit/zero_doppler_review_atlas_v1/review_workbench.html`，只先复核其中 11 个
+`P0_removed_by_residual` 条目。工作台逐例显示图册和结构指标，进度保存在浏览器
+`localStorage`；导出的 CSV 保留审计所需原始列，不会覆盖源队列。
+
+`reviewed` 必须填写可见结构和备注；没有独立场景记录时 `physical_class` 必须保持
+`unknown`。如果填写具体类别，必须把 `evidence_source` 写为
+`independent_scene_record` 并在备注中说明依据。工作台会在导出前执行相同规则，但导出后
+仍须用命令行审计：
 
 ```bash
 python scripts/audit_zero_doppler_human_review_v1.py \
@@ -158,7 +164,7 @@ python scripts/audit_zero_doppler_human_review_v1.py \
   --output-dir results/data_audit/zero_doppler_human_review_summary_reviewer_YYYYMMDD
 ```
 
-图册、逐样本队列和复核汇总都只在受控本地目录保存，不进入分享包。审计输出为
+图册、工作台、逐样本队列和复核汇总都只在受控本地目录保存，不进入分享包。审计输出为
 `INCOMPLETE` 仅表示还有待复核项，并不是失败或物理结论。
 
 ### Tian FCN
