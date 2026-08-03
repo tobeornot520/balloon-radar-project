@@ -36,7 +36,9 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md" in destinations
     assert "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md" in destinations
     assert "TEAM_START_HERE.md" in destinations
+    assert "docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md" in destinations
     assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
+    assert "assets/templates/team_qualification_scorecard_template_v1.csv" in destinations
     assert "assets/templates/team_task_claim_template_v1.csv" in destinations
     assert "assets/templates/TEAM_WEEKLY_REPORT_TEMPLATE_ZH.md" in destinations
     assert "assets/contracts/current_direction_completion_v1.json" in destinations
@@ -151,6 +153,8 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lat_mricd_random_row_split_allowed"] is False
     assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False
     assert rules["team_onboarding_manual_included"] is True
+    assert rules["team_qualification_policy_included"] is True
+    assert rules["team_qualification_scorecard_included"] is True
     assert rules["team_task_claim_template_included"] is True
     assert rules["team_weekly_report_template_included"] is True
 

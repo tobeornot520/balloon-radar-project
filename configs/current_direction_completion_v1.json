@@ -55,7 +55,7 @@
       "title": "可追溯交付、队员复现说明与分享包",
       "owner": "assistant",
       "status": "complete",
-      "evidence": "docs/TEAM_REPRODUCTION_GUIDE_ZH.md; scripts/build_project_share_package.py; dist/balloon_radar_results_and_team_onboarding_20260803_v3/",
+      "evidence": "docs/TEAM_REPRODUCTION_GUIDE_ZH.md; docs/share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md; scripts/build_project_share_package.py; dist/balloon_radar_results_and_team_onboarding_20260803_v4/",
       "next_action": "Keep only the latest share package and its immediate predecessor."
     }
   ]

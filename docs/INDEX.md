@@ -12,6 +12,7 @@
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
 - `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
+- `share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`: member qualification, trial-task scoring, role/access decisions, and communication scripts
 
 ## Detection and localization
 

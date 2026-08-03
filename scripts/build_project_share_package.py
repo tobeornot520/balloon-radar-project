@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v3"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v4"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
 PACKAGE_DATE = "2026-08-03"
@@ -91,9 +91,19 @@ PACKAGE_FILES = (
         "team_onboarding_manual",
     ),
     PackageFile(
+        "docs/share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md",
+        "docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md",
+        "team_qualification_policy",
+    ),
+    PackageFile(
         "configs/team_onboarding_checklist_template_v1.csv",
         "assets/templates/team_onboarding_checklist_template_v1.csv",
         "team_onboarding_template",
+    ),
+    PackageFile(
+        "configs/team_qualification_scorecard_template_v1.csv",
+        "assets/templates/team_qualification_scorecard_template_v1.csv",
+        "team_qualification_template",
     ),
     PackageFile(
         "configs/team_task_claim_template_v1.csv",
@@ -794,6 +804,8 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "lat_mricd_random_row_split_allowed": False,
             "lat_mricd_physical_micro_doppler_hz_allowed": False,
             "team_onboarding_manual_included": True,
+            "team_qualification_policy_included": True,
+            "team_qualification_scorecard_included": True,
             "team_task_claim_template_included": True,
             "team_weekly_report_template_included": True,
         },
