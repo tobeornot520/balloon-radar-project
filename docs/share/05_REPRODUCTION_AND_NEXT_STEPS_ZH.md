@@ -25,7 +25,27 @@ python -m pytest
 python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 ```
 
-该数据禁止随机拆行；第一轮只放行 batch-grouped 的 HRRP/归一化微动大类基线。
+该数据禁止随机拆行。D17-NX/HX 的五折 batch-code-held-out 大类基线已完成并冻结；下一
+公开数据任务为单独预登记的 band-held-out 迁移。
+
+完整仓库中的冻结结果重放顺序如下。分享包本身不含这些脚本和原始 MAT，因此只能做证据
+复核，不能单独执行重放。
+
+```bash
+python scripts/freeze_lat_mricd_grouped_split_v1.py --overwrite
+git diff --exit-code -- data/splits/lat_mricd_x_batch_grouped_v1.csv \
+  data/splits/lat_mricd_x_batch_grouped_v1.json
+python scripts/run_lat_mricd_grouped_baseline_v1.py \
+  --output-dir /tmp/lat_mricd_grouped_baseline_replay --overwrite
+python scripts/build_lat_mricd_grouped_evidence_v1.py \
+  --source-dir /tmp/lat_mricd_grouped_baseline_replay \
+  --output-dir /tmp/lat_mricd_grouped_evidence_replay --overwrite
+diff -rq /tmp/lat_mricd_grouped_evidence_replay/tables \
+  results/final_evidence/lat_mricd_grouped_baselines_v1/tables
+```
+
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。预期冻结划分无 Git 差异且聚合表
+一致；报告和证据 manifest 因记录当前提交，不要求逐字节相同。
 
 ## 3. 主要内部入口
 
@@ -106,6 +126,10 @@ python scripts/validate_data_collection_manifest.py \
 - 指标定义：`docs/METRIC_DEFINITIONS.md`
 - 模型选择台账：`docs/MODEL_SELECTION_LEDGER.md`
 - 外部公开数据审计：`docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`
+- LAT-MRICD 分组基线协议：`docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`
+- LAT-MRICD 分组基线冻结报告：`evidence/23_LAT_MRICD_GROUPED_BASELINES.md`
+- LAT-MRICD 分组指标与 CI：`assets/tables/lat_mricd_grouped_aggregate_metrics.csv`、
+  `assets/tables/lat_mricd_grouped_cluster_bootstrap_intervals.csv`
 
 早期 `final_roi_bc_dpg_joint` 使用了错误的 BC 判决来源，已经移出活动证据，不得引用。
 
@@ -137,9 +161,13 @@ python scripts/validate_data_collection_manifest.py \
 
 在真实空飘球数据齐备后，引入长慢时间时频/微多普勒、极化、轨迹和行为特征，逐级开展目标类别、有载/无载、载荷类型和运动状态识别。
 
-在等待新数据期间，LAT-MRICD 可作为独立支线先完成 Narrow-X、HRRP-X 的 batch-grouped
-UAV/鸟/气象特征基线和 band-held-out 迁移。它不与当前 H/V 六折结果合并计分，也不解除
-极化、PRF、连续时序和空飘球标签门禁。
+D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7872，HRRP-X
+为 0.6617/0.6481；四项 batch-code cluster 95% CI 和两个配对差值均已冻结，差值 CI 均
+跨 0，不选胜者。下一公开数据任务是单独预登记的 S/X/Ku band-held-out 迁移。
+
+LAT-MRICD 只构成同一公开发布内、已见子型号的 batch-code-held-out 证据，不是 unseen-model
+或独立外部验证。它不与当前 H/V 六折结果合并计分，也不解除极化、PRF、连续时序、空飘球
+标签或 Tian 复现门禁；主 UAV 方向仍为 `4/6`、`BLOCKED_EXTERNAL`。
 
 ## 6. 继续开发时必须保持的纪律
 

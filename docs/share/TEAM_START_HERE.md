@@ -48,14 +48,14 @@
 - 零多普勒虚警机制诊断与目标保护残差开发参考；
 - Tian 2024 FCN 方法迁移、失败诊断和复现条件清单；
 - 新数据合同、外场能力、同步、标定、dry run 和 Pilot 门禁；
-- LAT-MRICD 公开 HRRP/窄带 I/Q 数据的正式 schema 与 batch 审计。
+- LAT-MRICD 公开 HRRP/窄带 I/Q 数据的正式 schema/batch 审计，以及 D17-NX/HX 五折分组基线。
 
 ### 2.3 三个证据对象禁止混用
 
 | 证据对象 | 当前可做什么 | 当前不能证明什么 |
 |---|---|---|
 | 现有 H/V UAV/背景数据 | 检测、网格定位、内部虚警机制、相对极化工程特征 | 跨日期泛化、严格实时部署、空飘球分类、绝对极化物理量 |
-| LAT-MRICD-1.0 | HRRP、归一化频率微动、UAV/鸟/气象分组分类与跨频段预研 | H/V 极化、物理 Hz 微多普勒、空飘球状态、同事件跨频融合 |
+| LAT-MRICD-1.0 | 同一公开发布内的 HRRP、归一化频率微动、batch-code-held-out UAV/鸟/气象基线与跨频段预研 | unseen-model/独立外部泛化、H/V 极化、物理 Hz 微多普勒、空飘球状态、同事件跨频融合 |
 | 未来同步空飘球数据 | 通过合同后开展极化、时域、微多普勒和分层分类 | 在真实数据到位和锁定评价前不能预报性能 |
 
 任何报告都要写明使用的是哪一个证据对象，不允许把三者的结论拼成一个看似完整的模型结果。
@@ -67,6 +67,8 @@
 - 样本独立 BC：`122/830` 背景误警、`289/318` 联合成功；它更接近在线导向基线。
 - fixed notch + target-protected residual V2：CPU 重推理下 `109` 个误警、`290/318`
   联合成功；它是开发参考，不是盲测或部署结论。
+- D17-NX/HX：Narrow-X 的 batch-class macro 为 LR `0.7999`、RF `0.7872`，HRRP-X 为
+  `0.6617`、`0.6481`；四项均有 batch-code cluster 95% CI，两个配对差值 CI 均跨 0。
 - Tian 本地迁移没有成功复现论文。point-GT 只是 Fold 1 train/validation 上的本地消融。
 - 当前目标与背景日期完全耦合，六个折都参与过开发，不能称外部盲测。
 - 当前方向完成门为 `4/6`，状态是 `BLOCKED_EXTERNAL`；剩余两项是外部阻塞，没有待成员
@@ -103,8 +105,9 @@ sha256sum -c SHA256SUMS.txt
 | 5 | `docs/12_PROJECT_TASK_LEDGER_ZH.md` | 当前有哪些问题、谁负责、怎样验收？ |
 | 6 | `docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md` | 自己手里的材料允许做到哪种复现等级？ |
 | 7 | `docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md` | LAT-MRICD 为什么不能随机拆行？ |
-| 8 | `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md` | Tian 为什么冻结、替代路线是什么？ |
-| 9 | `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md` | 如何验收、评分、补验和分配权限？ |
+| 8 | `evidence/23_LAT_MRICD_GROUPED_BASELINES.md` | D17-NX/HX 得到什么、CI 和结论边界是什么？ |
+| 9 | `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md` | Tian 为什么冻结、替代路线是什么？ |
+| 10 | `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md` | 如何验收、评分、补验和分配权限？ |
 
 ### 阶段 C：口头验收
 
@@ -172,8 +175,9 @@ git status --short
 | D04-P0 | P0 | 已完成 | 雷达/数据分析 | 11 例 P0 复核 CSV 已通过审计；聚合结论已冻结 |
 | D01-D02 | P0 | 外部阻塞；当前不可获得 | 外部数据/设备方 | 有来源时提供 H/V、IQ、PRF、坐标事实；无来源保持 unknown |
 | D10 | P0 | 精确复现冻结 | 模型复现 | 只维护方法级负结果与合同测试；满足重开条件前不扫参 |
-| D17-NX | P0 | 审计完成，可开始 | 信号处理/ML | LAT-MRICD Narrow-X batch-grouped 三类特征基线 |
-| D17-HX | P1 | 审计完成，可开始 | 雷达识别 | LAT-MRICD HRRP-X batch-grouped 三类特征基线 |
+| D17-NX | P0 | 已完成 | 信号处理/ML | Narrow-X 五折分组结果、CI、特征和边界已冻结到证据 23 |
+| D17-HX | P1 | 已完成 | 雷达识别 | HRRP-X 五折分组结果、CI、子型号压力和边界已冻结到证据 23 |
+| D17-XBAND | P1 | 可开始，待预登记 | 信号处理/迁移 | S/X/Ku band-held-out 协议、类别交集、最差频段结果和停止规则 |
 | D15 | P0 | 持续 | 工程/复现 | 实验台账、配置哈希、提交号和结果摘要检查 |
 | D16 | P1 | 持续 | 文档/工程 | Git 清洁、包内敏感信息审计、最新和上一版分享包 |
 
@@ -210,21 +214,25 @@ git status --short
 python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 ```
 
-要求：
+冻结状态：
 
-- 第一轮只做 Narrow-X 的 UAV/鸟/气象大类；
+- 已完成 Narrow-X 的 UAV/鸟/气象大类五折评价；
 - 按 `(representation, band_code, batch_code)` 分组，禁止随机拆行；
-- 特征只使用归一化包络、相位增量、自相关、归一化谱、谱熵和谱展宽等；
+- 特征使用归一化包络、相位增量、自相关、归一化谱、谱熵和谱展宽等；
 - 无 PRF 时频率只写 cycles/sample 或 normalized frequency；
-- 先做线性或树模型，再决定是否允许一维 CNN；
-- 报告 macro、每类、最差组、混淆矩阵和 batch 覆盖；
-- 如果 batch-held-out 结果明显失效，记录负结果并停止扩深网。
+- 固定 batch-balanced LR/RF 的 batch-class macro 为 0.7999/0.7872，对应 95% CI 为
+  0.7659–0.8313/0.7373–0.8340；配对差值 CI 跨 0，不选胜者；
+- macro、每类、最差组、混淆矩阵、batch 覆盖和 CI 已进入冻结聚合证据。
+
+阅读入口：`evidence/23_LAT_MRICD_GROUPED_BASELINES.md`。该结果只属于同一公开发布内、
+已见子型号的 batch-code-held-out 基线。
 
 ### 7.3 D17-HX：HRRP 公开数据基线
 
-要求与 D17-NX 的分组纪律相同。第一轮使用归一化幅度、质心、展宽、熵、峰度、峰值/旁瓣和
-低维投影，不把样点解释成已标定绝对距离或 RCS。先做 HRRP-X 三类结构互证，再讨论 X 到
-Ku 的 band-held-out transfer。
+该任务已按与 D17-NX 相同的分组纪律完成。归一化幅度几何、熵、粗糙度和自相关特征上的固定
+LR/RF batch-class macro 为 0.6617/0.6481，对应 95% CI 为 0.5826–0.7404/
+0.5764–0.7240；配对差值 CI 跨 0。样点不解释为已标定绝对距离或 RCS，HRRP-X 也不是
+Narrow-X 的独立外部验证。下一公开数据任务是单独预登记的 band-held-out transfer。
 
 ### 7.4 D10：Tian 复现条件对齐
 
@@ -233,14 +241,13 @@ Ku 的 band-held-out transfer。
 PIR 阈值、V/HV 输入或更多 epoch。
 
 截至 2026-08-03，所需外部材料被报告为目前无法取得。精确复现保持冻结，执行 DPG-FCN
-零多普勒主线、LAT-MRICD 分组基线和 Tian 合同测试。完整失败链、替代路线及唯一重开条件
+零多普勒主线、LAT-MRICD 跨频段迁移预登记和 Tian 合同测试。完整失败链、替代路线及唯一重开条件
 见 `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md`。
 
 ## 8. 数据或设备到位后才能启动的任务
 
 | 任务 ID | 开启条件 | 主要工作 | 完成标准 |
 |---|---|---|---|
-| D17-XBAND | D17-NX/HX 分组基线稳定 | S/X/Ku band-held-out transfer | 各频段独立划分和最差频段结果齐全 |
 | D04-LIB | 11 例 P0 审计完成 | 合并模型变化、结构、证据来源，建立虚警库 | 命名类别可追溯，unknown 比例保留 |
 | D05-D07 | 新同条件 H/V 数据与标定通过 | 相对极化统计、最小 ROI 增强 | 困难验证组 Pfa 降低且目标保护门通过 |
 | D08 | 真实硬件顺序/时间戳可用 | past-only 因果背景校准 | 不读未来样本，窗口只由 train/val 选择 |
@@ -329,7 +336,7 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 
 ## 12. Git 与文件要求
 
-- 每个任务使用独立分支，例如 `task/D17-NX-feature-baseline`；
+- 每个任务使用独立分支，例如 `task/D17-XBAND-transfer`；
 - 开始和交付前都运行 `git status --short`；
 - 提交只包含本任务文件，不顺手整理无关目录；
 - 原始数据放 `data/raw/`，正式生成结果放约定的 ignored output 目录；
@@ -359,8 +366,8 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 
 | 角色 | 主任务 | 维护任务 |
 |---|---|---|
-| A：公开数据与信号 | D17-NX | 分组划分、特征 schema 和负结果 |
-| B：HRRP 与迁移 | D17-HX、后续 band-held-out | 批次覆盖和最差组检查 |
+| A：公开数据与信号 | D17-XBAND Narrow 迁移 | 频段分组、特征单位和负结果 |
+| B：HRRP 与迁移 | D17-XBAND HRRP 迁移 | 类别交集、批次覆盖和最差频段检查 |
 | C：复现与工程 | Tian 合同测试、D15 | Git、测试、哈希和实验记录 |
 | D：证据与质量保证 | D16、结论和分享包审计 | 周报、敏感信息和证据边界 |
 
@@ -376,7 +383,7 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 | 第 1 天 | 分享包校验、阅读一页摘要和本手册 | 无 |
 | 第 2 天 | 口头验收、填写个人清单 | 选择任务方向 |
 | 第 3 天 | 环境/测试验收、提交任务认领表 | 分享包证据核验、LAT 审计或 Tian 合同核对 |
-| 第 4-5 天 | reviewer 审核任务边界 | Narrow-X/HRRP-X 特征定义预登记 |
+| 第 4-5 天 | reviewer 审核任务边界 | band-held-out 类别交集与迁移协议预登记 |
 | 第 6-7 天 | 第一次周报 | 冻结下一周唯一主动作 |
 
 第一周不以“训练出一个准确率”为目标，以所有成员理解证据边界、能复跑审计并形成合格任务卡

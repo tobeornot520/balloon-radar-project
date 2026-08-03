@@ -66,8 +66,8 @@ HRRP 每行 504 列：前 4 列依次为频段、类别、型号、批次，后 
 4. 每个已发布“表征-频段-大类”至少有 3 个 batch，可开展预登记的大类分组基线。
 5. 跨频段实验只能称 band-held-out transfer；没有同一事件配对证据，不能称配对多频融合。
 
-当前审计状态为 `READY_FOR_PREREGISTERED_GROUPED_BASELINE`。它只放行下一步的分组特征
-基线，不代表已经证明外部泛化。
+审计状态 `READY_FOR_PREREGISTERED_GROUPED_BASELINE` 是算法运行前的放行结论，不代表
+外部泛化。基于该门禁完成的 D17-NX/HX 冻结结果见第 5.1 节。
 
 ## 5. 可开展的算法工作
 
@@ -79,6 +79,27 @@ HRRP 每行 504 列：前 4 列依次为频段、类别、型号、批次，后 
 
 第一轮使用可解释特征加线性/树模型建立泄漏敏感性基线，同时报告 batch 级 macro、最差组和
 混淆矩阵。只有分组基线稳定后才考虑一维 CNN；不先用深网掩盖数据划分问题。
+
+### 5.1 已冻结的 X 波段分组基线
+
+D17-NX 与 D17-HX 已完成。正式实验在提取信号特征前冻结元数据划分，只读取 X 波段聚合
+文件，按 `(representation, band_code, batch_code)` 整组留出五折；逻辑回归、随机森林及
+训练权重均预先固定，不根据 held-out 结果选模型。
+
+| 任务 | 固定模型 | batch-class macro accuracy | batch-code cluster bootstrap 95% CI | 最差折 balanced accuracy |
+|---|---|---:|---:|---:|
+| Narrow-X | batch-balanced logistic | 0.7999 | 0.7659–0.8313 | 0.7204 |
+| Narrow-X | batch-balanced random forest | 0.7872 | 0.7373–0.8340 | 0.6973 |
+| HRRP-X | batch-balanced logistic | 0.6617 | 0.5826–0.7404 | 0.4946 |
+| HRRP-X | batch-balanced random forest | 0.6481 | 0.5764–0.7240 | 0.4934 |
+
+随机森林减逻辑回归的配对差值在 Narrow-X 为 -0.0127（95% CI -0.0511–0.0246），在
+HRRP-X 为 -0.0136（-0.0775–0.0487）；两者均跨 0，因此保留两个固定模型，不宣布胜者。
+完整聚合证据位于 `results/final_evidence/lat_mricd_grouped_baselines_v1/`。
+
+这些数字只支持“同一 LAT-MRICD-1.0 公开发布内、X 波段、batch-code-held-out 的三类
+基线”。它们不是未见型号、独立 session、跨场景或外部盲测泛化；HRRP-X 与 Narrow-X
+也不能称为两个独立外部数据集的重复验证。
 
 ## 6. 不能由该数据集解决的问题
 
@@ -94,11 +115,12 @@ HRRP 每行 504 列：前 4 列依次为频段、类别、型号、批次，后 
 
 ## 7. 下一动作与停止点
 
-1. 冻结一个 batch-grouped 大类划分，并公开每个 split 的 batch 和类别覆盖；
-2. 先做不训练深网的可解释特征分离度审计；
-3. 以 Narrow-X 三类任务作为首个基线，HRRP-X 作为结构互证；
-4. 若特征在 batch-held-out 下失效，记录负结果并停止扩模型；
-5. 若稳定，再做 S/X/Ku band-held-out 迁移，最后才评估轻量一维 CNN。
+1. D17-NX/HX 的五折划分、固定模型、分组指标、CI 和边界已经冻结，不再用这些 OOF 结果
+   反向筛特征或调参；
+2. 下一公开数据任务是单独预登记的 S/X/Ku band-held-out 迁移，先冻结适用的类别交集、
+   source/target band、分组规则和失败标准；
+3. 跨频段只比较各频段独立训练/评价后的迁移表现，不做样本级拼接，不声称同一事件同步；
+4. 若迁移结果失效，记录负结果并停止扩模型；只有门禁稳定后才评估轻量一维 CNN。
 
 LSS-Ku-1.0 仅在学长确认它能补 Tian 同域性或地杂波测试缺口后再下载，避免为 14.88 GiB
 数据付出传输、存储和审计成本却不能解除当前门禁。

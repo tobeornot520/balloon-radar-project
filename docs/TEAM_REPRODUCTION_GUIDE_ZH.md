@@ -67,6 +67,34 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 `2fe0d5e89016382c7c980172d67ba640179d6e2724edc735bcdf65c66b533bc0`，审计状态为
 `READY_FOR_PREREGISTERED_GROUPED_BASELINE`。任何训练划分都必须按 batch 分组，不能随机拆行。
 
+### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
+
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V5 分享包只支持 A 级证据复核；
+下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
+MAT 与同目录明细 MAT，否则会重复计入记录。
+
+```bash
+python scripts/freeze_lat_mricd_grouped_split_v1.py --overwrite
+git diff --exit-code -- data/splits/lat_mricd_x_batch_grouped_v1.csv \
+  data/splits/lat_mricd_x_batch_grouped_v1.json
+
+python scripts/run_lat_mricd_grouped_baseline_v1.py \
+  --output-dir /tmp/lat_mricd_grouped_baseline_replay \
+  --overwrite
+
+python scripts/build_lat_mricd_grouped_evidence_v1.py \
+  --source-dir /tmp/lat_mricd_grouped_baseline_replay \
+  --output-dir /tmp/lat_mricd_grouped_evidence_replay \
+  --overwrite
+
+diff -rq /tmp/lat_mricd_grouped_evidence_replay/tables \
+  results/final_evidence/lat_mricd_grouped_baselines_v1/tables
+```
+
+预期：冻结划分没有 Git 差异，聚合表逐文件一致。`REPORT.md` 和
+`evidence_manifest.json` 会记录重放时的当前提交，因此不要求与历史文件逐字节相同。重放
+不得据 OOF 结果重新选特征、调参或宣布模型胜者。
+
 ## 4. 分享包的独立复核
 
 解压最新包后，在包含 `SHA256SUMS.txt` 的目录执行：

@@ -10,6 +10,8 @@
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
+- `LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`: frozen five-fold Narrow-X/HRRP-X grouped-baseline contract, metrics, and claim limits
+- `../results/final_evidence/lat_mricd_grouped_baselines_v1/REPORT.md`: frozen aggregate results and batch-code cluster intervals
 - `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
 - `share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`: member qualification, trial-task scoring, role/access decisions, and communication scripts

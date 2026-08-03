@@ -1,0 +1,90 @@
+{
+  "status": "FROZEN_SANITIZED_AGGREGATE_EVIDENCE",
+  "evidence_id": "lat_mricd_grouped_baselines_v1",
+  "source_experiment": "lat_mricd_grouped_baseline_v1",
+  "source_implementation_commit": "a102ea0c81925a3e0686bccc763a1856d6da319e",
+  "evidence_builder_commit": "e0069b0e04b3dc6fc36c6f20a283ba4ff8dda363",
+  "source_summary_sha256": "86b4fc10d24e19e453d0e191a221e91473450f3c5435852f9e30ecfee90d0dc0",
+  "sample_predictions_validated": true,
+  "sample_predictions_included": false,
+  "raw_data_included": false,
+  "model_checkpoints_included": false,
+  "excluded_source_files": [
+    "oof_predictions.csv",
+    "feature_importance_by_fold.csv"
+  ],
+  "published_file_count_excluding_manifest": 14,
+  "files": [
+    {
+      "relative_path": "REPORT.md",
+      "size_bytes": 2900,
+      "sha256": "d9e9f1b96edf2d68200507ebe9bf8b5f7aa1da6a38dca7c3f819d04e3fd1ee45"
+    },
+    {
+      "relative_path": "tables/aggregate_metrics.csv",
+      "size_bytes": 2345,
+      "sha256": "3396a6bf8be3e25ee15c69ea9affc37c2e1a6aee00f32334b566295e52e40ffc"
+    },
+    {
+      "relative_path": "tables/batch_class_distribution.csv",
+      "size_bytes": 2513,
+      "sha256": "af79b1b929062e160d1fced3c1798418769c9715b2aa8117cd781d6ab7a7fe61"
+    },
+    {
+      "relative_path": "tables/batch_class_metrics.csv",
+      "size_bytes": 194750,
+      "sha256": "fe3096cbe2c7e06cc069a8053e4f22b2349cbfa2d1331b24f5f8d1a041a7ce24"
+    },
+    {
+      "relative_path": "tables/claim_boundaries.csv",
+      "size_bytes": 668,
+      "sha256": "df9e2e4670c27f05077da11a2ab062e16d5bbc08a1bd4194a6173fac3b04ba4f"
+    },
+    {
+      "relative_path": "tables/cluster_bootstrap_intervals.csv",
+      "size_bytes": 1342,
+      "sha256": "586d2ad745bb4256fd8136f9b8b9ca33fe113c2b3219ff0814e410eb80a03943"
+    },
+    {
+      "relative_path": "tables/confusion_matrices.csv",
+      "size_bytes": 9289,
+      "sha256": "6c3d01e583207635ba6f72dc9a12340f6ba824ac7bf9befb0cfbabbe2279ed1c"
+    },
+    {
+      "relative_path": "tables/feature_definitions.csv",
+      "size_bytes": 3337,
+      "sha256": "470f638a89843f5b2dccd3273bdd4ec0671dfa597e3a57225207013654cad34a"
+    },
+    {
+      "relative_path": "tables/feature_importance.csv",
+      "size_bytes": 16823,
+      "sha256": "417850090ec1f77a7bd7e4fba3ac4f32e62a4fdf86333324f3286adb4db2e8ca"
+    },
+    {
+      "relative_path": "tables/feature_summary_by_category.csv",
+      "size_bytes": 15159,
+      "sha256": "92fdae52a81221a6eca6c7ba8a3a88ead2c5d64ee960df187de2f2094047e461"
+    },
+    {
+      "relative_path": "tables/fold_coverage.csv",
+      "size_bytes": 606,
+      "sha256": "da45a1804356dfb797186184003e3bc159cb1fc709e3eafdd31a0482849b7616"
+    },
+    {
+      "relative_path": "tables/fold_metrics.csv",
+      "size_bytes": 5503,
+      "sha256": "c0ef00f27a73f1e139e70b8edd80d170de083dcd3de8bac438f6f0226d3316fb"
+    },
+    {
+      "relative_path": "tables/split_manifest.csv",
+      "size_bytes": 26280,
+      "sha256": "ba41761226eb367197251f80f314eb5e44df429be54c6e9518cd0f7e2f15a354"
+    },
+    {
+      "relative_path": "tables/subtype_pressure.csv",
+      "size_bytes": 6225,
+      "sha256": "761624e2b1063cf8c3c645dd0e95e473386e80d8c583a1e6906ebfd58b591fab"
+    }
+  ],
+  "claim_scope": "internal batch-grouped public-data baseline"
+}

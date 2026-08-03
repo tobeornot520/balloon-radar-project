@@ -4,7 +4,8 @@
 
 本项目利用 H/V 双极化复数 IQ 雷达数据，研究低慢小目标的检测、距离—速度定位与背景虚警抑制。当前形成的是 UAV 检测定位前端及其可追溯、可校验的冻结结果摘录；完整复现仍需要内部源码、数据、逐样本预测和 checkpoint。空飘球有载/无载、载荷类型及运动状态识别属于后续目标，尚未由当前数据证明。
 
-本 V4 包已合并成果材料、入组执行手册、成员资格与分工验收规则，以及 Tian 复现受阻说明。
+本 V5 包已合并成果材料、入组执行手册、成员资格与分工验收规则、LAT-MRICD 分组基线，
+以及 Tian 复现受阻说明。
 准备继续参与下一阶段的成员应先完成 `TEAM_START_HERE.md` 和成员资格办法规定的验收，再
 认领模型、数据或文档任务。
 
@@ -28,8 +29,10 @@
 15. [项目任务台账](docs/12_PROJECT_TASK_LEDGER_ZH.md)：持续更新的问题、分工、验收标准和下一动作。
 16. [队员复现指南](docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md)：按材料完整程度区分分享包复核、冻结重放和重新训练。
 17. [外部公开数据核验](docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)：LAT-MRICD/LSS 的来源、规模、划分风险与可用边界。
-18. [Tian 复现受阻说明与替代路线](docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md)：失败证据、当前不可获得条件、替代方案和重开门槛。
-19. [成员资格、角色与数据权限验收办法](docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md)：统一时限、五问、试做、评分、补验、角色和沟通说辞。
+18. [LAT-MRICD 分组基线协议](docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md)：冻结划分、特征、模型、指标和停止规则。
+19. [LAT-MRICD 分组基线冻结报告](evidence/23_LAT_MRICD_GROUPED_BASELINES.md)：Narrow-X/HRRP-X 五折结果、CI、分组纪律和结论边界。
+20. [Tian 复现受阻说明与替代路线](docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md)：失败证据、当前不可获得条件、替代方案和重开门槛。
+21. [成员资格、角色与数据权限验收办法](docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md)：统一时限、五问、试做、评分、补验、角色和沟通说辞。
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 
@@ -49,6 +52,10 @@
 - 完成 11 例 P0 人工复核审计：9 例近零多普勒峰、2 例宽结构，物理类别全部保持 unknown；
 - 根据外部成果评议冻结下一阶段任务、所需数据、极化特征使用条件和算法停止规则。
 - 从官方补充材料取得并校验 LAT-MRICD-1.0，完成 23,191 条 HRRP/窄带 I/Q 的 schema、标签和 batch 混杂审计；原始数据不进入分享包。
+- 完成 D17-NX/HX 五折 batch-code-held-out 固定基线：Narrow-X 的 batch-class macro 为
+  LR 0.7999（95% CI 0.7659–0.8313）、RF 0.7872（0.7373–0.8340）；HRRP-X 分别为
+  0.6617（0.5826–0.7404）和 0.6481（0.5764–0.7240）。配对差值 CI 均跨 0，不选胜者；
+  下一公开数据任务为跨频段迁移。
 
 ## 当前最重要的结论
 
@@ -94,12 +101,12 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 - `TEAM_START_HERE.md`：给零项目背景组员的完整执行手册；组员应先读此文件再认领任务。
 - `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`：成员筛选、分工、权限和沟通的统一规则。
 - `assets/templates/team_qualification_scorecard_template_v1.csv`：逐人评分与决定记录。
-- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据和当前数据合同缺口审计。
+- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据、LAT-MRICD 审计/分组基线和当前数据合同缺口审计。
 - `MANIFEST.json`：版本、范围、源文件及 SHA256 哈希。
 - `SHA256SUMS.txt`：包内文件完整性校验值。
 
 ## 分享边界
 
-本包不包含原始 MAT/IQ 数据、标签明细、逐样本预测、checkpoint、训练日志、开发聊天记录、个人路径或访问凭据。哈希只能校验包内文件是否变化，不能替代从源码和数据重新计算结果。包内数字属于当前数据上的内部开发评价或明确标注的两折诊断证据，不代表跨日期、跨场地盲测、严格实时部署或空飘球载荷分类性能。
+本包不包含原始 MAT/IQ 数据、标签明细、逐样本预测、checkpoint、训练日志、开发聊天记录、个人路径或访问凭据。哈希只能校验包内文件是否变化，不能替代从源码和数据重新计算结果。LAT-MRICD 数字只属于同一公开发布内、已见子型号的 batch-code-held-out 基线，不是 unseen-model、独立外部、极化、空飘球或 Tian 复现证据。主 UAV 方向仍为 `4/6`、`BLOCKED_EXTERNAL`；其余包内数字属于当前数据上的内部开发评价或明确标注的两折诊断证据，不代表跨日期、跨场地盲测或严格实时部署。
 
-分享包版本：`2026-08-03 V4`
+分享包版本：`2026-08-03 V5`

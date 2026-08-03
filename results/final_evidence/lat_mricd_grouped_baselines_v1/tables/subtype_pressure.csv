@@ -1,0 +1,55 @@
+﻿task_id,model_id,target_model_code,target_model,category_code,category,record_count,batch_count,row_accuracy,batch_macro_accuracy,worst_batch_accuracy,unseen_model_generalization_evidence
+hrrp_x_category,dummy_prior,1,Mavic 2,1,UAV,392,2,0.7882653061224489,0.5,0.0,False
+hrrp_x_category,dummy_prior,2,Phantom 4,1,UAV,182,2,0.0,0.0,0.0,False
+hrrp_x_category,dummy_prior,3,Air 3S,1,UAV,295,1,0.0,0.0,0.0,False
+hrrp_x_category,dummy_prior,4,M30T,1,UAV,238,2,0.0,0.0,0.0,False
+hrrp_x_category,dummy_prior,5,racing drone,1,UAV,155,2,1.0,1.0,1.0,False
+hrrp_x_category,dummy_prior,6,self-built UAV,1,UAV,149,3,0.5369127516778524,0.3333333333333333,0.0,False
+hrrp_x_category,dummy_prior,7,pigeon,2,bird,616,15,0.5551948051948052,0.4666666666666667,0.0,False
+hrrp_x_category,dummy_prior,8,goose,2,bird,536,1,0.0,0.0,0.0,False
+hrrp_x_category,dummy_prior,9,weather clutter,3,weather,1085,22,0.35576036866359445,0.18181818181818182,0.0,False
+hrrp_x_category,logistic_batch_balanced,1,Mavic 2,1,UAV,392,2,0.8673469387755102,0.8541739774632511,0.8313253012048193,False
+hrrp_x_category,logistic_batch_balanced,2,Phantom 4,1,UAV,182,2,0.8736263736263736,0.875968992248062,0.8333333333333334,False
+hrrp_x_category,logistic_batch_balanced,3,Air 3S,1,UAV,295,1,0.6440677966101694,0.6440677966101694,0.6440677966101694,False
+hrrp_x_category,logistic_batch_balanced,4,M30T,1,UAV,238,2,0.957983193277311,0.8955590661751799,0.8148148148148148,False
+hrrp_x_category,logistic_batch_balanced,5,racing drone,1,UAV,155,2,0.5612903225806452,0.5914115646258503,0.5578231292517006,False
+hrrp_x_category,logistic_batch_balanced,6,self-built UAV,1,UAV,149,3,0.8322147651006712,0.8728070175438596,0.75,False
+hrrp_x_category,logistic_batch_balanced,7,pigeon,2,bird,616,15,0.5292207792207793,0.4937128282673234,0.0,False
+hrrp_x_category,logistic_batch_balanced,8,goose,2,bird,536,1,0.013059701492537313,0.013059701492537313,0.013059701492537313,False
+hrrp_x_category,logistic_batch_balanced,9,weather clutter,3,weather,1085,22,0.39078341013824885,0.7132834706243976,0.0,False
+hrrp_x_category,random_forest_batch_balanced,1,Mavic 2,1,UAV,392,2,0.9005102040816326,0.8443677623113814,0.7469879518072289,False
+hrrp_x_category,random_forest_batch_balanced,2,Phantom 4,1,UAV,182,2,0.9065934065934066,0.9114583333333333,0.8229166666666666,False
+hrrp_x_category,random_forest_batch_balanced,3,Air 3S,1,UAV,295,1,0.9322033898305084,0.9322033898305084,0.9322033898305084,False
+hrrp_x_category,random_forest_batch_balanced,4,M30T,1,UAV,238,2,0.957983193277311,0.8955590661751799,0.8148148148148148,False
+hrrp_x_category,random_forest_batch_balanced,5,racing drone,1,UAV,155,2,0.4838709677419355,0.6687925170068028,0.46258503401360546,False
+hrrp_x_category,random_forest_batch_balanced,6,self-built UAV,1,UAV,149,3,0.8523489932885906,0.8807017543859649,0.8,False
+hrrp_x_category,random_forest_batch_balanced,7,pigeon,2,bird,616,15,0.5925324675324676,0.5232154450605501,0.0,False
+hrrp_x_category,random_forest_batch_balanced,8,goose,2,bird,536,1,0.17723880597014927,0.17723880597014927,0.17723880597014927,False
+hrrp_x_category,random_forest_batch_balanced,9,weather clutter,3,weather,1085,22,0.37142857142857144,0.5913517951476653,0.0,False
+narrow_x_category,dummy_prior,1,Mavic 2,1,UAV,271,1,0.0,0.0,0.0,False
+narrow_x_category,dummy_prior,2,Phantom 4,1,UAV,262,2,0.0,0.0,0.0,False
+narrow_x_category,dummy_prior,3,Air 3S,1,UAV,335,2,1.0,1.0,1.0,False
+narrow_x_category,dummy_prior,4,M30T,1,UAV,762,15,0.6692913385826772,0.4666666666666667,0.0,False
+narrow_x_category,dummy_prior,5,racing drone,1,UAV,212,2,0.0,0.0,0.0,False
+narrow_x_category,dummy_prior,6,self-built UAV,1,UAV,327,3,0.0672782874617737,0.3333333333333333,0.0,False
+narrow_x_category,dummy_prior,7,pigeon,2,bird,852,8,0.02464788732394366,0.125,0.0,False
+narrow_x_category,dummy_prior,8,goose,2,bird,111,1,1.0,1.0,1.0,False
+narrow_x_category,dummy_prior,9,weather clutter,3,weather,5583,357,0.399964176965789,0.39775910364145656,0.0,False
+narrow_x_category,logistic_batch_balanced,1,Mavic 2,1,UAV,271,1,0.974169741697417,0.974169741697417,0.974169741697417,False
+narrow_x_category,logistic_batch_balanced,2,Phantom 4,1,UAV,262,2,0.9312977099236641,0.9554455445544554,0.9108910891089109,False
+narrow_x_category,logistic_batch_balanced,3,Air 3S,1,UAV,335,2,0.8477611940298507,0.8582641317016317,0.7864583333333334,False
+narrow_x_category,logistic_batch_balanced,4,M30T,1,UAV,762,15,0.9396325459317585,0.9369239844239844,0.5,False
+narrow_x_category,logistic_batch_balanced,5,racing drone,1,UAV,212,2,0.9198113207547169,0.91875,0.9,False
+narrow_x_category,logistic_batch_balanced,6,self-built UAV,1,UAV,327,3,0.6452599388379205,0.7795267159224757,0.6113074204946997,False
+narrow_x_category,logistic_batch_balanced,7,pigeon,2,bird,852,8,0.6291079812206573,0.6559831167334609,0.4032258064516129,False
+narrow_x_category,logistic_batch_balanced,8,goose,2,bird,111,1,0.7297297297297297,0.7297297297297297,0.7297297297297297,False
+narrow_x_category,logistic_batch_balanced,9,weather clutter,3,weather,5583,357,0.8190936772344618,0.8224045934963153,0.0,False
+narrow_x_category,random_forest_batch_balanced,1,Mavic 2,1,UAV,271,1,0.974169741697417,0.974169741697417,0.974169741697417,False
+narrow_x_category,random_forest_batch_balanced,2,Phantom 4,1,UAV,262,2,0.5343511450381679,0.698019801980198,0.39603960396039606,False
+narrow_x_category,random_forest_batch_balanced,3,Air 3S,1,UAV,335,2,0.5283582089552239,0.49663097319347316,0.27972027972027974,False
+narrow_x_category,random_forest_batch_balanced,4,M30T,1,UAV,762,15,0.9173228346456693,0.8637831237831238,0.0,False
+narrow_x_category,random_forest_batch_balanced,5,racing drone,1,UAV,212,2,0.8679245283018868,0.86375,0.79,False
+narrow_x_category,random_forest_batch_balanced,6,self-built UAV,1,UAV,327,3,0.617737003058104,0.8387943034586144,0.5618374558303887,False
+narrow_x_category,random_forest_batch_balanced,7,pigeon,2,bird,852,8,0.6208920187793427,0.6825305358494203,0.3064516129032258,False
+narrow_x_category,random_forest_batch_balanced,8,goose,2,bird,111,1,0.5585585585585585,0.5585585585585585,0.5585585585585585,False
+narrow_x_category,random_forest_batch_balanced,9,weather clutter,3,weather,5583,357,0.8642307003403188,0.8702902520322275,0.0,False

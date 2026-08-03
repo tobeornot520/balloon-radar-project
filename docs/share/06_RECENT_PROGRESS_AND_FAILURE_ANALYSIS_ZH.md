@@ -125,12 +125,32 @@ point-GT 单一救援只改变分类目标，不加载 test，得到：
 
 截至 2026-08-03，上述原始条件和 H/V/IQ/PRF/坐标事实被报告为目前无法取得。精确复现
 因此冻结，底层技术事实仍保持 unknown；替代路线转为 DPG-FCN 零多普勒主线、公开
-LAT-MRICD 分组基线和 Tian 合成合同测试。详细说明见分享包
+LAT-MRICD 跨频段迁移预登记和 Tian 合成合同测试。详细说明见分享包
 `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md`。
 
 详见[诊断结论](../evidence/10_TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md)、
 [PIR/MDP 机制分析](../evidence/11_TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md)和
 [复现条件请求](../evidence/13_TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md)。
+
+### 5.1 LAT-MRICD 分组可解释基线
+
+D17-NX/HX 已按信号特征提取前冻结的 metadata-only 五折划分完成。整组键为
+`(representation, band_code, batch_code)`，模型固定为 dummy、batch-balanced 逻辑回归
+和随机森林，不根据 held-out 结果选模型。
+
+| 任务 | 模型 | batch-class macro accuracy | batch-code cluster 95% CI | 最差折 balanced accuracy |
+|---|---|---:|---:|---:|
+| Narrow-X | logistic | 0.7999 | 0.7659–0.8313 | 0.7204 |
+| Narrow-X | random forest | 0.7872 | 0.7373–0.8340 | 0.6973 |
+| HRRP-X | logistic | 0.6617 | 0.5826–0.7404 | 0.4946 |
+| HRRP-X | random forest | 0.6481 | 0.5764–0.7240 | 0.4934 |
+
+RF-LR 配对差值在 Narrow-X 为 -0.0127（95% CI -0.0511–0.0246），在 HRRP-X 为
+-0.0136（-0.0775–0.0487），均跨 0，因此不宣布模型胜者。HRRP-X 和 Narrow-X 属于同一
+公开发布，batch 语义未独立验证，子型号也已在开发折出现；这些结果只能称
+batch-code-held-out 三类基线，不能称 unseen-model、独立外部、极化、空飘球或 Tian 复现证据。完整报告见
+[LAT-MRICD 分组基线](../evidence/23_LAT_MRICD_GROUPED_BASELINES.md)。下一公开数据任务是单独
+预登记的 band-held-out 迁移。
 
 ## 6. 极化特征现在做到什么程度
 
@@ -172,3 +192,6 @@ embedding 融合。详见[极化迁移编码器](../evidence/18_POLARIMETRIC_TRA
 
 现阶段继续无约束跑网络的边际价值较低。最有价值的工作是获得正确数据条件、建立
 可逐层对齐的复现样例，并用困难折门槛拒绝无效机制。
+
+公开数据支线可在不改变主 UAV `4/6 BLOCKED_EXTERNAL` 门槛的前提下，先推进冻结协议下的
+S/X/Ku band-held-out 迁移；不做同事件多频拼接，也不把迁移结果并入 H/V 或空飘球结论。

@@ -12,6 +12,7 @@
 8. An acquisition-order readiness audit finds no verified within-scan sample order. Formal causal training remains gated; a bounded validation-only interface smoke has passed.
 9. A frozen localization build aggregates range-velocity errors from the six base-threshold BC-DPG test tables without training, inference, or retuning.
 10. A versioned new-data contract now enforces capture, causal-order, and locked-evaluation readiness before new data can enter formal experiments.
+11. Five-fold LAT-MRICD Narrow-X and HRRP-X interpretable baselines are frozen with metadata-only batch-code assignment, fixed models, grouped metrics, and batch-code cluster intervals.
 
 ## Active method reproduction
 
@@ -73,7 +74,7 @@ The intended later transfer path is to replace the task head and fuse the
 polarimetric embedding with time-domain and micro-Doppler representations from
 new synchronized, calibrated balloon data.
 
-## External public-data preparation
+## External public-data grouped baseline
 
 LAT-MRICD-1.0 was obtained from the journal's official ScienceDB supplement and
 audited locally. Its 33 MAT files contain 7,119 X/Ku HRRP records and 16,072
@@ -82,12 +83,29 @@ code checks; alternating narrowband columns reconstruct to 512 complex samples.
 
 The audit forbids random row splitting. Across 911 `(representation, band,
 batch)` groups, 46 batch codes collide across models/categories and 94.95% of
-groups are category-pure. Category-level grouped baselines are ready for
-preregistration, while 12 fine-model strata have fewer than three batches.
-This public dataset partially unlocks normalized-frequency micro-motion and
-HRRP algorithm development only. It provides no H/V polarization, balloon
-labels, verified PRF/timestamps, causal session order, or Tian alignment facts.
-See [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md).
+groups are category-pure. Twelve fine-model strata have fewer than three
+batches. The frozen X-band experiment assigns whole
+`(representation, band_code, batch_code)` groups to five held-out folds using
+metadata only, then retains a dummy prior, fixed batch-balanced logistic
+regression, and a fixed batch-balanced random forest without held-out-driven
+model selection.
+
+For Narrow-X, batch-class macro accuracy is 0.7999 for logistic regression
+(batch-code cluster-bootstrap 95% CI 0.7659 to 0.8313) and 0.7872 for random
+forest (0.7373 to 0.8340). For HRRP-X, the corresponding values are 0.6617
+(0.5826 to 0.7404) and 0.6481 (0.5764 to 0.7240). The paired random-forest-minus-
+logistic intervals cross zero for both tasks, so neither model is selected as a
+winner. D17-NX and D17-HX are complete; the next public-data task is a separately
+preregistered cross-band transfer study.
+
+These are within-release, batch-code-held-out category baselines for already
+represented submodels. They are not unseen-model, independent-session, or
+external-blind evidence, and HRRP-X is not an independent external replication
+of Narrow-X. The dataset still provides no H/V polarization, balloon labels,
+verified PRF/timestamps, causal session order, or Tian alignment facts. This
+completion does not change the main UAV direction gate, which remains 4/6
+`BLOCKED_EXTERNAL`. See
+[EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md).
 
 ## Zero-Doppler development gate
 
@@ -139,6 +157,8 @@ mechanism. See
 - Field readiness pending baseline: `results/data_audit/field_readiness_v1/pending_audit/`
 - Polarimetric transfer encoder V1: [POLARIMETRIC_TRANSFER_ENCODER_V1.md](POLARIMETRIC_TRANSFER_ENCODER_V1.md)
 - External public-data audit: [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)
+- LAT-MRICD grouped-baseline protocol: [LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md](LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md)
+- Frozen LAT-MRICD grouped-baseline evidence: `results/final_evidence/lat_mricd_grouped_baselines_v1/`
 
 The deterministic joint evidence build contains the formal report, pooled and fold-level tables, fold-distribution summaries, Wilson and scan-group bootstrap intervals, paired McNemar diagnostics, PNG/PDF figures, and a SHA256 manifest. Build it with:
 

@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v4"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v5"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
 PACKAGE_DATE = "2026-08-03"
@@ -174,6 +174,106 @@ PACKAGE_FILES = (
         "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
         "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
         "external_public_data_audit",
+    ),
+    PackageFile(
+        "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md",
+        "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md",
+        "grouped_public_data_baseline_protocol",
+    ),
+    PackageFile(
+        "results/data_audit/lat_mricd_v1/REPORT.md",
+        "evidence/22_LAT_MRICD_DATA_AUDIT.md",
+        "external_data_audit_report",
+    ),
+    PackageFile(
+        "results/data_audit/lat_mricd_v1/summary.json",
+        "evidence/22_LAT_MRICD_DATA_AUDIT.json",
+        "external_data_audit_manifest",
+    ),
+    PackageFile(
+        "results/data_audit/lat_mricd_v1/category_split_readiness.csv",
+        "assets/tables/lat_mricd_category_split_readiness.csv",
+        "external_data_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lat_mricd_v1/batch_code_collisions.csv",
+        "assets/tables/lat_mricd_batch_code_collisions.csv",
+        "external_data_audit_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/REPORT.md",
+        "evidence/23_LAT_MRICD_GROUPED_BASELINES.md",
+        "grouped_public_data_baseline_report",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/evidence_manifest.json",
+        "evidence/23_LAT_MRICD_GROUPED_BASELINES.json",
+        "grouped_public_data_baseline_manifest",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/aggregate_metrics.csv",
+        "assets/tables/lat_mricd_grouped_aggregate_metrics.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/batch_class_distribution.csv",
+        "assets/tables/lat_mricd_grouped_batch_class_distribution.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/batch_class_metrics.csv",
+        "assets/tables/lat_mricd_grouped_batch_class_metrics.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/claim_boundaries.csv",
+        "assets/tables/lat_mricd_grouped_claim_boundaries.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/cluster_bootstrap_intervals.csv",
+        "assets/tables/lat_mricd_grouped_cluster_bootstrap_intervals.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/confusion_matrices.csv",
+        "assets/tables/lat_mricd_grouped_confusion_matrices.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/feature_definitions.csv",
+        "assets/tables/lat_mricd_grouped_feature_definitions.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/feature_importance.csv",
+        "assets/tables/lat_mricd_grouped_feature_importance.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/feature_summary_by_category.csv",
+        "assets/tables/lat_mricd_grouped_feature_summary_by_category.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/fold_coverage.csv",
+        "assets/tables/lat_mricd_grouped_fold_coverage.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/fold_metrics.csv",
+        "assets/tables/lat_mricd_grouped_fold_metrics.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/split_manifest.csv",
+        "assets/tables/lat_mricd_grouped_split_manifest.csv",
+        "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/subtype_pressure.csv",
+        "assets/tables/lat_mricd_grouped_subtype_pressure.csv",
+        "grouped_public_data_baseline_table",
     ),
     PackageFile(
         "configs/current_direction_completion_v1.json",
@@ -803,6 +903,13 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "lat_mricd_raw_data_included": False,
             "lat_mricd_random_row_split_allowed": False,
             "lat_mricd_physical_micro_doppler_hz_allowed": False,
+            "lat_mricd_grouped_baseline_included": True,
+            "lat_mricd_group_key": [
+                "representation",
+                "band_code",
+                "batch_code",
+            ],
+            "lat_mricd_sample_predictions_included": False,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,
             "team_qualification_scorecard_included": True,

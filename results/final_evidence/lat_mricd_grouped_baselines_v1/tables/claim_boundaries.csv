@@ -1,0 +1,7 @@
+﻿claim,allowed,reason
+LAT-MRICD X-band batch-code-held-out category baseline,True,frozen metadata-only batch split and out-of-fold predictions
+independent session or external blind generalization,False,batch semantics are not independently verified
+unseen-model generalization,False,submodels are represented across development folds and many have few batches
+physical micro-Doppler in Hz or velocity,False,PRF and continuous timing are not verified
+polarimetric or balloon-payload recognition,False,the public dataset has no H/V pair or balloon/payload labels
+Tian 2024 exact reproduction,False,"input, label, preprocessing and output alignment remain unavailable"

@@ -23,7 +23,7 @@
 | Tian 2024 FCN | 原迁移失败；point-GT 验证集 joint Pd 0.4151 | 方法诊断和本地消融，不是成功复现 |
 | 极化迁移编码器 | 三分支 ROI encoder 接口与测试完成 | 尚无预训练权重，未标定相位可通过 validity mask 关闭 |
 | 外场准备 | 能力、同步、标定、dry run、Pilot 五道门已固化 | 真实证据未提供前全部保持关闭 |
-| 公开多频段数据 | LAT-MRICD 23,191 条 HRRP/窄带 I/Q 已完成 schema 和 batch 审计 | 可做分组算法预研；不是 H/V、物理微多普勒或空飘球证据 |
+| 公开多频段数据 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
 
 ## 当前最关键的发现
 
@@ -38,8 +38,9 @@
    配置或对齐样例目前不可获得，因此精确复现冻结，转入明确的替代路线。
 4. 当前分类资料只有 UAV，且 H/V 绝对幅相、PRF 和连续慢时间关系未证实。现阶段只能
    搭可迁移表示，不能声称获得物理微多普勒或绝对极化结论。
-5. 新取得的 LAT-MRICD 覆盖 UAV、鸟和气象，已部分补上外部分类/微动预研数据；但 batch
-   编号存在跨类碰撞，必须分组划分，且没有 PRF 时频率只能报告为归一化单位。
+5. LAT-MRICD 的五折 metadata-only 分组基线已经冻结。Narrow-X 与 HRRP-X 的 LR/RF
+   配对差值 CI 均跨 0，因此不选模型胜者；batch 编号存在跨类碰撞，且无 PRF 时频率只能
+   报告为归一化单位。下一公开数据任务是单独预登记的跨频段迁移。
 
 ## 最希望请教学长的五件事
 
@@ -59,3 +60,5 @@
 - 完整扫描模型不是因果在线模型；
 - 候选 veto、soft notch 和 Tian point-GT 都属于开发诊断；
 - 没有真实空飘球载荷标签，不能报告空飘球分类准确率。
+- LAT-MRICD 结果不支持 unseen-model、独立外部、极化、空飘球或 Tian 复现结论；
+- 公开数据支线完成不改变主 UAV 完成门，当前仍为 `4/6`、`BLOCKED_EXTERNAL`。

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
 
@@ -19,6 +20,11 @@ from scripts.build_project_share_package import (
 def test_share_source_map_is_complete_and_unique() -> None:
     validate_source_map()
     destinations = [item.destination for item in PACKAGE_FILES]
+    sources = [item.source for item in PACKAGE_FILES]
+    assert (
+        share_package.PACKAGE_NAME
+        == "balloon_radar_results_and_team_onboarding_20260803_v5"
+    )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
     assert "docs/06_DATA_CARD_ZH.md" in destinations
@@ -75,7 +81,117 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/tables/zero_doppler_candidate_veto_tradeoff.csv" in destinations
     assert "assets/tables/zero_doppler_frozen_sixfold.csv" in destinations
     assert "docs/NEW_DATA_COLLECTION_PROTOCOL.md" in destinations
+    assert "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md" in destinations
+    assert "evidence/22_LAT_MRICD_DATA_AUDIT.md" in destinations
+    assert "evidence/22_LAT_MRICD_DATA_AUDIT.json" in destinations
+    assert "assets/tables/lat_mricd_category_split_readiness.csv" in destinations
+    assert "assets/tables/lat_mricd_batch_code_collisions.csv" in destinations
+    assert "evidence/23_LAT_MRICD_GROUPED_BASELINES.md" in destinations
+    assert "evidence/23_LAT_MRICD_GROUPED_BASELINES.json" in destinations
+    grouped_table_names = {
+        "aggregate_metrics",
+        "batch_class_distribution",
+        "batch_class_metrics",
+        "claim_boundaries",
+        "cluster_bootstrap_intervals",
+        "confusion_matrices",
+        "feature_definitions",
+        "feature_importance",
+        "feature_summary_by_category",
+        "fold_coverage",
+        "fold_metrics",
+        "split_manifest",
+        "subtype_pressure",
+    }
+    assert {
+        f"assets/tables/lat_mricd_grouped_{name}.csv"
+        for name in grouped_table_names
+    }.issubset(destinations)
+    assert not any("oof_predictions.csv" in path for path in sources + destinations)
+    assert not any(path.startswith("data/raw/") for path in sources)
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+
+
+def test_share_lat_mricd_split_manifest_is_group_level() -> None:
+    source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination == "assets/tables/lat_mricd_grouped_split_manifest.csv"
+    )
+    with (share_package.PROJECT_ROOT / source).open(
+        encoding="utf-8-sig", newline=""
+    ) as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        columns = set(reader.fieldnames or [])
+
+    expected_columns = {
+        "task_id",
+        "representation",
+        "band_code",
+        "band",
+        "batch_code",
+        "heldout_fold",
+        "record_count",
+        "category_count",
+        "model_count",
+        "uav_record_count",
+        "uav_present",
+        "bird_record_count",
+        "bird_present",
+        "weather_record_count",
+        "weather_present",
+    }
+    forbidden_columns = {
+        "sample_id",
+        "mat_path",
+        "label_path",
+        "source_path",
+        "prediction",
+        "predicted_category",
+        "true_category",
+    }
+    assert columns == expected_columns
+    assert columns.isdisjoint(forbidden_columns)
+    assert rows
+    group_keys = [
+        (
+            row["task_id"],
+            row["representation"],
+            row["band_code"],
+            row["batch_code"],
+        )
+        for row in rows
+    ]
+    assert len(group_keys) == len(set(group_keys))
+
+
+def test_share_lat_mricd_evidence_manifest_is_sanitized() -> None:
+    evidence_root = Path(
+        "results/final_evidence/lat_mricd_grouped_baselines_v1"
+    )
+    source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination == "evidence/23_LAT_MRICD_GROUPED_BASELINES.json"
+    )
+    manifest = json.loads(
+        (share_package.PROJECT_ROOT / source).read_text(encoding="utf-8")
+    )
+    assert manifest["sample_predictions_included"] is False
+    assert manifest["raw_data_included"] is False
+    assert "oof_predictions.csv" in manifest["excluded_source_files"]
+    published_paths = [item["relative_path"] for item in manifest["files"]]
+    assert published_paths
+    assert all(not Path(path).is_absolute() for path in published_paths)
+    assert not any("oof_predictions.csv" in path for path in published_paths)
+    assert not any(path.startswith("data/raw/") for path in published_paths)
+    mapped_paths = {
+        Path(item.source).relative_to(evidence_root).as_posix()
+        for item in PACKAGE_FILES
+        if item.source.startswith(f"{evidence_root.as_posix()}/")
+    }
+    assert mapped_paths == set(published_paths) | {"evidence_manifest.json"}
 
 
 def test_current_data_readiness_sources_are_fresh() -> None:
@@ -152,6 +268,13 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lat_mricd_raw_data_included"] is False
     assert rules["lat_mricd_random_row_split_allowed"] is False
     assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False
+    assert rules["lat_mricd_grouped_baseline_included"] is True
+    assert rules["lat_mricd_group_key"] == [
+        "representation",
+        "band_code",
+        "batch_code",
+    ]
+    assert rules["lat_mricd_sample_predictions_included"] is False
     assert rules["team_onboarding_manual_included"] is True
     assert rules["team_qualification_policy_included"] is True
     assert rules["team_qualification_scorecard_included"] is True

@@ -1,0 +1,11 @@
+﻿task_id,heldout_fold,record_count,batch_count,uav_record_count,uav_batch_count,bird_record_count,bird_batch_count,weather_record_count,weather_batch_count
+narrow_x_category,1,1715,73,434,5,164,2,1117,71
+narrow_x_category,2,1722,73,434,5,171,2,1117,72
+narrow_x_category,3,1683,73,434,5,132,2,1117,71
+narrow_x_category,4,1797,72,433,5,248,1,1116,72
+narrow_x_category,5,1798,73,434,5,248,2,1116,71
+hrrp_x_category,1,795,7,227,2,543,3,25,4
+hrrp_x_category,2,722,8,280,3,122,4,320,4
+hrrp_x_category,3,716,8,265,3,65,3,386,4
+hrrp_x_category,4,687,8,317,2,202,3,168,5
+hrrp_x_category,5,728,7,322,2,220,3,186,5
