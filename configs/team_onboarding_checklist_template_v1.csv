@@ -1,0 +1,2 @@
+member,reviewer,date_started,share_package_sha256_passed,one_page_summary_read,current_status_understood,three_evidence_objects_explained,claim_boundaries_explained,data_access_level,repository_access,environment_ready,project_health_passed,pytest_passed,task_id,task_claim_path,oral_review_passed,reviewer_decision,remaining_gap,next_action,date_completed
+,,,pending,pending,pending,pending,pending,A,no,pending,pending,pending,,,,pending,pending,,,

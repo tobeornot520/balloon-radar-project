@@ -10,6 +10,7 @@
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
+- `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
 
 ## Detection and localization
 

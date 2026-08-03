@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_consultation_20260803"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v2"
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
 DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
 PACKAGE_DATE = "2026-08-03"
@@ -85,6 +85,26 @@ class PackageFile:
 
 PACKAGE_FILES = (
     PackageFile("docs/share/README_SHARE_ZH.md", "README.md", "share_document"),
+    PackageFile(
+        "docs/share/TEAM_START_HERE.md",
+        "TEAM_START_HERE.md",
+        "team_onboarding_manual",
+    ),
+    PackageFile(
+        "configs/team_onboarding_checklist_template_v1.csv",
+        "assets/templates/team_onboarding_checklist_template_v1.csv",
+        "team_onboarding_template",
+    ),
+    PackageFile(
+        "configs/team_task_claim_template_v1.csv",
+        "assets/templates/team_task_claim_template_v1.csv",
+        "team_task_template",
+    ),
+    PackageFile(
+        "docs/share/TEAM_WEEKLY_REPORT_TEMPLATE_ZH.md",
+        "assets/templates/TEAM_WEEKLY_REPORT_TEMPLATE_ZH.md",
+        "team_reporting_template",
+    ),
     PackageFile(
         "docs/share/01_PROJECT_OVERVIEW_ZH.md",
         "docs/01_PROJECT_OVERVIEW_ZH.md",
@@ -709,9 +729,10 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
         "package_date": PACKAGE_DATE,
         "language": "zh-CN",
         "purpose": (
-            "sanitized results analysis and technical consultation package with "
-            "traceable frozen evidence and clearly labeled development diagnostics; "
-            "not a self-contained reproduction package"
+            "sanitized results analysis, technical consultation, and zero-context "
+            "team-onboarding package with traceable frozen evidence, task requirements, "
+            "and clearly labeled development diagnostics; not a self-contained "
+            "reproduction package"
         ),
         "source_commit": current_commit(),
         "current_scope": "H/V UAV detection, localization, and false-alarm suppression front end",
@@ -764,6 +785,9 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "lat_mricd_raw_data_included": False,
             "lat_mricd_random_row_split_allowed": False,
             "lat_mricd_physical_micro_doppler_hz_allowed": False,
+            "team_onboarding_manual_included": True,
+            "team_task_claim_template_included": True,
+            "team_weekly_report_template_included": True,
         },
         "full_reproduction_requires": [
             "internal source code",

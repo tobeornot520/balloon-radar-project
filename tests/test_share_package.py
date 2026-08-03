@@ -34,6 +34,10 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/17_NEXT_STAGE_PLAN_20260803_ZH.md" in destinations
     assert "evidence/21_ZERO_DOPPLER_P0_REVIEW_PRESCREEN.md" in destinations
     assert "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md" in destinations
+    assert "TEAM_START_HERE.md" in destinations
+    assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
+    assert "assets/templates/team_task_claim_template_v1.csv" in destinations
+    assert "assets/templates/TEAM_WEEKLY_REPORT_TEMPLATE_ZH.md" in destinations
     assert "assets/contracts/current_direction_completion_v1.json" in destinations
     assert "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md" in destinations
     assert "docs/10_QUESTIONS_FOR_SENIOR_ZH.md" in destinations
@@ -140,6 +144,9 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lat_mricd_raw_data_included"] is False
     assert rules["lat_mricd_random_row_split_allowed"] is False
     assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False
+    assert rules["team_onboarding_manual_included"] is True
+    assert rules["team_task_claim_template_included"] is True
+    assert rules["team_weekly_report_template_included"] is True
 
 
 def test_share_audit_rejects_local_paths(tmp_path: Path) -> None:

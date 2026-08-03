@@ -1,0 +1,2 @@
+task_id,title,owner,reviewer,priority,status,data_access_level,scope,input_paths,input_hash_or_manifest,git_branch,planned_outputs,group_key,test_access_policy,primary_metrics,acceptance_gate,stop_condition,forbidden_claims,start_date,target_date,last_update,blockers,next_action,review_decision
+,,,,,proposed,,,,,,,,,,,,,,,,,,
