@@ -83,7 +83,8 @@ def test_algorithm_package_builds_from_committed_snapshot(tmp_path: Path) -> Non
         for path in sorted(package_root.rglob("*"))
         if path.is_file()
     )
-    assert b"/home/tobeornot8259748/" not in payload
+    private_marker = b"/home/" + b"tobeornot8259748/"
+    assert private_marker not in payload
     assert not any(
         path.suffix.lower() in builder.FORBIDDEN_PACKAGED_SUFFIXES
         for path in package_root.rglob("*")

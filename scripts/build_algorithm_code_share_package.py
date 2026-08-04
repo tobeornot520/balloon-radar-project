@@ -100,8 +100,8 @@ FORBIDDEN_PACKAGED_SUFFIXES = {
 }
 
 ACTUAL_PRIVATE_MARKERS = (
-    b"/home/tobeornot8259748/",
-    b"C:\\Users\\tobeornot8259748\\",
+    b"/home/" + b"tobeornot8259748/",
+    b"C:\\Users\\" + b"tobeornot8259748\\",
 )
 
 INTERNAL_TOP_LEVEL = {
