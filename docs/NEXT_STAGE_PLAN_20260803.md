@@ -26,14 +26,15 @@
 | 1 | Fold 4 的 11 个 P0 零多普勒误警复核 | 已完成 | 已完成 CSV 审计和 D04 回填；保留不含样本 ID 的聚合结论 | 11 例已填写可见模式和备注，物理类别均保持 `unknown` | 11/11 通过审计：9 例近零多普勒峰、2 例宽结构 |
 | 2 | H/V、IQ、PRF 和坐标事实确认 | 外部阻塞；当前报告不可获得 | 按 unknown 门禁维护数据卡，只开放 bin 域和 relative H/V 分析 | 当前不要求继续追索；未来有可归因材料时转交核验 | 有来源才解锁物理坐标/相干特征；否则长期保持 unknown |
 | 3 | Tian 2024 最小条件对齐 | 外部阻塞；精确复现冻结 | 保留方法级实现和负结果，推进 DPG/LAT-MRICD/合同测试替代路线 | 可把失败说明发给学长征求方向判断，不承担猜测原条件 | 只有获得对齐样例、完整配置或同分布数据之一才重开训练 |
-| 3A | LAT-MRICD 公开数据算法预研 | D17-NX/HX 已完成；D17-XBAND 已预登记待一次密封运行 | 五折 X 波段证据已冻结；跨频 V1 也已冻结类别交集、Narrow X->S/X->Ku、固定模型、目标 batch 指标、CI 和停止规则；S/Ku 性能尚未查看 | 当前无需补数据；对外只按冻结边界引用，不把公开数据支线并入主 UAV 门槛 | clean pre-result 提交后只运行一次；两个 target 未同时过门则冻结负结果并停止 CNN/域适配 |
+| 3A | LAT-MRICD 公开数据算法预研 | D17-NX/HX/XBAND 已完成；XBAND 为预登记负结果 `FAIL_STOP` | 维护 X 波段五折证据和跨频最终证据；X->S 仅 UAV recall 失败，X->Ku 全部门槛通过；S/Ku target 已消费 | 当前无需补数据；对外只按冻结边界引用，不把公开数据支线并入主 UAV 门槛 | 不在同一 S/Ku target 上做 CNN、域适配、扩特征、调参或新确认性比较；新结论须使用独立未消费 target 并重新预登记 |
+| 3B | 新公开数据 schema/group 审计 | 核心数据已下载；DroneRFc schema 完成但 B1 同步阻塞；辅助 smoke 已落地；未放行建模 | 依次审计 DAUR TD/TR 配对、HSR-L V2 只读结构和 FMCWR-2.0 解包/记录分组；DroneRFc 只保留 8 条可对齐 recording 的后续预登记入口，B1 等待更正；Ku 群目标/NEXRAD 只验证接口 | 当前无需下载或标注；若能联系发布方，只询问 B1 更正 GT/时间偏移 | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；未过门前不训练 |
 | 4 | 建立可审计的虚警库 | P0 复核后开始 | 把 fixed/residual、特征、可见模式和证据来源合并，按 scan 汇总 | 优先核对有现场记录的误警事件，不确定项不强行分类 | 每个命名物理类别可追溯；同时保留 unknown 比例 |
 | 5 | 新同条件数据的极化统计 | 等待数据 | 冻结特征、按 session/scan 做 AUC/PR-AUC/低 FPR/最差组压力检查 | 审核特征物理解释与主验收指标 | 来源压力通过；目标/背景不再由日期直接区分 |
 | 6 | 最小极化增强模型 | 未放行 | 先做功率/相对幅度 ROI 小分支，一次只开放一个变量 | 评审困难样本、复杂度和停止规则 | 验证组 Pfa 降低且 joint Pd 不下降，或通过预登记容差 |
 | 7 | 因果背景校准 | 等待真实顺序 | 用 past-only 窗口训练，训练/验证选窗口，锁定外层只评一次 | 提供硬件时间戳、序号和丢帧记录 | 不读取未来样本，causal 合同通过 |
 | 8 | 空飘球载荷/状态迁移 | 等待新任务数据 | 接入分层标签、时域/微多普勒和极化接口 | 组织无载/有载、状态和同步真值采集 | 每类有独立 session，locked test 与开发组隔离 |
 
-只有完成度检查器输出 `COMPLETE`，才宣布当前方向任务全部完成。D17-NX/HX 完成后，主
+只有完成度检查器输出 `COMPLETE`，才宣布当前方向任务全部完成。D17-NX/HX/XBAND 完成后，主
 UAV 方向仍为 `4/6`、`BLOCKED_EXTERNAL`，不能用公开数据结果代替第 2、3 项的外部事实。
 
 2026-08-03 补充决策：项目负责人报告第 2、3 项所需外部材料目前无法取得。两项转为
@@ -118,11 +119,35 @@ batch-code-held-out 协议完成：Narrow-X 的 batch-class macro accuracy 为 L
 （0.5826–0.7404）和 0.6481（0.5764–0.7240）。两项 RF-LR 配对差值 CI 均跨 0，不选
 模型胜者。完整证据位于 `results/final_evidence/lat_mricd_grouped_baselines_v1/`。
 
-这些结果只属于同一公开发布内、已见子型号的 batch-code 留出评价，不是 unseen-model、
-独立外部或同事件跨表征验证。数据仍没有 H/V、空飘球标签，也未确认 PRF、逐脉冲时间戳、
-连续 session 和同事件跨频段配对。因此下一公开数据任务是执行已冻结的 band-held-out
-密封评价，而不是极化、空飘球或 Tian 复现；它也没有替代 3.1 至 3.5 的设备事实和任务数据。
-完整审计见 `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`。
+D17-XBAND 的一次密封评价也已完成并冻结为预登记负结果 `FAIL_STOP`：LR 的 X->S
+macro/UAV/weather/CI 下界依次为 0.6516798767/0.4433201701/0.8600395832/0.0839896354；
+X->Ku 依次为 0.8399853939/0.8493090645/0.8306617233/0.2670982858。八项条件中仅 S UAV
+recall 失败。S/Ku target 已消费，禁止在同一 target 上继续 CNN、域适配、扩特征、调参或
+新的确认性模型比较。最终证据位于
+`results/final_evidence/lat_mricd_cross_band_transfer_v1/`。
+
+这些结果只属于同一公开发布内、已见子型号的 batch-code 留出及 band-held-out 评价，不是
+unseen-model、独立外部或同事件跨表征验证。数据仍没有 H/V、空飘球标签，也未确认 PRF、
+逐脉冲时间戳、连续 session 和同事件跨频段配对。D17 完成没有替代 3.1 至 3.5 的设备事实
+和任务数据，主 UAV 方向仍为 4/6 `BLOCKED_EXTERNAL`。完整审计见
+`EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`。
+
+另已取得四条未建模的核心公开数据支线：LSS-DAUR-1.0 V3 的 314 个文件、LSS-FMCWR-2.0 V4
+的 8 个文件，以及 LSS-HSR-L 的 237,020,946-byte ScienceDB V2。HSR-L V2 已确认与较小的
+期刊历史包不等价，禁止混用。新增 DroneRFc-MM V1 只选择下载 28 个雷达相关文件，共
+47,366,902 bytes：9 个 77--81 GHz PCD recording、9 份飞行真值、6 份派生标签、README
+和 3 个参考脚本。30,717 个 PCD 帧来自 9 个同日 recording，不能按帧或五秒窗口随机
+划分；PCD 含 Doppler/功率/SNR/时间戳，但不是 ADC/IQ，也没有 H/V、鸟、背景或空飘球。
+全量只读检查已验证 30,717 个 PCD/639,527 个点的 schema、有限值、POINTS 行数和时间戳。
+8 条 recording 与 GT 时间范围重叠；B1 雷达结束后约 8 分钟同名 GT 才开始，因此状态为
+`PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`。B1 禁止监督对齐，且 A/E/G 的 `-2` 段必须与
+base group 同 split。这些数据尚未形成模型结论。
+
+又以最小下载验证了两条辅助接口：Ku 波段 UAV 群目标包只有 3 个物理实验，5 个 MAT 的
+2,281 列按重复屏号聚合后只有 275 屏、171,309 个有限 XYZ 点，没有 Doppler/IQ/类别；
+NEXRAD 只取 1 个 KTLX Level II 体扫，实际含 Z、V、SW、ZDR、PhiDP、RhoHV，但没有 UAV/
+气球标签。它们分别只支持航迹和双极化读取 smoke，不进入识别训练。42.4 GB 室内气球、
+23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟主包已登记但暂缓，先不消耗网络和存储。
 
 ## 4. 极化特征的使用边界
 
@@ -157,6 +182,7 @@ batch-code-held-out 协议完成：Narrow-X 的 batch-class macro accuracy 为 L
 
 我的三个动作：
 
-1. 把 D17-NX/HX 冻结聚合证据纳入 V5 分享包，继续排除原始数据和逐样本预测；
-2. 为 band-held-out 迁移先冻结类别交集、频段方向、分组指标和停止规则，再运行模型；
-3. 收到任何设备/Tian/新数据材料后，先做合同与来源核验，再决定开放哪个算法分支。
+1. 维护 D17-NX/HX/XBAND 冻结证据及其声明边界，继续排除原始数据和逐样本预测；
+2. 执行 D17-XBAND 的 `FAIL_STOP`：不复用已消费 S/Ku target；新确认性比较须换独立 target 并重新预登记；
+3. 按 DAUR -> HSR-L V2 -> FMCWR-2.0 完成其余核心 schema/group 审计；DroneRFc 保持
+   `B1 BLOCKED`，其余 8 条也要另行预登记才可继续；Ku 群目标/NEXRAD 保持 smoke-only。

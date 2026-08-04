@@ -30,7 +30,15 @@
 | Tian FCN 扩展 GT v1 | H-only 六折原方法迁移 | 当前 V4 六折 | 首轮正式执行后发现迁移失败及旧版论文指标定义错误 | 失败诊断；不得作为成功复现或有效论文指标引用 |
 | Tian FCN point-GT | Fold 1 H train/validation | 预登记单一救援诊断 | 只改变分类目标；未加载 test | joint Pd 0.4151、Pfa 0.0133；本地迁移消融，六折仍关闭 |
 | Zero-Doppler fixed residual V2 | 固定 soft notch 后的 1,137 参数非增残差 | 先预登记 Fold 1/4 门，过门后参数不变扩展六折 | 每折验证按 joint Pd、最差背景组 Pfa、pooled Pfa、AUC、loss 选 epoch，含 epoch 0 | 六折 CPU 开发比较 109 FA、290 joint hits；当前学习型开发参考，不是部署或盲测证据 |
-| LAT-MRICD D17-XBAND | dummy prior、batch-balanced logistic、固定 random forest 全部保留；LR 是预登记主模型，RF 仅作固定敏感性 | source band 拟合；S/Ku target 完全留出，不参与缩放、调参、选模或特征扩展 | 在查看 S/Ku 性能前冻结；无搜索、校准或 target 驱动选择 | `preregistered dataset-internal band-held-out transfer`；两个 locked target 均须通过 accuracy、两类 recall 和 LR-minus-dummy CI 门，否则冻结负结果并停止扩模 |
+| LAT-MRICD D17-XBAND | dummy prior、batch-balanced logistic、固定 random forest 全部保留；LR 是预登记主模型，RF 仅作固定敏感性 | source band 拟合；S/Ku target 完全留出，不参与缩放、调参、选模或特征扩展 | 在查看 S/Ku 性能前冻结；一次密封运行，无搜索、校准或 target 驱动选择 | 完成的预登记负结果 `FAIL_STOP`；仅 S UAV recall 失败；S/Ku target 已消费，禁止同 target 扩模或新确认性比较 |
+
+D17-XBAND 主模型 LR 的冻结结果为：X->S 的 target batch-class macro accuracy
+0.6516798767、UAV recall 0.4433201701、weather recall 0.8600395832、LR-minus-dummy 95% CI
+下界 0.0839896354；X->Ku 对应为 0.8399853939、0.8493090645、0.8306617233、
+0.2670982858。八项门禁仅 S UAV recall 失败，因此两个 target 必须共同通过的总门禁失败。
+最终证据位于 `results/final_evidence/lat_mricd_cross_band_transfer_v1/`。该证据只支持
+`preregistered dataset-internal released-band-held-out UAV/weather transfer`，不改变主 UAV
+方向 4/6 `BLOCKED_EXTERNAL`。
 
 ## 1. 必须使用的证据标签
 

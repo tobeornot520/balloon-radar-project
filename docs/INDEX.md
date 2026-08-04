@@ -15,6 +15,7 @@
 - `LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`: frozen five-fold Narrow-X/HRRP-X grouped-baseline contract, metrics, and claim limits
 - `LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md`: preregistered one-shot S/Ku band-held-out transfer contract and stop rules
 - `../results/final_evidence/lat_mricd_grouped_baselines_v1/REPORT.md`: frozen aggregate results and batch-code cluster intervals
+- `../results/final_evidence/lat_mricd_cross_band_transfer_v1/REPORT.md`: completed preregistered cross-band negative result (`FAIL_STOP`), consumed-target decision, and claim limits
 - `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
 - `share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`: member qualification, trial-task scoring, role/access decisions, and communication scripts

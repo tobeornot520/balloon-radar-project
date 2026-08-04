@@ -1,0 +1,12 @@
+﻿claim,allowed,reason
+H/V polarimetric performance,False,outside the frozen dataset-internal band-held-out contract
+Tian 2024 exact reproduction,False,outside the frozen dataset-internal band-held-out contract
+"Within LAT-MRICD-1.0, fixed interpretable features trained on one or more released source bands were evaluated on a held-out released target band for the common UAV-versus-weather task.",True,fixed source-only fit and released-band held-out evaluation
+absolute distance or RCS interpretation,False,outside the frozen dataset-internal band-held-out contract
+balloon payload or motion-state recognition,False,outside the frozen dataset-internal band-held-out contract
+causal temporal deployment,False,outside the frozen dataset-internal band-held-out contract
+independent-session cross-scene or external blind generalization,False,outside the frozen dataset-internal band-held-out contract
+physical frequency invariance,False,outside the frozen dataset-internal band-held-out contract
+physical micro-Doppler in Hz velocity or rotor rate,False,outside the frozen dataset-internal band-held-out contract
+same-event paired cross-band fusion,False,outside the frozen dataset-internal band-held-out contract
+unseen-UAV-model generalization,False,outside the frozen dataset-internal band-held-out contract

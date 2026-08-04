@@ -1,0 +1,78 @@
+{
+  "all_locked_primary_targets_pass": false,
+  "conditions": [
+    {
+      "metric": "target_batch_class_macro_accuracy",
+      "observed_value": 0.6516798766871876,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.6,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "metric": "target_batch_class_recall_uav",
+      "observed_value": 0.44332017014512737,
+      "operator": ">",
+      "passed": false,
+      "threshold": 0.5,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "metric": "target_batch_class_recall_weather",
+      "observed_value": 0.8600395832292479,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.5,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "metric": "paired_logistic_minus_dummy_ci_lower_95",
+      "observed_value": 0.08398963544467729,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.0,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "metric": "target_batch_class_macro_accuracy",
+      "observed_value": 0.8399853939080247,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.6,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "metric": "target_batch_class_recall_uav",
+      "observed_value": 0.8493090645393724,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.5,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "metric": "target_batch_class_recall_weather",
+      "observed_value": 0.8306617232766771,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.5,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "metric": "paired_logistic_minus_dummy_ci_lower_95",
+      "observed_value": 0.2670982858198076,
+      "operator": ">",
+      "passed": true,
+      "threshold": 0.0,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    }
+  ],
+  "model_id": "logistic_batch_balanced",
+  "same_target_reuse_for_future_confirmatory_comparison_allowed": false,
+  "status": "FAIL_STOP",
+  "target_bands_consumed": [
+    "S",
+    "Ku"
+  ],
+  "targets_consumed": true,
+  "uses_unrounded_values": true
+}

@@ -115,7 +115,63 @@ Stage 3 使用 Fold 1 和 Fold 4 做表征诊断。Stage 4 同样先用这两个
 
 冻结审计的 71 个目标扫描组全部来自 `20260202`，6 个背景扫描组全部来自 `20260204`，类别与采集日期完全耦合。当前结果不能排除日期、环境、硬件状态或采集流程差异，也不能支持跨日期泛化结论。
 
-## 9. 证据等级
+## 9. LAT-MRICD 分组基线与跨频段冻结负结果
+
+D17-NX/HX 已完成并冻结 X 波段 batch-code-held-out 三类基线。Narrow-X 的固定 LR/RF
+batch-class macro accuracy 为 0.7999/0.7872，HRRP-X 为 0.6617/0.6481；两项 RF-LR
+配对差值 CI 均跨 0，因此不选模型胜者。
+
+D17-XBAND 随后按预登记协议执行了唯一一次密封运行。StandardScaler、固定模型、加权 source
+prior 和 argmax 判决都只由 source band 拟合，S/Ku target 不参与缩放、校准、阈值、特征或
+模型选择。locked primary 结果为：
+
+| 迁移 | 固定主模型 | target batch-class macro accuracy | UAV batch recall | weather batch recall | target 门 |
+|---|---|---:|---:|---:|---|
+| Narrow X->S | batch-balanced logistic | 0.6517 | 0.4433 | 0.8600 | 失败：UAV recall 未严格大于 0.50 |
+| Narrow X->Ku | batch-balanced logistic | 0.8400 | 0.8493 | 0.8307 | 通过 |
+
+虽然 X->Ku 的全部门条件通过，X->S 的 UAV batch recall 失败意味着两个 locked target 未
+同时通过，因此整体决策是 `FAIL_STOP`，不是“部分成功后可继续调优”。S/Ku 都已经消费，
+禁止在同一 target 上重跑确认性模型比较、调 CNN、做域适配、改阈值或结果驱动扩特征。
+队员可以复核冻结表格、哈希、门判定和声明边界，也可以用完全合成数据运行接口/合同测试，
+但不能再次消费真实 S/Ku 来生成新的确认性结论。
+
+完整冻结报告见[LAT-MRICD 跨频段迁移](../evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md)。
+允许的唯一解释是“在 LAT-MRICD-1.0 同一公开发布内，用固定可解释特征完成了 released-band-
+held-out UAV/weather 评价，且预登记总体继续门失败”。它不证明物理频率不变性、同事件多频
+融合、未见型号、独立场景、H/V 极化、空飘球识别、因果部署或 Tian 复现。该公开数据支线
+也不改变主 UAV 完成门，主方向仍为 `4/6`、`BLOCKED_EXTERNAL`。
+
+## 10. 新公开数据的完整性证据与边界
+
+LSS-HSR-L 的 ScienceDB V2 正式包已经下载，大小为 237,020,946 bytes，SHA256 为
+`fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，ZIP 完整性通过。
+V2 有 1,561 个 ZIP entries，期刊包有 1,478 个；V2 额外包含 `overflow/air_routes`，同名
+样本长度也存在差异，因此两包已确认不等价，不能拼接或混合划分。后续 schema、scene/track
+分组和 loader 审计以 ScienceDB V2 为 canonical candidate；期刊包只保留为独立血统对照。
+
+DroneRFc-MM V1 的数据 DOI 为 `10.57760/sciencedb.j00173.00094`，许可为
+`CC-BY-SA-4.0`。完整发布共 113 files、75,612,067,287 bytes；本地没有下载完整发布，只选择
+28 个雷达相关文件：1 个 README、9 个 mmRadar PCD ZIP、9 个 GT CSV、6 个 labels 和
+3 个 code，共 47,366,902 bytes。选择性子集 manifest SHA256 为
+`6b0c2ed1a075aa9164a516af001b630a9f775fddc9f399223c1aeeb6e7047b2b`；9 个 ZIP 完整。
+只读审计进一步对 30,717 个 PCD 和 639,527 个点完成固定 15 列、finite、POINTS 行数及
+嵌入/文件名时间戳核对，字段包括 doppler、power、snr 和 timestamp。
+
+该子集只有 9 个 recordings、6 个 UAV models，且同日同场景；717 个派生 5 秒窗口不是独立
+采集单元，禁止随机 frame/window split。它不是 ADC/IQ、不是 H/V，也没有鸟、天气或空飘球
+标签，只放行点云/轨迹接口和按 recording 分组的时序算法审计，不能替代主数据、构成独立
+外部验证或宣布识别性能。8 条 recording 的 radar/GT 时间范围重叠；B1 雷达在同名 GT
+开始前约 8 分钟已经结束，零重叠，因此整体状态为
+`PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`，B1 禁止监督对齐。
+
+两个更小的样本只用于接口 smoke。Ku UAV 群官方包为 3,996,753 bytes，5 个 MAT 按连续
+屏号聚合后共 275 屏、171,309 个有限 XYZ 点，但只来自 3 个物理实验，没有目标 ID、类别、
+Doppler、IQ 或极化。NEXRAD 只取一个 395,379-byte KTLX Level II 体扫，实际含 Z、V、SW、
+ZDR、PhiDP、RhoHV；它没有 UAV/气球标签，也不是本项目雷达的原始 H/V IQ。两者不能产生
+识别指标，分别只核验航迹和双极化读取接口。
+
+## 11. 证据等级
 
 | 证据 | 范围 | 当前角色 |
 |---|---|---|
@@ -128,9 +184,14 @@ Stage 3 使用 Fold 1 和 Fold 4 做表征诊断。Stage 4 同样先用这两个
 | 因果训练就绪审计与 smoke | 1,148 个文件元数据；Fold 1 小样本 train/val | 正式门禁关闭；smoke 仅验证接口，不提供性能证据 |
 | 新数据合同基线 | 当前 V4 1,148 行；40 列 v1 合同 | locked_evaluation 为 FAIL，缺 33 列；下游门禁 BLOCKED |
 | 最终联合审计 | 六折、1,148 行对齐 | 测试后固定结果互补性诊断 |
+| LAT-MRICD X 波段分组基线 | 同一公开发布、batch-code-held-out | 冻结的公开数据内部三类基线；不是独立外部验证 |
+| LAT-MRICD D17-XBAND | 同一公开发布、S/Ku 一次性 locked target | `FAIL_STOP` 冻结负结果；target 已消费，禁止同 target 确认性复用 |
+| HSR ScienceDB V2/期刊包 | 两个已校验但不等价的发布包 | V2 为 canonical audit candidate；禁止混合，尚无模型性能证据 |
+| DroneRFc-MM radar subset | 完整发布中的 28 个选择性文件、9 recordings | PCD schema 通过但 B1 同步阻塞；不是独立外部性能证据 |
+| Ku UAV 群 / NEXRAD | 3 个物理实验 / 1 个完整体扫 | 航迹与双极化 loader smoke；不是识别训练或性能证据 |
 | 外部锁定盲测 | 尚无 | 不能声称 |
 
-## 10. 不能从当前结果推出的内容
+## 12. 不能从当前结果推出的内容
 
 - 不能声称已经完成空飘球有载/无载或载荷类型识别；
 - 不能声称已经通过跨日期、跨场地或跨天气独立盲测；
@@ -141,3 +202,9 @@ Stage 3 使用 Fold 1 和 Fold 4 做表征诊断。Stage 4 同样先用这两个
 - 不能把样本虚警数直接解释为每小时或事件级虚警率。
 - 不能把 30 m/gate、0.183 m/s/bin 的网格等价误差描述为连续物理真值测量精度。
 - 不能把旧 `new_split=test` 改名为锁定测试，也不能用文件名或 beam/azimuth 推断值补写已验证采集顺序。
+- 不能把 D17-XBAND 的 X->Ku 通过写成整体迁移成功，也不能隐去 X->S UAV recall 失败；
+- 不能在已消费的 S/Ku target 上重跑确认性比较、训练 CNN、做域适配或根据结果改特征。
+- 不能混合 HSR V2 与期刊包，也不能把 DroneRFc-MM 的随机 frame/window 拆分写成独立泛化；B1 不能在没有更正 GT/可归因偏移时做监督对齐；
+- 不能把 DroneRFc-MM 点云子集描述为 ADC/IQ、H/V 极化、鸟/天气/空飘球或主任务性能证据。
+- 不能把 Ku 群目标的列/点或 NEXRAD 的 gate/ray/patch 随机拆成独立样本，也不能把天气
+  雷达双极化矩描述为本项目已标定 H/V 通道证据。

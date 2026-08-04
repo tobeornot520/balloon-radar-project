@@ -15,13 +15,13 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v5"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v6"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
 STAGING_ROOT = DIST_ROOT / ".share-package-staging"
-PACKAGE_DATE = "2026-08-03"
-ZIP_TIMESTAMP = (2026, 8, 3, 0, 0, 0)
+PACKAGE_DATE = "2026-08-04"
+ZIP_TIMESTAMP = (2026, 8, 4, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"
@@ -74,7 +74,6 @@ SENSITIVE_TEXT_MARKERS = (
     "password=",
     "secret=",
 )
-TEXT_SUFFIXES = {".md", ".csv", ".json", ".txt"}
 MARKDOWN_LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 
 
@@ -276,6 +275,126 @@ PACKAGE_FILES = (
         "results/final_evidence/lat_mricd_grouped_baselines_v1/tables/subtype_pressure.csv",
         "assets/tables/lat_mricd_grouped_subtype_pressure.csv",
         "grouped_public_data_baseline_table",
+    ),
+    PackageFile(
+        "docs/LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md",
+        "docs/LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md",
+        "cross_band_transfer_protocol",
+    ),
+    PackageFile(
+        "configs/lat_mricd_cross_band_transfer_v1.json",
+        "assets/contracts/lat_mricd_cross_band_transfer_v1.json",
+        "cross_band_transfer_contract",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1.run_consumed.json",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_RUN_CONSUMED.json",
+        "sealed_run_consumption_record",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/REPORT.md",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md",
+        "cross_band_transfer_report",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/evidence_manifest.json",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_MANIFEST.json",
+        "cross_band_transfer_evidence_manifest",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/gate_decision.json",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_GATE.json",
+        "cross_band_transfer_gate_decision",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/model_fit_manifest.json",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_MODEL_FIT.json",
+        "cross_band_transfer_model_fit_manifest",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/summary.json",
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_SUMMARY.json",
+        "cross_band_transfer_summary",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/aggregate_metrics.csv",
+        "assets/tables/lat_mricd_cross_band_aggregate_metrics.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/bootstrap_intervals.csv",
+        "assets/tables/lat_mricd_cross_band_bootstrap_intervals.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/claim_boundaries.csv",
+        "assets/tables/lat_mricd_cross_band_claim_boundaries.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/confusion_matrices.csv",
+        "assets/tables/lat_mricd_cross_band_confusion_matrices.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/disjoint_sensitivity.csv",
+        "assets/tables/lat_mricd_cross_band_disjoint_sensitivity.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/feature_definitions.csv",
+        "assets/tables/lat_mricd_cross_band_feature_definitions.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/feature_importance.csv",
+        "assets/tables/lat_mricd_cross_band_feature_importance.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/raw_batch_overlap_audit.csv",
+        "assets/tables/lat_mricd_cross_band_raw_batch_overlap_audit.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/target_batch_class_metrics.csv",
+        "assets/tables/lat_mricd_cross_band_target_batch_class_metrics.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/training_weight_audit.csv",
+        "assets/tables/lat_mricd_cross_band_training_weight_audit.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1/tables/transfer_coverage.csv",
+        "assets/tables/lat_mricd_cross_band_transfer_coverage.csv",
+        "cross_band_transfer_table",
+    ),
+    PackageFile(
+        "results/data_audit/dronerfc_mm_v1/README.md",
+        "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.md",
+        "dronerfc_mm_read_only_audit_report",
+    ),
+    PackageFile(
+        "results/data_audit/dronerfc_mm_v1/summary.json",
+        "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.json",
+        "dronerfc_mm_read_only_audit_summary",
+    ),
+    PackageFile(
+        "results/data_audit/dronerfc_mm_v1/recording_audit.csv",
+        "assets/tables/dronerfc_mm_recording_audit.csv",
+        "dronerfc_mm_recording_audit_table",
+    ),
+    PackageFile(
+        "data/metadata/external_public_datasets_v1.csv",
+        "assets/registries/external_public_datasets_v1.csv",
+        "external_public_data_registry",
+    ),
+    PackageFile(
+        "data/metadata/external_public_artifacts_v1.csv",
+        "assets/registries/external_public_artifacts_v1.csv",
+        "external_public_artifact_registry",
     ),
     PackageFile(
         "configs/current_direction_completion_v1.json",
@@ -922,6 +1041,26 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
                 "batch_code",
             ],
             "lat_mricd_sample_predictions_included": False,
+            "lat_mricd_cross_band_transfer_included": True,
+            "lat_mricd_cross_band_sealed_run_consumed": True,
+            "lat_mricd_cross_band_primary_gate_passed": False,
+            "lat_mricd_cross_band_target_bands_consumed": ["S", "Ku"],
+            "lat_mricd_cross_band_same_target_confirmatory_reuse_allowed": False,
+            "lat_mricd_cross_band_raw_data_included": False,
+            "lat_mricd_cross_band_sample_predictions_included": False,
+            "dronerfc_mm_read_only_audit_included": True,
+            "dronerfc_mm_audit_status": "PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT",
+            "dronerfc_mm_raw_data_included": False,
+            "dronerfc_mm_sample_level_outputs_included": False,
+            "dronerfc_mm_training_performed": False,
+            "dronerfc_mm_model_training_allowed": False,
+            "dronerfc_mm_blocked_recordings": ["B1"],
+            "dronerfc_mm_b1_supervised_alignment_allowed": False,
+            "dronerfc_mm_random_frame_window_split_allowed": False,
+            "dronerfc_mm_group_key": "split_family_group",
+            "dronerfc_mm_minimum_split_unit": "split_family_group",
+            "dronerfc_mm_split_family_group_count": 6,
+            "external_public_data_registries_included": True,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,
             "team_qualification_scorecard_included": True,
@@ -935,7 +1074,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "model checkpoints",
         ],
         "excluded_content": [
-            "raw MAT or IQ data",
+            "raw MAT, IQ, or PCD data and external source archives",
             "sample labels and sample-level predictions",
             "model checkpoints and training logs",
             "development transcripts and local recovery archives",
@@ -980,11 +1119,10 @@ def audit_package_directory(package_dir: Path) -> dict[str, object]:
                 errors.append(f"forbidden or unsupported file type: {relative}")
             if path.stat().st_size > 10 * 1024 * 1024:
                 errors.append(f"unexpected large file: {relative}")
-            if suffix in TEXT_SUFFIXES:
-                text = path.read_text(encoding="utf-8-sig")
-                for marker in SENSITIVE_TEXT_MARKERS:
-                    if marker.lower() in text.lower():
-                        errors.append(f"sensitive marker {marker!r} in {relative}")
+            payload = path.read_bytes().lower()
+            for marker in SENSITIVE_TEXT_MARKERS:
+                if marker.lower().encode("utf-8") in payload:
+                    errors.append(f"sensitive marker {marker!r} in {relative}")
     if errors:
         raise ValueError("Share-package audit failed: " + "; ".join(errors))
     link_count = audit_markdown_links(package_dir)

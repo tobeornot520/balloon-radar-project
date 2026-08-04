@@ -94,15 +94,19 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 | D07 | 极化增强模型怎样控制复杂度和目标损失 | 进行中 | 先做 Power2、DPG-FCN、ROI 极化和候选 gated encoder 的统一消融；优先小模型和 suppression-only 头 | 我实现，你定主指标 | 在困难折同时满足 Pfa 降低、joint Pd 不下降或达到预登记容差，且无新增虚警 | 只在 D05/D06 通过后训练 |
 | D08 | 背景校准怎样做到实时且不泄漏未来信息 | 进行中 | 样本独立 BC 作为在线导向基线；scan-aware 作为离线上限；未来版本按真实时间戳训练 past-only 上下文 | 我实现/审计，你提供顺序信息 | causal 训练使用真实时间，不使用后续样本；窗口只由 train/val 选择 | 当前不从测试敏感性结果选窗口 |
 | D09 | 零多普勒虚警抑制是否可泛化 | 进行中 | 固定 soft notch + 目标保护 residual V2 作为开发参考；先验证折间配对变化，再等待外部数据 | 我 | 结构合同保持“不增加任何 logit”；困难折通过后才考虑扩展，外测一次性评价 | 不把 109 个误警写成部署指标 |
-| D10 | Tian 2024 FCN 为什么迁移失败 | 外部阻塞（精确复现冻结） | 原迁移、point-GT、负监督和 thesis adapter 失败链已完成；缺原条件时保留方法级负结果 | 外部材料方决定是否能重开；我推进替代路线 | 至少有样例输入/标签/输出、明确配置或同分布数据，才能分离实现差异与域不可辨识性 | 不再扫参；执行 DPG 主线、LAT-MRICD 跨频段迁移预登记和 Tian 合同测试，见 `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md` |
-| D11 | 真实微多普勒和时域特征能否使用 | 部分完成 | LAT-MRICD 的 16,072 条 512 点窄带复数 I/Q 已完成 X 波段归一化频率分组基线；物理微多普勒仍需连续慢时间、真实 PRF、事件起止和状态真值 | 你协调采集，我建接口/公开数据基线 | 公开数据研究按 batch 分组且只报归一化频率；有时间戳、连续 session、状态标签和回放验证后再开放物理 STFT/时频脊线 | 保留 D17-NX 冻结证据，预登记跨频段迁移；继续索取 PRF/时序事实，不训练时序大模型 |
+| D10 | Tian 2024 FCN 为什么迁移失败 | 外部阻塞（精确复现冻结） | 原迁移、point-GT、负监督和 thesis adapter 失败链已完成；缺原条件时保留方法级负结果 | 外部材料方决定是否能重开；我推进替代路线 | 至少有样例输入/标签/输出、明确配置或同分布数据，才能分离实现差异与域不可辨识性 | 不再扫参；保留 DPG 主线、D17-XBAND 冻结负结果和 Tian 合同测试，见 `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md` |
+| D11 | 真实微多普勒和时域特征能否使用 | 部分完成 | LAT-MRICD 的 16,072 条 512 点窄带复数 I/Q 已完成 X 波段归一化频率分组基线和一次预登记跨频段评价；物理微多普勒仍需连续慢时间、真实 PRF、事件起止和状态真值 | 你协调采集，我建接口/公开数据基线 | 公开数据研究按 batch 分组且只报归一化频率；有时间戳、连续 session、状态标签和回放验证后再开放物理 STFT/时频脊线 | 保留 D17-NX 与 D17-XBAND 冻结证据；S/Ku 已消费，不在同一 target 扩模；继续索取 PRF/时序事实 |
 | D12 | 极化绝对标定和通道相干是否可信 | 阻塞 | 完成 capability、同步、polarimetric calibration、dry run、pilot 五道门 | 你协调设备证据，我审计模板 | 每道门有证据文件、版本号和重复性记录；没有证据就关闭相位通道 | 使用 `channel_validity` 屏蔽未验证通道 |
 | D13 | 新数据能否支持空飘球有载/无载和状态识别 | 阻塞 | 同日目标/背景、无载、有载稳定、有载摆动/旋转、多日期多场地和锁定外层划分 | 你负责采集和真值，我负责合同/模型 | 40 列合同通过；每状态有独立 session 和同步真值；先做分层任务再做细分类 | 当前不报告空飘球分类准确率 |
 | D14 | 论文主线如何收敛 | 已完成 | 已冻结为“双极化 UAV 检测定位 + 背景虚警抑制”的当前论文主线，空飘球分类只写未来工作/后续论文 | 共同 | 主表、图件、允许/禁止表述和数据边界已写入 `PAPER_MAINLINE_V1.md` | 新同条件空飘球数据到位后建立 V2，不追溯性扩大旧结论 |
 | D15 | 实验是否可长期追溯 | 进行中 | 每轮绑定 experiment_id、数据 manifest、split、config、commit、checkpoint 哈希、日志和结果摘要 | 我维护模板，你每轮填写/确认 | 任意表格能追溯到源码和数据版本；新结果不覆盖旧目录 | 从下一轮开始执行记录协议 |
 | D16 | 分享包和 Git 是否保持可交付 | 进行中 | 只保留最新包和上一包；原始聊天/数据/权重留本地并忽略；新文档和构建脚本提交 Git | 我维护，你确认分享边界 | 包内无敏感路径、原始数据、权重和聊天记录；manifest 源提交等于 HEAD | 本轮清理 dist 并重建最新包 |
-| D17 | 外部公开多频段数据能否支撑算法预研 | 已完成（D17-NX/HX） | 官方 ZIP、schema/batch 审计和五折 metadata-only 分组均已冻结；Narrow-X LR/RF 的 batch-class macro 为 0.7999/0.7872，HRRP-X 为 0.6617/0.6481，四项均有 batch-code cluster CI | 我维护冻结证据和边界；你只按同一公开发布内结果引用 | `results/final_evidence/lat_mricd_grouped_baselines_v1/` 可复核；不写成 unseen-model、独立外部、极化、空飘球或 Tian 复现证据 | 下一公开数据任务为预登记的 band-held-out 迁移；LSS-Ku 仍仅在能补明确缺口时再下载 |
-| D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 已预登记，待唯一一次密封运行 | V1 已冻结 UAV/weather 类别交集、Narrow X->S/X->Ku locked primary、batch overlap 审计、目标 batch 等权指标、cluster CI 和停止规则；S/Ku 性能尚未运行或查看 | 我执行提交绑定的一次性正式运行、证据构建和结论冻结；你当前无需提供新数据 | 目标频段不参与缩放、调参或选模；两个 target 均通过 accuracy/recall/LR-dummy CI 三重门才可继续，否则冻结负结果并停止 CNN/域适配 | 先提交 clean pre-result commit；经实验 ledger wrapper 只运行一次，再用冻结构建器生成脱敏证据 |
+| D17 | 外部公开多频段数据能否支撑算法预研 | 已完成（D17-NX/HX/XBAND） | 官方 ZIP、schema/batch 审计和五折 metadata-only 分组均已冻结；X 波段基线与一次性跨频段评价均有最终证据 | 我维护冻结证据和边界；你只按同一公开发布内结果引用 | `results/final_evidence/lat_mricd_grouped_baselines_v1/` 与 `results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不写成 unseen-model、独立外部、极化、空飘球或 Tian 复现证据 | 不复用已消费 S/Ku target；新公开数据先做独立 schema/group 审计和预登记 |
+| D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 已完成（预登记负结果；`FAIL_STOP`） | LR 的 X->S macro/UAV/weather/CI 下界为 0.6516798767/0.4433201701/0.8600395832/0.0839896354；X->Ku 为 0.8399853939/0.8493090645/0.8306617233/0.2670982858；仅 S UAV recall 失败 | 我维护冻结证据和停止边界；你当前无需提供新数据 | S/Ku target 已消费；`results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不得在同一 target 上做 CNN、域适配、扩特征、调参或新的确认性比较 | 停止同 target 扩模；如要建立新确认性结论，必须换独立、未消费 target 并重新预登记 |
+| D18 | 新公开数据能否形成不泄漏的时域、轨迹和微多普勒算法支线 | 进行中（DroneRFc schema 完成但同步阻塞；辅助 smoke 已落地；未放行建模） | DAUR 做 TD/TR/PRF/track 审计；HSR-L 以 ScienceDB V2 做只读 split/source-track 审计；FMCWR-2.0 做 RAR/MAT/recording 审计；DroneRFc-MM 全量 PCD schema 已通过，B1 radar/GT 零重叠；Ku 群目标与 NEXRAD 已完成最小 schema/矩核验 | 我负责来源、loader、schema 和预登记；你只需判断研究故事；若能联系发布方可询问 B1 更正 GT/时间偏移 | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；DroneRFc 输出 `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`，未通过同步总门 | 顺序推进 DAUR -> HSR-L V2 -> FMCWR-2.0；DroneRFc B1 等待外部更正，其余 8 条另行预登记；Ku/NEXRAD smoke-only，不把 frame/window/屏/gate 当独立性能样本 |
+
+D17-XBAND 的完成以及 D18 的公开数据下载都不替代外部设备事实或 Tian 对齐材料；主 UAV 方向仍为 4/6
+`BLOCKED_EXTERNAL`，不得宣布当前方向已全部完成。
 
 ## 4. 分阶段计划与双方验收
 
@@ -213,12 +217,20 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 
 按优先级执行：
 
-1. 你向学长发送数据/Tian 条件问题单，并把答复保存为可引用文本；
-2. 我整理现有目标、困难背景和虚警的极化特征表与跨组压力报告；
-3. 你复核一批样本图，补充物理类别或 `unknown` 标记；
-4. 双方冻结极化特征定义、主指标和停止规则；
-5. 我在不加载外层测试信息的前提下实现最小特征融合/ROI 验证；
-6. 结果通过困难折门槛后，才讨论六折扩展；否则保留负结果并转向数据条件建设。
+1. 我先完成 DAUR 的 MAT schema、TD/TR 配对、时间轴、PRF 和 track 独立单位审计；
+2. 我以 ScienceDB V2 为唯一规范候选实现 HSR-L 只读 loader，核对 published split、overflow
+   与 source track/scene 的关系；期刊历史包不参与混合建模；
+3. 我为 FMCWR-2.0 配置可审计的 RAR 5 解包能力，核对 MAT 结构、记录数、角度、频段和
+   重复内容；仿真飞鸟始终单独标记；
+4. DroneRFc-MM 已完成 9 个 PCD recording 的全量只读 schema/时间覆盖审计：8 条时间范围
+   重叠，B1 为零重叠并冻结 `BLOCKED`；只有取得更正 GT/可归因偏移后才重开 B1；
+5. Ku 群目标和 NEXRAD 已完成低成本格式核验，只保留航迹/双极化接口 smoke，不开放识别
+   训练；42.4/23.46/30.36 GB 三个主包仅登记，出现明确算法缺口前不下载；
+6. 你当前只需阅读各数据审计结论，判断它们是否服务“低空目标多域特征”研究故事；不需要
+   继续手工下载，也不需要为公开数据补标签；
+7. Tian 精确复现继续冻结；只有学长提供可归因的对齐样例、完整配置或同分布数据时才重开；
+8. 2026 年 8--9 月仍需确认雷达极化和连续采集能力，完成 SOP、同步、标定、dry run 与
+   pilot，为空飘球正式数据做准备。
 
 当前最重要的个人任务不是“再跑一个模型”，而是拿到数据事实、理解困难样本、参与指标
 和停止规则的决定。当前最重要的工程任务不是“再写一个网络”，而是让每个结论都能追溯、

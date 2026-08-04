@@ -1,0 +1,100 @@
+{
+  "bootstrap_inference_scope": "conditional_on_each_fixed_source_fit",
+  "bootstrap_replicates": 2000,
+  "claim_scope": "dataset-internal released-band-held-out UAV/weather transfer",
+  "config_sha256": "45e7b0c832ab37194dfc079289ee44e62763562a17a11732463ccecd75c06ac0",
+  "dataset": "LAT-MRICD-1.0",
+  "decision_rule": "ascending_class_argmax_with_lowest_code_tie_break",
+  "dummy_prior_fit_scope": "weighted_source_rows_only",
+  "experiment_id": "lat_mricd_cross_band_transfer_v1",
+  "feature_implementation_sha256": "e5cdf9342492196b8999c9be0c4434cfe49fe8cbdeb0514b50862baaf367dfcd",
+  "formal_output_overwrite_allowed": false,
+  "hyperparameter_search_performed": false,
+  "implementation_commit": "61a3ef6e36d45c0b3bf4fa8fca60ea0d02d2ad24",
+  "implementation_sha256": "1c3a667d16d34f797903709fe7601383ab7ae788f2f916fb5819562a43c771a3",
+  "model_checkpoints_saved": false,
+  "model_count": 3,
+  "model_fit_count": 27,
+  "output_files": [
+    "transfer_coverage.csv",
+    "raw_batch_overlap_audit.csv",
+    "training_weight_audit.csv",
+    "aggregate_metrics.csv",
+    "target_batch_class_metrics.csv",
+    "bootstrap_intervals.csv",
+    "confusion_matrices.csv",
+    "feature_definitions.csv",
+    "feature_importance.csv",
+    "disjoint_sensitivity.csv",
+    "claim_boundaries.csv",
+    "model_fit_manifest.json",
+    "gate_decision.json",
+    "summary.json",
+    "REPORT.md"
+  ],
+  "output_sha256": {
+    "REPORT.md": "37be3bf489bc9648f521dda9e5aa396e7c9dc0456c02d7c10fbb7b6a06b18e66",
+    "aggregate_metrics.csv": "3e5482e7686eb4a85b0d15f6a3fd35352db48b9b9788e4a5eff67c7146b0da91",
+    "bootstrap_intervals.csv": "50b8d10ad49b093b3064b7478e3712bbd54f0ceddbb7839a3e52c82eac8ca80e",
+    "claim_boundaries.csv": "3bd7034f2e0800a4710d0e424d53114a8c670b3f621edeae5a795485d57ce75b",
+    "confusion_matrices.csv": "040f8338e06b705ce51ea8247b8fe4d80a3b1f1ccabc84b0a97668103c50cfc1",
+    "disjoint_sensitivity.csv": "4f60308d0f488a2520c12bc39d8b849ddeec4dacc7f87e024b3c5ba834d34aab",
+    "feature_definitions.csv": "beac656f0708bd0d15aaa43e079a945a435d299f46c5a7d54639813ce8e9bbdf",
+    "feature_importance.csv": "f9c30c7f3e1dabf23c3742f3273292ea2c090887ce11fe191f7d345e5baa598f",
+    "gate_decision.json": "61585dfd6d451a5f48454607fba0819c4b6f3bae298e94d5a957b250851e240f",
+    "model_fit_manifest.json": "2046d3e32466458a38703b61cc97aa74de8fd3a8586ead0afe706491fc2943e9",
+    "raw_batch_overlap_audit.csv": "e4806951719094184984bf456bd1e900ad91b3985a27b6d057ef9fe054571fa0",
+    "target_batch_class_metrics.csv": "a0a5778134643174d4815bf2139e5a5a8325166729353d6725542b4e08c37bee",
+    "training_weight_audit.csv": "5e15f83a5c1fe6a18d982bf56f430fab5fb7a4fcee75b04418b228451d20c19e",
+    "transfer_coverage.csv": "305d3f5f0ce4488ad070616368687287f7be9158c8f68f1755bc0df64616bb96"
+  },
+  "physical_frequency_hz_reported": false,
+  "primary_gate_passed": false,
+  "probability_calibration_performed": false,
+  "random_state": 20260803,
+  "raw_data_in_output": false,
+  "same_target_confirmatory_reuse_allowed": false,
+  "same_target_reuse_for_future_confirmatory_comparison_allowed": false,
+  "sample_predictions_saved": false,
+  "sealed_run_consumption_enforced": true,
+  "single_sealed_run": true,
+  "source_files": [
+    {
+      "analysis_record_count": 3471,
+      "full_release_batch_count": 50,
+      "sha256": "985d679510b272e90180a77cdfa64c354909a45bc6b20cb00d176b27fbe44ed4",
+      "source_id": "hrrp_ku"
+    },
+    {
+      "analysis_record_count": 2496,
+      "full_release_batch_count": 38,
+      "sha256": "276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267",
+      "source_id": "hrrp_x"
+    },
+    {
+      "analysis_record_count": 3319,
+      "full_release_batch_count": 47,
+      "sha256": "92246be376fe93b00bb6bb56d64882916297f88e8ac20839daced3c9a2c8d926",
+      "source_id": "narrow_ku"
+    },
+    {
+      "analysis_record_count": 4038,
+      "full_release_batch_count": 412,
+      "sha256": "e584b3ed8c0117265cfebe61bd289aa91c1d917aaa504e7cb21118615b5db328",
+      "source_id": "narrow_s"
+    },
+    {
+      "analysis_record_count": 6451,
+      "full_release_batch_count": 364,
+      "sha256": "da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4",
+      "source_id": "narrow_x"
+    }
+  ],
+  "status": "COMPLETE_PREREGISTERED_CROSS_BAND_TRANSFER",
+  "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+  "target_rows_used_for_fit": false,
+  "target_statistics_used_for_scaling_or_calibration": false,
+  "test_driven_model_selection_performed": false,
+  "threshold_tuning_performed": false,
+  "transfer_count": 7
+}

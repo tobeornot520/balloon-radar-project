@@ -1,0 +1,17 @@
+{
+  "config_sha256": "45e7b0c832ab37194dfc079289ee44e62763562a17a11732463ccecd75c06ac0",
+  "experiment_id": "lat_mricd_cross_band_transfer_v1",
+  "formal_output_overwrite_allowed": false,
+  "implementation_sha256": "1c3a667d16d34f797903709fe7601383ab7ae788f2f916fb5819562a43c771a3",
+  "persists_on_failure": true,
+  "pre_result_commit": "61a3ef6e36d45c0b3bf4fa8fca60ea0d02d2ad24",
+  "record_created_before_target_load": true,
+  "schema_version": 1,
+  "sealed_run_consumption_enforced": true,
+  "status": "COMPLETED_AND_TARGETS_CONSUMED",
+  "summary_sha256": "9c188b1027a20810b6abb859b3c1ba24f3f3cb95291093a2765f16d9bb97ba03",
+  "target_bands_consumed": [
+    "S",
+    "Ku"
+  ]
+}

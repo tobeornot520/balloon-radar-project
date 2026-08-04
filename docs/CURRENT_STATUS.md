@@ -13,6 +13,8 @@
 9. A frozen localization build aggregates range-velocity errors from the six base-threshold BC-DPG test tables without training, inference, or retuning.
 10. A versioned new-data contract now enforces capture, causal-order, and locked-evaluation readiness before new data can enter formal experiments.
 11. Five-fold LAT-MRICD Narrow-X and HRRP-X interpretable baselines are frozen with metadata-only batch-code assignment, fixed models, grouped metrics, and batch-code cluster intervals.
+12. The preregistered LAT-MRICD Narrow-X-to-S/Ku transfer has completed as a
+    frozen negative result (`FAIL_STOP`); both target bands are consumed.
 
 ## Active method reproduction
 
@@ -95,8 +97,8 @@ For Narrow-X, batch-class macro accuracy is 0.7999 for logistic regression
 forest (0.7373 to 0.8340). For HRRP-X, the corresponding values are 0.6617
 (0.5826 to 0.7404) and 0.6481 (0.5764 to 0.7240). The paired random-forest-minus-
 logistic intervals cross zero for both tasks, so neither model is selected as a
-winner. D17-NX and D17-HX are complete; the next public-data task is a separately
-preregistered cross-band transfer study.
+winner. D17-NX and D17-HX are complete. The separately preregistered D17-XBAND
+study has also completed and is reported below.
 
 These are within-release, batch-code-held-out category baselines for already
 represented submodels. They are not unseen-model, independent-session, or
@@ -107,22 +109,27 @@ completion does not change the main UAV direction gate, which remains 4/6
 `BLOCKED_EXTERNAL`. See
 [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md).
 
-## Preregistered LAT-MRICD cross-band transfer
+## Completed preregistered LAT-MRICD cross-band transfer
 
-D17-XBAND is preregistered but has not been run. The frozen V1 protocol uses
-Narrow X as the source and S/Ku as separate locked targets for the common
-UAV/weather task. Target rows cannot affect scaling, fitting, model selection,
-feature design or thresholds. Dummy prior, batch-balanced logistic regression
-and a fixed random forest are all retained; logistic regression is the primary
-gate model and random forest is a fixed sensitivity model.
+D17-XBAND completed its single sealed run as a preregistered negative result
+with gate status `FAIL_STOP`. The frozen V1 protocol used Narrow X as the source
+and S/Ku as separate locked targets for the common UAV/weather task. Target rows
+did not affect scaling, fitting, model selection, feature design or thresholds.
+Batch-balanced logistic regression was the primary gate model.
 
-At the preregistration checkpoint, no S/Ku target performance has been viewed,
-and the formal result directory, external consumption record and final evidence
-directory do not exist. After a clean pre-result commit, the runner may execute
-exactly once. Any failed or interrupted run consumes the targets. Both locked
-targets must pass the preregistered accuracy, per-class recall and paired
-LR-minus-dummy interval gates; otherwise the negative result is frozen and
-CNN/domain-adaptation development on these consumed targets stops. See
+| Transfer | Target batch-class macro accuracy | UAV batch recall | Weather batch recall | LR-minus-dummy 95% CI lower |
+|---|---:|---:|---:|---:|
+| X to S | 0.6516798767 | 0.4433201701 | 0.8600395832 | 0.0839896354 |
+| X to Ku | 0.8399853939 | 0.8493090645 | 0.8306617233 | 0.2670982858 |
+
+Only the S-band UAV-recall condition failed; the other seven preregistered
+conditions passed. Because both S and Ku targets were consumed by the sealed
+evaluation and both locked targets had to pass, the negative result is frozen.
+The same target data must not be reused for CNN/domain adaptation, feature
+expansion, result-driven tuning, or a new confirmatory model comparison. This
+does not change the main UAV direction gate, which remains 4/6
+`BLOCKED_EXTERNAL`. The final evidence is at
+`results/final_evidence/lat_mricd_cross_band_transfer_v1/`; see also
 [LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md](LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md).
 
 ## Newly acquired public inputs
@@ -135,10 +142,42 @@ are local research inputs only and have not entered a model result.
 
 DAUR is pending a full MAT/pairing/group audit. FMCWR-2.0 is pending RAR
 extraction and schema/group audit. The simulated-bird archive must not be cited
-as natural-bird evidence. A 209,569,478-byte LSS-HSR-L journal bundle also
-passed ZIP integrity checks, but it has not been proven equivalent to the
-237,020,946-byte ScienceDB V2 archive and is pending a read-only loader and
-group audit. Dataset decisions and download receipts are tracked in
+as natural-bird evidence. The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
+archive was downloaded and passed ZIP integrity checks. It has 1,561 entries
+and is confirmed not equivalent to the 209,569,478-byte, 1,478-entry journal
+bundle; the two variants must not be mixed. V2 remains pending a read-only
+loader and source-track/group audit.
+
+A selected 47,366,902-byte radar subset of DroneRFc-MM V1 was also downloaded
+from its official 113-file, 75,612,067,287-byte ScienceDB release. It includes
+nine 77--81 GHz PCD recording archives, nine flight-truth tables, six derived
+label tables, the README and three reference scripts. All nine ZIPs pass
+integrity checks. These approximately 30,717 timestamped PCD frames come from
+only nine same-day recordings across six UAV models and are not ADC/IQ;
+frame/window random splits, micro-Doppler-IQ claims and unseen-model claims are
+forbidden. A full read-only audit then passed all 30,717 PCD headers and all
+639,527 finite point rows, including POINTS counts and embedded-versus-filename
+timestamps. The nine GT files are monotonic non-decreasing but contain repeated
+timestamps. Eight recordings have radar/GT time overlap; B1 has none, because
+its radar ends about eight minutes before its same-named GT starts. The current
+gate is therefore `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`; B1 cannot enter
+supervised alignment without corrected truth or an attributable offset.
+
+Two deliberately small interface samples were added without starting a model
+run. The official Ku-band low-altitude UAV-swarm ZIP is 3,996,753 bytes and has
+five measurement MAT files from only three physical experiments; it is reserved
+for track-association smoke tests. One 395,379-byte KTLX NEXRAD Level II volume
+contains reflectivity, velocity, spectrum width, ZDR, PhiDP and RhoHV moments;
+it is reserved for dual-polarization loader and feature-formula smoke tests.
+Neither source contains radar ADC/IQ or target-recognition labels suitable for
+the main task, and neither may be split by frame, gate or patch.
+
+The 42.4 GB indoor foil-balloon range-profile archive, a 23.46 GB measured
+S-band UAV archive and a 30.36 GB measured 24/94/207 GHz UAV/real-bird release
+were evaluated but deliberately not downloaded. Their source, license, grouping
+risk and claim boundaries are recorded so that a later download requires a
+specific unresolved need rather than speculative accumulation. Dataset
+decisions and download receipts are tracked in
 `data/metadata/external_public_datasets_v1.csv` and
 `data/metadata/external_public_artifacts_v1.csv`.
 
@@ -195,6 +234,7 @@ mechanism. See
 - LAT-MRICD grouped-baseline protocol: [LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md](LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md)
 - Frozen LAT-MRICD grouped-baseline evidence: `results/final_evidence/lat_mricd_grouped_baselines_v1/`
 - Preregistered LAT-MRICD cross-band protocol: [LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md](LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md)
+- Frozen LAT-MRICD cross-band evidence: `results/final_evidence/lat_mricd_cross_band_transfer_v1/`
 - External public dataset registry: `data/metadata/external_public_datasets_v1.csv`
 - External public artifact registry: `data/metadata/external_public_artifacts_v1.csv`
 

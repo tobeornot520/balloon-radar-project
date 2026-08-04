@@ -1,10 +1,10 @@
 # 近期成果、失败机制与算法判断
 
-版本：2026-08-03
+版本：2026-08-04 V6
 
 本文补充 7 月 28 日以后完成的多域特征挖掘、零多普勒机制、Tian FCN 复现、极化
-迁移架构和外场准备。旧冻结 BC-DPG、ROI 与定位结果仍然有效，但以下新结果的证据
-等级不同，不能直接拼成一张“模型排行榜”。
+迁移架构、LAT-MRICD 冻结实验、外部公开数据审计和外场准备。旧冻结 BC-DPG、ROI
+与定位结果仍然有效，但以下新结果的证据等级不同，不能直接拼成一张“模型排行榜”。
 
 ## 1. 三套数字为什么不同
 
@@ -125,7 +125,7 @@ point-GT 单一救援只改变分类目标，不加载 test，得到：
 
 截至 2026-08-03，上述原始条件和 H/V/IQ/PRF/坐标事实被报告为目前无法取得。精确复现
 因此冻结，底层技术事实仍保持 unknown；替代路线转为 DPG-FCN 零多普勒主线、公开
-LAT-MRICD 跨频段迁移预登记和 Tian 合成合同测试。详细说明见分享包
+数据 schema/group 审计和 Tian 合成合同测试。详细说明见分享包
 `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md`。
 
 详见[诊断结论](../evidence/10_TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md)、
@@ -149,8 +149,64 @@ RF-LR 配对差值在 Narrow-X 为 -0.0127（95% CI -0.0511–0.0246），在 HR
 -0.0136（-0.0775–0.0487），均跨 0，因此不宣布模型胜者。HRRP-X 和 Narrow-X 属于同一
 公开发布，batch 语义未独立验证，子型号也已在开发折出现；这些结果只能称
 batch-code-held-out 三类基线，不能称 unseen-model、独立外部、极化、空飘球或 Tian 复现证据。完整报告见
-[LAT-MRICD 分组基线](../evidence/23_LAT_MRICD_GROUPED_BASELINES.md)。下一公开数据任务是单独
-预登记的 band-held-out 迁移。
+[LAT-MRICD 分组基线](../evidence/23_LAT_MRICD_GROUPED_BASELINES.md)。
+
+### 5.2 D17-XBAND 跨频段冻结负结果
+
+在查看 S/Ku 性能前，项目已冻结 Narrow X source、共同 UAV/weather 二分类、固定可解释
+特征、batch-balanced logistic 主模型、dummy 对照、target batch 等权指标和停止规则。正式
+运行只执行一次，target 不参与缩放、校准、阈值、选模或扩特征。
+
+| locked target | LR target batch-class macro accuracy | UAV batch recall | weather batch recall | 门判定 |
+|---|---:|---:|---:|---|
+| X->S | 0.6517 | 0.4433 | 0.8600 | 失败：UAV recall 未严格大于 0.50 |
+| X->Ku | 0.8400 | 0.8493 | 0.8307 | 通过 |
+
+X->Ku 的通过不能覆盖 X->S 的失败。预登记条件要求两个 locked target 全部通过，因此整体
+决策为 `FAIL_STOP`，作为跨频段不稳定的冻结负结果保留。S/Ku 已消费，禁止同 target 重跑、
+CNN、域适配、阈值调整或结果驱动特征扩展；新成员只能复核证据或用合成数据跑合同测试。
+完整证据见[跨频段迁移冻结报告](../evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md)。
+
+这项结果只属于 LAT-MRICD-1.0 同一公开发布内的 released-band-held-out UAV/weather 评价，
+不支持物理频率不变性、未见型号、独立场景、同事件多频融合、H/V 极化、空飘球或 Tian
+复现结论，也不改变主 UAV `4/6 BLOCKED_EXTERNAL` 状态。
+
+### 5.3 下一公开数据审计
+
+下一步不再消费 LAT-MRICD 的 S/Ku target，而是处理已取得的新官方数据：
+
+1. DAUR：逐 MAT 核对 schema、TD/TR 配对、时间/有限值，并建立原始 track group；
+2. HSR：以 ScienceDB V2 正式包为 canonical candidate，使用自建只读 loader 核对 schema
+   和 scene/track 分组；期刊包只作独立血统对照；
+3. FMCWR-2.0：可审计解包后核对 MAT schema、K/L 频段、角度、记录和潜在重复分组；
+4. DroneRFc-MM：全量 PCD schema 已核验；8 条 radar/GT 时间范围重叠，B1 零重叠并冻结
+   `BLOCKED`。更正材料到位前不做 B1 监督对齐，其余 recording 也需另行预登记。
+
+HSR ScienceDB V2 正式 ZIP 为 237,020,946 bytes，SHA256 为
+`fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，完整性通过。
+V2 与期刊包分别有 1,561/1,478 个 ZIP entries；V2 额外含 `overflow/air_routes`，同名样本
+长度也存在差异，因此已确认两者不等价、不可混合。等价性状态现已关闭，后续只以 V2 作为
+canonical audit candidate。
+
+DroneRFc-MM V1 的数据 DOI 为 `10.57760/sciencedb.j00173.00094`，许可为
+`CC-BY-SA-4.0`。完整发布为 113 files、75,612,067,287 bytes，本地只选择下载 28 个文件：
+1 README、9 mmRadar PCD ZIP、9 GT CSV、6 labels 和 3 code，共 47,366,902 bytes；选择性
+subset manifest SHA256 为 `6b0c2ed1a075aa9164a516af001b630a9f775fddc9f399223c1aeeb6e7047b2b`。
+9 个 ZIP 均完整；30,717 个 PCD/639,527 个点通过 15 列 schema、finite、POINTS 行数与
+嵌入/文件名时间戳核对，字段包括 doppler、power、snr、timestamp。
+
+该子集覆盖 9 recordings、6 UAV models，但全部同日同场景；717 个派生 5 秒 windows 必须
+按原始 recording 管理，禁止随机 frame/window split。它不是 ADC/IQ、不是 H/V，也没有鸟、
+天气或空飘球，只能用于点云/轨迹接口与时序算法审计，不能替代主数据或宣布模型性能。
+其中 B1 radar 在同名 GT 开始约 8 分钟前已结束，零时间重叠，整体状态为
+`PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`。其余数据同样在 schema/group 门通过前不训练，
+FMCWR-2.0 的仿真飞鸟不能写成真实自然鸟证据。
+
+另外只下载了两个很小的接口样本，而没有继续堆积大数据。Ku UAV 群包约 4 MB，schema
+核验得到 3 个物理实验、275 个连续屏和 171,309 个有限 XYZ 点，没有类别、Doppler、IQ 或
+极化；NEXRAD 单体扫约 0.4 MB，实际含 Z、V、SW、ZDR、PhiDP、RhoHV，但没有目标标签。
+前者只验证群目标航迹接口，后者只验证双极化 loader/公式。42.4/23.46/30.36 GB 的气球、
+S 波段 UAV、三频 UAV/真鸟主包均已登记但暂缓，避免在 split 和研究缺口不清楚时浪费网络。
 
 ## 6. 极化特征现在做到什么程度
 
@@ -183,15 +239,18 @@ embedding 融合。详见[极化迁移编码器](../evidence/18_POLARIMETRIC_TRA
 
 | 优先级 | 工作 | 启动条件 |
 |---:|---|---|
-| 1 | 向学长核对 Tian 数据与原始实现 | 获得样例、配置或明确答复即可 |
-| 2 | 完成设备能力、同步和标定摸底 | 设备负责人提供实测证据 |
-| 3 | 固定 notch + 目标保护残差 | Fold 1/4 预登记，禁止直接六折 |
-| 4 | 极化辅助预训练 | 明确组隔离、通道 validity 和泄漏验收 |
-| 5 | 时域/微多普勒融合 | 获得连续慢时间、PRF 与状态时间标签 |
-| 6 | 空飘球载荷分类 | 至少有同条件背景、无载、有载与锁定外层数据 |
+| 1 | DAUR/HSR/FMCWR-2.0 schema、配对与 group 审计；DroneRFc B1 外部更正 | 官方原件完整性已通过；DroneRFc schema 已完成但同步门阻塞；只读处理，不先训练 |
+| 2 | 向学长核对 Tian 数据与原始实现 | 获得样例、配置或明确答复即可 |
+| 3 | 完成设备能力、同步和标定摸底 | 设备负责人提供实测证据 |
+| 4 | 固定 notch + 目标保护残差 | Fold 1/4 预登记，禁止直接六折 |
+| 5 | 极化辅助预训练 | 明确组隔离、通道 validity 和泄漏验收 |
+| 6 | 时域/微多普勒融合 | 获得连续慢时间、PRF 与状态时间标签 |
+| 7 | 空飘球载荷分类 | 至少有同条件背景、无载、有载与锁定外层数据 |
 
 现阶段继续无约束跑网络的边际价值较低。最有价值的工作是获得正确数据条件、建立
 可逐层对齐的复现样例，并用困难折门槛拒绝无效机制。
 
-公开数据支线可在不改变主 UAV `4/6 BLOCKED_EXTERNAL` 门槛的前提下，先推进冻结协议下的
-S/X/Ku band-held-out 迁移；不做同事件多频拼接，也不把迁移结果并入 H/V 或空飘球结论。
+公开数据支线可在不改变主 UAV `4/6 BLOCKED_EXTERNAL` 门槛的前提下推进四项只读数据审计。
+D17-XBAND 已以 `FAIL_STOP` 结束，不能继续使用已消费的 S/Ku target 做确认性模型开发；
+DAUR、HSR 和 FMCWR-2.0 必须先完成各自 schema/group 门；DroneRFc-MM 的 B1 必须先取得
+更正 GT/可归因偏移，其余 8 条也要新预登记，之后才决定算法任务。

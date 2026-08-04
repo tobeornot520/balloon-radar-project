@@ -25,8 +25,12 @@ python -m pytest
 python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 ```
 
-该数据禁止随机拆行。D17-NX/HX 的五折 batch-code-held-out 大类基线已完成并冻结；下一
-公开数据任务为单独预登记的 band-held-out 迁移。
+该数据禁止随机拆行。D17-NX/HX 的五折 batch-code-held-out 大类基线已完成并冻结。
+D17-XBAND 的唯一一次密封运行也已完成：X->S 的固定 LR target batch-class macro accuracy
+为 0.6517，但 UAV batch recall 为 0.4433，未通过严格 `>0.50` 门；X->Ku 的同一指标为
+0.8400，且该 target 的全部门条件通过。两个 locked target 未同时通过，整体决策为
+`FAIL_STOP`。S/Ku 已消费，不能再次运行真实 target 来做确认性比较，也不能据此调 CNN、
+域适配、阈值或特征。
 
 完整仓库中的冻结结果重放顺序如下。分享包本身不含这些脚本和原始 MAT，因此只能做证据
 复核，不能单独执行重放。
@@ -46,6 +50,18 @@ diff -rq /tmp/lat_mricd_grouped_evidence_replay/tables \
 
 先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。预期冻结划分无 Git 差异且聚合表
 一致；报告和证据 manifest 因记录当前提交，不要求逐字节相同。
+
+D17-XBAND 不提供真实 target 重放入口。组员只允许阅读
+`evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md` 及配套聚合表、消费记录和 manifest，或在
+完整仓库中运行不读取真实 S/Ku 的合成合同测试：
+
+```bash
+python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
+  tests/test_lat_mricd_cross_band_evidence.py
+```
+
+这些测试只验证实现和门禁合同，不产生新的性能证据。不得删除消费记录、复制真实 target 到
+其他路径或改实验 ID 来规避密封规则。
 
 ## 3. 主要内部入口
 
@@ -130,6 +146,9 @@ python scripts/validate_data_collection_manifest.py \
 - LAT-MRICD 分组基线冻结报告：`evidence/23_LAT_MRICD_GROUPED_BASELINES.md`
 - LAT-MRICD 分组指标与 CI：`assets/tables/lat_mricd_grouped_aggregate_metrics.csv`、
   `assets/tables/lat_mricd_grouped_cluster_bootstrap_intervals.csv`
+- LAT-MRICD 跨频段冻结负结果：`evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md`
+- 跨频段门判定与消费记录：`evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_GATE.json`、
+  `evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_RUN_CONSUMED.json`
 
 早期 `final_roi_bc_dpg_joint` 使用了错误的 BC 判决来源，已经移出活动证据，不得引用。
 
@@ -163,7 +182,32 @@ python scripts/validate_data_collection_manifest.py \
 
 D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7872，HRRP-X
 为 0.6617/0.6481；四项 batch-code cluster 95% CI 和两个配对差值均已冻结，差值 CI 均
-跨 0，不选胜者。下一公开数据任务是单独预登记的 S/X/Ku band-held-out 迁移。
+跨 0，不选胜者。D17-XBAND 也已结束为 `FAIL_STOP`：X->Ku 过门，但 X->S 的 UAV recall
+0.4433 未过门，S/Ku target 均已消费。
+
+下一公开数据工作不再使用 LAT-MRICD 的 S/Ku target，而按以下顺序推进：
+
+1. LSS-DAUR-1.0：完成 MAT schema、TD/TR 逐轨配对、有限值/时间轴和原始 track group 审计；
+2. LSS-HSR-L：以已下载且 ZIP 完整的 ScienceDB V2 正式包为 canonical audit candidate，
+   实现只读 loader 并核对 schema、scene/track 分组；V2 的 1,561 个 entries 与期刊包的
+   1,478 个不等价，V2 额外含 `overflow/air_routes`，同名样本长度也不同，两包禁止混合；
+3. LSS-FMCWR-2.0：以可审计方式解包 RAR，建立 MAT schema、目标/频段/角度/记录分组和
+   潜在重复审计；仿真飞鸟不得写成真实自然鸟；
+4. DroneRFc-MM V1：选择性 radar subset 的全量 PCD schema/时间覆盖审计已完成。完整发布为
+   113 files、75,612,067,287 bytes；本地仅有 28 个文件、47,366,902 bytes。30,717 frames、
+   639,527 points 均通过 schema/finite/POINTS/时间戳检查；8 条 recording 与 GT 时间范围重叠，
+   B1 零重叠，故整体同步门阻塞。717 个派生 5 秒 windows 禁止随机拆分。
+
+四项都只在 schema、配对和 group 门通过后再预登记算法，不以“已经下载”代替数据可用。
+DroneRFc-MM 数据 DOI 为 `10.57760/sciencedb.j00173.00094`、许可为 `CC-BY-SA-4.0`；它不是
+ADC/IQ 或 H/V，没有鸟、天气、空飘球对照，只能用于点云/轨迹接口和时序算法审计；B1
+只有取得更正 GT 或可归因时间偏移后才可重开监督对齐。
+
+辅助 smoke 已最小落地：Ku UAV 群包只按 `{Exp1}`、`{Exp2_1,Exp2_2}`、
+`{Exp3_1,Exp3_2}` 三个物理实验管理，用 275 个连续屏的 XYZ 量测验证航迹接口；NEXRAD
+只用一个完整 KTLX 体扫验证 Z/V/SW/ZDR/PhiDP/RhoHV 读取。两者不训练识别器。42.4 GB
+室内气球、23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟主包已登记但暂缓，只有现有
+数据审计暴露明确缺口时才重新评估下载。
 
 LAT-MRICD 只构成同一公开发布内、已见子型号的 batch-code-held-out 证据，不是 unseen-model
 或独立外部验证。它不与当前 H/V 六折结果合并计分，也不解除极化、PRF、连续时序、空飘球
@@ -173,6 +217,11 @@ LAT-MRICD 只构成同一公开发布内、已见子型号的 batch-code-held-ou
 
 - 不依据外层测试结果重新选择阈值、容差、模型或组合逻辑；
 - 不覆盖冻结 checkpoint 和正式证据目录；
+- 不重跑已消费的 D17-XBAND S/Ku target，不以新实验 ID、CNN 或域适配规避 `FAIL_STOP`；
+- 不混合 HSR ScienceDB V2 与期刊包；只读 loader 以 V2 为 canonical candidate；
+- 不随机拆分 DroneRFc-MM 的 PCD frame 或派生 5 秒 window，最低按原始 recording 分组；
+- 不把 DroneRFc-MM B1 与当前同名 GT 强行平移对齐；更正材料到位前保持 blocked；
+- 不随机拆分 Ku 群目标列/点或 NEXRAD gate/ray/patch；两个小样本保持 smoke-only；
 - smoke 结果只验证接口，不作为性能结论；
 - 两折筛选、六折内部开发评价和外部盲测必须分开报告；
 - 样本独立、因果上下文和完整扫描离线模型必须分开命名；

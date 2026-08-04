@@ -1,6 +1,6 @@
 # 队员复现指南
 
-版本：2026-08-03
+版本：2026-08-04
 适用提交：以分享包 `MANIFEST.json` 中的 `source_commit` 为准。
 
 ## 1. 先说清楚：什么叫“复现”
@@ -69,7 +69,7 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 
 ### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
 
-先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V5 分享包只支持 A 级证据复核；
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V6 分享包只支持 A 级证据复核；
 下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
 MAT 与同目录明细 MAT，否则会重复计入记录。
 
@@ -94,6 +94,24 @@ diff -rq /tmp/lat_mricd_grouped_evidence_replay/tables \
 预期：冻结划分没有 Git 差异，聚合表逐文件一致。`REPORT.md` 和
 `evidence_manifest.json` 会记录重放时的当前提交，因此不要求与历史文件逐字节相同。重放
 不得据 OOF 结果重新选特征、调参或宣布模型胜者。
+
+### 3.2 LAT-MRICD D17-XBAND 只允许证据复核
+
+D17-XBAND 已完成唯一一次提交绑定的密封运行。X->S 的 UAV batch recall 为 `0.4433`，
+未通过预登记门；X->Ku 虽然通过该 target 的全部门槛，两个 locked target 仍未同时通过，
+所以总决策为 `FAIL_STOP`。S/Ku target 均已消费。
+
+队员只能核对 `evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md`、消费记录、门判定、聚合表和
+哈希，或运行不接触真实 target 的合成合同测试：
+
+```bash
+python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
+  tests/test_lat_mricd_cross_band_evidence.py
+```
+
+不得再次运行正式 runner，不得用复制数据、修改路径或新实验 ID 绕过消费记录，也不得在
+同一 S/Ku target 上训练 CNN、做域适配、扩特征、调阈值或建立新的确认性比较。如需新的
+跨频确认性结论，必须换独立且未消费的 target，并在查看结果前建立新协议。
 
 ## 4. 分享包的独立复核
 

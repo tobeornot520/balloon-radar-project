@@ -1,0 +1,11 @@
+﻿source_id,representation,band_code,band,category_code,category,record_count,analysis_batch_count,analysis_total_record_count,analysis_unique_batch_count,full_release_batch_count,sha256
+hrrp_ku,HRRP,3,Ku,1,UAV,1765,10,3471,50,50,985d679510b272e90180a77cdfa64c354909a45bc6b20cb00d176b27fbe44ed4
+hrrp_ku,HRRP,3,Ku,3,weather,1706,41,3471,50,50,985d679510b272e90180a77cdfa64c354909a45bc6b20cb00d176b27fbe44ed4
+hrrp_x,HRRP,2,X,1,UAV,1411,12,2496,33,38,276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267
+hrrp_x,HRRP,2,X,3,weather,1085,22,2496,33,38,276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267
+narrow_ku,Narrow,3,Ku,1,UAV,2598,8,3319,47,47,92246be376fe93b00bb6bb56d64882916297f88e8ac20839daced3c9a2c8d926
+narrow_ku,Narrow,3,Ku,3,weather,721,41,3319,47,47,92246be376fe93b00bb6bb56d64882916297f88e8ac20839daced3c9a2c8d926
+narrow_s,Narrow,1,S,1,UAV,1531,10,4038,412,412,e584b3ed8c0117265cfebe61bd289aa91c1d917aaa504e7cb21118615b5db328
+narrow_s,Narrow,1,S,3,weather,2507,406,4038,412,412,e584b3ed8c0117265cfebe61bd289aa91c1d917aaa504e7cb21118615b5db328
+narrow_x,Narrow,2,X,1,UAV,868,5,6451,358,364,da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4
+narrow_x,Narrow,2,X,3,weather,5583,357,6451,358,364,da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4

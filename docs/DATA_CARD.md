@@ -90,14 +90,31 @@ H/V 数据的设备事实，或报告物理 Hz 微多普勒、极化和空飘球
 `(representation, band_code, batch_code)` 保守分组。完整来源、哈希、规模与使用边界见
 [外部公开数据核验](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)。
 
-D17-XBAND V1 已进一步预登记同一发布内的 band-held-out transfer。正式 locked target
-仅为 Narrow-S 与 Narrow-Ku 的共同 UAV/weather 二分类；bird 不进入该任务，HRRP 仅作
-探索性压力分析。S/Ku target 不参与缩放、拟合、选模、调参或特征扩展。截至预登记提交前，
-target 性能尚未运行或查看。该实验仍不提供 H/V、真实 PRF、同事件跨频配对、空飘球或
-Tian 复现证据。
+D17-XBAND V1 已完成同一发布内、预登记的 band-held-out transfer，并以 `FAIL_STOP` 冻结为
+负结果。正式 locked target 仅为 Narrow-S 与 Narrow-Ku 的共同 UAV/weather 二分类；bird
+不进入该任务，HRRP 仅作预先声明的压力分析。主模型 batch-balanced LR 的结果如下：
 
-2026-08-04 新取得的 LSS-DAUR-1.0、LSS-FMCWR-2.0 与 LSS-HSR-L 期刊 bundle 目前只完成
-来源和下载完整性核验。HSR bundle 还未证明与大小不同的 ScienceDB V2 等价；三者均尚未
-通过本项目的 schema、标签、配对及分组审计，因此不进入本数据卡的已放行建模样本。
-来源、许可、状态和校验回执见 `data/metadata/external_public_datasets_v1.csv` 与
+| 迁移 | target batch-class macro accuracy | UAV batch recall | weather batch recall | LR-dummy 95% CI 下界 |
+|---|---:|---:|---:|---:|
+| X->S | 0.6516798767 | 0.4433201701 | 0.8600395832 | 0.0839896354 |
+| X->Ku | 0.8399853939 | 0.8493090645 | 0.8306617233 | 0.2670982858 |
+
+八项预登记条件中仅 S 频段 UAV recall 未通过。S/Ku target 已在唯一一次密封评价中消费，
+不得再用同一 target 做 CNN、域适配、特征扩展、结果驱动调参或新的确认性模型比较。完整
+证据位于 `results/final_evidence/lat_mricd_cross_band_transfer_v1/`。该实验仍不提供 H/V、
+真实 PRF、同事件跨频配对、空飘球或 Tian 复现证据，也不改变主 UAV 方向 4/6
+`BLOCKED_EXTERNAL` 的状态。
+
+2026-08-04 新取得的 LSS-DAUR-1.0、LSS-FMCWR-2.0、LSS-HSR-L V2、DroneRFc-MM
+选择性雷达子集、Ku 波段 UAV 群目标小包和单个 NEXRAD Level II 体扫，均不自动进入已放行
+建模数据。HSR-L 的 237,020,946-byte ScienceDB V2
+与 209,569,478-byte 期刊历史包已确认不等价，后者不得与 V2 混合。DroneRFc-MM 子集包含
+9 个同日 recording 的毫米波 PCD 点云、同步飞行真值和派生标签；它不是 ADC/IQ，也没有
+鸟、天气、背景、H/V 或空飘球标签。其 30,717 帧/639,527 点的 schema、有限值和时间戳已
+通过只读审计，但 B1 radar 与同名 GT 时间范围零重叠，因此同步总门阻塞，B1 不得进入监督
+对齐。UAV 群小包的 5 个 MAT 仅来自 3 个物理实验，只用于
+量测/航迹接口 smoke；NEXRAD 体扫虽含 ZDR、PhiDP、RhoHV 等双极化矩，却没有 UAV/气球
+标签，且不是原始 H/V IQ，只用于 loader 和公式 smoke。上述对象在各自 schema、标签、配对、
+同步及分组门通过前不进入本数据卡的已放行建模样本。来源、许可、状态和校验回执见
+`data/metadata/external_public_datasets_v1.csv` 与
 `data/metadata/external_public_artifacts_v1.csv`。

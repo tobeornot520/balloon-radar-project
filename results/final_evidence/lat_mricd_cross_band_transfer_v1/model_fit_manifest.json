@@ -1,0 +1,903 @@
+{
+  "analysis_scopes": [
+    "band_qualified_primary",
+    "raw_batch_code_disjoint_sensitivity"
+  ],
+  "argmax_tie_break": "lowest_class_code",
+  "config_sha256": "45e7b0c832ab37194dfc079289ee44e62763562a17a11732463ccecd75c06ac0",
+  "decision_rule": "argmax_over_model_classes_in_ascending_class_code_order",
+  "dummy_prior_fit_scope": "source_bands_only",
+  "dummy_prior_uses_same_sample_weights_as_learned_models": true,
+  "experiment_id": "lat_mricd_cross_band_transfer_v1",
+  "feature_implementation_sha256": "e5cdf9342492196b8999c9be0c4434cfe49fe8cbdeb0514b50862baaf367dfcd",
+  "fit_count": 27,
+  "fit_scope": "source_bands_only",
+  "formal_output_overwrite_allowed": false,
+  "hyperparameter_search_performed": false,
+  "implementation_commit": "61a3ef6e36d45c0b3bf4fa8fca60ea0d02d2ad24",
+  "implementation_sha256": "1c3a667d16d34f797903709fe7601383ab7ae788f2f916fb5819562a43c771a3",
+  "model_ids": [
+    "dummy_prior",
+    "logistic_batch_balanced",
+    "random_forest_batch_balanced"
+  ],
+  "models": [
+    {
+      "model_id": "dummy_prior",
+      "strategy": "prior",
+      "type": "dummy"
+    },
+    {
+      "C": 1.0,
+      "class_weight": null,
+      "max_iter": 5000,
+      "model_id": "logistic_batch_balanced",
+      "solver": "lbfgs",
+      "type": "logistic_regression"
+    },
+    {
+      "class_weight": null,
+      "max_depth": 8,
+      "max_features": "sqrt",
+      "min_samples_leaf": 5,
+      "model_id": "random_forest_batch_balanced",
+      "n_estimators": 500,
+      "n_jobs": 1,
+      "type": "random_forest"
+    }
+  ],
+  "probability_calibration": "none",
+  "sample_weight_hierarchy": [
+    "category_code",
+    "source_band_code",
+    "source_band_batch_class_cell"
+  ],
+  "scaler_fit_scope": "source_bands_only",
+  "sealed_run_consumption_enforced": true,
+  "single_sealed_run": true,
+  "source_files": [
+    {
+      "analysis_record_count": 3471,
+      "full_release_batch_count": 50,
+      "sha256": "985d679510b272e90180a77cdfa64c354909a45bc6b20cb00d176b27fbe44ed4",
+      "source_id": "hrrp_ku"
+    },
+    {
+      "analysis_record_count": 2496,
+      "full_release_batch_count": 38,
+      "sha256": "276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267",
+      "source_id": "hrrp_x"
+    },
+    {
+      "analysis_record_count": 3319,
+      "full_release_batch_count": 47,
+      "sha256": "92246be376fe93b00bb6bb56d64882916297f88e8ac20839daced3c9a2c8d926",
+      "source_id": "narrow_ku"
+    },
+    {
+      "analysis_record_count": 4038,
+      "full_release_batch_count": 412,
+      "sha256": "e584b3ed8c0117265cfebe61bd289aa91c1d917aaa504e7cb21118615b5db328",
+      "source_id": "narrow_s"
+    },
+    {
+      "analysis_record_count": 6451,
+      "full_release_batch_count": 364,
+      "sha256": "da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4",
+      "source_id": "narrow_x"
+    }
+  ],
+  "status": "COMPLETE_SOURCE_ONLY_MODEL_FIT_MANIFEST",
+  "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+  "target_rows_used_for_fit": false,
+  "target_statistics_used_for_scaling_or_calibration": false,
+  "test_driven_model_selection_performed": false,
+  "threshold_tuning_performed": false,
+  "training_weight_audit_sha256": "5e15f83a5c1fe6a18d982bf56f430fab5fb7a4fcee75b04418b228451d20c19e",
+  "transfer_ids": [
+    "narrow_x_to_s_shared_binary",
+    "narrow_x_to_ku_shared_binary",
+    "narrow_s_to_ku_shared_binary",
+    "narrow_ku_to_s_shared_binary",
+    "narrow_x_ku_to_s_shared_binary",
+    "narrow_x_s_to_ku_shared_binary",
+    "hrrp_x_to_ku_binary"
+  ],
+  "transfers": [
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20260803,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260804,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260805,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20260903,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260904,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260905,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 362,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 6451,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20260903,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 329,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 5980,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260904,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 329,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 5980,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20260905,
+      "role": "locked_primary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 329,
+      "source_ids": [
+        "narrow_x"
+      ],
+      "source_record_count": 5980,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261003,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "S"
+      ],
+      "source_batch_class_cell_count": 416,
+      "source_ids": [
+        "narrow_s"
+      ],
+      "source_record_count": 4038,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261004,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "S"
+      ],
+      "source_batch_class_cell_count": 416,
+      "source_ids": [
+        "narrow_s"
+      ],
+      "source_record_count": 4038,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261005,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "S"
+      ],
+      "source_batch_class_cell_count": 416,
+      "source_ids": [
+        "narrow_s"
+      ],
+      "source_record_count": 4038,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261103,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 49,
+      "source_ids": [
+        "narrow_ku"
+      ],
+      "source_record_count": 3319,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261104,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 49,
+      "source_ids": [
+        "narrow_ku"
+      ],
+      "source_record_count": 3319,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261105,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 49,
+      "source_ids": [
+        "narrow_ku"
+      ],
+      "source_record_count": 3319,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261203,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 411,
+      "source_ids": [
+        "narrow_x",
+        "narrow_ku"
+      ],
+      "source_record_count": 9770,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261204,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 411,
+      "source_ids": [
+        "narrow_x",
+        "narrow_ku"
+      ],
+      "source_record_count": 9770,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261205,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "Ku"
+      ],
+      "source_batch_class_cell_count": 411,
+      "source_ids": [
+        "narrow_x",
+        "narrow_ku"
+      ],
+      "source_record_count": 9770,
+      "target_band": "S",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 4038,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_s",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_ku_to_s_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261303,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "S"
+      ],
+      "source_batch_class_cell_count": 778,
+      "source_ids": [
+        "narrow_x",
+        "narrow_s"
+      ],
+      "source_record_count": 10489,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261304,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "S"
+      ],
+      "source_batch_class_cell_count": 778,
+      "source_ids": [
+        "narrow_x",
+        "narrow_s"
+      ],
+      "source_record_count": 10489,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 27,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261305,
+      "role": "secondary",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X",
+        "S"
+      ],
+      "source_batch_class_cell_count": 778,
+      "source_ids": [
+        "narrow_x",
+        "narrow_s"
+      ],
+      "source_record_count": 10489,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3319,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "narrow_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "narrow_x_s_to_ku_shared_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261403,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261404,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    },
+    {
+      "analysis_scope": "band_qualified_primary",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261405,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "dummy_prior",
+      "probability_calibration": "none",
+      "random_state": 20261403,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "logistic_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261404,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    },
+    {
+      "analysis_scope": "raw_batch_code_disjoint_sensitivity",
+      "feature_count": 18,
+      "fit_scope": "source_bands_only",
+      "hyperparameter_search_performed": false,
+      "model_id": "random_forest_batch_balanced",
+      "probability_calibration": "none",
+      "random_state": 20261405,
+      "role": "exploratory",
+      "sample_weights_fit_scope": "source_bands_only",
+      "scaler_fit_scope": "source_bands_only",
+      "source_bands": [
+        "X"
+      ],
+      "source_batch_class_cell_count": 34,
+      "source_ids": [
+        "hrrp_x"
+      ],
+      "source_record_count": 2496,
+      "target_band": "Ku",
+      "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+      "target_record_count_evaluated": 3471,
+      "target_rows_used_for_fit": false,
+      "target_source_id": "hrrp_ku",
+      "target_statistics_used_for_scaling_or_calibration": false,
+      "test_driven_model_selection_performed": false,
+      "threshold_tuning_performed": false,
+      "transfer_id": "hrrp_x_to_ku_binary"
+    }
+  ]
+}

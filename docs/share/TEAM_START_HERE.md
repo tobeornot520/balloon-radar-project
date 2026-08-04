@@ -1,6 +1,6 @@
 # 新组员从这里开始：入组、认领任务与交付手册
 
-版本：2026-08-03 V3
+版本：2026-08-04 V4（随 V6 分享包发布）
 
 适用对象：此前没有参与过项目开发的新组员，以及准备继续参与下一阶段的现有成员
 
@@ -13,7 +13,8 @@
 新组员不能只做到“看过分享包”。正式认领任务前，应能独立完成以下事项：
 
 1. 用三分钟说明项目的长期目标、当前任务和当前不能声称的结果；
-2. 区分当前 H/V UAV 数据、LAT-MRICD 公开数据和未来空飘球数据；
+2. 区分当前 H/V UAV 数据、LAT-MRICD、HSR/DAUR/FMCWR/DroneRFc-MM 公开数据和未来
+   空飘球数据；
 3. 解释为什么当前 56 个虚警结果不是严格实时或外部盲测结论；
 4. 解释为什么没有 PRF 时不能报告有 Hz 单位的物理微多普勒；
 5. 完成分享包校验，具备源码权限时还要通过环境和测试验收；
@@ -48,14 +49,23 @@
 - 零多普勒虚警机制诊断与目标保护残差开发参考；
 - Tian 2024 FCN 方法迁移、失败诊断和复现条件清单；
 - 新数据合同、外场能力、同步、标定、dry run 和 Pilot 门禁；
-- LAT-MRICD 公开 HRRP/窄带 I/Q 数据的正式 schema/batch 审计，以及 D17-NX/HX 五折分组基线。
+- LAT-MRICD 公开 HRRP/窄带 I/Q 数据的正式 schema/batch 审计、D17-NX/HX 五折分组基线，
+  以及 D17-XBAND 唯一一次密封迁移与 `FAIL_STOP` 冻结负结果；
+- DAUR V3、FMCWR-2.0 V4、HSR ScienceDB V2/期刊包和 DroneRFc-MM 选择性 radar subset
+  的来源与下载完整性核验。HSR 两包已确认不等价，V2 是 canonical audit candidate；
+  DroneRFc PCD schema 已通过但 B1 radar/GT 零重叠；其余配对/group 门也未通过，不能因
+  “已下载”或“schema 通过”写成“已可训练”。
 
-### 2.3 三个证据对象禁止混用
+### 2.3 不同证据对象禁止混用
 
 | 证据对象 | 当前可做什么 | 当前不能证明什么 |
 |---|---|---|
 | 现有 H/V UAV/背景数据 | 检测、网格定位、内部虚警机制、相对极化工程特征 | 跨日期泛化、严格实时部署、空飘球分类、绝对极化物理量 |
-| LAT-MRICD-1.0 | 同一公开发布内的 HRRP、归一化频率微动、batch-code-held-out UAV/鸟/气象基线与跨频段预研 | unseen-model/独立外部泛化、H/V 极化、物理 Hz 微多普勒、空飘球状态、同事件跨频融合 |
+| LAT-MRICD-1.0 | 同一公开发布内的 HRRP、归一化频率微动、batch-code-held-out UAV/鸟/气象基线与已冻结 band-held-out UAV/weather 评价 | unseen-model/独立外部泛化、H/V 极化、物理 Hz 微多普勒、空飘球状态、同事件跨频融合；已消费 S/Ku 不能重跑确认性比较 |
+| DAUR/FMCWR-2.0 | 来源和完整性核验；通过门禁后做时域、归一化微多普勒、轨迹和跨频/角度预研 | schema/group 审计前的模型性能、随机切窗结果、FMCWR 仿真鸟的真实自然鸟结论 |
+| HSR ScienceDB V2/期刊包 | 两包完整性通过且已证实不等价；以 V2 做 canonical 只读审计 | 混合两个包、把处理后 waterfall 当原始 IQ、独立外部性能 |
+| DroneRFc-MM radar subset | 复核全量 PCD schema 和 8 条时间重叠 recording；另行预登记后做点云/轨迹接口 | B1 监督对齐；ADC/IQ、H/V、鸟/天气/空飘球；随机 frame/window split；宣布性能 |
+| Ku UAV 群 / NEXRAD smoke | 分别验证量测/航迹接口和 Z/V/SW/ZDR/PhiDP/RhoHV 读取/公式 | 把 3 个实验或 1 个体扫扩成独立训练样本；UAV/气球识别性能；把天气雷达矩冒充本项目 H/V IQ |
 | 未来同步空飘球数据 | 通过合同后开展极化、时域、微多普勒和分层分类 | 在真实数据到位和锁定评价前不能预报性能 |
 
 任何报告都要写明使用的是哪一个证据对象，不允许把三者的结论拼成一个看似完整的模型结果。
@@ -69,6 +79,9 @@
   联合成功；它是开发参考，不是盲测或部署结论。
 - D17-NX/HX：Narrow-X 的 batch-class macro 为 LR `0.7999`、RF `0.7872`，HRRP-X 为
   `0.6617`、`0.6481`；四项均有 batch-code cluster 95% CI，两个配对差值 CI 均跨 0。
+- D17-XBAND：X->S LR target batch-class macro accuracy 为 `0.6517`，但 UAV batch recall
+  `0.4433` 未通过严格 `>0.50` 门；X->Ku 的同一指标为 `0.8400` 且该 target 过门。整体为
+  `FAIL_STOP`，S/Ku 已消费，禁止同 target 重跑、CNN、域适配或结果驱动改模。
 - Tian 本地迁移没有成功复现论文。point-GT 只是 Fold 1 train/validation 上的本地消融。
 - 当前目标与背景日期完全耦合，六个折都参与过开发，不能称外部盲测。
 - 当前方向完成门为 `4/6`，状态是 `BLOCKED_EXTERNAL`；剩余两项是外部阻塞，没有待成员
@@ -106,8 +119,10 @@ sha256sum -c SHA256SUMS.txt
 | 6 | `docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md` | 自己手里的材料允许做到哪种复现等级？ |
 | 7 | `docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md` | LAT-MRICD 为什么不能随机拆行？ |
 | 8 | `evidence/23_LAT_MRICD_GROUPED_BASELINES.md` | D17-NX/HX 得到什么、CI 和结论边界是什么？ |
-| 9 | `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md` | Tian 为什么冻结、替代路线是什么？ |
-| 10 | `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md` | 如何验收、评分、补验和分配权限？ |
+| 9 | `evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md` | 为什么 Ku 过门仍是整体 `FAIL_STOP`，且 S/Ku 不能重跑？ |
+| 10 | `evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.md` | 为什么 B1 被阻塞、为什么最低按 6 个 base family 分组且当前禁止训练？ |
+| 11 | `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md` | Tian 为什么冻结、替代路线是什么？ |
+| 12 | `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md` | 如何验收、评分、补验和分配权限？ |
 
 ### 阶段 C：口头验收
 
@@ -116,7 +131,7 @@ sha256sum -c SHA256SUMS.txt
 1. 为什么 `56/830` 不能写成严格实时部署性能？
 2. Tian 2024 为什么不能称为复现成功？
 3. 为什么当前 H/V 不能直接称为完整极化特征？
-4. 为什么 LAT-MRICD 不能随机拆行？
+4. 为什么 LAT-MRICD 不能随机拆行，D17-XBAND 又为什么不能重跑 S/Ku？
 5. 当前还有什么能做、什么不能做，自己准备认领什么任务？
 
 答不清楚时返回对应文档，不通过猜测补答案。
@@ -151,6 +166,10 @@ git status --short
 负责人按最小必要原则授予数据权限。原始 MAT/IQ、checkpoint、日志和包含个人路径的清单不在
 聊天群、公共网盘或分享包中传播。
 
+权限等级 D 也不授权重跑 D17-XBAND：S/Ku locked target 已在唯一一次密封运行中消费。
+成员对该实验只能复核冻结证据或运行完全合成的接口/门禁测试，不能通过复制文件、改路径、
+改实验 ID、CNN 或域适配规避停止规则。
+
 ## 6. 任务认领方法
 
 使用 [任务认领表](assets/templates/team_task_claim_template_v1.csv)。每个任务必须具备：
@@ -177,7 +196,11 @@ git status --short
 | D10 | P0 | 精确复现冻结 | 模型复现 | 只维护方法级负结果与合同测试；满足重开条件前不扫参 |
 | D17-NX | P0 | 已完成 | 信号处理/ML | Narrow-X 五折分组结果、CI、特征和边界已冻结到证据 23 |
 | D17-HX | P1 | 已完成 | 雷达识别 | HRRP-X 五折分组结果、CI、子型号压力和边界已冻结到证据 23 |
-| D17-XBAND | P1 | 可开始，待预登记 | 信号处理/迁移 | S/X/Ku band-held-out 协议、类别交集、最差频段结果和停止规则 |
+| D17-XBAND | P1 | 已完成；`FAIL_STOP` | 证据复核 | 核对证据 24、门判定和消费记录；禁止重跑真实 S/Ku target |
+| PUB-DAUR | P0 | 可开始；待审计 | 数据/信号处理 | MAT schema、TD/TR 1:1 配对、时间/有限值与 track group 审计 |
+| PUB-HSR | P1 | V2 已下载；不等价已确认；待审计 | 数据工程 | 以 ScienceDB V2 为 canonical 的只读 loader、schema 和 scene/track group；禁止混包 |
+| PUB-FMCWR2 | P1 | 待可审计解包 | 雷达/数据工程 | RAR 解包回执、MAT schema、频段/角度/记录及潜在重复 group 审计 |
+| PUB-DRONERFC | P1 | schema 已完成；B1 同步阻塞 | 证据/点云 | 复核证据 25、B1 零重叠和 base-family group；无更正材料不做 B1 监督对齐 |
 | D15 | P0 | 持续 | 工程/复现 | 实验台账、配置哈希、提交号和结果摘要检查 |
 | D16 | P1 | 持续 | 文档/工程 | Git 清洁、包内敏感信息审计、最新和上一版分享包 |
 
@@ -232,17 +255,59 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 该任务已按与 D17-NX 相同的分组纪律完成。归一化幅度几何、熵、粗糙度和自相关特征上的固定
 LR/RF batch-class macro 为 0.6617/0.6481，对应 95% CI 为 0.5826–0.7404/
 0.5764–0.7240；配对差值 CI 跨 0。样点不解释为已标定绝对距离或 RCS，HRRP-X 也不是
-Narrow-X 的独立外部验证。下一公开数据任务是单独预登记的 band-held-out transfer。
+Narrow-X 的独立外部验证。
 
-### 7.4 D10：Tian 复现条件对齐
+### 7.4 D17-XBAND：跨频段冻结负结果
+
+该任务已经按提交绑定的预登记协议执行唯一一次正式运行：
+
+- Narrow X->S 的固定 LR target batch-class macro accuracy 为 0.6517，UAV/weather batch
+  recall 为 0.4433/0.8600；UAV recall 未严格大于 0.50；
+- Narrow X->Ku 的 macro 为 0.8400，UAV/weather recall 为 0.8493/0.8307，该 target
+  全部门条件通过；
+- 两个 target 未同时通过，整体 gate 为 `FAIL_STOP`；S/Ku 均已消费。
+
+组员交付只能是证据 24 的数字、哈希、门判定、模型拟合范围和结论边界复核，或以下不接触
+真实 target 的合成合同测试：
+
+```bash
+python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
+  tests/test_lat_mricd_cross_band_evidence.py
+```
+
+不得重跑正式 runner，不得用同一 S/Ku 调 CNN、域适配、阈值或特征，也不得把 X->Ku 的通过
+单独写成“跨频段迁移成功”。阅读入口：`evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md`。
+
+### 7.5 D10：Tian 复现条件对齐
 
 优先获取：一个输入、网络前张量、标签图、网络输出、PIR/MDP 输出或 checkpoint。收到材料
 后先对齐一个样本，不直接跑六折。没有取得论文同域数据或明确配置前，禁止继续扫随机负样本、
 PIR 阈值、V/HV 输入或更多 epoch。
 
 截至 2026-08-03，所需外部材料被报告为目前无法取得。精确复现保持冻结，执行 DPG-FCN
-零多普勒主线、LAT-MRICD 跨频段迁移预登记和 Tian 合同测试。完整失败链、替代路线及唯一重开条件
+零多普勒主线、公开数据 schema/group 审计和 Tian 合同测试。完整失败链、替代路线及唯一重开条件
 见 `docs/18_TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803_ZH.md`。
+
+### 7.6 新公开数据审计
+
+HSR ScienceDB V2 正式包为 237,020,946 bytes，SHA256 为
+`fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，ZIP 完整。
+V2/期刊包分别有 1,561/1,478 个 entries；V2 额外有 `overflow/air_routes`，同名样本长度也
+不同。因此等价性任务已经得到否定结论：两包不可混合，ScienceDB V2 才是 canonical audit
+candidate。成员应实现只读 loader，禁止直接运行可能移动原件的官方 `dataset.py`。
+
+DroneRFc-MM V1 数据 DOI 为 `10.57760/sciencedb.j00173.00094`，许可为
+`CC-BY-SA-4.0`。完整发布是 113 files、75,612,067,287 bytes，本地只下载 28 个雷达相关
+文件（1 README、9 PCD ZIP、9 GT CSV、6 labels、3 code），共 47,366,902 bytes；subset
+manifest SHA256 为 `6b0c2ed1a075aa9164a516af001b630a9f775fddc9f399223c1aeeb6e7047b2b`。
+9 个 ZIP 均完整；30,717 PCD frames、639,527 points 全部通过 15 列 schema、finite、POINTS
+行数和嵌入/文件名时间戳检查，字段有 doppler、power、snr、timestamp。
+
+该 subset 只有 9 recordings、6 UAV models，且同日同场景。717 个派生 5 秒 windows 必须
+回连原始 recording，不能随机拆 frame/window。它不是 ADC/IQ 或 H/V，没有鸟、天气、
+空飘球。8 条 radar/GT 时间范围重叠；B1 雷达结束约 8 分钟后同名 GT 才开始，零重叠，
+所以状态为 `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`。B1 等待更正 GT/可归因偏移；其余
+8 条也只有另行预登记后才允许点云/轨迹接口研究，不允许替代主数据或宣布模型性能。
 
 ## 8. 数据或设备到位后才能启动的任务
 
@@ -279,6 +344,9 @@ python -m pytest
 
 在读取 locked test 前写明：研究问题、输入特征、分组单位、训练/验证/测试划分、主指标、容差、
 停止条件、允许尝试次数和禁止表述。
+
+已经消费且触发停止规则的 locked target 不能通过“重新预登记”恢复为未见数据。D17-XBAND
+S/Ku 只允许证据复核和合成合同测试。
 
 ### 9.4 实现
 
@@ -331,12 +399,17 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 10. 不把 Tian point-GT 本地消融写成论文成功复现；
 11. 不提交原始 MAT/IQ、checkpoint、访问凭据、个人绝对路径或开发聊天记录；
 12. 不隐去失败实验、目标损失、最差折或数据混杂，只展示总体 AUC。
+13. 不重跑 D17-XBAND 已消费的 S/Ku target，不用新实验 ID、CNN、域适配或复制数据规避
+    `FAIL_STOP`。
+14. 不混合 HSR ScienceDB V2 和期刊包，不运行会移动原件的 loader；
+15. 不随机拆分 DroneRFc-MM 的 frame 或派生 5 秒 window，不把点云 subset 写成 IQ、极化或
+    独立外部性能证据。
 
 违反红线的结果不进入论文、答辩、分享包或下一阶段选型。
 
 ## 12. Git 与文件要求
 
-- 每个任务使用独立分支，例如 `task/D17-XBAND-transfer`；
+- 每个任务使用独立分支，例如 `task/PUB-DAUR-audit`；
 - 开始和交付前都运行 `git status --short`；
 - 提交只包含本任务文件，不顺手整理无关目录；
 - 原始数据放 `data/raw/`，正式生成结果放约定的 ignored output 目录；
@@ -362,18 +435,20 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 
 ## 14. 推荐人员分工
 
-### 三名组员
+### 可分配任务线
 
 | 角色 | 主任务 | 维护任务 |
 |---|---|---|
-| A：公开数据与信号 | D17-XBAND Narrow 迁移 | 频段分组、特征单位和负结果 |
-| B：HRRP 与迁移 | D17-XBAND HRRP 迁移 | 类别交集、批次覆盖和最差频段检查 |
+| A：公开数据与信号 | PUB-DAUR schema/TD-TR/group 审计 | 配对、时间轴、分组与单位边界 |
+| B：公开数据工程 | PUB-HSR canonical V2 只读 loader；PUB-FMCWR2 解包/schema | 原件只读、禁止混包、频段/角度/重复分组 |
 | C：复现与工程 | Tian 合同测试、D15 | Git、测试、哈希和实验记录 |
-| D：证据与质量保证 | D16、结论和分享包审计 | 周报、敏感信息和证据边界 |
+| D：证据与质量保证 | D17-XBAND 证据复核、D16 | 周报、消费门禁、敏感信息和证据边界 |
+| E：点云与时序 | PUB-DRONERFC 证据复核/B1 更正条件清单 | 禁止强行对齐 B1、随机 frame/window split 或把接口结果冒充性能 |
 
-### 四至五名组员
+### 四至五名组员的合并方式
 
-可把公开数据拆成 Narrow、HRRP 两人，把 Tian/工程拆成复现与质量保证两人。负责人继续掌握
+可把公开数据拆成 DAUR、HSR/FMCWR、DroneRFc-MM 三个范围，把 Tian/工程拆成复现与质量
+保证两人。负责人继续掌握
 研究问题、外部沟通、locked test 开放和最终结论审批，不把这些决定完全下放。
 
 ## 15. 第一周建议安排
@@ -382,8 +457,8 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 |---|---|---|
 | 第 1 天 | 分享包校验、阅读一页摘要和本手册 | 无 |
 | 第 2 天 | 口头验收、填写个人清单 | 选择任务方向 |
-| 第 3 天 | 环境/测试验收、提交任务认领表 | 分享包证据核验、LAT 审计或 Tian 合同核对 |
-| 第 4-5 天 | reviewer 审核任务边界 | band-held-out 类别交集与迁移协议预登记 |
+| 第 3 天 | 环境/测试验收、提交任务认领表 | 分享包证据核验、D17-XBAND 合成合同测试或 Tian 合同核对 |
+| 第 4-5 天 | reviewer 审核任务边界 | DAUR 配对/group、HSR V2 loader、FMCWR-2.0 解包/schema 或 DroneRFc-MM 证据 25/B1 阻塞复核 |
 | 第 6-7 天 | 第一次周报 | 冻结下一周唯一主动作 |
 
 第一周不以“训练出一个准确率”为目标，以所有成员理解证据边界、能复跑审计并形成合格任务卡

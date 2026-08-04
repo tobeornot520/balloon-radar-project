@@ -1,6 +1,6 @@
 # 一页式成果摘要与请教说明
 
-版本：2026-08-03
+版本：2026-08-04 V6
 
 ## 项目在做什么
 
@@ -23,7 +23,8 @@
 | Tian 2024 FCN | 原迁移失败；point-GT 验证集 joint Pd 0.4151 | 方法诊断和本地消融，不是成功复现 |
 | 极化迁移编码器 | 三分支 ROI encoder 接口与测试完成 | 尚无预训练权重，未标定相位可通过 validity mask 关闭 |
 | 外场准备 | 能力、同步、标定、dry run、Pilot 五道门已固化 | 真实证据未提供前全部保持关闭 |
-| 公开多频段数据 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
+| 公开多频段分组基线 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
+| D17-XBAND 密封迁移 | X->S LR batch-class macro 0.6517，但 UAV recall 0.4433 未过门；X->Ku batch-class macro 0.8400 且该 target 过门；整体 `FAIL_STOP` | 两个 locked target 未同时通过，冻结为负结果；S/Ku 已消费，不得在同 target 上重跑、调 CNN、做域适配或结果驱动改模 |
 
 ## 当前最关键的发现
 
@@ -38,9 +39,23 @@
    配置或对齐样例目前不可获得，因此精确复现冻结，转入明确的替代路线。
 4. 当前分类资料只有 UAV，且 H/V 绝对幅相、PRF 和连续慢时间关系未证实。现阶段只能
    搭可迁移表示，不能声称获得物理微多普勒或绝对极化结论。
-5. LAT-MRICD 的五折 metadata-only 分组基线已经冻结。Narrow-X 与 HRRP-X 的 LR/RF
-   配对差值 CI 均跨 0，因此不选模型胜者；batch 编号存在跨类碰撞，且无 PRF 时频率只能
-   报告为归一化单位。下一公开数据任务是单独预登记的跨频段迁移。
+5. LAT-MRICD 的五折 metadata-only 分组基线和一次性跨频段迁移均已冻结。跨频段主模型
+   在 X->Ku 上通过，但 X->S 的 UAV batch recall 只有 0.4433，低于预登记的严格 `>0.50`
+   门，因此整体为 `FAIL_STOP`，不能用 Ku 的正结果掩盖 S 的失败。该结果只支持同一公开
+   发布内的 band-held-out UAV/weather 评价，不证明物理频率不变性或外部泛化。
+6. HSR 的 ScienceDB V2 正式包已经完整下载。V2 为 237,020,946 bytes、1,561 个 entries，
+   期刊包为 1,478 个 entries；V2 额外含 `overflow/air_routes`，同名样本长度也有差异。
+   两包已确认不等价、不可混合，后续以 ScienceDB V2 作为 canonical audit candidate。
+7. DroneRFc-MM V1 完整发布有 113 files、75,612,067,287 bytes；本地只取得 28 个雷达相关
+   文件，共 47,366,902 bytes。全量只读审计通过 30,717 frames/639,527 points 的 schema、
+   finite/POINTS/时间戳检查；8 条 radar/GT 时间范围重叠，B1 零重叠，整体同步门阻塞。
+8. 下一公开数据工作不再重跑 LAT-MRICD，而是 DAUR schema/TD-TR/group、HSR V2 只读
+   loader/schema/track 和 FMCWR-2.0 解包/schema。DroneRFc-MM B1 等待更正 GT/可归因偏移，
+   其余 8 条也只有另行预登记后才可继续；各自门禁通过前禁止训练。
+9. 公开检索只额外落地两个小型接口样本：Ku UAV 群包约 4 MB、仅 3 个物理实验；NEXRAD
+   单体扫约 0.4 MB，含 ZDR/PhiDP/RhoHV 等矩但没有目标标签。它们分别验证航迹和双极化
+   读取接口，不扩大训练集。42.4 GB 气球、23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟
+   主包均因域差异、体量或 split 未审计而暂缓，避免无目的网络与存储开销。
 
 ## 最希望请教学长的五件事
 
@@ -61,4 +76,10 @@
 - 候选 veto、soft notch 和 Tian point-GT 都属于开发诊断；
 - 没有真实空飘球载荷标签，不能报告空飘球分类准确率。
 - LAT-MRICD 结果不支持 unseen-model、独立外部、极化、空飘球或 Tian 复现结论；
+- D17-XBAND 的 S/Ku locked target 已消费；队员只能复核冻结证据或运行不接触真实 target
+  的合成合同测试，不能重跑密封 target，也不能据此调 CNN、域适配、阈值或特征；
+- HSR V2 与期刊包不得混合；DroneRFc-MM 不是 ADC/IQ、H/V 或鸟/天气/空飘球数据，不能
+  替代主数据，也不能把接口审计写成模型性能；B1 不得监督对齐；
+- Ku UAV 群的帧/拆分 MAT、NEXRAD 的 gate/ray/patch 都不是独立样本；两个小包只作接口
+  smoke，不作识别指标，也不把 NEXRAD 双极化矩冒充本项目已标定 H/V；
 - 公开数据支线完成不改变主 UAV 完成门，当前仍为 `4/6`、`BLOCKED_EXTERNAL`。

@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260803_v5"
+        == "balloon_radar_results_and_team_onboarding_20260804_v6"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -111,8 +111,47 @@ def test_share_source_map_is_complete_and_unique() -> None:
         f"assets/tables/lat_mricd_grouped_{name}.csv"
         for name in grouped_table_names
     }.issubset(destinations)
+    assert "docs/LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md" in destinations
+    assert "assets/contracts/lat_mricd_cross_band_transfer_v1.json" in destinations
+    assert (
+        "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_RUN_CONSUMED.json"
+        in destinations
+    )
+    assert "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER.md" in destinations
+    assert "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_MANIFEST.json" in destinations
+    assert "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_GATE.json" in destinations
+    assert "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_MODEL_FIT.json" in destinations
+    assert "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_SUMMARY.json" in destinations
+    cross_band_table_names = {
+        "aggregate_metrics",
+        "bootstrap_intervals",
+        "claim_boundaries",
+        "confusion_matrices",
+        "disjoint_sensitivity",
+        "feature_definitions",
+        "feature_importance",
+        "raw_batch_overlap_audit",
+        "target_batch_class_metrics",
+        "training_weight_audit",
+        "transfer_coverage",
+    }
+    assert {
+        f"assets/tables/lat_mricd_cross_band_{name}.csv"
+        for name in cross_band_table_names
+    }.issubset(destinations)
+    assert "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.md" in destinations
+    assert "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.json" in destinations
+    assert "assets/tables/dronerfc_mm_recording_audit.csv" in destinations
+    assert "assets/registries/external_public_datasets_v1.csv" in destinations
+    assert "assets/registries/external_public_artifacts_v1.csv" in destinations
     assert not any("oof_predictions.csv" in path for path in sources + destinations)
-    assert not any(path.startswith("data/raw/") for path in sources)
+    assert not any(
+        forbidden in Path(path).name.lower()
+        for path in sources + destinations
+        for forbidden in ("predictions", "review_queue", "sample_features")
+    )
+    assert not any(path.startswith("data/raw/") for path in sources + destinations)
+    assert all(not Path(path).is_absolute() for path in sources + destinations)
     assert not any("joint_fold_false_alarms" in path for path in destinations)
 
 
@@ -257,6 +296,157 @@ def test_share_lat_mricd_evidence_manifest_is_sanitized() -> None:
     assert mapped_paths == set(published_paths) | {"evidence_manifest.json"}
 
 
+def test_share_lat_mricd_cross_band_evidence_is_complete_and_sanitized() -> None:
+    evidence_root = Path(
+        "results/final_evidence/lat_mricd_cross_band_transfer_v1"
+    )
+    source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination
+        == "evidence/24_LAT_MRICD_CROSS_BAND_TRANSFER_MANIFEST.json"
+    )
+    manifest = json.loads(
+        (share_package.PROJECT_ROOT / source).read_text(encoding="utf-8")
+    )
+    assert manifest["sample_level_predictions_included"] is False
+    assert manifest["raw_data_included"] is False
+    assert manifest["raw_or_absolute_paths_included"] is False
+    assert manifest["model_checkpoints_included"] is False
+    published_paths = [item["file"] for item in manifest["files"]]
+    assert published_paths
+    assert all(not Path(path).is_absolute() for path in published_paths)
+    assert not any("oof_predictions.csv" in path for path in published_paths)
+    assert not any(path.startswith("data/raw/") for path in published_paths)
+    mapped_paths = {
+        Path(item.source).relative_to(evidence_root).as_posix()
+        for item in PACKAGE_FILES
+        if item.source.startswith(f"{evidence_root.as_posix()}/")
+    }
+    assert mapped_paths == set(published_paths) | {"evidence_manifest.json"}
+
+
+def test_share_external_public_registries_are_metadata_only() -> None:
+    registry_destinations = {
+        "assets/registries/external_public_datasets_v1.csv",
+        "assets/registries/external_public_artifacts_v1.csv",
+    }
+    registry_items = [
+        item for item in PACKAGE_FILES if item.destination in registry_destinations
+    ]
+    assert {item.destination for item in registry_items} == registry_destinations
+    assert all(item.source.startswith("data/metadata/") for item in registry_items)
+    assert all(not item.source.startswith("data/raw/") for item in registry_items)
+
+
+def test_share_dronerfc_audit_is_sanitized_blocked_and_grouped() -> None:
+    summary_source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination == "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.json"
+    )
+    table_source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination == "assets/tables/dronerfc_mm_recording_audit.csv"
+    )
+    summary = json.loads(
+        (share_package.PROJECT_ROOT / summary_source).read_text(encoding="utf-8")
+    )
+    assert summary["status"] == "PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT"
+    assert summary["schema_version"] == 1
+    assert summary["dataset_id"] == "dronerfc_mm"
+    assert summary["release_version"] == "V1"
+    assert summary["data_doi"] == "10.57760/sciencedb.j00173.00094"
+    assert summary["blocked_recordings"] == ["B1"]
+    assert summary["model_training_allowed"] is False
+    assert summary["source_files_modified"] is False
+    assert summary["source_archives_extracted"] is False
+    assert summary["sample_level_outputs_included"] is False
+    assert summary["recording_count"] == 9
+    assert summary["split_family_group_count"] == 6
+    assert summary["pcd_frame_count"] == 30717
+    assert summary["pcd_point_count"] == 639527
+    assert summary["ground_truth_row_count"] == 35959
+    assert summary["label_window_count"] == 717
+    assert summary["selected_subset_file_count"] == 28
+    assert summary["selected_subset_size_bytes"] == 47366902
+    assert summary["selected_subset_manifest_sha256"] == (
+        "6b0c2ed1a075aa9164a516af001b630a9f775fddc9f399223c1aeeb6e7047b2b"
+    )
+    assert summary["minimum_split_unit"] == (
+        "split_family_group; keep -2 recordings with their base group"
+    )
+    assert "Random frame/window split" in summary["prohibited_scope"]
+    assert "B1 supervised alignment" in summary["prohibited_scope"]
+
+    with (share_package.PROJECT_ROOT / table_source).open(
+        encoding="utf-8-sig", newline=""
+    ) as handle:
+        reader = csv.DictReader(handle)
+        rows = list(reader)
+        columns = set(reader.fieldnames or [])
+    assert columns == {
+        "recording_id",
+        "split_family_group",
+        "radar_zip",
+        "pcd_frame_count",
+        "pcd_point_count",
+        "min_points_per_frame",
+        "max_points_per_frame",
+        "radar_start_utc",
+        "radar_end_utc",
+        "ground_truth_csv",
+        "ground_truth_row_count",
+        "ground_truth_duplicate_timestamp_count",
+        "ground_truth_start_utc",
+        "ground_truth_end_utc",
+        "radar_gt_overlap_seconds",
+        "nearest_gt_error_median_seconds",
+        "nearest_gt_error_p95_seconds",
+        "nearest_gt_error_max_seconds",
+        "label_group",
+        "label_window_overlap_count",
+        "alignment_status",
+    }
+    assert len(rows) == 9
+    assert len({row["split_family_group"] for row in rows}) == 6
+    assert {row["recording_id"] for row in rows} == {
+        "A1",
+        "A1-2",
+        "B1",
+        "C1",
+        "E1",
+        "E1-2",
+        "F1",
+        "G1",
+        "G1-2",
+    }
+    grouped = {row["recording_id"]: row["split_family_group"] for row in rows}
+    assert grouped["A1-2"] == grouped["A1"] == "A1"
+    assert grouped["E1-2"] == grouped["E1"] == "E1"
+    assert grouped["G1-2"] == grouped["G1"] == "G1"
+    assert all(row["label_group"] == row["split_family_group"] for row in rows)
+    assert sum(int(row["pcd_frame_count"]) for row in rows) == 30717
+    assert sum(int(row["pcd_point_count"]) for row in rows) == 639527
+    assert sum(int(row["ground_truth_row_count"]) for row in rows) == 35959
+    b1 = next(row for row in rows if row["recording_id"] == "B1")
+    assert float(b1["radar_gt_overlap_seconds"]) == 0.0
+    assert b1["alignment_status"] == "BLOCKED_NO_RADAR_GT_TIME_OVERLAP"
+    assert b1["radar_end_utc"] == "2026-04-01T07:19:22.629000Z"
+    assert b1["ground_truth_start_utc"] == "2026-04-01T07:27:15.240000Z"
+    assert {
+        row["recording_id"]
+        for row in rows
+        if row["alignment_status"] != "PASS_TIME_RANGE_OVERLAP"
+    } == {"B1"}
+    assert all(
+        float(row["radar_gt_overlap_seconds"]) > 0.0
+        for row in rows
+        if row["recording_id"] != "B1"
+    )
+
+
 def test_current_data_readiness_sources_are_fresh() -> None:
     readiness = share_package.load_current_data_readiness()
     assert readiness["status"] == "FAIL"
@@ -338,6 +528,31 @@ def test_share_manifest_marks_causal_context_as_post_test(
         "batch_code",
     ]
     assert rules["lat_mricd_sample_predictions_included"] is False
+    assert rules["lat_mricd_cross_band_transfer_included"] is True
+    assert rules["lat_mricd_cross_band_sealed_run_consumed"] is True
+    assert rules["lat_mricd_cross_band_primary_gate_passed"] is False
+    assert rules["lat_mricd_cross_band_target_bands_consumed"] == ["S", "Ku"]
+    assert (
+        rules["lat_mricd_cross_band_same_target_confirmatory_reuse_allowed"]
+        is False
+    )
+    assert rules["lat_mricd_cross_band_raw_data_included"] is False
+    assert rules["lat_mricd_cross_band_sample_predictions_included"] is False
+    assert rules["dronerfc_mm_read_only_audit_included"] is True
+    assert rules["dronerfc_mm_audit_status"] == (
+        "PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT"
+    )
+    assert rules["dronerfc_mm_raw_data_included"] is False
+    assert rules["dronerfc_mm_sample_level_outputs_included"] is False
+    assert rules["dronerfc_mm_training_performed"] is False
+    assert rules["dronerfc_mm_model_training_allowed"] is False
+    assert rules["dronerfc_mm_blocked_recordings"] == ["B1"]
+    assert rules["dronerfc_mm_b1_supervised_alignment_allowed"] is False
+    assert rules["dronerfc_mm_random_frame_window_split_allowed"] is False
+    assert rules["dronerfc_mm_group_key"] == "split_family_group"
+    assert rules["dronerfc_mm_minimum_split_unit"] == "split_family_group"
+    assert rules["dronerfc_mm_split_family_group_count"] == 6
+    assert rules["external_public_data_registries_included"] is True
     assert rules["team_onboarding_manual_included"] is True
     assert rules["team_qualification_policy_included"] is True
     assert rules["team_qualification_scorecard_included"] is True
@@ -360,6 +575,18 @@ def test_share_audit_rejects_model_weights(tmp_path: Path) -> None:
     package.mkdir()
     (package / "model.pt").write_bytes(b"not-a-real-checkpoint")
     with pytest.raises(ValueError, match="file type"):
+        audit_package_directory(package)
+
+
+def test_share_audit_rejects_sensitive_markers_in_binary_metadata(
+    tmp_path: Path,
+) -> None:
+    package = tmp_path / "share"
+    package.mkdir()
+    (package / "figure.png").write_bytes(
+        b"not-a-real-png\x00creator=/home/example/project"
+    )
+    with pytest.raises(ValueError, match="sensitive marker"):
         audit_package_directory(package)
 
 
