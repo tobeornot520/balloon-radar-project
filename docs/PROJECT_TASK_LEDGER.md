@@ -1,6 +1,6 @@
 # 项目任务台账与协作分工
 
-版本：2026-08-03
+版本：2026-08-04
 来源：`接下来方向（一定要全部看完）.md` 的完整核读、当前仓库状态、冻结证据和外场准备文档。
 
 ## 1. 项目当前方向
@@ -102,7 +102,7 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 | D15 | 实验是否可长期追溯 | 进行中 | 每轮绑定 experiment_id、数据 manifest、split、config、commit、checkpoint 哈希、日志和结果摘要 | 我维护模板，你每轮填写/确认 | 任意表格能追溯到源码和数据版本；新结果不覆盖旧目录 | 从下一轮开始执行记录协议 |
 | D16 | 分享包和 Git 是否保持可交付 | 进行中 | 只保留最新包和上一包；原始聊天/数据/权重留本地并忽略；新文档和构建脚本提交 Git | 我维护，你确认分享边界 | 包内无敏感路径、原始数据、权重和聊天记录；manifest 源提交等于 HEAD | 本轮清理 dist 并重建最新包 |
 | D17 | 外部公开多频段数据能否支撑算法预研 | 已完成（D17-NX/HX） | 官方 ZIP、schema/batch 审计和五折 metadata-only 分组均已冻结；Narrow-X LR/RF 的 batch-class macro 为 0.7999/0.7872，HRRP-X 为 0.6617/0.6481，四项均有 batch-code cluster CI | 我维护冻结证据和边界；你只按同一公开发布内结果引用 | `results/final_evidence/lat_mricd_grouped_baselines_v1/` 可复核；不写成 unseen-model、独立外部、极化、空飘球或 Tian 复现证据 | 下一公开数据任务为预登记的 band-held-out 迁移；LSS-Ku 仍仅在能补明确缺口时再下载 |
-| D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 待预登记（可开始） | 先冻结 UAV/weather 类别交集、source/target band、batch-code overlap 审计、目标频段分组指标和停止规则；复用固定可解释特征与 LR/RF，不先上深网 | 我负责协议、实现和冻结结果；你当前无需提供新数据 | 目标频段不参与缩放、调参或选模；报告最差目标频段与 batch-code cluster CI；失败则冻结负结果并停止 CNN/域适配 | 先写独立 V1 协议和配置，主分析用 Narrow X->S/X->Ku；HRRP 只作探索性压力实验 |
+| D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 已预登记，待唯一一次密封运行 | V1 已冻结 UAV/weather 类别交集、Narrow X->S/X->Ku locked primary、batch overlap 审计、目标 batch 等权指标、cluster CI 和停止规则；S/Ku 性能尚未运行或查看 | 我执行提交绑定的一次性正式运行、证据构建和结论冻结；你当前无需提供新数据 | 目标频段不参与缩放、调参或选模；两个 target 均通过 accuracy/recall/LR-dummy CI 三重门才可继续，否则冻结负结果并停止 CNN/域适配 | 先提交 clean pre-result commit；经实验 ledger wrapper 只运行一次，再用冻结构建器生成脱敏证据 |
 
 ## 4. 分阶段计划与双方验收
 

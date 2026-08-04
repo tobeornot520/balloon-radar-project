@@ -10,7 +10,10 @@
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
+- `../data/metadata/external_public_datasets_v1.csv`: versioned external dataset, DOI, licence, use and decision registry
+- `../data/metadata/external_public_artifacts_v1.csv`: downloaded artifact size, hash and integrity registry
 - `LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`: frozen five-fold Narrow-X/HRRP-X grouped-baseline contract, metrics, and claim limits
+- `LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md`: preregistered one-shot S/Ku band-held-out transfer contract and stop rules
 - `../results/final_evidence/lat_mricd_grouped_baselines_v1/REPORT.md`: frozen aggregate results and batch-code cluster intervals
 - `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
@@ -41,6 +44,7 @@
 - `FIELD_COLLECTION_SOP_V1.md`
 - `FIELD_CAPABILITY_REQUEST_V1.md`
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`
+- `LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md`
 
 ## Reproducibility and sharing
 

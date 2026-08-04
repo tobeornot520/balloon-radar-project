@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "experiment_id": "lat_mricd_cross_band_transfer_v1",
+  "status": "PREREGISTERED_NOT_RUN",
+  "preregistration_date": "2026-08-03",
+  "dataset": "LAT-MRICD-1.0",
+  "dataset_root": "data/raw/external/LAT-MRICD-1.0",
+  "output_dir": "results/experiments/lat_mricd_cross_band_transfer_v1",
+  "random_state": 20260803,
+  "aggregate_sources": [
+    {
+      "source_id": "hrrp_x",
+      "relative_path": "HRRP/X波段/data_hrrp_X.mat",
+      "expected_sha256": "276029f334e24abf9e54860d3f58e99557ffd47398c602e49d4139f3a25ae267",
+      "representation": "HRRP",
+      "band_code": 2,
+      "band": "X",
+      "expected_record_count": 3648,
+      "expected_column_count": 504,
+      "expected_analysis_coverage": {
+        "record_count": 2496,
+        "unique_batch_count": 33,
+        "classes": {
+          "1": {
+            "record_count": 1411,
+            "batch_count": 12
+          },
+          "3": {
+            "record_count": 1085,
+            "batch_count": 22
+          }
+        }
+      }
+    },
+    {
+      "source_id": "hrrp_ku",
+      "relative_path": "HRRP/Ku波段/data_hrrp_Ku.mat",
+      "expected_sha256": "985d679510b272e90180a77cdfa64c354909a45bc6b20cb00d176b27fbe44ed4",
+      "representation": "HRRP",
+      "band_code": 3,
+      "band": "Ku",
+      "expected_record_count": 3471,
+      "expected_column_count": 504,
+      "expected_analysis_coverage": {
+        "record_count": 3471,
+        "unique_batch_count": 50,
+        "classes": {
+          "1": {
+            "record_count": 1765,
+            "batch_count": 10
+          },
+          "3": {
+            "record_count": 1706,
+            "batch_count": 41
+          }
+        }
+      }
+    },
+    {
+      "source_id": "narrow_s",
+      "relative_path": "Narrow/S波段/data_narrow_S.mat",
+      "expected_sha256": "e584b3ed8c0117265cfebe61bd289aa91c1d917aaa504e7cb21118615b5db328",
+      "representation": "Narrow",
+      "band_code": 1,
+      "band": "S",
+      "expected_record_count": 4038,
+      "expected_column_count": 1028,
+      "expected_analysis_coverage": {
+        "record_count": 4038,
+        "unique_batch_count": 412,
+        "classes": {
+          "1": {
+            "record_count": 1531,
+            "batch_count": 10
+          },
+          "3": {
+            "record_count": 2507,
+            "batch_count": 406
+          }
+        }
+      }
+    },
+    {
+      "source_id": "narrow_x",
+      "relative_path": "Narrow/X波段/data_narrow_X.mat",
+      "expected_sha256": "da8ea23032929a60de67fad7a46b7616f068885efc02042a22b747da9f6e24c4",
+      "representation": "Narrow",
+      "band_code": 2,
+      "band": "X",
+      "expected_record_count": 8715,
+      "expected_column_count": 1028,
+      "expected_analysis_coverage": {
+        "record_count": 6451,
+        "unique_batch_count": 358,
+        "classes": {
+          "1": {
+            "record_count": 868,
+            "batch_count": 5
+          },
+          "3": {
+            "record_count": 5583,
+            "batch_count": 357
+          }
+        }
+      }
+    },
+    {
+      "source_id": "narrow_ku",
+      "relative_path": "Narrow/Ku波段/data_narrow_Ku.mat",
+      "expected_sha256": "92246be376fe93b00bb6bb56d64882916297f88e8ac20839daced3c9a2c8d926",
+      "representation": "Narrow",
+      "band_code": 3,
+      "band": "Ku",
+      "expected_record_count": 3319,
+      "expected_column_count": 1028,
+      "expected_analysis_coverage": {
+        "record_count": 3319,
+        "unique_batch_count": 47,
+        "classes": {
+          "1": {
+            "record_count": 2598,
+            "batch_count": 8
+          },
+          "3": {
+            "record_count": 721,
+            "batch_count": 41
+          }
+        }
+      }
+    }
+  ],
+  "class_contract": {
+    "task_type": "binary_category_classification",
+    "class_codes": [1, 3],
+    "class_names": {
+      "1": "UAV",
+      "3": "weather"
+    },
+    "bird_class_code": 2,
+    "bird_rows_allowed": false,
+    "narrow_shared_uav_model_codes": [1, 2, 3],
+    "narrow_weather_model_codes": [9],
+    "hrrp_uav_model_alignment_available": false,
+    "hrrp_x_uav_model_codes": [1, 2, 3, 4, 5, 6],
+    "hrrp_ku_uav_model_codes": [10],
+    "hrrp_weather_model_codes": [9]
+  },
+  "group_key": [
+    "representation",
+    "band_code",
+    "batch_code"
+  ],
+  "feature_contract": {
+    "feature_set_id": "lat_mricd_grouped_baseline_v1_exact",
+    "implementation": "scripts/run_lat_mricd_grouped_baseline_v1.py",
+    "frozen_baseline_commit": "a102ea0c81925a3e0686bccc763a1856d6da319e",
+    "implementation_sha256": "e5cdf9342492196b8999c9be0c4434cfe49fe8cbdeb0514b50862baaf367dfcd",
+    "narrow_extractor": "extract_narrow_features",
+    "hrrp_extractor": "extract_hrrp_features",
+    "narrow_iq_reconstructor": "reconstruct_narrow_iq",
+    "feature_schemas": {
+      "Narrow": {
+        "feature_count": 27,
+        "feature_names": [
+          "envelope_mean_rms_normalized",
+          "envelope_std_rms_normalized",
+          "envelope_coefficient_of_variation",
+          "envelope_skewness",
+          "envelope_kurtosis",
+          "envelope_crest_factor",
+          "phase_increment_mean_cycles_per_sample",
+          "phase_increment_resultant_length",
+          "autocorrelation_magnitude_lag1",
+          "autocorrelation_magnitude_lag2",
+          "autocorrelation_magnitude_lag4",
+          "autocorrelation_magnitude_lag8",
+          "autocorrelation_magnitude_lag16",
+          "autocorrelation_magnitude_lag32",
+          "periodicity_candidate_autocorrelation",
+          "periodicity_candidate_lag_fraction",
+          "spectrum_centroid_cycles_per_sample",
+          "spectrum_abs_centroid_cycles_per_sample",
+          "spectrum_spread_cycles_per_sample",
+          "spectrum_entropy_normalized",
+          "spectrum_dominant_frequency_cycles_per_sample",
+          "spectrum_dominant_abs_frequency_cycles_per_sample",
+          "spectrum_peak_power_fraction",
+          "spectrum_zero_band_power_fraction",
+          "spectrum_positive_negative_log10_ratio",
+          "spectrum_flatness",
+          "spectrum_kurtosis"
+        ]
+      },
+      "HRRP": {
+        "feature_count": 18,
+        "feature_names": [
+          "energy_centroid_bin_fraction",
+          "energy_spread_bin_fraction",
+          "energy_entropy_normalized",
+          "peak_bin_fraction",
+          "peak_power_fraction",
+          "crest_factor",
+          "amplitude_mean_rms_normalized",
+          "amplitude_std_rms_normalized",
+          "amplitude_skewness",
+          "amplitude_kurtosis",
+          "energy_q10_bin_fraction",
+          "energy_q50_bin_fraction",
+          "energy_q90_bin_fraction",
+          "energy_q90_q10_width_fraction",
+          "roughness_mean_abs_difference",
+          "autocorrelation_magnitude_lag1",
+          "autocorrelation_magnitude_lag4",
+          "autocorrelation_magnitude_lag16"
+        ]
+      }
+    },
+    "per_record_normalization_only": true,
+    "frequency_unit": "cycles/sample",
+    "feature_selection_allowed": false,
+    "pca_allowed": false,
+    "band_code_as_feature_allowed": false,
+    "category_model_or_batch_metadata_as_feature_allowed": false,
+    "target_band_statistics_for_feature_processing_allowed": false
+  },
+  "transfers": [
+    {
+      "transfer_id": "narrow_x_to_s_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_x"],
+      "source_bands": ["X"],
+      "target_source_id": "narrow_s",
+      "target_band": "S",
+      "role": "locked_primary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 176,
+        "status": "NOT_IDENTIFIABLE",
+        "reason": "after excluding target raw batch codes the X source retains only two UAV batch codes"
+      }
+    },
+    {
+      "transfer_id": "narrow_x_to_ku_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_x"],
+      "source_bands": ["X"],
+      "target_source_id": "narrow_ku",
+      "target_band": "Ku",
+      "role": "locked_primary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 33,
+        "status": "REPORTABLE",
+        "minimum_source_batch_count_per_class": 3,
+        "expected_retained_source_uav_batch_count": 5,
+        "expected_retained_source_weather_batch_count": 324
+      }
+    },
+    {
+      "transfer_id": "narrow_s_to_ku_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_s"],
+      "source_bands": ["S"],
+      "target_source_id": "narrow_ku",
+      "target_band": "Ku",
+      "role": "secondary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 32,
+        "status": "NOT_IDENTIFIABLE",
+        "reason": "after excluding target raw batch codes the S source retains only two UAV batch codes"
+      }
+    },
+    {
+      "transfer_id": "narrow_ku_to_s_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_ku"],
+      "source_bands": ["Ku"],
+      "target_source_id": "narrow_s",
+      "target_band": "S",
+      "role": "secondary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 32,
+        "status": "NOT_IDENTIFIABLE",
+        "reason": "after excluding target raw batch codes the Ku source retains no UAV rows"
+      }
+    },
+    {
+      "transfer_id": "narrow_x_ku_to_s_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_x", "narrow_ku"],
+      "source_bands": ["X", "Ku"],
+      "target_source_id": "narrow_s",
+      "target_band": "S",
+      "role": "secondary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 186,
+        "status": "NOT_IDENTIFIABLE",
+        "reason": "after excluding target raw batch codes the pooled source retains UAV rows from only two X-band batch codes and none from Ku"
+      }
+    },
+    {
+      "transfer_id": "narrow_x_s_to_ku_shared_binary",
+      "representation": "Narrow",
+      "source_ids": ["narrow_x", "narrow_s"],
+      "source_bands": ["X", "S"],
+      "target_source_id": "narrow_ku",
+      "target_band": "Ku",
+      "role": "secondary",
+      "uav_model_codes": [1, 2, 3],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 43,
+        "status": "NOT_IDENTIFIABLE",
+        "partial_support": true,
+        "reason": "pooled source coverage remains nonzero but the disjoint S source has only two UAV batch codes, below the per-source-band-by-class minimum"
+      }
+    },
+    {
+      "transfer_id": "hrrp_x_to_ku_binary",
+      "representation": "HRRP",
+      "source_ids": ["hrrp_x"],
+      "source_bands": ["X"],
+      "target_source_id": "hrrp_ku",
+      "target_band": "Ku",
+      "role": "exploratory",
+      "uav_model_codes": [1, 2, 3, 4, 5, 6, 10],
+      "raw_batch_disjoint_sensitivity": {
+        "expected_overlap_code_count": 0,
+        "status": "REPORTABLE"
+      },
+      "known_confounders": [
+        "Ku UAV rows use model_code 10 (unspecified UAV) while X UAV rows use model codes 1-6",
+        "the X aggregate is float64 while the Ku aggregate is uint16"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "model_id": "dummy_prior",
+      "type": "dummy",
+      "strategy": "prior"
+    },
+    {
+      "model_id": "logistic_batch_balanced",
+      "type": "logistic_regression",
+      "C": 1.0,
+      "class_weight": null,
+      "max_iter": 5000,
+      "solver": "lbfgs"
+    },
+    {
+      "model_id": "random_forest_batch_balanced",
+      "type": "random_forest",
+      "n_estimators": 500,
+      "max_depth": 8,
+      "min_samples_leaf": 5,
+      "max_features": "sqrt",
+      "class_weight": null,
+      "n_jobs": 1
+    }
+  ],
+  "training_contract": {
+    "fit_scope": "source_bands_only",
+    "target_rows_used_for_fit": false,
+    "target_labels_used_for_fit_threshold_calibration_or_model_selection": false,
+    "target_metadata_labels_used_for_preregistered_eligibility_and_final_metrics": true,
+    "target_statistics_used_for_scaling_or_calibration": false,
+    "scaler_fit_scope": "source_bands_only",
+    "probability_calibration": "none",
+    "prediction_decision": "argmax_over_model_classes_in_ascending_class_code_order",
+    "argmax_tie_break": "lowest_class_code",
+    "dummy_prior_fit_scope": "source_bands_only",
+    "dummy_prior_uses_same_sample_weights_as_learned_models": true,
+    "threshold_tuning_allowed": false,
+    "hyperparameter_search_allowed": false,
+    "test_driven_model_selection_allowed": false,
+    "all_fixed_models_retained": true,
+    "single_sealed_run_before_result_inspection": true,
+    "sample_weight_hierarchy": [
+      "category_code",
+      "source_band_code",
+      "source_band_batch_class_cell"
+    ],
+    "sample_weight_formula": "1 / (number_of_source_bands_for_class * number_of_batch_codes_within_source_band_and_class * rows_in_source_band_batch_class_cell)",
+    "sample_weights_normalized_to_mean_one": true
+  },
+  "metrics": {
+    "primary_model_id": "logistic_batch_balanced",
+    "primary_metric": "target_batch_class_macro_accuracy",
+    "binary_positive_class_code_for_roc_auc": 1,
+    "probability_column_class_code_order": [1, 3],
+    "binary_log_loss_definition": "sklearn.metrics.log_loss(labels=[1,3], normalize=True)",
+    "roc_auc_definition": "roc_auc_score(category_code==1, probability_for_class_1)",
+    "p10_quantile_method": "linear",
+    "target_batch_class_macro_hierarchy": "row_accuracy_within_batch_class_then_equal_batches_within_class_then_equal_classes",
+    "required_metrics": [
+      "pooled_accuracy",
+      "pooled_balanced_accuracy",
+      "pooled_macro_f1",
+      "binary_log_loss",
+      "roc_auc",
+      "target_batch_macro_accuracy",
+      "target_batch_accuracy_p10",
+      "worst_target_batch_accuracy",
+      "target_batch_class_macro_accuracy",
+      "target_batch_class_recall_uav",
+      "target_batch_class_recall_weather",
+      "target_batch_class_cell_accuracy_p10",
+      "worst_target_batch_class_cell_accuracy",
+      "worst_target_batch_class_cell_record_count"
+    ],
+    "confusion_matrices": [
+      "row_count",
+      "target_batch_class_row_normalized"
+    ],
+    "target_batch_class_row_normalized_confusion_definition": "within_each_true_class_equalize_target_batches_then_sum_prediction_mass",
+    "worst_target_band": {
+      "transfer_ids": [
+        "narrow_x_to_s_shared_binary",
+        "narrow_x_to_ku_shared_binary"
+      ],
+      "metric": "target_batch_class_macro_accuracy",
+      "reducer": "minimum"
+    }
+  },
+  "bootstrap_replicates": 2000,
+  "bootstrap_contract": {
+    "confidence_level": 0.95,
+    "interval_method": "percentile",
+    "percentile_quantile_method": "linear",
+    "missing_class_replicate": "discard_and_report",
+    "analysis_scopes": [
+      "band_qualified_primary",
+      "raw_batch_code_disjoint_sensitivity"
+    ],
+    "raw_batch_code_disjoint_sensitivity_included_only_when_reportable": true,
+    "resampling_unit": [
+      "representation",
+      "target_band_code",
+      "batch_code"
+    ],
+    "draw_count_per_replicate": "number_of_unique_target_batch_codes_in_transfer_scope",
+    "sample_with_replacement": true,
+    "duplicate_batch_draws_count_with_multiplicity": true,
+    "class_macro_hierarchy_after_resampling": "row_accuracy_within_drawn_batch_class_then_equal_drawn_batches_within_class_then_equal_classes",
+    "seed_derivation": "uint32_from_first_8_hex_sha256_of_random_state_pipe_analysis_scope_pipe_transfer_id",
+    "required_interval_estimands": [
+      "target_batch_class_macro_accuracy_for_each_fixed_model",
+      "logistic_batch_balanced_minus_dummy_prior_paired_target_batch_class_macro_accuracy"
+    ],
+    "paired_comparison": "logistic_batch_balanced_minus_dummy_prior",
+    "paired_resamples_must_use_identical_target_batches": true,
+    "resample_complete_target_raw_batch_code_clusters": true,
+    "confidence_interval_conditioning": "conditional_on_each_fixed_source_fit",
+    "minimum_valid_replicates": 1900
+  },
+  "raw_batch_overlap_audit": {
+    "raw_batch_code_global_semantics_verified": false,
+    "primary_group_key_remains_band_qualified": true,
+    "expected_narrow_full_release_pairwise_overlap_counts": {
+      "S_X": 177,
+      "S_Ku": 32,
+      "X_Ku": 33
+    },
+    "expected_narrow_shared_model_analysis_pairwise_overlap_counts": {
+      "S_X": 176,
+      "S_Ku": 32,
+      "X_Ku": 33
+    },
+    "expected_hrrp_pairwise_overlap_counts": {
+      "X_Ku": 0
+    },
+    "filter_order": "apply_class_eligibility_and_model_filters_then_remove_from_source_codes_seen_in_the_unchanged_target",
+    "disjoint_filter_scope": "remove_from_source_all_rows_whose_raw_batch_code_occurs_in_the_unchanged_target",
+    "target_rows_removed_for_disjoint_sensitivity": false,
+    "disjoint_sensitivity_is_primary_evidence": false,
+    "not_identifiable_status_must_be_reported_without_metric_imputation": true
+  },
+  "acceptance_contract": {
+    "protocol_frozen_before_target_band_evaluation": true,
+    "target_band_performance_inspected_before_preregistration": false,
+    "formal_run_requires_clean_git_worktree": true,
+    "formal_run_records_current_pre_result_commit": true,
+    "pre_result_commit_must_contain_config_runner_tests_and_frozen_feature_implementation": true,
+    "formal_run_consumption_record": "results/final_evidence/lat_mricd_cross_band_transfer_v1.run_consumed.json",
+    "consumption_record_must_be_absent_before_formal_run": true,
+    "formal_output_overwrite_allowed": false,
+    "record_before_target_load": true,
+    "persist_on_failure": true,
+    "aggregate_file_count": 5,
+    "aggregate_files_only": true,
+    "detail_files_allowed": false,
+    "aggregate_and_detail_files_loaded_together_allowed": false,
+    "class_codes_must_equal": [1, 3],
+    "narrow_uav_model_codes_must_equal": [1, 2, 3],
+    "target_x_allowed": false,
+    "formal_target_bands": ["S", "Ku"],
+    "locked_primary_transfer_ids": [
+      "narrow_x_to_s_shared_binary",
+      "narrow_x_to_ku_shared_binary"
+    ],
+    "secondary_transfer_ids": [
+      "narrow_s_to_ku_shared_binary",
+      "narrow_ku_to_s_shared_binary",
+      "narrow_x_ku_to_s_shared_binary",
+      "narrow_x_s_to_ku_shared_binary"
+    ],
+    "exploratory_transfer_ids": [
+      "hrrp_x_to_ku_binary"
+    ],
+    "minimum_batch_count_per_source_band_and_class_for_reportable_disjoint_sensitivity": 3,
+    "feature_values_must_be_finite": true,
+    "physical_frequency_hz_reporting_allowed": false,
+    "same_event_cross_band_fusion_allowed": false,
+    "paired_cross_band_feature_comparison_allowed": false,
+    "unseen_model_generalization_claim_allowed": false,
+    "independent_session_or_external_generalization_claim_allowed": false
+  },
+  "output_contract": {
+    "file_count": 15,
+    "files": [
+      "transfer_coverage.csv",
+      "raw_batch_overlap_audit.csv",
+      "training_weight_audit.csv",
+      "aggregate_metrics.csv",
+      "target_batch_class_metrics.csv",
+      "bootstrap_intervals.csv",
+      "confusion_matrices.csv",
+      "feature_definitions.csv",
+      "feature_importance.csv",
+      "disjoint_sensitivity.csv",
+      "claim_boundaries.csv",
+      "model_fit_manifest.json",
+      "gate_decision.json",
+      "summary.json",
+      "REPORT.md"
+    ],
+    "sample_level_predictions_allowed": false,
+    "oof_predictions_allowed": false,
+    "raw_data_allowed": false,
+    "per_sample_weights_allowed": false,
+    "model_checkpoints_allowed": false,
+    "raw_or_absolute_paths_allowed": false
+  },
+  "stopping_rule": {
+    "applies_to_transfer_ids": [
+      "narrow_x_to_s_shared_binary",
+      "narrow_x_to_ku_shared_binary"
+    ],
+    "model_id": "logistic_batch_balanced",
+    "all_locked_primary_targets_must_pass": true,
+    "target_batch_class_macro_accuracy_strictly_greater_than": 0.6,
+    "each_target_class_batch_recall_strictly_greater_than": 0.5,
+    "paired_logistic_minus_dummy_ci_lower_strictly_greater_than": 0.0,
+    "uses_unrounded_values": true,
+    "on_failure": "FREEZE_NEGATIVE_RESULT_AND_STOP_DEEP_MODELS_AND_DOMAIN_ADAPTATION",
+    "on_pass": "ALLOW_ONLY_SEPARATELY_PREREGISTERED_METHOD_ENGINEERING_NOT_CONFIRMATORY_REUSE_OF_THE_SAME_TARGETS",
+    "target_bands_consumed_by_this_run": ["S", "Ku"],
+    "same_target_reuse_for_future_confirmatory_comparison_allowed": false,
+    "reserved_independent_holdout_exists": false,
+    "future_confirmatory_comparison_requires": "new_locked_data_or_an_independent_holdout_reserved_before_this_run",
+    "hrrp_exploratory_result_can_open_deep_model_gate": false
+  },
+  "claim_contract": {
+    "allowed_claim": "Within LAT-MRICD-1.0, fixed interpretable features trained on one or more released source bands were evaluated on a held-out released target band for the common UAV-versus-weather task.",
+    "forbidden_claims": [
+      "physical frequency invariance",
+      "physical micro-Doppler in Hz velocity or rotor rate",
+      "same-event paired cross-band fusion",
+      "independent-session cross-scene or external blind generalization",
+      "unseen-UAV-model generalization",
+      "H/V polarimetric performance",
+      "balloon payload or motion-state recognition",
+      "absolute distance or RCS interpretation",
+      "causal temporal deployment",
+      "Tian 2024 exact reproduction"
+    ]
+  }
+}

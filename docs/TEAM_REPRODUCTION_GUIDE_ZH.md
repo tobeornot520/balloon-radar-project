@@ -152,7 +152,7 @@ python scripts/build_final_roi_bc_dpg_joint_audit.py \
 ```bash
 python scripts/build_roi_bc_dpg_joint_paper_assets.py --overwrite
 python scripts/build_bc_dpg_localization_evidence.py --overwrite
-python scripts/build_project_share_package.py --overwrite
+python scripts/build_project_share_package.py
 ```
 
 这些命令的前提是内部证据目录、原始数据和 checkpoint 已按项目约定准备好。分享包本身

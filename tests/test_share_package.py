@@ -11,7 +11,11 @@ from scripts.build_project_share_package import (
     PACKAGE_FILES,
     audit_markdown_links,
     audit_package_directory,
+    cleanup_staging_directory,
+    ensure_output_available,
+    parse_args,
     sha256_file,
+    validate_output_paths,
     validate_source_map,
     write_deterministic_zip,
 )
@@ -110,6 +114,65 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert not any("oof_predictions.csv" in path for path in sources + destinations)
     assert not any(path.startswith("data/raw/") for path in sources)
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    (
+        ["--output-dir", "ignored"],
+        ["--zip-path", "ignored"],
+        ["--overwrite"],
+    ),
+)
+def test_share_builder_cli_rejects_path_and_overwrite_controls(
+    arguments: list[str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr("sys.argv", ["share-builder", *arguments])
+    with pytest.raises(SystemExit):
+        parse_args()
+
+
+def test_share_builder_rejects_existing_empty_destination_without_deleting_it(
+    tmp_path: Path,
+) -> None:
+    output_dir = tmp_path / "existing-package"
+    output_dir.mkdir()
+    zip_path = tmp_path / "package.zip"
+
+    with pytest.raises(FileExistsError, match="directory already exists"):
+        ensure_output_available(output_dir, zip_path)
+
+    assert output_dir.is_dir()
+    assert list(output_dir.iterdir()) == []
+
+
+def test_share_builder_rejects_nonfrozen_output_paths(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="frozen"):
+        validate_output_paths(tmp_path / "package", tmp_path / "package.zip")
+
+
+def test_share_builder_cleanup_is_limited_to_fixed_staging_root(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    staging_root = tmp_path / ".share-package-staging"
+    staging_root.mkdir()
+    monkeypatch.setattr(share_package, "STAGING_ROOT", staging_root)
+    valid_staging = staging_root / f".{share_package.PACKAGE_NAME}.build-current"
+    unrelated_staging = staging_root / "unrelated"
+    outside = tmp_path / f".{share_package.PACKAGE_NAME}.build-outside"
+    for directory in (valid_staging, unrelated_staging, outside):
+        directory.mkdir()
+        (directory / "marker.txt").write_text("preserve\n", encoding="utf-8")
+
+    cleanup_staging_directory(valid_staging)
+
+    assert not valid_staging.exists()
+    assert (unrelated_staging / "marker.txt").read_text(encoding="utf-8") == "preserve\n"
+    with pytest.raises(ValueError, match="outside the fixed staging root"):
+        cleanup_staging_directory(outside)
+    assert (outside / "marker.txt").read_text(encoding="utf-8") == "preserve\n"
 
 
 def test_share_lat_mricd_split_manifest_is_group_level() -> None:

@@ -21,6 +21,8 @@
 |---|---|
 | `results/data_audit/` | Manifests, alignment audits, and compact result tables |
 | `results/final_evidence/` | Frozen paper evidence and precomputed assets |
+| `data/metadata/` | Versioned manifests and external dataset/artifact provenance registries; no raw signals |
+| `data/raw/external/` | Local official downloads and per-file integrity manifests; ignored by Git and excluded from sharing |
 | `docs/` | Stable conclusions, preregistration, and operating instructions |
 
 Directory-level indexes are maintained in `scripts/README.md`, `configs/README.md`,

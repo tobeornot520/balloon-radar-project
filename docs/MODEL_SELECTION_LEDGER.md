@@ -1,6 +1,6 @@
 # 模型选择台账
 
-版本：2026-07-28
+版本：2026-08-04
 
 本台账记录当前主要模型、表征和规则的选择来源。它用于区分验证集选择、开发折反馈、测试后诊断和真正的锁定盲测。
 逐次运行的命令、代码状态、测试集访问和结果路径另见
@@ -30,6 +30,7 @@
 | Tian FCN 扩展 GT v1 | H-only 六折原方法迁移 | 当前 V4 六折 | 首轮正式执行后发现迁移失败及旧版论文指标定义错误 | 失败诊断；不得作为成功复现或有效论文指标引用 |
 | Tian FCN point-GT | Fold 1 H train/validation | 预登记单一救援诊断 | 只改变分类目标；未加载 test | joint Pd 0.4151、Pfa 0.0133；本地迁移消融，六折仍关闭 |
 | Zero-Doppler fixed residual V2 | 固定 soft notch 后的 1,137 参数非增残差 | 先预登记 Fold 1/4 门，过门后参数不变扩展六折 | 每折验证按 joint Pd、最差背景组 Pfa、pooled Pfa、AUC、loss 选 epoch，含 epoch 0 | 六折 CPU 开发比较 109 FA、290 joint hits；当前学习型开发参考，不是部署或盲测证据 |
+| LAT-MRICD D17-XBAND | dummy prior、batch-balanced logistic、固定 random forest 全部保留；LR 是预登记主模型，RF 仅作固定敏感性 | source band 拟合；S/Ku target 完全留出，不参与缩放、调参、选模或特征扩展 | 在查看 S/Ku 性能前冻结；无搜索、校准或 target 驱动选择 | `preregistered dataset-internal band-held-out transfer`；两个 locked target 均须通过 accuracy、两类 recall 和 LR-minus-dummy CI 门，否则冻结负结果并停止扩模 |
 
 ## 1. 必须使用的证据标签
 

@@ -1,6 +1,6 @@
 # 当前检测数据卡
 
-版本：2026-08-03
+版本：2026-08-04
 
 ## 1. 适用范围
 
@@ -89,3 +89,15 @@ H/V 数据的设备事实，或报告物理 Hz 微多普勒、极化和空飘球
 批次审计发现 batch 编号存在跨类别/型号碰撞，因此禁止随机拆行。第一轮算法必须按
 `(representation, band_code, batch_code)` 保守分组。完整来源、哈希、规模与使用边界见
 [外部公开数据核验](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)。
+
+D17-XBAND V1 已进一步预登记同一发布内的 band-held-out transfer。正式 locked target
+仅为 Narrow-S 与 Narrow-Ku 的共同 UAV/weather 二分类；bird 不进入该任务，HRRP 仅作
+探索性压力分析。S/Ku target 不参与缩放、拟合、选模、调参或特征扩展。截至预登记提交前，
+target 性能尚未运行或查看。该实验仍不提供 H/V、真实 PRF、同事件跨频配对、空飘球或
+Tian 复现证据。
+
+2026-08-04 新取得的 LSS-DAUR-1.0、LSS-FMCWR-2.0 与 LSS-HSR-L 期刊 bundle 目前只完成
+来源和下载完整性核验。HSR bundle 还未证明与大小不同的 ScienceDB V2 等价；三者均尚未
+通过本项目的 schema、标签、配对及分组审计，因此不进入本数据卡的已放行建模样本。
+来源、许可、状态和校验回执见 `data/metadata/external_public_datasets_v1.csv` 与
+`data/metadata/external_public_artifacts_v1.csv`。

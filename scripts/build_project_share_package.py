@@ -16,8 +16,10 @@ from typing import Iterable
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260803_v5"
-DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "dist" / PACKAGE_NAME
-DEFAULT_ZIP_PATH = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
+DIST_ROOT = PROJECT_ROOT / "dist"
+DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
+DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
+STAGING_ROOT = DIST_ROOT / ".share-package-staging"
 PACKAGE_DATE = "2026-08-03"
 ZIP_TIMESTAMP = (2026, 8, 3, 0, 0, 0)
 CURRENT_DATA_READINESS = (
@@ -695,21 +697,7 @@ def parse_args() -> argparse.Namespace:
             "checkpoints, predictions, logs, or development transcripts."
         )
     )
-    parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
-    parser.add_argument("--zip-path", type=Path, default=DEFAULT_ZIP_PATH)
-    parser.add_argument(
-        "--overwrite",
-        action="store_true",
-        help="Replace an existing package directory and ZIP after a successful build.",
-    )
     return parser.parse_args()
-
-
-def resolve_path(path: Path) -> Path:
-    path = path.expanduser()
-    if not path.is_absolute():
-        path = PROJECT_ROOT / path
-    return path.resolve()
 
 
 def sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -793,28 +781,52 @@ def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
         raise ValueError("Invalid share-package mapping: " + "; ".join(errors))
 
 
-def ensure_output_available(output_dir: Path, zip_path: Path, overwrite: bool) -> None:
-    if output_dir.exists() and not output_dir.is_dir():
-        raise FileExistsError(f"Package output is not a directory: {output_dir}")
-    if output_dir.is_dir() and any(output_dir.iterdir()) and not overwrite:
-        raise FileExistsError(
-            f"Package directory is nonempty: {output_dir}. Use --overwrite to replace it."
-        )
-    if zip_path.exists() and not overwrite:
-        raise FileExistsError(
-            f"Package ZIP already exists: {zip_path}. Use --overwrite to replace it."
-        )
+def ensure_output_available(output_dir: Path, zip_path: Path) -> None:
+    if output_dir.exists() or output_dir.is_symlink():
+        raise FileExistsError(f"Package directory already exists: {output_dir}")
+    if zip_path.exists() or zip_path.is_symlink():
+        raise FileExistsError(f"Package ZIP already exists: {zip_path}")
 
 
 def validate_output_paths(output_dir: Path, zip_path: Path) -> None:
-    output_dir = output_dir.resolve()
-    zip_path = zip_path.resolve()
-    if output_dir == PROJECT_ROOT or output_dir in PROJECT_ROOT.parents:
-        raise ValueError("Package output cannot be the repository or its parent")
-    if zip_path == PROJECT_ROOT or zip_path.is_dir():
-        raise ValueError("ZIP output must be a file path outside the package directory")
-    if zip_path == output_dir or output_dir in zip_path.parents:
-        raise ValueError("ZIP output must not be inside the package directory")
+    frozen_output_dir = PROJECT_ROOT / "dist" / PACKAGE_NAME
+    frozen_zip_path = PROJECT_ROOT / "dist" / f"{PACKAGE_NAME}.zip"
+    if output_dir != frozen_output_dir or zip_path != frozen_zip_path:
+        raise ValueError(
+            "Share-package outputs are frozen to the project dist directory"
+        )
+
+
+def prepare_staging_root() -> Path:
+    expected_dist_root = PROJECT_ROOT / "dist"
+    expected_staging_root = expected_dist_root / ".share-package-staging"
+    if DIST_ROOT != expected_dist_root or STAGING_ROOT != expected_staging_root:
+        raise ValueError("Share-package staging root is not the frozen project path")
+    if DIST_ROOT.is_symlink():
+        raise ValueError("Share-package dist root must not be a symlink")
+    DIST_ROOT.mkdir(parents=True, exist_ok=True)
+    if not DIST_ROOT.is_dir():
+        raise ValueError("Share-package dist root is not a directory")
+    if STAGING_ROOT.is_symlink():
+        raise ValueError("Share-package staging root must not be a symlink")
+    STAGING_ROOT.mkdir(exist_ok=True)
+    if not STAGING_ROOT.is_dir():
+        raise ValueError("Share-package staging root is not a directory")
+    if STAGING_ROOT.resolve().parent != DIST_ROOT.resolve():
+        raise ValueError("Share-package staging root escapes the project dist directory")
+    return STAGING_ROOT.resolve()
+
+
+def cleanup_staging_directory(staging_dir: Path) -> None:
+    staging_root = STAGING_ROOT.resolve()
+    if staging_dir.is_symlink():
+        raise ValueError("Refusing to clean a symlinked staging directory")
+    resolved = staging_dir.resolve()
+    expected_prefix = f".{PACKAGE_NAME}.build-"
+    if resolved.parent != staging_root or not resolved.name.startswith(expected_prefix):
+        raise ValueError("Refusing to clean outside the fixed staging root")
+    if resolved.exists():
+        shutil.rmtree(resolved)
 
 
 def copy_package_files(staging_dir: Path) -> list[dict[str, object]]:
@@ -1049,26 +1061,23 @@ def audit_zip(zip_path: Path, package_name: str) -> None:
             raise ValueError("ZIP contains an unsafe or unexpected archive path")
 
 
-def build_share_package(
-    output_dir: Path,
-    zip_path: Path,
-    overwrite: bool = False,
-) -> tuple[Path, Path, dict[str, object]]:
-    output_dir = resolve_path(output_dir)
-    zip_path = resolve_path(zip_path)
+def build_share_package() -> tuple[Path, Path, dict[str, object]]:
+    output_dir = DEFAULT_OUTPUT_DIR
+    zip_path = DEFAULT_ZIP_PATH
     validate_source_map()
     validate_output_paths(output_dir, zip_path)
-    ensure_output_available(output_dir, zip_path, overwrite)
+    ensure_output_available(output_dir, zip_path)
 
-    output_dir.parent.mkdir(parents=True, exist_ok=True)
-    zip_path.parent.mkdir(parents=True, exist_ok=True)
+    staging_root = prepare_staging_root()
     staging_parent = Path(
-        tempfile.mkdtemp(prefix=f".{output_dir.name}.build-", dir=output_dir.parent)
+        tempfile.mkdtemp(prefix=f".{PACKAGE_NAME}.build-", dir=staging_root)
     )
+    if staging_parent.resolve().parent != staging_root:
+        raise ValueError("Created staging directory is outside the fixed staging root")
     staging_dir = staging_parent / output_dir.name
     staging_zip = staging_parent / zip_path.name
-    staging_dir.mkdir()
     try:
+        staging_dir.mkdir()
         records = copy_package_files(staging_dir)
         write_manifest(staging_dir, records)
         write_checksums(staging_dir)
@@ -1076,25 +1085,18 @@ def build_share_package(
         write_deterministic_zip(staging_dir, staging_zip)
         audit_zip(staging_zip, staging_dir.name)
 
-        if output_dir.exists():
-            shutil.rmtree(output_dir)
-        if zip_path.exists():
-            zip_path.unlink()
-        staging_dir.replace(output_dir)
-        staging_zip.replace(zip_path)
-    except Exception:
-        shutil.rmtree(staging_parent, ignore_errors=True)
-        raise
-    shutil.rmtree(staging_parent, ignore_errors=True)
+        ensure_output_available(output_dir, zip_path)
+        staging_dir.rename(output_dir)
+        staging_zip.rename(zip_path)
+    finally:
+        cleanup_staging_directory(staging_parent)
     return output_dir, zip_path, audit
 
 
 def main() -> int:
-    args = parse_args()
+    parse_args()
     try:
-        output_dir, zip_path, audit = build_share_package(
-            args.output_dir, args.zip_path, args.overwrite
-        )
+        output_dir, zip_path, audit = build_share_package()
     except (FileNotFoundError, FileExistsError, ValueError, OSError) as exc:
         print(f"[ERROR] {exc}")
         return 1

@@ -79,7 +79,7 @@ python scripts/build_final_roi_bc_dpg_joint_audit.py \
 ```bash
 python scripts/build_roi_bc_dpg_joint_paper_assets.py --overwrite
 python scripts/build_bc_dpg_localization_evidence.py --overwrite
-python scripts/build_project_share_package.py --overwrite
+python scripts/build_project_share_package.py
 ```
 
 冻结 BC-DPG 上下文敏感性审计：

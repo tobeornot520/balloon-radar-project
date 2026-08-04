@@ -107,6 +107,41 @@ completion does not change the main UAV direction gate, which remains 4/6
 `BLOCKED_EXTERNAL`. See
 [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md).
 
+## Preregistered LAT-MRICD cross-band transfer
+
+D17-XBAND is preregistered but has not been run. The frozen V1 protocol uses
+Narrow X as the source and S/Ku as separate locked targets for the common
+UAV/weather task. Target rows cannot affect scaling, fitting, model selection,
+feature design or thresholds. Dummy prior, batch-balanced logistic regression
+and a fixed random forest are all retained; logistic regression is the primary
+gate model and random forest is a fixed sensitivity model.
+
+At the preregistration checkpoint, no S/Ku target performance has been viewed,
+and the formal result directory, external consumption record and final evidence
+directory do not exist. After a clean pre-result commit, the runner may execute
+exactly once. Any failed or interrupted run consumes the targets. Both locked
+targets must pass the preregistered accuracy, per-class recall and paired
+LR-minus-dummy interval gates; otherwise the negative result is frozen and
+CNN/domain-adaptation development on these consumed targets stops. See
+[LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md](LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md).
+
+## Newly acquired public inputs
+
+LSS-DAUR-1.0 V3 and LSS-FMCWR-2.0 V4 were downloaded from their official
+ScienceDB file trees on 2026-08-04. DAUR matches the release count and size at
+314 files and 148,763,512 bytes. FMCWR-2.0 matches at eight files and
+1,013,535,036 bytes; all six RAR archives match the official MD5 values. These
+are local research inputs only and have not entered a model result.
+
+DAUR is pending a full MAT/pairing/group audit. FMCWR-2.0 is pending RAR
+extraction and schema/group audit. The simulated-bird archive must not be cited
+as natural-bird evidence. A 209,569,478-byte LSS-HSR-L journal bundle also
+passed ZIP integrity checks, but it has not been proven equivalent to the
+237,020,946-byte ScienceDB V2 archive and is pending a read-only loader and
+group audit. Dataset decisions and download receipts are tracked in
+`data/metadata/external_public_datasets_v1.csv` and
+`data/metadata/external_public_artifacts_v1.csv`.
+
 ## Zero-Doppler development gate
 
 The six-fold frozen fixed-notch diagnostic improves the current false-alarm
@@ -159,6 +194,9 @@ mechanism. See
 - External public-data audit: [EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md](EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md)
 - LAT-MRICD grouped-baseline protocol: [LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md](LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md)
 - Frozen LAT-MRICD grouped-baseline evidence: `results/final_evidence/lat_mricd_grouped_baselines_v1/`
+- Preregistered LAT-MRICD cross-band protocol: [LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md](LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md)
+- External public dataset registry: `data/metadata/external_public_datasets_v1.csv`
+- External public artifact registry: `data/metadata/external_public_artifacts_v1.csv`
 
 The deterministic joint evidence build contains the formal report, pooled and fold-level tables, fold-distribution summaries, Wilson and scan-group bootstrap intervals, paired McNemar diagnostics, PNG/PDF figures, and a SHA256 manifest. Build it with:
 
