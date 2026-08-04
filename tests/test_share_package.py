@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260804_v7"
+        == "balloon_radar_results_and_team_onboarding_20260804_v8"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -182,6 +182,34 @@ def test_share_source_map_is_complete_and_unique() -> None:
         ) as handle:
             fieldnames = set(csv.DictReader(handle).fieldnames or ())
         assert fieldnames.isdisjoint(forbidden_daur_columns)
+    hsr_sources = {
+        "results/data_audit/lss_hsr_l_v2/REPORT.md",
+        "results/data_audit/lss_hsr_l_v2/summary.json",
+        "results/data_audit/lss_hsr_l_v2/split_summary.csv",
+        "results/data_audit/lss_hsr_l_v2/split_class_summary.csv",
+        "results/data_audit/lss_hsr_l_v2/feature_summary.csv",
+    }
+    hsr_destinations = {
+        "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md",
+        "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.json",
+        "assets/tables/lss_hsr_l_v2_split_summary.csv",
+        "assets/tables/lss_hsr_l_v2_split_class_summary.csv",
+        "assets/tables/lss_hsr_l_v2_feature_summary.csv",
+    }
+    assert {
+        item.source
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_hsr_l_v2/")
+    } == hsr_sources
+    assert {
+        item.destination
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_hsr_l_v2/")
+    } == hsr_destinations
+    assert not any(
+        Path(path).name in {"route_audit.csv", "mat_audit.csv"}
+        for path in sources + destinations
+    )
     assert "assets/registries/external_public_datasets_v1.csv" in destinations
     assert "assets/registries/external_public_artifacts_v1.csv" in destinations
     assert not any("oof_predictions.csv" in path for path in sources + destinations)
@@ -568,6 +596,149 @@ def test_share_lss_daur_audit_is_sanitized_blocked_and_not_doubled() -> None:
         assert len(rows) == expected_count
 
 
+def test_share_lss_hsr_l_v2_audit_is_aggregate_blocked_and_sanitized() -> None:
+    summary = share_package.load_lss_hsr_audit()
+    assert summary["status"] == (
+        "PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS"
+    )
+    assert summary["gates"] == {
+        "release_identity": "PASS",
+        "zip_safety_and_integrity": "PASS",
+        "mat_schema_and_finite": "PASS",
+        "route_mapping": "PASS",
+        "published_train_validation_route_isolation": "PASS",
+        "overflow_role": "BLOCKED_UNDOCUMENTED",
+        "acquisition_session_identity": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_time_axis": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_doppler_axis": "BLOCKED_NOT_AVAILABLE",
+        "model_training": "BLOCKED",
+    }
+    assert summary["mat_file_count"] == 1530
+    assert summary["total_frame_count"] == 63148
+    assert summary["route_count"] == 865
+    assert summary["published_window_count"] == 55231
+    assert summary["split_mat_counts"] == {
+        "overflow": 11,
+        "train": 1269,
+        "validation": 250,
+    }
+    assert summary["split_route_counts"] == {
+        "overflow": 11,
+        "train": 723,
+        "validation": 131,
+    }
+    assert summary["split_frame_counts"] == {
+        "overflow": 704,
+        "train": 51789,
+        "validation": 10655,
+    }
+    assert summary["split_published_window_counts"] == {
+        "overflow": 529,
+        "train": 45366,
+        "validation": 9336,
+    }
+    assert summary["published_train_validation_route_disjoint"] is True
+    assert summary["published_train_validation_route_overlap_count"] == 0
+    assert summary["acquisition_session_key_available"] is False
+    assert summary["published_train_validation_session_disjoint_verified"] is False
+    assert summary["route_id_sufficient_for_independent_evaluation"] is False
+    assert summary["overflow_isolated"] is True
+    assert summary["overflow_merge_allowed"] is False
+    assert summary["random_mat_split_allowed"] is False
+    assert summary["random_frame_or_window_split_allowed"] is False
+    assert summary["dpl_amplitude_unit_verified"] is False
+    assert summary["dpl_physical_time_axis_available"] is False
+    assert summary["dpl_physical_doppler_hz_axis_available"] is False
+    assert summary["dpl_physical_velocity_axis_available"] is False
+    assert summary["track_physical_units_verified"] is True
+    assert summary["physical_micro_doppler_hz_allowed"] is False
+    assert summary["model_training_allowed"] is False
+    assert summary["model_training_performed"] is False
+    assert summary["journal_bundle_mixing_allowed"] is False
+
+    expected_tables = {
+        "assets/tables/lss_hsr_l_v2_split_summary.csv": (
+            {
+                "split",
+                "mat_file_count",
+                "route_count",
+                "frame_count",
+                "published_window_count",
+                "class_count",
+                "role",
+            },
+            3,
+        ),
+        "assets/tables/lss_hsr_l_v2_split_class_summary.csv": (
+            {
+                "split",
+                "category",
+                "mat_file_count",
+                "route_count",
+                "frame_count",
+                "published_window_count",
+            },
+            22,
+        ),
+        "assets/tables/lss_hsr_l_v2_feature_summary.csv": (
+            {
+                "representation",
+                "feature_index",
+                "feature_name",
+                "width",
+                "unit",
+                "unit_source",
+                "physical_axis_available",
+            },
+            6,
+        ),
+    }
+    forbidden_detail_columns = {
+        "route_id",
+        "route_number",
+        "track_path",
+        "mat_path",
+        "relative_path",
+        "zip_member",
+        "raw_mat_sha256",
+        "numeric_payload_sha256",
+        "raw_sha256",
+        "payload_sha256",
+        "dpl_sha256",
+        "track_sha256",
+    }
+    for destination, (expected_columns, expected_row_count) in expected_tables.items():
+        source = next(
+            item.source for item in PACKAGE_FILES if item.destination == destination
+        )
+        with (share_package.PROJECT_ROOT / source).open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            reader = csv.DictReader(handle)
+            rows = list(reader)
+            columns = set(reader.fieldnames or ())
+        assert columns == expected_columns
+        assert columns.isdisjoint(forbidden_detail_columns)
+        assert len(rows) == expected_row_count
+
+
+def test_lss_hsr_audit_loader_rejects_training_gate_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload = json.loads(
+        share_package.LSS_HSR_AUDIT_SUMMARY.read_text(encoding="utf-8")
+    )
+    payload["model_training_allowed"] = True
+    changed_summary = tmp_path / "changed_hsr_summary.json"
+    changed_summary.write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+    monkeypatch.setattr(share_package, "LSS_HSR_AUDIT_SUMMARY", changed_summary)
+    with pytest.raises(ValueError, match="model_training_allowed"):
+        share_package.load_lss_hsr_audit()
+
+
 def test_current_data_readiness_sources_are_fresh() -> None:
     readiness = share_package.load_current_data_readiness()
     assert readiness["status"] == "FAIL"
@@ -692,6 +863,93 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lss_daur_model_training_allowed"] is False
     assert rules["lss_daur_raw_data_included"] is False
     assert rules["lss_daur_sample_level_outputs_included"] is False
+    assert rules["lss_hsr_l_v2_read_only_audit_included"] is True
+    assert rules["lss_hsr_l_v2_audit_status"] == (
+        "PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS"
+    )
+    assert rules["lss_hsr_l_v2_release_version"] == "V2"
+    assert rules["lss_hsr_l_v2_release_identity_verified"] is True
+    assert rules["lss_hsr_l_v2_data_doi"] == "10.57760/sciencedb.radars.00063"
+    assert rules["lss_hsr_l_v2_archive_size_bytes"] == 237020946
+    assert rules["lss_hsr_l_v2_archive_sha256"] == (
+        "fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540"
+    )
+    assert rules["lss_hsr_l_v2_mat_file_count"] == 1530
+    assert rules["lss_hsr_l_v2_total_frame_count"] == 63148
+    assert rules["lss_hsr_l_v2_route_count"] == 865
+    assert rules["lss_hsr_l_v2_published_window_count"] == 55231
+    assert rules["lss_hsr_l_v2_split_mat_counts"] == {
+        "overflow": 11,
+        "train": 1269,
+        "validation": 250,
+    }
+    assert rules["lss_hsr_l_v2_split_route_counts"] == {
+        "overflow": 11,
+        "train": 723,
+        "validation": 131,
+    }
+    assert rules["lss_hsr_l_v2_split_frame_counts"] == {
+        "overflow": 704,
+        "train": 51789,
+        "validation": 10655,
+    }
+    assert rules["lss_hsr_l_v2_split_published_window_counts"] == {
+        "overflow": 529,
+        "train": 45366,
+        "validation": 9336,
+    }
+    assert rules["lss_hsr_l_v2_gates"] == {
+        "release_identity": "PASS",
+        "zip_safety_and_integrity": "PASS",
+        "mat_schema_and_finite": "PASS",
+        "route_mapping": "PASS",
+        "published_train_validation_route_isolation": "PASS",
+        "overflow_role": "BLOCKED_UNDOCUMENTED",
+        "acquisition_session_identity": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_time_axis": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_doppler_axis": "BLOCKED_NOT_AVAILABLE",
+        "model_training": "BLOCKED",
+    }
+    assert rules["lss_hsr_l_v2_authoritative_route_id_available"] is True
+    assert rules["lss_hsr_l_v2_every_mat_assigned_to_exactly_one_route"] is True
+    assert rules["lss_hsr_l_v2_published_train_validation_route_disjoint"] is True
+    assert (
+        rules["lss_hsr_l_v2_published_train_validation_route_overlap_count"] == 0
+    )
+    assert rules["lss_hsr_l_v2_lowest_available_grouping_key"] == "route_id"
+    assert rules["lss_hsr_l_v2_minimum_split_unit"] == (
+        "UNRESOLVED_SOURCE_SESSION_IDENTITY_UNAVAILABLE"
+    )
+    assert rules["lss_hsr_l_v2_acquisition_session_key_available"] is False
+    assert rules["lss_hsr_l_v2_published_session_disjoint_verified"] is False
+    assert (
+        rules["lss_hsr_l_v2_route_id_sufficient_for_independent_evaluation"]
+        is False
+    )
+    assert rules["lss_hsr_l_v2_published_split_preservation_required"] is True
+    assert rules["lss_hsr_l_v2_overflow_isolated"] is True
+    assert rules["lss_hsr_l_v2_overflow_merge_allowed"] is False
+    assert rules["lss_hsr_l_v2_overflow_role_documented"] is False
+    assert rules["lss_hsr_l_v2_random_mat_split_allowed"] is False
+    assert rules["lss_hsr_l_v2_random_frame_window_split_allowed"] is False
+    assert rules["lss_hsr_l_v2_dpl_amplitude_unit_verified"] is False
+    assert rules["lss_hsr_l_v2_dpl_physical_time_axis_available"] is False
+    assert (
+        rules["lss_hsr_l_v2_dpl_physical_doppler_hz_axis_available"] is False
+    )
+    assert rules["lss_hsr_l_v2_dpl_physical_velocity_axis_available"] is False
+    assert rules["lss_hsr_l_v2_track_physical_units_verified"] is True
+    assert rules["lss_hsr_l_v2_physical_micro_doppler_hz_allowed"] is False
+    assert rules["lss_hsr_l_v2_raw_adc_or_iq_available"] is False
+    assert rules["lss_hsr_l_v2_h_v_polarimetry_available"] is False
+    assert rules["lss_hsr_l_v2_model_training_allowed"] is False
+    assert rules["lss_hsr_l_v2_model_training_performed"] is False
+    assert rules["lss_hsr_l_v2_source_archive_extracted"] is False
+    assert rules["lss_hsr_l_v2_source_archive_modified"] is False
+    assert rules["lss_hsr_l_v2_journal_bundle_mixing_allowed"] is False
+    assert rules["lss_hsr_l_v2_raw_data_included"] is False
+    assert rules["lss_hsr_l_v2_route_mat_detail_tables_included"] is False
+    assert rules["lss_hsr_l_v2_sample_level_outputs_included"] is False
     assert rules["external_public_data_registries_included"] is True
     assert rules["team_onboarding_manual_included"] is True
     assert rules["team_qualification_policy_included"] is True

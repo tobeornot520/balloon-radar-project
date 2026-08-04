@@ -108,8 +108,29 @@ D17-XBAND V1 已完成同一发布内、预登记的 band-held-out transfer，�
 2026-08-04 新取得的 LSS-DAUR-1.0、LSS-FMCWR-2.0、LSS-HSR-L V2、DroneRFc-MM
 选择性雷达子集、Ku 波段 UAV 群目标小包和单个 NEXRAD Level II 体扫，均不自动进入已放行
 建模数据。HSR-L 的 237,020,946-byte ScienceDB V2
-与 209,569,478-byte 期刊历史包已确认不等价，后者不得与 V2 混合。DroneRFc-MM 子集包含
-9 个同日 recording 的毫米波 PCD 点云、同步飞行真值和派生标签；它不是 ADC/IQ，也没有
+与 209,569,478-byte 期刊历史包已确认不等价，后者不得与 V2 混合。V2 的
+`CC-BY-NC-4.0` 来自 2026-08-04 ScienceDB 页面访问记录，不是 ZIP 内嵌许可文本。V2
+全量只读审计冻结
+`1530` 个 MAT、`63148` 个真实帧和 `865` 条 `air_route_x`：train 为
+`1269 MAT / 51789 帧 / 723 routes / 45366` 个官方默认窗口，validation 为
+`250 / 10655 / 131 / 9336`；另有 `11 / 704 / 11 / 529` 的 overflow，因发布用途未说明而
+隔离，不当作 train、validation 或 test。全部 MAT 均为唯一变量 `Trace_DPL_Data` 的 1×2
+cell，包含有限 `float64` 的 `T×512` DPL 和时间对齐的 `T×5` 轨迹，且 T 与文件名后缀一致。
+轨迹五列由官方说明明确为径向速度（m/s，正值远离）、距离（km）、方位角（°）、高度（m）
+和距离归一化 SNR（dB）。
+
+V2 的每个 MAT 恰被一个 route 引用，route 不跨 published split 或类别，也未发现原始字节或
+解码内容重复；但 `route_id` 只是当前最低可用分组，发布中没有场地、日期、天气、雷达运行、
+物理目标或 source-session 键，不能证明 train/validation 在这些来源层面独立。512 列 DPL
+也没有可核验的 bin 顺序、零频位置及到 Hz/速度的映射。因此状态为
+`PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`；
+只放行只读 schema/route 审计、归一化 bin 和轨迹方法设计，不放行模型训练、随机
+track/frame/window split 或物理微多普勒
+结论。V2 自带 `Dataset.py` 是只读懒加载器，首帧填充只在内存构窗；“会移动原件”的警告
+只适用于不等价的期刊历史包旧脚本。
+
+DroneRFc-MM 子集包含 9 个同日 recording 的毫米波 PCD 点云、同步飞行真值和派生标签；
+它不是 ADC/IQ，也没有
 鸟、天气、背景、H/V 或空飘球标签。其 30,717 帧/639,527 点的 schema、有限值和时间戳已
 通过只读审计，但 B1 radar 与同名 GT 时间范围零重叠，因此同步总门阻塞，B1 不得进入监督
 对齐。UAV 群小包的 5 个 MAT 仅来自 3 个物理实验，只用于

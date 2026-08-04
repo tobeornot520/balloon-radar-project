@@ -192,9 +192,15 @@ D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7
    TD/TR 内容对；39 个保守候选 source-session 组未经作者确认，严格时间、日期和 1024-bin
    轴仍阻塞。canonical/backup 与 TD/TR 必须始终同组，禁止随机 MAT/frame/window split，
    禁止静默修日期、物理 Hz 声明和模型训练；
-2. LSS-HSR-L：当前执行项。以已下载且 ZIP 完整的 ScienceDB V2 正式包为 canonical candidate，
-   实现只读 loader 并核对 schema、scene/track 分组；V2 的 1,561 个 entries 与期刊包的
-   1,478 个不等价，V2 额外含 `overflow/air_routes`，同名样本长度也不同，两包禁止混合；
+2. LSS-HSR-L：V2 全量只读审计已完成并冻结为
+   `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
+   1,530 MAT/63,148 真实帧/
+   865 routes 与官方 45,366/9,336 个 train/validation 默认窗口均已核对；11 MAT/704 帧/
+   529 窗口的 overflow 因用途未说明而隔离。route 是最低 published group，不能称
+   session-disjoint；轨迹五列单位已验证，但 512-bin DPL 到 Hz/速度的物理轴未知，禁止训练。
+   V2 与 1,478-entry 期刊历史包不等价、禁止混合；V2 `Dataset.py` 只读，移动原件警告只属
+   历史包旧脚本。`CC-BY-NC-4.0` 来自 2026-08-04 ScienceDB 页面访问记录，不是 ZIP 内嵌
+   许可文本；
 3. LSS-FMCWR-2.0：以可审计方式解包 RAR，建立 MAT schema、目标/频段/角度/记录分组和
    潜在重复审计；仿真飞鸟不得写成真实自然鸟；
 4. DroneRFc-MM V1：选择性 radar subset 的全量 PCD schema/时间覆盖审计已完成。完整发布为
@@ -202,8 +208,10 @@ D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7
    639,527 points 均通过 schema/finite/POINTS/时间戳检查；8 条 recording 与 GT 时间范围重叠，
    B1 零重叠，故整体同步门阻塞。717 个派生 5 秒 windows 禁止随机拆分。
 
-DAUR 虽已通过 schema 与配对门，但 grouping/physical-axis 总门仍关闭；其余三项也只在各自
-schema、配对和 group 门通过后再预登记算法，不以“已经下载”代替数据可用。
+DAUR 虽已通过 schema 与配对门，但 grouping/physical-axis 总门仍关闭；HSR 虽已通过
+schema/route 门，但 source-provenance/physical-axis 总门仍关闭。FMCWR-2.0 和 DroneRFc-MM
+也只在各自 archive/schema/group 或同步门通过后再预登记算法，不以“已经下载”或“route
+不跨 published split”代替数据可用。
 DroneRFc-MM 数据 DOI 为 `10.57760/sciencedb.j00173.00094`、许可为 `CC-BY-SA-4.0`；它不是
 ADC/IQ 或 H/V，没有鸟、天气、空飘球对照，只能用于点云/轨迹接口和时序算法审计；B1
 只有取得更正 GT 或可归因时间偏移后才可重开监督对齐。
@@ -223,7 +231,8 @@ LAT-MRICD 只构成同一公开发布内、已见子型号的 batch-code-held-ou
 - 不依据外层测试结果重新选择阈值、容差、模型或组合逻辑；
 - 不覆盖冻结 checkpoint 和正式证据目录；
 - 不重跑已消费的 D17-XBAND S/Ku target，不以新实验 ID、CNN 或域适配规避 `FAIL_STOP`；
-- 不混合 HSR ScienceDB V2 与期刊包；只读 loader 以 V2 为 canonical candidate；
+- 不混合 HSR ScienceDB V2 与期刊包；不把 route 写成 session，不随机拆 MAT/frame/window，
+  不使用 overflow 训练/测试，不把 512 bins 换算成未经说明的 Hz/速度；
 - 不随机拆分 DroneRFc-MM 的 PCD frame 或派生 5 秒 window，最低按原始 recording 分组；
 - 不把 DroneRFc-MM B1 与当前同名 GT 强行平移对齐；更正材料到位前保持 blocked；
 - 不随机拆分 Ku 群目标列/点或 NEXRAD gate/ray/patch；两个小样本保持 smoke-only；

@@ -1,6 +1,6 @@
 # 一页式成果摘要与请教说明
 
-版本：2026-08-04 V7
+版本：2026-08-04 V8
 
 ## 项目在做什么
 
@@ -26,6 +26,7 @@
 | 公开多频段分组基线 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
 | D17-XBAND 密封迁移 | X->S LR batch-class macro 0.6517，但 UAV recall 0.4433 未过门；X->Ku batch-class macro 0.8400 且该 target 过门；整体 `FAIL_STOP` | 两个 locked target 未同时通过，冻结为负结果；S/Ku 已消费，不得在同 target 上重跑、调 CNN、做域适配或结果驱动改模 |
 | DAUR V3 只读审计 | 77 个逻辑 TD/TR 观测、76 个唯一内容对、39 个保守候选 source-session 组；schema/配对通过 | 分组、严格时间、日期和 1024-bin 物理轴仍阻塞，`model_training_allowed=false` |
+| HSR V2 只读审计 | 1,530 MAT、63,148 真实帧、865 routes；官方 train/validation 窗口 45,366/9,336 | route 以上来源和 512-bin DPL 物理轴阻塞；529 个 overflow 窗口隔离，`model_training_allowed=false` |
 
 ## 当前最关键的发现
 
@@ -44,9 +45,14 @@
    在 X->Ku 上通过，但 X->S 的 UAV batch recall 只有 0.4433，低于预登记的严格 `>0.50`
    门，因此整体为 `FAIL_STOP`，不能用 Ku 的正结果掩盖 S 的失败。该结果只支持同一公开
    发布内的 band-held-out UAV/weather 评价，不证明物理频率不变性或外部泛化。
-6. HSR 的 ScienceDB V2 正式包已经完整下载。V2 为 237,020,946 bytes、1,561 个 entries，
-   期刊包为 1,478 个 entries；V2 额外含 `overflow/air_routes`，同名样本长度也有差异。
-   两包已确认不等价、不可混合，后续以 ScienceDB V2 作为 canonical audit candidate。
+6. HSR ScienceDB V2 已完成全量只读审计：1,530 MAT、63,148 个真实帧和 865 routes 的
+   schema/索引均通过，官方 train/validation 默认窗口精确复现为 45,366/9,336。另有 11 MAT、
+   704 帧、529 窗口的 overflow，因用途未说明而隔离。route 只是最低 published group，
+   source-session/场景来源与 512-bin DPL 物理轴未知，状态为
+   `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
+   V2 与 1,478-entry 期刊历史包不等价、不可混合；V2 自带 `Dataset.py` 是只读懒加载器，
+   移动原件警告只针对历史包旧脚本。`CC-BY-NC-4.0` 来自 2026-08-04 ScienceDB 页面访问
+   记录，不是 ZIP 内嵌许可文本。
 7. DroneRFc-MM V1 完整发布有 113 files、75,612,067,287 bytes；本地只取得 28 个雷达相关
    文件，共 47,366,902 bytes。全量只读审计通过 30,717 frames/639,527 points 的 schema、
    finite/POINTS/时间戳检查；8 条 radar/GT 时间范围重叠，B1 零重叠，整体同步门阻塞。
@@ -55,9 +61,9 @@
    唯一内容对。全部轨迹有重复时间，6 个日期冲突，58/19 条分别为 512/1024 bins；11 对
    recording 共享内部帧，连通后为 39 个候选组。候选组仍不是作者确认的 session，Bird/UAV
    候选 session 零重叠，训练和物理 Hz 微多普勒结论均未放行。
-9. 下一公开数据工作不再重跑 LAT-MRICD 或重复 DAUR 审计，而是 HSR V2 只读 loader、
-   schema/route/source-session 审计，再做 FMCWR-2.0 解包/schema。DroneRFc-MM B1 等待更正
-   GT/可归因偏移；各自门禁通过前禁止训练。
+9. 下一公开数据工作不再重跑 LAT-MRICD、DAUR 或 HSR 审计，而是转做 FMCWR-2.0 解包/schema，
+   同时维护 HSR source provenance/物理轴、DAUR grouping/物理轴和 DroneRFc-MM B1 同步阻塞；
+   各自门禁通过前禁止训练。
 10. 公开检索只额外落地两个小型接口样本：Ku UAV 群包约 4 MB、仅 3 个物理实验；NEXRAD
    单体扫约 0.4 MB，含 ZDR/PhiDP/RhoHV 等矩但没有目标标签。它们分别验证航迹和双极化
    读取接口，不扩大训练集。42.4 GB 气球、23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟
@@ -84,7 +90,8 @@
 - LAT-MRICD 结果不支持 unseen-model、独立外部、极化、空飘球或 Tian 复现结论；
 - D17-XBAND 的 S/Ku locked target 已消费；队员只能复核冻结证据或运行不接触真实 target
   的合成合同测试，不能重跑密封 target，也不能据此调 CNN、域适配、阈值或特征；
-- HSR V2 与期刊包不得混合；DroneRFc-MM 不是 ADC/IQ、H/V 或鸟/天气/空飘球数据，不能
+- HSR V2 与期刊包不得混合；HSR 不得随机拆 MAT/frame/window、使用 overflow 训练/测试、
+  把 route 写成 session-disjoint，或把 512 bins 写成 Hz/速度微多普勒；DroneRFc-MM 不是 ADC/IQ、H/V 或鸟/天气/空飘球数据，不能
   替代主数据，也不能把接口审计写成模型性能；B1 不得监督对齐；
 - Ku UAV 群的帧/拆分 MAT、NEXRAD 的 gate/ray/patch 都不是独立样本；两个小包只作接口
   smoke，不作识别指标，也不把 NEXRAD 双极化矩冒充本项目已标定 H/V；

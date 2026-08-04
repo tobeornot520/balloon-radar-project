@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v7"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v8"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -40,6 +40,9 @@ DATA_CONTRACT = PROJECT_ROOT / "configs" / "data_collection_contract_v1.json"
 DATA_CONTRACT_VALIDATOR = PROJECT_ROOT / "scripts" / "validate_data_collection_manifest.py"
 LSS_DAUR_AUDIT_SUMMARY = (
     PROJECT_ROOT / "results" / "data_audit" / "lss_daur_v1" / "summary.json"
+)
+LSS_HSR_AUDIT_SUMMARY = (
+    PROJECT_ROOT / "results" / "data_audit" / "lss_hsr_l_v2" / "summary.json"
 )
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt"}
@@ -413,6 +416,31 @@ PACKAGE_FILES = (
         "results/data_audit/lss_daur_v1/doppler_config_audit.csv",
         "assets/tables/lss_daur_doppler_config_audit.csv",
         "lss_daur_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_hsr_l_v2/REPORT.md",
+        "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md",
+        "lss_hsr_l_v2_read_only_audit_report",
+    ),
+    PackageFile(
+        "results/data_audit/lss_hsr_l_v2/summary.json",
+        "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.json",
+        "lss_hsr_l_v2_read_only_audit_summary",
+    ),
+    PackageFile(
+        "results/data_audit/lss_hsr_l_v2/split_summary.csv",
+        "assets/tables/lss_hsr_l_v2_split_summary.csv",
+        "lss_hsr_l_v2_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_hsr_l_v2/split_class_summary.csv",
+        "assets/tables/lss_hsr_l_v2_split_class_summary.csv",
+        "lss_hsr_l_v2_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_hsr_l_v2/feature_summary.csv",
+        "assets/tables/lss_hsr_l_v2_feature_summary.csv",
+        "lss_hsr_l_v2_aggregate_audit_table",
     ),
     PackageFile(
         "data/metadata/external_public_datasets_v1.csv",
@@ -975,11 +1003,189 @@ def load_lss_daur_audit() -> dict[str, object]:
     return payload
 
 
+def load_lss_hsr_audit() -> dict[str, object]:
+    payload = json.loads(LSS_HSR_AUDIT_SUMMARY.read_text(encoding="utf-8"))
+    expected = {
+        "schema_version": 1,
+        "dataset_id": "lss_hsr_l",
+        "release_version": "V2",
+        "audit_mode": "strict_release",
+        "release_identity_verified": True,
+        "data_doi": "10.57760/sciencedb.radars.00063",
+        "status": "PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS",
+        "archive_size_bytes": 237020946,
+        "archive_sha256": (
+            "fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540"
+        ),
+        "zip_entry_count": 1561,
+        "zip_file_count": 1534,
+        "zip_directory_count": 27,
+        "zip_integrity_passed": True,
+        "zip_paths_safe": True,
+        "mat_file_count": 1530,
+        "route_count": 865,
+        "route_track_reference_count": 1530,
+        "unique_raw_mat_count": 1530,
+        "unique_numeric_payload_count": 1530,
+        "exact_raw_mat_duplicate_group_count": 0,
+        "exact_numeric_payload_duplicate_group_count": 0,
+        "total_frame_count": 63148,
+        "doppler_value_count": 32331776,
+        "track_value_count": 315740,
+        "published_window_count": 55231,
+        "window_size": 10,
+        "first_frame_repeat": 4,
+        "authoritative_route_id_available": True,
+        "every_mat_assigned_to_exactly_one_route": True,
+        "published_train_validation_route_disjoint": True,
+        "published_train_validation_route_overlap_count": 0,
+        "published_train_validation_session_disjoint_verified": False,
+        "published_split_preservation_required": True,
+        "overflow_merge_allowed": False,
+        "overflow_isolated": True,
+        "overflow_role_documented_in_published_statistics": False,
+        "acquisition_session_key_available": False,
+        "random_mat_split_allowed": False,
+        "random_frame_or_window_split_allowed": False,
+        "lowest_available_grouping_key": "route_id",
+        "minimum_split_unit": "UNRESOLVED_SOURCE_SESSION_IDENTITY_UNAVAILABLE",
+        "route_id_sufficient_for_independent_evaluation": False,
+        "dpl_representation": "processed real 512-bin Doppler waterfall",
+        "dpl_amplitude_unit_verified": False,
+        "dpl_physical_time_axis_available": False,
+        "dpl_physical_doppler_hz_axis_available": False,
+        "dpl_physical_velocity_axis_available": False,
+        "track_physical_units_available": True,
+        "track_physical_units_verified": True,
+        "raw_adc_or_iq_available": False,
+        "h_v_polarimetry_available": False,
+        "physical_micro_doppler_hz_allowed": False,
+        "model_training_allowed": False,
+        "model_training_performed": False,
+        "official_dataset_py_executed": False,
+        "source_archive_extracted": False,
+        "source_archive_modified": False,
+        "raw_data_included_in_outputs": False,
+        "local_route_and_mat_audit_tables_included": True,
+        "journal_bundle_mixing_allowed": False,
+        "allowed_use": (
+            "read-only loader/schema verification, route-grouped method design, and "
+            "exact reproduction of published window counts"
+        ),
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(
+                f"Unexpected LSS-HSR-L V2 audit {field}: {payload.get(field)!r}"
+            )
+
+    expected_gates = {
+        "release_identity": "PASS",
+        "zip_safety_and_integrity": "PASS",
+        "mat_schema_and_finite": "PASS",
+        "route_mapping": "PASS",
+        "published_train_validation_route_isolation": "PASS",
+        "overflow_role": "BLOCKED_UNDOCUMENTED",
+        "acquisition_session_identity": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_time_axis": "BLOCKED_NOT_AVAILABLE",
+        "dpl_physical_doppler_axis": "BLOCKED_NOT_AVAILABLE",
+        "model_training": "BLOCKED",
+    }
+    expected_mappings = {
+        "gates": expected_gates,
+        "step_length_counts": {"1": 802, "5": 63},
+        "split_mat_counts": {"overflow": 11, "train": 1269, "validation": 250},
+        "split_route_counts": {"overflow": 11, "train": 723, "validation": 131},
+        "split_frame_counts": {
+            "overflow": 704,
+            "train": 51789,
+            "validation": 10655,
+        },
+        "split_published_window_counts": {
+            "overflow": 529,
+            "train": 45366,
+            "validation": 9336,
+        },
+        "mat_schema": {
+            "public_fields": ["Trace_DPL_Data"],
+            "dpl_shape": "[T, 512]",
+            "track_shape": "[T, 5]",
+            "storage_dtype": "float64",
+            "real_values": True,
+            "all_values_finite": True,
+        },
+        "track_features": [
+            {"index": 1, "name": "radial_velocity", "unit": "m/s"},
+            {"index": 2, "name": "range", "unit": "km"},
+            {"index": 3, "name": "azimuth", "unit": "degree"},
+            {"index": 4, "name": "height", "unit": "m"},
+            {"index": 5, "name": "normalized_snr", "unit": "dB"},
+        ],
+        "blockers": [
+            "overflow is present in V2 but omitted from the published train/validation "
+            "statistics and Dataset.py main loop",
+            "route_id exists but acquisition day, flight, scene, and source-session "
+            "identities are unavailable",
+            "the processed DPL has no machine-readable CPI duration, PRF, or "
+            "bin-to-Hz/velocity mapping",
+            "no preregistered modeling protocol has been approved for this release",
+        ],
+        "prohibited_claims": [
+            "random MAT/frame/window split performance",
+            "overflow as train, validation, test, or independent evidence",
+            "independent-session or deployment generalization",
+            "physical-Hz or physical-time micro-Doppler features",
+            "raw IQ, H/V polarimetry, or balloon recognition",
+            "model performance before a separate preregistered protocol",
+        ],
+    }
+    for field, value in expected_mappings.items():
+        if payload.get(field) != value:
+            raise ValueError(f"Unexpected LSS-HSR-L V2 audit {field}")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
     if len(destinations) != len(set(destinations)):
         raise ValueError("Package file map contains duplicate destinations")
+
+    hsr_source_prefix = "results/data_audit/lss_hsr_l_v2/"
+    expected_hsr_map = {
+        f"{hsr_source_prefix}REPORT.md": (
+            "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md"
+        ),
+        f"{hsr_source_prefix}summary.json": (
+            "evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.json"
+        ),
+        f"{hsr_source_prefix}split_summary.csv": (
+            "assets/tables/lss_hsr_l_v2_split_summary.csv"
+        ),
+        f"{hsr_source_prefix}split_class_summary.csv": (
+            "assets/tables/lss_hsr_l_v2_split_class_summary.csv"
+        ),
+        f"{hsr_source_prefix}feature_summary.csv": (
+            "assets/tables/lss_hsr_l_v2_feature_summary.csv"
+        ),
+    }
+    actual_hsr_map = {
+        item.source: item.destination
+        for item in files
+        if item.source.startswith(hsr_source_prefix)
+    }
+    if actual_hsr_map != expected_hsr_map:
+        raise ValueError(
+            "LSS-HSR-L V2 share evidence must contain exactly the five approved "
+            "aggregate source/destination mappings"
+        )
+    if any(
+        Path(path).name in {"route_audit.csv", "mat_audit.csv"}
+        for item in files
+        if item.source.startswith(hsr_source_prefix)
+        for path in (item.source, item.destination)
+    ):
+        raise ValueError("LSS-HSR-L route/MAT detail tables are forbidden")
 
     missing: list[str] = []
     errors: list[str] = []
@@ -1070,6 +1276,7 @@ def copy_package_files(staging_dir: Path) -> list[dict[str, object]]:
 def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     readiness = load_current_data_readiness()
     daur = load_lss_daur_audit()
+    hsr = load_lss_hsr_audit()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1194,6 +1401,111 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "lss_daur_sample_level_outputs_included": daur[
                 "sample_level_outputs_included"
             ],
+            "lss_hsr_l_v2_read_only_audit_included": True,
+            "lss_hsr_l_v2_audit_status": hsr["status"],
+            "lss_hsr_l_v2_release_version": hsr["release_version"],
+            "lss_hsr_l_v2_release_identity_verified": hsr[
+                "release_identity_verified"
+            ],
+            "lss_hsr_l_v2_data_doi": hsr["data_doi"],
+            "lss_hsr_l_v2_archive_size_bytes": hsr["archive_size_bytes"],
+            "lss_hsr_l_v2_archive_sha256": hsr["archive_sha256"],
+            "lss_hsr_l_v2_mat_file_count": hsr["mat_file_count"],
+            "lss_hsr_l_v2_total_frame_count": hsr["total_frame_count"],
+            "lss_hsr_l_v2_route_count": hsr["route_count"],
+            "lss_hsr_l_v2_published_window_count": hsr[
+                "published_window_count"
+            ],
+            "lss_hsr_l_v2_split_mat_counts": hsr["split_mat_counts"],
+            "lss_hsr_l_v2_split_route_counts": hsr["split_route_counts"],
+            "lss_hsr_l_v2_split_frame_counts": hsr["split_frame_counts"],
+            "lss_hsr_l_v2_split_published_window_counts": hsr[
+                "split_published_window_counts"
+            ],
+            "lss_hsr_l_v2_gates": hsr["gates"],
+            "lss_hsr_l_v2_authoritative_route_id_available": hsr[
+                "authoritative_route_id_available"
+            ],
+            "lss_hsr_l_v2_every_mat_assigned_to_exactly_one_route": hsr[
+                "every_mat_assigned_to_exactly_one_route"
+            ],
+            "lss_hsr_l_v2_published_train_validation_route_disjoint": hsr[
+                "published_train_validation_route_disjoint"
+            ],
+            "lss_hsr_l_v2_published_train_validation_route_overlap_count": hsr[
+                "published_train_validation_route_overlap_count"
+            ],
+            "lss_hsr_l_v2_lowest_available_grouping_key": hsr[
+                "lowest_available_grouping_key"
+            ],
+            "lss_hsr_l_v2_minimum_split_unit": hsr["minimum_split_unit"],
+            "lss_hsr_l_v2_acquisition_session_key_available": hsr[
+                "acquisition_session_key_available"
+            ],
+            "lss_hsr_l_v2_published_session_disjoint_verified": hsr[
+                "published_train_validation_session_disjoint_verified"
+            ],
+            "lss_hsr_l_v2_route_id_sufficient_for_independent_evaluation": hsr[
+                "route_id_sufficient_for_independent_evaluation"
+            ],
+            "lss_hsr_l_v2_published_split_preservation_required": hsr[
+                "published_split_preservation_required"
+            ],
+            "lss_hsr_l_v2_overflow_isolated": hsr["overflow_isolated"],
+            "lss_hsr_l_v2_overflow_merge_allowed": hsr[
+                "overflow_merge_allowed"
+            ],
+            "lss_hsr_l_v2_overflow_role_documented": hsr[
+                "overflow_role_documented_in_published_statistics"
+            ],
+            "lss_hsr_l_v2_random_mat_split_allowed": hsr[
+                "random_mat_split_allowed"
+            ],
+            "lss_hsr_l_v2_random_frame_window_split_allowed": hsr[
+                "random_frame_or_window_split_allowed"
+            ],
+            "lss_hsr_l_v2_dpl_amplitude_unit_verified": hsr[
+                "dpl_amplitude_unit_verified"
+            ],
+            "lss_hsr_l_v2_dpl_physical_time_axis_available": hsr[
+                "dpl_physical_time_axis_available"
+            ],
+            "lss_hsr_l_v2_dpl_physical_doppler_hz_axis_available": hsr[
+                "dpl_physical_doppler_hz_axis_available"
+            ],
+            "lss_hsr_l_v2_dpl_physical_velocity_axis_available": hsr[
+                "dpl_physical_velocity_axis_available"
+            ],
+            "lss_hsr_l_v2_track_physical_units_verified": hsr[
+                "track_physical_units_verified"
+            ],
+            "lss_hsr_l_v2_physical_micro_doppler_hz_allowed": hsr[
+                "physical_micro_doppler_hz_allowed"
+            ],
+            "lss_hsr_l_v2_raw_adc_or_iq_available": hsr[
+                "raw_adc_or_iq_available"
+            ],
+            "lss_hsr_l_v2_h_v_polarimetry_available": hsr[
+                "h_v_polarimetry_available"
+            ],
+            "lss_hsr_l_v2_model_training_allowed": hsr[
+                "model_training_allowed"
+            ],
+            "lss_hsr_l_v2_model_training_performed": hsr[
+                "model_training_performed"
+            ],
+            "lss_hsr_l_v2_source_archive_extracted": hsr[
+                "source_archive_extracted"
+            ],
+            "lss_hsr_l_v2_source_archive_modified": hsr[
+                "source_archive_modified"
+            ],
+            "lss_hsr_l_v2_journal_bundle_mixing_allowed": hsr[
+                "journal_bundle_mixing_allowed"
+            ],
+            "lss_hsr_l_v2_raw_data_included": False,
+            "lss_hsr_l_v2_route_mat_detail_tables_included": False,
+            "lss_hsr_l_v2_sample_level_outputs_included": False,
             "external_public_data_registries_included": True,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,

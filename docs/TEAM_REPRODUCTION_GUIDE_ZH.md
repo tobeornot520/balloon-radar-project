@@ -69,7 +69,7 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 
 ### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
 
-先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V7 分享包只支持 A 级证据复核；
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V8 分享包只支持 A 级证据复核；
 下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
 MAT 与同目录明细 MAT，否则会重复计入记录。
 
@@ -115,7 +115,7 @@ python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
 
 ### 3.3 LSS-DAUR V3 只读审计复核
 
-V7 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
+V8 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
 JSON 和聚合表。完整仓库中的 B/C 级复核还需从官方 ScienceDB V3 自行取得原始发布，
 放在 `data/raw/external/LSS-DAUR-1.0/`；受 `CC-BY-NC-ND-4.0` 约束，原始或重打包数据
 不得从项目分享包转发。
@@ -128,13 +128,45 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 预期状态为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，`paired_track_count=77`、
 `unique_signal_trajectory_content_count=76`、`candidate_source_session_group_count=39`、
 `frame_count=11366` 且 `model_training_allowed=false`。审计器只写入被忽略的本地审计目录，
-不修改原始文件，也不训练模型。V7 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
+不修改原始文件，也不训练模型。V8 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
 逐 recording 的日期、路径、时间戳或 payload 哈希明细。
 
 复核纪律：canonical/backup 是等价视图，不能倍增；TD/TR、完全重复记录和保守连通组不得
 跨 split；不能随机拆 MAT/frame/window、静默修正 6 个日期冲突，或把 19 条 1024-bin
 记录映射到未经说明的物理 Hz/速度轴。得到相同阻塞结论才算复核成功，不能把它改写成
 模型训练或识别性能结果。
+
+### 3.4 LSS-HSR-L ScienceDB V2 只读审计复核
+
+V8 分享包可直接复核 `evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md`、对应 JSON，以及
+split、split-class 和 feature 三张聚合表。包内不含 route/MAT 级路径、ID 或 payload 哈希。
+完整仓库复核需从官方 ScienceDB V2 取得原始 ZIP，并保持文件名
+`data/raw/external/LSS-HSR-L/ScienceDB_V2_dataset_and_instructions.zip`。该原件受
+`CC-BY-NC-4.0` 约束；该许可来自 2026-08-04 ScienceDB 页面访问记录，不是 ZIP 内嵌文本。
+原件不进入 Git 或分享包；期刊页面的 1,478-entry 历史包与 V2 不等价，
+不能替代、拼接或混合。
+
+```bash
+conda run -n radar-torch python scripts/audit_lss_hsr_l_v2.py --overwrite
+```
+
+预期状态为 `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，并同时满足：ZIP
+`237020946` bytes、SHA256
+`fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`；`mat_file_count=1530`、
+`total_frame_count=63148`、`route_count=865`、`model_training_allowed=false`。train 应为
+`1269 MAT / 51789 frames / 723 routes / 45366 windows`，validation 为
+`250 / 10655 / 131 / 9336`；overflow 为 `11 / 704 / 11 / 529`，必须保持隔离。窗口计数使用
+`window_size=10`、`first_frame_repeat=4` 与 JSON 的 route-specific `step_length`，不能把
+首帧内存填充误算成 MAT 真实帧。
+
+每个 MAT 必须验证为唯一变量 `Trace_DPL_Data` 的 1×2 cell，包含有限 `float64 T×512`
+DPL 和对齐的 `T×5` 轨迹。轨迹五列单位分别是径向速度 m/s（正值远离）、距离 km、方位角
+degree、高度 m、距离归一化 SNR dB；512 个 DPL bins 没有足够元数据换算 Hz 或速度。
+`air_route_x` 是最低分组：即使 route 不跨 published split，也没有权威 site/date/weather/
+sensor-run/physical-target/source-session 键，不能声称来源独立、跨场景泛化或开始模型训练。
+
+V2 自带大写 `Dataset.py` 是只读懒加载器，不移动或重写 MAT；禁止运行会移动原件的脚本这一
+警告只针对不等价的期刊历史包旧 `dataset.py`。两包都保持原件只读，但必须准确区分原因。
 
 ## 4. 分享包的独立复核
 

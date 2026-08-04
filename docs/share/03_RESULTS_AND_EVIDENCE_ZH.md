@@ -162,8 +162,21 @@ MATLAB v5/v7.3 存储视图，共享数值完全相等，不能把 backup 当额
 LSS-HSR-L 的 ScienceDB V2 正式包已经下载，大小为 237,020,946 bytes，SHA256 为
 `fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，ZIP 完整性通过。
 V2 有 1,561 个 ZIP entries，期刊包有 1,478 个；V2 额外包含 `overflow/air_routes`，同名
-样本长度也存在差异，因此两包已确认不等价，不能拼接或混合划分。后续 schema、scene/track
-分组和 loader 审计以 ScienceDB V2 为 canonical candidate；期刊包只保留为独立血统对照。
+样本长度也存在差异，因此两包已确认不等价，不能拼接或混合划分；期刊包只保留为独立血统
+对照。V2 的 `CC-BY-NC-4.0` 许可记录来自 2026-08-04 ScienceDB 页面访问，不是 ZIP 内嵌许可文本。
+
+V2 全量只读审计冻结 1,530 MAT、63,148 个真实帧和 865 条 `air_route_x`。train 为
+1,269 MAT/51,789 帧/723 routes，按发布默认参数精确得到 45,366 窗口；validation 为
+250/10,655/131/9,336。另有 11 MAT/704 帧/11 routes/529 窗口的 overflow，发布说明和
+`Dataset.py` 主入口均未赋予其训练、验证或测试角色，因此保持隔离。
+
+全部 MAT 都是有限 `float64 T×512` DPL 与对齐 `T×5` 轨迹。轨迹五列单位已验证为径向速度
+m/s（正值远离）、距离 km、方位角 degree、高度 m、距离归一化 SNR dB；DPL 512 bins
+到 Hz/速度的物理映射未知。每个 MAT 恰被一个 route 引用，route 不跨 published split，
+但缺少 route 以上 site/date/weather/sensor-run/physical-target/source-session 键，不能称
+session-disjoint 或独立场景外测。状态为
+`PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
+V2 自带 `Dataset.py` 是只读懒加载器；移动原件警告只适用于不等价期刊历史包的旧脚本。
 
 DroneRFc-MM V1 的数据 DOI 为 `10.57760/sciencedb.j00173.00094`，许可为
 `CC-BY-SA-4.0`。完整发布共 113 files、75,612,067,287 bytes；本地没有下载完整发布，只选择
@@ -202,7 +215,7 @@ ZDR、PhiDP、RhoHV；它没有 UAV/气球标签，也不是本项目雷达的�
 | LAT-MRICD X 波段分组基线 | 同一公开发布、batch-code-held-out | 冻结的公开数据内部三类基线；不是独立外部验证 |
 | LAT-MRICD D17-XBAND | 同一公开发布、S/Ku 一次性 locked target | `FAIL_STOP` 冻结负结果；target 已消费，禁止同 target 确认性复用 |
 | LSS-DAUR V3 | 77 个逻辑配对观测、76 个唯一内容对、39 个保守候选组 | schema/配对/数值等价性通过；分组/时间/1024-bin 轴阻塞；无模型性能证据 |
-| HSR ScienceDB V2/期刊包 | 两个已校验但不等价的发布包 | V2 为 canonical audit candidate；禁止混合，尚无模型性能证据 |
+| HSR ScienceDB V2/期刊包 | V2 的 1,530 MAT/63,148 帧/865 routes；不等价历史包 | V2 schema/route 通过但 source provenance/512-bin 轴阻塞；overflow 隔离、禁止训练和混包，无模型性能证据 |
 | DroneRFc-MM radar subset | 完整发布中的 28 个选择性文件、9 recordings | PCD schema 通过但 B1 同步阻塞；不是独立外部性能证据 |
 | Ku UAV 群 / NEXRAD | 3 个物理实验 / 1 个完整体扫 | 航迹与双极化 loader smoke；不是识别训练或性能证据 |
 | 外部锁定盲测 | 尚无 | 不能声称 |
@@ -220,7 +233,9 @@ ZDR、PhiDP、RhoHV；它没有 UAV/气球标签，也不是本项目雷达的�
 - 不能把旧 `new_split=test` 改名为锁定测试，也不能用文件名或 beam/azimuth 推断值补写已验证采集顺序。
 - 不能把 D17-XBAND 的 X->Ku 通过写成整体迁移成功，也不能隐去 X->S UAV recall 失败；
 - 不能在已消费的 S/Ku target 上重跑确认性比较、训练 CNN、做域适配或根据结果改特征。
-- 不能混合 HSR V2 与期刊包，也不能把 DroneRFc-MM 的随机 frame/window 拆分写成独立泛化；B1 不能在没有更正 GT/可归因偏移时做监督对齐；
+- 不能混合 HSR V2 与期刊包，不能使用 overflow、随机拆 HSR MAT/frame/window、把 route
+  称为 session-disjoint、把 512 bins 写成物理 Hz/速度或启动 HSR 模型训练；也不能把
+  DroneRFc-MM 的随机 frame/window 拆分写成独立泛化，B1 不能在没有更正 GT/可归因偏移时做监督对齐；
 - 不能把 DroneRFc-MM 点云子集描述为 ADC/IQ、H/V 极化、鸟/天气/空飘球或主任务性能证据。
 - 不能把 Ku 群目标的列/点或 NEXRAD 的 gate/ray/patch 随机拆成独立样本，也不能把天气
   雷达双极化矩描述为本项目已标定 H/V 通道证据。

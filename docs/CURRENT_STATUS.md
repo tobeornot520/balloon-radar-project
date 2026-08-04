@@ -152,10 +152,30 @@ session key exists, and 19 tracks use an undocumented 1024-bin physical axis
 while the official plotting script assumes 512 bins. FMCWR-2.0 is pending RAR
 extraction and schema/group audit. The simulated-bird archive must not be cited
 as natural-bird evidence. The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
-archive was downloaded and passed ZIP integrity checks. It has 1,561 entries
-and is confirmed not equivalent to the 209,569,478-byte, 1,478-entry journal
-bundle; the two variants must not be mixed. V2 remains pending a read-only
-loader and source-track/group audit.
+archive has now completed its full read-only audit. Its 1,561 entries include
+1,530 MAT tracks and 63,148 real frames indexed by 865 routes. The published
+train split has 1,269 MAT, 51,789 frames, 723 routes and 45,366 default windows;
+validation has 250 MAT, 10,655 frames, 131 routes and 9,336 windows. Eleven
+overflow MAT/routes contain 704 frames and would yield 529 windows, but their
+published use is undocumented, so they remain quarantined.
+
+Every MAT follows one finite float64 schema: `Trace_DPL_Data` is a 1-by-2 cell
+containing aligned `T x 512` Doppler-waterfall values and `T x 5` trajectory
+values. The trajectory columns are radial velocity (m/s, positive away), range
+(km), azimuth (degrees), height (m), and range-normalized SNR (dB). Every track
+is referenced exactly once, no route crosses a published split or class, and no
+bytewise or decoded-content duplicates were found. However, `air_route_x` is
+only the lowest published grouping: V2 provides no per-route site, date,
+weather, sensor run, physical target, or source-session identifier, and it does
+not define the 512-bin Doppler axis in Hz or velocity. The status is therefore
+`PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS` with
+`model_training_allowed=false`; training, random track/frame/window splitting,
+and physical micro-Doppler claims remain
+blocked. V2's bundled `Dataset.py` is a read-only lazy loader and does not move
+or rewrite source files. The source-moving warning applies only to the distinct
+209,569,478-byte, 1,478-entry historical journal bundle; the two variants must
+never be mixed. The `CC-BY-NC-4.0` license record comes from the 2026-08-04
+ScienceDB metadata access, not from license text embedded in the ZIP.
 
 A selected 47,366,902-byte radar subset of DroneRFc-MM V1 was also downloaded
 from its official 113-file, 75,612,067,287-byte ScienceDB release. It includes
@@ -246,6 +266,8 @@ mechanism. See
 - Frozen LAT-MRICD cross-band evidence: `results/final_evidence/lat_mricd_cross_band_transfer_v1/`
 - LSS-DAUR V3 read-only auditor: `scripts/audit_lss_daur_v1.py`
 - Local LSS-DAUR audit evidence: `results/data_audit/lss_daur_v1/`
+- LSS-HSR-L V2 read-only auditor: `scripts/audit_lss_hsr_l_v2.py`
+- Local LSS-HSR-L V2 audit evidence: `results/data_audit/lss_hsr_l_v2/`
 - External public dataset registry: `data/metadata/external_public_datasets_v1.csv`
 - External public artifact registry: `data/metadata/external_public_artifacts_v1.csv`
 

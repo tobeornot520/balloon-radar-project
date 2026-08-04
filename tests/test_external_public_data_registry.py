@@ -124,24 +124,38 @@ def test_hsr_v2_and_journal_bundle_are_recorded_as_distinct_non_equivalent_relea
     }
     assert set(by_version) == {"V2", "journal_bundle_20260804"}
     assert by_version["V2"]["official_size_bytes"] == "237020946"
-    assert "non_equivalent" in by_version["V2"]["decision_status"]
+    assert by_version["V2"]["decision_status"] == (
+        "PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS"
+    )
     assert "not_equivalent" in by_version["journal_bundle_20260804"][
         "decision_status"
     ]
     assert "mixing" in by_version["V2"]["prohibited_claim_scope"]
 
-    v2_artifact = next(
-        row
+    hsr_artifacts = {
+        row["release_version"]: row
         for row in artifacts
         if row["dataset_id"] == "lss_hsr_l"
-        and row["release_version"] == "V2"
-    )
+    }
+    assert set(hsr_artifacts) == {"V2", "journal_bundle_20260804"}
+
+    v2_artifact = hsr_artifacts["V2"]
     assert v2_artifact["byte_count"] == "237020946"
     assert (
         v2_artifact["sha256"]
         == "fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540"
     )
-    assert v2_artifact["integrity_status"] == "official_size_and_zip_test_passed"
+    assert v2_artifact["integrity_status"] == (
+        "official_size_zip_and_full_read_only_schema_audit_passed"
+    )
+
+    journal_artifact = hsr_artifacts["journal_bundle_20260804"]
+    assert journal_artifact["byte_count"] == "209569478"
+    assert journal_artifact["sha256"] == (
+        "22112d4225636c5626845a9f0640abbf4503cc70763b592a609287760ab5f4a4"
+    )
+    assert "non_equivalent_to_v2" in journal_artifact["integrity_status"]
+    assert "distinct historical snapshot" in journal_artifact["notes"]
 
 
 def test_lss_daur_registry_freezes_pairing_equivalence_and_training_block() -> None:

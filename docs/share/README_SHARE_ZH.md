@@ -4,8 +4,8 @@
 
 本项目利用 H/V 双极化复数 IQ 雷达数据，研究低慢小目标的检测、距离—速度定位与背景虚警抑制。当前形成的是 UAV 检测定位前端及其可追溯、可校验的冻结结果摘录；完整复现仍需要内部源码、数据、逐样本预测和 checkpoint。空飘球有载/无载、载荷类型及运动状态识别属于后续目标，尚未由当前数据证明。
 
-本 V7 包已合并成果材料、入组执行手册、成员资格与分工验收规则、LAT-MRICD 分组基线与
-跨频段冻结负结果、DAUR V3 全量只读审计，以及 Tian 复现受阻说明。
+本 V8 包已合并成果材料、入组执行手册、成员资格与分工验收规则、LAT-MRICD 分组基线与
+跨频段冻结负结果、DAUR V3 与 HSR-L V2 全量只读审计，以及 Tian 复现受阻说明。
 准备继续参与下一阶段的成员应先完成 `TEAM_START_HERE.md` 和成员资格办法规定的验收，再
 认领模型、数据或文档任务。
 
@@ -67,7 +67,14 @@
   和 ScienceDB V2 正式包。HSR V2 为 237,020,946 bytes，SHA256 为
   `fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，ZIP 完整；
   V2/期刊包分别有 1,561/1,478 个 ZIP entries，V2 额外含 `overflow/air_routes`，且同名
-  样本长度存在差异，已确认两者不等价、不可混合。ScienceDB V2 是 canonical audit candidate；
+  样本长度存在差异，已确认两者不等价、不可混合；
+- 完成 HSR V2 的 1,530 MAT/63,148 真实帧/865 routes 全量只读审计，官方
+  train/validation 默认窗口精确复现为 45,366/9,336；11 MAT/704 帧/529 窗口的 overflow
+  用途未说明，保持隔离。route 只是最低 published group，source-session/场景来源和
+  512-bin DPL 物理轴未知；轨迹五列单位已验证。状态为
+  `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
+  V2 `Dataset.py` 是只读懒加载器，移动原件警告只适用于历史期刊包；V2 的
+  `CC-BY-NC-4.0` 来自 2026-08-04 ScienceDB 页面访问记录，不是 ZIP 内嵌文本；
 - 完成 DAUR V3 的 308 个 MAT 全量只读审计：154 canonical 与 154 backup 是同一 77 个
   逻辑观测的不同存储视图，共享数值完全相等；其中一组两个 recording 的 TD/TR 内容完全
   重复，因此只有 76 个唯一内容对。77 对 TD/TR 对齐，但全部轨迹有重复时间，6 个日期
@@ -83,8 +90,8 @@
   PhiDP、RhoHV，用于双极化 loader/公式 smoke。两者都不进入识别训练；
 - 已登记但暂缓 42.4 GB 室内铝箔数字气球、23.46 GB S 波段野外 UAV 和 30.36 GB
   24/94/207 GHz UAV/真实鸟主数据；暂缓原因、许可、分组单位和禁止声明均写入来源台账；
-- DAUR 只读审计已完成但训练阻塞；下一公开数据工作从 HSR ScienceDB V2 只读 loader 与
-  schema/route 审计开始，再做 FMCWR-2.0 解包/schema 审计。DroneRFc-MM 保持
+- DAUR 与 HSR 只读审计均完成但训练阻塞；下一公开数据工作转 FMCWR-2.0 解包/schema 审计，
+  同时维护 HSR provenance/axis、DAUR grouping/axis 门。DroneRFc-MM 保持
   `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`，B1 等待更正 GT/可归因偏移；审计通过前不训练。
 
 ## 当前最重要的结论
@@ -131,7 +138,7 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 - `TEAM_START_HERE.md`：给零项目背景组员的完整执行手册；组员应先读此文件再认领任务。
 - `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`：成员筛选、分工、权限和沟通的统一规则。
 - `assets/templates/team_qualification_scorecard_template_v1.csv`：逐人评分与决定记录。
-- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据、LAT-MRICD 审计/分组基线/跨频段冻结负结果、DroneRFc-MM 与 DAUR 只读审计和当前数据合同缺口审计。
+- `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据、LAT-MRICD 审计/分组基线/跨频段冻结负结果、DroneRFc-MM、DAUR 与 HSR-L 只读审计和当前数据合同缺口审计。
 - `MANIFEST.json`：版本、范围、源文件及 SHA256 哈希。
 - `SHA256SUMS.txt`：包内文件完整性校验值。
 
@@ -139,4 +146,4 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 
 本包不包含原始 MAT/IQ/PCD、外部数据压缩包、标签明细、逐样本预测、checkpoint、训练日志、开发聊天记录、个人路径或访问凭据。哈希只能校验包内文件是否变化，不能替代从源码和数据重新计算结果。LAT-MRICD 数字只属于同一公开发布内的 batch-code-held-out 基线或 band-held-out 迁移，不是 unseen-model、独立外部、极化、空飘球或 Tian 复现证据。D17-XBAND 的 S/Ku target 已消费，分享包接收者只能复核证据或运行不接触真实 target 的合成合同测试，不能把重跑、CNN、域适配或调参称为新的确认性结果。DAUR 的 canonical/backup 不得倍增，TD/TR 和保守连接组不得跨 split；随机 frame/window/MAT 拆分、静默修日期、把 1024-bin 转成未经说明的物理 Hz 轴以及任何 DAUR 模型性能均禁止。DroneRFc-MM 子集不是 ADC/IQ 或 H/V 数据，没有鸟、天气或空飘球对照，只能用于点云/轨迹接口和时序算法审计，不能替代主数据或宣布识别性能；B1 radar/GT 零重叠，禁止监督对齐。UAV 群和 NEXRAD 小样本也只用于接口 smoke，不能按帧/gate/patch 随机拆分或写成识别结果；三个大体量候选没有进入本包或本地训练。主 UAV 方向仍为 `4/6`、`BLOCKED_EXTERNAL`；其余包内数字属于当前数据上的内部开发评价或明确标注的诊断证据，不代表跨日期、跨场地盲测或严格实时部署。
 
-分享包版本：`2026-08-04 V7`
+分享包版本：`2026-08-04 V8`
