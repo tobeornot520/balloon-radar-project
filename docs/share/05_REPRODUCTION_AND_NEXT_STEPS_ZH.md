@@ -187,8 +187,12 @@ D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7
 
 下一公开数据工作不再使用 LAT-MRICD 的 S/Ku target，而按以下顺序推进：
 
-1. LSS-DAUR-1.0：完成 MAT schema、TD/TR 逐轨配对、有限值/时间轴和原始 track group 审计；
-2. LSS-HSR-L：以已下载且 ZIP 完整的 ScienceDB V2 正式包为 canonical audit candidate，
+1. LSS-DAUR-1.0：全量只读审计已完成并冻结为
+   `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`。77 个逻辑观测只有 76 个唯一
+   TD/TR 内容对；39 个保守候选 source-session 组未经作者确认，严格时间、日期和 1024-bin
+   轴仍阻塞。canonical/backup 与 TD/TR 必须始终同组，禁止随机 MAT/frame/window split，
+   禁止静默修日期、物理 Hz 声明和模型训练；
+2. LSS-HSR-L：当前执行项。以已下载且 ZIP 完整的 ScienceDB V2 正式包为 canonical candidate，
    实现只读 loader 并核对 schema、scene/track 分组；V2 的 1,561 个 entries 与期刊包的
    1,478 个不等价，V2 额外含 `overflow/air_routes`，同名样本长度也不同，两包禁止混合；
 3. LSS-FMCWR-2.0：以可审计方式解包 RAR，建立 MAT schema、目标/频段/角度/记录分组和
@@ -198,7 +202,8 @@ D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7
    639,527 points 均通过 schema/finite/POINTS/时间戳检查；8 条 recording 与 GT 时间范围重叠，
    B1 零重叠，故整体同步门阻塞。717 个派生 5 秒 windows 禁止随机拆分。
 
-四项都只在 schema、配对和 group 门通过后再预登记算法，不以“已经下载”代替数据可用。
+DAUR 虽已通过 schema 与配对门，但 grouping/physical-axis 总门仍关闭；其余三项也只在各自
+schema、配对和 group 门通过后再预登记算法，不以“已经下载”代替数据可用。
 DroneRFc-MM 数据 DOI 为 `10.57760/sciencedb.j00173.00094`、许可为 `CC-BY-SA-4.0`；它不是
 ADC/IQ 或 H/V，没有鸟、天气、空飘球对照，只能用于点云/轨迹接口和时序算法审计；B1
 只有取得更正 GT 或可归因时间偏移后才可重开监督对齐。

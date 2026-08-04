@@ -82,4 +82,4 @@ Stage 4 先使用 Fold 1 和 Fold 4 筛选 power control 与 RI4，再将这些�
 - Stage 3/4 的极化和 ROI 结果是机制与候选模块研究，不能改写成已证明的载荷分类收益；
 - 完整扫描 BC-DPG 的 56 个虚警属于离线 scan-aware 上限，样本独立 BC 才是当前在线导向参照；
 - leave-one-out、past-only、AND/OR、candidate veto 和 CPU notch 对照均不能替代独立盲测；
-- 当前数据仍只有 UAV 与背景，空飘球载荷、有载/无载和物理微多普勒结论必须等待新采集。
+- 当前内部 H/V 主任务数据仍只有 UAV 与背景，空飘球载荷、有载/无载和物理微多普勒结论必须等待新采集。

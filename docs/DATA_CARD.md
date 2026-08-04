@@ -118,3 +118,14 @@ D17-XBAND V1 已完成同一发布内、预登记的 band-held-out transfer，�
 同步及分组门通过前不进入本数据卡的已放行建模样本。来源、许可、状态和校验回执见
 `data/metadata/external_public_datasets_v1.csv` 与
 `data/metadata/external_public_artifacts_v1.csv`。
+
+DAUR V3 的只读审计已覆盖 308 个 MAT。154 个 canonical 文件与 154 个
+`backup_original` 文件只是同一 77 个逻辑记录 ID 的两种存储视图，共享数值逐元素相等；
+backup 不计额外样本。其中 1 组 2 个 recording 的 TD/TR 内容完全重复，因此只有 76 个
+唯一内容对；另有 11 对 recording 共享内部帧，保守连通后为 39 个候选 source-session
+组。77 对 TD/TR 在时间、帧号、载频和逐帧行数上完全对齐，但全部轨迹
+都有重复时间戳，6 条文件名日期与 `File_head` 日期冲突，且 45/40 个候选 session 定义均
+未获官方确认。58 条为 512 Doppler bins，19 条为 1024 bins，官方固定 512 的绘图脚本不能
+解释后者；宽度还与类别混杂。状态冻结为
+`PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，随机 frame/window split、把
+backup 当新样本、静默修日期、物理 Hz 微多普勒和任何模型训练均未放行。

@@ -144,6 +144,37 @@ def test_hsr_v2_and_journal_bundle_are_recorded_as_distinct_non_equivalent_relea
     assert v2_artifact["integrity_status"] == "official_size_and_zip_test_passed"
 
 
+def test_lss_daur_registry_freezes_pairing_equivalence_and_training_block() -> None:
+    _, datasets = read_registry(DATASET_REGISTRY)
+    _, artifacts = read_registry(ARTIFACT_REGISTRY)
+
+    dataset = next(row for row in datasets if row["dataset_id"] == "lss_daur_1_0")
+    assert dataset["release_version"] == "V3"
+    assert dataset["data_doi"] == "10.57760/sciencedb.radars.00076"
+    assert dataset["license_spdx"] == "CC-BY-NC-ND-4.0"
+    assert dataset["official_file_count"] == "314"
+    assert dataset["official_size_bytes"] == "148763512"
+    assert dataset["decision_status"] == (
+        "schema_pairing_verified_blocked_grouping_and_physical_axis"
+    )
+    assert "77" in dataset["independent_unit"]
+    assert "512/1024" in dataset["representation"]
+    assert "Canonical and backup" in dataset["grouping_risk"]
+    assert "Model training before" in dataset["prohibited_claim_scope"]
+    assert "backup as extra samples" in dataset["prohibited_claim_scope"]
+    assert "scripts/audit_lss_daur_v1.py" in dataset["audit_evidence"]
+
+    artifact = next(
+        row for row in artifacts if row["dataset_id"] == "lss_daur_1_0"
+    )
+    assert artifact["byte_count"] == "148763512"
+    assert artifact["sha256"] == (
+        "5febc59a29c42fb7dd8b001afa73fe913767f00c2c060a21a5d95073c2ee1745"
+    )
+    assert "numeric_equivalence_passed" in artifact["integrity_status"]
+    assert "only 77 logical recording IDs" in artifact["notes"]
+
+
 def test_dronerfc_registry_distinguishes_full_release_from_selected_radar_subset() -> None:
     _, datasets = read_registry(DATASET_REGISTRY)
     _, artifacts = read_registry(ARTIFACT_REGISTRY)

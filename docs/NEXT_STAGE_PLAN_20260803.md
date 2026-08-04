@@ -27,7 +27,7 @@
 | 2 | H/V、IQ、PRF 和坐标事实确认 | 外部阻塞；当前报告不可获得 | 按 unknown 门禁维护数据卡，只开放 bin 域和 relative H/V 分析 | 当前不要求继续追索；未来有可归因材料时转交核验 | 有来源才解锁物理坐标/相干特征；否则长期保持 unknown |
 | 3 | Tian 2024 最小条件对齐 | 外部阻塞；精确复现冻结 | 保留方法级实现和负结果，推进 DPG/LAT-MRICD/合同测试替代路线 | 可把失败说明发给学长征求方向判断，不承担猜测原条件 | 只有获得对齐样例、完整配置或同分布数据之一才重开训练 |
 | 3A | LAT-MRICD 公开数据算法预研 | D17-NX/HX/XBAND 已完成；XBAND 为预登记负结果 `FAIL_STOP` | 维护 X 波段五折证据和跨频最终证据；X->S 仅 UAV recall 失败，X->Ku 全部门槛通过；S/Ku target 已消费 | 当前无需补数据；对外只按冻结边界引用，不把公开数据支线并入主 UAV 门槛 | 不在同一 S/Ku target 上做 CNN、域适配、扩特征、调参或新确认性比较；新结论须使用独立未消费 target 并重新预登记 |
-| 3B | 新公开数据 schema/group 审计 | 核心数据已下载；DroneRFc schema 完成但 B1 同步阻塞；辅助 smoke 已落地；未放行建模 | 依次审计 DAUR TD/TR 配对、HSR-L V2 只读结构和 FMCWR-2.0 解包/记录分组；DroneRFc 只保留 8 条可对齐 recording 的后续预登记入口，B1 等待更正；Ku 群目标/NEXRAD 只验证接口 | 当前无需下载或标注；若能联系发布方，只询问 B1 更正 GT/时间偏移 | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；未过门前不训练 |
+| 3B | 新公开数据 schema/group 审计 | DAUR schema/配对通过但 grouping/physical-axis 阻塞；DroneRFc schema 完成但 B1 同步阻塞；辅助 smoke 已落地；未放行建模 | 下一项审计 HSR-L V2 只读结构，再做 FMCWR-2.0 解包/记录分组；DAUR 等作者确认 session/1024 轴；DroneRFc 只保留 8 条可对齐 recording 的后续预登记入口，B1 等待更正 | 当前无需下载或标注；若能联系发布方，询问 DAUR session/1024-bin 轴或 DroneRFc B1 更正 GT/时间偏移 | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；未过门前不训练 |
 | 4 | 建立可审计的虚警库 | P0 复核后开始 | 把 fixed/residual、特征、可见模式和证据来源合并，按 scan 汇总 | 优先核对有现场记录的误警事件，不确定项不强行分类 | 每个命名物理类别可追溯；同时保留 unknown 比例 |
 | 5 | 新同条件数据的极化统计 | 等待数据 | 冻结特征、按 session/scan 做 AUC/PR-AUC/低 FPR/最差组压力检查 | 审核特征物理解释与主验收指标 | 来源压力通过；目标/背景不再由日期直接区分 |
 | 6 | 最小极化增强模型 | 未放行 | 先做功率/相对幅度 ROI 小分支，一次只开放一个变量 | 评审困难样本、复杂度和停止规则 | 验证组 Pfa 降低且 joint Pd 不下降，或通过预登记容差 |
@@ -184,5 +184,8 @@ NEXRAD 只取 1 个 KTLX Level II 体扫，实际含 Z、V、SW、ZDR、PhiDP、
 
 1. 维护 D17-NX/HX/XBAND 冻结证据及其声明边界，继续排除原始数据和逐样本预测；
 2. 执行 D17-XBAND 的 `FAIL_STOP`：不复用已消费 S/Ku target；新确认性比较须换独立 target 并重新预登记；
-3. 按 DAUR -> HSR-L V2 -> FMCWR-2.0 完成其余核心 schema/group 审计；DroneRFc 保持
-   `B1 BLOCKED`，其余 8 条也要另行预登记才可继续；Ku 群目标/NEXRAD 保持 smoke-only。
+3. DAUR 已冻结为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`；下一步按
+   HSR-L V2 -> FMCWR-2.0 完成其余核心 schema/group 审计。DAUR 在作者确认 session 键、
+   日期冲突和 1024-bin 轴前不训练；其 77 个逻辑观测只有 76 个唯一内容对，保守连通为
+   39 个候选 source-session 组。DroneRFc 保持 `B1 BLOCKED`，其余 8 条也要另行预登记；
+   Ku 群目标/NEXRAD 保持 smoke-only。

@@ -144,6 +144,21 @@ held-out UAV/weather 评价，且预登记总体继续门失败”。它不证�
 
 ## 10. 新公开数据的完整性证据与边界
 
+LSS-DAUR-1.0 V3 的 314 个官方文件和 148,763,512 bytes 与官方发布元数据一致，并与本地
+保留的 314 文件下载清单复核一致。全量只读
+审计覆盖 308 个 MAT：154 canonical 与 154 `backup_original` 是同一 77 个逻辑观测的
+MATLAB v5/v7.3 存储视图，共享数值完全相等，不能把 backup 当额外样本。77 对 TD/TR 的
+公共时间、帧号、载频和逐帧结构完全对齐，共 11,366 帧、7,728,640 个有限复数 DPL 值。
+但有一组 2 个 recording 的 TD/TR 内容完全重复，只剩 76 个唯一内容对；另有 11 对记录
+共享内部帧，字段与内容保守连通后得到 39 个候选 source-session 组。
+
+该审计没有放行训练。全部 77 条都有重复时间戳，894 个重复位置后只剩 10,472 个唯一时间
+位置；13 条帧号不连续，6 条文件名/`File_head` 日期冲突。58 条为 512 bins、19 条为
+1024 bins，而官方绘图脚本固定 512；Bird/UAV 在三种候选 session 定义下均零重叠，24 个
+日期/配置 scene 中 20 个类别纯，存在明显域捷径。`V` 字段全零。状态为
+`PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`；证据见
+[DAUR 只读审计](../evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md)。
+
 LSS-HSR-L 的 ScienceDB V2 正式包已经下载，大小为 237,020,946 bytes，SHA256 为
 `fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`，ZIP 完整性通过。
 V2 有 1,561 个 ZIP entries，期刊包有 1,478 个；V2 额外包含 `overflow/air_routes`，同名
@@ -186,6 +201,7 @@ ZDR、PhiDP、RhoHV；它没有 UAV/气球标签，也不是本项目雷达的�
 | 最终联合审计 | 六折、1,148 行对齐 | 测试后固定结果互补性诊断 |
 | LAT-MRICD X 波段分组基线 | 同一公开发布、batch-code-held-out | 冻结的公开数据内部三类基线；不是独立外部验证 |
 | LAT-MRICD D17-XBAND | 同一公开发布、S/Ku 一次性 locked target | `FAIL_STOP` 冻结负结果；target 已消费，禁止同 target 确认性复用 |
+| LSS-DAUR V3 | 77 个逻辑配对观测、76 个唯一内容对、39 个保守候选组 | schema/配对/数值等价性通过；分组/时间/1024-bin 轴阻塞；无模型性能证据 |
 | HSR ScienceDB V2/期刊包 | 两个已校验但不等价的发布包 | V2 为 canonical audit candidate；禁止混合，尚无模型性能证据 |
 | DroneRFc-MM radar subset | 完整发布中的 28 个选择性文件、9 recordings | PCD schema 通过但 B1 同步阻塞；不是独立外部性能证据 |
 | Ku UAV 群 / NEXRAD | 3 个物理实验 / 1 个完整体扫 | 航迹与双极化 loader smoke；不是识别训练或性能证据 |

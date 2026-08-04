@@ -103,7 +103,7 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 | D16 | 分享包和 Git 是否保持可交付 | 进行中 | 只保留最新包和上一包；原始聊天/数据/权重留本地并忽略；新文档和构建脚本提交 Git | 我维护，你确认分享边界 | 包内无敏感路径、原始数据、权重和聊天记录；manifest 源提交等于 HEAD | 本轮清理 dist 并重建最新包 |
 | D17 | 外部公开多频段数据能否支撑算法预研 | 已完成（D17-NX/HX/XBAND） | 官方 ZIP、schema/batch 审计和五折 metadata-only 分组均已冻结；X 波段基线与一次性跨频段评价均有最终证据 | 我维护冻结证据和边界；你只按同一公开发布内结果引用 | `results/final_evidence/lat_mricd_grouped_baselines_v1/` 与 `results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不写成 unseen-model、独立外部、极化、空飘球或 Tian 复现证据 | 不复用已消费 S/Ku target；新公开数据先做独立 schema/group 审计和预登记 |
 | D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 已完成（预登记负结果；`FAIL_STOP`） | LR 的 X->S macro/UAV/weather/CI 下界为 0.6516798767/0.4433201701/0.8600395832/0.0839896354；X->Ku 为 0.8399853939/0.8493090645/0.8306617233/0.2670982858；仅 S UAV recall 失败 | 我维护冻结证据和停止边界；你当前无需提供新数据 | S/Ku target 已消费；`results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不得在同一 target 上做 CNN、域适配、扩特征、调参或新的确认性比较 | 停止同 target 扩模；如要建立新确认性结论，必须换独立、未消费 target 并重新预登记 |
-| D18 | 新公开数据能否形成不泄漏的时域、轨迹和微多普勒算法支线 | 进行中（DroneRFc schema 完成但同步阻塞；辅助 smoke 已落地；未放行建模） | DAUR 做 TD/TR/PRF/track 审计；HSR-L 以 ScienceDB V2 做只读 split/source-track 审计；FMCWR-2.0 做 RAR/MAT/recording 审计；DroneRFc-MM 全量 PCD schema 已通过，B1 radar/GT 零重叠；Ku 群目标与 NEXRAD 已完成最小 schema/矩核验 | 我负责来源、loader、schema 和预登记；你只需判断研究故事；若能联系发布方可询问 B1 更正 GT/时间偏移 | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；DroneRFc 输出 `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`，未通过同步总门 | 顺序推进 DAUR -> HSR-L V2 -> FMCWR-2.0；DroneRFc B1 等待外部更正，其余 8 条另行预登记；Ku/NEXRAD smoke-only，不把 frame/window/屏/gate 当独立性能样本 |
+| D18 | 新公开数据能否形成不泄漏的时域、轨迹和微多普勒算法支线 | 进行中（DAUR schema/配对通过但 grouping/physical-axis 阻塞；DroneRFc 同步阻塞；未放行建模） | DAUR 77 个逻辑观测仅 76 个唯一 TD/TR 内容对，11 对共享内部帧并保守连通为 39 个候选组；canonical/backup 等价性与配对通过，但严格时间、权威 session、日期和 1024-bin 轴阻塞；HSR-L 以 ScienceDB V2 做只读 split/source-track 审计；FMCWR-2.0 做 RAR/MAT/recording 审计；DroneRFc-MM B1 radar/GT 零重叠 | 我负责来源、loader、schema 和预登记；你判断研究故事；若能联系发布方可询问 DAUR session/1024 轴或 DroneRFc B1 更正 GT/时间偏移 | DAUR 输出 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS` 且 `model_training_allowed=false`；其余每集也必须有版本、许可、哈希、独立单位和禁止拆分规则 | 下一项 HSR-L V2，再做 FMCWR-2.0；DAUR/DroneRFc 等外部更正；Ku/NEXRAD smoke-only，不把 frame/window/屏/gate 当独立性能样本 |
 
 D17-XBAND 的完成以及 D18 的公开数据下载都不替代外部设备事实或 Tian 对齐材料；主 UAV 方向仍为 4/6
 `BLOCKED_EXTERNAL`，不得宣布当前方向已全部完成。
@@ -217,7 +217,8 @@ D17-XBAND 的完成以及 D18 的公开数据下载都不替代外部设备事�
 
 按优先级执行：
 
-1. 我先完成 DAUR 的 MAT schema、TD/TR 配对、时间轴、PRF 和 track 独立单位审计；
+1. DAUR 全量只读审计已完成：77 对 TD/TR 与 canonical/backup 等价性通过，但分组键、
+   严格时间、日期冲突和 1024-bin 物理轴未过门；不训练、不随机切窗；
 2. 我以 ScienceDB V2 为唯一规范候选实现 HSR-L 只读 loader，核对 published split、overflow
    与 source track/scene 的关系；期刊历史包不参与混合建模；
 3. 我为 FMCWR-2.0 配置可审计的 RAR 5 解包能力，核对 MAT 结构、记录数、角度、频段和

@@ -69,7 +69,7 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 
 ### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
 
-先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V6 分享包只支持 A 级证据复核；
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V7 分享包只支持 A 级证据复核；
 下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
 MAT 与同目录明细 MAT，否则会重复计入记录。
 
@@ -112,6 +112,29 @@ python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
 不得再次运行正式 runner，不得用复制数据、修改路径或新实验 ID 绕过消费记录，也不得在
 同一 S/Ku target 上训练 CNN、做域适配、扩特征、调阈值或建立新的确认性比较。如需新的
 跨频确认性结论，必须换独立且未消费的 target，并在查看结果前建立新协议。
+
+### 3.3 LSS-DAUR V3 只读审计复核
+
+V7 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
+JSON 和聚合表。完整仓库中的 B/C 级复核还需从官方 ScienceDB V3 自行取得原始发布，
+放在 `data/raw/external/LSS-DAUR-1.0/`；受 `CC-BY-NC-ND-4.0` 约束，原始或重打包数据
+不得从项目分享包转发。
+
+```bash
+conda run -n radar-torch python scripts/audit_lss_daur_v1.py --overwrite
+conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
+```
+
+预期状态为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，`paired_track_count=77`、
+`unique_signal_trajectory_content_count=76`、`candidate_source_session_group_count=39`、
+`frame_count=11366` 且 `model_training_allowed=false`。审计器只写入被忽略的本地审计目录，
+不修改原始文件，也不训练模型。V7 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
+逐 recording 的日期、路径、时间戳或 payload 哈希明细。
+
+复核纪律：canonical/backup 是等价视图，不能倍增；TD/TR、完全重复记录和保守连通组不得
+跨 split；不能随机拆 MAT/frame/window、静默修正 6 个日期冲突，或把 19 条 1024-bin
+记录映射到未经说明的物理 Hz/速度轴。得到相同阻塞结论才算复核成功，不能把它改写成
+模型训练或识别性能结果。
 
 ## 4. 分享包的独立复核
 

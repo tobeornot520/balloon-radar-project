@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260804_v6"
+        == "balloon_radar_results_and_team_onboarding_20260804_v7"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -142,6 +142,46 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.md" in destinations
     assert "evidence/25_DRONERFC_MM_READ_ONLY_AUDIT.json" in destinations
     assert "assets/tables/dronerfc_mm_recording_audit.csv" in destinations
+    assert "evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md" in destinations
+    assert "evidence/26_LSS_DAUR_READ_ONLY_AUDIT.json" in destinations
+    daur_table_names = {
+        "source_session_group_audit",
+        "class_summary",
+        "doppler_config_audit",
+    }
+    assert {
+        f"assets/tables/lss_daur_{name}.csv" for name in daur_table_names
+    } == {
+        destination
+        for destination in destinations
+        if destination.startswith("assets/tables/lss_daur_")
+    }
+    assert {
+        item.source
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_daur_v1/")
+    } == {
+        "results/data_audit/lss_daur_v1/REPORT.md",
+        "results/data_audit/lss_daur_v1/summary.json",
+        "results/data_audit/lss_daur_v1/source_session_group_audit.csv",
+        "results/data_audit/lss_daur_v1/class_summary.csv",
+        "results/data_audit/lss_daur_v1/doppler_config_audit.csv",
+    }
+    forbidden_daur_columns = {
+        "recording_id",
+        "timestamp",
+        "relative_path",
+        "td_payload_sha256",
+        "tr_payload_sha256",
+    }
+    for item in PACKAGE_FILES:
+        if not item.destination.startswith("assets/tables/lss_daur_"):
+            continue
+        with (share_package.PROJECT_ROOT / item.source).open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            fieldnames = set(csv.DictReader(handle).fieldnames or ())
+        assert fieldnames.isdisjoint(forbidden_daur_columns)
     assert "assets/registries/external_public_datasets_v1.csv" in destinations
     assert "assets/registries/external_public_artifacts_v1.csv" in destinations
     assert not any("oof_predictions.csv" in path for path in sources + destinations)
@@ -447,6 +487,87 @@ def test_share_dronerfc_audit_is_sanitized_blocked_and_grouped() -> None:
     )
 
 
+def test_share_lss_daur_audit_is_sanitized_blocked_and_not_doubled() -> None:
+    summary_source = next(
+        item.source
+        for item in PACKAGE_FILES
+        if item.destination == "evidence/26_LSS_DAUR_READ_ONLY_AUDIT.json"
+    )
+    summary = json.loads(
+        (share_package.PROJECT_ROOT / summary_source).read_text(encoding="utf-8")
+    )
+    assert summary["status"] == (
+        "PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS"
+    )
+    assert summary["gates"] == {
+        "release_identity": "PASS",
+        "schema_and_finite": "PASS",
+        "td_tr_pairing": "PASS",
+        "canonical_backup_equivalence": "PASS",
+        "strict_time": "FAIL_DUPLICATE_TIMESTAMPS",
+        "absolute_date_weather_join": "BLOCKED_DATE_CONFLICT",
+        "session_identity": "BLOCKED_NO_AUTHORITATIVE_SESSION_KEY",
+        "physical_axis_512": "PARTIAL_SCRIPT_DEFINED",
+        "physical_axis_1024": "BLOCKED_UNDOCUMENTED_WIDTH",
+        "model_training": "BLOCKED",
+    }
+    assert summary["paired_track_count"] == 77
+    assert summary["unique_signal_trajectory_content_count"] == 76
+    assert summary["canonical_mat_file_count"] == 154
+    assert summary["backup_mat_file_count"] == 154
+    assert summary["canonical_backup_observation_count_multiplier_allowed"] is False
+    assert summary["frame_count"] == 11366
+    assert summary["doppler_value_count"] == 7728640
+    assert summary["doppler_512_track_count"] == 58
+    assert summary["doppler_1024_track_count"] == 19
+    assert summary["duplicate_time_step_count"] == 894
+    assert summary["unique_time_position_count"] == 10472
+    assert summary["tracks_with_noncontiguous_frame_counter"] == 13
+    assert summary["frame_counter_gap_event_count"] == 85
+    assert summary["frame_counter_missing_value_count"] == 94
+    assert summary["frame_counter_repeat_event_count"] == 2
+    assert summary["filename_header_date_mismatch_count"] == 6
+    assert summary["filename_session_candidate_count"] == 45
+    assert summary["header_date_session_candidate_count"] == 40
+    assert summary["candidate_source_session_group_count"] == 39
+    assert summary["header_date_scene_group_count"] == 24
+    assert summary["header_date_scene_class_pure_group_count"] == 20
+    assert summary["bird_uav_filename_session_overlap_count"] == 0
+    assert summary["bird_uav_header_date_session_overlap_count"] == 0
+    assert summary["bird_uav_connected_session_overlap_count"] == 0
+    assert summary["shared_frame_record_pair_count"] == 11
+    assert summary["exact_duplicate_recording_group_count"] == 1
+    assert summary["exact_duplicate_recording_count"] == 2
+    assert summary["v_field_constant_zero"] is True
+    assert summary["authoritative_session_key_available"] is False
+    assert summary["absolute_weather_join_allowed"] is False
+    assert summary["raw_adc_or_iq_available"] is False
+    assert summary["h_v_polarimetry_available"] is False
+    assert summary["physical_micro_doppler_hz_allowed"] is False
+    assert summary["random_mat_split_allowed"] is False
+    assert summary["random_frame_or_window_split_allowed"] is False
+    assert summary["td_tr_split_allowed"] is False
+    assert summary["canonical_backup_as_extra_samples_allowed"] is False
+    assert summary["model_training_allowed"] is False
+    assert summary["source_files_modified"] is False
+    assert summary["sample_level_outputs_included"] is False
+
+    expected_rows = {
+        "assets/tables/lss_daur_source_session_group_audit.csv": 39,
+        "assets/tables/lss_daur_class_summary.csv": 6,
+        "assets/tables/lss_daur_doppler_config_audit.csv": 3,
+    }
+    for destination, expected_count in expected_rows.items():
+        source = next(
+            item.source for item in PACKAGE_FILES if item.destination == destination
+        )
+        with (share_package.PROJECT_ROOT / source).open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            rows = list(csv.DictReader(handle))
+        assert len(rows) == expected_count
+
+
 def test_current_data_readiness_sources_are_fresh() -> None:
     readiness = share_package.load_current_data_readiness()
     assert readiness["status"] == "FAIL"
@@ -552,6 +673,25 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["dronerfc_mm_group_key"] == "split_family_group"
     assert rules["dronerfc_mm_minimum_split_unit"] == "split_family_group"
     assert rules["dronerfc_mm_split_family_group_count"] == 6
+    assert rules["lss_daur_read_only_audit_included"] is True
+    assert rules["lss_daur_audit_status"] == (
+        "PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS"
+    )
+    assert rules["lss_daur_paired_observation_count"] == 77
+    assert rules["lss_daur_unique_signal_trajectory_content_count"] == 76
+    assert rules["lss_daur_candidate_source_session_group_count"] == 39
+    assert rules["lss_daur_canonical_mat_file_count"] == 154
+    assert rules["lss_daur_backup_mat_file_count"] == 154
+    assert rules["lss_daur_canonical_backup_observation_multiplier_allowed"] is False
+    assert rules["lss_daur_canonical_backup_as_extra_samples_allowed"] is False
+    assert rules["lss_daur_authoritative_session_key_available"] is False
+    assert rules["lss_daur_random_mat_split_allowed"] is False
+    assert rules["lss_daur_random_frame_window_split_allowed"] is False
+    assert rules["lss_daur_td_tr_split_allowed"] is False
+    assert rules["lss_daur_physical_micro_doppler_hz_allowed"] is False
+    assert rules["lss_daur_model_training_allowed"] is False
+    assert rules["lss_daur_raw_data_included"] is False
+    assert rules["lss_daur_sample_level_outputs_included"] is False
     assert rules["external_public_data_registries_included"] is True
     assert rules["team_onboarding_manual_included"] is True
     assert rules["team_qualification_policy_included"] is True

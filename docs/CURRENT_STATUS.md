@@ -140,7 +140,16 @@ ScienceDB file trees on 2026-08-04. DAUR matches the release count and size at
 1,013,535,036 bytes; all six RAR archives match the official MD5 values. These
 are local research inputs only and have not entered a model result.
 
-DAUR is pending a full MAT/pairing/group audit. FMCWR-2.0 is pending RAR
+DAUR has completed a full read-only MAT, TD/TR pairing, timing, metadata and
+grouping audit. All 77 logical recording IDs pair exactly and their canonical
+MATLAB v5 and metadata-rich v7.3 backup views contain identical shared values;
+the backups are not extra samples. One pair of recording IDs also has identical
+TD/TR content, so the release contains 76 unique signal/trajectory content pairs;
+11 recording pairs share internal frames and conservative linkage leaves 39
+candidate source-session groups. Training remains blocked because every track
+has repeated timestamps, six filename/header dates conflict, no authoritative
+session key exists, and 19 tracks use an undocumented 1024-bin physical axis
+while the official plotting script assumes 512 bins. FMCWR-2.0 is pending RAR
 extraction and schema/group audit. The simulated-bird archive must not be cited
 as natural-bird evidence. The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
 archive was downloaded and passed ZIP integrity checks. It has 1,561 entries
@@ -235,6 +244,8 @@ mechanism. See
 - Frozen LAT-MRICD grouped-baseline evidence: `results/final_evidence/lat_mricd_grouped_baselines_v1/`
 - Preregistered LAT-MRICD cross-band protocol: [LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md](LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md)
 - Frozen LAT-MRICD cross-band evidence: `results/final_evidence/lat_mricd_cross_band_transfer_v1/`
+- LSS-DAUR V3 read-only auditor: `scripts/audit_lss_daur_v1.py`
+- Local LSS-DAUR audit evidence: `results/data_audit/lss_daur_v1/`
 - External public dataset registry: `data/metadata/external_public_datasets_v1.csv`
 - External public artifact registry: `data/metadata/external_public_artifacts_v1.csv`
 

@@ -1,6 +1,6 @@
 # 一页式成果摘要与请教说明
 
-版本：2026-08-04 V6
+版本：2026-08-04 V7
 
 ## 项目在做什么
 
@@ -25,6 +25,7 @@
 | 外场准备 | 能力、同步、标定、dry run、Pilot 五道门已固化 | 真实证据未提供前全部保持关闭 |
 | 公开多频段分组基线 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
 | D17-XBAND 密封迁移 | X->S LR batch-class macro 0.6517，但 UAV recall 0.4433 未过门；X->Ku batch-class macro 0.8400 且该 target 过门；整体 `FAIL_STOP` | 两个 locked target 未同时通过，冻结为负结果；S/Ku 已消费，不得在同 target 上重跑、调 CNN、做域适配或结果驱动改模 |
+| DAUR V3 只读审计 | 77 个逻辑 TD/TR 观测、76 个唯一内容对、39 个保守候选 source-session 组；schema/配对通过 | 分组、严格时间、日期和 1024-bin 物理轴仍阻塞，`model_training_allowed=false` |
 
 ## 当前最关键的发现
 
@@ -37,7 +38,7 @@
 3. Tian FCN 的本地输出近似两条固定多普勒带，53 张验证目标图与公共模板的平均相关
    系数约 0.998。问题不只是阈值，而是输入/监督条件与当前数据可辨识性不匹配；原数据、
    配置或对齐样例目前不可获得，因此精确复现冻结，转入明确的替代路线。
-4. 当前分类资料只有 UAV，且 H/V 绝对幅相、PRF 和连续慢时间关系未证实。现阶段只能
+4. 当前内部 H/V 主任务分类资料只有 UAV，且 H/V 绝对幅相、PRF 和连续慢时间关系未证实。现阶段只能
    搭可迁移表示，不能声称获得物理微多普勒或绝对极化结论。
 5. LAT-MRICD 的五折 metadata-only 分组基线和一次性跨频段迁移均已冻结。跨频段主模型
    在 X->Ku 上通过，但 X->S 的 UAV batch recall 只有 0.4433，低于预登记的严格 `>0.50`
@@ -49,10 +50,15 @@
 7. DroneRFc-MM V1 完整发布有 113 files、75,612,067,287 bytes；本地只取得 28 个雷达相关
    文件，共 47,366,902 bytes。全量只读审计通过 30,717 frames/639,527 points 的 schema、
    finite/POINTS/时间戳检查；8 条 radar/GT 时间范围重叠，B1 零重叠，整体同步门阻塞。
-8. 下一公开数据工作不再重跑 LAT-MRICD，而是 DAUR schema/TD-TR/group、HSR V2 只读
-   loader/schema/track 和 FMCWR-2.0 解包/schema。DroneRFc-MM B1 等待更正 GT/可归因偏移，
-   其余 8 条也只有另行预登记后才可继续；各自门禁通过前禁止训练。
-9. 公开检索只额外落地两个小型接口样本：Ku UAV 群包约 4 MB、仅 3 个物理实验；NEXRAD
+8. DAUR 的 308 个 MAT 已完成全量只读审计。154 canonical 与 154 backup 共享数值完全
+   相等，只代表 77 个逻辑观测；其中 2 个 recording 的 TD/TR 内容完全重复，只有 76 个
+   唯一内容对。全部轨迹有重复时间，6 个日期冲突，58/19 条分别为 512/1024 bins；11 对
+   recording 共享内部帧，连通后为 39 个候选组。候选组仍不是作者确认的 session，Bird/UAV
+   候选 session 零重叠，训练和物理 Hz 微多普勒结论均未放行。
+9. 下一公开数据工作不再重跑 LAT-MRICD 或重复 DAUR 审计，而是 HSR V2 只读 loader、
+   schema/route/source-session 审计，再做 FMCWR-2.0 解包/schema。DroneRFc-MM B1 等待更正
+   GT/可归因偏移；各自门禁通过前禁止训练。
+10. 公开检索只额外落地两个小型接口样本：Ku UAV 群包约 4 MB、仅 3 个物理实验；NEXRAD
    单体扫约 0.4 MB，含 ZDR/PhiDP/RhoHV 等矩但没有目标标签。它们分别验证航迹和双极化
    读取接口，不扩大训练集。42.4 GB 气球、23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟
    主包均因域差异、体量或 split 未审计而暂缓，避免无目的网络与存储开销。

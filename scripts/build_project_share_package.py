@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v6"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v7"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -38,6 +38,9 @@ CURRENT_DATA_MANIFEST = (
 )
 DATA_CONTRACT = PROJECT_ROOT / "configs" / "data_collection_contract_v1.json"
 DATA_CONTRACT_VALIDATOR = PROJECT_ROOT / "scripts" / "validate_data_collection_manifest.py"
+LSS_DAUR_AUDIT_SUMMARY = (
+    PROJECT_ROOT / "results" / "data_audit" / "lss_daur_v1" / "summary.json"
+)
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt"}
 FORBIDDEN_SUFFIXES = {
@@ -385,6 +388,31 @@ PACKAGE_FILES = (
         "results/data_audit/dronerfc_mm_v1/recording_audit.csv",
         "assets/tables/dronerfc_mm_recording_audit.csv",
         "dronerfc_mm_recording_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_daur_v1/REPORT.md",
+        "evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md",
+        "lss_daur_read_only_audit_report",
+    ),
+    PackageFile(
+        "results/data_audit/lss_daur_v1/summary.json",
+        "evidence/26_LSS_DAUR_READ_ONLY_AUDIT.json",
+        "lss_daur_read_only_audit_summary",
+    ),
+    PackageFile(
+        "results/data_audit/lss_daur_v1/source_session_group_audit.csv",
+        "assets/tables/lss_daur_source_session_group_audit.csv",
+        "lss_daur_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_daur_v1/class_summary.csv",
+        "assets/tables/lss_daur_class_summary.csv",
+        "lss_daur_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_daur_v1/doppler_config_audit.csv",
+        "assets/tables/lss_daur_doppler_config_audit.csv",
+        "lss_daur_aggregate_audit_table",
     ),
     PackageFile(
         "data/metadata/external_public_datasets_v1.csv",
@@ -875,6 +903,78 @@ def load_current_data_readiness() -> dict[str, object]:
     return payload
 
 
+def load_lss_daur_audit() -> dict[str, object]:
+    payload = json.loads(LSS_DAUR_AUDIT_SUMMARY.read_text(encoding="utf-8"))
+    expected = {
+        "schema_version": 1,
+        "dataset_id": "lss_daur_1_0",
+        "release_version": "V3",
+        "status": "PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS",
+        "official_file_count": 314,
+        "official_size_bytes": 148763512,
+        "canonical_mat_file_count": 154,
+        "backup_mat_file_count": 154,
+        "paired_track_count": 77,
+        "unique_signal_trajectory_content_count": 76,
+        "frame_count": 11366,
+        "doppler_value_count": 7728640,
+        "doppler_512_track_count": 58,
+        "doppler_1024_track_count": 19,
+        "duplicate_time_step_count": 894,
+        "unique_time_position_count": 10472,
+        "tracks_with_noncontiguous_frame_counter": 13,
+        "frame_counter_gap_event_count": 85,
+        "frame_counter_missing_value_count": 94,
+        "frame_counter_repeat_event_count": 2,
+        "filename_header_date_mismatch_count": 6,
+        "filename_session_candidate_count": 45,
+        "header_date_session_candidate_count": 40,
+        "header_date_scene_group_count": 24,
+        "header_date_scene_class_pure_group_count": 20,
+        "candidate_source_session_group_count": 39,
+        "bird_uav_filename_session_overlap_count": 0,
+        "bird_uav_header_date_session_overlap_count": 0,
+        "bird_uav_connected_session_overlap_count": 0,
+        "shared_frame_record_pair_count": 11,
+        "exact_duplicate_recording_group_count": 1,
+        "exact_duplicate_recording_count": 2,
+        "v_field_constant_zero": True,
+        "canonical_backup_observation_count_multiplier_allowed": False,
+        "canonical_backup_as_extra_samples_allowed": False,
+        "random_mat_split_allowed": False,
+        "random_frame_or_window_split_allowed": False,
+        "td_tr_split_allowed": False,
+        "authoritative_session_key_available": False,
+        "absolute_weather_join_allowed": False,
+        "raw_adc_or_iq_available": False,
+        "h_v_polarimetry_available": False,
+        "physical_micro_doppler_hz_allowed": False,
+        "model_training_allowed": False,
+        "source_files_modified": False,
+        "sample_level_outputs_included": False,
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(
+                f"Unexpected LSS-DAUR audit {field}: {payload.get(field)!r}"
+            )
+    expected_gates = {
+        "release_identity": "PASS",
+        "schema_and_finite": "PASS",
+        "td_tr_pairing": "PASS",
+        "canonical_backup_equivalence": "PASS",
+        "strict_time": "FAIL_DUPLICATE_TIMESTAMPS",
+        "absolute_date_weather_join": "BLOCKED_DATE_CONFLICT",
+        "session_identity": "BLOCKED_NO_AUTHORITATIVE_SESSION_KEY",
+        "physical_axis_512": "PARTIAL_SCRIPT_DEFINED",
+        "physical_axis_1024": "BLOCKED_UNDOCUMENTED_WIDTH",
+        "model_training": "BLOCKED",
+    }
+    if payload.get("gates") != expected_gates:
+        raise ValueError("Unexpected LSS-DAUR audit gate states")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -969,6 +1069,7 @@ def copy_package_files(staging_dir: Path) -> list[dict[str, object]]:
 
 def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     readiness = load_current_data_readiness()
+    daur = load_lss_daur_audit()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1060,6 +1161,39 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "dronerfc_mm_group_key": "split_family_group",
             "dronerfc_mm_minimum_split_unit": "split_family_group",
             "dronerfc_mm_split_family_group_count": 6,
+            "lss_daur_read_only_audit_included": True,
+            "lss_daur_audit_status": daur["status"],
+            "lss_daur_paired_observation_count": daur["paired_track_count"],
+            "lss_daur_unique_signal_trajectory_content_count": daur[
+                "unique_signal_trajectory_content_count"
+            ],
+            "lss_daur_candidate_source_session_group_count": daur[
+                "candidate_source_session_group_count"
+            ],
+            "lss_daur_canonical_mat_file_count": daur["canonical_mat_file_count"],
+            "lss_daur_backup_mat_file_count": daur["backup_mat_file_count"],
+            "lss_daur_canonical_backup_observation_multiplier_allowed": daur[
+                "canonical_backup_observation_count_multiplier_allowed"
+            ],
+            "lss_daur_canonical_backup_as_extra_samples_allowed": daur[
+                "canonical_backup_as_extra_samples_allowed"
+            ],
+            "lss_daur_authoritative_session_key_available": daur[
+                "authoritative_session_key_available"
+            ],
+            "lss_daur_random_mat_split_allowed": daur["random_mat_split_allowed"],
+            "lss_daur_random_frame_window_split_allowed": daur[
+                "random_frame_or_window_split_allowed"
+            ],
+            "lss_daur_td_tr_split_allowed": daur["td_tr_split_allowed"],
+            "lss_daur_physical_micro_doppler_hz_allowed": daur[
+                "physical_micro_doppler_hz_allowed"
+            ],
+            "lss_daur_model_training_allowed": daur["model_training_allowed"],
+            "lss_daur_raw_data_included": False,
+            "lss_daur_sample_level_outputs_included": daur[
+                "sample_level_outputs_included"
+            ],
             "external_public_data_registries_included": True,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,
