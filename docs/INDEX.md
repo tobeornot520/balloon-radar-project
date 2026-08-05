@@ -4,6 +4,9 @@
 
 - `CURRENT_STATUS.md`: current claims, blockers and authoritative evidence
 - `PROJECT_STRUCTURE.md`: source and artifact ownership
+- `PROJECT_KNOWLEDGE_HANDBOOK_ZH.md`: beginner-oriented radar physics, signal processing, machine learning, code, evidence, and future-data handbook
+- `TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md`: page-by-page Tian 2024 guide, reproduction audit, 50 paper questions, and 22 project questions
+- `RECOMMENDED_PAPERS_20260805.md`: curated online papers, legal source URLs, license boundaries, hashes, and reading order
 - `DATA_CARD.md`: current dataset scope and limitations
 - `MODEL_SELECTION_LEDGER.md`: model-selection history and claim boundaries
 - `HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md`: audited reconstruction of the 14 local history exports and their corrections
