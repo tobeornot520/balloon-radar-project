@@ -15,13 +15,13 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260804_v8"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260805_v9"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
 STAGING_ROOT = DIST_ROOT / ".share-package-staging"
-PACKAGE_DATE = "2026-08-04"
-ZIP_TIMESTAMP = (2026, 8, 4, 0, 0, 0)
+PACKAGE_DATE = "2026-08-05"
+ZIP_TIMESTAMP = (2026, 8, 5, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"
@@ -44,8 +44,11 @@ LSS_DAUR_AUDIT_SUMMARY = (
 LSS_HSR_AUDIT_SUMMARY = (
     PROJECT_ROOT / "results" / "data_audit" / "lss_hsr_l_v2" / "summary.json"
 )
+LSS_FMCWR_AUDIT_SUMMARY = (
+    PROJECT_ROOT / "results" / "data_audit" / "lss_fmcwr_2_v1" / "summary.json"
+)
 
-ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt"}
+ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt", ".py"}
 FORBIDDEN_SUFFIXES = {
     ".mat",
     ".h5",
@@ -143,6 +146,11 @@ PACKAGE_FILES = (
         "project_governance_document",
     ),
     PackageFile(
+        "docs/RECOMMENDED_PAPERS_20260805.md",
+        "docs/20_RECOMMENDED_PAPERS_20260805.md",
+        "reading_registry",
+    ),
+    PackageFile(
         "docs/TEAM_REPRODUCTION_GUIDE_ZH.md",
         "docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md",
         "reproduction_guide",
@@ -181,6 +189,26 @@ PACKAGE_FILES = (
         "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
         "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md",
         "external_public_data_audit",
+    ),
+    PackageFile(
+        "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md",
+        "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md",
+        "external_public_data_audit",
+    ),
+    PackageFile(
+        "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md",
+        "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md",
+        "fmcwr_normalized_processing_contract",
+    ),
+    PackageFile(
+        "configs/lss_fmcwr_normalized_processing_contract_v1.json",
+        "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json",
+        "fmcwr_normalized_processing_contract",
+    ),
+    PackageFile(
+        "scripts/process_lss_fmcwr_normalized_v1.py",
+        "scripts/process_lss_fmcwr_normalized_v1.py",
+        "fmcwr_normalized_processing_code",
     ),
     PackageFile(
         "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md",
@@ -441,6 +469,26 @@ PACKAGE_FILES = (
         "results/data_audit/lss_hsr_l_v2/feature_summary.csv",
         "assets/tables/lss_hsr_l_v2_feature_summary.csv",
         "lss_hsr_l_v2_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_fmcwr_2_v1/REPORT.md",
+        "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md",
+        "lss_fmcwr_2_v1_read_only_audit_report",
+    ),
+    PackageFile(
+        "results/data_audit/lss_fmcwr_2_v1/summary.json",
+        "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.json",
+        "lss_fmcwr_2_v1_read_only_audit_summary",
+    ),
+    PackageFile(
+        "results/data_audit/lss_fmcwr_2_v1/archive_audit.csv",
+        "assets/tables/lss_fmcwr_2_v1_archive_audit.csv",
+        "lss_fmcwr_2_v1_aggregate_audit_table",
+    ),
+    PackageFile(
+        "results/data_audit/lss_fmcwr_2_v1/group_summary.csv",
+        "assets/tables/lss_fmcwr_2_v1_group_summary.csv",
+        "lss_fmcwr_2_v1_aggregate_audit_table",
     ),
     PackageFile(
         "data/metadata/external_public_datasets_v1.csv",
@@ -1145,6 +1193,139 @@ def load_lss_hsr_audit() -> dict[str, object]:
     return payload
 
 
+def _summary_contains_forbidden_member_keys(value: object) -> bool:
+    forbidden = {
+        "member_path",
+        "members_json",
+        "raw_sha256",
+        "numeric_payload_sha256",
+        "candidate_group_id",
+        "recording_stem",
+        "ordinal",
+        "crc32",
+    }
+    if isinstance(value, dict):
+        return any(
+            key in forbidden or _summary_contains_forbidden_member_keys(item)
+            for key, item in value.items()
+        )
+    if isinstance(value, list):
+        return any(_summary_contains_forbidden_member_keys(item) for item in value)
+    return False
+
+
+def load_lss_fmcwr_audit() -> dict[str, object]:
+    """Load and freeze only aggregate, share-safe FMCWR audit facts."""
+
+    payload = json.loads(LSS_FMCWR_AUDIT_SUMMARY.read_text(encoding="utf-8"))
+    if _summary_contains_forbidden_member_keys(payload):
+        raise ValueError("LSS-FMCWR audit summary contains member-level detail")
+    expected = {
+        "schema_version": 1,
+        "dataset_id": "lss_fmcwr_2_0",
+        "target_release_version": "V4",
+        "release_version": "V4",
+        "target_data_doi": "10.57760/sciencedb.radars.00054",
+        "data_doi": "10.57760/sciencedb.radars.00054",
+        "status": "PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS",
+        "audit_mode": "strict_release",
+        "release_identity_verified": True,
+        "archive_count": 6,
+        "archive_total_size_bytes": 1013456629,
+        "rar_entry_count": 116,
+        "mat_file_count": 90,
+        "directory_count": 26,
+        "uncompressed_mat_size_bytes": 1041307141,
+        "packed_mat_size_bytes": 1013436117,
+        "band_counts": {"K": 64, "L": 26},
+        "recording_stem_count": 66,
+        "candidate_group_count": 48,
+        "candidate_group_cross_target_count": 0,
+        "candidate_groups_authoritative": False,
+        "independent_recording_or_session_key_available": False,
+        "path_filename_angle_conflict_count": 1,
+        "unique_raw_mat_count": 71,
+        "raw_duplicate_group_count": 11,
+        "raw_duplicate_member_count": 30,
+        "raw_cross_target_duplicate_group_count": 0,
+        "unique_numeric_payload_count": 71,
+        "numeric_duplicate_group_count": 11,
+        "numeric_duplicate_member_count": 30,
+        "numeric_cross_target_duplicate_group_count": 0,
+        "k_channel_a_complex_verified": True,
+        "l_channel_a_real_verified": True,
+        "raw_complex_iq_available_for_all_records": False,
+        "h_v_polarimetry_available": False,
+        "target_aspect_angle_verified": False,
+        "natural_bird_evidence_available": False,
+        "global_sampling_rate_available": False,
+        "global_carrier_frequency_available": False,
+        "physical_doppler_hz_axis_available": False,
+        "physical_velocity_axis_available": False,
+        "complete_md_stft_implementation_available": False,
+        "simulated_bird_archive_is_simulation_only": True,
+        "random_mat_frame_or_window_split_allowed": False,
+        "model_training_allowed": False,
+        "model_training_performed": False,
+        "source_archives_extracted_to_disk": False,
+        "source_archives_modified": False,
+        "raw_data_included_in_outputs": False,
+        "member_level_outputs_local_only": True,
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(
+                f"Unexpected LSS-FMCWR audit {field}: {payload.get(field)!r}"
+            )
+    expected_gates = {
+        "release_identity": "PASS",
+        "rar_path_safety_and_inventory": "PASS",
+        "rar_integrity": "PASS",
+        "mat_schema_and_finite": "PASS",
+        "exact_duplicate_isolation": "BLOCKED_DUPLICATES_PRESENT",
+        "recording_session_identity": "BLOCKED_NOT_AVAILABLE",
+        "physical_time_doppler_velocity_axis": "BLOCKED_NOT_AVAILABLE",
+        "natural_bird_evidence": "BLOCKED_SIMULATION_ONLY",
+        "model_training": "BLOCKED",
+    }
+    if payload.get("gates") != expected_gates:
+        raise ValueError("Unexpected LSS-FMCWR audit gate states")
+    expected_targets = {
+        "ac311": 4,
+        "hexacopter": 15,
+        "inspire2": 15,
+        "m350": 15,
+        "mavic2": 15,
+        "simulated_bird": 2,
+    }
+    if payload.get("target_recording_stem_counts") != expected_targets:
+        raise ValueError("Unexpected LSS-FMCWR target stem counts")
+    expected_groups = {
+        "ac311": 4,
+        "hexacopter": 10,
+        "inspire2": 12,
+        "m350": 10,
+        "mavic2": 10,
+        "simulated_bird": 2,
+    }
+    if payload.get("target_candidate_group_counts") != expected_groups:
+        raise ValueError("Unexpected LSS-FMCWR candidate group counts")
+    expected_shapes = [
+        {"band_token": "K", "channelA_shape": "150x6000", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 29},
+        {"band_token": "K", "channelA_shape": "2000x5704", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 1},
+        {"band_token": "K", "channelA_shape": "2000x6000", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 3},
+        {"band_token": "K", "channelA_shape": "500x102400", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 1},
+        {"band_token": "K", "channelA_shape": "500x43439", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 1},
+        {"band_token": "K", "channelA_shape": "500x6000", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 16},
+        {"band_token": "K", "channelA_shape": "512x6000", "channelA_dtype": "<c16", "channelA_complex": True, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 13},
+        {"band_token": "L", "channelA_shape": "150x4000", "channelA_dtype": "<f8", "channelA_complex": False, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 5},
+        {"band_token": "L", "channelA_shape": "150x6000", "channelA_dtype": "<f8", "channelA_complex": False, "channelB_shape": "0x0", "channelB_dtype": "|u1", "channelB_complex": False, "mat_count": 21},
+    ]
+    if payload.get("channel_shape_dtype_counts") != expected_shapes:
+        raise ValueError("Unexpected LSS-FMCWR channel shape/type counts")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -1186,6 +1367,61 @@ def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
         for path in (item.source, item.destination)
     ):
         raise ValueError("LSS-HSR-L route/MAT detail tables are forbidden")
+
+    fmcwr_source_prefix = "results/data_audit/lss_fmcwr_2_v1/"
+    expected_fmcwr_map = {
+        f"{fmcwr_source_prefix}REPORT.md": (
+            "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md"
+        ),
+        f"{fmcwr_source_prefix}summary.json": (
+            "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.json"
+        ),
+        f"{fmcwr_source_prefix}archive_audit.csv": (
+            "assets/tables/lss_fmcwr_2_v1_archive_audit.csv"
+        ),
+        f"{fmcwr_source_prefix}group_summary.csv": (
+            "assets/tables/lss_fmcwr_2_v1_group_summary.csv"
+        ),
+    }
+    actual_fmcwr_map = {
+        item.source: item.destination
+        for item in files
+        if item.source.startswith(fmcwr_source_prefix)
+    }
+    if actual_fmcwr_map != expected_fmcwr_map:
+        raise ValueError(
+            "LSS-FMCWR-2.0 share evidence must contain exactly the four approved "
+            "aggregate source/destination mappings"
+        )
+
+    fmcwr_report_map = {
+        item.source: item.destination
+        for item in files
+        if item.source == "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md"
+    }
+    if fmcwr_report_map != {
+        "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md": (
+            "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md"
+        )
+    }:
+        raise ValueError("The standalone FMCWR read-only audit document is required")
+
+    forbidden_fmcwr_names = {
+        "mat_audit.csv",
+        "duplicate_groups.csv",
+    }
+    if any(
+        Path(path).name in forbidden_fmcwr_names
+        for item in files
+        if item.source.startswith(fmcwr_source_prefix)
+        for path in (item.source, item.destination)
+    ):
+        raise ValueError("LSS-FMCWR member-level audit tables are forbidden")
+    if any(
+        item.source.startswith("data/raw/") or item.destination.startswith("data/raw/")
+        for item in files
+    ):
+        raise ValueError("Raw data paths are forbidden in the share package")
 
     missing: list[str] = []
     errors: list[str] = []
@@ -1277,6 +1513,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     readiness = load_current_data_readiness()
     daur = load_lss_daur_audit()
     hsr = load_lss_hsr_audit()
+    fmcwr = load_lss_fmcwr_audit()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1506,6 +1743,114 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "lss_hsr_l_v2_raw_data_included": False,
             "lss_hsr_l_v2_route_mat_detail_tables_included": False,
             "lss_hsr_l_v2_sample_level_outputs_included": False,
+            "lss_fmcwr_2_read_only_audit_included": True,
+            "lss_fmcwr_2_audit_status": fmcwr["status"],
+            "lss_fmcwr_2_target_release_version": fmcwr[
+                "target_release_version"
+            ],
+            "lss_fmcwr_2_release_identity_verified": fmcwr[
+                "release_identity_verified"
+            ],
+            "lss_fmcwr_2_data_doi": fmcwr["data_doi"],
+            "lss_fmcwr_2_archive_count": fmcwr["archive_count"],
+            "lss_fmcwr_2_archive_total_size_bytes": fmcwr[
+                "archive_total_size_bytes"
+            ],
+            "lss_fmcwr_2_rar_entry_count": fmcwr["rar_entry_count"],
+            "lss_fmcwr_2_mat_file_count": fmcwr["mat_file_count"],
+            "lss_fmcwr_2_directory_count": fmcwr["directory_count"],
+            "lss_fmcwr_2_band_counts": fmcwr["band_counts"],
+            "lss_fmcwr_2_recording_stem_count": fmcwr[
+                "recording_stem_count"
+            ],
+            "lss_fmcwr_2_candidate_group_count": fmcwr[
+                "candidate_group_count"
+            ],
+            "lss_fmcwr_2_candidate_groups_authoritative": fmcwr[
+                "candidate_groups_authoritative"
+            ],
+            "lss_fmcwr_2_independent_recording_or_session_key_available": fmcwr[
+                "independent_recording_or_session_key_available"
+            ],
+            "lss_fmcwr_2_unique_raw_mat_count": fmcwr[
+                "unique_raw_mat_count"
+            ],
+            "lss_fmcwr_2_raw_duplicate_group_count": fmcwr[
+                "raw_duplicate_group_count"
+            ],
+            "lss_fmcwr_2_raw_duplicate_member_count": fmcwr[
+                "raw_duplicate_member_count"
+            ],
+            "lss_fmcwr_2_unique_numeric_payload_count": fmcwr[
+                "unique_numeric_payload_count"
+            ],
+            "lss_fmcwr_2_numeric_duplicate_group_count": fmcwr[
+                "numeric_duplicate_group_count"
+            ],
+            "lss_fmcwr_2_numeric_duplicate_member_count": fmcwr[
+                "numeric_duplicate_member_count"
+            ],
+            "lss_fmcwr_2_channel_shape_dtype_counts": fmcwr[
+                "channel_shape_dtype_counts"
+            ],
+            "lss_fmcwr_2_target_recording_stem_counts": fmcwr[
+                "target_recording_stem_counts"
+            ],
+            "lss_fmcwr_2_target_candidate_group_counts": fmcwr[
+                "target_candidate_group_counts"
+            ],
+            "lss_fmcwr_2_gates": fmcwr["gates"],
+            "lss_fmcwr_2_raw_complex_iq_available_for_all_records": fmcwr[
+                "raw_complex_iq_available_for_all_records"
+            ],
+            "lss_fmcwr_2_h_v_polarimetry_available": fmcwr[
+                "h_v_polarimetry_available"
+            ],
+            "lss_fmcwr_2_target_aspect_angle_verified": fmcwr[
+                "target_aspect_angle_verified"
+            ],
+            "lss_fmcwr_2_natural_bird_evidence_available": fmcwr[
+                "natural_bird_evidence_available"
+            ],
+            "lss_fmcwr_2_global_sampling_rate_available": fmcwr[
+                "global_sampling_rate_available"
+            ],
+            "lss_fmcwr_2_global_carrier_frequency_available": fmcwr[
+                "global_carrier_frequency_available"
+            ],
+            "lss_fmcwr_2_physical_doppler_hz_axis_available": fmcwr[
+                "physical_doppler_hz_axis_available"
+            ],
+            "lss_fmcwr_2_physical_velocity_axis_available": fmcwr[
+                "physical_velocity_axis_available"
+            ],
+            "lss_fmcwr_2_complete_md_stft_implementation_available": fmcwr[
+                "complete_md_stft_implementation_available"
+            ],
+            "lss_fmcwr_2_simulated_bird_archive_is_simulation_only": fmcwr[
+                "simulated_bird_archive_is_simulation_only"
+            ],
+            "lss_fmcwr_2_random_mat_frame_or_window_split_allowed": fmcwr[
+                "random_mat_frame_or_window_split_allowed"
+            ],
+            "lss_fmcwr_2_model_training_allowed": fmcwr[
+                "model_training_allowed"
+            ],
+            "lss_fmcwr_2_model_training_performed": fmcwr[
+                "model_training_performed"
+            ],
+            "lss_fmcwr_2_source_archives_extracted_to_disk": fmcwr[
+                "source_archives_extracted_to_disk"
+            ],
+            "lss_fmcwr_2_source_archives_modified": fmcwr[
+                "source_archives_modified"
+            ],
+            "lss_fmcwr_2_raw_data_included": False,
+            "lss_fmcwr_2_member_level_outputs_included": False,
+            "lss_fmcwr_2_normalized_axis_contract_only": True,
+            "lss_fmcwr_2_normalized_processing_contract_version": 1,
+            "lss_fmcwr_2_normalized_processing_performance_reported": False,
+            "lss_fmcwr_2_normalized_processing_code_included": True,
             "external_public_data_registries_included": True,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,

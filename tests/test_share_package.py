@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260804_v8"
+        == "balloon_radar_results_and_team_onboarding_20260805_v9"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -47,6 +47,10 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md" in destinations
     assert "TEAM_START_HERE.md" in destinations
     assert "docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md" in destinations
+    assert "docs/20_RECOMMENDED_PAPERS_20260805.md" in destinations
+    assert "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json" in destinations
+    assert "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md" in destinations
+    assert "scripts/process_lss_fmcwr_normalized_v1.py" in destinations
     assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
     assert "assets/templates/team_qualification_scorecard_template_v1.csv" in destinations
     assert "assets/templates/team_task_claim_template_v1.csv" in destinations
@@ -208,6 +212,59 @@ def test_share_source_map_is_complete_and_unique() -> None:
     } == hsr_destinations
     assert not any(
         Path(path).name in {"route_audit.csv", "mat_audit.csv"}
+        for path in sources + destinations
+    )
+    fmcwr_sources = {
+        "results/data_audit/lss_fmcwr_2_v1/REPORT.md",
+        "results/data_audit/lss_fmcwr_2_v1/summary.json",
+        "results/data_audit/lss_fmcwr_2_v1/archive_audit.csv",
+        "results/data_audit/lss_fmcwr_2_v1/group_summary.csv",
+    }
+    fmcwr_destinations = {
+        "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md",
+        "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.json",
+        "assets/tables/lss_fmcwr_2_v1_archive_audit.csv",
+        "assets/tables/lss_fmcwr_2_v1_group_summary.csv",
+    }
+    assert {
+        item.source
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_fmcwr_2_v1/")
+    } == fmcwr_sources
+    assert {
+        item.destination
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_fmcwr_2_v1/")
+    } == fmcwr_destinations
+    assert {
+        item.source: item.destination
+        for item in PACKAGE_FILES
+        if item.source.startswith("results/data_audit/lss_fmcwr_2_v1/")
+    } == {
+        "results/data_audit/lss_fmcwr_2_v1/REPORT.md": (
+            "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md"
+        ),
+        "results/data_audit/lss_fmcwr_2_v1/summary.json": (
+            "evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.json"
+        ),
+        "results/data_audit/lss_fmcwr_2_v1/archive_audit.csv": (
+            "assets/tables/lss_fmcwr_2_v1_archive_audit.csv"
+        ),
+        "results/data_audit/lss_fmcwr_2_v1/group_summary.csv": (
+            "assets/tables/lss_fmcwr_2_v1_group_summary.csv"
+        ),
+    }
+    assert {
+        item.source: item.destination
+        for item in PACKAGE_FILES
+        if item.source == "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md"
+    } == {
+        "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md": (
+            "docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md"
+        )
+    }
+    assert not any(
+        Path(path).name in {"mat_audit.csv", "duplicate_groups.csv"}
         for path in sources + destinations
     )
     assert "assets/registries/external_public_datasets_v1.csv" in destinations
@@ -722,6 +779,184 @@ def test_share_lss_hsr_l_v2_audit_is_aggregate_blocked_and_sanitized() -> None:
         assert len(rows) == expected_row_count
 
 
+def test_share_lss_fmcwr_audit_is_aggregate_blocked_and_sanitized() -> None:
+    summary = share_package.load_lss_fmcwr_audit()
+    assert summary["dataset_id"] == "lss_fmcwr_2_0"
+    assert summary["target_release_version"] == "V4"
+    assert summary["data_doi"] == "10.57760/sciencedb.radars.00054"
+    assert summary["status"] == (
+        "PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS"
+    )
+    assert summary["archive_count"] == 6
+    assert summary["rar_entry_count"] == 116
+    assert summary["mat_file_count"] == 90
+    assert summary["directory_count"] == 26
+    assert summary["band_counts"] == {"K": 64, "L": 26}
+    assert summary["recording_stem_count"] == 66
+    assert summary["candidate_group_count"] == 48
+    assert summary["unique_raw_mat_count"] == 71
+    assert summary["raw_duplicate_group_count"] == 11
+    assert summary["raw_duplicate_member_count"] == 30
+    assert summary["unique_numeric_payload_count"] == 71
+    assert summary["numeric_duplicate_group_count"] == 11
+    assert summary["numeric_duplicate_member_count"] == 30
+    assert summary["candidate_groups_authoritative"] is False
+    assert summary["independent_recording_or_session_key_available"] is False
+    assert summary["h_v_polarimetry_available"] is False
+    assert summary["natural_bird_evidence_available"] is False
+    assert summary["physical_doppler_hz_axis_available"] is False
+    assert summary["physical_velocity_axis_available"] is False
+    assert summary["model_training_allowed"] is False
+    assert summary["model_training_performed"] is False
+    assert summary["source_archives_extracted_to_disk"] is False
+    assert summary["source_archives_modified"] is False
+    assert summary["raw_data_included_in_outputs"] is False
+    assert summary["member_level_outputs_local_only"] is True
+    assert summary["gates"] == {
+        "release_identity": "PASS",
+        "rar_path_safety_and_inventory": "PASS",
+        "rar_integrity": "PASS",
+        "mat_schema_and_finite": "PASS",
+        "exact_duplicate_isolation": "BLOCKED_DUPLICATES_PRESENT",
+        "recording_session_identity": "BLOCKED_NOT_AVAILABLE",
+        "physical_time_doppler_velocity_axis": "BLOCKED_NOT_AVAILABLE",
+        "natural_bird_evidence": "BLOCKED_SIMULATION_ONLY",
+        "model_training": "BLOCKED",
+    }
+    assert summary["target_recording_stem_counts"] == {
+        "ac311": 4,
+        "hexacopter": 15,
+        "inspire2": 15,
+        "m350": 15,
+        "mavic2": 15,
+        "simulated_bird": 2,
+    }
+    assert summary["target_candidate_group_counts"] == {
+        "ac311": 4,
+        "hexacopter": 10,
+        "inspire2": 12,
+        "m350": 10,
+        "mavic2": 10,
+        "simulated_bird": 2,
+    }
+
+    expected_tables = {
+        "assets/tables/lss_fmcwr_2_v1_archive_audit.csv": (
+            {
+                "archive_name",
+                "target_id",
+                "physical_size_bytes",
+                "sha256",
+                "entry_count",
+                "mat_file_count",
+                "directory_count",
+                "uncompressed_mat_size_bytes",
+                "packed_mat_size_bytes",
+                "k_count",
+                "l_count",
+                "rar5_non_solid_non_volume_unencrypted",
+                "integrity_test_passed",
+                "release_identity_verified",
+            },
+            6,
+        ),
+        "assets/tables/lss_fmcwr_2_v1_group_summary.csv": (
+            {
+                "archive_name",
+                "target_id",
+                "band_token",
+                "collection_angle",
+                "duration_token",
+                "channelA_shape",
+                "channelB_shape",
+                "mat_count",
+                "unique_raw_mat_count",
+                "unique_numeric_payload_count",
+                "candidate_group_count",
+            },
+            68,
+        ),
+    }
+    forbidden_detail_columns = {
+        "member_path",
+        "members_json",
+        "member_sha256",
+        "raw_sha256",
+        "raw_mat_sha256",
+        "numeric_payload_sha256",
+        "mat_path",
+        "relative_path",
+        "recording_stem",
+        "ordinal",
+        "crc32",
+    }
+    for destination, (expected_columns, expected_row_count) in expected_tables.items():
+        source = next(
+            item.source for item in PACKAGE_FILES if item.destination == destination
+        )
+        with (share_package.PROJECT_ROOT / source).open(
+            encoding="utf-8-sig", newline=""
+        ) as handle:
+            reader = csv.DictReader(handle)
+            rows = list(reader)
+            columns = set(reader.fieldnames or ())
+        assert columns == expected_columns
+        assert columns.isdisjoint(forbidden_detail_columns)
+        assert len(rows) == expected_row_count
+        assert all(not any(key in row for key in forbidden_detail_columns) for row in rows)
+
+
+def test_lss_fmcwr_audit_loader_rejects_training_gate_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload = json.loads(
+        share_package.LSS_FMCWR_AUDIT_SUMMARY.read_text(encoding="utf-8")
+    )
+    payload["model_training_allowed"] = True
+    changed_summary = tmp_path / "changed_fmcwr_summary.json"
+    changed_summary.write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+    monkeypatch.setattr(share_package, "LSS_FMCWR_AUDIT_SUMMARY", changed_summary)
+    with pytest.raises(ValueError, match="model_training_allowed"):
+        share_package.load_lss_fmcwr_audit()
+
+
+def test_lss_fmcwr_audit_loader_rejects_gate_state_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload = json.loads(
+        share_package.LSS_FMCWR_AUDIT_SUMMARY.read_text(encoding="utf-8")
+    )
+    payload["gates"]["model_training"] = "PASS"
+    changed_summary = tmp_path / "changed_fmcwr_gate_summary.json"
+    changed_summary.write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+    monkeypatch.setattr(share_package, "LSS_FMCWR_AUDIT_SUMMARY", changed_summary)
+    with pytest.raises(ValueError, match="gate states"):
+        share_package.load_lss_fmcwr_audit()
+
+
+def test_lss_fmcwr_audit_loader_rejects_member_level_detail(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload = json.loads(
+        share_package.LSS_FMCWR_AUDIT_SUMMARY.read_text(encoding="utf-8")
+    )
+    payload["member_path"] = "archive/member.mat"
+    changed_summary = tmp_path / "changed_fmcwr_member_summary.json"
+    changed_summary.write_text(
+        json.dumps(payload, ensure_ascii=False), encoding="utf-8"
+    )
+    monkeypatch.setattr(share_package, "LSS_FMCWR_AUDIT_SUMMARY", changed_summary)
+    with pytest.raises(ValueError, match="member-level detail"):
+        share_package.load_lss_fmcwr_audit()
+
+
 def test_lss_hsr_audit_loader_rejects_training_gate_drift(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -950,6 +1185,81 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lss_hsr_l_v2_raw_data_included"] is False
     assert rules["lss_hsr_l_v2_route_mat_detail_tables_included"] is False
     assert rules["lss_hsr_l_v2_sample_level_outputs_included"] is False
+    fmcwr = share_package.load_lss_fmcwr_audit()
+    fmcwr_manifest_fields = {
+        "lss_fmcwr_2_audit_status": "status",
+        "lss_fmcwr_2_target_release_version": "target_release_version",
+        "lss_fmcwr_2_release_identity_verified": "release_identity_verified",
+        "lss_fmcwr_2_data_doi": "data_doi",
+        "lss_fmcwr_2_archive_count": "archive_count",
+        "lss_fmcwr_2_archive_total_size_bytes": "archive_total_size_bytes",
+        "lss_fmcwr_2_rar_entry_count": "rar_entry_count",
+        "lss_fmcwr_2_mat_file_count": "mat_file_count",
+        "lss_fmcwr_2_directory_count": "directory_count",
+        "lss_fmcwr_2_band_counts": "band_counts",
+        "lss_fmcwr_2_recording_stem_count": "recording_stem_count",
+        "lss_fmcwr_2_candidate_group_count": "candidate_group_count",
+        "lss_fmcwr_2_candidate_groups_authoritative": (
+            "candidate_groups_authoritative"
+        ),
+        "lss_fmcwr_2_independent_recording_or_session_key_available": (
+            "independent_recording_or_session_key_available"
+        ),
+        "lss_fmcwr_2_unique_raw_mat_count": "unique_raw_mat_count",
+        "lss_fmcwr_2_raw_duplicate_group_count": "raw_duplicate_group_count",
+        "lss_fmcwr_2_raw_duplicate_member_count": "raw_duplicate_member_count",
+        "lss_fmcwr_2_unique_numeric_payload_count": "unique_numeric_payload_count",
+        "lss_fmcwr_2_numeric_duplicate_group_count": (
+            "numeric_duplicate_group_count"
+        ),
+        "lss_fmcwr_2_numeric_duplicate_member_count": (
+            "numeric_duplicate_member_count"
+        ),
+        "lss_fmcwr_2_channel_shape_dtype_counts": "channel_shape_dtype_counts",
+        "lss_fmcwr_2_target_recording_stem_counts": "target_recording_stem_counts",
+        "lss_fmcwr_2_target_candidate_group_counts": "target_candidate_group_counts",
+        "lss_fmcwr_2_gates": "gates",
+        "lss_fmcwr_2_raw_complex_iq_available_for_all_records": (
+            "raw_complex_iq_available_for_all_records"
+        ),
+        "lss_fmcwr_2_h_v_polarimetry_available": "h_v_polarimetry_available",
+        "lss_fmcwr_2_target_aspect_angle_verified": "target_aspect_angle_verified",
+        "lss_fmcwr_2_natural_bird_evidence_available": (
+            "natural_bird_evidence_available"
+        ),
+        "lss_fmcwr_2_global_sampling_rate_available": "global_sampling_rate_available",
+        "lss_fmcwr_2_global_carrier_frequency_available": "global_carrier_frequency_available",
+        "lss_fmcwr_2_physical_doppler_hz_axis_available": (
+            "physical_doppler_hz_axis_available"
+        ),
+        "lss_fmcwr_2_physical_velocity_axis_available": (
+            "physical_velocity_axis_available"
+        ),
+        "lss_fmcwr_2_complete_md_stft_implementation_available": (
+            "complete_md_stft_implementation_available"
+        ),
+        "lss_fmcwr_2_simulated_bird_archive_is_simulation_only": (
+            "simulated_bird_archive_is_simulation_only"
+        ),
+        "lss_fmcwr_2_random_mat_frame_or_window_split_allowed": (
+            "random_mat_frame_or_window_split_allowed"
+        ),
+        "lss_fmcwr_2_model_training_allowed": "model_training_allowed",
+        "lss_fmcwr_2_model_training_performed": "model_training_performed",
+        "lss_fmcwr_2_source_archives_extracted_to_disk": (
+            "source_archives_extracted_to_disk"
+        ),
+        "lss_fmcwr_2_source_archives_modified": "source_archives_modified",
+    }
+    for manifest_key, summary_key in fmcwr_manifest_fields.items():
+        assert rules[manifest_key] == fmcwr[summary_key]
+    assert rules["lss_fmcwr_2_read_only_audit_included"] is True
+    assert rules["lss_fmcwr_2_raw_data_included"] is False
+    assert rules["lss_fmcwr_2_member_level_outputs_included"] is False
+    assert rules["lss_fmcwr_2_normalized_axis_contract_only"] is True
+    assert rules["lss_fmcwr_2_normalized_processing_contract_version"] == 1
+    assert rules["lss_fmcwr_2_normalized_processing_performance_reported"] is False
+    assert rules["lss_fmcwr_2_normalized_processing_code_included"] is True
     assert rules["external_public_data_registries_included"] is True
     assert rules["team_onboarding_manual_included"] is True
     assert rules["team_qualification_policy_included"] is True

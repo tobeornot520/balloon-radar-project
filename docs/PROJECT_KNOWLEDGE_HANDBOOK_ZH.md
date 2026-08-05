@@ -768,7 +768,10 @@ model_training_allowed = false
 ### 7.5 LSS-DAUR、LSS-FMCWR-2.0 与 DroneRFc-MM
 
 - DAUR：TD/TR 和轨迹配对、canonical/backup 等价及重复内容已审计；时间重复、日期冲突、分组和 1024-bin 轴仍阻塞训练。
-- FMCWR-2.0：K/L 波段归档已经完成来源与压缩包完整性核验；当前审计脚本仍在开发、未验证，不能把它列为已完成模型证据。模拟鸟只能叫模拟鸟。
+- FMCWR-2.0：6 个 RAR/90 MAT 的只读 schema/重复审计已完成。64 个 K 记录为复数
+  `channelA`、26 个 L 记录为实数 `channelA`，`channelB` 全空；90 个 MAT 只有 71 个唯一
+  payload，11 个精确重复组覆盖 30 文件，66 stems 连通为 48 个非权威候选组。它不是 H/V
+  极化数据，session 和物理轴仍阻塞训练；模拟鸟只能叫模拟鸟。
 - DroneRFc-MM 子集：是约 30,717 帧 PCD 点云，不是 ADC/IQ；B1 雷达与同名 GT 时间范围零重叠，当前不能监督对齐。
 
 ### 7.6 接口小样本
@@ -1612,7 +1615,9 @@ Tian 入口存在不等于复现成功；训练脚本存在也不等于该训练
 - `notes/development_history/`：本地历史记录；
 - `losses/`、`metrics/`、`postprocess/`、`radar_processing/`、`checkpoints/`、`logs/`、`notebooks/`：当前预留目录；
 - 一些无 `_v1` 的早期 ROI 脚本只有占位输出，正式 Stage 4 使用版本化 `_v1` 文件；
-- `scripts/audit_lss_fmcwr_2_v1.py` 当前未跟踪、开发中且未经测试，不能写成完成审计；
+- `scripts/audit_lss_fmcwr_2_v1.py` 是保留内容不变的早期开发稿，单独运行不能读取发布中的
+  MATLAB v7.3；正式入口是 `scripts/audit_lss_fmcwr_2_hdf5_v1.py`。后者的全量只读审计已
+  完成，但完成的是 archive/schema/重复审计，不是模型训练或性能复现；
 - 气球类别枚举和迁移网络只是接口准备，不代表已有气球训练样本或 checkpoint。
 
 ### 14.9 关键支线 shape 合同
@@ -1844,7 +1849,7 @@ V2 相对 fixed notch 移除 11 个 Fold 4 报警，没有增加报警或改变�
 |---|---|---|
 | HSR-L V2 | 全量只读 schema/route/窗口审计完成 | source-session与512-bin物理轴 |
 | DAUR V3 | MAT、TD/TR、重复和轨迹审计完成 | 分组、重复时间、日期冲突、1024-bin轴 |
-| FMCWR-2.0 | 来源、归档数和哈希已核验 | 完整解包后的schema/group审计尚未冻结 |
+| FMCWR-2.0 | 6 RAR/90 MAT 的 schema/重复审计完成；71 唯一 payload、48 非权威候选组 | source-session、全局 Fs/PRF/载频/零频和物理轴；训练关闭 |
 | DroneRFc-MM subset | 全PCD schema与时间范围检查完成 | B1真值零重叠，其余也需预登记 |
 | Ku UAV swarm | 小接口样本已保留 | 只有3次物理实验，不支持模型评价 |
 | NEXRAD | 单体扫接口样本已保留 | 无UAV/气球识别标签 |

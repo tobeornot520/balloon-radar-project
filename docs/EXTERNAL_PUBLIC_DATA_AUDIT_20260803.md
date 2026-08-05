@@ -1,6 +1,6 @@
 # 外部公开雷达数据核验与使用计划
 
-版本：2026-08-04
+版本：2026-08-05
 
 ## 1. 来源核验
 
@@ -11,7 +11,7 @@
 | `radars.ac.cn` | 《雷达学报》数据栏目；正确路径含 `/cn/`，正式文件由 ScienceDB 托管 | 已核对 LSS-DAUR、LSS-HSR-L、LSS-FMCWR-1.0/2.0 的 DOI、许可和文件树 | 下载 DAUR V3、HSR-L ScienceDB V2 与期刊历史包、FMCWR-2.0 V4 及两版 FMCWR 说明；原始数据不进 Git/分享包 |
 | ScienceDB LSS-DAUR-1.0 | 数据 DOI `10.57760/sciencedb.radars.00076`，V3 | 314/314 文件、148,763,512 bytes 完整；77 对 TD/TR 的 schema、配对与 canonical/backup 数值等价性已通过 | 分组键、严格时间和 1024-bin 物理轴阻塞；不训练 |
 | ScienceDB LSS-HSR-L | 数据 DOI `10.57760/sciencedb.radars.00063`，V2 | 237,020,946-byte ZIP 与 1,561 个条目完整；1,530 MAT/63,148 帧/865 routes 全量只读 schema 与索引审计通过 | route 是最低分组，但 source-session/场景来源和 512-bin DPL 物理轴未知；529 个 overflow 窗口隔离，不训练 |
-| ScienceDB LSS-FMCWR-2.0 | 数据 DOI `10.57760/sciencedb.radars.00054`，V4 | 8/8 文件、1,013,535,036 bytes 已下载；6 个 RAR 的官方 MD5 全通过 | 优先做 K/L、角度和微多普勒 schema 审计；鸟类包只作仿真数据 |
+| ScienceDB LSS-FMCWR-2.0 | 数据 DOI `10.57760/sciencedb.radars.00054`，V4 | 8/8 文件、1,013,535,036 bytes 已下载；6 个 RAR 身份/完整性与 90 个 MAT 的全量只读 schema/重复审计通过 | 71 个唯一 payload、48 个非权威候选组；session/物理轴阻塞，鸟类包只作仿真数据，不训练 |
 | ScienceDB DroneRFc-MM | 数据 DOI `10.57760/sciencedb.j00173.00094`，V1 | 从 75.6 GB/113 文件的完整发布中选择下载 28 个雷达、真值、标签、说明和代码文件，共 47,366,902 bytes | 用于 77--81 GHz 点云、轨迹和时间同步接口审计；不下载无关相机、音频、LiDAR 与通信 RF |
 | ScienceDB UAV 群目标 | 论文 DOI `10.12466/xhcl.2025.05.004`，数据 DOI `10.57760/sciencedb.25500`，V1 | 3,996,753-byte 官方 ZIP 已下载，SHA256、ZIP 安全和 MAT schema 检查通过 | 只做 Ku 波段 XYZ 量测、航迹关联和跟踪接口 smoke；5 个 MAT 只对应 3 个物理实验 |
 | NOAA NEXRAD Level II | Open Data Registry 的现行 `unidata-nexrad-level2` 桶 | 只下载一个 395,379-byte KTLX Archive II 体扫并核验实际双极化矩 | 只做 Z/V/SW/ZDR/PhiDP/RhoHV loader 和公式 smoke；无 UAV/气球标签 |
@@ -172,8 +172,8 @@ LSS-Ku-1.0 仅在学长确认它能补 Tian 同域性或地杂波测试缺口后
 | LSS-DAUR-1.0 V3 | 314 个官方文件完整下载并完成全量只读审计 | 文件数 `314`、总字节 `148763512`、清单 SHA256 `5febc59a29c42fb7dd8b001afa73fe913767f00c2c060a21a5d95073c2ee1745`；308 MAT 全部可读有限；77 对 TD/TR 对齐；canonical/backup 共享数值完全相等 | `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`：每轨重复时间、6 个日期冲突、session key 未确认、19 条 1024-bin 轴无说明；禁止训练与随机切窗 |
 | LSS-HSR-L ScienceDB V2 | 正式 ZIP 已下载并完成全量只读审计 | `237020946` bytes；SHA256 `fea8a21354110a96fb9644dc1c69649b6dc6d1a1b6da512498d9c2d74d839540`；1,561 个条目、1,530 MAT、63,148 帧和 865 routes 均通过完整性/schema/索引检查 | `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`：route 以上来源和 512-bin DPL 物理轴未知；529 个 overflow 窗口隔离，禁止训练 |
 | LSS-HSR-L 期刊历史包 | ZIP 已下载 | `209569478` bytes；SHA256 `22112d4225636c5626845a9f0640abbf4503cc70763b592a609287760ab5f4a4`；1,478 个条目且 ZIP 完整 | 已确认不等同于 V2，只保留版本史，不混合建模；禁止直接运行会移动原件的官方 `dataset.py` |
-| LSS-FMCWR-2.0 V4 | 8 个官方文件完整下载 | 总字节 `1013535036` 与发布元数据一致；6 个 RAR 的官方 MD5 全通过，另生成 SHA256 | 先配置可审计的 RAR 5 解包工具，再按 MAT 实查官方“90 组”与分项合计 86 的矛盾 |
-| LSS-FMCWR-1.0 | 仅下载 1.0 使用说明 PDF | 当前没有原始 RAR | 等 FMCWR-2.0 审计后，仅在能补明确 UAV 型号/双频缺口时下载主体 |
+| LSS-FMCWR-2.0 V4 | 8 个官方文件完整下载并完成全量只读 RAR/MAT 审计 | 总字节 `1013535036` 与发布元数据一致；6 个 RAR 的 MD5/SHA256/完整性通过；90 MAT、64 K/26 L、71 唯一 payload、48 非权威候选组，B 通道全空 | `PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`：session、全局 Fs/PRF/载频/零频与物理轴未知；禁止训练和随机切窗 |
+| LSS-FMCWR-1.0 | 仅下载 1.0 使用说明 PDF | 当前没有原始 RAR；2.0 审计已表明核心缺口是 session 和物理轴，而非 MAT 数量 | 继续暂缓；只有能补发布方确认的 session/轴事实或 2.0 未覆盖的明确目标时才下载主体 |
 | St Andrews 微多普勒仿真包 | 未下载 | DOI 页面与 CC BY 可核验，但官方文件端两次返回 HTTP 403；没有保留部分文件，也未绕过访问限制 | 只在官方端恢复或数据持有人授权后用于 smoke，不作为真实外部性能证据 |
 | DroneRFc-MM V1 雷达子集 | 28 个官方文件完整下载并完成只读 schema/时间覆盖审计 | `47366902` bytes；9 个 ZIP/30,717 个 PCD/639,527 个点均通过 CRC、15 列 schema、有限值、POINTS 行数和文件名时间戳检查 | 总门为 `BLOCKED_TIMESTAMP_ALIGNMENT`：B1 雷达与同名 GT 零重叠；B1 禁止监督对齐，其余 8 条只允许后续预登记同步研究 |
 | Radar Signature Dataset 0.1 | 只下载 README 与 metadata | README `125546` bytes、SHA256 `34900026bc5081d45eccaf69df62fac65173cd2c8b0520d8088cc335941b2171`；metadata `27732` bytes、SHA256 `6c58ab862caa82cebe72403aed4c33fd61ae3c6aea71cf45bcfe1dcd0d7224b3`；不执行不可信 pickle | 42.4 GB 主包暂缓；即使以后下载，也只按完整测量序列/物理气球分组做室内接口 smoke |
@@ -227,8 +227,24 @@ frame 或重叠 window 随机拆分。V2 自带 `Dataset.py` 仅按需读 MAT、
 旧 `dataset.py`。V2 审计状态冻结为
 `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
 
-FMCWR-2.0 中的 bird 是仿真飞鸟，不得写成真实自然鸟外部验证；官方还提示部分 L 波段记录
-可能因采集位置未改变而不变，拆分前必须按目标、角度、记录和潜在重复内容建立分组清单。
+FMCWR-2.0 的六个 RAR 已使用 UNRAR 7.20 直接列表、完整性测试和内存流式 MAT 读取，未落盘
+解包或修改源文件。实际 90 个 MAT 中有 84 个 MATLAB v5 和 6 个 v7.3；所有文件只有
+`echoes.channelA/channelB`。64 个 K 频段 A 通道是有限 `complex128`，26 个 L 频段 A 通道是
+有限 `float64`，B 通道 90/90 为空，所以不能作为 H/V 极化数据。数组逻辑形状并不统一，
+包括 K 的 `150/500/512/2000 x 6000` 以及两个长短异常记录，不能默认固定切窗语义。
+
+原始 MAT 和解码数值都只有 71 个唯一 payload；11 个精确重复组覆盖 30 个文件，且存在跨
+角度目录的完全相同内容。去 ordinal 后有 66 个 recording stems，按 stem 与精确重复边连通
+后为 48 个保守候选组；它们不是作者确认的 session。另有一条六旋翼 L 记录的目录角度
+`120` 与文件名角度 `0` 冲突，不能静默修正。官方标题/表格与实查均为 90 MAT，但说明第 2 页
+分项相加为 86；命名说明还遗漏实际 `4` ms token，这些矛盾均保留。
+
+发布没有提供全局 Fs、PRF、载频、零频、Doppler/速度轴或独立 source-session。示例脚本的
+`Fs=500 kHz` 只适用于一个 `Br=100 MHz, 0.3 ms` 示例，不能外推全包。因此状态冻结为
+`PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`，只允许只读审计、
+归一化轴的合成/单记录处理合同和未来预登记设计；随机 MAT/frame/window split、模型训练、
+物理 Hz/速度、H/V 极化和性能声明都未放行。bird 包是仿真飞鸟，不得写成真实自然鸟外部
+验证。完整报告见 [LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md](LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md)。
 
 DroneRFc-MM 下载子集含 9 个同日 recording、30,717 个 PCD 帧和 717 个由 recording
 切出的约 5 秒窗口，覆盖 6 种无人机。只读检查器对全部 639,527 个点验证了固定 15 列、
@@ -258,7 +274,7 @@ NEXRAD 的射线、仰角层、range gate 和 patch 也不能随机拆分；
 |---|---|---|
 | LSS-DAUR-1.0 | A1，只读审计完成但训练阻塞 | 77 个逻辑观测仅 76 个唯一 TD/TR 内容对，保守连通为 39 个候选组；schema、配对与 canonical/backup 等价性通过，但 session 未确认、严格时间失败、512/1024 混宽且类别混杂，暂只允许归一化 bin/轨迹方法设计 |
 | LSS-HSR-L | A2，schema/route 审计完成但训练阻塞 | 1,530 MAT/63,148 帧/865 routes 及官方窗口计数已冻结；route 不跨 published split，但 source-session/场景来源和 512-bin DPL 物理轴未知，529 个 overflow 窗口隔离；期刊包仅留作版本史 |
-| LSS-FMCWR-2.0 | A3，已下载 | K/L 双频、多角度和原始回波，适合微多普勒/跨频/跨角度；需严格区分仿真鸟 |
+| LSS-FMCWR-2.0 | A3，schema/重复审计完成但训练阻塞 | 90 MAT 仅 71 个唯一 payload，11 重复组覆盖 30 文件；48 个候选组非权威，B 通道全空，全局 Fs/PRF/载频/零频未知。当前只做归一化轴处理合同；仿真鸟不作自然鸟证据 |
 | DroneRFc-MM V1 | A4，schema 通过但同步总门阻塞 | 全量 PCD 结构/数值/时间戳通过；B1 radar/GT 零重叠，禁止用于监督对齐。其余 8 条可在另行预登记后继续同步/轨迹接口研究；最低按 6 个 base family 分组 |
 | 低空 UAV 群目标 V1 | S1，小包 schema 已审计 | 约 4 MB、Ku 波段 XYZ 量测，适合按屏聚合的群目标质心/外形、航迹关联和运动模式接口 smoke；只有 3 个物理实验且没有目标 ID、IQ、Doppler 或负类，不能做识别性能 |
 | NOAA NEXRAD Level II | S2，单体扫已下载 | 实际含 Z、V、SW、ZDR、PhiDP、RhoHV，可验证双极化 loader/公式；无目标标签且体制不同，不并入主训练集 |

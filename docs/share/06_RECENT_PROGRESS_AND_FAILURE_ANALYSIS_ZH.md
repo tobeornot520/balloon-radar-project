@@ -1,6 +1,6 @@
 # 近期成果、失败机制与算法判断
 
-版本：2026-08-04 V8
+版本：2026-08-05 V9
 
 本文补充 7 月 28 日以后完成的多域特征挖掘、零多普勒机制、Tian FCN 复现、极化
 迁移架构、LAT-MRICD 冻结实验、外部公开数据审计和外场准备。旧冻结 BC-DPG、ROI
@@ -181,7 +181,9 @@ CNN、域适配、阈值调整或结果驱动特征扩展；新成员只能复�
 2. HSR：V2 全量只读审计已完成。1,530 MAT/63,148 真实帧/865 routes 和官方
    45,366/9,336 个 train/validation 默认窗口均已冻结；11 MAT/704 帧/529 窗口的 overflow
    隔离。route 以上来源和 512-bin DPL 物理轴未知，禁止训练；
-3. FMCWR-2.0：可审计解包后核对 MAT schema、K/L 频段、角度、记录和潜在重复分组；
+3. FMCWR-2.0：6 个 RAR/90 MAT 已完成只读审计；64 K/26 L、71 个唯一 payload、11 个
+   重复组/30 个成员、48 个非权威候选组和 B 通道全空已冻结。归一化轴合成/单记录处理
+   合同和合成 smoke 已完成；session/物理轴仍未确认，不训练；
 4. DroneRFc-MM：全量 PCD schema 已核验；8 条 radar/GT 时间范围重叠，B1 零重叠并冻结
    `BLOCKED`。更正材料到位前不做 B1 监督对齐，其余 recording 也需另行预登记。
 
@@ -248,7 +250,7 @@ embedding 融合。详见[极化迁移编码器](../evidence/18_POLARIMETRIC_TRA
 
 | 优先级 | 工作 | 启动条件 |
 |---:|---|---|
-| 1 | FMCWR-2.0 schema/group 审计；维护 DAUR/HSR/DroneRFc 阻塞证据 | HSR schema/route 已通过但 provenance/axis 阻塞；DAUR grouping/axis、DroneRFc 同步仍阻塞；只读处理，不先训练 |
+| 1 | 复核 FMCWR-2.0 归一化轴合同；维护 DAUR/HSR/FMCWR/DroneRFc 阻塞证据 | 合同与合成 smoke 已完成，但 grouping/provenance/axis 仍阻塞；其余数据门也关闭；不训练 |
 | 2 | 向学长核对 Tian 数据与原始实现 | 获得样例、配置或明确答复即可 |
 | 3 | 完成设备能力、同步和标定摸底 | 设备负责人提供实测证据 |
 | 4 | 固定 notch + 目标保护残差 | Fold 1/4 预登记，禁止直接六折 |
@@ -262,6 +264,7 @@ embedding 融合。详见[极化迁移编码器](../evidence/18_POLARIMETRIC_TRA
 公开数据支线可在不改变主 UAV `4/6 BLOCKED_EXTERNAL` 门槛的前提下推进四项只读数据审计。
 D17-XBAND 已以 `FAIL_STOP` 结束，不能继续使用已消费的 S/Ku target 做确认性模型开发；
 DAUR 的 schema/pairing 门已完成但 grouping/physical-axis 门未放行；HSR 的 schema/route
-门已完成但 source-provenance/physical-axis 门未放行；当前转入 FMCWR-2.0 的 schema/group
-审计。DroneRFc-MM 的 B1 必须先取得更正 GT/可归因偏移，其余
+门已完成但 source-provenance/physical-axis 门未放行；FMCWR 的 archive/schema/重复门已
+完成但 grouping/provenance/physical-axis 门未放行；归一化处理合同已完成，当前只做接口复核。DroneRFc-MM
+的 B1 必须先取得更正 GT/可归因偏移，其余
 8 条也要新预登记，之后才决定算法任务。

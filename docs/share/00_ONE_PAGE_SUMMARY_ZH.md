@@ -1,6 +1,6 @@
 # 一页式成果摘要与请教说明
 
-版本：2026-08-04 V8
+版本：2026-08-05 V9
 
 ## 项目在做什么
 
@@ -61,9 +61,12 @@
    唯一内容对。全部轨迹有重复时间，6 个日期冲突，58/19 条分别为 512/1024 bins；11 对
    recording 共享内部帧，连通后为 39 个候选组。候选组仍不是作者确认的 session，Bird/UAV
    候选 session 零重叠，训练和物理 Hz 微多普勒结论均未放行。
-9. 下一公开数据工作不再重跑 LAT-MRICD、DAUR 或 HSR 审计，而是转做 FMCWR-2.0 解包/schema，
-   同时维护 HSR source provenance/物理轴、DAUR grouping/物理轴和 DroneRFc-MM B1 同步阻塞；
-   各自门禁通过前禁止训练。
+9. FMCWR-2.0 的 6 个 RAR/90 MAT 已完成只读 schema/重复审计：64 K/26 L，B 通道全空；
+   90 个 MAT 仅 71 个唯一 payload，11 个精确重复组覆盖 30 个文件，66 stems 连通为 48 个
+   非权威候选组。session 和物理轴未知，状态为
+   `PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`；归一化轴
+   合成/单记录处理合同和合成 smoke 已完成，只继续接口复核与外部参数确认；同时维护
+   DAUR、HSR 和 DroneRFc 阻塞，各自门禁通过前禁止训练。
 10. 公开检索只额外落地两个小型接口样本：Ku UAV 群包约 4 MB、仅 3 个物理实验；NEXRAD
    单体扫约 0.4 MB，含 ZDR/PhiDP/RhoHV 等矩但没有目标标签。它们分别验证航迹和双极化
    读取接口，不扩大训练集。42.4 GB 气球、23.46 GB S 波段 UAV 和 30.36 GB 三频 UAV/真鸟

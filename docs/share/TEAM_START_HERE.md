@@ -1,6 +1,6 @@
 # 新组员从这里开始：入组、认领任务与交付手册
 
-版本：2026-08-04 V6（随 V8 分享包发布）
+版本：2026-08-05 V7（随 V9 分享包发布）
 
 适用对象：此前没有参与过项目开发的新组员，以及准备继续参与下一阶段的现有成员
 
@@ -54,10 +54,11 @@
 - DAUR V3 的 308 个 MAT 全量只读审计：77 个逻辑 TD/TR 观测只有 76 个唯一内容对，
   canonical/backup 数值等价；39 个保守候选 source-session 组、严格时间、日期和 1024-bin
   轴仍阻塞，禁止训练；
-- FMCWR-2.0 V4、HSR ScienceDB V2/期刊包和 DroneRFc-MM 选择性 radar subset 的来源与
-  下载完整性核验。HSR 两包已确认不等价；V2 的 1,530 MAT/63,148 帧/865 routes 已完成
-  只读审计，但 source provenance/512-bin 物理轴阻塞。DroneRFc PCD schema 已通过但 B1
-  radar/GT 零重叠，均不能因“已下载”或“schema 通过”写成“已可训练”。
+- FMCWR-2.0 V4 的 6 个 RAR/90 MAT 已完成只读 schema/重复审计：64 K/26 L，B 通道全空；
+  71 个唯一 payload、11 个重复组/30 个成员、48 个非权威候选组已冻结，session/物理轴
+  阻塞。HSR 两包已确认不等价；V2 的 1,530 MAT/63,148 帧/865 routes 已完成只读审计，
+  但 source provenance/512-bin 物理轴阻塞。DroneRFc PCD schema 已通过但 B1 radar/GT
+  零重叠，均不能因“已下载”或“schema 通过”写成“已可训练”。
 
 ### 2.3 不同证据对象禁止混用
 
@@ -66,7 +67,7 @@
 | 现有 H/V UAV/背景数据 | 检测、网格定位、内部虚警机制、相对极化工程特征 | 跨日期泛化、严格实时部署、空飘球分类、绝对极化物理量 |
 | LAT-MRICD-1.0 | 同一公开发布内的 HRRP、归一化频率微动、batch-code-held-out UAV/鸟/气象基线与已冻结 band-held-out UAV/weather 评价 | unseen-model/独立外部泛化、H/V 极化、物理 Hz 微多普勒、空飘球状态、同事件跨频融合；已消费 S/Ku 不能重跑确认性比较 |
 | DAUR V3 | 复核 schema/配对/等价性与 39 个保守候选组；设计不使用标签的未来分组方案 | 当前模型性能、随机 MAT/frame/window、backup 倍增、1024-bin 物理 Hz、独立 session 结论 |
-| FMCWR-2.0 | 来源和完整性核验；通过门禁后做跨频/角度微多普勒预研 | schema/group 审计前的模型性能、随机切窗结果、仿真鸟的真实自然鸟结论 |
+| FMCWR-2.0 | 复核 90 MAT/71 唯一 payload/48 候选组和已完成的归一化轴合成/单记录处理合同 | 模型性能、随机 MAT/frame/window、把候选组当 session、物理 Hz/速度、H/V 极化、仿真鸟的自然鸟结论 |
 | HSR ScienceDB V2/期刊包 | V2 的 schema/route 与官方窗口计数已审计；按归一化 bin/轨迹复核接口 | 混包、使用 overflow、随机 MAT/frame/window split、把 route 当 session、物理 Hz/速度轴、训练或独立外部性能 |
 | DroneRFc-MM radar subset | 复核全量 PCD schema 和 8 条时间重叠 recording；另行预登记后做点云/轨迹接口 | B1 监督对齐；ADC/IQ、H/V、鸟/天气/空飘球；随机 frame/window split；宣布性能 |
 | Ku UAV 群 / NEXRAD smoke | 分别验证量测/航迹接口和 Z/V/SW/ZDR/PhiDP/RhoHV 读取/公式 | 把 3 个实验或 1 个体扫扩成独立训练样本；UAV/气球识别性能；把天气雷达矩冒充本项目 H/V IQ |
@@ -204,7 +205,7 @@ git status --short
 | D17-XBAND | P1 | 已完成；`FAIL_STOP` | 证据复核 | 核对证据 24、门判定和消费记录；禁止重跑真实 S/Ku target |
 | PUB-DAUR | P0 | 只读审计完成；grouping/axis 阻塞 | 数据/信号处理 | 复核证据 26、验证禁止训练边界，或提出不使用标签的保守 group 方案；不得重新包装成开放训练任务 |
 | PUB-HSR | P1 | V2 只读审计完成；provenance/axis 阻塞 | 数据工程/证据复核 | 复跑 1,530 MAT/63,148 帧/865 routes 审计并核对 overflow 隔离、五列单位和禁止训练边界；禁止混包 |
-| PUB-FMCWR2 | P1 | 待可审计解包 | 雷达/数据工程 | RAR 解包回执、MAT schema、频段/角度/记录及潜在重复 group 审计 |
+| PUB-FMCWR2 | P1 | 只读审计与归一化合同完成；grouping/provenance/axis 阻塞 | 雷达/数据工程 | 复核证据 28 的 90 MAT/71 payload/48 候选组、v5/v7.3 读取和归一化 smoke；不训练 |
 | PUB-DRONERFC | P1 | schema 已完成；B1 同步阻塞 | 证据/点云 | 复核证据 25、B1 零重叠和 base-family group；无更正材料不做 B1 监督对齐 |
 | D15 | P0 | 持续 | 工程/复现 | 实验台账、配置哈希、提交号和结果摘要检查 |
 | D16 | P1 | 持续 | 文档/工程 | Git 清洁、包内敏感信息审计、最新和上一版分享包 |
@@ -459,7 +460,7 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 | 角色 | 主任务 | 维护任务 |
 |---|---|---|
 | A：公开数据与信号 | PUB-HSR V2 审计复核；DAUR 证据 26 复核 | route/source-session、物理轴、分组与单位边界 |
-| B：公开数据工程 | PUB-FMCWR2 解包/schema | 原件只读、频段/角度/重复分组 |
+| B：公开数据工程 | PUB-FMCWR2 证据 28 复核/归一化处理合同 | 原件只读、v5/v7.3、频段/角度/重复分组、物理轴门禁 |
 | C：复现与工程 | Tian 合同测试、D15 | Git、测试、哈希和实验记录 |
 | D：证据与质量保证 | D17-XBAND 证据复核、D16 | 周报、消费门禁、敏感信息和证据边界 |
 | E：点云与时序 | PUB-DRONERFC 证据复核/B1 更正条件清单 | 禁止强行对齐 B1、随机 frame/window split 或把接口结果冒充性能 |
@@ -477,7 +478,7 @@ reviewer 检查数据范围、测试访问、代码、日志、结果、失败�
 | 第 1 天 | 分享包校验、阅读一页摘要和本手册 | 无 |
 | 第 2 天 | 口头验收、填写个人清单 | 选择任务方向 |
 | 第 3 天 | 环境/测试验收、提交任务认领表 | 分享包证据核验、D17-XBAND 合成合同测试或 Tian 合同核对 |
-| 第 4-5 天 | reviewer 审核任务边界 | DAUR 证据 26/grouping 阻塞复核、HSR V2 provenance/axis 阻塞复核、FMCWR-2.0 解包/schema 或 DroneRFc-MM 证据 25/B1 阻塞复核 |
+| 第 4-5 天 | reviewer 审核任务边界 | DAUR 证据 26/grouping 阻塞复核、HSR 证据 27/provenance/axis 阻塞复核、FMCWR 证据 28/grouping/axis 阻塞复核或 DroneRFc-MM 证据 25/B1 阻塞复核 |
 | 第 6-7 天 | 第一次周报 | 冻结下一周唯一主动作 |
 
 第一周不以“训练出一个准确率”为目标，以所有成员理解证据边界、能复跑审计并形成合格任务卡

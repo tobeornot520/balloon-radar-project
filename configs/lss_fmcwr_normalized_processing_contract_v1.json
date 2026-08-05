@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "contract_id": "lss_fmcwr_normalized_processing_v1",
+  "dataset_scope": "LSS-FMCWR-2.0 V4",
+  "status": "synthetic_smoke_and_single_record_interface_only",
+  "input": {
+    "variable": "echoes.channelA",
+    "required_ndim": 2,
+    "axis_order": ["slow_time_index", "fast_time_index"],
+    "axis_semantics": "caller_supplies_row_as_slow_time_index_and_column_as_fast_time_index_for_processing_only; no physical timing is inferred",
+    "accepted_numeric_forms": ["complex_K_like", "real_L_like"],
+    "channelB_policy": "optional_metadata_only; empty_channelB_is_not_HV_polarimetry"
+  },
+  "guards": {
+    "max_elements": 5000000,
+    "max_dimension": 2000000,
+    "max_abs_value": 1000000000000.0,
+    "max_output_elements_per_branch": 8000000,
+    "reject_nan_inf": true,
+    "reject_zero_sized_record": true
+  },
+  "normalization": {
+    "scope": "one_record",
+    "rms_epsilon": 1e-12,
+    "amplitude_percentile": 99.0,
+    "scales": ["rms", "amplitude_percentile"],
+    "spectral_branch": "both_scales",
+    "zero_scale_policy": "use_epsilon_and_record_degenerate_flag"
+  },
+  "fast_time_fft": {
+    "axis": "fast_time_index",
+    "window": "hann",
+    "nfft": null,
+    "fftshift": true,
+    "axis_unit": "normalized_cycles_per_fast_sample",
+    "physical_axis": false
+  },
+  "slow_time_stft": {
+    "axis": "slow_time_index",
+    "window": "hann",
+    "window_length": 64,
+    "hop_length": 32,
+    "nfft": 64,
+    "center": false,
+    "fftshift": true,
+    "axis_unit": "normalized_cycles_per_slow_sample",
+    "physical_axis": false,
+    "short_record_policy": "one_zero_padded_frame"
+  },
+  "output": {
+    "arrays": [
+      "normalized_channel_rms",
+      "normalized_channel_percentile",
+      "fast_time_spectrum_rms",
+      "fast_time_spectrum_percentile",
+      "slow_time_spectrogram_rms",
+      "slow_time_spectrogram_percentile",
+      "slow_time_spectrum_rms",
+      "slow_time_spectrum_percentile",
+      "slow_index_axis",
+      "fast_index_axis",
+      "fast_bin_axis",
+      "slow_frame_index_axis",
+      "slow_frame_start_index_axis",
+      "slow_bin_axis"
+    ],
+    "spectrum_representation": "nonnegative_power",
+    "array_order": {
+      "fast_time_spectrum": ["slow_time_index", "fast_bin"],
+      "slow_time_spectrogram": ["slow_frame_index", "slow_bin", "fast_bin"],
+      "slow_time_spectrum": ["slow_frame_index", "slow_bin"]
+    }
+  },
+  "claim_gates": {
+    "model_training_allowed": false,
+    "physical_axis": false,
+    "physical_frequency_hz_allowed": false,
+    "velocity_m_per_s_allowed": false,
+    "h_v_polarimetry_claim_allowed": false,
+    "performance_reporting_allowed": false,
+    "random_window_split_allowed": false
+  }
+}

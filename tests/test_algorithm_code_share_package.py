@@ -62,7 +62,10 @@ def test_algorithm_package_builds_from_committed_snapshot(tmp_path: Path) -> Non
     assert not (package_root / "project/checkpoints").exists()
     assert not (package_root / "project/payload").exists()
     assert not (package_root / "project/_cleanup_archive").exists()
-    assert not (package_root / "project/scripts/audit_lss_hsr_l_v2.py").exists()
+    # The HSR-L read-only audit is a committed, data-free reproducibility
+    # entry point; the package may include the script without including its
+    # local source archive or audit outputs.
+    assert (package_root / "project/scripts/audit_lss_hsr_l_v2.py").is_file()
 
     requirements = (package_root / "project/requirements-lock.txt").read_text(encoding="utf-8")
     assert "packaging==26.2" in requirements

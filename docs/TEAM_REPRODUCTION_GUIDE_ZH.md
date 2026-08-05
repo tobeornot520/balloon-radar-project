@@ -1,6 +1,6 @@
 # 队员复现指南
 
-版本：2026-08-04
+版本：2026-08-05
 适用提交：以分享包 `MANIFEST.json` 中的 `source_commit` 为准。
 
 ## 1. 先说清楚：什么叫“复现”
@@ -69,7 +69,7 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 
 ### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
 
-先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V8 分享包只支持 A 级证据复核；
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V9 分享包只支持 A 级证据复核；
 下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
 MAT 与同目录明细 MAT，否则会重复计入记录。
 
@@ -115,7 +115,7 @@ python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
 
 ### 3.3 LSS-DAUR V3 只读审计复核
 
-V8 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
+V9 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
 JSON 和聚合表。完整仓库中的 B/C 级复核还需从官方 ScienceDB V3 自行取得原始发布，
 放在 `data/raw/external/LSS-DAUR-1.0/`；受 `CC-BY-NC-ND-4.0` 约束，原始或重打包数据
 不得从项目分享包转发。
@@ -128,7 +128,7 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 预期状态为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，`paired_track_count=77`、
 `unique_signal_trajectory_content_count=76`、`candidate_source_session_group_count=39`、
 `frame_count=11366` 且 `model_training_allowed=false`。审计器只写入被忽略的本地审计目录，
-不修改原始文件，也不训练模型。V8 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
+不修改原始文件，也不训练模型。V9 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
 逐 recording 的日期、路径、时间戳或 payload 哈希明细。
 
 复核纪律：canonical/backup 是等价视图，不能倍增；TD/TR、完全重复记录和保守连通组不得
@@ -138,7 +138,7 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 
 ### 3.4 LSS-HSR-L ScienceDB V2 只读审计复核
 
-V8 分享包可直接复核 `evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md`、对应 JSON，以及
+V9 分享包可直接复核 `evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md`、对应 JSON，以及
 split、split-class 和 feature 三张聚合表。包内不含 route/MAT 级路径、ID 或 payload 哈希。
 完整仓库复核需从官方 ScienceDB V2 取得原始 ZIP，并保持文件名
 `data/raw/external/LSS-HSR-L/ScienceDB_V2_dataset_and_instructions.zip`。该原件受
@@ -167,6 +167,28 @@ sensor-run/physical-target/source-session 键，不能声称来源独立、跨�
 
 V2 自带大写 `Dataset.py` 是只读懒加载器，不移动或重写 MAT；禁止运行会移动原件的脚本这一
 警告只针对不等价的期刊历史包旧 `dataset.py`。两包都保持原件只读，但必须准确区分原因。
+
+### 3.5 LSS-FMCWR-2.0 V4 只读审计与归一化接口
+
+V9 包中的 `evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md`、JSON、6 行 archive
+聚合表和 68 行 group 聚合表只用于复核发布身份、MAT schema、重复统计和边界。90 个 MAT
+只有 71 个唯一 payload，48 个候选组不是作者确认的 session，`channelB` 全空；不能把它
+写成 H/V 极化、自然鸟、90 个独立样本或物理 Hz/速度数据。
+
+归一化处理合同见 `docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md` 和
+`assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json`。它只接受单条二维
+`channelA`，以行/列索引约定做快时间 FFT 和慢时间 STFT，输出 normalized bin/index 轴；
+`model_training_allowed=false`，不输出 Pd/Pfa/AUC，也不允许把 STFT patch 当独立样本。
+合成 smoke 命令为：
+
+```bash
+conda run -n radar-torch python scripts/process_lss_fmcwr_normalized_v1.py \
+  --smoke --output-dir /tmp/lss_fmcwr_normalized_smoke
+```
+
+真实 RAR 不会被该 smoke 命令读取；若要重新审计原始发布，必须先从官方 ScienceDB 取得
+对应 V4 文件，并使用正式 HDF5 兼容入口。任何模型训练都要等 session、Fs/PRF、载频、零频
+和物理轴得到可引用确认后另行预登记。
 
 ## 4. 分享包的独立复核
 

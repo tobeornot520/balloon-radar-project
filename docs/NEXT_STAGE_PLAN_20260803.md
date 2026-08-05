@@ -1,6 +1,6 @@
 # 下一阶段研究与数据计划 V1
 
-版本：2026-08-04
+版本：2026-08-05
 
 ## 1. 采用外部建议后的判断
 
@@ -27,7 +27,7 @@
 | 2 | H/V、IQ、PRF 和坐标事实确认 | 外部阻塞；当前报告不可获得 | 按 unknown 门禁维护数据卡，只开放 bin 域和 relative H/V 分析 | 当前不要求继续追索；未来有可归因材料时转交核验 | 有来源才解锁物理坐标/相干特征；否则长期保持 unknown |
 | 3 | Tian 2024 最小条件对齐 | 外部阻塞；精确复现冻结 | 保留方法级实现和负结果，推进 DPG/LAT-MRICD/合同测试替代路线 | 可把失败说明发给学长征求方向判断，不承担猜测原条件 | 只有获得对齐样例、完整配置或同分布数据之一才重开训练 |
 | 3A | LAT-MRICD 公开数据算法预研 | D17-NX/HX/XBAND 已完成；XBAND 为预登记负结果 `FAIL_STOP` | 维护 X 波段五折证据和跨频最终证据；X->S 仅 UAV recall 失败，X->Ku 全部门槛通过；S/Ku target 已消费 | 当前无需补数据；对外只按冻结边界引用，不把公开数据支线并入主 UAV 门槛 | 不在同一 S/Ku target 上做 CNN、域适配、扩特征、调参或新确认性比较；新结论须使用独立未消费 target 并重新预登记 |
-| 3B | 新公开数据 schema/group 审计 | DAUR 与 HSR schema 已完成但分别受 grouping/axis、source-provenance/axis 阻塞；DroneRFc schema 完成但 B1 同步阻塞；辅助 smoke 已落地；未放行建模 | HSR 冻结 1530 MAT/63148 帧/865 routes 并隔离 529 个 overflow 窗口；下一项做 FMCWR-2.0 解包/记录分组；维护 DAUR/HSR/DroneRFc 阻塞门 | 当前无需下载或标注；若能联系发布方，询问 HSR route 到 session/场景映射及 512-bin DPL 物理轴，也可询问 DAUR session/1024-bin 轴或 DroneRFc B1 更正 GT | 每个数据集有版本/许可/哈希、只读 loader、独立单位、禁止拆分规则和可声明边界；未过门前不训练 |
+| 3B | 新公开数据 schema/group 审计 | DAUR、HSR、FMCWR 与 DroneRFc 当前只读审计均完成，但分别受 grouping/axis、source-provenance/axis、grouping/provenance/axis、B1 同步阻塞；辅助 smoke 已落地；未放行建模 | FMCWR 冻结 90 MAT/71 唯一 payload/48 非权威候选组、64 K/26 L 且 B 通道全空；归一化微多普勒合成/单记录处理合同和合成 smoke 已完成；维护四集阻塞门 | 当前无需下载或标注；若能联系发布方，优先询问 FMCWR session、Fs/PRF、载频和零频，也可询问 HSR route-source/512-bin 轴、DAUR session/1024-bin 轴或 DroneRFc B1 更正 GT | 每个数据集有版本/许可/哈希、只读 loader、最低分组、禁止拆分规则和可声明边界；未过门前不训练 |
 | 4 | 建立可审计的虚警库 | P0 复核后开始 | 把 fixed/residual、特征、可见模式和证据来源合并，按 scan 汇总 | 优先核对有现场记录的误警事件，不确定项不强行分类 | 每个命名物理类别可追溯；同时保留 unknown 比例 |
 | 5 | 新同条件数据的极化统计 | 等待数据 | 冻结特征、按 session/scan 做 AUC/PR-AUC/低 FPR/最差组压力检查 | 审核特征物理解释与主验收指标 | 来源压力通过；目标/背景不再由日期直接区分 |
 | 6 | 最小极化增强模型 | 未放行 | 先做功率/相对幅度 ROI 小分支，一次只开放一个变量 | 评审困难样本、复杂度和停止规则 | 验证组 Pfa 降低且 joint Pd 不下降，或通过预登记容差 |
@@ -139,7 +139,11 @@ unseen-model、独立外部或同事件跨表征验证。数据仍没有 H/V、�
 隔离。全部 MAT schema 和轨迹五列单位已确认，但 route 以上 source-session/场景来源与
 512-bin DPL 物理轴未知，状态为
 `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`，`model_training_allowed=false`。
-不开放模型训练。新增 DroneRFc-MM V1 只选择下载 28 个雷达相关文件，共
+不开放模型训练。FMCWR-2.0 的六个 RAR 也已完成全量只读审计：90 个 MAT 中只有 71 个
+唯一 raw/numeric payload，11 个精确重复组覆盖 30 个文件；66 stems 通过重复边连通为
+48 个非权威候选组。64 个 K 记录为复数 A 通道、26 个 L 记录为实数 A 通道，B 通道全空，
+所以既不能随机拆 MAT/window，也不能称 H/V 极化。其状态为
+`PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`，训练继续关闭。新增 DroneRFc-MM V1 只选择下载 28 个雷达相关文件，共
 47,366,902 bytes：9 个 77--81 GHz PCD recording、9 份飞行真值、6 份派生标签、README
 和 3 个参考脚本。30,717 个 PCD 帧来自 9 个同日 recording，不能按帧或五秒窗口随机
 划分；PCD 含 Doppler/功率/SNR/时间戳，但不是 ADC/IQ，也没有 H/V、鸟、背景或空飘球。
@@ -189,8 +193,8 @@ NEXRAD 只取 1 个 KTLX Level II 体扫，实际含 Z、V、SW、ZDR、PhiDP、
 
 1. 维护 D17-NX/HX/XBAND 冻结证据及其声明边界，继续排除原始数据和逐样本预测；
 2. 执行 D17-XBAND 的 `FAIL_STOP`：不复用已消费 S/Ku target；新确认性比较须换独立 target 并重新预登记；
-3. DAUR 已冻结为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`；HSR-L V2 已冻结为
-   `PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`。下一步转 FMCWR-2.0；DAUR 在
-   作者确认 session/1024-bin 轴前不训练，HSR 在发布方说明 route 以上来源和 512-bin 物理轴
-   前不训练，overflow 始终隔离。DroneRFc 保持 `B1 BLOCKED`，其余 8 条也要另行预登记；
-   Ku 群目标/NEXRAD 保持 smoke-only。
+3. DAUR、HSR-L V2 与 FMCWR-2.0 的当前只读审计均已冻结；FMCWR 归一化轴的合成/单记录
+   微多普勒处理合同已实现并通过合成 smoke，不训练、不报性能。DAUR 在作者确认 session/1024-bin 轴前
+   不训练，HSR 在发布方说明 route 以上来源和 512-bin 物理轴前不训练，overflow 始终隔离；
+   FMCWR 在确认 session、Fs/PRF、载频和零频前保持模型门关闭。DroneRFc 保持 `B1 BLOCKED`，
+   其余 8 条也要另行预登记；Ku 群目标/NEXRAD 保持 smoke-only。

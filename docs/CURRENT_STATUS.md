@@ -149,9 +149,32 @@ TD/TR content, so the release contains 76 unique signal/trajectory content pairs
 candidate source-session groups. Training remains blocked because every track
 has repeated timestamps, six filename/header dates conflict, no authoritative
 session key exists, and 19 tracks use an undocumented 1024-bin physical axis
-while the official plotting script assumes 512 bins. FMCWR-2.0 is pending RAR
-extraction and schema/group audit. The simulated-bird archive must not be cited
-as natural-bird evidence. The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
+while the official plotting script assumes 512 bins.
+
+FMCWR-2.0 has now completed a full read-only RAR 5, MAT-schema, angle, band,
+duplicate and conservative-group audit. The six frozen RAR identities and
+integrity tests pass; their 90 MAT comprise 84 MATLAB v5 and six MATLAB v7.3
+files. Sixty-four K-band `channelA` arrays are finite complex values and 26
+L-band arrays are finite real values, while `channelB` is empty in every file.
+This release therefore does not provide H/V polarimetry. Only 71 raw and
+decoded numeric payloads are unique: 11 exact duplicate groups cover 30 MAT.
+Removing ordinal tokens gives 66 recording stems, and joining stem and exact-
+duplicate edges gives 48 conservative candidate groups. These are not
+authoritative sessions; one directory/filename angle conflict also remains.
+The status is
+`PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS` with
+`model_training_allowed=false`. Random MAT/frame/window splits, physical-Hz or
+velocity claims and model performance remain blocked. The simulated-bird
+archive must not be cited as natural-bird evidence. See
+[LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md](LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md).
+The normalized single-record processing contract is also implemented and
+synthetic-smoke tested. It exposes only row/column indices and normalized
+cycles-per-sample FFT/STFT axes, keeps K complex and L real semantics separate,
+and fixes the physical-axis, H/V, training and performance gates to false. It
+does not change the blocked dataset status; see
+[LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md](LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md).
+
+The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
 archive has now completed its full read-only audit. Its 1,561 entries include
 1,530 MAT tracks and 63,148 real frames indexed by 865 routes. The published
 train split has 1,269 MAT, 51,789 frames, 723 routes and 45,366 default windows;

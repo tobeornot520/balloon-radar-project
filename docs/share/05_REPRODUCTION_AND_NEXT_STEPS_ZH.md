@@ -201,16 +201,18 @@ D17-NX/HX 已完成：Narrow-X 固定 LR/RF 的 batch-class macro 为 0.7999/0.7
    V2 与 1,478-entry 期刊历史包不等价、禁止混合；V2 `Dataset.py` 只读，移动原件警告只属
    历史包旧脚本。`CC-BY-NC-4.0` 来自 2026-08-04 ScienceDB 页面访问记录，不是 ZIP 内嵌
    许可文本；
-3. LSS-FMCWR-2.0：以可审计方式解包 RAR，建立 MAT schema、目标/频段/角度/记录分组和
-   潜在重复审计；仿真飞鸟不得写成真实自然鸟；
+3. LSS-FMCWR-2.0：6 个 RAR/90 MAT 的只读 schema/重复审计已完成；64 K/26 L、71 个唯一
+   payload、11 个重复组/30 个成员、48 个非权威候选组和 B 通道全空已冻结。归一化轴
+   合成/单记录处理合同与合成 smoke 已完成；只继续接口复核和外部参数确认，仿真飞鸟不得写成真实自然鸟；
 4. DroneRFc-MM V1：选择性 radar subset 的全量 PCD schema/时间覆盖审计已完成。完整发布为
    113 files、75,612,067,287 bytes；本地仅有 28 个文件、47,366,902 bytes。30,717 frames、
    639,527 points 均通过 schema/finite/POINTS/时间戳检查；8 条 recording 与 GT 时间范围重叠，
    B1 零重叠，故整体同步门阻塞。717 个派生 5 秒 windows 禁止随机拆分。
 
 DAUR 虽已通过 schema 与配对门，但 grouping/physical-axis 总门仍关闭；HSR 虽已通过
-schema/route 门，但 source-provenance/physical-axis 总门仍关闭。FMCWR-2.0 和 DroneRFc-MM
-也只在各自 archive/schema/group 或同步门通过后再预登记算法，不以“已经下载”或“route
+schema/route 门，但 source-provenance/physical-axis 总门仍关闭；FMCWR 虽已通过
+archive/schema/重复门，但 grouping/provenance/physical-axis 总门仍关闭。FMCWR-2.0 和 DroneRFc-MM
+只在各自剩余分组/物理轴或同步门通过后再预登记算法，不以“已经下载”或“route
 不跨 published split”代替数据可用。
 DroneRFc-MM 数据 DOI 为 `10.57760/sciencedb.j00173.00094`、许可为 `CC-BY-SA-4.0`；它不是
 ADC/IQ 或 H/V，没有鸟、天气、空飘球对照，只能用于点云/轨迹接口和时序算法审计；B1

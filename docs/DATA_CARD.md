@@ -1,6 +1,6 @@
 # 当前检测数据卡
 
-版本：2026-08-04
+版本：2026-08-05
 
 ## 1. 适用范围
 
@@ -128,6 +128,19 @@ V2 的每个 MAT 恰被一个 route 引用，route 不跨 published split 或类
 track/frame/window split 或物理微多普勒
 结论。V2 自带 `Dataset.py` 是只读懒加载器，首帧填充只在内存构窗；“会移动原件”的警告
 只适用于不等价的期刊历史包旧脚本。
+
+LSS-FMCWR-2.0 V4 的只读 RAR/MAT 审计也已完成。六个 RAR 内实际有 90 个 MAT，其中
+84 个 MATLAB v5、6 个 v7.3；64 个 K 频段 `channelA` 为有限复数，26 个 L 频段
+`channelA` 为有限实数，而 `channelB` 在 90 个文件中全部为空，因此不是 H/V 极化数据。
+原始和解码数值都只有 71 个唯一 payload：11 个精确重复组覆盖 30 个 MAT；66 个候选
+recording stems 经精确重复边连通后为 48 个保守候选组，但发布方没有确认其 session 含义。
+另有 1 个目录角度/文件名角度冲突，仿真鸟也只能作为仿真数据。该集状态为
+`PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`，禁止随机 MAT/frame/
+window split、模型训练、物理 Hz/速度和自然鸟结论。详见
+[FMCWR-2.0 审计](LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md)。归一化轴的单记录 FFT/STFT
+合同和合成 smoke 已完成，但只输出 index/cycles-per-sample 轴；它不解除任何分组、物理轴、
+H/V、训练或性能门禁，见
+[归一化处理合同](LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md)。
 
 DroneRFc-MM 子集包含 9 个同日 recording 的毫米波 PCD 点云、同步飞行真值和派生标签；
 它不是 ADC/IQ，也没有

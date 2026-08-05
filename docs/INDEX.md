@@ -13,6 +13,8 @@
 - `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
+- `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`: FMCWR-2.0 V4 RAR/MAT schema, duplicate, grouping and physical-axis gate
+- `LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md`: normalized-index FFT/STFT single-record interface; no physical-axis or training claims
 - `../data/metadata/external_public_datasets_v1.csv`: versioned external dataset, DOI, licence, use and decision registry
 - `../data/metadata/external_public_artifacts_v1.csv`: downloaded artifact size, hash and integrity registry
 - `LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`: frozen five-fold Narrow-X/HRRP-X grouped-baseline contract, metrics, and claim limits
@@ -48,6 +50,8 @@
 - `FIELD_COLLECTION_SOP_V1.md`
 - `FIELD_CAPABILITY_REQUEST_V1.md`
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`
+- `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`
+- `LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md`
 - `LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md`
 
 ## Reproducibility and sharing
