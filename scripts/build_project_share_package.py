@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v13"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v14"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -64,6 +64,7 @@ ZERO_DOPPLER_TARGET_SAFETY_SUMMARY = (
 FIELD_IQ_PROBE_CONTRACT = (
     PROJECT_ROOT / "configs/field_iq_probe_contract_template_v1.json"
 )
+FIELD_SYNC_EVENT_CONTRACT = PROJECT_ROOT / "configs/field_sync_event_contract_v1.json"
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt", ".py"}
 FORBIDDEN_SUFFIXES = {
@@ -241,6 +242,26 @@ PACKAGE_FILES = (
         "scripts/audit_field_iq_integrity_v1.py",
         "scripts/audit_field_iq_integrity_v1.py",
         "field_iq_integrity_probe_code",
+    ),
+    PackageFile(
+        "docs/FIELD_SYNCHRONIZATION_AUDIT_V1.md",
+        "docs/FIELD_SYNCHRONIZATION_AUDIT_V1.md",
+        "field_synchronization_audit_document",
+    ),
+    PackageFile(
+        "configs/field_sync_event_contract_v1.json",
+        "assets/contracts/field_sync_event_contract_v1.json",
+        "field_synchronization_audit_contract",
+    ),
+    PackageFile(
+        "configs/field_sync_event_template_v1.csv",
+        "assets/templates/field_sync_event_template_v1.csv",
+        "field_synchronization_event_template",
+    ),
+    PackageFile(
+        "scripts/audit_field_synchronization_v1.py",
+        "scripts/audit_field_synchronization_v1.py",
+        "field_synchronization_audit_code",
     ),
     PackageFile(
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
@@ -1582,6 +1603,38 @@ def load_field_iq_probe_contract() -> dict[str, object]:
     return payload
 
 
+def load_field_sync_event_contract() -> dict[str, object]:
+    """Validate the shipped synchronization-event contract without real evidence."""
+
+    payload = json.loads(FIELD_SYNC_EVENT_CONTRACT.read_text(encoding="utf-8"))
+    expected = {
+        "schema_version": 1,
+        "contract_id": "field_sync_event_contract_v1",
+        "minimum_accepted_events": 5,
+        "minimum_accepted_events_per_session": 1,
+        "maximum_event_uncertainty_ms": 20.0,
+        "radar_video_limits_ms": {
+            "absolute_error_p95_maximum": 50.0,
+            "absolute_error_maximum": 100.0,
+        },
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(f"Unexpected field synchronization contract {field}")
+    expected_claims = {
+        "all_radar_frames_timestamped_established": False,
+        "hardware_sequence_integrity_established": False,
+        "clock_mapping_provenance_established": False,
+        "formal_synchronization_gate_opened_by_numeric_audit_alone": False,
+        "model_training_allowed_by_sync_audit": False,
+    }
+    if payload.get("claim_boundaries") != expected_claims:
+        raise ValueError("Unexpected field synchronization claim boundaries")
+    if len(payload.get("required_columns", [])) != 15:
+        raise ValueError("Unexpected field synchronization required-column count")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -1813,6 +1866,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     false_alarm = load_zero_doppler_false_alarm_summary()
     target_safety = load_zero_doppler_target_safety_summary()
     field_iq_probe = load_field_iq_probe_contract()
+    field_sync = load_field_sync_event_contract()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1942,6 +1996,13 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "field_iq_integrity_probe_establishes_polarimetric_calibration": False,
             "field_iq_integrity_probe_establishes_physical_axes": False,
             "field_iq_integrity_probe_opens_model_training": False,
+            "field_synchronization_audit_included": True,
+            "field_synchronization_audit_schema_version": field_sync["schema_version"],
+            "field_synchronization_audit_real_data_completed": False,
+            "field_synchronization_audit_raw_events_included": False,
+            "field_synchronization_audit_numeric_limits_frozen": True,
+            "field_synchronization_audit_formal_gate_open": False,
+            "field_synchronization_audit_model_training_allowed": False,
             "lat_mricd_raw_data_included": False,
             "lat_mricd_random_row_split_allowed": False,
             "lat_mricd_physical_micro_doppler_hz_allowed": False,

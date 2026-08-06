@@ -12,7 +12,7 @@ than being copied into a script.
 | Experiment provenance | `run_recorded_experiment.py`, `manage_experiment_ledger.py` |
 | Dataset contracts | `validate_data_collection_manifest.py`, `audit_detection_acquisition_order.py` |
 | Public external data | `audit_lat_mricd_dataset_v1.py`, `audit_lss_daur_v1.py`, `audit_lss_hsr_l_v2.py`, `audit_lss_fmcwr_2_hdf5_v1.py`, `process_lss_fmcwr_normalized_v1.py`, `run_lat_mricd_grouped_baseline_v1.py`, `run_lat_mricd_cross_band_transfer_v1.py` |
-| Field readiness | `initialize_field_readiness_evidence.py`, `audit_field_readiness_v1.py`, `audit_field_iq_integrity_v1.py` |
+| Field readiness | `initialize_field_readiness_evidence.py`, `audit_field_readiness_v1.py`, `audit_field_iq_integrity_v1.py`, `audit_field_synchronization_v1.py` |
 | BC-DPG | `run_bc_dpg_v3.py`, `audit_bc_dpg_v3_causal_context.py` |
 | Polarimetric Stage 3 | `run_polarimetric_representation_benchmark_v2.py` |
 | ROI Stage 4 | `run_roi_stage4_selected_sixfold_v1.py` |

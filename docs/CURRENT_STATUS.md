@@ -203,13 +203,21 @@ failures. Therefore the allowed statement is "no joint-success loss under the
 frozen tolerance," not "no target behavior changed." See
 [ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md](ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md).
 
-The V13 share package is the current sanitized delivery. Its completion gate now
+The V14 share package is the current sanitized delivery. Its completion gate now
 checks that every evidence path attached to a `complete` item exists and is
 nonempty; a stale package path can no longer count as completion. D15 is complete
 only at the current A-level evidence-review scope: the disclosed historical BC
 checkpoint-hash gap still prevents a claim of self-contained checkpoint replay or
 full retraining reproduction. CD04 and CD05 remain externally blocked, so the
 current direction remains 4/6 `BLOCKED_EXTERNAL`.
+
+The synchronization-event numeric audit is now available as a read-only field tool. It accepts a
+controlled radar/video/truth event table, enforces at least five accepted events and one per session,
+and computes the radar-video P95 and maximum error for readiness backfill. The V1 contract freezes a
+20 ms event-uncertainty ceiling, 50 ms P95 limit and 100 ms maximum limit. No real event table has
+been audited yet; the share package contains only the contract, blank template, code and explanation.
+`formal_synchronization_gate_open=false` remains fixed because UTC provenance, per-frame radar
+timestamps, hardware sequence integrity and video-frame mapping require independent evidence.
 
 The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
 archive has now completed its full read-only audit. Its 1,561 entries include

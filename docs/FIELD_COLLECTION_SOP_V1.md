@@ -21,6 +21,9 @@ Pilot 数据全部标记为 `development`。Pilot 用来发现采集问题，不
 - `scripts/audit_field_readiness_v1.py`
 - `scripts/validate_data_collection_manifest.py`
 - `scripts/audit_field_iq_integrity_v1.py`
+- `configs/field_sync_event_contract_v1.json`
+- `configs/field_sync_event_template_v1.csv`
+- `scripts/audit_field_synchronization_v1.py`
 
 设备负责人联系表和答复模板：
 
@@ -77,6 +80,12 @@ MAT 文件存在不等于内容可用。设备负责人给出变量名和期望�
 连续记录至少 5 次清楚的同步事件。Pilot 放行线为绝对同步误差 P95 不超过 50 ms，
 最大值不超过 100 ms。状态切换标签应记录开始、结束和不确定区间，不能只给整个文件
 写一个“摆动”标签。
+
+同步事件按 `field_sync_event_template_v1.csv` 逐事件记录。采集后先运行
+`audit_field_synchronization_v1.py`，用 `readiness_measurements.csv` 回填
+`SYNC_EVENT_REPEATS`、`SYNC_P95_ERROR` 和 `SYNC_MAX_ERROR`。这个审计只提供数值子门；
+UTC 来源、雷达逐帧时间戳/硬件序号和视频逐帧映射仍需在 readiness evidence 中独立证明。
+即使结果是 `PASS_NUMERIC_LIMITS_ONLY`，完整 synchronization gate 仍保持关闭。
 
 ### 4.3 Polarimetric calibration
 

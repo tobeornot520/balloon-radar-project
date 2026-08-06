@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "contract_id": "field_sync_event_contract_v1",
+  "minimum_accepted_events": 5,
+  "minimum_accepted_events_per_session": 1,
+  "maximum_event_uncertainty_ms": 20.0,
+  "radar_video_limits_ms": {
+    "absolute_error_p95_maximum": 50.0,
+    "absolute_error_maximum": 100.0
+  },
+  "allowed_event_methods": [
+    "visible_marker",
+    "active_transponder",
+    "manual_trigger",
+    "other_documented"
+  ],
+  "required_columns": [
+    "session_id",
+    "event_id",
+    "event_index",
+    "radar_timestamp_utc",
+    "video_timestamp_utc",
+    "truth_timestamp_utc",
+    "radar_clock_id",
+    "video_clock_id",
+    "truth_clock_id",
+    "timestamp_mapping_id",
+    "event_method",
+    "event_uncertainty_ms",
+    "accepted",
+    "rejection_reason",
+    "notes"
+  ],
+  "claim_boundaries": {
+    "all_radar_frames_timestamped_established": false,
+    "hardware_sequence_integrity_established": false,
+    "clock_mapping_provenance_established": false,
+    "formal_synchronization_gate_opened_by_numeric_audit_alone": false,
+    "model_training_allowed_by_sync_audit": false
+  }
+}

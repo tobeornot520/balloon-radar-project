@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260806_v13"
+        == "balloon_radar_results_and_team_onboarding_20260806_v14"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -54,6 +54,10 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/FIELD_IQ_INTEGRITY_PROBE_V1.md" in destinations
     assert "assets/contracts/field_iq_probe_contract_template_v1.json" in destinations
     assert "scripts/audit_field_iq_integrity_v1.py" in destinations
+    assert "docs/FIELD_SYNCHRONIZATION_AUDIT_V1.md" in destinations
+    assert "assets/contracts/field_sync_event_contract_v1.json" in destinations
+    assert "assets/templates/field_sync_event_template_v1.csv" in destinations
+    assert "scripts/audit_field_synchronization_v1.py" in destinations
     assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
     assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations
     assert "scripts/build_zero_doppler_false_alarm_library_v1.py" in destinations
@@ -1135,6 +1139,13 @@ def test_share_manifest_marks_causal_context_as_post_test(
     )
     assert rules["field_iq_integrity_probe_establishes_physical_axes"] is False
     assert rules["field_iq_integrity_probe_opens_model_training"] is False
+    assert rules["field_synchronization_audit_included"] is True
+    assert rules["field_synchronization_audit_schema_version"] == 1
+    assert rules["field_synchronization_audit_real_data_completed"] is False
+    assert rules["field_synchronization_audit_raw_events_included"] is False
+    assert rules["field_synchronization_audit_numeric_limits_frozen"] is True
+    assert rules["field_synchronization_audit_formal_gate_open"] is False
+    assert rules["field_synchronization_audit_model_training_allowed"] is False
     assert rules["lat_mricd_raw_data_included"] is False
     assert rules["lat_mricd_random_row_split_allowed"] is False
     assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False
