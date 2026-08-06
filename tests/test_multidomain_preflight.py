@@ -11,3 +11,4 @@ def test_data_free_multidomain_preflight_passes_without_metrics() -> None:
     assert summary["performance_metrics"] is False
     assert summary["contract"]["total_features"] == 56
     assert summary["smoke"]["fusion"]["masked_polar_weight"] == 0.0
+    assert summary["invariance"]["common_phase_coherence"] == 1.0

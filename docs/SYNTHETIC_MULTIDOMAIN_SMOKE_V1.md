@@ -68,6 +68,10 @@ conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
 
 统一预检的任一子门失败都会令命令失败；其 `status=PASS` 仍只表示数据无关接口就绪。
 
+统一预检还会检查三个信号级不变量：公共 H/V 相位旋转和公共幅度缩放不应改变相对
+相干/极化描述；交换 H/V 后相对功率比应反号而相干保持不变。这些检查用于防止特征
+实现的数学语义漂移，不代表真实雷达标定或目标识别性能。
+
 ## 通过条件
 
 - 合成 H/V 固定相位关系的 coherence 接近 1；
