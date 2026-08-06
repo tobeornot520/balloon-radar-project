@@ -25,6 +25,7 @@ from datasets.detection_dataset_v2 import DetectionGeometry, _load_iq_pair  # no
 from datasets.polarimetric_detection_dataset_v2 import _recover_data_path  # noqa: E402
 from features.multidomain_radar_features import (  # noqa: E402
     FEATURE_DOMAINS,
+    MULTIDOMAIN_FEATURE_NAMES,
     MultiDomainFeatureConfig,
     extract_multidomain_features,
 )
@@ -62,12 +63,16 @@ def resolve_path(value: str | Path) -> Path:
 
 
 def feature_columns(frame: pd.DataFrame) -> list[str]:
-    prefixes = tuple(f"{domain}_" for domain in FEATURE_DOMAINS)
+    """Return only frozen catalog fields, in the fusion contract order."""
+    ordered_names = tuple(
+        name
+        for names in MULTIDOMAIN_FEATURE_NAMES.values()
+        for name in names
+    )
     return [
-        column
-        for column in frame.columns
-        if column.startswith(prefixes)
-        and pd.api.types.is_numeric_dtype(frame[column])
+        name
+        for name in ordered_names
+        if name in frame.columns and pd.api.types.is_numeric_dtype(frame[name])
     ]
 
 
