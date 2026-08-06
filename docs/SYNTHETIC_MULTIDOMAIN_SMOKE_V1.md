@@ -67,6 +67,9 @@ conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
 ```
 
 统一预检的任一子门失败都会令命令失败；其 `status=PASS` 仍只表示数据无关接口就绪。
+同一命令可在完整仓库或解压后的 V14 分享包根目录运行；脚本会分别识别 `configs/` 或
+`assets/contracts/` 中的契约。分享包只保证这条无数据预检所需的最小源码，不提供完整
+训练复现能力。
 
 统一预检还会检查三个信号级不变量：公共 H/V 相位旋转和公共幅度缩放不应改变相对
 相干/极化描述；交换 H/V 后相对功率比应反号而相干保持不变。这些检查用于防止特征

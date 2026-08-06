@@ -6,6 +6,18 @@
 
 `MANIFEST.json` 记录分享版本、来源提交、证据角色和文件哈希；`SHA256SUMS.txt` 用于检查文件是否在传输中损坏。哈希校验不等同于重新运行指标计算。完整复现需要内部代码、数据、冻结预测和 checkpoint。
 
+分享包提供一个例外的可执行入口：多域无数据预检。解压后可使用包内
+`environment.yml` 创建环境，再从分享包根目录运行：
+
+```bash
+conda env create -f environment.yml
+conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
+```
+
+该命令只运行 56 维特征契约、确定性合成 H/V、融合 mask 和信号不变量检查；不读取
+真实数据、不训练，也不产生 Pd、Pfa、AUC、物理 Hz 或泛化结论。包内只附带这条预检
+所需的最小源码，不能据此执行完整模型重放或重新训练。
+
 ## 2. 完整仓库环境
 
 内部工程使用 Conda 环境 `radar-torch`，Python 3.11。仓库根目录提供 `environment.yml` 和锁定依赖文件。

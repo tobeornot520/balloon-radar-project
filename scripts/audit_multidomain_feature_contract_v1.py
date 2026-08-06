@@ -17,7 +17,6 @@ from typing import Any, Mapping
 import yaml
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CONTRACT = PROJECT_ROOT / "configs/multidomain_feature_contract_v1.yaml"
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -64,6 +63,21 @@ EXPECTED_TF_UNLOCK_REQUIREMENTS = {
     "sample_duration",
     "target_aligned_events",
 }
+
+
+def resolve_default_contract(project_root: Path = PROJECT_ROOT) -> Path:
+    """Resolve the contract in either repository or sanitized-package layout."""
+    candidates = (
+        project_root / "configs/multidomain_feature_contract_v1.yaml",
+        project_root / "assets/contracts/multidomain_feature_contract_v1.yaml",
+    )
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    return candidates[0]
+
+
+DEFAULT_CONTRACT = resolve_default_contract()
 
 
 class ContractAuditError(ValueError):

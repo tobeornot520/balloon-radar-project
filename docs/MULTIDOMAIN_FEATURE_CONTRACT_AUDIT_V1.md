@@ -37,6 +37,7 @@ conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
 ```
 
 它会先执行本契约审查，再执行确定性合成 H/V 特征与融合 smoke。
+该入口会自动识别完整仓库的 `configs/` 和分享包的 `assets/contracts/` 布局。
 
 统一入口还包含信号级不变量检查：公共相位旋转、公共幅度缩放的相对量不变性，以及
 H/V 交换时功率比反号、相干不变性。该层只保护代码数学语义，不开放任何物理或性能声明。

@@ -2,6 +2,10 @@ from __future__ import annotations
 
 import csv
 import json
+import os
+import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -30,6 +34,8 @@ def test_share_source_map_is_complete_and_unique() -> None:
         == "balloon_radar_results_and_team_onboarding_20260806_v14"
     )
     assert len(destinations) == len(set(destinations))
+    assert "environment.yml" in destinations
+    assert "requirements-lock.txt" in destinations
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
     assert "docs/06_DATA_CARD_ZH.md" in destinations
     assert "docs/07_METRIC_DEFINITIONS_ZH.md" in destinations
@@ -63,6 +69,11 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/contracts/multidomain_feature_contract_v1.yaml" in destinations
     assert "scripts/audit_multidomain_feature_contract_v1.py" in destinations
     assert "scripts/run_multidomain_preflight_v1.py" in destinations
+    assert "scripts/run_multidomain_feature_smoke_v1.py" in destinations
+    assert "features/multidomain_radar_features.py" in destinations
+    assert "features/synthetic_radar.py" in destinations
+    assert "features/polarimetric_rd.py" in destinations
+    assert "models/multidomain_feature_fusion.py" in destinations
     assert "docs/ONB_01_SUBMISSION_GUIDE_ZH.md" in destinations
     assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
     assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations
@@ -333,6 +344,45 @@ def test_share_source_map_is_complete_and_unique() -> None:
         "results/data_audit/zero_doppler_target_safety_audit_v1/summary.json",
     }
     assert not any("target_case_library_local" in path for path in sources + destinations)
+
+
+def test_packaged_multidomain_preflight_runs_without_repository_imports(
+    tmp_path: Path,
+) -> None:
+    required_destinations = {
+        "assets/contracts/multidomain_feature_contract_v1.yaml",
+        "scripts/audit_multidomain_feature_contract_v1.py",
+        "scripts/run_multidomain_feature_smoke_v1.py",
+        "scripts/run_multidomain_preflight_v1.py",
+        "features/multidomain_radar_features.py",
+        "features/synthetic_radar.py",
+        "features/polarimetric_rd.py",
+        "models/multidomain_feature_fusion.py",
+    }
+    mapping = {item.destination: item for item in PACKAGE_FILES}
+    assert required_destinations <= mapping.keys()
+
+    package = tmp_path / "share"
+    for destination in required_destinations:
+        item = mapping[destination]
+        target = package / destination
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(share_package.PROJECT_ROOT / item.source, target)
+
+    environment = os.environ.copy()
+    environment.pop("PYTHONPATH", None)
+    result = subprocess.run(
+        [sys.executable, "scripts/run_multidomain_preflight_v1.py"],
+        cwd=package,
+        env=environment,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    summary = json.loads(result.stdout)
+    assert summary["status"] == "PASS"
+    assert summary["contract"]["total_features"] == 56
+    assert summary["performance_metrics"] is False
 
 
 def test_completion_delivery_evidence_tracks_frozen_package_name() -> None:

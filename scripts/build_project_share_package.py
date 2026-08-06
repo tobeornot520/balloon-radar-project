@@ -75,6 +75,7 @@ ALLOWED_SUFFIXES = {
     ".txt",
     ".py",
     ".yaml",
+    ".yml",
 }
 FORBIDDEN_SUFFIXES = {
     ".mat",
@@ -121,6 +122,16 @@ class PackageFile:
 
 
 PACKAGE_FILES = (
+    PackageFile(
+        "environment.yml",
+        "environment.yml",
+        "runtime_environment",
+    ),
+    PackageFile(
+        "requirements-lock.txt",
+        "requirements-lock.txt",
+        "runtime_environment_lock",
+    ),
     PackageFile("docs/share/README_SHARE_ZH.md", "README.md", "share_document"),
     PackageFile(
         "docs/share/TEAM_START_HERE.md",
@@ -296,6 +307,31 @@ PACKAGE_FILES = (
         "scripts/run_multidomain_preflight_v1.py",
         "scripts/run_multidomain_preflight_v1.py",
         "data_free_multidomain_preflight_code",
+    ),
+    PackageFile(
+        "scripts/run_multidomain_feature_smoke_v1.py",
+        "scripts/run_multidomain_feature_smoke_v1.py",
+        "data_free_multidomain_smoke_code",
+    ),
+    PackageFile(
+        "features/multidomain_radar_features.py",
+        "features/multidomain_radar_features.py",
+        "data_free_multidomain_feature_code",
+    ),
+    PackageFile(
+        "features/synthetic_radar.py",
+        "features/synthetic_radar.py",
+        "data_free_synthetic_radar_code",
+    ),
+    PackageFile(
+        "features/polarimetric_rd.py",
+        "features/polarimetric_rd.py",
+        "data_free_polarimetric_feature_dependency",
+    ),
+    PackageFile(
+        "models/multidomain_feature_fusion.py",
+        "models/multidomain_feature_fusion.py",
+        "data_free_multidomain_fusion_code",
     ),
     PackageFile(
         "docs/share/ONB_01_SUBMISSION_GUIDE_ZH.md",
