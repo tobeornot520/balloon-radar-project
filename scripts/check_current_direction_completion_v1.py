@@ -52,20 +52,61 @@ def validate_config(payload: dict[str, Any]) -> list[dict[str, Any]]:
             raise ValueError(f"invalid completion status: {item['status']}")
         if not isinstance(item["ledger_ids"], list) or not item["ledger_ids"]:
             raise ValueError(f"{item['id']} must reference at least one ledger ID")
+        if not isinstance(item["evidence"], str) or not item["evidence"].strip():
+            raise ValueError(f"{item['id']} must reference at least one evidence path")
     return items
+
+
+def inspect_evidence(
+    items: list[dict[str, Any]], *, evidence_root: Path
+) -> list[dict[str, Any]]:
+    root = evidence_root.resolve()
+    inspected: list[dict[str, Any]] = []
+    for original in items:
+        item = dict(original)
+        raw_paths = [part.strip() for part in str(item["evidence"]).split(";")]
+        if not raw_paths or any(not path for path in raw_paths):
+            raise ValueError(f"{item['id']} has an empty evidence path")
+
+        missing: list[str] = []
+        for raw_path in raw_paths:
+            relative_path = Path(raw_path)
+            if relative_path.is_absolute():
+                raise ValueError(f"{item['id']} evidence path must be repository-relative")
+            resolved = (root / relative_path).resolve()
+            if not resolved.is_relative_to(root):
+                raise ValueError(f"{item['id']} evidence path escapes the repository")
+            available = resolved.is_file() and resolved.stat().st_size > 0
+            if resolved.is_dir():
+                available = next(resolved.iterdir(), None) is not None
+            if not available:
+                missing.append(raw_path)
+
+        item["evidence_path_count"] = len(raw_paths)
+        item["missing_evidence_count"] = len(missing)
+        item["missing_evidence_paths"] = "; ".join(missing)
+        item["evidence_complete"] = not missing
+        inspected.append(item)
+    return inspected
 
 
 def summarize_items(items: list[dict[str, Any]]) -> tuple[dict[str, Any], pd.DataFrame]:
     table = pd.DataFrame(items)
+    if "evidence_complete" not in table:
+        raise ValueError("completion items must be inspected before summarizing")
     table["ledger_ids"] = table["ledger_ids"].apply(
         lambda values: ", ".join(str(value) for value in values)
     )
-    table["is_complete"] = table["status"].eq("complete")
+    table["is_complete"] = table["status"].eq("complete") & table[
+        "evidence_complete"
+    ]
     blocked = table[table["status"].eq("blocked_external")]
     remaining = table[~table["is_complete"]]
     if remaining.empty:
         status = "COMPLETE"
-    elif not blocked.empty:
+    elif remaining["status"].eq("blocked_external").all() and remaining[
+        "evidence_complete"
+    ].all():
         status = "BLOCKED_EXTERNAL"
     else:
         status = "IN_PROGRESS"
@@ -77,6 +118,10 @@ def summarize_items(items: list[dict[str, Any]]) -> tuple[dict[str, Any], pd.Dat
         "remaining_count": int(len(remaining)),
         "blocked_external_count": int(len(blocked)),
         "pending_user_count": int(table["status"].eq("pending_user").sum()),
+        "missing_evidence_count": int(table["missing_evidence_count"].sum()),
+        "configured_complete_but_missing_evidence_count": int(
+            (table["status"].eq("complete") & ~table["evidence_complete"]).sum()
+        ),
         "completion_notice": (
             "All current-direction items are complete; start the next-data phase only "
             "under the collection contract."
@@ -97,6 +142,8 @@ Complete: `{summary['completed_count']}/{summary['item_count']}`
 `COMPLETE` is emitted only when every explicitly required item is complete.
 `BLOCKED_EXTERNAL` means a data, device, or reproduction-condition fact must be
 supplied by an external owner; it is not an engineering success or failure.
+An item configured as `complete` is counted only when every repository-relative
+evidence path exists and is nonempty.
 
 The current blocker list is in `remaining_actions.csv`. Do not start a new
 model-training branch merely because a blocker is inconvenient.
@@ -119,7 +166,9 @@ def check_completion(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     payload = json.loads(config_path.read_text(encoding="utf-8"))
-    items = validate_config(payload)
+    items = inspect_evidence(
+        validate_config(payload), evidence_root=PROJECT_ROOT
+    )
     summary, table = summarize_items(items)
     summary["milestone_id"] = payload["milestone_id"]
     summary["completion_rule"] = payload["completion_rule"]

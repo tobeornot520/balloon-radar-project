@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260805_v9"
+        == "balloon_radar_results_and_team_onboarding_20260806_v10"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -278,6 +278,22 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert not any(path.startswith("data/raw/") for path in sources + destinations)
     assert all(not Path(path).is_absolute() for path in sources + destinations)
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+
+
+def test_completion_delivery_evidence_tracks_frozen_package_name() -> None:
+    project_root = Path(__file__).resolve().parents[1]
+    payload = json.loads(
+        (project_root / "configs/current_direction_completion_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    delivery = next(item for item in payload["items"] if item["id"] == "CD06")
+    evidence_paths = {
+        value.strip() for value in delivery["evidence"].split(";")
+    }
+
+    assert f"dist/{share_package.PACKAGE_NAME}/MANIFEST.json" in evidence_paths
+    assert f"dist/{share_package.PACKAGE_NAME}.zip" in evidence_paths
 
 
 @pytest.mark.parametrize(

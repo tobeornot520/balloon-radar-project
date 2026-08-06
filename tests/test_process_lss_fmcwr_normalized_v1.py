@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import sys
 
 import numpy as np
 import pytest
@@ -70,6 +71,19 @@ def test_short_slow_record_is_zero_padded_to_one_stft_frame(contract: dict) -> N
     assert output["slow_time_spectrogram"].shape == (1, 64, 16)
     np.testing.assert_array_equal(output["slow_frame_index_axis"], [0])
     np.testing.assert_array_equal(output["slow_frame_start_index_axis"], [0])
+
+
+def test_one_two_sample_hann_edges_preserve_nonzero_input_energy(contract: dict) -> None:
+    one_slow_sample = process_record(np.ones((1, 16)), contract, band="L")
+    two_slow_samples = process_record(np.ones((2, 16)), contract, band="L")
+    two_fast_samples = process_record(np.ones((4, 2)), contract, band="L")
+
+    assert np.max(one_slow_sample["slow_time_spectrogram"]) > 0.0
+    assert np.max(two_slow_samples["slow_time_spectrogram"]) > 0.0
+    assert np.max(two_fast_samples["fast_time_spectrum"]) > 0.0
+    assert np.max(two_fast_samples["slow_time_spectrogram"]) > 0.0
+    np.testing.assert_array_equal(processing._window("hann", 2), np.ones(2))
+    np.testing.assert_array_equal(processing._window("hann", 3), np.hanning(3))
 
 
 @pytest.mark.parametrize(
@@ -142,3 +156,72 @@ def test_share_package_contract_location_is_supported(
     monkeypatch.setattr(processing, "PACKAGED_CONFIG", packaged_location)
 
     assert processing.load_contract(repository_location)["contract_id"] == contract["contract_id"]
+
+
+def test_cli_npy_requires_explicit_axis_order(
+    tmp_path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    input_path = tmp_path / "record.npy"
+    np.save(input_path, np.ones((8, 16), dtype=np.float64))
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "process_lss_fmcwr_normalized_v1.py",
+            "--input-npy",
+            str(input_path),
+            "--band",
+            "L",
+        ],
+    )
+
+    with pytest.raises(SystemExit, match="--input-axis-order is required"):
+        processing.main()
+
+
+@pytest.mark.parametrize(
+    "axis_order, source_shape, expected_shape, expected_transposed",
+    [
+        ("slow-fast", (8, 16), (8, 16), False),
+        ("fast-slow", (16, 8), (8, 16), True),
+    ],
+)
+def test_cli_npy_axis_order_is_applied_and_recorded(
+    tmp_path,
+    monkeypatch: pytest.MonkeyPatch,
+    axis_order: str,
+    source_shape: tuple[int, int],
+    expected_shape: tuple[int, int],
+    expected_transposed: bool,
+) -> None:
+    input_path = tmp_path / f"record-{axis_order}.npy"
+    output_dir = tmp_path / f"output-{axis_order}"
+    np.save(input_path, np.ones(source_shape, dtype=np.float64))
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "process_lss_fmcwr_normalized_v1.py",
+            "--input-npy",
+            str(input_path),
+            "--input-axis-order",
+            axis_order,
+            "--band",
+            "L",
+            "--output-dir",
+            str(output_dir),
+        ],
+    )
+
+    assert processing.main() == 0
+    metadata = json.loads((output_dir / "metadata.json").read_text(encoding="utf-8"))
+    with np.load(output_dir / "normalized_processing.npz", allow_pickle=False) as arrays:
+        assert arrays["normalized_channel"].shape == expected_shape
+    assert metadata["input_shape"] == list(expected_shape)
+    assert metadata["cli_input"] == {
+        "source": "npy",
+        "declared_axis_order": axis_order,
+        "source_shape": list(source_shape),
+        "transposed_to_contract_axis_order": expected_transposed,
+        "contract_axis_order": "slow-fast",
+    }

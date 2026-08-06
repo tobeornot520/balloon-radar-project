@@ -174,6 +174,14 @@ and fixes the physical-axis, H/V, training and performance gates to false. It
 does not change the blocked dataset status; see
 [LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md](LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md).
 
+The V10 share package is the current sanitized delivery. Its completion gate now
+checks that every evidence path attached to a `complete` item exists and is
+nonempty; a stale package path can no longer count as completion. D15 is complete
+only at the current A-level evidence-review scope: the disclosed historical BC
+checkpoint-hash gap still prevents a claim of self-contained checkpoint replay or
+full retraining reproduction. CD04 and CD05 remain externally blocked, so the
+current direction remains 4/6 `BLOCKED_EXTERNAL`.
+
 The canonical 237,020,946-byte LSS-HSR-L ScienceDB V2
 archive has now completed its full read-only audit. Its 1,561 entries include
 1,530 MAT tracks and 63,148 real frames indexed by 865 routes. The published

@@ -15,13 +15,13 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260805_v9"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v10"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
 STAGING_ROOT = DIST_ROOT / ".share-package-staging"
-PACKAGE_DATE = "2026-08-05"
-ZIP_TIMESTAMP = (2026, 8, 5, 0, 0, 0)
+PACKAGE_DATE = "2026-08-06"
+ZIP_TIMESTAMP = (2026, 8, 6, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"

@@ -11,6 +11,12 @@
     "accepted_numeric_forms": ["complex_K_like", "real_L_like"],
     "channelB_policy": "optional_metadata_only; empty_channelB_is_not_HV_polarimetry"
   },
+  "cli_npy": {
+    "axis_order_argument_required": true,
+    "axis_order_choices": ["slow-fast", "fast-slow"],
+    "fast_slow_transform": "transpose_before_library_call",
+    "library_axis_order": "slow-fast"
+  },
   "guards": {
     "max_elements": 5000000,
     "max_dimension": 2000000,

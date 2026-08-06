@@ -25,7 +25,7 @@ PACKAGED_CONFIG = (
     PROJECT_ROOT / "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json"
 )
 if not DEFAULT_CONFIG.is_file():
-    # The sanitized V9 share package stores contracts under assets/contracts.
+    # The sanitized share package stores contracts under assets/contracts.
     # Keep the same script runnable both from the repository and after unzip.
     DEFAULT_CONFIG = (
         PROJECT_ROOT / "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json"
@@ -67,7 +67,7 @@ def load_contract(path: str | Path = DEFAULT_CONFIG) -> dict[str, Any]:
 
 def _validate_contract(contract: Mapping[str, Any]) -> None:
     required = {
-        "schema_version", "contract_id", "input", "guards", "normalization",
+        "schema_version", "contract_id", "input", "cli_npy", "guards", "normalization",
         "fast_time_fft", "slow_time_stft", "output", "claim_gates",
     }
     missing = required - set(contract)
@@ -77,6 +77,15 @@ def _validate_contract(contract: Mapping[str, Any]) -> None:
         raise ProcessingContractError("only schema_version=1 is supported")
     if contract["input"].get("axis_order") != ["slow_time_index", "fast_time_index"]:
         raise ProcessingContractError("input axis_order must be slow_time_index/fast_time_index")
+    cli_npy = contract["cli_npy"]
+    if cli_npy.get("axis_order_argument_required") is not True:
+        raise ProcessingContractError("CLI NPY axis-order declaration must remain required")
+    if cli_npy.get("axis_order_choices") != ["slow-fast", "fast-slow"]:
+        raise ProcessingContractError("CLI NPY axis-order choices must be slow-fast/fast-slow")
+    if cli_npy.get("fast_slow_transform") != "transpose_before_library_call":
+        raise ProcessingContractError("CLI fast-slow input must be transposed before processing")
+    if cli_npy.get("library_axis_order") != "slow-fast":
+        raise ProcessingContractError("library axis order must remain slow-fast")
     guards = contract["guards"]
     for name in ("max_elements", "max_dimension", "max_abs_value"):
         if float(guards.get(name, 0)) <= 0:
@@ -114,6 +123,11 @@ def _contract_from_arg(config: Mapping[str, Any] | str | Path | None) -> dict[st
 
 def _window(name: str, length: int) -> np.ndarray:
     if name == "hann":
+        # A symmetric Hann window has no nonzero samples at length two.  Use the
+        # rectangular limiting case so a valid one/two-sample input is not
+        # silently erased; lengths above two retain the established behavior.
+        if length <= 2:
+            return np.ones(length, dtype=np.float64)
         # np.hanning is available without scipy and has the expected symmetric
         # endpoint convention for this smoke contract.
         return np.hanning(length).astype(np.float64)
@@ -319,7 +333,13 @@ def _slow_stft(
     for frame_index, start in enumerate(starts):
         stop = min(start + window_length, slow_count)
         frames[frame_index, : stop - start, :] = fast_spectrum[start:stop, :]
-    taper = _window(str(settings.get("window", "hann")), window_length)
+    window_name = str(settings.get("window", "hann"))
+    taper = _window(window_name, window_length)
+    if window_name == "hann" and slow_count <= 2:
+        # The sole short frame is left-aligned by contract.  Its occupied bins
+        # otherwise coincide with Hann's zero/near-zero leading coefficients.
+        taper = taper.copy()
+        taper[:slow_count] = 1.0
     transformed = np.fft.fft(frames * taper[None, :, None], n=nfft, axis=1)
     if bool(settings.get("fftshift", True)):
         transformed = np.fft.fftshift(transformed, axes=1)
@@ -488,6 +508,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--smoke", action="store_true", help="process an in-memory synthetic record")
     parser.add_argument("--input-npy", type=Path, help="optional .npy channelA matrix; archives are not accepted")
+    parser.add_argument(
+        "--input-axis-order",
+        choices=("slow-fast", "fast-slow"),
+        help="required with --input-npy; fast-slow is transposed before processing",
+    )
     parser.add_argument("--band", choices=("K", "L"), default="K")
     parser.add_argument("--slow-count", type=int, default=96)
     parser.add_argument("--fast-count", type=int, default=128)
@@ -503,16 +528,35 @@ def main() -> int:
         raise SystemExit("choose --smoke or --input-npy, not both")
     if not args.smoke and args.input_npy is None:
         raise SystemExit("--smoke or --input-npy is required")
+    if args.input_npy is not None and args.input_axis_order is None:
+        raise SystemExit("--input-axis-order is required with --input-npy")
+    if args.smoke and args.input_axis_order is not None:
+        raise SystemExit("--input-axis-order is only valid with --input-npy")
     if args.input_npy is not None and args.input_npy.suffix.lower() != ".npy":
         raise SystemExit("--input-npy accepts only a .npy matrix; RAR/MAT readers are intentionally absent")
     if args.slow_count < 1 or args.fast_count < 1:
         raise SystemExit("slow/fast counts must be positive")
-    record = (
-        _demo_record(args.band, args.slow_count, args.fast_count, args.seed)
-        if args.smoke
-        else np.load(args.input_npy, allow_pickle=False)
-    )
+    if args.smoke:
+        record = _demo_record(args.band, args.slow_count, args.fast_count, args.seed)
+        cli_source_shape = list(record.shape)
+        cli_input_axis_order = "slow-fast"
+        cli_transposed = False
+    else:
+        loaded_record = np.load(args.input_npy, allow_pickle=False)
+        if loaded_record.ndim != 2:
+            raise ProcessingContractError("--input-npy must contain a two-dimensional array")
+        cli_source_shape = [int(value) for value in loaded_record.shape]
+        cli_input_axis_order = str(args.input_axis_order)
+        cli_transposed = cli_input_axis_order == "fast-slow"
+        record = loaded_record.T if cli_transposed else loaded_record
     result = process_record(record, args.config, band=args.band, record_id=args.record_id)
+    result["metadata"]["cli_input"] = {
+        "source": "synthetic_smoke" if args.smoke else "npy",
+        "declared_axis_order": cli_input_axis_order,
+        "source_shape": cli_source_shape,
+        "transposed_to_contract_axis_order": cli_transposed,
+        "contract_axis_order": "slow-fast",
+    }
     output_dir = args.output_dir.expanduser()
     output_dir.mkdir(parents=True, exist_ok=True)
     arrays = {name: value for name, value in result.items() if isinstance(value, np.ndarray)}
