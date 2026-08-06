@@ -59,6 +59,9 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/templates/field_sync_event_template_v1.csv" in destinations
     assert "scripts/audit_field_synchronization_v1.py" in destinations
     assert "docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md" in destinations
+    assert "docs/MULTIDOMAIN_FEATURE_CONTRACT_AUDIT_V1.md" in destinations
+    assert "assets/contracts/multidomain_feature_contract_v1.yaml" in destinations
+    assert "scripts/audit_multidomain_feature_contract_v1.py" in destinations
     assert "docs/ONB_01_SUBMISSION_GUIDE_ZH.md" in destinations
     assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
     assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations

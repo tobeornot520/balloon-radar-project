@@ -66,7 +66,16 @@ FIELD_IQ_PROBE_CONTRACT = (
 )
 FIELD_SYNC_EVENT_CONTRACT = PROJECT_ROOT / "configs/field_sync_event_contract_v1.json"
 
-ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt", ".py"}
+ALLOWED_SUFFIXES = {
+    ".md",
+    ".csv",
+    ".png",
+    ".pdf",
+    ".json",
+    ".txt",
+    ".py",
+    ".yaml",
+}
 FORBIDDEN_SUFFIXES = {
     ".mat",
     ".h5",
@@ -267,6 +276,21 @@ PACKAGE_FILES = (
         "docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md",
         "docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md",
         "data_free_multidomain_smoke_document",
+    ),
+    PackageFile(
+        "docs/MULTIDOMAIN_FEATURE_CONTRACT_AUDIT_V1.md",
+        "docs/MULTIDOMAIN_FEATURE_CONTRACT_AUDIT_V1.md",
+        "multidomain_feature_contract_audit_document",
+    ),
+    PackageFile(
+        "configs/multidomain_feature_contract_v1.yaml",
+        "assets/contracts/multidomain_feature_contract_v1.yaml",
+        "multidomain_feature_contract",
+    ),
+    PackageFile(
+        "scripts/audit_multidomain_feature_contract_v1.py",
+        "scripts/audit_multidomain_feature_contract_v1.py",
+        "multidomain_feature_contract_audit_code",
     ),
     PackageFile(
         "docs/share/ONB_01_SUBMISSION_GUIDE_ZH.md",
