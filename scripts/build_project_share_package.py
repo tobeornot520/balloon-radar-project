@@ -127,11 +127,6 @@ PACKAGE_FILES = (
         "environment.yml",
         "runtime_environment",
     ),
-    PackageFile(
-        "requirements-lock.txt",
-        "requirements-lock.txt",
-        "runtime_environment_lock",
-    ),
     PackageFile("docs/share/README_SHARE_ZH.md", "README.md", "share_document"),
     PackageFile(
         "docs/share/TEAM_START_HERE.md",

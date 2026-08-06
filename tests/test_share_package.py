@@ -35,7 +35,6 @@ def test_share_source_map_is_complete_and_unique() -> None:
     )
     assert len(destinations) == len(set(destinations))
     assert "environment.yml" in destinations
-    assert "requirements-lock.txt" in destinations
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
     assert "docs/06_DATA_CARD_ZH.md" in destinations
     assert "docs/07_METRIC_DEFINITIONS_ZH.md" in destinations
