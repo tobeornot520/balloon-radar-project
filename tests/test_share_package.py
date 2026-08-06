@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260806_v10"
+        == "balloon_radar_results_and_team_onboarding_20260806_v11"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -51,6 +51,13 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json" in destinations
     assert "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md" in destinations
     assert "scripts/process_lss_fmcwr_normalized_v1.py" in destinations
+    assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
+    assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations
+    assert "scripts/build_zero_doppler_false_alarm_library_v1.py" in destinations
+    assert "assets/tables/zero_doppler_false_alarm_fold_summary.csv" in destinations
+    assert "assets/tables/zero_doppler_false_alarm_scan_summary.csv" in destinations
+    assert "assets/tables/zero_doppler_false_alarm_review_pattern_summary.csv" in destinations
+    assert "evidence/29_ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.json" in destinations
     assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
     assert "assets/templates/team_qualification_scorecard_template_v1.csv" in destinations
     assert "assets/templates/team_task_claim_template_v1.csv" in destinations
@@ -278,6 +285,20 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert not any(path.startswith("data/raw/") for path in sources + destinations)
     assert all(not Path(path).is_absolute() for path in sources + destinations)
     assert not any("joint_fold_false_alarms" in path for path in destinations)
+    false_alarm_sources = {
+        item.source
+        for item in PACKAGE_FILES
+        if item.source.startswith(
+            "results/data_audit/zero_doppler_false_alarm_library_v1/"
+        )
+    }
+    assert false_alarm_sources == {
+        "results/data_audit/zero_doppler_false_alarm_library_v1/fold_transition_summary.csv",
+        "results/data_audit/zero_doppler_false_alarm_library_v1/scan_transition_summary.csv",
+        "results/data_audit/zero_doppler_false_alarm_library_v1/review_pattern_summary.csv",
+        "results/data_audit/zero_doppler_false_alarm_library_v1/summary.json",
+    }
+    assert not any("case_library_local" in path for path in sources + destinations)
 
 
 def test_completion_delivery_evidence_tracks_frozen_package_name() -> None:

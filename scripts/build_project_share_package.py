@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v10"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v11"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -46,6 +46,13 @@ LSS_HSR_AUDIT_SUMMARY = (
 )
 LSS_FMCWR_AUDIT_SUMMARY = (
     PROJECT_ROOT / "results" / "data_audit" / "lss_fmcwr_2_v1" / "summary.json"
+)
+ZERO_DOPPLER_FALSE_ALARM_SUMMARY = (
+    PROJECT_ROOT
+    / "results"
+    / "data_audit"
+    / "zero_doppler_false_alarm_library_v1"
+    / "summary.json"
 )
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt", ".py"}
@@ -209,6 +216,41 @@ PACKAGE_FILES = (
         "scripts/process_lss_fmcwr_normalized_v1.py",
         "scripts/process_lss_fmcwr_normalized_v1.py",
         "fmcwr_normalized_processing_code",
+    ),
+    PackageFile(
+        "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
+        "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
+        "zero_doppler_false_alarm_audit_report",
+    ),
+    PackageFile(
+        "configs/zero_doppler_false_alarm_library_v1.json",
+        "assets/contracts/zero_doppler_false_alarm_library_v1.json",
+        "zero_doppler_false_alarm_audit_contract",
+    ),
+    PackageFile(
+        "scripts/build_zero_doppler_false_alarm_library_v1.py",
+        "scripts/build_zero_doppler_false_alarm_library_v1.py",
+        "zero_doppler_false_alarm_audit_code",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_false_alarm_library_v1/fold_transition_summary.csv",
+        "assets/tables/zero_doppler_false_alarm_fold_summary.csv",
+        "zero_doppler_false_alarm_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_false_alarm_library_v1/scan_transition_summary.csv",
+        "assets/tables/zero_doppler_false_alarm_scan_summary.csv",
+        "zero_doppler_false_alarm_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_false_alarm_library_v1/review_pattern_summary.csv",
+        "assets/tables/zero_doppler_false_alarm_review_pattern_summary.csv",
+        "zero_doppler_false_alarm_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_false_alarm_library_v1/summary.json",
+        "evidence/29_ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.json",
+        "zero_doppler_false_alarm_audit_summary",
     ),
     PackageFile(
         "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md",
@@ -1326,6 +1368,55 @@ def load_lss_fmcwr_audit() -> dict[str, object]:
     return payload
 
 
+def load_zero_doppler_false_alarm_summary() -> dict[str, object]:
+    """Validate the aggregate-only zero-Doppler false-alarm evidence."""
+
+    payload = json.loads(ZERO_DOPPLER_FALSE_ALARM_SUMMARY.read_text(encoding="utf-8"))
+    expected_counts = {
+        "test_samples": 1148,
+        "target_samples": 318,
+        "background_samples": 830,
+        "background_scans": 6,
+        "fixed_false_alarms": 120,
+        "residual_false_alarms": 109,
+        "removed_by_residual": 11,
+        "added_by_residual": 0,
+        "retained_false_alarms": 109,
+        "review_queue_rows": 120,
+        "reviewed_rows": 11,
+        "named_physical_labels": 0,
+    }
+    expected_claims = {
+        "model_training_performed": False,
+        "threshold_retuning_performed": False,
+        "blind_test_claim_allowed": False,
+        "physical_taxonomy_established": False,
+        "calibrated_polarimetry_claim_allowed": False,
+    }
+    if payload.get("schema_version") != 1:
+        raise ValueError("Unexpected zero-Doppler false-alarm schema version")
+    if payload.get("library_id") != "zero_doppler_false_alarm_library_v1":
+        raise ValueError("Unexpected zero-Doppler false-alarm library ID")
+    if payload.get("status") != "COMPLETE_AS_DEVELOPMENT_AUDIT":
+        raise ValueError("Unexpected zero-Doppler false-alarm audit status")
+    if payload.get("counts") != expected_counts:
+        raise ValueError("Unexpected zero-Doppler false-alarm counts")
+    if payload.get("claim_boundaries") != expected_claims:
+        raise ValueError("Unexpected zero-Doppler false-alarm claim boundaries")
+    sharing = payload.get("sharing_boundary", {})
+    if sharing.get("local_only_file") != "case_library_local.csv":
+        raise ValueError("Unexpected zero-Doppler local-only file declaration")
+    if sharing.get("scan_alias_mapping_published") is not False:
+        raise ValueError("Zero-Doppler scan alias mapping must not be published")
+    if set(sharing.get("forbidden_row_level_fields", [])) != {
+        "sample_id",
+        "source_file",
+        "review_note",
+    }:
+        raise ValueError("Unexpected zero-Doppler forbidden row-level fields")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -1423,6 +1514,26 @@ def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     ):
         raise ValueError("Raw data paths are forbidden in the share package")
 
+    false_alarm_prefix = "results/data_audit/zero_doppler_false_alarm_library_v1/"
+    expected_false_alarm_files = {
+        f"{false_alarm_prefix}fold_transition_summary.csv",
+        f"{false_alarm_prefix}scan_transition_summary.csv",
+        f"{false_alarm_prefix}review_pattern_summary.csv",
+        f"{false_alarm_prefix}summary.json",
+    }
+    actual_false_alarm_files = {
+        item.source for item in files if item.source.startswith(false_alarm_prefix)
+    }
+    if actual_false_alarm_files != expected_false_alarm_files:
+        raise ValueError(
+            "Zero-Doppler share evidence must contain exactly four aggregate files"
+        )
+    if any(
+        Path(item.source).name == "case_library_local.csv"
+        for item in files
+    ):
+        raise ValueError("The local zero-Doppler case library is forbidden")
+
     missing: list[str] = []
     errors: list[str] = []
     for item in files:
@@ -1514,6 +1625,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     daur = load_lss_daur_audit()
     hsr = load_lss_hsr_audit()
     fmcwr = load_lss_fmcwr_audit()
+    false_alarm = load_zero_doppler_false_alarm_summary()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1572,6 +1684,31 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "zero_doppler_candidate_veto_role": "post-test mechanism diagnostic",
             "zero_doppler_fixed_notch_role": "development safety reference",
             "zero_doppler_learned_sixfold_authorized": False,
+            "zero_doppler_false_alarm_library_included": True,
+            "zero_doppler_false_alarm_library_status": false_alarm["status"],
+            "zero_doppler_false_alarm_background_samples": false_alarm["counts"][
+                "background_samples"
+            ],
+            "zero_doppler_false_alarm_fixed_count": false_alarm["counts"][
+                "fixed_false_alarms"
+            ],
+            "zero_doppler_false_alarm_residual_count": false_alarm["counts"][
+                "residual_false_alarms"
+            ],
+            "zero_doppler_false_alarm_removed_count": false_alarm["counts"][
+                "removed_by_residual"
+            ],
+            "zero_doppler_false_alarm_added_count": false_alarm["counts"][
+                "added_by_residual"
+            ],
+            "zero_doppler_false_alarm_reviewed_count": false_alarm["counts"][
+                "reviewed_rows"
+            ],
+            "zero_doppler_false_alarm_row_level_library_included": False,
+            "zero_doppler_false_alarm_source_mapping_included": False,
+            "zero_doppler_false_alarm_review_notes_included": False,
+            "zero_doppler_false_alarm_physical_taxonomy_established": False,
+            "zero_doppler_false_alarm_blind_test_claim_allowed": False,
             "polarimetric_transfer_checkpoint_available": False,
             "absolute_polarimetric_calibration_verified": False,
             "physical_micro_doppler_timing_verified": False,

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "library_id": "zero_doppler_false_alarm_library_v1",
+  "folds": [1, 2, 3, 4, 5, 6],
+  "fixed_prediction_template": "results/experiments/zero_doppler_v1_fixed_notch_fold{fold:02d}_seed42/tables/test_predictions.csv",
+  "residual_prediction_template": "results/experiments/zero_doppler_v1_fixed_residual_fold{fold:02d}_seed42/tables/test_predictions.csv",
+  "review_queue": "results/data_audit/zero_doppler_human_review_v1/review_queue.csv",
+  "reviewed_queue": "results/data_audit/zero_doppler_human_review_v1/review_queue_reviewer_20260803.csv",
+  "input_sha256": {
+    "fixed_predictions": {
+      "1": "3b5f68581f68343a5965014a32d41ac450e7d450d9b902ecbb039a84476f76da",
+      "2": "ffbe7f3ee1d83e473d37e05a996e8b3b7cce4149da2abc7cd752222e4aaef980",
+      "3": "d78b594ed503dff0b05afd950ab49a425658a1e19a1c7f7b44024524336d9b7f",
+      "4": "d4293db2db204fca3461309314ee0416aafd15e01404a815a991e443793a72d2",
+      "5": "af8158c10461a2f33956995dfff56fa24f8d0c11bdb7127ef477b699462e4f3e",
+      "6": "76eecf6d8f77c872727ac64e1f9cd607ea097b2afb551410b66d9c08fae673ed"
+    },
+    "residual_predictions": {
+      "1": "d1686182e5154e11080bf7cbaf168ffa225fb6f1ecba37be6e458cc080b409d6",
+      "2": "1b479cfe16ce0a56fe3ebe368324c274245ce22e9ee32f195d6d09ee10c14c2f",
+      "3": "f65b9a847d39a7b15755cb24598acfd9d8c8795d95229ae08593db5656ed2971",
+      "4": "7fbeab7c86d3320db16ecb4f7eac01d66e6f48b1ec4fcd72fc1ebedc3bc96a60",
+      "5": "34d89989f9961c6a012dd11b66171fb0478c072b58167e1d2f686b5e34b79425",
+      "6": "644fffa42430c69bccfb450377bf19a77301e1488f18c0c1ba9d4e28edad7a10"
+    },
+    "review_queue": "56fa5247fdeb63801d00efd37e7fb63a0685a693b8d5afb1480e5ae88c08fbd2",
+    "reviewed_queue": "f71bc142bbea5c445cd9d89a178988dcbbe0157cbbe2b393f47b99ec1fb32680"
+  },
+  "expected_counts": {
+    "test_samples": 1148,
+    "target_samples": 318,
+    "background_samples": 830,
+    "background_scans": 6,
+    "fixed_false_alarms": 120,
+    "residual_false_alarms": 109,
+    "removed_by_residual": 11,
+    "added_by_residual": 0,
+    "retained_false_alarms": 109,
+    "review_queue_rows": 120,
+    "reviewed_rows": 11,
+    "named_physical_labels": 0
+  },
+  "scan_alias": {
+    "algorithm": "sha256_prefix",
+    "namespace": "zero-doppler-false-alarm-library-v1",
+    "hex_characters": 12
+  },
+  "claim_boundaries": {
+    "model_training_performed": false,
+    "threshold_retuning_performed": false,
+    "blind_test_claim_allowed": false,
+    "physical_taxonomy_established": false,
+    "calibrated_polarimetry_claim_allowed": false
+  }
+}

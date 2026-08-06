@@ -174,7 +174,17 @@ and fixes the physical-axis, H/V, training and performance gates to false. It
 does not change the blocked dataset status; see
 [LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md](LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md).
 
-The V10 share package is the current sanitized delivery. Its completion gate now
+The zero-Doppler false-alarm library V1 now pairs all 830 background test
+samples across the frozen fixed-notch and residual predictions. It verifies a
+120-to-109 false-alarm transition: 11 removed in Fold 4, zero added, and 109
+retained. The local row-level library remains ignored; only fold, stable
+anonymous-scan and visible-pattern aggregates are shareable. The 11 reviewed
+cases contain nine near-zero-Doppler peaks and two broad structures, but all
+physical labels remain unknown. This is consumed development evidence, not an
+external blind test or deployment Pfa. See
+[ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md](ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md).
+
+The V11 share package is the current sanitized delivery. Its completion gate now
 checks that every evidence path attached to a `complete` item exists and is
 nonempty; a stale package path can no longer count as completion. D15 is complete
 only at the current A-level evidence-review scope: the disclosed historical BC

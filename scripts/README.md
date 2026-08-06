@@ -16,7 +16,7 @@ than being copied into a script.
 | BC-DPG | `run_bc_dpg_v3.py`, `audit_bc_dpg_v3_causal_context.py` |
 | Polarimetric Stage 3 | `run_polarimetric_representation_benchmark_v2.py` |
 | ROI Stage 4 | `run_roi_stage4_selected_sixfold_v1.py` |
-| Zero-Doppler review | `build_zero_doppler_human_review_queue_v1.py`, `build_zero_doppler_review_atlas_v1.py`, `build_zero_doppler_review_workbench_v1.py`, `audit_zero_doppler_human_review_v1.py` |
+| Zero-Doppler review | `build_zero_doppler_human_review_queue_v1.py`, `build_zero_doppler_review_atlas_v1.py`, `build_zero_doppler_review_workbench_v1.py`, `audit_zero_doppler_human_review_v1.py`, `build_zero_doppler_false_alarm_library_v1.py` |
 | Tian reproduction | `run_tian_fcn_reproduction_smoke.py`, `run_tian_fcn_sixfold.py` |
 | Frozen evidence | `build_bc_dpg_localization_evidence.py`, `build_roi_bc_dpg_joint_paper_assets.py`, `build_lat_mricd_cross_band_evidence_v1.py` |
 | Sharing | `build_project_share_package.py` |
