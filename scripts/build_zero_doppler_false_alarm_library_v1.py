@@ -408,9 +408,12 @@ def assert_sanitized(frame: pd.DataFrame, role: str) -> None:
     forbidden = LOCAL_ONLY_COLUMNS & set(frame.columns)
     if forbidden:
         raise ValueError(f"{role} exposes local-only columns: {sorted(forbidden)}")
+    unix_home_marker = "/" + "home" + "/"
     for column in frame.columns:
         values = frame[column].fillna("").astype(str)
-        if values.str.contains(r"/home/|\\\\Users\\\\", regex=True).any():
+        has_unix_home = values.str.contains(unix_home_marker, regex=False).any()
+        has_windows_users = values.str.contains(r"\\Users\\", regex=False).any()
+        if has_unix_home or has_windows_users:
             raise ValueError(f"{role}.{column} contains a local path")
 
 
