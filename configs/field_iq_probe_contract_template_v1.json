@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "contract_id": "field_iq_probe_contract_template_v1",
+  "file_format": "mat_auto_v5_or_v7_3",
+  "h_variable": "local_data_H",
+  "v_variable": "local_data_V",
+  "requirements": {
+    "expected_ndim": 2,
+    "expected_shape": null,
+    "minimum_elements_per_channel": 2,
+    "require_same_hv_shape": true,
+    "require_complex": true,
+    "require_finite": true,
+    "require_real_component_variation": true,
+    "require_imag_component_variation": true,
+    "minimum_component_std": 0.0
+  },
+  "claim_boundaries": {
+    "hv_coherence_established_by_probe": false,
+    "polarimetric_calibration_established_by_probe": false,
+    "prf_or_physical_axis_established_by_probe": false,
+    "channel_mapping_established_by_probe": false,
+    "model_training_allowed_by_probe": false
+  },
+  "usage_note": "Copy this template to a controlled local contract and fill expected_shape from attributable device documentation before using a PASS result for CAL_COMPLEX_IQ."
+}

@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v12"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v13"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -60,6 +60,9 @@ ZERO_DOPPLER_TARGET_SAFETY_SUMMARY = (
     / "data_audit"
     / "zero_doppler_target_safety_audit_v1"
     / "summary.json"
+)
+FIELD_IQ_PROBE_CONTRACT = (
+    PROJECT_ROOT / "configs/field_iq_probe_contract_template_v1.json"
 )
 
 ALLOWED_SUFFIXES = {".md", ".csv", ".png", ".pdf", ".json", ".txt", ".py"}
@@ -223,6 +226,21 @@ PACKAGE_FILES = (
         "scripts/process_lss_fmcwr_normalized_v1.py",
         "scripts/process_lss_fmcwr_normalized_v1.py",
         "fmcwr_normalized_processing_code",
+    ),
+    PackageFile(
+        "docs/FIELD_IQ_INTEGRITY_PROBE_V1.md",
+        "docs/FIELD_IQ_INTEGRITY_PROBE_V1.md",
+        "field_iq_integrity_probe_document",
+    ),
+    PackageFile(
+        "configs/field_iq_probe_contract_template_v1.json",
+        "assets/contracts/field_iq_probe_contract_template_v1.json",
+        "field_iq_integrity_probe_contract_template",
+    ),
+    PackageFile(
+        "scripts/audit_field_iq_integrity_v1.py",
+        "scripts/audit_field_iq_integrity_v1.py",
+        "field_iq_integrity_probe_code",
     ),
     PackageFile(
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
@@ -1525,6 +1543,45 @@ def load_zero_doppler_target_safety_summary() -> dict[str, object]:
     return payload
 
 
+def load_field_iq_probe_contract() -> dict[str, object]:
+    """Validate the shipped field-IQ template without claiming real evidence."""
+
+    payload = json.loads(FIELD_IQ_PROBE_CONTRACT.read_text(encoding="utf-8"))
+    expected_requirements = {
+        "expected_ndim": 2,
+        "expected_shape": None,
+        "minimum_elements_per_channel": 2,
+        "require_same_hv_shape": True,
+        "require_complex": True,
+        "require_finite": True,
+        "require_real_component_variation": True,
+        "require_imag_component_variation": True,
+        "minimum_component_std": 0.0,
+    }
+    expected_claims = {
+        "hv_coherence_established_by_probe": False,
+        "polarimetric_calibration_established_by_probe": False,
+        "prf_or_physical_axis_established_by_probe": False,
+        "channel_mapping_established_by_probe": False,
+        "model_training_allowed_by_probe": False,
+    }
+    expected = {
+        "schema_version": 1,
+        "contract_id": "field_iq_probe_contract_template_v1",
+        "file_format": "mat_auto_v5_or_v7_3",
+        "h_variable": "local_data_H",
+        "v_variable": "local_data_V",
+    }
+    for field, value in expected.items():
+        if payload.get(field) != value:
+            raise ValueError(f"Unexpected field IQ probe contract {field}")
+    if payload.get("requirements") != expected_requirements:
+        raise ValueError("Unexpected field IQ probe requirements")
+    if payload.get("claim_boundaries") != expected_claims:
+        raise ValueError("Unexpected field IQ probe claim boundaries")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -1755,6 +1812,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     fmcwr = load_lss_fmcwr_audit()
     false_alarm = load_zero_doppler_false_alarm_summary()
     target_safety = load_zero_doppler_target_safety_summary()
+    field_iq_probe = load_field_iq_probe_contract()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1872,6 +1930,18 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "absolute_polarimetric_calibration_verified": False,
             "physical_micro_doppler_timing_verified": False,
             "field_readiness_gate_open": False,
+            "field_iq_integrity_probe_included": True,
+            "field_iq_integrity_probe_schema_version": field_iq_probe[
+                "schema_version"
+            ],
+            "field_iq_integrity_probe_supports_mat_v5_and_v7_3": True,
+            "field_iq_integrity_probe_default_expected_shape_configured": False,
+            "field_iq_integrity_probe_real_data_audit_completed": False,
+            "field_iq_integrity_probe_raw_data_included": False,
+            "field_iq_integrity_probe_establishes_hv_coherence": False,
+            "field_iq_integrity_probe_establishes_polarimetric_calibration": False,
+            "field_iq_integrity_probe_establishes_physical_axes": False,
+            "field_iq_integrity_probe_opens_model_training": False,
             "lat_mricd_raw_data_included": False,
             "lat_mricd_random_row_split_allowed": False,
             "lat_mricd_physical_micro_doppler_hz_allowed": False,

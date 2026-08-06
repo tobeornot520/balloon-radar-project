@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260806_v12"
+        == "balloon_radar_results_and_team_onboarding_20260806_v13"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -51,6 +51,9 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json" in destinations
     assert "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md" in destinations
     assert "scripts/process_lss_fmcwr_normalized_v1.py" in destinations
+    assert "docs/FIELD_IQ_INTEGRITY_PROBE_V1.md" in destinations
+    assert "assets/contracts/field_iq_probe_contract_template_v1.json" in destinations
+    assert "scripts/audit_field_iq_integrity_v1.py" in destinations
     assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
     assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations
     assert "scripts/build_zero_doppler_false_alarm_library_v1.py" in destinations
@@ -1116,6 +1119,22 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["absolute_polarimetric_calibration_verified"] is False
     assert rules["physical_micro_doppler_timing_verified"] is False
     assert rules["field_readiness_gate_open"] is False
+    assert rules["field_iq_integrity_probe_included"] is True
+    assert rules["field_iq_integrity_probe_schema_version"] == 1
+    assert rules["field_iq_integrity_probe_supports_mat_v5_and_v7_3"] is True
+    assert (
+        rules["field_iq_integrity_probe_default_expected_shape_configured"]
+        is False
+    )
+    assert rules["field_iq_integrity_probe_real_data_audit_completed"] is False
+    assert rules["field_iq_integrity_probe_raw_data_included"] is False
+    assert rules["field_iq_integrity_probe_establishes_hv_coherence"] is False
+    assert (
+        rules["field_iq_integrity_probe_establishes_polarimetric_calibration"]
+        is False
+    )
+    assert rules["field_iq_integrity_probe_establishes_physical_axes"] is False
+    assert rules["field_iq_integrity_probe_opens_model_training"] is False
     assert rules["lat_mricd_raw_data_included"] is False
     assert rules["lat_mricd_random_row_split_allowed"] is False
     assert rules["lat_mricd_physical_micro_doppler_hz_allowed"] is False

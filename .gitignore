@@ -142,6 +142,7 @@ notes/development_history/
 
 # Reproducible outputs from active development workflows
 results/data_audit/field_readiness_v1/
+results/data_audit/field_iq_integrity_v1/
 results/data_audit/multidomain_feature_catalog_v1/
 results/data_audit/tian_fcn_reproduction_v1/
 results/data_audit/tian_fcn_v1/

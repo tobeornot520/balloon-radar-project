@@ -58,6 +58,16 @@ field SOP are implemented. All gates remain blocked until the team supplies
 real device, timing, calibration, dry-run, and pilot evidence; no readiness is
 inferred from the legacy data.
 
+A read-only field IQ integrity probe now closes the gap between “the manifest
+path exists” and “the MAT actually contains usable H/V complex arrays.” It
+supports MATLAB v5 and v7.3, restores v7.3 logical axis order, checks variables,
+numeric/complex dtype, finite values, I/Q variation and device-configured shape,
+and keeps per-file names and hashes local. The shipped template deliberately
+has no expected shape, so it returns `BLOCKED_EXPECTED_SHAPE` until attributable
+device facts are entered in a controlled contract. Even a file-content PASS
+does not establish channel mapping, H/V coherence, calibration, PRF or physical
+axes. See [FIELD_IQ_INTEGRITY_PROBE_V1.md](FIELD_IQ_INTEGRITY_PROBE_V1.md).
+
 ## Active polarimetric transfer preparation
 
 A reusable candidate-ROI polarimetric encoder scaffold is now implemented. It
@@ -193,7 +203,7 @@ failures. Therefore the allowed statement is "no joint-success loss under the
 frozen tolerance," not "no target behavior changed." See
 [ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md](ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md).
 
-The V12 share package is the current sanitized delivery. Its completion gate now
+The V13 share package is the current sanitized delivery. Its completion gate now
 checks that every evidence path attached to a `complete` item exists and is
 nonempty; a stale package path can no longer count as completion. D15 is complete
 only at the current A-level evidence-review scope: the disclosed historical BC

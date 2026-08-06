@@ -20,6 +20,7 @@ Pilot 数据全部标记为 `development`。Pilot 用来发现采集问题，不
 - `configs/data_collection_manifest_template_v1.csv`
 - `scripts/audit_field_readiness_v1.py`
 - `scripts/validate_data_collection_manifest.py`
+- `scripts/audit_field_iq_integrity_v1.py`
 
 设备负责人联系表和答复模板：
 
@@ -64,6 +65,11 @@ Pilot 数据全部标记为 `development`。Pilot 用来发现采集问题，不
 必须实际读取一段新采数据，确认 H/V 都是复数数组、尺寸和数据类型符合配置、没有
 NaN/Inf，并能通过硬件序号恢复帧顺序。连续采集至少 300 秒，写盘吞吐量至少为实测
 原始流速的 1.5 倍。只看到处理后的 RD 图片不算具备原始极化和微多普勒采集能力。
+
+MAT 文件存在不等于内容可用。设备负责人给出变量名和期望形状后，使用
+`field_iq_probe_contract_template_v1.json` 建立受控设备合同，并运行
+`audit_field_iq_integrity_v1.py`。只有 `PASS_FILE_CONTENT_ONLY` 才能作为
+`CAP_RAW_COMPLEX_HV` / `CAL_COMPLEX_IQ` 的文件内容证据；它不证明 H/V 相干或标定。
 
 ### 4.2 Synchronization
 
@@ -190,6 +196,16 @@ python scripts/validate_data_collection_manifest.py \
   --data-root /controlled/collection \
   --check-files \
   --output-dir results/data_audit/dry_run_causal_v1
+```
+
+第一次最小 H/V 样例到位后，先执行实际内容探针：
+
+```bash
+python scripts/audit_field_iq_integrity_v1.py \
+  /controlled/collection/manifests/capability_sample.csv \
+  --data-root /controlled/collection \
+  --contract /controlled/field_evidence/field_iq_probe_contract_device_v1.json \
+  --output-dir results/data_audit/field_iq_integrity_device_v1
 ```
 
 最后的 Pilot readiness 审计：

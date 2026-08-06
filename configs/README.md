@@ -11,6 +11,7 @@ refer to these paths directly. Existing files must not be moved after an experim
 | `roi_*` | Candidate-ROI polarimetric refinement |
 | `tian_fcn_*` | Tian reproduction and local-transfer diagnostics |
 | `field_*`, `pilot_*` | Field capability, readiness and Pilot templates |
+| `field_iq_probe_*` | Device-variable and expected-shape template for read-only H/V MAT content checks |
 | `data_collection_*` | Versioned capture and evaluation contracts |
 | `lat_mricd_grouped_*` | Frozen LAT-MRICD X-band grouped baselines |
 | `lat_mricd_cross_band_*` | Preregistered one-shot LAT-MRICD band-held-out transfer |
