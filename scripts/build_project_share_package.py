@@ -269,6 +269,11 @@ PACKAGE_FILES = (
         "data_free_multidomain_smoke_document",
     ),
     PackageFile(
+        "docs/share/ONB_01_SUBMISSION_GUIDE_ZH.md",
+        "docs/ONB_01_SUBMISSION_GUIDE_ZH.md",
+        "team_onboarding_submission_guide",
+    ),
+    PackageFile(
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
         "zero_doppler_false_alarm_audit_report",

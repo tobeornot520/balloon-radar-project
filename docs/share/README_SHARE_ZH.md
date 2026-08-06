@@ -162,6 +162,7 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 - `docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md`：说明无数据条件下如何复核多域特征顺序、归一化
   STFT 接口和 validity-mask 融合；该 smoke 不产生性能结论。
 - `TEAM_START_HERE.md`：给零项目背景组员的完整执行手册；组员应先读此文件再认领任务。
+- `docs/ONB_01_SUBMISSION_GUIDE_ZH.md`：ONB-01 三项提交物、任务选择规则和负责人验收清单。
 - `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`：成员筛选、分工、权限和沟通的统一规则。
 - `assets/templates/team_qualification_scorecard_template_v1.csv`：逐人评分与决定记录。
 - `evidence/`：四个阶段的冻结结论或正式报告，以及上下文敏感性、因果训练就绪、定位证据、LAT-MRICD 审计/分组基线/跨频段冻结负结果、DroneRFc-MM、DAUR、HSR-L 与 FMCWR-2.0 只读审计和当前数据合同缺口审计。

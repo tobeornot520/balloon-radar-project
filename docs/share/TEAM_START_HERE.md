@@ -180,6 +180,8 @@ git status --short
 
 使用 [任务认领表](assets/templates/team_task_claim_template_v1.csv)。每个任务必须具备：
 
+ONB-01 的具体提交格式见 [ONB-01 入组验收提交说明](docs/ONB_01_SUBMISSION_GUIDE_ZH.md)。
+
 - 唯一 `task_id`；
 - 一名 owner 和一名 reviewer；
 - 明确输入路径或 manifest；
