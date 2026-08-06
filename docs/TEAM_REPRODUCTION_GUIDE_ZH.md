@@ -128,7 +128,7 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 预期状态为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，`paired_track_count=77`、
 `unique_signal_trajectory_content_count=76`、`candidate_source_session_group_count=39`、
 `frame_count=11366` 且 `model_training_allowed=false`。审计器只写入被忽略的本地审计目录，
-不修改原始文件，也不训练模型。V13 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
+不修改原始文件，也不训练模型。V14 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
 逐 recording 的日期、路径、时间戳或 payload 哈希明细。
 
 复核纪律：canonical/backup 是等价视图，不能倍增；TD/TR、完全重复记录和保守连通组不得
