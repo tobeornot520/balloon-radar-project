@@ -60,6 +60,14 @@ conda run -n radar-torch python scripts/audit_multidomain_feature_contract_v1.py
 `scaffold_only`、相对极化量、归一化频率和轨迹/风动力学阻塞状态。它输出
 `status=PASS` 只代表“文档契约与代码实现一致”，不是性能结果。
 
+通常直接运行统一预检即可同时执行契约审查和合成 smoke：
+
+```bash
+conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
+```
+
+统一预检的任一子门失败都会令命令失败；其 `status=PASS` 仍只表示数据无关接口就绪。
+
 ## 通过条件
 
 - 合成 H/V 固定相位关系的 coherence 接近 1；

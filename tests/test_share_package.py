@@ -62,6 +62,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "docs/MULTIDOMAIN_FEATURE_CONTRACT_AUDIT_V1.md" in destinations
     assert "assets/contracts/multidomain_feature_contract_v1.yaml" in destinations
     assert "scripts/audit_multidomain_feature_contract_v1.py" in destinations
+    assert "scripts/run_multidomain_preflight_v1.py" in destinations
     assert "docs/ONB_01_SUBMISSION_GUIDE_ZH.md" in destinations
     assert "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md" in destinations
     assert "assets/contracts/zero_doppler_false_alarm_library_v1.json" in destinations

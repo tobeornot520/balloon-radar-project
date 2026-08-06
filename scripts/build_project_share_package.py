@@ -293,6 +293,11 @@ PACKAGE_FILES = (
         "multidomain_feature_contract_audit_code",
     ),
     PackageFile(
+        "scripts/run_multidomain_preflight_v1.py",
+        "scripts/run_multidomain_preflight_v1.py",
+        "data_free_multidomain_preflight_code",
+    ),
+    PackageFile(
         "docs/share/ONB_01_SUBMISSION_GUIDE_ZH.md",
         "docs/ONB_01_SUBMISSION_GUIDE_ZH.md",
         "team_onboarding_submission_guide",

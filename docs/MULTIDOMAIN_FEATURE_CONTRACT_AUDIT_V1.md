@@ -30,6 +30,14 @@ conda run -n radar-torch python scripts/audit_multidomain_feature_contract_v1.py
 “契约和代码接口一致”，不表示模型训练完成，也不产生 Pd、Pfa、AUC 或物理 Hz 结论。
 任何维度、顺序、状态或缺失域策略的意外修改都会以非零退出和明确错误信息拒绝。
 
+日常使用可运行统一入口：
+
+```bash
+conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
+```
+
+它会先执行本契约审查，再执行确定性合成 H/V 特征与融合 smoke。
+
 ## 与下一阶段的关系
 
 真实 H/V IQ、PRF、同步和标定资料到位后，先运行本审查和
