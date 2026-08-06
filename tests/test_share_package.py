@@ -27,7 +27,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260806_v11"
+        == "balloon_radar_results_and_team_onboarding_20260806_v12"
     )
     assert len(destinations) == len(set(destinations))
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -58,6 +58,13 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/tables/zero_doppler_false_alarm_scan_summary.csv" in destinations
     assert "assets/tables/zero_doppler_false_alarm_review_pattern_summary.csv" in destinations
     assert "evidence/29_ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.json" in destinations
+    assert "docs/ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md" in destinations
+    assert "assets/contracts/zero_doppler_target_safety_audit_v1.json" in destinations
+    assert "scripts/audit_zero_doppler_target_safety_v1.py" in destinations
+    assert "assets/tables/zero_doppler_target_safety_fold_summary.csv" in destinations
+    assert "assets/tables/zero_doppler_target_peak_shift_histogram.csv" in destinations
+    assert "assets/tables/zero_doppler_target_score_delta_quantiles.csv" in destinations
+    assert "evidence/30_ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.json" in destinations
     assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
     assert "assets/templates/team_qualification_scorecard_template_v1.csv" in destinations
     assert "assets/templates/team_task_claim_template_v1.csv" in destinations
@@ -299,6 +306,20 @@ def test_share_source_map_is_complete_and_unique() -> None:
         "results/data_audit/zero_doppler_false_alarm_library_v1/summary.json",
     }
     assert not any("case_library_local" in path for path in sources + destinations)
+    target_safety_sources = {
+        item.source
+        for item in PACKAGE_FILES
+        if item.source.startswith(
+            "results/data_audit/zero_doppler_target_safety_audit_v1/"
+        )
+    }
+    assert target_safety_sources == {
+        "results/data_audit/zero_doppler_target_safety_audit_v1/fold_target_safety_summary.csv",
+        "results/data_audit/zero_doppler_target_safety_audit_v1/peak_shift_histogram.csv",
+        "results/data_audit/zero_doppler_target_safety_audit_v1/score_delta_quantiles.csv",
+        "results/data_audit/zero_doppler_target_safety_audit_v1/summary.json",
+    }
+    assert not any("target_case_library_local" in path for path in sources + destinations)
 
 
 def test_completion_delivery_evidence_tracks_frozen_package_name() -> None:
@@ -1078,6 +1099,19 @@ def test_share_manifest_marks_causal_context_as_post_test(
         "development safety reference"
     )
     assert rules["zero_doppler_learned_sixfold_authorized"] is False
+    assert rules["zero_doppler_target_safety_audit_included"] is True
+    assert rules["zero_doppler_target_sample_count"] == 318
+    assert rules["zero_doppler_target_fixed_detected"] == 302
+    assert rules["zero_doppler_target_residual_detected"] == 301
+    assert rules["zero_doppler_target_detection_lost"] == 1
+    assert rules["zero_doppler_target_fixed_joint_success"] == 290
+    assert rules["zero_doppler_target_residual_joint_success"] == 290
+    assert rules["zero_doppler_target_peak_changed"] == 6
+    assert rules["zero_doppler_target_large_peak_shift_count"] == 2
+    assert rules["zero_doppler_target_row_level_library_included"] is False
+    assert rules["zero_doppler_target_source_identifiers_included"] is False
+    assert rules["zero_doppler_target_threshold_retuning_performed"] is False
+    assert rules["zero_doppler_target_deployment_safety_established"] is False
     assert rules["polarimetric_transfer_checkpoint_available"] is False
     assert rules["absolute_polarimetric_calibration_verified"] is False
     assert rules["physical_micro_doppler_timing_verified"] is False

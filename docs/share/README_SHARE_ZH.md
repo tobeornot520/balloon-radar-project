@@ -4,7 +4,7 @@
 
 本项目利用 H/V 双极化复数 IQ 雷达数据，研究低慢小目标的检测、距离—速度定位与背景虚警抑制。当前形成的是 UAV 检测定位前端及其可追溯、可校验的冻结结果摘录；完整复现仍需要内部源码、数据、逐样本预测和 checkpoint。空飘球有载/无载、载荷类型及运动状态识别属于后续目标，尚未由当前数据证明。
 
-本 V11 包已合并成果材料、入组执行手册、成员资格与分工验收规则、LAT-MRICD 分组基线与
+本 V12 包已合并成果材料、入组执行手册、成员资格与分工验收规则、LAT-MRICD 分组基线与
 跨频段冻结负结果、DAUR V3、HSR-L V2 与 FMCWR-2.0 V4 全量只读审计，以及 Tian 复现受阻说明。
 准备继续参与下一阶段的成员应先完成 `TEAM_START_HERE.md` 和成员资格办法规定的验收，再
 认领模型、数据或文档任务。
@@ -39,6 +39,7 @@
 25. [推荐论文与下载登记](docs/20_RECOMMENDED_PAPERS_20260805.md)：Tian 前作、微多普勒、极化、载荷和有限数据检测的官方来源与阅读导引。
 26. [FMCWR 只读审计与归一化处理合同](docs/LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md)：当前公开数据的事实边界、允许的单记录接口和禁止声明。
 27. [零多普勒可审计虚警库 V1](docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md)：830 个背景案例的本地/分享分层、120→109 配对变化和物理标签边界。
+28. [零多普勒目标安全审计 V1](docs/ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md)：318 个目标的 detected/localization/joint、峰移动和分数下降配对边界。
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 
@@ -147,6 +148,7 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 - `assets/contracts/`、`assets/templates/`：新数据采集合同、FMCWR 归一化处理合同和空白清单模板。
 - `scripts/process_lss_fmcwr_normalized_v1.py`：不接触 RAR/MAT 的归一化 FFT/STFT 合成 smoke 工具；
 - `scripts/build_zero_doppler_false_alarm_library_v1.py`：重建本地逐样本库并输出脱敏聚合证据；
+- `scripts/audit_zero_doppler_target_safety_v1.py`：审计 residual 的目标检测、定位与峰移动风险；
   它只验证接口，不产生模型性能。
 - `TEAM_START_HERE.md`：给零项目背景组员的完整执行手册；组员应先读此文件再认领任务。
 - `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`：成员筛选、分工、权限和沟通的统一规则。
@@ -159,4 +161,4 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
 
 本包不包含原始 MAT/IQ/PCD、外部数据压缩包、标签明细、逐样本预测、checkpoint、训练日志、开发聊天记录、个人路径或访问凭据。哈希只能校验包内文件是否变化，不能替代从源码和数据重新计算结果。LAT-MRICD 数字只属于同一公开发布内的 batch-code-held-out 基线或 band-held-out 迁移，不是 unseen-model、独立外部、极化、空飘球或 Tian 复现证据。D17-XBAND 的 S/Ku target 已消费，分享包接收者只能复核证据或运行不接触真实 target 的合成合同测试，不能把重跑、CNN、域适配或调参称为新的确认性结果。DAUR 的 canonical/backup 不得倍增，TD/TR 和保守连接组不得跨 split；随机 frame/window/MAT 拆分、静默修日期、把 1024-bin 转成未经说明的物理 Hz 轴以及任何 DAUR 模型性能均禁止。FMCWR-2.0 的 90 MAT 只有 71 个唯一 payload，48 个候选组不是发布方确认的 session，B 通道全空；成员级哈希不在包内，禁止随机 MAT/frame/window、模型性能、H/V、自然鸟和物理 Hz/速度声明。DroneRFc-MM 子集不是 ADC/IQ 或 H/V 数据，没有鸟、天气或空飘球对照，只能用于点云/轨迹接口和时序算法审计，不能替代主数据或宣布识别性能；B1 radar/GT 零重叠，禁止监督对齐。UAV 群和 NEXRAD 小样本也只用于接口 smoke，不能按帧/gate/patch 随机拆分或写成识别结果；三个大体量候选没有进入本包或本地训练。主 UAV 方向仍为 `4/6`、`BLOCKED_EXTERNAL`；其余包内数字属于当前数据上的内部开发评价或明确标注的诊断证据，不代表跨日期、跨场地盲测或严格实时部署。
 
-分享包版本：`2026-08-06 V11`
+分享包版本：`2026-08-06 V12`

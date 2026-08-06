@@ -15,7 +15,7 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v11"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v12"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
@@ -52,6 +52,13 @@ ZERO_DOPPLER_FALSE_ALARM_SUMMARY = (
     / "results"
     / "data_audit"
     / "zero_doppler_false_alarm_library_v1"
+    / "summary.json"
+)
+ZERO_DOPPLER_TARGET_SAFETY_SUMMARY = (
+    PROJECT_ROOT
+    / "results"
+    / "data_audit"
+    / "zero_doppler_target_safety_audit_v1"
     / "summary.json"
 )
 
@@ -251,6 +258,41 @@ PACKAGE_FILES = (
         "results/data_audit/zero_doppler_false_alarm_library_v1/summary.json",
         "evidence/29_ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.json",
         "zero_doppler_false_alarm_audit_summary",
+    ),
+    PackageFile(
+        "docs/ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md",
+        "docs/ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md",
+        "zero_doppler_target_safety_audit_report",
+    ),
+    PackageFile(
+        "configs/zero_doppler_target_safety_audit_v1.json",
+        "assets/contracts/zero_doppler_target_safety_audit_v1.json",
+        "zero_doppler_target_safety_audit_contract",
+    ),
+    PackageFile(
+        "scripts/audit_zero_doppler_target_safety_v1.py",
+        "scripts/audit_zero_doppler_target_safety_v1.py",
+        "zero_doppler_target_safety_audit_code",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_target_safety_audit_v1/fold_target_safety_summary.csv",
+        "assets/tables/zero_doppler_target_safety_fold_summary.csv",
+        "zero_doppler_target_safety_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_target_safety_audit_v1/peak_shift_histogram.csv",
+        "assets/tables/zero_doppler_target_peak_shift_histogram.csv",
+        "zero_doppler_target_safety_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_target_safety_audit_v1/score_delta_quantiles.csv",
+        "assets/tables/zero_doppler_target_score_delta_quantiles.csv",
+        "zero_doppler_target_safety_aggregate_table",
+    ),
+    PackageFile(
+        "results/data_audit/zero_doppler_target_safety_audit_v1/summary.json",
+        "evidence/30_ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.json",
+        "zero_doppler_target_safety_audit_summary",
     ),
     PackageFile(
         "docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md",
@@ -1417,6 +1459,72 @@ def load_zero_doppler_false_alarm_summary() -> dict[str, object]:
     return payload
 
 
+def load_zero_doppler_target_safety_summary() -> dict[str, object]:
+    """Validate aggregate-only residual target-safety evidence."""
+
+    payload = json.loads(ZERO_DOPPLER_TARGET_SAFETY_SUMMARY.read_text(encoding="utf-8"))
+    expected_counts = {
+        "target_samples": 318,
+        "target_source_identifiers": 71,
+        "fixed_detected": 302,
+        "residual_detected": 301,
+        "detection_lost": 1,
+        "detection_gained": 0,
+        "fixed_localization_ok": 298,
+        "residual_localization_ok": 298,
+        "localization_lost": 0,
+        "localization_gained": 0,
+        "fixed_joint_success": 290,
+        "residual_joint_success": 290,
+        "joint_success_lost": 0,
+        "joint_success_gained": 0,
+        "peak_changed": 6,
+        "large_peak_shift_over_10_bins": 2,
+        "score_decreased": 292,
+        "score_equal": 26,
+        "score_increased": 0,
+        "range_error_worsened": 3,
+        "range_error_improved": 1,
+        "velocity_error_worsened": 5,
+        "velocity_error_improved": 1,
+    }
+    expected_claims = {
+        "model_training_performed": False,
+        "threshold_retuning_performed": False,
+        "blind_test_claim_allowed": False,
+        "deployment_safety_established": False,
+        "physical_mechanism_established": False,
+        "verified_session_grouping_available": False,
+    }
+    if payload.get("schema_version") != 1:
+        raise ValueError("Unexpected zero-Doppler target safety schema version")
+    if payload.get("audit_id") != "zero_doppler_target_safety_audit_v1":
+        raise ValueError("Unexpected zero-Doppler target safety audit ID")
+    if payload.get("status") != "COMPLETE_AS_DEVELOPMENT_AUDIT":
+        raise ValueError("Unexpected zero-Doppler target safety status")
+    if payload.get("counts") != expected_counts:
+        raise ValueError("Unexpected zero-Doppler target safety counts")
+    if payload.get("claim_boundaries") != expected_claims:
+        raise ValueError("Unexpected zero-Doppler target safety claim boundaries")
+    loss_context = payload.get("detection_loss_context", {})
+    if loss_context != {
+        "count": 1,
+        "fixed_joint_success_count": 0,
+        "residual_joint_success_count": 0,
+        "sample_identifiers_published": False,
+    }:
+        raise ValueError("Unexpected zero-Doppler target detection-loss context")
+    sharing = payload.get("sharing_boundary", {})
+    if sharing.get("local_only_file") != "target_case_library_local.csv":
+        raise ValueError("Unexpected target safety local-only file declaration")
+    if set(sharing.get("forbidden_row_level_fields", [])) != {
+        "sample_id",
+        "source_file",
+    }:
+        raise ValueError("Unexpected target safety forbidden row-level fields")
+    return payload
+
+
 def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     files = tuple(files)
     destinations = [item.destination for item in files]
@@ -1534,6 +1642,26 @@ def validate_source_map(files: Iterable[PackageFile] = PACKAGE_FILES) -> None:
     ):
         raise ValueError("The local zero-Doppler case library is forbidden")
 
+    target_safety_prefix = "results/data_audit/zero_doppler_target_safety_audit_v1/"
+    expected_target_safety_files = {
+        f"{target_safety_prefix}fold_target_safety_summary.csv",
+        f"{target_safety_prefix}peak_shift_histogram.csv",
+        f"{target_safety_prefix}score_delta_quantiles.csv",
+        f"{target_safety_prefix}summary.json",
+    }
+    actual_target_safety_files = {
+        item.source for item in files if item.source.startswith(target_safety_prefix)
+    }
+    if actual_target_safety_files != expected_target_safety_files:
+        raise ValueError(
+            "Zero-Doppler target safety share evidence must contain exactly four aggregate files"
+        )
+    if any(
+        Path(item.source).name == "target_case_library_local.csv"
+        for item in files
+    ):
+        raise ValueError("The local zero-Doppler target case library is forbidden")
+
     missing: list[str] = []
     errors: list[str] = []
     for item in files:
@@ -1626,6 +1754,7 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
     hsr = load_lss_hsr_audit()
     fmcwr = load_lss_fmcwr_audit()
     false_alarm = load_zero_doppler_false_alarm_summary()
+    target_safety = load_zero_doppler_target_safety_summary()
     manifest = {
         "schema_version": 1,
         "package_name": PACKAGE_NAME,
@@ -1709,6 +1838,36 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "zero_doppler_false_alarm_review_notes_included": False,
             "zero_doppler_false_alarm_physical_taxonomy_established": False,
             "zero_doppler_false_alarm_blind_test_claim_allowed": False,
+            "zero_doppler_target_safety_audit_included": True,
+            "zero_doppler_target_safety_status": target_safety["status"],
+            "zero_doppler_target_sample_count": target_safety["counts"][
+                "target_samples"
+            ],
+            "zero_doppler_target_fixed_detected": target_safety["counts"][
+                "fixed_detected"
+            ],
+            "zero_doppler_target_residual_detected": target_safety["counts"][
+                "residual_detected"
+            ],
+            "zero_doppler_target_detection_lost": target_safety["counts"][
+                "detection_lost"
+            ],
+            "zero_doppler_target_fixed_joint_success": target_safety["counts"][
+                "fixed_joint_success"
+            ],
+            "zero_doppler_target_residual_joint_success": target_safety["counts"][
+                "residual_joint_success"
+            ],
+            "zero_doppler_target_peak_changed": target_safety["counts"][
+                "peak_changed"
+            ],
+            "zero_doppler_target_large_peak_shift_count": target_safety["counts"][
+                "large_peak_shift_over_10_bins"
+            ],
+            "zero_doppler_target_row_level_library_included": False,
+            "zero_doppler_target_source_identifiers_included": False,
+            "zero_doppler_target_threshold_retuning_performed": False,
+            "zero_doppler_target_deployment_safety_established": False,
             "polarimetric_transfer_checkpoint_available": False,
             "absolute_polarimetric_calibration_verified": False,
             "physical_micro_doppler_timing_verified": False,

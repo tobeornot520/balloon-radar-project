@@ -184,7 +184,16 @@ physical labels remain unknown. This is consumed development evidence, not an
 external blind test or deployment Pfa. See
 [ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md](ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md).
 
-The V11 share package is the current sanitized delivery. Its completion gate now
+A paired target-side safety audit further refines the residual claim. Joint
+success remains 290 to 290 and localization-ok remains 298 to 298, but raw
+detected targets change from 302 to 301. The single lost detected state was
+already mislocalized under both modes. Six target peaks move: four remain joint
+successes and two remain failures; the two over-10-bin shifts occur among the
+failures. Therefore the allowed statement is "no joint-success loss under the
+frozen tolerance," not "no target behavior changed." See
+[ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md](ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md).
+
+The V12 share package is the current sanitized delivery. Its completion gate now
 checks that every evidence path attached to a `complete` item exists and is
 nonempty; a stale package path can no longer count as completion. D15 is complete
 only at the current A-level evidence-review scope: the disclosed historical BC

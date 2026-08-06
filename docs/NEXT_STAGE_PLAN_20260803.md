@@ -29,6 +29,7 @@
 | 3A | LAT-MRICD 公开数据算法预研 | D17-NX/HX/XBAND 已完成；XBAND 为预登记负结果 `FAIL_STOP` | 维护 X 波段五折证据和跨频最终证据；X->S 仅 UAV recall 失败，X->Ku 全部门槛通过；S/Ku target 已消费 | 当前无需补数据；对外只按冻结边界引用，不把公开数据支线并入主 UAV 门槛 | 不在同一 S/Ku target 上做 CNN、域适配、扩特征、调参或新确认性比较；新结论须使用独立未消费 target 并重新预登记 |
 | 3B | 新公开数据 schema/group 审计 | DAUR、HSR、FMCWR 与 DroneRFc 当前只读审计均完成，但分别受 grouping/axis、source-provenance/axis、grouping/provenance/axis、B1 同步阻塞；辅助 smoke 已落地；未放行建模 | FMCWR 冻结 90 MAT/71 唯一 payload/48 非权威候选组、64 K/26 L 且 B 通道全空；归一化微多普勒合成/单记录处理合同和合成 smoke 已完成；维护四集阻塞门 | 当前无需下载或标注；若能联系发布方，优先询问 FMCWR session、Fs/PRF、载频和零频，也可询问 HSR route-source/512-bin 轴、DAUR session/1024-bin 轴或 DroneRFc B1 更正 GT | 每个数据集有版本/许可/哈希、只读 loader、最低分组、禁止拆分规则和可声明边界；未过门前不训练 |
 | 4 | 建立可审计的虚警库 | 已完成（开发审计级） | 已配对 830 个背景样本，验证 fixed 120→residual 109、移除 11、新增 0，并输出折级、匿名 scan 级和可见模式聚合 | 已完成 11 例可见模式复核；没有现场记录的物理类别继续保持 `unknown` | 输入哈希、120 条队列和 11 条人工记录一致；逐样本 ID/来源/备注不进入 Git 或分享包 |
+| 4A | residual 目标安全审计 | 已完成（开发审计级） | 已配对 318 个目标：joint 290→290，但 raw detected 302→301；披露 6 个峰移动和 2 个大位移失败案例 | 当前无需追加旧数据复核；新同条件采集时把 raw detected、joint 和峰移动同时列为验收项 | 不重新调参；本地逐样本库不分享，聚合结果明确“不等于部署安全” |
 | 5 | 新同条件数据的极化统计 | 等待数据 | 冻结特征、按 session/scan 做 AUC/PR-AUC/低 FPR/最差组压力检查 | 审核特征物理解释与主验收指标 | 来源压力通过；目标/背景不再由日期直接区分 |
 | 6 | 最小极化增强模型 | 未放行 | 先做功率/相对幅度 ROI 小分支，一次只开放一个变量 | 评审困难样本、复杂度和停止规则 | 验证组 Pfa 降低且 joint Pd 不下降，或通过预登记容差 |
 | 7 | 因果背景校准 | 等待真实顺序 | 用 past-only 窗口训练，训练/验证选窗口，锁定外层只评一次 | 提供硬件时间戳、序号和丢帧记录 | 不读取未来样本，causal 合同通过 |

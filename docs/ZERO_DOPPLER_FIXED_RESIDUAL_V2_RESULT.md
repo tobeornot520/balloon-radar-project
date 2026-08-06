@@ -38,6 +38,14 @@ Every residual score is no greater than its paired fixed-notch score. The model
 therefore satisfies both the fixed-notch safety baseline and the residual
 non-increasing-logit contract.
 
+A later target-side paired audit refines this statement. Raw target detection
+changes from 302 to 301: one already mislocalized target loses its detected
+state, while joint success remains 290 to 290. Six target peaks move; four stay
+joint-successful and two stay joint-unsuccessful, with the two large shifts
+occurring in the latter group. The precise claim is therefore "no paired joint-
+success loss under the frozen tolerance," not "no target behavior changed."
+See `ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md`.
+
 ## Interpretation
 
 The result supports a narrow claim: direct background top-k pressure plus a

@@ -16,6 +16,7 @@
 - `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`: FMCWR-2.0 V4 RAR/MAT schema, duplicate, grouping and physical-axis gate
 - `LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md`: normalized-index FFT/STFT single-record interface; no physical-axis or training claims
 - `ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md`: paired local false-alarm registry, sanitized aggregate evidence, and physical-label boundary
+- `ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md`: paired target detection, localization, peak-shift and score-change safety audit
 - `../data/metadata/external_public_datasets_v1.csv`: versioned external dataset, DOI, licence, use and decision registry
 - `../data/metadata/external_public_artifacts_v1.csv`: downloaded artifact size, hash and integrity registry
 - `LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`: frozen five-fold Narrow-X/HRRP-X grouped-baseline contract, metrics, and claim limits
@@ -37,6 +38,7 @@
 - `ZERO_DOPPLER_FIXED_RESIDUAL_V2_PREREGISTRATION.md`
 - `ZERO_DOPPLER_FIXED_RESIDUAL_V2_RESULT.md`
 - `ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md`
+- `ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md`
 
 ## Tian reproduction
 

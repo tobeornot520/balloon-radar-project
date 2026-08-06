@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "audit_id": "zero_doppler_target_safety_audit_v1",
+  "prediction_contract": "configs/zero_doppler_false_alarm_library_v1.json",
+  "prediction_contract_sha256": "b959e46e89cfc609668046eb6968fbb1682ea071a40b829ff529e70151759093",
+  "expected_counts": {
+    "target_samples": 318,
+    "target_source_identifiers": 71,
+    "fixed_detected": 302,
+    "residual_detected": 301,
+    "detection_lost": 1,
+    "detection_gained": 0,
+    "fixed_localization_ok": 298,
+    "residual_localization_ok": 298,
+    "localization_lost": 0,
+    "localization_gained": 0,
+    "fixed_joint_success": 290,
+    "residual_joint_success": 290,
+    "joint_success_lost": 0,
+    "joint_success_gained": 0,
+    "peak_changed": 6,
+    "large_peak_shift_over_10_bins": 2,
+    "score_decreased": 292,
+    "score_equal": 26,
+    "score_increased": 0,
+    "range_error_worsened": 3,
+    "range_error_improved": 1,
+    "velocity_error_worsened": 5,
+    "velocity_error_improved": 1
+  },
+  "score_comparison_atol": 1e-12,
+  "large_peak_shift_threshold_bins": 10,
+  "claim_boundaries": {
+    "model_training_performed": false,
+    "threshold_retuning_performed": false,
+    "blind_test_claim_allowed": false,
+    "deployment_safety_established": false,
+    "physical_mechanism_established": false,
+    "verified_session_grouping_available": false
+  }
+}
