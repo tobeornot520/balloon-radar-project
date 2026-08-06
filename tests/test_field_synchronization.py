@@ -13,6 +13,7 @@ from scripts.audit_field_synchronization_v1 import (
     load_contract,
     validate_events,
 )
+from scripts.audit_field_readiness_v1 import DEFAULT_CHECKLIST, load_checklist
 
 
 def timestamp(base: datetime, seconds: float) -> str:
@@ -193,3 +194,33 @@ def test_template_matches_contract() -> None:
 
     assert template.empty
     assert template.columns.tolist() == contract["required_columns"]
+
+
+def test_sync_limits_match_field_readiness_checklist() -> None:
+    contract = load_contract(DEFAULT_CONTRACT)
+    checklist = load_checklist(DEFAULT_CHECKLIST)
+    items = {
+        item["item_id"]: item["measurement"]
+        for item in checklist["items"]
+        if item["item_id"] in {
+            "SYNC_EVENT_REPEATS",
+            "SYNC_P95_ERROR",
+            "SYNC_MAX_ERROR",
+        }
+    }
+    assert items == {
+        "SYNC_EVENT_REPEATS": {
+            "minimum": contract["minimum_accepted_events"],
+            "unit": "count",
+        },
+        "SYNC_P95_ERROR": {
+            "maximum": contract["radar_video_limits_ms"][
+                "absolute_error_p95_maximum"
+            ],
+            "unit": "ms",
+        },
+        "SYNC_MAX_ERROR": {
+            "maximum": contract["radar_video_limits_ms"]["absolute_error_maximum"],
+            "unit": "ms",
+        },
+    }
