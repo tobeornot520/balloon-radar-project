@@ -17,6 +17,79 @@ FEATURE_DOMAINS: Mapping[str, str] = {
     "tf": "normalized-frequency time-frequency descriptors",
 }
 
+# Keep the scalar-to-domain order in one place.  The extractor returns a
+# mapping for readability, while the fusion model consumes fixed-width vectors;
+# this contract prevents callers from relying on dictionary insertion order or
+# collecting fields with a broad prefix (which can silently reorder features).
+MULTIDOMAIN_FEATURE_NAMES: Mapping[str, tuple[str, ...]] = {
+    "quality": (
+        "quality_slow_time_samples",
+        "quality_range_gates",
+        "quality_finite_fraction",
+    ),
+    "time": (
+        "time_h_magnitude_mean",
+        "time_h_magnitude_cv",
+        "time_h_magnitude_kurtosis",
+        "time_v_magnitude_mean",
+        "time_v_magnitude_cv",
+        "time_v_magnitude_kurtosis",
+        "time_h_lag1_coherence",
+        "time_v_lag1_coherence",
+        "time_hv_coherence",
+        "time_hv_phase_resultant",
+        "time_hv_power_ratio_db",
+    ),
+    "rd": (
+        "rd_peak_velocity_index",
+        "rd_peak_range_index",
+        "rd_peak_velocity_offset",
+        "rd_peak_at_zero_band",
+        "rd_peak_at_edge_band",
+        "rd_anchor_velocity_index",
+        "rd_anchor_range_index",
+        "rd_anchor_is_external_candidate",
+        "rd_anchor_matches_scene_peak",
+        "rd_total_energy_db",
+        "rd_global_peak_fraction",
+        "rd_zero_doppler_energy_fraction",
+        "rd_edge_doppler_energy_fraction",
+        "rd_anchor_centroid_bin",
+        "rd_anchor_centroid_offset",
+        "rd_anchor_spectral_width_bins",
+        "rd_anchor_entropy",
+        "rd_anchor_flatness",
+        "rd_anchor_peak_fraction",
+        "rd_anchor_main_band_fraction",
+        "rd_anchor_sideband_fraction",
+        "rd_anchor_zero_doppler_fraction",
+    ),
+    "polar": (
+        "polar_roi_zdr_median_db",
+        "polar_roi_zdr_iqr_db",
+        "polar_roi_rho_mean",
+        "polar_roi_rho_p10",
+        "polar_roi_phase_resultant",
+        "polar_roi_stokes_s1_mean",
+        "polar_roi_stokes_s2_mean",
+        "polar_roi_stokes_s3_mean",
+    ),
+    "tf": (
+        "tf_frame_count",
+        "tf_nperseg",
+        "tf_centroid_mean_normalized",
+        "tf_centroid_std_normalized",
+        "tf_bandwidth_mean_normalized",
+        "tf_bandwidth_std_normalized",
+        "tf_entropy_mean",
+        "tf_entropy_std",
+        "tf_dominant_std_normalized",
+        "tf_dominant_span_normalized",
+        "tf_energy_cv",
+        "tf_long_window_available",
+    ),
+}
+
 
 @dataclass(frozen=True)
 class MultiDomainFeatureConfig:
@@ -372,3 +445,52 @@ def extract_multidomain_features(
     if not np.isfinite(values).all():
         raise ValueError("multi-domain feature vector contains NaN or Inf")
     return output
+
+
+def split_multidomain_features(
+    features: Mapping[str, float | int],
+    *,
+    dtype: np.dtype | type = np.float32,
+) -> dict[str, np.ndarray]:
+    """Pack extracted scalar features into the frozen domain order.
+
+    ``extract_multidomain_features`` intentionally returns a named mapping so
+    audit tables remain self-describing.  Neural fusion modules instead need a
+    dense ``[features]`` vector for each domain.  This adapter is the single
+    ordering contract between those two interfaces; it performs no scaling or
+    imputation.  Callers must fit scalar normalization on training acquisition
+    groups before passing the arrays to a model.
+
+    The adapter rejects missing, non-scalar, complex, or non-finite values so a
+    partially populated real record cannot silently become a valid model input.
+    """
+    missing = {
+        name
+        for names in MULTIDOMAIN_FEATURE_NAMES.values()
+        for name in names
+        if name not in features
+    }
+    if missing:
+        raise KeyError(f"missing multidomain features: {sorted(missing)}")
+
+    packed: dict[str, np.ndarray] = {}
+    for domain, names in MULTIDOMAIN_FEATURE_NAMES.items():
+        values: list[float] = []
+        for name in names:
+            value = np.asarray(features[name])
+            if value.ndim != 0:
+                raise ValueError(f"{name} must be a scalar feature")
+            if np.iscomplexobj(value):
+                raise TypeError(f"{name} must be real-valued")
+            try:
+                scalar = float(value)
+            except (TypeError, ValueError) as error:
+                raise TypeError(f"{name} must be numeric") from error
+            if not np.isfinite(scalar):
+                raise ValueError(f"{name} must be finite")
+            values.append(scalar)
+        array = np.asarray(values, dtype=dtype)
+        if not np.isfinite(array).all():
+            raise ValueError(f"{domain} feature vector contains NaN or Inf")
+        packed[domain] = array
+    return packed

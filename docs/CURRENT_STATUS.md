@@ -385,6 +385,24 @@ The version-1 collection contract defines 40 required manifest columns and three
 
 The current 1,148-row V4 manifest fails the locked-evaluation profile because 33 contract columns are absent. Schema failure blocks all downstream gates; neither formal causal training nor locked external evaluation is open. Existing filename time, beam/azimuth order, MAT header time, filesystem mtime, and historical test labels cannot be promoted into the missing verified metadata.
 
+## Local work closeout (2026-08-06)
+
+All data-independent preparation that is currently authorized has been closed out:
+
+- the UAV detection, localization, zero-Doppler false-alarm, and target-safety evidence is frozen;
+- the polarimetric transfer interface, MATLAB v5/v7.3 H/V IQ content probe, and synchronization-event
+  numeric sub-audit are implemented and covered by tests;
+- the LAT-MRICD, DAUR, HSR-L, FMCWR-2.0, and DroneRFc-MM read-only audits and the normalized
+  processing/synthetic smoke contracts are frozen at their documented boundaries;
+- the Tian transfer failure chain and its exact-reproduction reopen conditions are frozen; and
+- the task ledger and sanitized sharing source documents now record the same closeout boundary.
+
+No formal model-training or confirmation experiment is pending that can be validly completed without
+new data or attributable device/material facts. The remaining work is external: H/V and IQ/PRF/axis
+facts, Tian-aligned material, real synchronization/calibration evidence, and independent balloon
+sessions. Until those arrive, model-training gates remain closed and the main direction remains
+`4/6 BLOCKED_EXTERNAL`.
+
 ## Claim boundaries
 
 The current data support an internal development-stage H/V UAV detection and distance-velocity localization front end. They do not establish balloon payload classification, event-level or hourly false-alarm performance, cross-environment blind generalization, or a trained and independently evaluated real-time causal scan adapter.

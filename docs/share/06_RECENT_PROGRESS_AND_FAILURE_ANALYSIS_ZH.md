@@ -288,3 +288,10 @@ DAUR 的 schema/pairing 门已完成但 grouping/physical-axis 门未放行；HS
 完成但 grouping/provenance/physical-axis 门未放行；归一化处理合同已完成，当前只做接口复核。DroneRFc-MM
 的 B1 必须先取得更正 GT/可归因偏移，其余
 8 条也要新预登记，之后才决定算法任务。
+
+## 9. 2026-08-06 本地工作收口
+
+截至本版，数据无关的工程准备、只读审计、接口/合同 smoke、失败链整理和分享文档已经
+收口。没有真实 H/V IQ、同步/标定事实、Tian 对齐材料或独立空飘球 session 时，不再启动
+正式训练、测试后调参或确认性公开数据比较；只允许维护证据、运行不接触真实 target 的
+合成合同测试并等待外部材料。主 UAV 完成门保持 `4/6 BLOCKED_EXTERNAL`。

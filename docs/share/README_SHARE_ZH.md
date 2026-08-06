@@ -46,7 +46,7 @@
 
 只需快速了解时，阅读一页摘要和近期失败分析；准备与学长交流时，再打开问题清单。
 
-## 2026-07-31 至 2026-08-05 新增进展
+## 2026-07-31 至 2026-08-06 新增进展
 
 - 完成 56 个时域、极化、时频和 RD 特征的候选锚定目录及组依赖审计；
 - 定位零多普勒附近的集中虚警机制，并完成 candidate veto、固定 soft notch、
@@ -107,6 +107,9 @@
 - DAUR、HSR 与 FMCWR 当前只读审计均完成但训练阻塞；FMCWR 归一化轴合成/单记录处理
   合同和合成 smoke 已完成，下一步只维护 grouping/provenance/axis 门并等待可归因参数。DroneRFc-MM 保持
   `PASS_SCHEMA_BLOCKED_TIMESTAMP_ALIGNMENT`，B1 等待更正 GT/可归因偏移；审计通过前不训练。
+- 完成 2026-08-06 本地工作收口：UAV 冻结证据、极化 encoder、IQ 内容探针、同步数值子审计、
+  公开数据只读审计、Tian 失败链和分享源文档均已收口；当前没有可在无新数据条件下合法完成的
+  正式模型实验，主方向仍为 `4/6 BLOCKED_EXTERNAL`。
 
 ## 当前最重要的结论
 
@@ -156,6 +159,8 @@ BC-DPG 与 ROI RI4 的 OR/union 可得到 294/318 个正确目标，但虚警升
   它只验证接口，不产生模型性能。
 - `scripts/audit_field_synchronization_v1.py`：从受控同步事件表计算 radar-video P95/最大误差；
   它不打开完整同步门，也不允许据此训练模型。
+- `docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md`：说明无数据条件下如何复核多域特征顺序、归一化
+  STFT 接口和 validity-mask 融合；该 smoke 不产生性能结论。
 - `TEAM_START_HERE.md`：给零项目背景组员的完整执行手册；组员应先读此文件再认领任务。
 - `docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`：成员筛选、分工、权限和沟通的统一规则。
 - `assets/templates/team_qualification_scorecard_template_v1.csv`：逐人评分与决定记录。

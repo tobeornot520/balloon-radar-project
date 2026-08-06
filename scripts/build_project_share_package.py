@@ -264,6 +264,11 @@ PACKAGE_FILES = (
         "field_synchronization_audit_code",
     ),
     PackageFile(
+        "docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md",
+        "docs/SYNTHETIC_MULTIDOMAIN_SMOKE_V1.md",
+        "data_free_multidomain_smoke_document",
+    ),
+    PackageFile(
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
         "docs/ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md",
         "zero_doppler_false_alarm_audit_report",

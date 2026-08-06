@@ -23,10 +23,15 @@
 | Tian 2024 FCN | 原迁移失败；point-GT 验证集 joint Pd 0.4151 | 方法诊断和本地消融，不是成功复现 |
 | 极化迁移编码器 | 三分支 ROI encoder 接口与测试完成 | 尚无预训练权重，未标定相位可通过 validity mask 关闭 |
 | 外场准备 | 能力、同步、标定、dry run、Pilot 五道门已固化 | 真实证据未提供前全部保持关闭 |
+| 本地工作收口（2026-08-06） | 现有审计、接口、合同、测试和分享源文档均已收口 | 没有新数据时不再启动正式训练；剩余事项均为外部事实门 |
 | 公开多频段分组基线 | D17-NX/HX 已完成；Narrow-X LR/RF batch-class macro 0.7999/0.7872，HRRP-X 0.6617/0.6481，均有 batch-code cluster CI | 同一公开发布内的 batch-code-held-out 基线；不是 unseen-model、独立外部、H/V、空飘球或 Tian 证据 |
 | D17-XBAND 密封迁移 | X->S LR batch-class macro 0.6517，但 UAV recall 0.4433 未过门；X->Ku batch-class macro 0.8400 且该 target 过门；整体 `FAIL_STOP` | 两个 locked target 未同时通过，冻结为负结果；S/Ku 已消费，不得在同 target 上重跑、调 CNN、做域适配或结果驱动改模 |
 | DAUR V3 只读审计 | 77 个逻辑 TD/TR 观测、76 个唯一内容对、39 个保守候选 source-session 组；schema/配对通过 | 分组、严格时间、日期和 1024-bin 物理轴仍阻塞，`model_training_allowed=false` |
 | HSR V2 只读审计 | 1,530 MAT、63,148 真实帧、865 routes；官方 train/validation 窗口 45,366/9,336 | route 以上来源和 512-bin DPL 物理轴阻塞；529 个 overflow 窗口隔离，`model_training_allowed=false` |
+
+截至 2026-08-06，数据无关的本地准备已经收口：可以继续做的只剩文档/合同维护和合成接口
+复核；正式极化、因果、微多普勒或空飘球模型都必须等待真实数据与可归因设备事实。主方向
+完成门仍是 `4/6 BLOCKED_EXTERNAL`，因此不能宣布当前方向全部完成。
 
 ## 当前最关键的发现
 

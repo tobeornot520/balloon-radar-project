@@ -65,16 +65,21 @@ def result_complete(
         payload = json.loads(summary_path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return False
+    if not isinstance(payload, dict) or payload.get("status") != "PASS":
+        return False
     if payload.get("scope") != scope:
         return False
-    config = payload.get("config", {})
+    config = payload.get("config")
+    if not isinstance(config, dict):
+        return False
     if any(config.get(key) != value for key, value in expected_config.items()):
         return False
+    test_split_loaded = payload.get("test_split_loaded")
     if scope == "formal":
-        return bool(payload.get("test_split_loaded")) and (
+        return test_split_loaded is True and (
             path / "tables" / "test_predictions.csv"
         ).is_file()
-    return not bool(payload.get("test_split_loaded"))
+    return test_split_loaded is False
 
 
 def run(command: list[str]) -> None:

@@ -283,6 +283,7 @@ def test_completed_run_requires_matching_frozen_config(tmp_path: Path) -> None:
     (experiment / "tables" / "summary.json").write_text(
         json.dumps(
             {
+                "status": "PASS",
                 "scope": "smoke",
                 "test_split_loaded": False,
                 "config": {"joint_epochs": 1, "channel": "H"},
@@ -299,4 +300,40 @@ def test_completed_run_requires_matching_frozen_config(tmp_path: Path) -> None:
         experiment,
         "smoke",
         {"joint_epochs": 20, "channel": "H"},
+    )
+
+
+@pytest.mark.parametrize(
+    ("status", "test_split_loaded"),
+    [
+        ("FAIL", False),
+        (None, False),
+        ("PASS", "false"),
+        ("PASS", 0),
+    ],
+)
+def test_completed_run_rejects_failed_or_ambiguous_summary_state(
+    tmp_path: Path,
+    status: str | None,
+    test_split_loaded: object,
+) -> None:
+    experiment = tmp_path / "experiment"
+    (experiment / "tables").mkdir(parents=True)
+    (experiment / "checkpoints").mkdir()
+    (experiment / "checkpoints" / "best.pt").touch()
+    (experiment / "tables" / "summary.json").write_text(
+        json.dumps(
+            {
+                "status": status,
+                "scope": "smoke",
+                "test_split_loaded": test_split_loaded,
+                "config": {"joint_epochs": 1, "channel": "H"},
+            }
+        ),
+        encoding="utf-8",
+    )
+    assert not result_complete(
+        experiment,
+        "smoke",
+        {"joint_epochs": 1, "channel": "H"},
     )

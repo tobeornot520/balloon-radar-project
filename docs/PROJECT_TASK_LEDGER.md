@@ -1,6 +1,6 @@
 # 项目任务台账与协作分工
 
-版本：2026-08-05
+版本：2026-08-06
 来源：`接下来方向（一定要全部看完）.md` 的完整核读、当前仓库状态、冻结证据和外场准备文档。
 
 ## 1. 项目当前方向
@@ -79,7 +79,8 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 
 ## 3. 待解决问题台账
 
-状态含义：`已完成` 表示当前证据已具备；`进行中` 表示有代码或结果但仍需验收；
+状态含义：`已完成` 表示当前证据已具备；`本地准备完成；外部阻塞` 表示代码、合同或只读
+审计已经收口，但缺少外部事实，不能启动正式建模；`进行中` 仅用于仍有明确的本地验收动作；
 `待确认` 表示需要你的外部沟通或物理判断；`阻塞` 表示缺少必要数据/设备；`暂缓` 表示
 有价值但当前不进入主线。
 
@@ -91,8 +92,8 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 | D04 | 186/187 个历史误警具体是什么物理类型 | 可审计虚警库已完成；完整物理类型仍未知 | 已配对 830 个背景样本及 120→109 个虚警变化；11 例人工记录为 9 例近零多普勒峰、2 例宽结构，物理类别均为 unknown | 我维护本地逐样本库和脱敏聚合层；未来由现场记录补物理标签 | fixed 队列、residual 转移、人工记录和输入哈希一致；分享层不含 sample ID、来源、路径和备注 | 冻结 `ZERO_DOPPLER_FALSE_ALARM_LIBRARY_V1.md`；新同条件现场记录到位后再扩展物理类别复核 |
 | D05 | 极化信息是否真的区分目标和虚警 | 部分完成 | 已完成相对特征目录与压力检查；相对极化量只保留为未来 ROI 辅助候选，当前不放行单独检测或绝对极化解释 | 我实现，你解释物理意义 | 新同条件组隔离数据上稳定，通道 validity/标定证据齐全，明确哪些只是 relative / ZDR-like | 等待 D01/D12 与新数据门；当前维持 no-go |
 | D06 | 当前高 AUC 是否只是日期、设备或扫描来源泄漏 | 部分完成 | 已报告每背景组 AUC、组依赖和日期混杂，并冻结特征放行门；禁止只报 pooled AUC | 我 | 新数据的最差组和来源压力检查不再只编码日期/文件来源 | 当前把高 AUC 降级为机制诊断，等待同条件外层数据 |
-| D07 | 极化增强模型怎样控制复杂度和目标损失 | 进行中 | 先做 Power2、DPG-FCN、ROI 极化和候选 gated encoder 的统一消融；优先小模型和 suppression-only 头 | 我实现，你定主指标 | 在困难折同时满足 Pfa 降低、joint Pd 不下降或达到预登记容差，且无新增虚警 | 只在 D05/D06 通过后训练 |
-| D08 | 背景校准怎样做到实时且不泄漏未来信息 | 进行中 | 样本独立 BC 作为在线导向基线；scan-aware 作为离线上限；未来版本按真实时间戳训练 past-only 上下文 | 我实现/审计，你提供顺序信息 | causal 训练使用真实时间，不使用后续样本；窗口只由 train/val 选择 | 当前不从测试敏感性结果选窗口 |
+| D07 | 极化增强模型怎样控制复杂度和目标损失 | 本地准备完成；外部阻塞（模型暂缓） | Power2、DPG-FCN、ROI 极化和 gated encoder 接口/放行规则已冻结；不在日期混杂数据上启动正式消融 | 新同条件数据到位后定主指标并评审困难样本 | D05/D06 通过、困难折满足 Pfa 降低且 joint Pd 不下降（或预登记容差），且无新增虚警 | 保持 no-go；仅在 D05/D06 和新 session 数据通过后建立新 experiment_id |
+| D08 | 背景校准怎样做到实时且不泄漏未来信息 | 本地审计完成；外部阻塞（因果训练暂缓） | 样本独立 BC、scan-aware 上限、上下文敏感性审计和接口 smoke 已冻结；不把推断顺序当时间事实 | 提供真实逐样本时间戳、硬件序号和丢帧记录 | causal 合同通过；窗口只由 train/val 选择，锁定外层一次评价 | 不再用测试敏感性结果选窗；外部时间事实到位后重开 |
 | D09 | 零多普勒虚警抑制是否可泛化 | 当前开发审计已闭环；外部泛化仍阻塞 | fixed residual 保持 120→109、背景新增 0、joint 290→290；目标安全审计同时披露 raw detected 302→301、6 个峰移动和 2 个大位移失败案例 | 我维护冻结证据；你在新采集时确认安全容差 | 结构合同保持“不增加任何 logit”；新同条件 locked evaluation 同时报 Pfa、raw Pd、joint Pd、峰移动和最差组 | 不再消费六折调参；不把 109 个误警或当前目标安全结果写成部署指标 |
 | D10 | Tian 2024 FCN 为什么迁移失败 | 外部阻塞（精确复现冻结） | 原迁移、point-GT、负监督和 thesis adapter 失败链已完成；缺原条件时保留方法级负结果 | 外部材料方决定是否能重开；我推进替代路线 | 至少有样例输入/标签/输出、明确配置或同分布数据，才能分离实现差异与域不可辨识性 | 不再扫参；保留 DPG 主线、D17-XBAND 冻结负结果和 Tian 合同测试，见 `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md` |
 | D11 | 真实微多普勒和时域特征能否使用 | 部分完成 | LAT-MRICD 的 16,072 条 512 点窄带复数 I/Q 已完成 X 波段归一化频率分组基线和一次预登记跨频段评价；物理微多普勒仍需连续慢时间、真实 PRF、事件起止和状态真值 | 你协调采集，我建接口/公开数据基线 | 公开数据研究按 batch 分组且只报归一化频率；有时间戳、连续 session、状态标签和回放验证后再开放物理 STFT/时频脊线 | 保留 D17-NX 与 D17-XBAND 冻结证据；S/Ku 已消费，不在同一 target 扩模；继续索取 PRF/时序事实 |
@@ -103,10 +104,25 @@ python scripts/check_current_direction_completion_v1.py --overwrite
 | D16 | 分享包和 Git 是否保持可交付 | 已完成（V14） | 只保留 V14 和 V13；原始聊天/数据/权重/逐样本库留本地并忽略；外场 IQ 与同步工具只分享代码、空白合同和说明，不分享真实 IQ/事件 | 我维护，你确认分享边界 | 包内无敏感路径、原始数据、权重、聊天记录、sample ID 或来源标识；V14 manifest 源提交等于构建时 HEAD；完成门逐项核验证据非空 | 发布新版本时再按“最新+上一版”规则滚动维护 |
 | D17 | 外部公开多频段数据能否支撑算法预研 | 已完成（D17-NX/HX/XBAND） | 官方 ZIP、schema/batch 审计和五折 metadata-only 分组均已冻结；X 波段基线与一次性跨频段评价均有最终证据 | 我维护冻结证据和边界；你只按同一公开发布内结果引用 | `results/final_evidence/lat_mricd_grouped_baselines_v1/` 与 `results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不写成 unseen-model、独立外部、极化、空飘球或 Tian 复现证据 | 不复用已消费 S/Ku target；新公开数据先做独立 schema/group 审计和预登记 |
 | D17-XBAND | LAT-MRICD 跨频段迁移是否成立 | 已完成（预登记负结果；`FAIL_STOP`） | LR 的 X->S macro/UAV/weather/CI 下界为 0.6516798767/0.4433201701/0.8600395832/0.0839896354；X->Ku 为 0.8399853939/0.8493090645/0.8306617233/0.2670982858；仅 S UAV recall 失败 | 我维护冻结证据和停止边界；你当前无需提供新数据 | S/Ku target 已消费；`results/final_evidence/lat_mricd_cross_band_transfer_v1/` 可复核；不得在同一 target 上做 CNN、域适配、扩特征、调参或新的确认性比较 | 停止同 target 扩模；如要建立新确认性结论，必须换独立、未消费 target 并重新预登记 |
-| D18 | 新公开数据能否形成不泄漏的时域、轨迹和微多普勒算法支线 | 进行中（DAUR、HSR、FMCWR 与 DroneRFc 均完成当前只读审计，但各有外部门禁；未放行建模） | DAUR 77 个逻辑观测仅 76 个唯一 TD/TR 内容对并保守连通为 39 个候选组；HSR V2 冻结 1530 MAT/63148 帧/865 routes 和 529 个隔离 overflow 窗口；FMCWR V4 的 90 MAT 仅 71 个唯一 payload，11 个重复组覆盖 30 文件，66 stems 连通为 48 个非权威候选组，K/L 为 64/26 且 B 通道全空；DroneRFc-MM B1 radar/GT 零重叠 | 我负责来源、loader、schema、合成处理合同和预登记；你判断研究故事；若能联系发布方，优先询问 FMCWR session/Fs/PRF/载频/零频，也可询问 HSR route-source/512-bin 轴、DAUR session/1024 轴或 DroneRFc B1 更正 GT | DAUR、HSR、FMCWR 分别冻结为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`、`PASS_SCHEMA_BLOCKED_SOURCE_PROVENANCE_AND_PHYSICAL_AXIS`、`PASS_ARCHIVE_SCHEMA_BLOCKED_GROUPING_PROVENANCE_AND_PHYSICAL_AXIS`，均须 `model_training_allowed=false`；每集有版本、许可、哈希、最低分组与禁止声明；FMCWR 归一化轴/单记录处理合同已完成并通过合成 smoke，但不产生物理轴或性能证据 | 维持四个外部阻塞；若发布方补齐 session/Fs/PRF/载频/零频，再为真实记录预登记处理；Ku/NEXRAD 继续 smoke-only，不把 frame/window/屏/gate 当独立性能样本 |
+| D18 | 新公开数据能否形成不泄漏的时域、轨迹和微多普勒算法支线 | 本地审计与接口准备完成；外部阻塞（不放行建模） | DAUR、HSR、FMCWR 与 DroneRFc 的只读 schema/group/时间审计、归一化处理合同和合成 smoke 已冻结；不再下载或训练 | 仅在发布方补齐分组/物理轴/同步事实后判断研究故事 | 各数据集的版本、许可、哈希、最低分组、禁止拆分规则和边界均可复核；模型门仍为 `false` | 维护冻结审计；若外部事实到位，再新建预登记 experiment_id；Ku/NEXRAD 继续 smoke-only |
 
 D17-XBAND 的完成以及 D18 的公开数据下载都不替代外部设备事实或 Tian 对齐材料；主 UAV 方向仍为 4/6
 `BLOCKED_EXTERNAL`，不得宣布当前方向已全部完成。
+
+## 3A. 2026-08-06 本地工作收口快照
+
+在没有新增原始数据、设备说明或 Tian 对齐材料的条件下，本地可完成的工作已经收口：
+
+| 本地事项 | 收口状态 | 证据/边界 |
+|---|---|---|
+| 现有 UAV 检测、定位、虚警库和目标安全审计 | 已完成（开发证据冻结） | 只复核冻结结果；不重新调参、不写成部署指标 |
+| 极化 encoder、IQ 内容探针、同步数值审计 | 已完成（接口/合同/测试） | 无真实设备文件或事件表时不产生 PASS，不打开相干、标定或同步总门 |
+| LAT-MRICD、DAUR、HSR、FMCWR、DroneRFc 公开数据审计 | 已完成（只读/接口层） | 各自剩余 grouping、provenance、physical-axis 或 B1 同步门保持关闭；不训练 |
+| Tian 2024 迁移复现 | 已完成（失败链和替代路线冻结） | 原条件不可归因时不扫参；仅等待合格样例/配置/同分布数据 |
+| 任务台账与分享源文档 | 已完成（本快照） | 新结果另建实验记录；分享包仍只维护最新两个版本 |
+
+因此当前没有“无数据即可完成”的正式模型实验待办。下一步清单只描述外部事实到位后的
+重开条件；`configs/current_direction_completion_v1.json` 的 `4/6 BLOCKED_EXTERNAL` 状态不变。
 
 ## 4. 分阶段计划与双方验收
 
@@ -213,7 +229,7 @@ D17-XBAND 的完成以及 D18 的公开数据下载都不替代外部设备事�
 实验结果另记入 `EXPERIMENT_RECORDING_PROTOCOL.md` 规定的实验台账；本文件只记录任务
 状态和决策，不替代逐次实验记录。
 
-## 7. 当前下一步清单
+## 7. 外部条件到位后的下一步清单
 
 按优先级执行：
 
