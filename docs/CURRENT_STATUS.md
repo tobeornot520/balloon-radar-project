@@ -394,6 +394,8 @@ All data-independent preparation that is currently authorized has been closed ou
   numeric sub-audit are implemented and covered by tests;
 - the LAT-MRICD, DAUR, HSR-L, FMCWR-2.0, and DroneRFc-MM read-only audits and the normalized
   processing/synthetic smoke contracts are frozen at their documented boundaries;
+- the multidomain feature contract is now executable: its 56-field order, five fusion-domain
+  dimensions, missing-domain mask policy, and physical-claim gates are checked without data;
 - the Tian transfer failure chain and its exact-reproduction reopen conditions are frozen; and
 - the task ledger and sanitized sharing source documents now record the same closeout boundary.
 

@@ -28,6 +28,7 @@ physical micro-Doppler interpretation, or calibrated polarimetric claims.
 | New-data contract validation | `scripts/validate_data_collection_manifest.py` |
 | Field readiness audit | `scripts/audit_field_readiness_v1.py` |
 | Data-free multidomain feature smoke | `scripts/run_multidomain_feature_smoke_v1.py` |
+| Multidomain feature contract audit | `scripts/audit_multidomain_feature_contract_v1.py` |
 | LAT-MRICD grouped baseline | `scripts/run_lat_mricd_grouped_baseline_v1.py` |
 | LAT-MRICD cross-band transfer | `scripts/run_lat_mricd_cross_band_transfer_v1.py` |
 | Experiment ledger | `scripts/run_recorded_experiment.py` |

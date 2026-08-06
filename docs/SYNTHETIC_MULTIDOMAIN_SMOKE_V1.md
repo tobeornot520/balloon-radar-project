@@ -49,6 +49,17 @@ conda run -n radar-torch python scripts/run_multidomain_feature_smoke_v1.py
 如需保存机器可读摘要，可额外指定 `--output-json /tmp/multidomain_smoke.json`。输出中的
 `status=PASS` 只表示接口贯通，不能替代真实数据审计或外场门禁。
 
+在运行 smoke 前后，可运行冻结契约审查：
+
+```bash
+conda run -n radar-torch python scripts/audit_multidomain_feature_contract_v1.py
+```
+
+该审查读取 `configs/multidomain_feature_contract_v1.yaml`，逐项核对物理域、
+`quality/time/rd/polar/tf` 融合域及 `3/11/22/8/12` 维度，并确认当前仍是
+`scaffold_only`、相对极化量、归一化频率和轨迹/风动力学阻塞状态。它输出
+`status=PASS` 只代表“文档契约与代码实现一致”，不是性能结果。
+
 ## 通过条件
 
 - 合成 H/V 固定相位关系的 coherence 接近 1；
@@ -65,4 +76,3 @@ conda run -n radar-torch python scripts/run_multidomain_feature_smoke_v1.py
 - PRF、距离/速度物理轴或物理微多普勒频率；
 - 数据划分、标签质量、检测性能或跨场景泛化；
 - 空飘球、无人机或任何具体载荷的识别能力。
-
