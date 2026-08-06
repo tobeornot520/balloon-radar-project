@@ -44,6 +44,26 @@ EXPECTED_PHYSICAL_DOMAINS = (
     "trajectory",
     "wind_dynamics",
 )
+EXPECTED_ANALYSIS_RULES = {
+    "do_not_train_detection_claims_from_date_confounded_target_background_labels",
+    "use_source_file_as_independent_group",
+    "report_pooled_and_worst_background_group_behavior",
+    "current_classification_data_are_UAV_only",
+    "current_heldout_detection_partition_is_consumed_historical_evidence",
+    "fit_scalar_normalization_on_training_acquisition_groups_only",
+}
+EXPECTED_POLAR_BLOCKED_CLAIMS = {"absolute_ZDR", "absolute_PhiDP"}
+EXPECTED_POLAR_UNLOCK_REQUIREMENTS = {
+    "simultaneous_HV_capture",
+    "amplitude_calibration",
+    "phase_calibration",
+}
+EXPECTED_TF_UNLOCK_REQUIREMENTS = {
+    "PRF",
+    "continuous_order",
+    "sample_duration",
+    "target_aligned_events",
+}
 
 
 class ContractAuditError(ValueError):
@@ -93,7 +113,10 @@ def audit_contract(document: Mapping[str, Any]) -> dict[str, Any]:
         "physical domain keys/order changed: "
         f"expected {EXPECTED_PHYSICAL_DOMAINS}, got {tuple(domains)}",
     )
-    _require(isinstance(rules, list) and len(rules) >= 5, "analysis_rules are incomplete")
+    _require(
+        isinstance(rules, list) and EXPECTED_ANALYSIS_RULES.issubset(rules),
+        "analysis_rules are incomplete",
+    )
 
     configured_domains = fusion.get("domains")
     _require(
@@ -127,12 +150,34 @@ def audit_contract(document: Mapping[str, Any]) -> dict[str, Any]:
     )
     _require(fusion.get("training_status") == "scaffold_only", "training status must remain scaffold_only")
 
-    _require(domains["polarimetric"].get("current_status") == "relative_only", "polarimetric status must remain relative_only")
-    _require(domains["time_frequency"].get("current_status") == "normalized_frequency_descriptors_available", "time-frequency status changed")
-    _require("micro_Doppler_Hz" in domains["time_frequency"].get("blocked_physical_claims", []), "micro-Doppler Hz claim gate removed")
-    _require("rotor_rate_Hz" in domains["time_frequency"].get("blocked_physical_claims", []), "rotor-rate Hz claim gate removed")
-    _require(domains["trajectory"].get("current_status") == "blocked", "trajectory gate must remain blocked")
-    _require(domains["wind_dynamics"].get("current_status") == "blocked", "wind-dynamics gate must remain blocked")
+    polarimetric = _mapping(domains["polarimetric"], "domains.polarimetric")
+    time_frequency = _mapping(domains["time_frequency"], "domains.time_frequency")
+    trajectory = _mapping(domains["trajectory"], "domains.trajectory")
+    wind_dynamics = _mapping(domains["wind_dynamics"], "domains.wind_dynamics")
+    _require(polarimetric.get("current_status") == "relative_only", "polarimetric status must remain relative_only")
+    _require(
+        EXPECTED_POLAR_BLOCKED_CLAIMS.issubset(
+            set(polarimetric.get("blocked_absolute_claims", []))
+        ),
+        "absolute polarimetric claim gate removed",
+    )
+    _require(
+        EXPECTED_POLAR_UNLOCK_REQUIREMENTS.issubset(
+            set(polarimetric.get("unlock_requires", []))
+        ),
+        "polarimetric unlock requirements are incomplete",
+    )
+    _require(time_frequency.get("current_status") == "normalized_frequency_descriptors_available", "time-frequency status changed")
+    _require("micro_Doppler_Hz" in time_frequency.get("blocked_physical_claims", []), "micro-Doppler Hz claim gate removed")
+    _require("rotor_rate_Hz" in time_frequency.get("blocked_physical_claims", []), "rotor-rate Hz claim gate removed")
+    _require(
+        EXPECTED_TF_UNLOCK_REQUIREMENTS.issubset(
+            set(time_frequency.get("unlock_requires", []))
+        ),
+        "time-frequency unlock requirements are incomplete",
+    )
+    _require(trajectory.get("current_status") == "blocked", "trajectory gate must remain blocked")
+    _require(wind_dynamics.get("current_status") == "blocked", "wind-dynamics gate must remain blocked")
 
     return {
         "status": "PASS",

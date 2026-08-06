@@ -38,17 +38,22 @@ def test_frozen_multidomain_contract_passes(contract: dict) -> None:
         (("fusion_interface", "current_dimensions"), [3, 11, 22, 8, 13], "current_dimensions"),
         (("fusion_interface", "missing_domain_policy"), "zero_fill", "missing-domain policy"),
         (("domains", "polarimetric", "current_status"), "absolute", "polarimetric status"),
+        (("domains", "polarimetric", "unlock_requires"), ["simultaneous_HV_capture"], "polarimetric unlock requirements"),
         (("domains", "time_frequency", "blocked_physical_claims"), [], "micro-Doppler Hz"),
+        (("analysis_rules",), [], "analysis_rules"),
     ],
 )
 def test_contract_drift_is_rejected(
     contract: dict, path: tuple[str, ...], value: object, message: str
 ) -> None:
     changed = deepcopy(contract)
-    target = changed
-    for key in path[:-1]:
-        target = target[key]
-    target[path[-1]] = value
+    if path == ("analysis_rules",):
+        changed[path[0]] = value
+    else:
+        target = changed
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
 
     with pytest.raises(ContractAuditError, match=message):
         audit_contract(changed)
