@@ -31,8 +31,9 @@ def test_share_source_map_is_complete_and_unique() -> None:
     sources = [item.source for item in PACKAGE_FILES]
     assert (
         share_package.PACKAGE_NAME
-        == "balloon_radar_results_and_team_onboarding_20260806_v14"
+        == "balloon_radar_results_and_team_onboarding_20260807_v15"
     )
+    assert share_package.PACKAGE_DATE == "2026-08-07"
     assert len(destinations) == len(set(destinations))
     assert "environment.yml" in destinations
     assert not any("development_history" in item.source for item in PACKAGE_FILES)
@@ -88,9 +89,35 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "assets/tables/zero_doppler_target_peak_shift_histogram.csv" in destinations
     assert "assets/tables/zero_doppler_target_score_delta_quantiles.csv" in destinations
     assert "evidence/30_ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.json" in destinations
-    assert "assets/templates/team_onboarding_checklist_template_v1.csv" in destinations
-    assert "assets/templates/team_qualification_scorecard_template_v1.csv" in destinations
-    assert "assets/templates/team_task_claim_template_v1.csv" in destinations
+    team_csv_templates = {
+        item.source: item.destination
+        for item in PACKAGE_FILES
+        if item.source.startswith("configs/team_")
+        and item.source.endswith(".csv")
+    }
+    assert team_csv_templates == {
+        "configs/team_onboarding_checklist_template_v2.csv": (
+            "assets/templates/team_onboarding_checklist_template_v2.csv"
+        ),
+        "configs/team_trial_task_template_v1.csv": (
+            "assets/templates/team_trial_task_template_v1.csv"
+        ),
+        "configs/team_qualification_scorecard_template_v2.csv": (
+            "assets/templates/team_qualification_scorecard_template_v2.csv"
+        ),
+        "configs/team_task_claim_template_v2.csv": (
+            "assets/templates/team_task_claim_template_v2.csv"
+        ),
+    }
+    legacy_team_templates = {
+        "configs/team_onboarding_checklist_template_v1.csv",
+        "configs/team_qualification_scorecard_template_v1.csv",
+        "configs/team_task_claim_template_v1.csv",
+        "assets/templates/team_onboarding_checklist_template_v1.csv",
+        "assets/templates/team_qualification_scorecard_template_v1.csv",
+        "assets/templates/team_task_claim_template_v1.csv",
+    }
+    assert legacy_team_templates.isdisjoint(sources + destinations)
     assert "assets/templates/TEAM_WEEKLY_REPORT_TEMPLATE_ZH.md" in destinations
     assert "assets/contracts/current_direction_completion_v1.json" in destinations
     assert "docs/09_RECENT_PROGRESS_AND_FAILURE_ANALYSIS_ZH.md" in destinations
@@ -1120,6 +1147,10 @@ def test_share_manifest_marks_causal_context_as_post_test(
     monkeypatch.setattr(share_package, "current_commit", lambda: "test-commit")
     share_package.write_manifest(tmp_path, [])
     manifest = json.loads((tmp_path / "MANIFEST.json").read_text(encoding="utf-8"))
+    assert manifest["package_name"] == (
+        "balloon_radar_results_and_team_onboarding_20260807_v15"
+    )
+    assert manifest["package_date"] == "2026-08-07"
     rules = manifest["evidence_rules"]
     assert rules["causal_context_audit_role"] == (
         "post-hoc frozen-checkpoint sensitivity"
@@ -1418,7 +1449,9 @@ def test_share_manifest_marks_causal_context_as_post_test(
     assert rules["lss_fmcwr_2_normalized_processing_code_included"] is True
     assert rules["external_public_data_registries_included"] is True
     assert rules["team_onboarding_manual_included"] is True
+    assert rules["team_onboarding_checklist_included"] is True
     assert rules["team_qualification_policy_included"] is True
+    assert rules["team_trial_task_template_included"] is True
     assert rules["team_qualification_scorecard_included"] is True
     assert rules["team_task_claim_template_included"] is True
     assert rules["team_weekly_report_template_included"] is True

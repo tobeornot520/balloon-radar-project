@@ -203,7 +203,7 @@ failures. Therefore the allowed statement is "no joint-success loss under the
 frozen tolerance," not "no target behavior changed." See
 [ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md](ZERO_DOPPLER_TARGET_SAFETY_AUDIT_V1.md).
 
-The V14 share package is the current sanitized delivery. Its completion gate now
+The V15 share package is the sole current sanitized delivery. Its completion gate now
 checks that every evidence path attached to a `complete` item exists and is
 nonempty; a stale package path can no longer count as completion. D15 is complete
 only at the current A-level evidence-review scope: the disclosed historical BC

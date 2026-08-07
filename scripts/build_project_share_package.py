@@ -15,13 +15,13 @@ from typing import Iterable
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260806_v14"
+PACKAGE_NAME = "balloon_radar_results_and_team_onboarding_20260807_v15"
 DIST_ROOT = PROJECT_ROOT / "dist"
 DEFAULT_OUTPUT_DIR = DIST_ROOT / PACKAGE_NAME
 DEFAULT_ZIP_PATH = DIST_ROOT / f"{PACKAGE_NAME}.zip"
 STAGING_ROOT = DIST_ROOT / ".share-package-staging"
-PACKAGE_DATE = "2026-08-06"
-ZIP_TIMESTAMP = (2026, 8, 6, 0, 0, 0)
+PACKAGE_DATE = "2026-08-07"
+ZIP_TIMESTAMP = (2026, 8, 7, 0, 0, 0)
 CURRENT_DATA_READINESS = (
     PROJECT_ROOT
     / "results"
@@ -139,18 +139,23 @@ PACKAGE_FILES = (
         "team_qualification_policy",
     ),
     PackageFile(
-        "configs/team_onboarding_checklist_template_v1.csv",
-        "assets/templates/team_onboarding_checklist_template_v1.csv",
+        "configs/team_onboarding_checklist_template_v2.csv",
+        "assets/templates/team_onboarding_checklist_template_v2.csv",
         "team_onboarding_template",
     ),
     PackageFile(
-        "configs/team_qualification_scorecard_template_v1.csv",
-        "assets/templates/team_qualification_scorecard_template_v1.csv",
+        "configs/team_trial_task_template_v1.csv",
+        "assets/templates/team_trial_task_template_v1.csv",
+        "team_trial_task_template",
+    ),
+    PackageFile(
+        "configs/team_qualification_scorecard_template_v2.csv",
+        "assets/templates/team_qualification_scorecard_template_v2.csv",
         "team_qualification_template",
     ),
     PackageFile(
-        "configs/team_task_claim_template_v1.csv",
-        "assets/templates/team_task_claim_template_v1.csv",
+        "configs/team_task_claim_template_v2.csv",
+        "assets/templates/team_task_claim_template_v2.csv",
         "team_task_template",
     ),
     PackageFile(
@@ -2351,6 +2356,8 @@ def write_manifest(staging_dir: Path, records: list[dict[str, object]]) -> None:
             "external_public_data_registries_included": True,
             "team_onboarding_manual_included": True,
             "team_qualification_policy_included": True,
+            "team_onboarding_checklist_included": True,
+            "team_trial_task_template_included": True,
             "team_qualification_scorecard_included": True,
             "team_task_claim_template_included": True,
             "team_weekly_report_template_included": True,

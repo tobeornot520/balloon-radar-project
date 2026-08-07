@@ -67,7 +67,7 @@ conda run -n radar-torch python scripts/run_multidomain_preflight_v1.py
 ```
 
 统一预检的任一子门失败都会令命令失败；其 `status=PASS` 仍只表示数据无关接口就绪。
-同一命令可在完整仓库或解压后的 V14 分享包根目录运行；脚本会分别识别 `configs/` 或
+同一命令可在完整仓库或解压后的 V15 分享包根目录运行；脚本会分别识别 `configs/` 或
 `assets/contracts/` 中的契约。分享包只保证这条无数据预检所需的最小源码，不提供完整
 训练复现能力。
 

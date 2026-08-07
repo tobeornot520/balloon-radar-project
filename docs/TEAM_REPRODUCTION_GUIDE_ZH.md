@@ -69,7 +69,7 @@ python scripts/audit_lat_mricd_dataset_v1.py --overwrite
 
 ### 3.1 LAT-MRICD D17-NX/HX 冻结结果重放
 
-先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V14 分享包只支持 A 级证据复核；
+先阅读 `docs/LAT_MRICD_GROUPED_BASELINE_PROTOCOL_V1.md`。V15 分享包只支持 A 级证据复核；
 下面的完整重放还需要 Git 仓库、`radar-torch` 环境和上述公开原始数据。不得同时读取聚合
 MAT 与同目录明细 MAT，否则会重复计入记录。
 
@@ -115,7 +115,7 @@ python -m pytest tests/test_lat_mricd_cross_band_transfer.py \
 
 ### 3.3 LSS-DAUR V3 只读审计复核
 
-V14 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
+V15 分享包可直接做 A 级复核：阅读 `evidence/26_LSS_DAUR_READ_ONLY_AUDIT.md`、核对
 JSON 和聚合表。完整仓库中的 B/C 级复核还需从官方 ScienceDB V3 自行取得原始发布，
 放在 `data/raw/external/LSS-DAUR-1.0/`；受 `CC-BY-NC-ND-4.0` 约束，原始或重打包数据
 不得从项目分享包转发。
@@ -128,7 +128,7 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 预期状态为 `PASS_SCHEMA_PAIRING_BLOCKED_GROUPING_AND_PHYSICAL_AXIS`，`paired_track_count=77`、
 `unique_signal_trajectory_content_count=76`、`candidate_source_session_group_count=39`、
 `frame_count=11366` 且 `model_training_allowed=false`。审计器只写入被忽略的本地审计目录，
-不修改原始文件，也不训练模型。V14 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
+不修改原始文件，也不训练模型。V15 仅纳入报告、summary 与 39/6/3 行三张聚合表，不纳入
 逐 recording 的日期、路径、时间戳或 payload 哈希明细。
 
 复核纪律：canonical/backup 是等价视图，不能倍增；TD/TR、完全重复记录和保守连通组不得
@@ -138,7 +138,7 @@ conda run -n radar-torch python -m pytest -q tests/test_audit_lss_daur_v1.py
 
 ### 3.4 LSS-HSR-L ScienceDB V2 只读审计复核
 
-V14 分享包可直接复核 `evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md`、对应 JSON，以及
+V15 分享包可直接复核 `evidence/27_LSS_HSR_L_V2_READ_ONLY_AUDIT.md`、对应 JSON，以及
 split、split-class 和 feature 三张聚合表。包内不含 route/MAT 级路径、ID 或 payload 哈希。
 完整仓库复核需从官方 ScienceDB V2 取得原始 ZIP，并保持文件名
 `data/raw/external/LSS-HSR-L/ScienceDB_V2_dataset_and_instructions.zip`。该原件受
@@ -170,7 +170,7 @@ V2 自带大写 `Dataset.py` 是只读懒加载器，不移动或重写 MAT；�
 
 ### 3.5 LSS-FMCWR-2.0 V4 只读审计与归一化接口
 
-V14 包中的 `evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md`、JSON、6 行 archive
+V15 包中的 `evidence/28_LSS_FMCWR_2_V1_READ_ONLY_AUDIT.md`、JSON、6 行 archive
 聚合表和 68 行 group 聚合表只用于复核发布身份、MAT schema、重复统计和边界。90 个 MAT
 只有 71 个唯一 payload，48 个候选组不是作者确认的 session，`channelB` 全空；不能把它
 写成 H/V 极化、自然鸟、90 个独立样本或物理 Hz/速度数据。
@@ -192,7 +192,7 @@ conda run -n radar-torch python scripts/process_lss_fmcwr_normalized_v1.py \
 
 ### 3.6 外场 H/V IQ 内容探针
 
-V14 包提供 `scripts/audit_field_iq_integrity_v1.py`、
+V15 包提供 `scripts/audit_field_iq_integrity_v1.py`、
 `assets/contracts/field_iq_probe_contract_template_v1.json` 和
 `docs/FIELD_IQ_INTEGRITY_PROBE_V1.md`。包内不含真实 IQ，因此不能仅靠分享包产生外场 PASS。
 
@@ -212,7 +212,7 @@ conda run -n radar-torch python scripts/audit_field_iq_integrity_v1.py \
 
 ### 3.7 外场同步事件数值审计
 
-V14 包提供 `scripts/audit_field_synchronization_v1.py`、
+V15 包提供 `scripts/audit_field_synchronization_v1.py`、
 `assets/contracts/field_sync_event_contract_v1.json`、
 `assets/templates/field_sync_event_template_v1.csv` 和
 `docs/FIELD_SYNCHRONIZATION_AUDIT_V1.md`。真实采集后，在受控目录复制空白模板，逐事件

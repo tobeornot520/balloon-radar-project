@@ -1,0 +1,2 @@
+member,reviewer_1,reviewer_2,assessment_round,date_issued,onboarding_record_path,onboarding_decision,trial_task_deadline,trial_task_id,trial_task_result,project_understanding_score_25,evidence_boundary_score_20,execution_score_30,reproducibility_score_15,communication_score_10,total_score_100,role_gate_status,role_gate_violation,initial_role,granted_data_access_level,retry_required,retry_deadline,qualification_decision,decision_reason,member_acknowledgement,qualification_completed_at
+,,,1,,,pending,,,pending,0,0,0,0,0,0,pending,,pending,A,no,,pending,,pending,
