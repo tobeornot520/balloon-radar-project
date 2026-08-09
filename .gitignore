@@ -163,3 +163,20 @@ results/data_audit/lss_hsr_l_v2/
 results/data_audit/lss_fmcwr_2_v1/
 results/experiment_ledger/
 results/reproduction/
+
+# Local reference books
+paper/references/
+
+# External/raw datasets
+data/raw/external/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Build/cache
+dist/
+build/
+*.log
