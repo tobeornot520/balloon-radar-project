@@ -31,6 +31,11 @@ Directory-level indexes are maintained in `scripts/README.md`, `configs/README.m
 Large checkpoints, raw radar data, experiment runs, and generated distributions
 are excluded from Git.
 
+`dist/` is the local delivery area. It may contain the single current onboarding
+package and the independent algorithm-code review package; generated ZIPs and
+staging directories are ignored by Git. Delivery packages must be built from a
+clean commit and audited before old package artifacts are removed.
+
 ## Supporting and historical material
 
 | Path | Responsibility |
@@ -39,6 +44,10 @@ are excluded from Git.
 | `notes/development_history/` | Local raw transcripts and manuscript drafts; ignored by Git |
 | `_cleanup_archive/` | Local recovery material; new content ignored by Git |
 | `payload/` | Previously committed delivery snapshot; not an active entry point |
+
+Python bytecode (`__pycache__/`, `*.pyc`) and test caches (`.pytest_cache/`) are
+reproducible local artifacts. They are never source, evidence, or delivery
+inputs and may be removed during housekeeping.
 
 The repository has no package-level `main.py`. Use the versioned entry points
 listed in the root README.
