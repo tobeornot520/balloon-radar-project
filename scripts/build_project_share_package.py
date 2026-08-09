@@ -179,7 +179,7 @@ PACKAGE_FILES = (
         "historical_reconstruction",
     ),
     PackageFile(
-        "docs/PROJECT_TASK_LEDGER.md",
+        "PROJECT_CONTROL/TASK_BOARD.md",
         "docs/12_PROJECT_TASK_LEDGER_ZH.md",
         "project_governance_document",
     ),
@@ -209,7 +209,7 @@ PACKAGE_FILES = (
         "external_fact_request",
     ),
     PackageFile(
-        "docs/NEXT_STAGE_PLAN_20260803.md",
+        "PROJECT_CONTROL/ROADMAP.md",
         "docs/17_NEXT_STAGE_PLAN_20260803_ZH.md",
         "next_stage_plan",
     ),

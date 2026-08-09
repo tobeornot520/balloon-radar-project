@@ -4,13 +4,15 @@
 
 - `CURRENT_STATUS.md`: current claims, blockers and authoritative evidence
 - `PROJECT_STRUCTURE.md`: source and artifact ownership
-- `PROJECT_KNOWLEDGE_HANDBOOK_ZH.md`: beginner-oriented radar physics, signal processing, machine learning, code, evidence, and future-data handbook
+- `../PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md`: beginner-oriented radar physics, signal processing, machine learning, code, evidence, and future-data handbook
 - `TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md`: page-by-page Tian 2024 guide, reproduction audit, 50 paper questions, and 22 project questions
 - `RECOMMENDED_PAPERS_20260805.md`: curated online papers, legal source URLs, license boundaries, hashes, and reading order
 - `DATA_CARD.md`: current dataset scope and limitations
 - `MODEL_SELECTION_LEDGER.md`: model-selection history and claim boundaries
 - `HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md`: audited reconstruction of the 14 local history exports and their corrections
-- `PROJECT_TASK_LEDGER.md`: ongoing problem list, ownership, acceptance gates, and next actions
+- `../PROJECT_CONTROL/TASK_BOARD.md`: ongoing problem list, ownership, acceptance gates, and next actions
+- `../PROJECT_CONTROL/ROADMAP.md`: short-, medium-, and long-term research roadmap
+- `../PROJECT_CONTROL/PROJECT_LOG.md`: append-only project decisions and experiment log
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
 - `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`: FMCWR-2.0 V4 RAR/MAT schema, duplicate, grouping and physical-axis gate

@@ -8,5 +8,5 @@ training or evaluation entry points.
 - `radar_data_reader/`: standalone data-layout preparation package.
 
 Run project experiments from `scripts/` and `training/`. Historical patch
-installers and one-off repair artifacts are kept locally under
-`_cleanup_archive/` and are not part of the active source tree.
+installers are not active inputs; any optional local recovery material belongs
+under `PROJECT_CONTROL/archive/` and is excluded from the source tree.

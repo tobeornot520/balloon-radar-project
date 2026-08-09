@@ -52,26 +52,6 @@ REVIEW_DOCUMENTS = {
     "docs/share/08_DATA_REQUEST_CHECKLIST_ZH.md": "review/04_DATA_REQUEST_CHECKLIST_ZH.md",
 }
 
-# These tracked recovery copies fill imports used only by early workflows. They
-# remain provenance-labelled compatibility sources, not silently promoted code.
-COMPATIBILITY_SOURCES = {
-    "_cleanup_archive/final_cleanup_20260723_174442/datasets/radar_dataset.py": (
-        "project/datasets/radar_dataset.py"
-    ),
-    "_cleanup_archive/final_cleanup_20260723_174442/datasets/"
-    "polarimetric_detection_dataset_v1.py": (
-        "project/datasets/polarimetric_detection_dataset_v1.py"
-    ),
-    "_cleanup_archive/final_cleanup_20260723_174442/training/"
-    "train_background_calibrator.py": (
-        "project/training/train_background_calibrator.py"
-    ),
-    "_cleanup_archive/final_cleanup_20260723_174442/training/"
-    "train_background_tail_calibrator.py": (
-        "project/training/train_background_tail_calibrator.py"
-    ),
-}
-
 FORBIDDEN_SOURCE_PREFIXES = (
     "data/",
     "results/",
@@ -324,8 +304,6 @@ def validate_source_selection(paths: Iterable[str]) -> None:
     for path in paths:
         if path.startswith(FORBIDDEN_SOURCE_PREFIXES):
             raise RuntimeError(f"Forbidden source selected: {path}")
-        if path.startswith("_cleanup_archive/"):
-            raise RuntimeError(f"Recovery source selected as active code: {path}")
         if PurePosixPath(path).suffix.lower() in FORBIDDEN_PACKAGED_SUFFIXES:
             raise RuntimeError(f"Forbidden artifact selected: {path}")
 
@@ -425,9 +403,9 @@ python -m pytest -q {tests}
 
 \u4e0a\u9762\u7684 pytest \u5217\u8868\u662f\u4e0d\u9700\u539f\u59cb\u6570\u636e\u7684\u6838\u5fc3\u7b97\u6cd5\u5408\u540c\u6d4b\u8bd5\u3002\u4e0d\u8981\u76f4\u63a5\u8fd0\u884c\u5168\u90e8\u8bad\u7ec3\u5165\u53e3\uff1a\u5b83\u4eec\u9700\u8981\u672c\u5305\u6545\u610f\u6392\u9664\u7684\u539f\u59cb\u6570\u636e\u3001manifest \u548c checkpoint\u3002
 
-## \u5386\u53f2\u517c\u5bb9\u6e90\u7801
+## \u6e90\u7801\u8fb9\u754c
 
-4 \u4e2a\u65e9\u671f\u5165\u53e3\u4ecd\u4f9d\u8d56\u6e05\u7406\u65f6\u5f52\u6863\u7684\u6a21\u5757\u3002\u6784\u5efa\u5668\u6309 Git \u4e2d\u7684\u5df2\u8ddf\u8e2a\u539f\u4ef6\u5c06\u5b83\u4eec\u8865\u5230 `project/` \u7684\u539f\u5bfc\u5165\u4f4d\u7f6e\uff0c\u5e76\u5728 `MANIFEST.json` \u4e2d\u6807\u8bb0 `legacy_compatibility_source`\u3002\u8fd9\u4e0d\u8868\u793a\u5b83\u4eec\u5df2\u88ab\u91cd\u65b0\u9009\u4e3a\u5f53\u524d\u65b9\u6cd5\u3002
+\u65e9\u671f\u5de5\u4f5c\u6d41\u6240\u9700\u7684\u6570\u636e\u96c6\u548c\u8bad\u7ec3\u6a21\u5757\u5df2\u6062\u590d\u5230\u6d3b\u52a8\u6e90\u7801\u76ee\u5f55\uff0c\u4e0e\u5176\u4ed6\u6e90\u7801\u4e00\u6837\u4ece\u6307\u5b9a Git \u63d0\u4ea4\u8bfb\u53d6\u3002\u5305\u5185\u4e0d\u4f9d\u8d56\u672c\u5730\u6e05\u7406\u5f52\u6863\u3002
 
 ## \u91cd\u8981\u9650\u5236
 
@@ -560,11 +538,8 @@ def build_package(source_ref: str, output_root: Path, overwrite: bool) -> tuple[
     validate_source_selection(selected)
 
     missing_review = sorted(set(REVIEW_DOCUMENTS) - set(all_paths))
-    missing_compat = sorted(set(COMPATIBILITY_SOURCES) - set(all_paths))
-    if missing_review or missing_compat:
-        raise RuntimeError(
-            f"Missing frozen package inputs: review={missing_review}, compatibility={missing_compat}"
-        )
+    if missing_review:
+        raise RuntimeError(f"Missing frozen package inputs: review={missing_review}")
 
     output_root = output_root.resolve()
     package_root = output_root / PACKAGE_NAME
@@ -594,17 +569,6 @@ def build_package(source_ref: str, output_root: Path, overwrite: bool) -> tuple[
                     source_path=source_path,
                     category="active_project_source",
                     transformation=transformation,
-                )
-            )
-
-        for source_path, packaged_path in COMPATIBILITY_SOURCES.items():
-            records.append(
-                write_payload(
-                    staging_root,
-                    packaged_path,
-                    blob(commit, source_path),
-                    source_path=source_path,
-                    category="legacy_compatibility_source",
                 )
             )
 

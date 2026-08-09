@@ -175,7 +175,7 @@ def checkpoint_metadata(path: Path) -> dict[str, Any]:
 
 def iter_text_files(root: Path) -> Iterable[Path]:
     allowed = {".py", ".yaml", ".yml", ".json", ".md", ".txt", ".csv"}
-    excluded_dirs = {".git", "__pycache__", "_cleanup_archive", "backups", "data", "checkpoints"}
+    excluded_dirs = {".git", "__pycache__", "PROJECT_CONTROL", "backups", "data", "checkpoints"}
     for base in ["models", "datasets", "features", "training", "scripts", "configs", "evaluation", "losses"]:
         d = root / base
         if not d.is_dir():
@@ -253,7 +253,7 @@ def project_tree(root: Path) -> str:
             if count >= 700:
                 lines.append(f"  ... truncated after {count} entries")
                 break
-            if any(x in p.parts for x in ["__pycache__", ".git", "_cleanup_archive"]):
+            if any(x in p.parts for x in ["__pycache__", ".git", "PROJECT_CONTROL"]):
                 continue
             rel = p.relative_to(d)
             depth = len(rel.parts)

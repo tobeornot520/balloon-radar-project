@@ -112,8 +112,9 @@ def test_manifest_and_checksums_cover_packaged_payload(tmp_path: Path) -> None:
     manifest_rows = {row["packaged_path"]: row for row in manifest["files"]}
     assert "README.md" in manifest_rows
     assert "project/models/simple_fcn.py" in manifest_rows
-    assert manifest_rows["project/datasets/radar_dataset.py"]["category"] == (
-        "legacy_compatibility_source"
+    assert (
+        manifest_rows["project/datasets/radar_dataset.py"]["category"]
+        == "active_project_source"
     )
 
     for path, row in manifest_rows.items():

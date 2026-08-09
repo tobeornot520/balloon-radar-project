@@ -3,7 +3,7 @@
 ## Purpose
 
 This branch implements the local six-channel adaptation described in
-`参考资料/thesis.pdf` using only the existing train and validation partitions.
+`paper/references/thesis.pdf` using only the existing train and validation partitions.
 It is separate from the original Tian et al. reproduction branch, whose local
 `4 x 16` output-stride migration was closed after fixed-template degeneration.
 

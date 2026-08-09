@@ -1,9 +1,0 @@
-﻿scope,fold,mode,samples,background_false_alarms_removed,background_false_alarms_added,target_correct_detections_preserved,target_correct_detections_regressed,target_correct_detections_rescued
-formal,1,power2_roi_power_control,203,52,0,52,0,0
-formal,1,power2_roi_ri4,203,50,0,52,0,0
-formal,1,power2_roi_polar6_gated,203,66,0,51,1,0
-formal,1,power2_roi_ri4_polar6_gated,203,26,0,52,0,0
-formal,4,power2_roi_power_control,202,9,0,41,0,0
-formal,4,power2_roi_ri4,202,52,0,41,0,0
-formal,4,power2_roi_polar6_gated,202,18,0,41,0,0
-formal,4,power2_roi_ri4_polar6_gated,202,38,0,41,0,0

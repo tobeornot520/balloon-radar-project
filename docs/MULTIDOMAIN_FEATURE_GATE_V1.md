@@ -64,7 +64,7 @@ ZDR、PhiDP 或经标定散射物理量。相位类通道在 H/V 相干、同步
 - `features/multidomain_radar_features.py`：候选局部及多域特征定义；
 - `scripts/audit_polarimetric_features_v1.py`：H/V 相对特征与命名边界；
 - `docs/MULTIDOMAIN_CURRENT_DATA_MINING_V1.md`：当前数据挖掘的完整解释；
-- `docs/PROJECT_TASK_LEDGER.md`：D05、D06、D07 的持续状态。
+- `PROJECT_CONTROL/TASK_BOARD.md`：D05、D06、D07 的持续状态。
 
 本记录冻结的是**当前数据上的决策边界**，不是永久否定极化、时域或微多普勒路线。新数据
 满足上述门后，应建立 V2 记录，而不是修改本文件以追溯性放行旧结果。

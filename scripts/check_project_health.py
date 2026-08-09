@@ -13,12 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 EXCLUDED_PARTS = {
     ".git",
-    "_cleanup_archive",
+    "PROJECT_CONTROL",
     "data",
     "dist",
-    "payload",
     "results",
-    "notes",
+    "paper",
 }
 
 REQUIRED_FILES = (

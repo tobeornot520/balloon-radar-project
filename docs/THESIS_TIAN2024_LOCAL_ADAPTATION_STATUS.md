@@ -47,7 +47,7 @@ been consumed and must not be presented as a future blind test.
 ## Outcome
 
 The existing local H/V IQ data now drive an independent implementation of the
-six-channel Tian2024 adaptation described in `参考资料/thesis.pdf`. The complete
+six-channel Tian2024 adaptation described in `paper/references/thesis.pdf`. The complete
 train/validation-only path has been exercised without network access. No test
 dataset was constructed or loaded.
 

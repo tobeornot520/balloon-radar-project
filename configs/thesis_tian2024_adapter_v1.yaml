@@ -1,7 +1,7 @@
 experiment:
   name: thesis_tian2024_local_adaptation_v1
   evidence_role: train_validation_only_method_level_local_adaptation
-  source: 参考资料/thesis.pdf
+  source: paper/references/thesis.pdf
 
 data:
   manifest: results/data_audit/dataset_v4_multifold/fold_01_manifest.csv

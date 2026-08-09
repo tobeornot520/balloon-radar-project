@@ -10,6 +10,11 @@ physical micro-Doppler interpretation, or calibrated polarimetric claims.
 
 ## Start here
 
+- [Project control panel](PROJECT_CONTROL/README.md)
+- [Technical handbook](PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md)
+- [Task board](PROJECT_CONTROL/TASK_BOARD.md)
+- [Roadmap](PROJECT_CONTROL/ROADMAP.md)
+- [Long-term project log](PROJECT_CONTROL/PROJECT_LOG.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Documentation index](docs/INDEX.md)
 - [Project structure](docs/PROJECT_STRUCTURE.md)

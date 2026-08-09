@@ -129,15 +129,16 @@ hv_late_fusion_diagnostic_v1/
 dist/
 
 # Local recovery material and raw development transcripts
-_cleanup_archive/
-notes/development_history/
+PROJECT_CONTROL/archive/
+PROJECT_CONTROL/logs/
+PROJECT_CONTROL/team_review/
+PROJECT_CONTROL/source_inputs/
 *.docx
 
 # Local user-owned research inputs and development transcripts
-参考资料/
-当前开发过程/
-有用？/
-接下来方向（一定要全部看完）.md
+paper/references/
+paper/drafts/
+paper/archive/
 /cases.csv
 
 # Reproducible outputs from active development workflows
