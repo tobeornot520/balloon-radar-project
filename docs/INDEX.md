@@ -3,6 +3,7 @@
 ## Start here
 
 - `CURRENT_STATUS.md`: current claims, blockers and authoritative evidence
+- `PROJECT_LEARNING_COURSE_ZH.md`: four-stage, twelve-lesson project courseware with role-based routes, reviewable deliverables, reference answers, paper/report guidance, and troubleshooting
 - `PROJECT_STRUCTURE.md`: source and artifact ownership
 - `../PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md`: beginner-oriented radar physics, signal processing, machine learning, code, evidence, and future-data handbook
 - `TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md`: page-by-page Tian 2024 guide, reproduction audit, 50 paper questions, and 22 project questions
@@ -68,6 +69,7 @@
 ## Reproducibility and sharing
 
 - `EXPERIMENT_RECORDING_PROTOCOL.md`
+- `../scripts/check_project_contracts.py`: cross-file checks for metric, threshold, course-link, and governance contracts
 - `share/README_SHARE_ZH.md`
 
 Raw development transcripts and recovery snapshots are intentionally outside this stable index.

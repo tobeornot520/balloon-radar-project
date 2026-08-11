@@ -189,6 +189,68 @@ PACKAGE_FILES = (
         "reading_registry",
     ),
     PackageFile(
+        "docs/PROJECT_LEARNING_COURSE_ZH.md",
+        "docs/21_PROJECT_LEARNING_COURSE_ZH.md",
+        "learning_course",
+    ),
+    # Keep the course's explicit repository-relative reading links usable inside
+    # the sanitized package as well as in the full repository.
+    PackageFile(
+        "PROJECT_CONTROL/TASK_BOARD.md",
+        "PROJECT_CONTROL/TASK_BOARD.md",
+        "course_linked_governance_source",
+    ),
+    PackageFile(
+        "PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md",
+        "PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md",
+        "course_linked_governance_source",
+    ),
+    PackageFile(
+        "docs/PAPER_MAINLINE_V1.md",
+        "docs/PAPER_MAINLINE_V1.md",
+        "course_linked_governance_source",
+    ),
+    PackageFile(
+        "docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md",
+        "polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md",
+        "course_linked_evidence_source",
+    ),
+    PackageFile(
+        "datasets/detection_dataset_v2.py",
+        "datasets/detection_dataset_v2.py",
+        "course_linked_code_source",
+    ),
+    PackageFile(
+        "datasets/detection_dataset_v3.py",
+        "datasets/detection_dataset_v3.py",
+        "course_linked_code_source",
+    ),
+    PackageFile(
+        "scripts/train_detection_baseline_v2.py",
+        "scripts/train_detection_baseline_v2.py",
+        "course_linked_code_source",
+    ),
+    PackageFile(
+        "training/train_simple_fcn.py",
+        "training/train_simple_fcn.py",
+        "course_linked_code_source",
+    ),
+    PackageFile(
+        "docs/TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md",
+        "PROJECT_CONTROL/TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md",
+        "course_linked_reading_source",
+    ),
+    PackageFile(
+        "docs/RECOMMENDED_PAPERS_20260805.md",
+        "PROJECT_CONTROL/RECOMMENDED_PAPERS_20260805.md",
+        "course_linked_reading_source",
+    ),
+    PackageFile(
+        "docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md",
+        "docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md",
+        "course_linked_evidence_source",
+    ),
+    PackageFile(
         "docs/TEAM_REPRODUCTION_GUIDE_ZH.md",
         "docs/13_TEAM_REPRODUCTION_GUIDE_ZH.md",
         "reproduction_guide",

@@ -54,6 +54,7 @@ def test_share_source_map_is_complete_and_unique() -> None:
     assert "TEAM_START_HERE.md" in destinations
     assert "docs/19_TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md" in destinations
     assert "docs/20_RECOMMENDED_PAPERS_20260805.md" in destinations
+    assert "docs/21_PROJECT_LEARNING_COURSE_ZH.md" in destinations
     assert "assets/contracts/lss_fmcwr_normalized_processing_contract_v1.json" in destinations
     assert "docs/LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md" in destinations
     assert "scripts/process_lss_fmcwr_normalized_v1.py" in destinations

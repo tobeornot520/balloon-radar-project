@@ -38,6 +38,7 @@ REQUIRED_FILES = (
     "scripts/build_final_roi_bc_dpg_joint_audit.py",
     "scripts/build_roi_bc_dpg_joint_paper_assets.py",
     "scripts/build_project_share_package.py",
+    "scripts/check_project_contracts.py",
     "scripts/audit_bc_dpg_v3_causal_context.py",
     "scripts/audit_detection_acquisition_order.py",
     "scripts/run_bc_dpg_causal_smoke.py",
@@ -62,6 +63,7 @@ REQUIRED_FILES = (
     "docs/NEW_DATA_COLLECTION_PROTOCOL.md",
     "docs/FIELD_COLLECTION_SOP_V1.md",
     "docs/TIAN_FCN_REPRODUCTION_PROTOCOL.md",
+    "docs/PROJECT_LEARNING_COURSE_ZH.md",
     "docs/EXPERIMENT_RECORDING_PROTOCOL.md",
     "utils/experiment_ledger.py",
 )

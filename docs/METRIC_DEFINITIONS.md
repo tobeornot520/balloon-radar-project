@@ -14,7 +14,8 @@
 
 ### Detected
 
-当模型分数不低于该 fold 的冻结决策阈值时，记为 detected。
+当模型分数严格大于该 fold 的冻结决策阈值时，记为 detected。当前代码和正式评价统一采用
+`score > threshold`；分数恰好等于阈值不计为 detected。
 
 ### Localization OK
 
@@ -39,7 +40,7 @@ BC-DPG 和 ROI 均冻结原始候选位置，只调整候选分数，因此校�
 
 ### Score Pd
 
-目标样本中分数超过阈值的比例，不要求定位正确。
+目标样本中分数严格超过阈值的比例，不要求定位正确。
 
 `score_pd = detected_target_count / target_count`
 

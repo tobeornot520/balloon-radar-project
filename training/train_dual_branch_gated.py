@@ -102,7 +102,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--early-stopping-patience", type=int, default=15)
     parser.add_argument("--scheduler-patience", type=int, default=5)
     parser.add_argument("--gradient-clip-norm", type=float, default=5.0)
-    parser.add_argument("--max-val-false-alarms", type=int, default=2)
+    # Keep the CLI default aligned with configs/dual_branch_gated_v1.yaml.
+    parser.add_argument("--max-val-false-alarms", type=int, default=1)
     parser.add_argument("--range-tolerance-gates", type=int, default=2)
     parser.add_argument("--velocity-tolerance-bins", type=int, default=3)
     parser.add_argument("--seed", type=int, default=42)
