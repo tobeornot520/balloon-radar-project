@@ -1,0 +1,61 @@
+experiment:
+  name: tian_fcn_point_gt_rescue_diagnostic_v1_fold01
+  parent: tian_fcn_lr_rescue_geometryfix_diagnostic_v1_fold01
+  evidence_role: train_validation_only_local_transfer_rescue_ablation
+  created_at: 2026-07-28
+
+trigger:
+  corrected_mdp_validation_joint_pd: 0.0
+  responsible_cell_above_pir_threshold: 53/53
+  responsible_cell_selected_by_mdp: 0/53
+  responsible_cell_oracle_joint_pd: 0.4528
+
+frozen_scope:
+  fold: 1
+  splits_loaded: [train, val]
+  test_split_loaded: false
+  channel: H
+  seed: 42
+  architecture_changed: false
+  regression_target_changed: false
+  postprocess_changed: false
+  learning_rates_changed_from_prior_diagnostic: false
+
+single_change:
+  classification_target_mode:
+    from: expanded
+    to: responsible_point
+  rationale: make the regression-responsible output unit identifiable on local data
+  interpretation: local_transfer_rescue_not_paper_reproduction
+
+training:
+  classification_epochs: 20
+  regression_epochs: 20
+  joint_epochs: 20
+  classification_learning_rate: 0.001
+  regression_learning_rate: 0.001
+  joint_learning_rate: 0.0005
+  regression_weight: 10
+
+acceptance:
+  required_before_any_test_or_sixfold_run:
+    - validation_joint_pd_greater_than_zero
+    - validation_responsible_cell_selection_rate_greater_than_zero
+  prohibited:
+    - loading_test_split
+    - scanning_additional_learning_rates
+    - reporting_as_tian_paper_reproduction
+
+result:
+  completed_at: 2026-07-29
+  test_split_loaded: false
+  validation_target_count: 53
+  validation_background_count: 150
+  validation_correct_detection_count: 22
+  validation_joint_pd: 0.4150943396
+  validation_false_alarm_count: 2
+  validation_pfa: 0.0133333333
+  responsible_cell_peak_rate: 0.3207547170
+  responsible_cell_mdp_selection_rate: 0.1509433962
+  responsible_cell_oracle_joint_pd: 0.5660377358
+  decision: acceptance_floor_met_but_sixfold_remains_blocked

@@ -1,0 +1,4 @@
+failure_mode,sample_count,responsible_in_selected_component_count,responsible_cell_selected_count,responsible_in_selected_component_rate,responsible_cell_selected_rate,H_label_db_mean,H_label_db_min,H_label_db_max,decoded_error_mean,decoded_error_max,sample_fraction
+responsible_cell_in_discarded_component,17,0,0,0.0,0.0,20.658647312837488,11.312507629394531,31.57683563232422,53.81253089493227,88.45903006477066,0.32075471698113206
+responsible_cell_selected,8,8,8,1.0,1.0,27.350430250167847,16.92329216003418,35.784305572509766,1.5821067811865475,2.0,0.1509433962264151
+selected_component_mdp_chose_other_cell,28,28,0,1.0,0.0,22.218249355043685,11.673561096191406,29.80276298522949,3.7997736330516787,6.4031242374328485,0.5283018867924528

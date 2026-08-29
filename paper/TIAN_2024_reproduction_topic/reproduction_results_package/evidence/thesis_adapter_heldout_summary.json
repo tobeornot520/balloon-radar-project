@@ -1,0 +1,29 @@
+{
+  "status": "COMPLETE_SINGLE_FROZEN_LOCAL_HELDOUT_EVALUATION",
+  "evidence_role": "historical_local_heldout_not_external_blind_test",
+  "method": "thesis_tian2024_local_adaptation_v1",
+  "checkpoint_sha256": "7a50827634a8e921a89619e3ab26907ed4e7ca09e2158b8bc0bb4a072b291cda",
+  "manifest_sha256": "b22abcfdece83a17ab474e690a280400b97c60623a9780d799fe2e1c19476221",
+  "normalization_scope": "sample_channel",
+  "threshold_source": "frozen_validation",
+  "test_retuning_performed": false,
+  "metrics": {
+    "frozen_threshold": 0.7036690711975098,
+    "target_count": 53,
+    "background_count": 150,
+    "joint_success_count": 30,
+    "false_alarm_count": 134,
+    "joint_pd": 0.5660377358490566,
+    "pfa": 0.8933333333333333,
+    "responsible_grid_selection_rate": 0.4528301886792453,
+    "range_mae_gates": 6.018867924528302,
+    "velocity_mae_bins": 5.679245283018868,
+    "unique_target_peak_grids": 12,
+    "seconds_per_map": 0.06830507975369947
+  },
+  "not_claimed": [
+    "external_blind_generalization",
+    "exact_numeric_thesis_reproduction",
+    "balloon_payload_recognition"
+  ]
+}

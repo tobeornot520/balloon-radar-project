@@ -1,0 +1,72 @@
+experiment:
+  name: tian_fcn_point_gt_negative_floor_diagnostic_v1_fold01
+  parent: tian_fcn_point_gt_rescue_diagnostic_v1_fold01
+  evidence_role: train_validation_only_local_transfer_mechanism_ablation
+  created_at: 2026-07-29
+
+trigger:
+  validation_target_count: 53
+  pir_component_count: 2/53_unique_value
+  selected_component_shape: 12x1/53_unique_value
+  responsible_cell_in_selected_component: 36/53
+  responsible_cell_selected_by_mdp: 8/53
+  point_gt_target_map_negative_samples: 1
+  interpretation: insufficient_negative_supervision_matches_broad_doppler_stripe
+
+frozen_scope:
+  fold: 1
+  splits_loaded: [train, val]
+  test_split_loaded: false
+  channel: H
+  seed: 42
+  architecture_changed: false
+  classification_target_mode: responsible_point
+  regression_target_changed: false
+  postprocess_changed: false
+  learning_rates_changed: false
+  epochs_changed: false
+
+single_change:
+  target_negative_units_floor:
+    from: 0
+    to: 16
+  rationale: supervise more than one negative output unit on each point-GT target map
+  interpretation: local_transfer_mechanism_ablation_not_paper_reproduction
+
+training:
+  classification_epochs: 20
+  regression_epochs: 20
+  joint_epochs: 20
+  classification_learning_rate: 0.001
+  regression_learning_rate: 0.001
+  joint_learning_rate: 0.0005
+  regression_weight: 10
+  background_negative_units: 16
+  target_negative_units_floor: 16
+
+acceptance:
+  primary:
+    - selected_component_size_mean_less_than_12
+    - validation_joint_pd_greater_than_0.4150943396
+  guardrails:
+    - validation_pfa_less_than_or_equal_to_0.02
+    - responsible_cell_selection_rate_greater_than_0.1509433962
+  prohibited:
+    - loading_test_split
+    - scanning_negative_sample_counts
+    - running_new_sixfold_V_or_HV_experiments
+    - reporting_as_tian_paper_reproduction
+
+result:
+  status: REJECT
+  completed_experiment: tian_fcn_point_gt_negative_floor_diagnostic_v1_fold01_gpu_retry03
+  completed_at: 2026-07-29
+  test_split_loaded: false
+  validation_joint_pd: 0.2452830189
+  validation_pfa: 0.0066666667
+  velocity_mae_bins: 24.9245283019
+  responsible_cell_in_selected_component: 27/53
+  responsible_cell_selected_by_mdp: 9/53
+  selected_component_size_mean: 12.4716981132
+  target_probability_template_correlation_mean: 0.9984995284
+  decision: reject_random_negative_floor_did_not_remove_template_bands

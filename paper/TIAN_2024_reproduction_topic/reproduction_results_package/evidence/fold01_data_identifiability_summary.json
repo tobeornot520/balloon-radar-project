@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED",
+  "evidence_role": "tian_fcn_data_identifiability_pretraining_audit",
+  "manifest_path": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/dataset_v4_multifold/fold_01_manifest.csv",
+  "target_count": 318,
+  "source_count": 71,
+  "output_stride": [
+    4,
+    16
+  ],
+  "output_grid_x_values": [
+    4
+  ],
+  "all_targets_share_one_output_range_column": true,
+  "single_velocity_source_count": 47,
+  "source_group_count": 71,
+  "interpretation": "single output range column cannot test range-column generalization; source/velocity coupling can support fixed location templates"
+}

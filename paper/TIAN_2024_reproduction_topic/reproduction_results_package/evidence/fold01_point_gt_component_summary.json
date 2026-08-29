@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "evidence_role": "fold01_validation_component_mechanism_diagnostic_only",
+  "test_split_loaded": false,
+  "target_count": 53,
+  "raw_H_evidence_match_count": 53,
+  "raw_H_local_velocity_exact_label_count": 51,
+  "raw_H_local_velocity_within_one_bin_count": 53,
+  "pir_component_count_unique": [
+    2
+  ],
+  "selected_component_shapes": [
+    "12x1"
+  ],
+  "failure_mode_counts": {
+    "selected_component_mdp_chose_other_cell": 28,
+    "responsible_cell_in_discarded_component": 17,
+    "responsible_cell_selected": 8
+  },
+  "mean_H_label_db_by_failure_mode": {
+    "responsible_cell_in_discarded_component": 20.658647312837488,
+    "responsible_cell_selected": 27.350430250167847,
+    "selected_component_mdp_chose_other_cell": 22.218249355043685
+  },
+  "interpretation": "two_stage_failure: component competition plus within-component minimum-offset selection; raw H strength is associated but source and velocity are confounded",
+  "inputs": {
+    "diagnostic_rows": "/home/tobeornot8259748/projects/balloon_radar_project/results/data_audit/tian_fcn_v1/fold01_point_gt_validation_audit_v3/validation_diagnostic_rows.csv",
+    "raw_peak_rows": "/home/tobeornot8259748/projects/balloon_radar_project/results/analysis/hv_raw_peak_offsets/tables/hv_raw_peak_offsets.csv"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "scope": "formal",
+  "threshold_source": "fold-specific validation only",
+  "test_threshold_retuning": false,
+  "requested_folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "requested_channels": [
+    "H"
+  ],
+  "missing_summaries": [],
+  "channels": {
+    "H": {
+      "completed_folds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fold_count": 6,
+      "macro": {
+        "paper_pd": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "paper_pf": {
+          "mean": 0.8333333333333334,
+          "std": 0.408248290463863,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "paper_d_min_l1_cells": {
+          "mean": 75.6,
+          "std": 10.334408546211051,
+          "min": 58.0,
+          "max": 84.0
+        },
+        "paper_d_5_fraction": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "paper_d_avg_l1_cells": {
+          "mean": 110.23343130140299,
+          "std": 11.783704879829036,
+          "min": 91.9245283018868,
+          "max": 122.35
+        },
+        "joint_pd": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "pfa": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "range_mae_gates": {
+          "mean": null,
+          "std": null,
+          "min": null,
+          "max": null
+        },
+        "velocity_mae_bins": {
+          "mean": null,
+          "std": null,
+          "min": null,
+          "max": null
+        },
+        "seconds_per_map": {
+          "mean": 0.00019060167086667202,
+          "std": 4.869416964619353e-05,
+          "min": 0.0001155310985286364,
+          "max": 0.00023985901428940926
+        }
+      },
+      "pooled_project": {
+        "positive_count": 318,
+        "background_count": 830,
+        "detected_positive_count": 0,
+        "correct_detection_count": 0,
+        "false_alarm_count": 0,
+        "joint_pd": 0.0,
+        "pfa": 0.0
+      },
+      "worst_fold": {
+        "joint_pd_fold": 1,
+        "joint_pd": 0.0,
+        "pfa_fold": 1,
+        "pfa": 0.0
+      }
+    }
+  }
+}

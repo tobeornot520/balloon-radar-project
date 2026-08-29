@@ -1,0 +1,79 @@
+experiment:
+  name: tian_fcn_point_gt_same_column_dense_diagnostic_v1_fold01
+  parent: tian_fcn_point_gt_rescue_diagnostic_v1_fold01
+  evidence_role: train_validation_only_local_transfer_localization_ablation
+  created_at: 2026-07-29
+
+trigger:
+  validation_target_count: 53
+  point_gt_template_correlation_mean: 0.9981831099
+  point_gt_selected_component_size_mean: 12.0
+  point_gt_validation_joint_pd: 0.4150943396
+  random_negative_floor_result: REJECT
+  interpretation: model_uses_fixed_velocity_support_template_instead_of_sample_localization
+
+frozen_scope:
+  fold: 1
+  splits_loaded: [train, val]
+  test_split_loaded: false
+  channel: H
+  seed: 42
+  architecture_changed: false
+  classification_target_mode: responsible_point
+  regression_target_changed: false
+  postprocess_changed: false
+  learning_rates_changed: false
+  epochs_changed: false
+  target_negative_units_floor: 0
+
+single_change:
+  target_negative_sampling:
+    from: balanced_random
+    to: same_range_column_dense
+  target_map_effect:
+    positive_units: 1
+    negative_units: 31
+    negative_definition: all_non_target_velocity_units_in_responsible_range_column
+  rationale: directly penalize the fixed velocity-band template at the target range column
+  interpretation: local_transfer_localization_ablation_not_paper_reproduction
+
+training:
+  classification_epochs: 20
+  regression_epochs: 20
+  joint_epochs: 20
+  classification_learning_rate: 0.001
+  regression_learning_rate: 0.001
+  joint_learning_rate: 0.0005
+  regression_weight: 10
+  background_negative_units: 16
+  target_negative_units_floor: 0
+  target_negative_sampling: same_range_column_dense
+
+acceptance:
+  primary:
+    - target_probability_template_correlation_mean_less_than_or_equal_to_0.99
+    - selected_component_size_mean_less_than_12
+    - validation_joint_pd_greater_than_0.4150943396
+  guardrails:
+    - validation_pfa_less_than_or_equal_to_0.02
+    - responsible_cell_selection_rate_greater_than_0.1509433962
+  prohibited:
+    - loading_test_split
+    - scanning_negative_sampling_variants
+    - changing_PIR_or_MDP_thresholds_after_result
+    - running_new_sixfold_V_or_HV_experiments
+    - reporting_as_tian_paper_reproduction
+
+result:
+  status: REJECT
+  completed_experiment: tian_fcn_point_gt_same_column_dense_diagnostic_v1_fold01
+  completed_at: 2026-07-29
+  test_split_loaded: false
+  validation_joint_pd: 0.1132075472
+  validation_pfa: 0.0133333333
+  velocity_mae_bins: 32.3018867925
+  responsible_cell_in_selected_component: 21/53
+  responsible_cell_selected_by_mdp: 5/53
+  selected_component_size_mean: 12.0754716981
+  target_probability_template_correlation_mean: 0.9981675058
+  decision: reject_dense_same_column_negatives_suppressed_scores_without_breaking_template
