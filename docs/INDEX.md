@@ -75,6 +75,7 @@
 - `../scripts/check_project_contracts.py`: cross-file checks for metric, threshold, course-link, and governance contracts
 - `share/README_SHARE_ZH.md`
 - `share/TEAM_SYNC_BRIEF_20260826.md`: concise whole-project briefing for current members
+- `share/TEAM_MEMBER_START_HERE_20260829.md`: zero-context setup guide for members who only have initial data
 - `share/TEAM_MEMBER_FULL_SYNC_GUIDE_20260829.md`: scope and access boundary of the complete data-free member package
 - `../scripts/build_team_sync_package.py`: build the three-part complete member synchronization release
 

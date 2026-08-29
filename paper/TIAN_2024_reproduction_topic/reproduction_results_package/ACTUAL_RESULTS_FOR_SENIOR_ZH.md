@@ -45,7 +45,7 @@
 | `20260202_144458_beam5` | 33 | 113 | 相差 80 bins，定位失败 |
 | `20260202_144629_beam1` | 101 | 25 | 相差 76 bins，定位失败 |
 
-完整的 203 个验证样本结果位于 `evidence/point_gt_validation_predictions.csv`。
+负责人本地受控目录中保存完整的 203 个验证样本结果；普通成员同步包只保留本节的聚合图和结论摘要。
 
 ## 4. 六通道模型为什么换背景后失效
 
@@ -71,7 +71,7 @@
 | `20260204_100739_beam1_az028` | 0.9020 | 16 | 64 |
 | `20260204_100739_beam1_az037` | 0.9995 | 16 | 64 |
 
-完整预测位于：
+负责人本地受控目录中的完整预测位于：
 
 - `evidence/thesis_adapter_validation_predictions.csv`
 - `evidence/thesis_adapter_heldout_predictions.csv`
@@ -89,8 +89,7 @@
 |---|---|
 | `01_experiment_outcomes.png` | 四份诊断配置、adapter validation/held-out summary |
 | `02_fixed_template_heatmap.png` | `point_gt_target_probability_mean_map.csv` 和 `point_gt_target_probability_std_map.csv` |
-| `03_point_gt_velocity_localization.png` | `point_gt_validation_predictions.csv` |
-| `04_background_group_shift.png` | 两份 adapter 完整背景预测 CSV |
+| `03_point_gt_velocity_localization.png` | 负责人本地的 point-GT 预测表 |
+| `04_background_group_shift.png` | 负责人本地的两份 adapter 背景预测表 |
 
 图可以使用同目录下的 `generate_figures.py` 从包内证据重新生成。
-

@@ -84,6 +84,19 @@ def collect_member_evidence() -> tuple[str, ...]:
     )
 
 
+def collect_tian_member_evidence() -> tuple[str, ...]:
+    """Collect readable Tian diagnostics without sample-level predictions or logs."""
+    root = PROJECT_ROOT / "paper/TIAN_2024_reproduction_topic/reproduction_results_package"
+    excluded_tokens = ("predictions", "training_history", "val_threshold_curve", "target_grid_assignments")
+    return tuple(
+        path.relative_to(PROJECT_ROOT).as_posix()
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+        and path.suffix.lower() in {".md", ".json", ".csv", ".png"}
+        and not any(token in path.name.lower() for token in excluded_tokens)
+    )
+
+
 DOCUMENT_FILES = (
     "README.md",
     "PROJECT_CONTROL/README.md",
@@ -91,6 +104,7 @@ DOCUMENT_FILES = (
     "PROJECT_CONTROL/ROADMAP.md",
     "PROJECT_CONTROL/TASK_BOARD.md",
     "PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md",
+    "docs/share/TEAM_MEMBER_START_HERE_20260829.md",
     *collect_tree("docs", {".md"}),
     "paper/README.md",
     "paper/TIAN_2024_reproduction_topic/README.md",
@@ -98,6 +112,7 @@ DOCUMENT_FILES = (
     "paper/TIAN_2024_reproduction_topic/reproduction_results_package/ACTUAL_RESULTS_FOR_SENIOR_ZH.md",
     "paper/TIAN_2024_reproduction_topic/reproduction_results_package/FAILURE_REASON_SIMPLE_ZH.md",
     "paper/TIAN_2024_reproduction_topic/reproduction_results_package/RESULT_SUMMARY_ZH.md",
+    *collect_tian_member_evidence(),
     *collect_member_evidence(),
 )
 
@@ -142,6 +157,22 @@ FIELD_FILES = (
 )
 
 PACKAGES = (
+    Package(
+        "00_组员启动与目录说明",
+        "组员启动与目录说明",
+        "给只有学长初始数据的新成员的阅读顺序、数据放置、安装和协作边界。",
+        (
+            "README.md",
+            "docs/share/TEAM_MEMBER_START_HERE_20260829.md",
+            "docs/share/TEAM_SYNC_BRIEF_20260826.md",
+            "docs/PROJECT_STRUCTURE.md",
+            "docs/DATA_CARD.md",
+            "docs/CURRENT_STATUS.md",
+            "PROJECT_CONTROL/README.md",
+            "PROJECT_CONTROL/TASK_BOARD.md",
+            "PROJECT_CONTROL/ROADMAP.md",
+        ),
+    ),
     Package(
         "01_项目资料与研究证据",
         "项目资料与研究证据",
