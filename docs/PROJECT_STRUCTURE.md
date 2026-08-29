@@ -23,7 +23,7 @@
 | `results/final_evidence/` | Frozen paper evidence and precomputed assets |
 | `data/metadata/` | Versioned manifests and external dataset/artifact provenance registries; no raw signals |
 | `data/raw/external/` | Local official downloads and per-file integrity manifests; ignored by Git and excluded from sharing |
-| `docs/` | Stable conclusions, preregistration, and operating instructions |
+| `docs/` | Stable conclusions, preregistration, operating instructions, and the canonical copy of research Markdown |
 
 Directory-level indexes are maintained in `scripts/README.md`, `configs/README.md`,
 `results/README.md`, and `docs/INDEX.md`.
@@ -31,10 +31,10 @@ Directory-level indexes are maintained in `scripts/README.md`, `configs/README.m
 Large checkpoints, raw radar data, experiment runs, and generated distributions
 are excluded from Git.
 
-`dist/` is the local delivery area. It may contain the single current onboarding
-package and the independent algorithm-code review package; generated ZIPs and
-staging directories are ignored by Git. Delivery packages must be built from a
-clean commit and audited before old package artifacts are removed.
+`dist/` is the local delivery area. Current releases stay at its top level;
+superseded local deliveries go under `dist/archive/`. Generated ZIPs, extracted
+package trees and staging directories are ignored by Git. Delivery packages
+must be built from a clean commit and audited before old artifacts are archived.
 
 ## Four logical zones
 
@@ -59,6 +59,7 @@ one logical code zone, not separate projects.
 | `tools/` | Diagnostics, maintenance, and data-layout utilities |
 | `PROJECT_CONTROL/logs/` | Consolidated local development exports and historical chat records; ignored by Git |
 | `PROJECT_CONTROL/archive/` | Optional local recovery material; ignored by Git |
+| `PROJECT_CONTROL/meetings/` | Dated planning and decision memos; task status remains in `TASK_BOARD.md` |
 | `dist/` | Current delivery packages only; generated and ignored by Git |
 
 Python bytecode (`__pycache__/`, `*.pyc`) and test caches (`.pytest_cache/`) are
@@ -71,7 +72,9 @@ listed in the root README.
 ## Root boundary
 
 User-owned research inputs are kept under `PROJECT_CONTROL/source_inputs/` and
-`paper/references/`. They are never treated as source entry points.
+`paper/references/`. Reference PDFs never belong in the repository root or in
+topic folders. Topic indexes link to the one reference copy and to canonical
+documents under `docs/`. These inputs are never treated as source entry points.
 
 Generated checkpoints and raw data stay local. Empty `losses/`, `metrics/`,
 `postprocess/`, `radar_processing/`, `checkpoints/`, `logs/`, and `notebooks/`
@@ -86,3 +89,4 @@ directories are reserved local placeholders, not active modules.
 3. absence of exact duplicate Python implementations in active directories;
 4. absence of root-level Python entry points;
 5. optional availability of frozen six-fold joint inputs.
+6. canonical file placement: no root-level PDF and no known duplicate Tian copies.

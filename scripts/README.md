@@ -20,7 +20,7 @@ than being copied into a script.
 | Zero-Doppler review | `build_zero_doppler_human_review_queue_v1.py`, `build_zero_doppler_review_atlas_v1.py`, `build_zero_doppler_review_workbench_v1.py`, `audit_zero_doppler_human_review_v1.py`, `build_zero_doppler_false_alarm_library_v1.py`, `audit_zero_doppler_target_safety_v1.py` |
 | Tian reproduction | `run_tian_fcn_reproduction_smoke.py`, `run_tian_fcn_sixfold.py` |
 | Frozen evidence | `build_bc_dpg_localization_evidence.py`, `build_roi_bc_dpg_joint_paper_assets.py`, `build_lat_mricd_cross_band_evidence_v1.py` |
-| Sharing | `build_project_share_package.py` |
+| Sharing | `build_project_share_package.py` (formal onboarding release), `build_team_sync_package.py` (complete data-free member sync) |
 
 Files named `test_*.py` in this directory are explicit historical smoke tools. Automated tests live
 only in `tests/` and are collected by pytest.

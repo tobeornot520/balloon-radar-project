@@ -1,6 +1,6 @@
 # H/V 双极化雷达检测项目课程讲义（当前主线）
 
-版本：1.1（十二课概念增强版）；更新时间：2026-08-11
+版本：1.1（十二课概念增强版）；更新时间：2026-08-12
 
 课程状态：十二课课程内容编写完成；研究方向仍受外部条件阻塞。教学验收框架已经建立，技术表述和任务映射随项目证据持续审校。
 
@@ -56,6 +56,7 @@ H/V 复数 IQ
 
 - 授课时先读每课正文和“课堂问题”，在回答前不要打开文末“参考答案”。
 - 参考答案是可核对的最低标准，不是唯一表达；能够引用代码、公式和证据边界的回答更完整。
+- 标注为“开放讨论”的问题没有唯一答案，也不收入文末参考答案；验收重点是能否提出清楚假设、控制变量、所需证据和停止条件。
 - DeepSeek 分享记录只作为外部延伸材料。相关核心概念已经摘要进正文，链接失效不影响课程学习；凡是与仓库代码、冻结结果或数据卡冲突的说法，以仓库证据为准。
 - 本课件中的“当前结果”必须与具体数据版本、fold、阈值口径一起阅读，不能脱离上下文摘数字。
 
@@ -159,6 +160,42 @@ V2 目录式数据接口适合入门理解；当前六折正式链路使用 V3/V
 | ROI | region of interest，围绕候选位置裁出的局部感兴趣区域 |
 | checkpoint | 某个训练时刻保存的模型参数及相关状态，不等同于网络结构定义 |
 
+### 0.9 常用缩写对照
+
+这张表只帮助查词。英文全称不自动扩大项目结论，例如 `ZDR-like` 仍不等于经过绝对标定的 `ZDR`。
+
+| 缩写或写法 | 英文全称 | 本课程中的中文含义 |
+|---|---|---|
+| ADC | analog-to-digital converter | 模数转换器，把接收机模拟电压采样为数字量 |
+| AUC | area under the ROC curve | ROC 曲线下面积，汇总目标/背景分数排序能力 |
+| BC | background calibration | 背景校准或背景条件抑制模块 |
+| BCE | binary cross-entropy | 二元交叉熵，用于 0/1 分类监督 |
+| CDF | cumulative distribution function | 累积分布函数，本课程用来展示误差不超过某阈值的样本比例 |
+| DFT / FFT | discrete Fourier transform / fast Fourier transform | 离散傅里叶变换及其快速算法 |
+| DPG-FCN | project name for `DualBranchGatedFCN` | H/V 双分支门控全卷积检测器；不猜造仓库未定义的正式英文展开 |
+| ECE | expected calibration error | 期望校准误差，用于检查分数与经验发生率的一致程度 |
+| FCN | fully convolutional network | 全卷积网络，输出保留空间对应关系的热图 |
+| FPR | false positive rate | 假阳性率；ROC 横轴，具体试验单位必须随评价合同说明 |
+| H/V | project channel labels; hardware definition unconfirmed | 项目中的 H/V 通道标签；通常联想到水平/垂直方向，但物理收发定义仍需设备资料确认 |
+| IQ | in-phase and quadrature | 同相/正交复数基带分量 `I+jQ` |
+| MAE | mean absolute error | 平均绝对误差 |
+| MAT | MATLAB data file/container | MATLAB 数据容器，不代表固定雷达数据格式 |
+| MLP | multilayer perceptron | 多层感知机，本项目用于从统计特征生成门控或校准量 |
+| MSE | mean squared error | 均方误差，部分热图训练入口使用的损失 |
+| OOD | out-of-distribution | 推理输入条件偏离训练分布 |
+| pAUC | partial area under the ROC curve | ROC 指定低 FPR 区间的部分面积 |
+| Pd | probability of detection | 检测率的传统记号；当前为有限目标记录上的经验比例 |
+| Pfa | probability of false alarm | 虚警率的传统记号；当前为背景记录级经验比例 |
+| PRF | pulse repetition frequency | 脉冲重复频率，是 Doppler bin 换算物理频率/速度所需参数之一 |
+| RD | range-Doppler | 距离-多普勒二维表示 |
+| RI4 / RI8 | real-imaginary 4/8-channel representation | 由复数 RD 实部/虚部及可选附加特征组成的项目表示名 |
+| ROC | receiver operating characteristic | 随阈值变化的 TPR-FPR 曲线 |
+| ROI | region of interest | 候选周围的局部感兴趣区域 |
+| SNR | signal-to-noise ratio | 信噪比；当前正式 manifest 尚无可审计字段 |
+| TPR | true positive rate | 真阳性率，在当前目标检测口径下与相应 Score Pd 对应 |
+| UAV | unmanned aerial vehicle | 无人机；当前主数据的目标对象，不等于空飘球 |
+| ZDR-like | differential-reflectivity-like feature | 类差分反射率的相对功率比特征，不是绝对标定 ZDR |
+
 ## 第一课：从 MAT/IQ 到可监督 RD 热图
 
 ### 1.0 学习任务卡
@@ -166,6 +203,7 @@ V2 目录式数据接口适合入门理解；当前六折正式链路使用 V3/V
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 60 分钟 |
+| 课程位置 | 全课程的数据起点：先说明原始 IQ 怎样变成监督样本，下一课才能讨论网络究竟在学习什么 |
 | 先修知识 | 复数的实部/虚部、矩阵下标；不要求已有雷达经验 |
 | 必须阅读 | `datasets/detection_dataset_v2.py`、`features/polarimetric_rd.py`、`docs/DATA_CARD.md` |
 | 必须完成 | 提交一页 `IQ -> Hann -> Doppler FFT -> RD 功率 -> 归一化 -> 高斯热图` 数据流图，标注每一步形状、轴和不可逆信息 |
@@ -277,6 +315,7 @@ y(v,r)=\exp\left[-\frac{(r-r_0)^2}{2\sigma_r^2}
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 承接第 1 课的数据表示，建立最小检测基线；第 3 课将在此基础上扩展为 H/V 双分支融合 |
 | 先修知识 | 第 1 课、Python 张量形状、卷积核和 padding 的基本概念 |
 | 必须阅读 | `models/simple_fcn.py`、`scripts/train_detection_baseline_v2.py` |
 | 必须完成 | 提交逐层张量表，列出输入/输出通道、空间尺寸、卷积核和累计理论感受野 |
@@ -386,6 +425,7 @@ N_{out}=\left\lfloor\frac{N_{in}+2p-d(k-1)-1}{s}+1\right\rfloor,
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 从单一 FCN 进入项目主检测器，连接基础网络与后续 BC-DPG 背景校准 |
 | 先修知识 | 第 2 课、softmax、逐元素加减乘法 |
 | 必须阅读 | `models/dual_branch_gated_fcn.py`、`training/train_dual_branch_gated.py` |
 | 必须完成 | 提交一张 H/V 双分支融合图，并用自己的话解释 gate、`abs(H-V)`、`H*V` 和两个辅助输出 |
@@ -477,6 +517,7 @@ L=L_{fusion}+0.2L_H+0.2L_V.
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 60 分钟 |
+| 课程位置 | 把模型热图转换为可比较的实验结论，是后续所有校准、特征和统计课程共同使用的评价合同 |
 | 先修知识 | 第 1-3 课、集合交集、比例和阈值判决 |
 | 必须阅读 | `docs/METRIC_DEFINITIONS.md`、`scripts/train_detection_baseline_v2.py` |
 | 必须完成 | 根据给定目标/背景计数手算 Score Pd、Joint Pd 和 Pfa，并画出 train/validation/test 到 checkpoint/阈值/最终评价的流程 |
@@ -560,6 +601,7 @@ Joint Pd 是“过阈目标集合”与“定位正确集合”的交集，所�
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 在冻结 DPG 候选之后处理背景虚警，形成当前主结果，并为第 10 课的因果部署问题埋下上下文边界 |
 | 先修知识 | 第 4 课、logit/sigmoid、固定阈值和 checkpoint |
 | 必须阅读 | `models/target_protected_scan_calibrator.py`、`features/scan_context.py`、`results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md` |
 | 必须完成 | 提交 raw DPG、sample-independent BC、complete-scan BC 的输入、输出、结果角色和部署边界对照表 |
@@ -653,6 +695,7 @@ JointPd_{BC,val}\ge JointPd_{raw,val}-0.01.
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 检验复杂极化表示能否替代 Power2；其负结果直接推动第 7 课转向局部 ROI 精修 |
 | 先修知识 | 第 1、2、4 课，相对幅度、复数实部/虚部和控制变量 |
 | 必须阅读 | `features/polarimetric_rd.py`、`models/polarimetric_representation_fcn.py`、`docs/polarimetric_stage3/STAGE3_FROZEN_CONCLUSION.md` |
 | 必须完成 | 提交 Power2、RI4、Polar6-gated、RI8-gated 的信息、容量控制、结果和解释边界公平比较表 |
@@ -745,6 +788,7 @@ Stage 3 把所有输入补到 8 通道并使用同一 FCN，只控制了张量�
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 90 分钟 |
+| 课程位置 | 承接 Stage 3 的负结果，把极化信息从全图主检测改为候选局部确认，并完成模型与特征阶段 |
 | 先修知识 | 第 4-6 课、ROI 裁剪、mask、BCE 和 suppression-only |
 | 必须阅读 | `docs/README_候选区域极化精修Stage4_V1.md`、`models/roi_polarimetric_refiner.py`、`training/train_roi_polarimetric_refiner_v1.py` |
 | 必须完成 | 提交 Power2、ROI power control、ROI RI4 的控制变量图，解释为什么必须保留 power control |
@@ -850,6 +894,7 @@ ROI RI4 有独立的抑制价值，但不能替代当前观测结果更好的 BC
 3. 为什么 suppression-only 在沿用原固定阈值时不能制造新虚警，却仍可能损失真实目标？
 4. ROI RI4 将虚警从 300 降到 196，并保持联合成功为 268/318，为什么还不能说它已经替代 BC-DPG？
 5. Fold 1/4 用于模式筛选后，为什么包含这两折的六折汇总不能称为完全独立盲测？
+6. **开放讨论：**如果下一批数据完成 H/V 标定并提供独立锁定测试，你会继续让 ROI 只降低分数，还是允许它修正候选坐标？请给出最小对照实验、目标保护门和停止条件。
 
 ## 第八课：六折评价、统计不确定性与论文证据边界
 
@@ -858,6 +903,7 @@ ROI RI4 有独立的抑制价值，但不能替代当前观测结果更好的 BC
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 从“模型得到多少分”转向“这些分有多可信”，为定位审计和部署边界提供统计证据基础 |
 | 先修知识 | 第 4 课、平均数/中位数、交叉验证和独立样本概念 |
 | 必须阅读 | `docs/DATA_CARD.md`、`docs/METRIC_DEFINITIONS.md`、`results/final_evidence/roi_bc_dpg_joint_fixed_threshold/JOINT_AUDIT_REPORT.md` |
 | 必须完成 | 提交 pooled、macro、median、worst-fold 和扫描组 bootstrap 的对象、权重和解释限制对照表 |
@@ -925,6 +971,7 @@ pooled 让记录多的折权重更大，macro 让每个折权重相同。BC-DPG 
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 60 分钟 |
+| 课程位置 | 在第 8 课总体统计之后深入逐目标误差，分开检测失败与定位失败，并约束物理精度表述 |
 | 先修知识 | 第 4、8 课、绝对误差、分位数和条件统计 |
 | 必须阅读 | `results/final_evidence/bc_dpg_localization/LOCALIZATION_EVIDENCE_REPORT.md`、`scripts/build_bc_dpg_localization_evidence.py` |
 | 必须完成 | 从获准的冻结预测或匿名示例中选一个定位失败样本，标明它属于四象限中的哪一类，并列出分数、坐标误差和可能的核查项 |
@@ -989,6 +1036,7 @@ Fold 1 的目标 Joint Pd 为 1.0、距离 MAE 为 0.4528 gates，但它的背�
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 75 分钟 |
+| 课程位置 | 把离线模型放回真实时间流程，说明现有结果离部署还缺哪些顺序、状态和采集证据 |
 | 先修知识 | 第 5、8 课、时间顺序、训练/推理分布和状态重置 |
 | 必须阅读 | `results/data_audit/bc_dpg_v3_causal_context_audit/CAUSAL_CONTEXT_AUDIT.md`、`results/data_audit/detection_acquisition_order/ACQUISITION_ORDER_AUDIT.md`、`configs/data_collection_contract_v1.json` |
 | 必须完成 | 画出 complete-scan、leave-one-out、past-only 和 sample-independent 的信息流，标出当前样本、过去、未来和训练匹配关系 |
@@ -1058,6 +1106,7 @@ past-only 中每个扫描首样本没有历史，71 个目标组和 6 个背景�
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 60 分钟 |
+| 课程位置 | 汇总前十课的方法与证据，学习怎样归因贡献、保留负结果，并为最后的论文交付定下表述边界 |
 | 先修知识 | 第 4-10 课、控制变量、消融和证据等级 |
 | 必须阅读 | `results/final_evidence/bc_dpg_v3_final/FINAL_EVIDENCE_REPORT.md`、`docs/MODEL_SELECTION_LEDGER.md`、`docs/PAPER_MAINLINE_V1.md` |
 | 必须完成 | 提交一段“当前可以说”和一段“当前不能说”的论文表述，至少覆盖 BC-DPG 收益、complete-scan 边界和 Stage 3 负结果 |
@@ -1135,6 +1184,7 @@ Stage 3 中 RI4 虽减少虚警，却明显损失 Joint Pd；Polar6/RI8 也未�
 4. 怎样给 Stage 3、Stage 4 六折、BC/ROI OR 和 past-only 窗口审计标注证据角色？
 5. 怎样用一句话同时写出 BC-DPG 的收益和 complete-scan 离线边界？
 6. 为什么 Power2 既是 baseline 又是 control group，而不是可被后续方案删除的旧模型？
+7. **开放讨论：**如果组会只能展示三张图或表，你会选哪些来支撑当前论文主线？请说明每项回答的问题、舍弃了什么信息，以及怎样避免只挑最好看的结果。
 
 ## 第十二课：论文、汇报与复现交付
 
@@ -1143,6 +1193,7 @@ Stage 3 中 RI4 虽减少虚警，却明显损失 Joint Pd；Polar6/RI8 也未�
 | 项目 | 内容 |
 |---|---|
 | 预计时间 | 90 分钟 |
+| 课程位置 | 全课程的交付终点：把数据、方法、指标、限制和复现证据组织成论文、汇报和可审查材料 |
 | 先修知识 | 第 1-11 课、Markdown 表格、引用和基本版本控制概念 |
 | 必须阅读 | `paper/README.md`、`docs/EXPERIMENT_RECORDING_PROTOCOL.md`、`docs/TEAM_REPRODUCTION_GUIDE_ZH.md` |
 | 必须完成 | 提交一页项目复现与证据说明：研究对象、三项主结果、证据等级、所需材料、当前不能复现或不能声称的内容 |

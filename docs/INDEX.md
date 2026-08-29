@@ -14,6 +14,7 @@
 - `../PROJECT_CONTROL/TASK_BOARD.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `../PROJECT_CONTROL/ROADMAP.md`: short-, medium-, and long-term research roadmap
 - `../PROJECT_CONTROL/PROJECT_LOG.md`: append-only project decisions and experiment log
+- `../PROJECT_CONTROL/meetings/`: dated meeting and planning memos; not a second task-status source
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
 - `EXTERNAL_PUBLIC_DATA_AUDIT_20260803.md`: LAT-MRICD/LSS source, schema, split and claim audit
 - `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`: FMCWR-2.0 V4 RAR/MAT schema, duplicate, grouping and physical-axis gate
@@ -31,6 +32,7 @@
 - `../results/final_evidence/lat_mricd_grouped_baselines_v1/REPORT.md`: frozen aggregate results and batch-code cluster intervals
 - `../results/final_evidence/lat_mricd_cross_band_transfer_v1/REPORT.md`: completed preregistered cross-band negative result (`FAIL_STOP`), consumed-target decision, and claim limits
 - `TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md`: current Tian failure evidence, unavailable prerequisites, and executable fallback routes
+- `TIAN_REPRODUCTION_FAILURE_SENIOR_DEFENSE_ZH.md`: evidence-bounded senior Q&A script for explaining why exact reproduction and local transfer did not pass
 - `share/TEAM_START_HERE.md`: zero-context team onboarding, task assignment and delivery manual
 - `share/TEAM_QUALIFICATION_AND_ROLE_SCREENING_ZH.md`: member qualification, trial-task scoring, role/access decisions, and communication scripts
 
@@ -49,6 +51,7 @@
 
 ## Tian reproduction
 
+- `TIAN_REPRODUCTION_FAILURE_SENIOR_DEFENSE_ZH.md`
 - `TIAN_FCN_REPRODUCTION_PROTOCOL.md`
 - `TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md`
 - `TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md`
@@ -71,5 +74,8 @@
 - `EXPERIMENT_RECORDING_PROTOCOL.md`
 - `../scripts/check_project_contracts.py`: cross-file checks for metric, threshold, course-link, and governance contracts
 - `share/README_SHARE_ZH.md`
+- `share/TEAM_SYNC_BRIEF_20260826.md`: concise whole-project briefing for current members
+- `share/TEAM_MEMBER_FULL_SYNC_GUIDE_20260829.md`: scope and access boundary of the complete data-free member package
+- `../scripts/build_team_sync_package.py`: build the three-part complete member synchronization release
 
 Raw development transcripts and recovery snapshots are intentionally outside this stable index.

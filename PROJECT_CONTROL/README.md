@@ -12,6 +12,7 @@
 | 查看每次正式推进的事实记录和决策 | `PROJECT_LOG.md` |
 | 查看原始方向输入 | `source_inputs/` |
 | 查看验收材料 | `team_review/` |
+| 查看会议决策与规划备忘 | `meetings/` |
 | 查看历史开发导出 | `logs/` |
 
 ## 四区结构

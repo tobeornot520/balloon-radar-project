@@ -38,6 +38,7 @@ REQUIRED_FILES = (
     "scripts/build_final_roi_bc_dpg_joint_audit.py",
     "scripts/build_roi_bc_dpg_joint_paper_assets.py",
     "scripts/build_project_share_package.py",
+    "scripts/build_team_sync_package.py",
     "scripts/check_project_contracts.py",
     "scripts/audit_bc_dpg_v3_causal_context.py",
     "scripts/audit_detection_acquisition_order.py",
@@ -65,7 +66,21 @@ REQUIRED_FILES = (
     "docs/TIAN_FCN_REPRODUCTION_PROTOCOL.md",
     "docs/PROJECT_LEARNING_COURSE_ZH.md",
     "docs/EXPERIMENT_RECORDING_PROTOCOL.md",
+    "PROJECT_CONTROL/meetings/README.md",
     "utils/experiment_ledger.py",
+)
+
+OBSOLETE_DUPLICATE_PATHS = (
+    "docs/MEETING_MEMO_20260826.md",
+    "scripts/build_team_member_full_sync_package.py",
+    "scripts/build_team_sync_packages.py",
+    "paper/TIAN_2024_reproduction_topic/TIAN_2024_PAPER_GUIDE_AND_ORAL_EXAM_ZH.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_FCN_FOLD1_COMPONENT_MECHANISM.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_FCN_FOLD1_DIAGNOSTIC_CONCLUSION.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_FCN_REPRODUCTION_CONDITIONS_REQUEST.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_FCN_REPRODUCTION_PROTOCOL.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_REPRODUCTION_FAILURE_AND_ALTERNATIVES_20260803.md",
+    "paper/TIAN_2024_reproduction_topic/TIAN_REPRODUCTION_FAILURE_SENIOR_DEFENSE_ZH.md",
 )
 
 
@@ -117,6 +132,14 @@ def root_python_files() -> list[Path]:
     return sorted(ROOT.glob("*.py"))
 
 
+def misplaced_root_references() -> list[Path]:
+    return sorted(path for path in ROOT.glob("*.pdf") if path.is_file())
+
+
+def obsolete_duplicate_files() -> list[Path]:
+    return [ROOT / name for name in OBSOLETE_DUPLICATE_PATHS if (ROOT / name).exists()]
+
+
 def missing_required_files() -> list[str]:
     return [name for name in REQUIRED_FILES if not (ROOT / name).is_file()]
 
@@ -161,6 +184,8 @@ def main() -> int:
     errors = syntax_errors(python_files)
     duplicate_groups = exact_duplicate_python_groups(python_files)
     root_entrypoints = root_python_files()
+    root_references = misplaced_root_references()
+    obsolete_duplicates = obsolete_duplicate_files()
     missing = missing_required_files()
 
     print_result(
@@ -189,6 +214,22 @@ def main() -> int:
         print(f"  move into package or scripts/: {path.name}")
 
     print_result(
+        "root reference placement",
+        not root_references,
+        f"{len(root_references)} root-level PDF files",
+    )
+    for path in root_references:
+        print(f"  move into paper/references/: {path.name}")
+
+    print_result(
+        "canonical document placement",
+        not obsolete_duplicates,
+        f"{len(obsolete_duplicates)} obsolete duplicate paths",
+    )
+    for path in obsolete_duplicates:
+        print(f"  remove duplicate or update canonical path: {path.relative_to(ROOT)}")
+
+    print_result(
         "required project files",
         not missing,
         f"{len(REQUIRED_FILES) - len(missing)}/{len(REQUIRED_FILES)} present",
@@ -212,6 +253,8 @@ def main() -> int:
         errors
         or duplicate_groups
         or root_entrypoints
+        or root_references
+        or obsolete_duplicates
         or missing
         or joint_missing
     ) else 0
