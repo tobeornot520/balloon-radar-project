@@ -14,6 +14,8 @@ physical micro-Doppler interpretation, or calibrated polarimetric claims.
 - [Technical handbook](PROJECT_CONTROL/TECHNICAL_HANDBOOK_ZH.md)
 - [Task board](PROJECT_CONTROL/TASK_BOARD.md)
 - [Roadmap](PROJECT_CONTROL/ROADMAP.md)
+- [2026 autumn execution route and work allocation](PROJECT_CONTROL/ROADMAP_2026_AUTUMN_EXECUTION_ZH.md)
+- [Experiment preparation and data requirements (mentor report)](PROJECT_CONTROL/EXPERIMENT_PREPARATION_DATA_REQUIREMENTS_ZH.md)
 - [Long-term project log](PROJECT_CONTROL/PROJECT_LOG.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Documentation index](docs/INDEX.md)

@@ -13,6 +13,25 @@
 - `HISTORICAL_PROJECT_RECONSTRUCTION_20260801.md`: audited reconstruction of the 14 local history exports and their corrections
 - `../PROJECT_CONTROL/TASK_BOARD.md`: ongoing problem list, ownership, acceptance gates, and next actions
 - `../PROJECT_CONTROL/ROADMAP.md`: short-, medium-, and long-term research roadmap
+- `../PROJECT_CONTROL/ROADMAP_2026_AUTUMN_EXECUTION_ZH.md`: current semester execution route, field preparation gates, role allocation and deliverables
+- `../PROJECT_CONTROL/EXPERIMENT_PREPARATION_DATA_REQUIREMENTS_ZH.md`: mentor-facing field experiment preparation, required data, pilot matrix and release gates
+- `../PROJECT_CONTROL/ENVIRONMENTAL_BLOCKERS_AND_SUPPLEMENTAL_COLLECTION_PLAN_ZH.md`: current weather/site blockers, supplemental collection requirements, phased pilot matrix and release gates
+- `../PROJECT_CONTROL/environment/WEATHER_SCENE_FACTOR_MODEL_PLAN_V1_ZH.md`: theoretical weather/site factor model, comparison ladder and validation plan
+- `../PROJECT_CONTROL/environment/LOCAL_PREPARATION_RUNBOOK_V1_ZH.md`: local field-readiness workflow, templates, commands and stop conditions
+- `../configs/environment_context_observation_schema_v1.json`: versioned weather/site observation field contract and formal model gate
+- `../configs/environment_context_observation_template_v1.csv`: fillable weather/site observation table
+- `../configs/site_scene_profile_template_v1.csv`: versioned fixed-site scene profile table
+- `../configs/environment_factor_analysis_config_v1.json`: frozen S0-S5 factor-analysis comparison configuration
+- `../PROJECT_CONTROL/REVIEW_DISCUSSION_AGENDA_PLANNING_ZH.md`: technical and project-consistency review of the discussion agenda document
+- `../PROJECT_CONTROL/environment/`: unified environment, site-clutter and interference research folder
+- `../PROJECT_CONTROL/environment/ENVIRONMENT_RESEARCH_STARTER_ZH.md`: initial research route for fast-changing weather, slow-changing site priors and interference stress tests
+- `../PROJECT_CONTROL/environment/ENVIRONMENT_INTERFERENCE_LITERATURE_20260918.md`: downloaded and indexed open-access reading package for weather, clutter maps, radar interference and urban-site effects
+- `TIME_FREQUENCY_ANALYSIS_DATA_20260922.md`: intake record, classification, provenance limits and audit plan for the newly received `.bin`/`.fig` time-frequency package
+- `FIELD_COLLECTION_20250425_ST001_INTAKE_ZH.md`: RSTM field-data intake, source-category audit, newly filled gaps, exploratory target model and claim boundaries
+- `../PROJECT_CONTROL/environment/ENVIRONMENT_INTERFERENCE_KNOWLEDGE_BASE_ZH.md`: paper-by-paper Chinese knowledge base covering 20 local full texts, transferable ideas, non-transferable assumptions, synthesis and glossary
+- `../PROJECT_CONTROL/environment/ENVIRONMENT_PROJECT_DESIGN_REPORT_ZH.md`: teammate-facing environment research design, pilot matrix, algorithm baselines, evidence gates and meeting script
+- `../PROJECT_CONTROL/environment/RESEARCH_STATUS_DOMESTIC_INTERNATIONAL_ZH.md`: domestic/international research status, limitations, evidence boundaries and project entry point
+- `../PROJECT_CONTROL/environment/WEATHER_SCENE_RESEARCH_STATUS_ZH.md`: focused domestic/international review of weather effects, scene clutter, site priors, DEM/DSM modeling and research gaps
 - `../PROJECT_CONTROL/PROJECT_LOG.md`: append-only project decisions and experiment log
 - `../PROJECT_CONTROL/meetings/`: dated meeting and planning memos; not a second task-status source
 - `TEAM_REPRODUCTION_GUIDE_ZH.md`: graded reproduction instructions for project teammates
@@ -68,6 +87,7 @@
 - `LSS_FMCWR_2_READ_ONLY_AUDIT_20260805.md`
 - `LSS_FMCWR_2_NORMALIZED_PROCESSING_CONTRACT_20260805.md`
 - `LAT_MRICD_CROSS_BAND_TRANSFER_PROTOCOL_V1.md`
+- `FIELD_COLLECTION_20250425_ST001_INTAKE_ZH.md`
 
 ## Reproducibility and sharing
 

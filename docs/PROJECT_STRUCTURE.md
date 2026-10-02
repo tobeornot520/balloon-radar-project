@@ -23,7 +23,7 @@
 | `results/final_evidence/` | Frozen paper evidence and precomputed assets |
 | `data/metadata/` | Versioned manifests and external dataset/artifact provenance registries; no raw signals |
 | `data/raw/external/` | Local official downloads and per-file integrity manifests; ignored by Git and excluded from sharing |
-| `docs/` | Stable conclusions, preregistration, operating instructions, and the canonical copy of research Markdown |
+| `docs/` | Stable conclusions, preregistration, operating instructions, and the canonical copy of general research Markdown |
 
 Directory-level indexes are maintained in `scripts/README.md`, `configs/README.md`,
 `results/README.md`, and `docs/INDEX.md`.
@@ -32,9 +32,10 @@ Large checkpoints, raw radar data, experiment runs, and generated distributions
 are excluded from Git.
 
 `dist/` is the local delivery area. Current releases stay at its top level;
-superseded local deliveries go under `dist/archive/`. Generated ZIPs, extracted
-package trees and staging directories are ignored by Git. Delivery packages
-must be built from a clean commit and audited before old artifacts are archived.
+superseded local deliveries go under `dist/archive/` with an archive README.
+Generated ZIPs, extracted package trees and staging directories are ignored by
+Git. Delivery packages must be built from a clean commit and audited before old
+artifacts are archived.
 
 ## Four logical zones
 
@@ -44,6 +45,7 @@ control panel outside the code modules:
 | Zone | Path | Responsibility |
 |---|---|---|
 | Project control | `PROJECT_CONTROL/` | Long-term handbook, task board, roadmap, log, source inputs and team review material |
+| Environment dossier | `PROJECT_CONTROL/environment/` | Unified weather, site-clutter and interference research design, literature registry and teammate-facing materials |
 | Data | `data/` | Raw/processed signals, manifests, splits and provenance metadata |
 | Code | `datasets/`, `features/`, `models/`, `training/`, `evaluation/`, `scripts/`, `tests/`, `utils/`, `baselines/`, `tools/` | Active implementation and executable entry points; `code/README.md` is the map |
 | Results | `results/` | Audits, experiment runs, figures, tables and frozen evidence |
@@ -74,7 +76,8 @@ listed in the root README.
 User-owned research inputs are kept under `PROJECT_CONTROL/source_inputs/` and
 `paper/references/`. Reference PDFs never belong in the repository root or in
 topic folders. Topic indexes link to the one reference copy and to canonical
-documents under `docs/`. These inputs are never treated as source entry points.
+documents under `docs/` or an explicitly named topic dossier under
+`PROJECT_CONTROL/`. These inputs are never treated as source entry points.
 
 Generated checkpoints and raw data stay local. Empty `losses/`, `metrics/`,
 `postprocess/`, `radar_processing/`, `checkpoints/`, `logs/`, and `notebooks/`

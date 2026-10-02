@@ -9,6 +9,16 @@
 | 了解雷达物理、信号处理、特征、模型和代码 | `TECHNICAL_HANDBOOK_ZH.md` |
 | 查看待解决问题、负责人、验收门和下一动作 | `TASK_BOARD.md` |
 | 查看短期、中期、长期路线及停止规则 | `ROADMAP.md` |
+| 查看 2026 秋季执行路线、采集阶段和长期分工 | `ROADMAP_2026_AUTUMN_EXECUTION_ZH.md` |
+| 向导师汇报外场实验准备和明确数据需求 | `EXPERIMENT_PREPARATION_DATA_REQUIREMENTS_ZH.md` |
+| 审阅《讨论议程规划.docx》的技术说法 | `REVIEW_DISCUSSION_AGENDA_PLANNING_ZH.md` |
+| 进入复杂气象、场地与干扰方向统一目录 | `environment/README.md` |
+| 开始复杂气象与环境方向调研 | `environment/ENVIRONMENT_RESEARCH_STARTER_ZH.md` |
+| 查看复杂气象、场地杂波与雷达干扰文献包 | `environment/ENVIRONMENT_INTERFERENCE_LITERATURE_20260918.md` |
+| 阅读 20 篇环境/干扰论文的逐篇知识提炼 | `environment/ENVIRONMENT_INTERFERENCE_KNOWLEDGE_BASE_ZH.md` |
+| 查看国内外研究现状与不足 | `environment/RESEARCH_STATUS_DOMESTIC_INTERNATIONAL_ZH.md` |
+| 查看气象与场景环境研究现状及不足 | `environment/WEATHER_SCENE_RESEARCH_STATUS_ZH.md` |
+| 向组员介绍环境方向的研究与实验设计 | `environment/ENVIRONMENT_PROJECT_DESIGN_REPORT_ZH.md` |
 | 查看每次正式推进的事实记录和决策 | `PROJECT_LOG.md` |
 | 查看原始方向输入 | `source_inputs/` |
 | 查看验收材料 | `team_review/` |

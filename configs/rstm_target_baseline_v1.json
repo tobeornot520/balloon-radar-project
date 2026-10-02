@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "rstm_target_baseline_20250425_v1",
+  "collection_id": "field_collection_20250425_st001",
+  "provenance": {
+    "source": "senior_student_existing_experiment",
+    "project_directed_collection": false,
+    "formal_project_evaluation": false
+  },
+  "input": {
+    "manifest": "data/metadata/field_collection_20250425_st001_manifest_hashed.csv",
+    "extension": ".iq",
+    "payload_offset_bytes": 2144,
+    "payload_offset_status": "candidate_from_header_probe_not_device_format_proof",
+    "sampling_blocks": 64,
+    "block_float32_count": 8192,
+    "robust_abs_value_limit": 16.0,
+    "component_names": ["component_a", "component_b"],
+    "h_v_claim": false
+  },
+  "tasks": [
+    {
+      "id": "target_type",
+      "labels": [
+        "target_six_wing",
+        "target_reflector",
+        "target_small_satellite",
+        "target_uav",
+        "target_balloon"
+      ]
+    },
+    {
+      "id": "balloon_vs_other_target",
+      "positive": "target_balloon",
+      "negative": "all_other_target_source_directories"
+    }
+  ],
+  "split": {
+    "unit": "one source IQ file",
+    "rule": "last temporal quintile within each source directory is test",
+    "random_seed": 42,
+    "random_window_split": false,
+    "independent_locked_test": false
+  },
+  "model": {
+    "type": "standardized_logistic_regression",
+    "class_weight": "balanced",
+    "max_iter": 3000,
+    "features": "robust_component_and_magnitude_statistics"
+  },
+  "claim_boundary": {
+    "status": "development_only",
+    "allows_cross_date_generalization": false,
+    "allows_real_time_claim": false,
+    "allows_physical_hz_micro_doppler": false,
+    "allows_absolute_polarimetry": false,
+    "allows_verified_balloon_payload_classification": false
+  }
+}

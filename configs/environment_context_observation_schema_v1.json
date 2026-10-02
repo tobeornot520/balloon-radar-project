@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "schema_id": "environment_context_observation_v1",
+  "purpose": "Weather and fixed-site context observations for factor analysis and context calibration",
+  "time_standard": "UTC",
+  "observation_unit": "one timestamped weather/site observation linked to a radar session or event",
+  "provenance": {
+    "project_directed_collection_required_for_formal_use": true,
+    "historical_external_data_allowed_for_schema_smoke_only": true,
+    "weather_classification_target": false
+  },
+  "required_identifiers": [
+    "experiment_id",
+    "session_id",
+    "scan_id",
+    "event_id",
+    "observation_id",
+    "site_id",
+    "radar_config_id",
+    "calibration_id",
+    "observation_timestamp_utc",
+    "observation_quality"
+  ],
+  "weather_fields": {
+    "temperature_c": {"type": "number", "unit": "degC", "nullable": true},
+    "relative_humidity_pct": {"type": "number", "unit": "percent", "range": [0, 100], "nullable": true},
+    "pressure_hpa": {"type": "number", "unit": "hPa", "nullable": true},
+    "wind_speed_mean_mps": {"type": "number", "unit": "m/s", "minimum": 0, "nullable": true},
+    "wind_speed_gust_mps": {"type": "number", "unit": "m/s", "minimum": 0, "nullable": true},
+    "wind_direction_deg": {"type": "number", "unit": "deg_true_north", "range": [0, 360], "maximum_exclusive": 360, "nullable": true},
+    "precip_rate_mm_h": {"type": "number", "unit": "mm/h", "minimum": 0, "nullable": true},
+    "visibility_m": {"type": "number", "unit": "m", "minimum": 0, "nullable": true},
+    "weather_sensor_id": {"type": "string", "nullable": true},
+    "weather_sensor_height_m": {"type": "number", "unit": "m", "minimum": 0, "nullable": true},
+    "weather_quality": {"type": "enum", "allowed": ["valid", "estimated", "missing", "fault"], "nullable": false}
+  },
+  "derived_weather_fields": {
+    "wind_u_mps": {"type": "number", "unit": "m/s", "definition": "east_component_under_declared_direction_convention"},
+    "wind_v_mps": {"type": "number", "unit": "m/s", "definition": "north_component_under_declared_direction_convention"},
+    "wind_gust_ratio": {"type": "number", "definition": "gust divided by mean with explicit low-wind rule"},
+    "wind_relative_to_radar_deg": {"type": "number", "unit": "deg", "range": [0, 360], "maximum_exclusive": 360},
+    "weather_observation_age_s": {"type": "number", "unit": "s", "minimum": 0},
+    "weather_missing_indicator": {"type": "integer", "allowed": [0, 1]}
+  },
+  "scene_static_fields": {
+    "site_class": {"type": "enum", "allowed": ["open", "built_up", "vegetation", "mixed", "unknown"]},
+    "radar_latitude_deg": {"type": "number", "nullable": true},
+    "radar_longitude_deg": {"type": "number", "nullable": true},
+    "radar_height_m": {"type": "number", "unit": "m", "minimum": 0, "nullable": true},
+    "radar_azimuth_deg": {"type": "number", "unit": "deg", "range": [0, 360], "maximum_exclusive": 360, "nullable": true},
+    "obstruction_mask_version": {"type": "string", "nullable": true},
+    "map_source_id": {"type": "string", "nullable": true},
+    "map_resolution_m": {"type": "number", "unit": "m", "minimum": 0, "nullable": true}
+  },
+  "scene_empirical_fields": {
+    "background_power_q50": {"type": "number", "nullable": true},
+    "background_power_q90": {"type": "number", "nullable": true},
+    "background_power_q99": {"type": "number", "nullable": true},
+    "background_occupancy": {"type": "number", "range": [0, 1], "nullable": true},
+    "background_peak_stability": {"type": "number", "range": [0, 1], "nullable": true},
+    "background_zero_doppler_fraction": {"type": "number", "range": [0, 1], "nullable": true},
+    "background_risk_at_candidate": {"type": "number", "nullable": true},
+    "background_update_age_s": {"type": "number", "unit": "s", "minimum": 0, "nullable": true},
+    "background_map_version": {"type": "string", "nullable": true}
+  },
+  "quality_rules": [
+    "All timestamps use UTC and retain source clock identifiers.",
+    "A missing weather measurement is null plus weather_quality=missing; it is never silently replaced by zero.",
+    "Derived context features are fitted or normalized using development/validation data only.",
+    "Scene empirical fields must record the background interval and cannot be updated from locked_test events.",
+    "No field in this schema proves H/V coherence, polarimetric calibration, physical range/velocity axes, or causality by itself."
+  ],
+  "formal_model_gate": {
+    "required_profiles": ["capture", "causal"],
+    "required_for_locked_claim": ["locked_test", "target_background_pairing", "date_site_outer_group_isolation"],
+    "current_status": "blocked_until_project_directed_field_collection"
+  }
+}

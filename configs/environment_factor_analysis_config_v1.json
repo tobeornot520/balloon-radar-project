@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "config_id": "environment_factor_analysis_v1",
+  "status": "design_only_blocked_until_project_directed_field_collection",
+  "primary_questions": [
+    "Do weather conditions change Pfa, Pd, Joint Pd, or localization error when target and background are comparable?",
+    "Does a fixed-site prior reduce false alarms without reducing target protection?"
+  ],
+  "outcomes": [
+    "pfa",
+    "pd",
+    "joint_pd",
+    "range_error",
+    "velocity_error",
+    "angle_error",
+    "inference_latency_ms",
+    "resource_usage"
+  ],
+  "weather_factors": [
+    "wind_speed_mean_mps",
+    "wind_speed_gust_mps",
+    "wind_direction_deg",
+    "temperature_c",
+    "relative_humidity_pct",
+    "pressure_hpa",
+    "precip_rate_mm_h",
+    "visibility_m"
+  ],
+  "scene_factors": [
+    "site_id",
+    "site_class",
+    "radar_azimuth_deg",
+    "obstruction_mask_version",
+    "background_occupancy",
+    "background_peak_stability",
+    "background_zero_doppler_fraction",
+    "background_risk_at_candidate"
+  ],
+  "outer_group_candidates": [
+    "collection_date",
+    "site_id",
+    "session_id",
+    "radar_config_id",
+    "calibration_id"
+  ],
+  "comparison_ladder": {
+    "S0": {"inputs": ["signal"], "purpose": "signal-only baseline"},
+    "S1": {"inputs": ["weather"], "purpose": "weather-only leakage and predictability check"},
+    "S2": {"inputs": ["scene_prior"], "purpose": "site-memory and background-prior check"},
+    "S3": {"inputs": ["signal", "weather"], "purpose": "weather incremental value"},
+    "S4": {"inputs": ["signal", "scene_prior"], "purpose": "scene incremental value"},
+    "S5": {"inputs": ["signal", "weather", "scene_prior"], "purpose": "joint context value with fallback"}
+  },
+  "evaluation": {
+    "bootstrap_unit": "session_or_event",
+    "required_stratification": ["collection_date", "site_id", "weather_quality", "target_class", "snr_bin"],
+    "must_report": ["pooled", "macro_group", "worst_group", "confidence_interval"],
+    "primary_safety_constraint": "joint_pd_must_not_decrease_without_preregistered_tolerance",
+    "environment_branch": "post_fusion_score_calibration_before_large_context_head",
+    "locked_test_update_forbidden": true,
+    "future_context_forbidden": true
+  },
+  "formal_gate": {
+    "required_profiles": ["capture", "causal"],
+    "required_target_background_pairing": true,
+    "required_new_date_or_site_locked_test": true,
+    "current_status": "blocked_until_project_directed_field_collection"
+  }
+}
